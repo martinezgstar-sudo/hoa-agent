@@ -9,13 +9,14 @@ export default function Home() {
           <span style={{fontSize: '18px', fontWeight: '600', color: '#1a1a1a'}}>HOA Agent</span>
         </div>
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
-          <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
+          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Insights</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
           <a href="#" style={{fontSize: '13px', backgroundColor: '#1a1a1a', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
         </div>
       </nav>
+
 
       {/* HERO */}
       <section style={{backgroundColor: '#fff', padding: '72px 32px 64px', textAlign: 'center', borderBottom: '1px solid #e5e5e5'}}>
@@ -24,15 +25,25 @@ export default function Home() {
         <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews — all in one place.</p>
         
         {/* SEARCH BAR */}
-        <div style={{display: 'flex', gap: '8px', maxWidth: '560px', margin: '0 auto 20px', backgroundColor: '#fff', border: '1.5px solid #1a1a1a', borderRadius: '12px', padding: '6px 6px 6px 16px', alignItems: 'center'}}>
+        <form action="/search" method="GET" style={{display: 'flex', gap: '8px', maxWidth: '560px', margin: '0 auto 20px', backgroundColor: '#fff', border: '1.5px solid #1a1a1a', borderRadius: '12px', padding: '6px 6px 6px 16px', alignItems: 'center'}}>
           <input 
+            name="q"
             type="text" 
             placeholder="Search by community name, city, or management company..." 
             style={{flex: 1, border: 'none', outline: 'none', fontSize: '14px', color: '#1a1a1a', backgroundColor: 'transparent'}}
           />
-          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1D9E75', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>
+          <button type="submit" style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1D9E75', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>
             Search
           </button>
+        </form>
+
+        {/* HINT PILLS */}
+        <div style={{display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap'}}>
+          {['Boca Highlands HOA', 'Boca Raton condos', 'Associa Florida', 'Palm Beach County'].map((hint) => (
+            <a key={hint} href={`/search?q=${encodeURIComponent(hint)}`} style={{fontSize: '12px', padding: '5px 12px', borderRadius: '20px', border: '1px solid #e0e0e0', color: '#666', cursor: 'pointer', backgroundColor: '#fff', textDecoration: 'none'}}>
+              {hint}
+            </a>
+          ))}
         </div>
 
         {/* HINT PILLS */}
