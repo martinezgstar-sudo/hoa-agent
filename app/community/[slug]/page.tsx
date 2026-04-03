@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
 
 interface Community {
