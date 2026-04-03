@@ -227,6 +227,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#085041', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
         </div>
 
+        <CommentForm communityId={community.id} />
+
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px'}}>
