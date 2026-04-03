@@ -62,7 +62,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
-      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', hplay: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <a href="/" style={{display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'}}>
           <div style={{width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
           <span style={{fontSize: '18px', fontWeight: '600', color: '#1a1a1a'}}>HOA Agent</span>
@@ -90,7 +90,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px'}}>
             <div>
               <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: '0 0 6px 0'}}>{community.canonical_name}</h1>
-              <div style={{fontSize: '13px', co#888', marginBottom: '12px'}}>
+              <div style={{fontSize: '13px', color: '#888', marginBottom: '12px'}}>
                 {community.street_address ? `${community.street_address}, ` : ''}{community.city}, FL{community.zip_code ? ` ${community.zip_code}` : ''} · {community.county} County
               </div>
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
@@ -100,7 +100,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               </div>
             </div>
             <div style={{textAlign: 'right'}}>
-              <div style={{fontSize: '12px' color: '#888', marginBottom: '6px'}}>Data confidence</div>
+              <div style={{fontSize: '12px', color: '#888', marginBottom: '6px'}}>Data confidence</div>
               <div style={{display: 'inline-block', padding: '6px 14px', borderRadius: '20px', backgroundColor: confidence.bg, color: confidence.color, fontSize: '13px', fontWeight: '600', marginBottom: '4px'}}>
                 {confidence.stars} {confidence.label}
               </div>
@@ -113,7 +113,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <strong>Data transparency:</strong> This profile combines public records, listing observations, and user-submitted reports. Each field is labeled by source. Unverified data is clearly marked.
         </div>
 
-        <div style={{displ: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
           {[
             {val: community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min}–$${community.monthly_fee_max}/mo` : 'Unknown', label: 'Monthly fee', src: 'listing-derived'},
             {val: community.review_avg ? `${community.review_avg}★` : 'No reviews', label: `${community.review_count || 0} reviews`, src: 'user-submitted'},
@@ -122,7 +122,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center'}}>
               <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
-              <div style={{fontSize0px', color: '#888', marginBottom: '1px'}}>{stat.label}</div>
+              <div style={{fontSize: '10px', color: '#888', marginBottom: '1px'}}>{stat.label}</div>
               <div style={{fontSize: '9px', color: '#aaa'}}>{stat.src}</div>
             </div>
           ))}
@@ -150,7 +150,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on MLS listing observations. Not a guaranteed fee. Always verify with the HOA directly.</div>
         </div>
 
-        {community.assessment_ount > 0 && (
+        {community.assessment_signal_count > 0 && (
           <div style={{backgroundColor: '#fff', border: '1px solid #EF9F27', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
               <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Special assessment signals</div>
@@ -189,7 +189,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px'}}>
             {[
-              {label: 'Short-term rentals', val: commuty.str_restriction || 'Unknown'},
+              {label: 'Short-term rentals', val: community.str_restriction || 'Unknown'},
               {label: 'Pets', val: community.pet_restriction || 'Unknown'},
               {label: 'Commercial vehicles', val: community.vehicle_restriction || 'Unknown'},
               {label: 'Rental approval', val: community.rental_approval || 'Unknown'},
@@ -223,7 +223,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{fontSize: '15px', fontWeight: '500', color: '#085041', marginBottom: '4px'}}>Get the full HOA Agent report</div>
             <div style={{fontSize: '12px', color: '#0F6E56'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
           </div>
-          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#085041', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report —button>
+          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#085041', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
         </div>
 
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
@@ -233,7 +233,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div><strong style={{fontWeight: '500'}}>MLS listing data ({community.fee_observation_count || 0} observations)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
             <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points. Unverified.</span></div>
           </div>
-          <div style={{marginTop: '12px', fontSize: '12px           <a href="#" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
+          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="#" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
           </div>
         </div>
       </div>
