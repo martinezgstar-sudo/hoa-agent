@@ -1,6 +1,37 @@
 import { supabase } from '@/lib/supabase'
 import { NextRequest, NextResponse } from 'next/server'
 
+async function moderateComment(text: string, rating: number | null): Promise<{ status: string, reason: string }> {
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 200,
+        messages: [{
+          role: 'user',
+          content: `You are a content moderator for an HOA community review platform. Review this comment and respond with JSON only.
+
+Comment: "${text}"
+Rating: ${rating || 'not provided'}
+
+Respond with exactly this JSON format:
+{"status": "approved" or "flagged", "reason": "brief reason"}
+
+Auto-approve if: factual, about HOA fees/management/rules/community life, constructive criticism, neutral or positive.
+Flag if: profanity, personal attacks, spam, completely off-topic, fake-seeming, or extremely one-sided without specifics.`
+        }]
+      })
+    })
+    const data = await response.json()
+    const result = JSON.parse(data.content[0].text)
+    return result
+  } catch {
+    return { status: 'pending', reason: 'moderation error' }
+  }
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.json()
   const { community_id, comment_text, rating, commenter_name } = body
@@ -17,6 +48,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Comment too long' }, { status: 400 })
   }
 
+  const moderation = await moderateComment(comment_text, rating)
+
   const { error } = await supabase
     .from('community_comments')
     .insert({
@@ -24,12 +57,13 @@ export async function POST(request: NextRequest) {
       comment_text,
       rating: rating || null,
       commenter_name: commenter_name || 'Anonymous',
-      status: 'pending'
+      status: moderation.status,
+      source_type: 'user'
     })
 
   if (error) {
     return NextResponse.json({ error: 'Failed to submit comment' }, { status: 500 })
   }
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true, status: moderation.status })
 }
