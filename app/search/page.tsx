@@ -66,7 +66,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                 </div>
               </div>
               <div style={{textAlign:'right',flexShrink:0,marginLeft:'16px'}}>
-                <div style={{fontSize:'15px',fontWeight:'500',color:'#1a1a1a'}}>Fee range</div>
+                <div style={{fontSize:'15px',fontWeight:'500',color:'#1a1a1a'}}>{c.monthly_fee_min && c.monthly_fee_max ? '$' + c.monthly_fee_min + '-$' + c.monthly_fee_max + '/mo' : 'Fee unknown'}</div>
                 {(() => { const conf = getConfidenceLabel(c.confidence_score); return <div style={{display:'inline-block',padding:'2px 10px',borderRadius:'20px',backgroundColor:conf.bg,color:conf.color,fontSize:'11px',fontWeight:'600'}}>{conf.stars} {conf.label}</div> })()}
                 <div style={{fontSize:'11px',color:'#1D9E75',marginTop:'4px'}}>View profile →</div>
               </div>
