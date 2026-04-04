@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import HomeSearch from '@/app/components/HomeSearch'
 
 export default async function Home() {
   const { count } = await supabase
@@ -35,10 +36,7 @@ export default async function Home() {
         <h1 style={{fontSize: '42px', fontWeight: '600', color: '#1a1a1a', lineHeight: '1.2', marginBottom: '16px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto'}}>Know the HOA before you commit</h1>
         <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews all in one place.</p>
 
-        <form action="/search" method="GET" style={{display: 'flex', gap: '8px', maxWidth: '560px', margin: '0 auto 20px', backgroundColor: '#fff', border: '1.5px solid #1B2B6B', borderRadius: '12px', padding: '6px 6px 6px 16px', alignItems: 'center'}}>
-          <input name="q" type="text" placeholder="Search by community name, city, or management company..." style={{flex: 1, border: 'none', outline: 'none', fontSize: '14px', color: '#1a1a1a', backgroundColor: 'transparent'}}/>
-          <button type="submit" style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1D9E75', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Search</button>
-        </form>
+        <HomeSearch />
 
         <div style={{display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap'}}>
           {['Boynton Beach HOA', 'Boca Raton condos', 'Campbell Property Management', 'Palm Beach County'].map((hint) => (
