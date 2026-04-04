@@ -25,9 +25,9 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
   return (
     <main style={{fontFamily:'system-ui,sans-serif',backgroundColor:'#f9f9f9',minHeight:'100vh'}}>
-      <nav style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5',padding:'0 32px',height:'60px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+      <nav style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5',padding:'0 32px',height:'72px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
         <a href="/" style={{display:'flex',alignItems:'center',gap:'8px',textDecoration:'none'}}>
-          <img src="/logo.png" alt="HOA Agent" style={{height:'96px',width:'auto'}}/>
+          <img src="/logo.png" alt="HOA Agent" style={{height:'48px',width:'auto'}}/>
         </a>
         <div style={{display:'flex',gap:'24px',alignItems:'center'}}>
           <a href="/search" style={{fontSize:'13px',color:'#1D9E75',textDecoration:'none',fontWeight:'500'}}>Search</a>
