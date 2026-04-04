@@ -8,6 +8,65 @@ function getConfidenceLabel(score: number) {
   return { label: "Low", color: "#E24B4A", bg: "#FEE9E9", stars: "★☆☆" }
 }
 
+
+function SuggestForm({ address }: { address: string }) {
+  const [email, setEmail] = useState("")
+  const [community, setCommunity] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+
+  async function handleSuggest(e: React.FormEvent) {
+    e.preventDefault()
+    setSubmitting(true)
+    await fetch("/api/suggest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ address, community_name: community, submitter_email: email })
+    })
+    setSubmitted(true)
+    setSubmitting(false)
+  }
+
+  if (submitted) {
+    return (
+      <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
+        <div style={{fontSize:"15px",fontWeight:"500",color:"#1D9E75",marginBottom:"8px"}}>Thanks! We got your suggestion.</div>
+        <div style={{fontSize:"13px",color:"#888"}}>We will research this community and add it to our database.</div>
+      </div>
+    )
+  }
+
+  return (
+    <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px"}}>
+      <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"4px"}}>This HOA is not in our database yet</div>
+      <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover Palm Beach County and are adding more. Suggest this community and we will research it.</div>
+      <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
+        <input
+          type="text"
+          placeholder="Community or HOA name (if known)"
+          value={community}
+          onChange={e => setCommunity(e.target.value)}
+          style={{fontSize:"13px",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",outline:"none"}}
+        />
+        <input
+          type="email"
+          placeholder="Your email (optional)"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          style={{fontSize:"13px",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",outline:"none"}}
+        />
+        <button
+          onClick={handleSuggest}
+          disabled={submitting}
+          style={{fontSize:"13px",padding:"10px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500"}}
+        >
+          {submitting ? "Submitting..." : "Suggest this community"}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function SearchPage() {
   const router = useRouter()
   const [query, setQuery] = useState("")
