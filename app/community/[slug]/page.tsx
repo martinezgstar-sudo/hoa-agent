@@ -71,7 +71,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <a href="/" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="#" style={{fontSize: '13px', backgroundColor: '#1a1a1a', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
         </div>
       </nav>
 
@@ -95,7 +95,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               </div>
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
                 {community.property_type && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E6F1FB', color: '#0C447C'}}>{community.property_type}</span>}
-                <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#085041'}}>{community.entity_status || 'Active'} entity</span>
+                <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>{community.entity_status || 'Active'} entity</span>
                 {community.unit_count && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#555'}}>{community.unit_count} units</span>}
               </div>
             </div>
@@ -220,10 +220,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
           <div>
-            <div style={{fontSize: '15px', fontWeight: '500', color: '#085041', marginBottom: '4px'}}>Get the full HOA Agent report</div>
-            <div style={{fontSize: '12px', color: '#0F6E56'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the full HOA Agent report</div>
+            <div style={{fontSize: '12px', color: '#1B2B6B'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
           </div>
-          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#085041', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
+          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
         </div>
 
         <CommentForm communityId={community.id} />

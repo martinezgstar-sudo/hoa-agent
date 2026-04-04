@@ -26,7 +26,7 @@ export default async function Home() {
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
           <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="#" style={{fontSize: '13px', backgroundColor: '#1a1a1a', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
         </div>
       </nav>
 
@@ -35,7 +35,7 @@ export default async function Home() {
         <h1 style={{fontSize: '42px', fontWeight: '600', color: '#1a1a1a', lineHeight: '1.2', marginBottom: '16px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto'}}>Know the HOA before you commit</h1>
         <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews all in one place.</p>
 
-        <form action="/search" method="GET" style={{display: 'flex', gap: '8px', maxWidth: '560px', margin: '0 auto 20px', backgroundColor: '#fff', border: '1.5px solid #1a1a1a', borderRadius: '12px', padding: '6px 6px 6px 16px', alignItems: 'center'}}>
+        <form action="/search" method="GET" style={{display: 'flex', gap: '8px', maxWidth: '560px', margin: '0 auto 20px', backgroundColor: '#fff', border: '1.5px solid #1B2B6B', borderRadius: '12px', padding: '6px 6px 6px 16px', alignItems: 'center'}}>
           <input name="q" type="text" placeholder="Search by community name, city, or management company..." style={{flex: 1, border: 'none', outline: 'none', fontSize: '14px', color: '#1a1a1a', backgroundColor: 'transparent'}}/>
           <button type="submit" style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1D9E75', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Search</button>
         </form>
@@ -80,7 +80,7 @@ export default async function Home() {
                 <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '3px'}}>{c.canonical_name}</div>
                 <div style={{fontSize: '12px', color: '#888', marginBottom: 'x'}}>{c.city} · {c.property_type}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
                 <div style={{display: 'flex', gap: '6px'}}>
-                  <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#085041'}}>Active entity</span>
+                  <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>Active entity</span>
                   {c.assessment_signal_count > 0
                     ? <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>{c.assessment_signal_count} assessment signals</span>
                     : <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#888'}}>No signals</span>
@@ -117,12 +117,12 @@ export default async function Home() {
       <section style={{margin: '0 32px 40px', maxWidth: '616px', marginLeft: 'auto', marginRight: 'auto'}}>
         <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
           <div>
-            <div style={{fontSize: '15px', fontWeight: '500', color: '#085041', marginBottom: '4px'}}>Get the Palm Beach County HOA Fee Guide free</div>
-            <div style={{fontSize: '12px', color: '#0F6E56'}}>2025 data. Median fees by city, top management companies, assessment trends.</div>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the Palm Beach County HOA Fee Guide free</div>
+            <div style={{fontSize: '12px', color: '#1B2B6B'}}>2025 data. Median fees by city, top management companies, assessment trends.</div>
           </div>
           <div style={{display: 'flex', gap: '8px', flexShrink: 0}}>
             <input type="email" placeholder="your@email.com" style={{fontSize: '13px', padding: '8px 12px', borderRadius: '8px', border: '1px solid #5DCAA5', outline: 'none', width: '200px'}}/>
-            <button style={{fontSize: '13px', padding: '8px 16px', borderRadius: '8px', backgroundColor: '#085041', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500'}}>Get guide</button>
+            <button style={{fontSize: '13px', padding: '8px 16px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500'}}>Get guide</button>
           </div>
         </div>
       </section>

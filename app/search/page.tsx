@@ -32,7 +32,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <div style={{display:'flex',gap:'24px',alignItems:'center'}}>
           <a href="/search" style={{fontSize:'13px',color:'#1D9E75',textDecoration:'none',fontWeight:'500'}}>Search</a>
           <a href="#" style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Pricing</a>
-          <a href="#" style={{fontSize:'13px',backgroundColor:'#1a1a1a',color:'#fff',padding:'8px 16px',borderRadius:'6px',textDecoration:'none'}}>Sign in</a>
+          <a href="#" style={{fontSize:'13px',backgroundColor:'#1B2B6B',color:'#fff',padding:'8px 16px',borderRadius:'6px',textDecoration:'none'}}>Sign in</a>
         </div>
       </nav>
       <div style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5',padding:'24px 32px'}}>
@@ -40,7 +40,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           <h1 style={{fontSize:'22px',fontWeight:'600',color:'#1a1a1a',marginBottom:'16px'}}>Search HOA communities</h1>
           <form action="/search" method="GET">
             <div style={{display:'flex',gap:'8px'}}>
-              <input name="q" type="text" defaultValue={query} placeholder="Search by community name, city, or management company..." style={{flex:1,border:'1.5px solid #1a1a1a',borderRadius:'10px',padding:'10px 16px',fontSize:'14px',outline:'none'}}/>
+              <input name="q" type="text" defaultValue={query} placeholder="Search by community name, city, or management company..." style={{flex:1,border:'1.5px solid #1B2B6B',borderRadius:'10px',padding:'10px 16px',fontSize:'14px',outline:'none'}}/>
               <button type="submit" style={{fontSize:'13px',padding:'10px 20px',borderRadius:'10px',backgroundColor:'#1D9E75',color:'#fff',border:'none',cursor:'pointer',fontWeight:'500'}}>Search</button>
             </div>
           </form>
@@ -59,7 +59,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                 <div style={{fontSize:'15px',fontWeight:'500',color:'#1a1a1a',marginBottom:'3px'}}>{c.canonical_name}</div>
                 <div style={{fontSize:'12px',color:'#888',marginBottom:'8px'}}>{c.city}{c.property_type ? ' · ' + c.property_type : ''}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
                 <div style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>
-                  <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'4px',backgroundColor:'#E1F5EE',color:'#085041'}}>Active entity</span>
+                  <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'4px',backgroundColor:'#E1F5EE',color:'#1B2B6B'}}>Active entity</span>
                   {c.assessment_signal_count > 0 && <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'4px',backgroundColor:'#FAEEDA',color:'#854F0B'}}>{c.assessment_signal_count} signals</span>}
                   {c.management_company && c.management_company !== 'Unknown' && <span style={{fontSize:'11px',padding:'2px 8px',borderRadius:'4px',backgroundColor:'#f0f0f0',color:'#555'}}>{c.management_company}</span>}
                 </div>

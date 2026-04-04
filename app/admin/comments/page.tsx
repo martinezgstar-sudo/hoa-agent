@@ -59,7 +59,7 @@ export default function AdminComments() {
           />
           <button
             onClick={() => password === ADMIN_PASSWORD ? setAuthed(true) : alert('Wrong password')}
-            style={{width:'100%',padding:'10px',borderRadius:'8px',backgroundColor:'#085041',color:'#fff',border:'none',cursor:'pointer',fontSize:'14px',fontWeight:'500'}}
+            style={{width:'100%',padding:'10px',borderRadius:'8px',backgroundColor:'#1B2B6B',color:'#fff',border:'none',cursor:'pointer',fontSize:'14px',fontWeight:'500'}}
           >
             Sign in
           </button>
@@ -101,7 +101,7 @@ export default function AdminComments() {
                 <div style={{fontSize:'13px',fontWeight:'500',color:'#1a1a1a'}}>{c.commenter_name}</div>
                 <div style={{fontSize:'11px',color:'#888'}}>{new Date(c.created_at).toLocaleDateString()} · {c.rating ? c.rating + '★' : 'No rating'}</div>
               </div>
-              <span style={{fontSize:'11px',padding:'2px 10px',borderRadius:'20px',backgroundColor: c.status === 'approved' ? '#E1F5EE' : c.status === 'rejected' ? '#FEE9E9' : c.status === 'flagged' ? '#FAEEDA' : '#f0f0f0',color: c.status === 'approved' ? '#085041' : c.status === 'rejected' ? '#E24B4A' : c.status === 'flagged' ? '#854F0B' : '#555'}}>
+              <span style={{fontSize:'11px',padding:'2px 10px',borderRadius:'20px',backgroundColor: c.status === 'approved' ? '#E1F5EE' : c.status === 'rejected' ? '#FEE9E9' : c.status === 'flagged' ? '#FAEEDA' : '#f0f0f0',color: c.status === 'approved' ? '#1B2B6B' : c.status === 'rejected' ? '#E24B4A' : c.status === 'flagged' ? '#854F0B' : '#555'}}>
                 {c.status}
               </span>
             </div>
@@ -109,7 +109,7 @@ export default function AdminComments() {
             <div style={{display:'flex',gap:'8px'}}>
               {c.status !== 'approved' && (
                 <button onClick={() => updateStatus(c.id, 'approved')}
-                  style={{fontSize:'12px',padding:'5px 14px',borderRadius:'6px',backgroundColor:'#085041',color:'#fff',border:'none',cursor:'pointer'}}>
+                  style={{fontSize:'12px',padding:'5px 14px',borderRadius:'6px',backgroundColor:'#1B2B6B',color:'#fff',border:'none',cursor:'pointer'}}>
                   Approve
                 </button>
               )}
