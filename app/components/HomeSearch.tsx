@@ -32,13 +32,14 @@ export default function HomeSearch() {
     }
     // Address — go to search page with lookup
     setSearching(true)
-    const res = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
+    const params = new URLSearchParams({ streetName: s.streetName || "", neighborhood: s.neighborhood || "", locality: s.locality || "", city: s.city || "" })
+    const res = await fetch("/api/address-lookup?" + params.toString())
     const data = await res.json()
     setSearching(false)
     if (data.match) {
       router.push("/community/" + data.match.slug)
     } else {
-      router.push("/search?q=" + encodeURIComponent(s.city))
+      roupush("/search?address=" + encodeURIComponent(s.label) + "&result=" + encodeURIComponent(JSON.stringify(data)))
     }
   }
 

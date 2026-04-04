@@ -134,7 +134,13 @@ export default function SearchPage() {
     }
     setSearching(true)
     setQuery(s.label)
-    const res = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
+    const params = new URLSearchParams({
+      streetName: s.streetName || "",
+      neighborhood: s.neighborhood || "",
+      locality: s.locality || "",
+      city: s.city || "",
+    })
+    const res = await fetch("/api/address-lookup?" + params.toString())
     const data = await res.json()
     setAddressResult(data)
     setSearching(false)

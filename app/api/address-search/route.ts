@@ -9,30 +9,33 @@ export async function GET(request: NextRequest) {
   const isAddress = /^\d/.test(q)
 
   if (isAddress) {
-    const parts = q.trim().split(' ')
-    const streetNo = parts[0]
-    // Strip city/state/zip — take only words before city indicators
-    const rawStreet = parts.slice(1).join(' ')
-    // Remove anything after FL, Florida, or a zip code
-    const streetClean = rawStreet
-      .replace(/\s+(west palm beach|boynton beach|boca raton|delray beach|lake worth|palm beach gardens|wellington|jupiter|greenacres|royal palm beach|riviera beach|north palm beach|palm springs|belle glade|lantana|hypoluxo|manalapan|ocean ridge|briny breezes|south palm beach|tequesta|juno ach|palm beach|unincorporated).*$/i, '')
-      .replace(/\s+fl\s+\d{5}.*/i, '')
-      .replace(/\s+florida.*/i, '')
-      .replace(/\s+\d{5}$/, '')
-      .trim()
-    const streetName = streetClean || rawStreet.split(' ').slice(0, 2).join(' ')
-    if (!streetName) return NextResponse.json({ suggestions: [] })
-
-    const where = `STREET_NO = '${streetNo}' AND STREET_NAME LIKE '%${streetName}%'`
-    const url = `https://maps.co.palm-beach.fl.us/arcgis/rest/services/OpenData/open_data_v2/FeatureServer/0/query?where=${encodeURIComponent(where)}&outFields=PCN,STREET_NO,STREET_NAME,STREET_SUFFIX,CITY,ZIP_CODE&resultRecordCount=8&f=json`
+    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+    // Bounding box for Palm Beach County
+    const bbox = '-80.9,26.3,-80.0,26.97'
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json?country=US&bbox=${bbox}&types=address&limit=6&access_token=${token}`
 
     try {
       const res = await fetch(url)
       const data = await res.json()
       const suggestions = (data.features || []).map((f: any) => {
-        const a = f.attributes
-        const label = `${a.STREET_NO} ${a.STREET_NAME} ${a.STREET_SUFFIX || ''}, ${a.CITY}, FL ${a.ZIP_CODE}`.trim()
-        return { label, pcn: a.PCN, streetName: a.STREET_NAME, city: a.CITY, type: 'address' }
+        const [lng, lat] = f.center
+        const context = f.context || []
+        const neighborhood = context.find((c: any) => c.id.startsWith('neighborhood'))?.text || ''
+        const locality = context.find((c: any) => c.id.startsWith('locality'))?.text || ''
+        const place = context.find((c: any) => c.id.startsWith('place'))?.text || ''
+        const postcode = context.find((c: any) => c.id.startsWith('postcode'))?.text || ''
+        return {
+          label: f.place_name,
+          address: f.place_name,
+          streetName: f.text,
+          neighborhood,
+          locality,
+          city: locality || place,
+          postcode,
+          lat,
+          lng,
+          type: 'address'
+        }
       })
       return NextResponse.json({ suggestions })
     } catch {
@@ -40,6 +43,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
+  // Community name search
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   const res = await fetch(
