@@ -39,7 +39,7 @@ export default function HomeSearch() {
     if (data.match) {
       router.push("/community/" + data.match.slug)
     } else {
-      roupush("/search?address=" + encodeURIComponent(s.label) + "&result=" + encodeURIComponent(JSON.stringify(data)))
+      router.push("/search?address=" + encodeURIComponent(s.label) + "&result=" + encodeURIComponent(JSON.stringify(data)))
     }
   }
 
