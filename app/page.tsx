@@ -106,7 +106,7 @@ export default async function Home() {
             {step: 'Step 2', title: 'Read the profile', desc: 'Fee history, assessments, restrictions, entity status all source-labeled.'},
             {step: 'Step 3', title: 'Get the full report', desc: '$29 deep-dive PDF with source trail and fee trend history.'},
           ].map((h) => (
-            <div key={h.step} style=backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
+            <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
               <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', marginBottom: '6px'}}>{h.step}</div>
               <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a', marginBottom: '4px'}}>{h.title}</div>
               <div style={{fontSize: '12px', color: '#888', lineHeight: '1.5'}}>{h.desc}</div>
