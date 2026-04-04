@@ -65,8 +65,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
       <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <a href="/" style={{display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'}}>
-          <div style={{width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
-          <span style={{fontSize: '18px', fontWeight: '600', color: '#1a1a1a'}}>HOA Agent</span>
+          <img src="/logo.png" alt="HOA Agent" style={{height: '36px', width: 'auto'}}/>
         </a>
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
