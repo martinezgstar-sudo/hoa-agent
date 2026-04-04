@@ -43,5 +43,5 @@ export async function GET(request: NextRequest) {
     slug: c.slug,
     type: 'community'
   }))
-  return NextResponse.json({ suggestns })
+  return NextResponse.json({ suggestions })
 }
