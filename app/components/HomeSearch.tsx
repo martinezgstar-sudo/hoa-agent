@@ -52,16 +52,19 @@ export default function HomeSearch() {
       const data = await res.json()
       if (data.suggestions && data.suggestions.length > 0) {
         const s = data.suggestions[0]
-      const res2 = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
+        const res2 = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
         const data2 = await res2.json()
         setSearching(false)
         if (data2.match) {
           router.push("/community/" + data2.match.slug)
           return
         }
+        const encoded = encodeURIComponent(JSON.stringify(data2))
+        router.push("/search?address=" + encodeURIComponent(query) + "&result=" + encoded)
+        return
       }
       setSearching(false)
-      router.push("/search?q=" + encodeURIComponent(query))
+      router.push("/search?address=" + encodeURIComponent(query) + "&result=" + encodeURIComponent(JSON.stringify({match:null})))
     } else {
       router.push("/search?q=" + encodeURIComponent(query))
     }

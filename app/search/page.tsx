@@ -22,8 +22,17 @@ export default function SearchPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const q = params.get("q") || ""
-    setQuery(q)
-    fetchCommunities(q)
+    const address = params.get("address") || ""
+    const result = params.get("result") || ""
+    if (address) {
+      setQuery(address)
+      if (result) {
+        try { setAddressResult(JSON.parse(decodeURIComponent(result))) } catch {}
+      }
+    } else {
+      setQuery(q)
+      fetchCommunities(q)
+    }
   }, [])
 
   async function fetchCommunities(q: string) {
