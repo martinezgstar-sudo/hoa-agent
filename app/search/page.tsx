@@ -76,6 +76,7 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false)
   const [addressResult, setAddressResult] = useState<any>(null)
   const [searching, setSearching] = useState(false)
+  const [selectedCity, setSelectedCity] = useState("")
   const debounceRef = useRef<any>(null)
 
   useEffect(() => {
@@ -94,9 +95,10 @@ export default function SearchPage() {
     }
   }, [])
 
-  async function fetchCommunities(q: string) {
+  async function fetchCommunities(q: string, city: string = "") {
     setLoading(true)
-    const res = await fetch("/api/communities-search?q=" + encodeURIComponent(q))
+    const cityParam = city ? "&city=" + encodeURIComponent(city) : ""
+    const res = await fetch("/api/communities-search?q=" + encodeURIComponent(q) + cityParam)
     const data = await res.json()
     setCommunities(data.communities || [])
     setLoading(false)
@@ -108,6 +110,13 @@ export default function SearchPage() {
     const data = await res.json()
     setSuggestions(data.suggestions || [])
     setShowSuggestions((data.suggestions || []).length > 0)
+  }
+
+  function handleCityFilter(city: string) {
+    const newCity = selectedCity === city ? "" : city
+    setSelectedCity(newCity)
+    setAddressResult(null)
+    fetchCommunities(query, newCity)
   }
 
   function handleInput(val: string) {
@@ -216,6 +225,19 @@ export default function SearchPage() {
             </div>
           </form>
           {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#888",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
+          {!isAddress && (
+            <div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginTop:"12px"}}>
+              {["Boynton Beach","Boca Raton","Delray Beach","West Palm Beach","Lake Worth","Wellington","Jupiter","Greenacres"].map((city) => (
+                <button
+                  key={city}
+                  onClick={() => handleCityFilter(city)}
+                  style={{fontSize:"12px",padding:"5px 12px",borderRadius:"20px",border:"1px solid " + (selectedCity===city?"#1B2B6B":"#e0e0e0"),backgroundColor:selectedCity===city?"#1B2B6B":"#fff",color:selectedCity===city?"#fff":"#555",cursor:"pointer",fontWeight:selectedCity===city?"600":"400"}}
+                >
+                  {city}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
