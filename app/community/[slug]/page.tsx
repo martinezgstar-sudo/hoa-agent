@@ -95,6 +95,14 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   if (!community) notFound()
 
+  const { data: comments } = await supabase
+    .from('community_comments')
+    .select('id,commenter_name,comment_text,rating,created_at')
+    .eq('community_id', community.id)
+    .eq('status', 'approved')
+    .order('created_at', { ascending: false })
+    .limit(10)
+
   const confidence = getConfidenceLabel(community.confidence_score)
   const amenitiesList = community.amenities ? community.amenities.split(',').map((a: string) => a.trim()) : []
 
@@ -263,6 +271,33 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
         </div>
 
+        {comments && comments.length > 0 && (
+          <div style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'12px',padding:'20px 24px',marginBottom:'12px'}}>
+            <div style={{fontSize:'15px',fontWeight:'500',color:'#1a1a1a',marginBottom:'16px'}}>
+              Resident reviews <span style={{fontSize:'13px',fontWeight:'400',color:'#888'}}>({comments.length})</span>
+            </div>
+            <div style={{display:'flex',flexDirection:'column',gap:'14px'}}>
+              {comments.map((c) => (
+                <div key={c.id} style={{borderBottom:'1px solid #f0f0f0',paddingBottom:'14px'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'6px'}}>
+                    <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+                      <span style={{fontSize:'13px',fontWeight:'500',color:'#1a1a1a'}}>{c.commenter_name || 'Anonymous'}</span>
+                      {c.rating && (
+                        <span style={{fontSize:'12px',color:'#EF9F27'}}>
+                          {'★'.repeat(c.rating)}{'☆'.repeat(5 - c.rating)}
+                        </span>
+                      )}
+                    </div>
+                    <span style={{fontSize:'11px',color:'#aaa'}}>
+                      {new (c.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'})}
+                    </span>
+                  </div>
+                  <div style={{fontSize:'13px',color:'#555',lineHeight:'1.6'}}>{c.comment_text}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <CommentForm communityId={community.id} />
 
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
