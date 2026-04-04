@@ -72,7 +72,7 @@ export default function AdminComments() {
     <div style={{minHeight:'100vh',backgroundColor:'#f9f9f9',fontFamily:'system-ui,sans-serif'}}>
       <nav style={{backgroundColor:'#fff',borderBottom:'1px solid #e5e5e5',padding:'0 32px',height:'60px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
         <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
-          <img src="/logo.png" alt="HOA Agent" style={{height:'48px',width:'auto'}}/>
+          <img src="/logo.png" alt="HOA Agent" style={{height:'96px',width:'auto'}}/>
           <span style={{fontSize:'12px',color:'#888',marginLeft:'8px'}}>Comment Moderation</span>
         </div>
         <a href="/" style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Back to site</a>
