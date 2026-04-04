@@ -20,7 +20,7 @@ export default function SearchPage() {
   const debounceRef = useRef<any>(null)
 
   useEffect(() => {
-    const params = new URLSearchParamsearch)
+    const params = new URLSearchParams(window.location.search)
     const q = params.get("q") || ""
     setQuery(q)
     fetchCommunities(q)
@@ -158,7 +158,7 @@ export default function SearchPage() {
               </div>
             ) : addressResult.cityMatches ? (
               <div>
-                <div style={{fontSize:"13px",color#888",marginBottom:"12px"}}>No exact match found. HOA communities in this area:</div>
+                <div style={{fontSize:"13px",color:"#888",marginBottom:"12px"}}>No exact match found. HOA communities in this area:</div>
                 {addressResult.cityMatches.map((c: any) => (
                   <a key={c.slug} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"14px 20px",marginBottom:"8px",cursor:"pointer"}}>
