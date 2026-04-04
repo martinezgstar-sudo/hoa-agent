@@ -303,7 +303,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#f9f9f9', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '14px 20px', marginBottom: '12px', fontSize: '12px', color: '#888', lineHeight: '1.6'}}>
           <strong style={{color: '#555', fontWeight: '500'}}>Data accuracy notice:</strong> Data is sourced from public records, MLS observations, and user submissions. HOA Agent does not guarantee accuracy. Verify all fees and restrictions directly with the association before making any real estate decision.
         </div>
-        <div style={{backgrouColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+        <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px'}}>
             <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>— Entity, registered agent, status.</span></div>
