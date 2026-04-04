@@ -2,6 +2,43 @@ import { supabase } from '@/lib/supabase'
 import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { data: community } = await supabase
+    .from('communities')
+    .select('canonical_name,city,monthly_fee_min,monthly_fee_max,management_company,property_type')
+    .eq('slug', slug)
+    .single()
+
+  if (!community) return { title: 'Community Not Found — HOA Agent' }
+
+  const feeStr = community.monthly_fee_min && community.monthly_fee_max
+    ? `HOA fees $${community.monthly_fee_min}-$${community.monthly_fee_max}/mo.`
+    : 'HOA fee data available.'
+
+  const title = `${community.canonical_name} — ${community.city} HOA | HOA Agent`
+  const description = `${community.canonical_name} is a ${community.property_type || 'residential'} community in ${community.city}, FL. ${feeStr} View fees, assessments, restrictions and managemenmpany details.`
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://hoa-agent.com/community/${slug}`,
+      siteName: 'HOA Agent',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+  }
+}
+
+
+
 interface Community {
   id: string
   slug: string
