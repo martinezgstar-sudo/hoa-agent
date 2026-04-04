@@ -77,7 +77,16 @@ export default function SearchPage() {
         const data2 = await res2.json()
         setAddressResult(data2)
       } else {
-        setAddressResult({ match: null })
+        const parts = query.trim().toLowerCase().split(' ')
+        const knownCities = ['boynton','boca','delray','wellington','jupiter','greenacres','lantana','tequesta','riviera']
+        const cityHint = parts.find(p => knownCities.some(c => p.includes(c))) || ''
+        if (cityHint) {
+          const res3 = await fetch("/api/address-lookup?streetName=&city=" + encodeURIComponent(cityHint))
+          const data3 = await res3.json()
+          setAddressResult(data3.cityMatches ? data3 : { match: null })
+        } else {
+          setAddressResult({ match: null })
+        }
       }
       setSearching(false)
     } else {

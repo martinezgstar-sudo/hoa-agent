@@ -11,7 +11,16 @@ export async function GET(request: NextRequest) {
   if (isAddress) {
     const parts = q.trim().split(' ')
     const streetNo = parts[0]
-    const streetName = parts.slice(1).join(' ')
+    // Strip city/state/zip — take only words before city indicators
+    const rawStreet = parts.slice(1).join(' ')
+    // Remove anything after FL, Florida, or a zip code
+    const streetClean = rawStreet
+      .replace(/\s+(west palm beach|boynton beach|boca raton|delray beach|lake worth|palm beach gardens|wellington|jupiter|greenacres|royal palm beach|riviera beach|north palm beach|palm springs|belle glade|lantana|hypoluxo|manalapan|ocean ridge|briny breezes|south palm beach|tequesta|juno ach|palm beach|unincorporated).*$/i, '')
+      .replace(/\s+fl\s+\d{5}.*/i, '')
+      .replace(/\s+florida.*/i, '')
+      .replace(/\s+\d{5}$/, '')
+      .trim()
+    const streetName = streetClean || rawStreet.split(' ').slice(0, 2).join(' ')
     if (!streetName) return NextResponse.json({ suggestions: [] })
 
     const where = `STREET_NO = '${streetNo}' AND STREET_NAME LIKE '%${streetName}%'`
