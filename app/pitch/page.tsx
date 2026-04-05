@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } }
+
 export default function PitchPage() {
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#0f1623",minHeight:"100vh",color:"#fff"}}>

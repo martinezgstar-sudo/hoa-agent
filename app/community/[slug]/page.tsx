@@ -289,7 +289,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                       )}
                     </div>
                     <span style={{fontSize:'11px',color:'#aaa'}}>
-                      {new (c.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'})}
+                      {new Date(c.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'})}
                     </span>
                   </div>
                   <div style={{fontSize:'13px',color:'#555',lineHeight:'1.6'}}>{c.comment_text}</div>
