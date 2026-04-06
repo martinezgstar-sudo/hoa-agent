@@ -62,10 +62,8 @@ export default function AdminUpload() {
 
   function downloadTemplate(type: "communities" | "observations") {
     const templates: Record<string, string> = {
-      communities: "canonical_name,slug,city,zip_codes,property_type,unit_count,monthly_fee_min,monthly_fee_max,monthly_fee_median,fee_observation_count,confidence_score,management_company,str_restriction,pet_restriction,vehicle_restriction,rental_approval,amenities,subdivision_names,street_address_range,status
-Estates at Heritage Club,estates-at-heritage-club,Boynton Beach,33436,Single family,120,250,350,300,5,2,Campbell Property Management,No short-term rentals,2 pets max,No commercial vehicles,Board approval required,Pool|Tennis|Clubhouse,Heritage Club,100-500 Heritage Blvd,published",
-      observations: "community_name,mls_number,listing_date,property_address,listing_agent,fee_min,fee_max,fee_includes,special_assessment,assessment_amount,assessment_end_date,reserve_status,source_text
-Estates at Heritage Club,MLS123456,2026-01-15,123 Heritage Blvd Boynton Beach FL,John Smith,250,350,Water and lawn,Yes,$200/mo roof assessment,2027-12,Fully funded,HOA fee is $300/mo includes water and lawn care. Special assessment of $200/mo for roof through 2027."
+      communities: "canonical_name,slug,city,zip_codes,property_type,unit_count,monthly_fee_min,monthly_fee_max,monthly_fee_median,fee_observation_count,confidence_score,management_company,str_restriction,pet_restriction,vehicle_restriction,rental_approval,amenities,subdivision_names,street_address_range,status\nEstates at Heritage Club,estates-at-heritage-club,Boynton Beach,33436,Single family,120,250,350,300,5,2,Campbell Property Management,No short-term rentals,2 pets max,No commercial vehicles,Board approval required,Pool|Tennis|Clubhouse,Heritage Club,100-500 Heritage Blvd,published",
+      observations: "community_name,mls_number,listing_date,property_address,listing_agent,fee_min,fee_max,fee_includes,special_assessment,assessment_amount,assessment_end_date,reserve_status,source_text\nEstates at Heritage Club,MLS123456,2026-01-15,123 Heritage Blvd Boynton Beach FL,John Smith,250,350,Water and lawn,Yes,$200/mo roof assessment,2027-12,Fully funded,HOA fee is $300/mo includes water and lawn care. Special assessment of $200/mo for roof through 2027."
     }
     const blob = new Blob([templates[type]], { type: "text/csv" })
     const url = URL.createObjectURL(blob)
