@@ -312,7 +312,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div><strong style={{fontWeight: '500'}}>MLS listing data ({community.fee_observation_count || 0} observations)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
             <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points. Unverified.</span></div>
           </div>
-          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="/pricing" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
+          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="mailto:fieldlogisticsfl@gmail.com" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
           </div>
         </div>
       </div>
