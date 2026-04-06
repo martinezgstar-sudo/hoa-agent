@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: 'https://hoa-agent.com',
     siteName: 'HOA Agent',
     type: 'website',
-    images: [{ url: 'https://hoa-agent.com/logo.png', width0, height: 400, alt: 'HOA Agent' }],
+    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
   },
   twitter: {
     card: 'summary',
