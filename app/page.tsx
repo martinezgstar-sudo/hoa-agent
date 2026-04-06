@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import GuideForm from '@/app/components/GuideForm'
 import HomeSearch from '@/app/components/HomeSearch'
 
 export default async function Home() {
@@ -118,10 +119,7 @@ export default async function Home() {
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the Palm Beach County HOA Fee Guide free</div>
             <div style={{fontSize: '12px', color: '#1B2B6B'}}>2025 data. Median fees by city, top management companies, assessment trends.</div>
           </div>
-          <div style={{display: 'flex', gap: '8px', flexShrink: 0}}>
-            <input type="email" placeholder="your@email.com" style={{fontSize: '13px', padding: '8px 12px', borderRadius: '8px', border: '1px solid #5DCAA5', outline: 'none', width: '200px'}}/>
-            <button style={{fontSize: '13px', padding: '8px 16px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500'}}>Get guide</button>
-          </div>
+          <GuideForm />
         </div>
       </section>
 
