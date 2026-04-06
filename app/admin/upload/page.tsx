@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "hoaagent2025"
+const ADMIN_PASSWORD = "Valean2008!"
 
 function parseCSV(text: string): Record<string, string>[] {
   const lines = text.trim().split("\n")
