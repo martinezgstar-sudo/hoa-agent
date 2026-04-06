@@ -32,9 +32,27 @@ Flag if: profanity, personal attacks, spam, completely off-topic, fake-seeming, 
   }
 }
 
+const rateLimitMap = new Map<string, number[]>()
+
 export async function POST(request: NextRequest) {
+  // Rate limit — max 3 comments per IP per hour
+  const ip = request.headers.get('x-forwarded-for') || 'unknown'
+  const now = Date.now()
+  const windowMs = 60 * 60 * 1000
+  const maxRequests = 3
+
+  if (!rateLimitMap.has(ip)) rateLimitMap.set(ip, [])
+  const timestamps = rateLimitMap.get(ip)!.filter(t => now - t < windowMs)
+  
+  if (timestamps.length >= maxRequests) {
+    return NextResponse.json({ error: 'Too many submissions. Please try again later.' }, { status: 429 })
+  }
+  
+  timestamps.push(now)
+  rateLimitMap.set(ip, timestamps)
+
   const body = await request.json()
-  const { community_id, comment_text, rating, commenter_name } = body
+  const { community_id, comment_xt, rating, commenter_name } = body
 
   if (!community_id || !comment_text) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
