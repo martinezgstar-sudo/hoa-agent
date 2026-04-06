@@ -4,8 +4,7 @@ import { useState } from "react"
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "hoaagent2025"
 
 function parseCSV(text: string): Record<string, string>[] {
-  const lines = text.trim().split("
-")
+  const lines = text.trim().split("\n")
   if (lines.length < 2) return []
   const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""))
   return lines.slice(1).map(line => {
