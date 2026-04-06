@@ -136,7 +136,7 @@ export default function AdminUpload() {
             <div style={{fontSize:"32px",marginBottom:"8px"}}>📄</div>
             <div style={{fontSize:"14px",color:"#555",marginBottom:"4px"}}>{file ? file.name : "Drop CSV file here or click to browse"}</div>
             <div style={{fontSize:"12px",color:"#aaa"}}>CSV files only</div>
-            <input id="csv-input" type="file" accept=".csv" style={{display:"none"}} onChge={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }}/>
+            <input id="csv-input" type="file" accept=".csv" style={{display:"none"}} onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }}/>
           </div>
 
           {preview.length > 0 && (
