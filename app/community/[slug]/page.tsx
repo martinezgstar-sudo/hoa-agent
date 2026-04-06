@@ -117,7 +117,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <a href="/" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
           <a href="/pricing" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="/pricing" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
         </div>
       </nav>
 
