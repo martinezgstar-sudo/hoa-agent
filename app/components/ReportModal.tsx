@@ -25,14 +25,14 @@ export default function ReportModal() {
         Get report — 
       </button>
       {open && (
-        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,backgundColor:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:"24px"}} onClick={() => setOpen(false)}>
+        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,backgroundColor:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:"24px"}} onClick={() => setOpen(false)}>
           <div style={{backgroundColor:"#fff",borderRadius:"16px",padding:"32px",maxWidth:"440px",width:"100%",position:"relative"}} onClick={e => e.stopPropagation()}>
             <button onClick={() => setOpen(false)} style={{position:"absolute",top:"16px",right:"16px",background:"none",border:"none",fontSize:"20px",cursor:"pointer",color:"#888"}}>✕</button>
             {submitted ? (
               <div style={{textAlign:"center",padding:"16px 0"}}>
                 <div style={{fontSize:"40px",marginBottom:"16px"}}>✓</div>
                 <div style={{fontSize:"18px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>You are on the list</div>
-                <div style={{fontSize:"14px",color:"#888",lineHeight:"1.6"}}>Full reports are coming soon. We will email you as soon as they are available ong with a discount for early access.</div>
+                <div style={{fontSize:"14px",color:"#888",lineHeight:"1.6"}}>Full reports are coming soon. We will email you as soon as they are available — along with a discount for early access.</div>
               </div>
             ) : (
               <>
