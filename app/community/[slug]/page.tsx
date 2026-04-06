@@ -121,6 +121,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
       </nav>
 
       <div style={{maxWidth: '720px', margin: '0 auto', padding: '24px 32px'}}>
+        <a href='/search' style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'13px',color:'#888',textDecoration:'none',marginBottom:'16px'}}>← Back to search</a>
         <div style={{fontSize: '12px', color: '#888', marginBottom: '16px'}}>
           <a href="/" style={{color: '#888', textDecoration: 'none'}}>Florida</a>
           <span style={{margin: '0 6px'}}>›</span>

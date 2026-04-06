@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server"
 import { supabase } from "@/lib/supabase"
 
 export async function POST(request: NextRequest) {
+  const adminPassword = request.headers.get('x-admin-password')
+  if (adminPassword !== process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   const body = await request.json()
   const { data, error } = await supabase
     .from("communities")

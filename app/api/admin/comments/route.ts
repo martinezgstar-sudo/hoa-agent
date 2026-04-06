@@ -2,6 +2,10 @@ import { supabase } from '@/lib/supabase'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
+  const adminPassword = request.headers.get('x-admin-password')
+  if (adminPassword !== process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   const status = request.nextUrl.searchParams.get('status') || 'pending'
   const { data, error } = await supabase
     .from('community_comments')
@@ -14,6 +18,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+  const adminPassword = request.headers.get('x-admin-password')
+  if (adminPassword !== process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   const { id, status } = await request.json()
   const { error } = await supabase
     .from('community_comments')
