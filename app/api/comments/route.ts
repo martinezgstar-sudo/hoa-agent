@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
   rateLimitMap.set(ip, timestamps)
 
   const body = await request.json()
-  const { community_id, comment_xt, rating, commenter_name } = body
+  const { community_id, comment_text, rating, commenter_name } = body
 
   if (!community_id || !comment_text) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
