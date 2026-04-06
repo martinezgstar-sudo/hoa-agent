@@ -35,9 +35,8 @@ export default function AdminComments() {
   }, [authed, filter])
 
   async function updateStatus(id: string, status: string) {
-    await fetch('/api/admin/comments', { headers: { 'x-admin-password': ADMIN_PASSWORD },
+    await fetch('/api/admin/comments', { headers: { 'x-admin-password': ADMIN_PASSWORD, 'Content-Type': 'application/json' },
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, status })
     })
     fetchComments(filter)
