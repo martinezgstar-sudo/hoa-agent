@@ -41,7 +41,7 @@ export default function ReportModal() {
                 <p style={{fontSize:"13px",color:"#888",lineHeight:"1.7",marginBottom:"20px"}}>Full reports are coming soon. Enter your email to be notified when available — early access customers get a discount.</p>
                 <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"20px"}}>
                   {["Complete fee trend analysis","Full source trail with citations","All special assessment signals","Restriction detail","Management company history","Downloadable PDF"].map(i => (
-                    <div key={iyle={{display:"flex",alignItems:"center",gap:"8px",fontSize:"13px",color:"#444"}}>
+                    <div key={i} style={{display:"flex",alignItems:"center",gap:"8px",fontSize:"13px",color:"#444"}}>
                       <span style={{color:"#1D9E75",fontWeight:"600"}}>✓</span>{i}
                     </div>
                   ))}
