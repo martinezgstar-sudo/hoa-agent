@@ -190,7 +190,7 @@ export default function AdminUpload() {
             <div>3. Save as CSV and upload here</div>
             <div>4. Preview confirms your data looks right before importing</div>
             <div>5. Click Upload — data appears in Supabase instantly</div>
-            {activeTab === "observations" &&  style={{marginTop:"8px",color:"#EF9F27"}}>Note: Fee observations are linked to communities by name. Make sure community_name matches exactly.</div>}
+            {activeTab === "observations" && <div style={{marginTop:"8px",color:"#EF9F27"}}>Note: Fee observations are linked to communities by name. Make sure community_name matches exactly.</div>}
           </div>
         </div>
       </div>
