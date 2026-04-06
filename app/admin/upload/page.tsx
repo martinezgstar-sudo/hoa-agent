@@ -154,7 +154,7 @@ export default function AdminUpload() {
                   <tbody>
                     {preview.map((row, i) => (
                       <tr key={i}>
-                        {Object.values(row).map((val, j)> (
+                        {Object.values(row).map((val, j) => (
                           <td key={j} style={{padding:"6px 10px",borderBottom:"1px solid #f0f0f0",whiteSpace:"nowrap",maxWidth:"150px",overflow:"hidden",textOverflow:"ellipsis"}}>{val}</td>
                         ))}
                       </tr>
