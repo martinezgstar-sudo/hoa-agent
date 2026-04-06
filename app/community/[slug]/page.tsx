@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
+import ReportModal from '@/app/components/ReportModal'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -114,9 +115,9 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </a>
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
-          <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
-          <a href="#" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="/pricing" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
+          <a href="/pricing" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
+          <a href="/pricing" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
         </div>
       </nav>
 
@@ -269,7 +270,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the full HOA Agent report</div>
             <div style={{fontSize: '12px', color: '#1B2B6B'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
           </div>
-          <button style={{fontSize: '13px', padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', border: 'none', cursor: 'pointer', fontWeight: '500', whiteSpace: 'nowrap'}}>Get report — $29</button>
+          <ReportModal />
         </div>
 
         {comments && comments.length > 0 && (
@@ -311,7 +312,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div><strong style={{fontWeight: '500'}}>MLS listing data ({community.fee_observation_count || 0} observations)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
             <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points. Unverified.</span></div>
           </div>
-          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="#" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
+          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="/pricing" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
           </div>
         </div>
       </div>
