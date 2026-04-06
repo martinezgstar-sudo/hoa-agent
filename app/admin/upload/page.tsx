@@ -24,7 +24,7 @@ function parseCSV(text: string): Record<string, string>[] {
 }
 
 export default function AdminUpload() {
-  const [authed, setAuthed] = useState(false)
+  const [authed, setAuthed] = useState(typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true")
   const [password, setPassword] = useState("")
   const [activeTab, setActiveTab] = useState<"communities"|"observations">("communities")
   const [file, setFile] = useState<File | null>(null)
@@ -81,7 +81,7 @@ export default function AdminUpload() {
           <div style={{fontSize:"13px",color:"#888",marginBottom:"20px"}}>CSV Upload Tool</div>
           <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}
             style={{width:"100%",padding:"10px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"14px",marginBottom:"12px",boxSizing:"border-box"}}/>
-          <button onClick={() => password === ADMIN_PASSWORD && setAuthed(true)}
+          <button onClick={() => if (password === ADMIN_PASSWORD) { setAuthed(true); sessionStorage.setItem("hoa_admin", "true") }}
             style={{width:"100%",padding:"10px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"500"}}>
             Sign in
           </button>
