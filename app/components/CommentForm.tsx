@@ -278,7 +278,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
             <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 — Your review</div>
 
             <div style={{marginBottom:"16px"}}>
-              <div style={{fontSize:"12px",color:"#555",maBottom:"10px"}}>Rate your experience</div>
+              <div style={{fontSize:"12px",color:"#555",marginBottom:"10px"}}>Rate your experience</div>
               <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"14px 16px"}}>
                 <StarRow label="Overall rating" value={rating} onChange={setRating}/>
                 <StarRow label="Management responsiveness" value={managementRating} onChange={setManagementRating}/>
