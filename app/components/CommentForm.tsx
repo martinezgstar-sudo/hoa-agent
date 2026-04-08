@@ -290,7 +290,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Your review *</div>
               <textarea value={comment} onChange={e => setComment(e.target.value)} required rows={5}
                 placeholder="Share your experience — HOA management, community atmosphere, any issues or highlights buyers should know about..."
-                style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",resize:"vercal",outline:"none",boxSizing:"border-box",fontFamily:"system-ui,sans-serif"}}/>
+                style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",resize:"vertical",outline:"none",boxSizing:"border-box",fontFamily:"system-ui,sans-serif"}}/>
               <div style={{fontSize:"11px",color:"#aaa",marginTop:"4px"}}>{comment.length}/2000</div>
             </div>
 
