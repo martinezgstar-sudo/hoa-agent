@@ -124,7 +124,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               <div style={{fontSize:"12px",color:"#555",marginBottom:"8px"}}>Are you a current or former resident of this community?</div>
               <div style={{display:"flex",gap:"8px"}}>
                 <SelectBtn value="yes" current={isResident} onClick={() => setIsResident("yes")} label="Yes"/>
-                <SelectBtn value="no" current={isResident} onClick={() => setIsResident("no")} label="No — but I know this community"             </div>
+                <SelectBtn value="no" current={isResident} onClick={() => setIsResident("no")} label="No — but I know this community"/>              </div>
             </div>
 
             {isResident === "yes" && (
