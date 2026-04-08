@@ -21,7 +21,7 @@ export default function TermsPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>We source data from public records, MLS observations, and user submissions. HOA Agent does not guarantee the accuracy, completeness, or timeliness of any information on this site. Fee amounts, restrictions, and entity information may change without notice. Always verify directly with the association or management company.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>3. No Affiliation</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent is not affiliated with any homeowner association, condominium association, management company, government agency, or MLS organization. We are an independent information platform.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent is not affiliated with any homeowner association, condominium association, management company, or government agency. We are an independent information platform.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>4. User Submissions</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>By submitting a review, comment, or community suggestion, you confirm that your submission is truthful and does not contain defamatory, discriminatory, or illegal content. We reserve the right to moderate, edit, or remove any submission at our discretion. You grant HOA Agent a non-exclusive license to display your submission on our platform.</p>

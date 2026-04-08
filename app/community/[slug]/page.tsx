@@ -158,12 +158,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </div>
 
         <div style={{backgroundColor: '#FAEEDA', border: '1px solid #EF9F27', borderRadius: '8px', padding: '10px 14px', marginBottom: '12px', fontSize: '12px', color: '#633806', lineHeight: '1.5'}}>
-          <strong>Data transparency:</strong> This profile combines public records, listing observations, and user-submitted reports. Each field is labeled by source. Unverified data is clearly marked.
+          <strong>Data transparency:</strong> This profile combines public records and resident-submitted data. Each field is labeled by source. Unverified data is clearly marked.
         </div>
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
           {[
-            {val: community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min}–$${community.monthly_fee_max}/mo` : 'Unknown', label: 'Monthly fee', src: 'listing-derived'},
+            {val: community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min}–$${community.monthly_fee_max}/mo` : 'Unknown', label: 'Monthly fee', src: 'public record'},
             {val: community.review_avg ? `${community.review_avg}★` : 'No reviews', label: `${community.review_count || 0} reviews`, src: 'user-submitted'},
             {val: `${community.assessment_signal_count || 0} signals`, label: 'Assessments', src: 'listing + user'},
             {val: community.management_company || 'Unknown', label: 'Management', src: 'public record'},
@@ -179,7 +179,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>HOA fee summary</div>
-            <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>listing-derived</span>
+            <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>resident-verified</span>
           </div>
           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '14px'}}>
             <div>
@@ -195,7 +195,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Observations</div>
             </div>
           </div>
-          <div style={{fontSize: '11px', color: '#aaa'}}>Based on MLS listing observations. Not a guaranteed fee. Always verify with the HOA directly.</div>
+          <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the HOA directly.</div>
         </div>
 
         {community.assessment_signal_count > 0 && (
@@ -218,7 +218,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
               <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Amenities</div>
-              <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>listing-derived</span>
+              <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>resident-verified</span>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
               {amenitiesList.map((amenity: string) => (
@@ -304,13 +304,13 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <CommentForm communityId={community.id} />
 
         <div style={{backgroundColor: '#f9f9f9', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '14px 20px', marginBottom: '12px', fontSize: '12px', color: '#888', lineHeight: '1.6'}}>
-          <strong style={{color: '#555', fontWeight: '500'}}>Data accuracy notice:</strong> Data is sourced from public records, MLS observations, and user submissions. HOA Agent does not guarantee accuracy. Verify all fees and restrictions directly with the association before making any real estate decision.
+          <strong style={{color: '#555', fontWeight: '500'}}>Data accuracy notice:</strong> Data is sourced from public records and resident submissions. HOA Agent does not guarantee accuracy. Verify all fees and restrictions directly with the association before making any real estate decision.
         </div>
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px'}}>
             <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>— Entity, registered agent, status.</span></div>
-            <div><strong style={{fontWeight: '500'}}>MLS listing data ({community.fee_observation_count || 0} observations)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Resident submissions ({community.fee_observation_count || 0} reports)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
             <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points. Unverified.</span></div>
           </div>
           <div style={{marginTop: '12px', fontSize: '12px'}}><a href="mailto:fieldlogisticsfl@gmail.com" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>

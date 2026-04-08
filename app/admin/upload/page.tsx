@@ -186,7 +186,7 @@ export default function AdminUpload() {
           <div style={{fontSize:"13px",fontWeight:"500",color:"#1a1a1a",marginBottom:"12px"}}>Instructions</div>
           <div style={{fontSize:"12px",color:"#666",lineHeight:"1.8"}}>
             <div>1. Download the template for the type of data you want to upload</div>
-            <div>2. Fill it in — you can use Claude to extract data from MLS listings</div>
+            <div>2. Fill it in — you can use Claude to extract data from public records and resident submissions</div>
             <div>3. Save as CSV and upload here</div>
             <div>4. Preview confirms your data looks right before importing</div>
             <div>5. Click Upload — data appears in Supabase instantly</div>

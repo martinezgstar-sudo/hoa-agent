@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
           property_address: row.property_address,
           listing_agent: row.listing_agent,
           extracted_by: "claude",
-          source_type: "mls",
+          source_type: "public-record",
           confidence_score: 2,
         }
         const { error } = await supabase.from("fee_observations").insert(payload)

@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>You may request deletion of your personal data at any time by emailing info@hoa-agent.com. We will process deletion requests within 30 days.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>6. Public Records Data</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Community information displayed on HOA Agent is sourced from public records including Florida Division of Corporations, Palm Beach County property data, and MLS observations. This data is publicly available and not considered private information.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Community information displayed on HOA Agent is sourced from public records including Florida Division of Corporations, Palm Beach County property data, and resident submissions. This data is publicly available and not considered private information.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>7. Children</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent is not directed at children under 13. We do not knowingly collect information from children.</p>
