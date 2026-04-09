@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const { data: community } = await supabase
     .from('communities')
-    .select('canonical_name,city,monthly_fee_min,monthly_fee_max,management_company,property_type')
+    .select('canonical_name,city,city_verified,monthly_fee_min,monthly_fee_max,management_company,property_type')
     .eq('slug', slug)
     .single()
 
