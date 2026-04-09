@@ -190,7 +190,7 @@ function SuggestForm({ address }: { address: string }) {
             <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 — Optional details</div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Management company</label>
-              <input v={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Seacrest Services" style={inputStyle}/>
+              <input value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Seacrest Services" style={inputStyle}/>
             </div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Approximate number of units</label>
