@@ -225,7 +225,7 @@ export default function AdminSuggestions() {
                     </div>
                     <div style={{display:"flex",gap:"6px"}}>
                       <a href={"/community/"+c.slug} target="_blank"
-                        style={{padding:"5px 10px",Radius:"6px",border:"1px solid #e0e0e0",backgroundColor:"#fff",color:"#555",textDecoration:"none",fontSize:"11px"}}>
+                        style={{padding:"5px 10px",borderRadius:"6px",border:"1px solid #e0e0e0",backgroundColor:"#fff",color:"#555",textDecoration:"none",fontSize:"11px"}}>
                         View
                       </a>
                       <button onClick={() => mergeSuggestion(s, c)}
