@@ -51,13 +51,27 @@ export async function PATCH(request: NextRequest) {
       // Count fee observations from approved comments
       const feeReports = comments.filter(c => (c as any).hoa_fee_reported).length
 
+      // Get the comment details to check if city was submitted
+      const { data: fullComment } = await supabase
+        .from('community_comments')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      const updates: any = {
+        review_count: comments.length,
+        review_avg: avg,
+        fee_observation_count: feeReports
+      }
+
+      // If comment had HOA fee data, mark city as resident-verified
+      if (fullComment?.hoa_fee_reported) {
+        updates.city_verified = true
+      }
+
       await supabase
         .from('communities')
-        .update({
-          review_count: comments.length,
-          review_avg: avg,
-          fee_observation_count: feeReports
-        })
+        .update(updates)
         .eq('id', comment.community_id)
     }
   }

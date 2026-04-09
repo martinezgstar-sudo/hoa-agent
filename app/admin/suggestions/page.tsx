@@ -64,7 +64,7 @@ export default function AdminSuggestions() {
         monthly_fee_min: s.hoa_fee || null, monthly_fee_max: s.hoa_fee || null,
         str_restriction: s.str_restriction || null, pet_restriction: s.pet_restriction || null,
         amenities: s.amenities || null, management_company: s.management_company || null,
-        status: "published", confidence_score: 2,
+        status: "published", confidence_score: 2, city_verified: true,
       })
     })
     if (res.ok) {
