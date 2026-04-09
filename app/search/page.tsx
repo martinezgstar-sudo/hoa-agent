@@ -279,7 +279,7 @@ export default function SearchPage() {
                 <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"8px"}}>This HOA is not in our database yet</div>
                 <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover 7,000+ communities in Palm Beach County. Help us add yours.</div>
                 <button onClick={() => setShowSuggestForm(true)} style={{fontSize:"13px",padding:"8px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer"}}>Suggest this community</button>
-                {showSuggestForm && <div style={{marginTop:"16px"}}><SuggestForm address={address} /></div>}
+                {showSuggestForm && <div style={{marginTop:"16px"}}><SuggestForm address={query} /></div>}
               </div>
             )}
           </div>
