@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 
-const ADMIN_PASSWORD = "hoaagent2025"
+const ADMIN_PASSWORD = "Valean2008!"
 
 const EMPTY_FORM = {
   canonical_name: "",

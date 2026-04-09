@@ -13,7 +13,7 @@ interface Comment {
   communities?: { canonical_name: string }
 }
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'hoaagent2025'
+const ADMIN_PASSWORD = "Valean2008!"
 
 export default function AdminComments() {
   const [authed, setAuthed] = useState(false)
