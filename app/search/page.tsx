@@ -10,62 +10,252 @@ function getConfidenceLabel(score: number) {
 
 
 function SuggestForm({ address }: { address: string }) {
-  const [email, setEmail] = useState("")
-  const [community, setCommunity] = useState("")
-  const [submitted, setSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [step, setStep] = useState(1)
+  const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
+  const [communityName, setCommunityName] = useState("")
+  const [city, setCity] = useState("")
+  const [hoaFee, setHoaFee] = useState("")
+  const [feeUnsure, setFeeUnsure] = useState(false)
+  const [strRestriction, setStrRestriction] = useState("")
+  const [strUnsure, setStrUnsure] = useState(false)
+  const [petRestriction, setPetRestriction] = useState("")
+  const [petUnsure, setPetUnsure] = useState(false)
+  const [rentalRestriction, setRentalRestriction] = useState("")
+  const [rentalUnsure, setRentalUnsure] = useState(false)
+  const [amenities, setAmenities] = useState<string[]>([])
+  const [managementCompany, setManagementCompany] = useState("")
+  const [unitCount, setUnitCount] = useState("")
+  const [specialAssessment, setSpecialAssessment] = useState("")
+  const [assessmentAmount, setAssessmentAmount] = useState("")
+  const [submitterEmail, setSubmitterEmail] = useState("")
+  const [notes, setNotes] = useState("")
+  const [rating, setRating] = useState(0)
+  const [ratingHover, setRatingHover] = useState(0)
+  const [comment, setComment] = useState("")
 
-  async function handleSuggest(e: React.FormEvent) {
+  const amenityOptions = ["Pool","Tennis Court","Clubhouse","Fitness Center","Playground","Golf Course","Boat Dock","Gated","Security","None"]
+
+  function toggleAmenity(a: string) {
+    if (a === "None") { setAmenities(["None"]); return }
+    setAmenities(prev => {
+      const without = prev.filter(x => x !== "None")
+      return without.includes(a) ? without.filter(x => x !== a) : [...without, a]
+    })
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitting(true)
+    setStatus("submitting")
     await fetch("/api/suggest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ address, community_name: community, submitter_email: email })
+      body: JSON.stringify({
+        address,
+        community_name: communityName,
+        city,
+        hoa_fee: feeUnsure ? "unsure" : hoaFee,
+        str_restriction: strUnsure ? "unsure" : strRestriction,
+        pet_restriction: petUnsure ? "unsure" : petRestriction,
+        rental_restriction: rentalUnsure ? "unsure" : rentalRestriction,
+        amenities: amenities.join("|"),
+        management_company: managementCompany,
+        unit_count: unitCount,
+        special_assessment: specialAssessment,
+        assessment_amount: assessmentAmount,
+        submitter_email: submitterEmail,
+        notes,
+        rating: rating || null,
+        comment,
+      })
     })
-    setSubmitted(true)
-    setSubmitting(false)
+    setStatus("success")
   }
 
-  if (submitted) {
+  const inputStyle = {width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",outline:"none",boxSizing:"border-box" as const}
+  const labelStyle = {fontSize:"12px",color:"#555",marginBottom:"6px",display:"block" as const}
+  const sectionStyle = {marginBottom:"18px"}
+
+  const ChkBtn = ({value, current, onClick, label}: {value:string, current:string, onClick:()=>void, label:string}) => (
+    <button type="button" onClick={onClick}
+      style={{padding:"7px 14px",borderRadius:"8px",border:"1.5px solid "+(current===value?"#1B2B6B":"#e0e0e0"),backgroundColor:current===value?"#1B2B6B":"#fff",color:current===value?"#fff":"#555",cursor:"pointer",fontSize:"13px",marginRight:"6px",marginBottom:"6px"}}>
+      {label}
+    </button>
+  )
+
+  if (status === "success") {
     return (
-      <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
-        <div style={{fontSize:"15px",fontWeight:"500",color:"#1D9E75",marginBottom:"8px"}}>Thanks! We got your suggestion.</div>
-        <div style={{fontSize:"13px",color:"#888"}}>We will research this community and add it to our database.</div>
+      <div style={{backgroundColor:"#E1F5EE",borderRadius:"12px",padding:"24px",textAlign:"center",marginTop:"16px"}}>
+        <div style={{fontSize:"32px",marginBottom:"8px"}}>checkmark</div>
+        <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you for contributing</div>
+        <div style={{fontSize:"13px",color:"#555"}}>Your submission will be reviewed and added to HOA Agent. This helps buyers make better decisions.</div>
       </div>
     )
   }
 
   return (
-    <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px"}}>
-      <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"4px"}}>This HOA is not in our database yet</div>
-      <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover Palm Beach County and are adding more. Suggest this community and we will research it.</div>
-      <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
-        <input
-          type="text"
-          placeholder="Community or HOA name (if known)"
-          value={community}
-          onChange={e => setCommunity(e.target.value)}
-          style={{fontSize:"13px",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",outline:"none"}}
-        />
-        <input
-          type="email"
-          placeholder="Your email (optional)"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          style={{fontSize:"13px",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",outline:"none"}}
-        />
-        <button
-          onClick={handleSuggest}
-          disabled={submitting}
-          style={{fontSize:"13px",padding:"10px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500"}}
-        >
-          {submitting ? "Submitting..." : "Suggest this community"}
-        </button>
+    <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",marginTop:"16px",textAlign:"left"}}>
+      <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Add this community</div>
+      <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Help buyers know what to expect. Fields marked * are required.</div>
+      <div style={{display:"flex",gap:"8px",marginBottom:"20px"}}>
+        {[1,2,3].map(s => (
+          <div key={s} style={{flex:1,height:"4px",borderRadius:"2px",backgroundColor:step>=s?"#1B2B6B":"#e5e5e5"}}></div>
+        ))}
       </div>
+      <form onSubmit={handleSubmit}>
+        {step === 1 && (
+          <div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 of 3 — Community basics</div>
+            <div style={sectionSte}>
+              <label style={labelStyle}>Community name *</label>
+              <input required value={communityName} onChange={e => setCommunityName(e.target.value)} placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>City *</label>
+              <input required value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Boca Raton" style={inputStyle}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Monthly HOA fee *</label>
+              <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
+                <div style={{position:"relative",flex:1}}>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350" disabled={feeUnsure}
+                    style={{...inputStyle,paddingLeft:"24px",opacity:feeUnsure?0.4:1}}/>
+                </div>
+                <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",whiteSpace:"nowrap"}}>
+                  <input type="checkbox" checked={feeUnsure} onChange={e => setFeeUnsure(e.target.checked)}/>
+                  I am not sure
+                </label>
+              </div>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Amenities *</label>
+              <div style={{display:"flex",flexWrap:"wrap"}}>
+                {amenityOptions.map(a => (
+                  <button key={a} type="button" onClick={() => toggleAmenity(a)}
+                    style={{padding:"6px 14px",borderRadius:"20px",border:"1.5px solid "+(amenities.includes(a)?"#1B2B6B":"#e0e0e0"),backgroundColor:amenities.includes(a)?"#1B2B6B":"#fff",color:amenities.includes(a)?"#fff":"#555",cursor:"pointer",fontSize:"12px",margin:"0 6px 6px 0"}}>
+                    {a}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <button type="button" onClick={() => setStep(2)} disabled={!communityName || !city || (!hoaFee && !feeUnsure)}
+              style={{width:"100%",padding:"12px",borderRadius:"8px",backgroundColor:(communityName && city && (hoaFee || feeUnsure))?"#1B2B6B":"#ccc",color:"#fff",border:"none",cursor:(communityName && city && (hoaFee || feeUnsure))?"pointer":"not-allowed",fontSize:"14px",fontWeight:"600"}}>
+              Next — Restrictions
+            </button>
+          </div>
+        )}
+        {step === 2 && (
+          <div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 of 3 — Restrictions *</div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Short-term rentals allowed? (Airbnb, VRBO)</label>
+              <div style={{display:"flex",flexWrap:"w}}>
+                {["Yes","No","Restricted"].map(v => <ChkBtn key={v} value={v} current={strUnsure?"":strRestriction} onClick={() => {setStrRestriction(v);setStrUnsure(false)}} label={v}/>)}
+                <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",padding:"7px 0"}}>
+                  <input type="checkbox" checked={strUnsure} onChange={e => {setStrUnsure(e.target.checked);if(e.target.checked)setStrRestriction("")}}/>
+                  Not sure
+                </label>
+              </div>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Pets allowed?</label>
+              <div style={{display:"flex",flexWrap:"wrap"}}>
+                {["Yes","No","With restrictions"].map(v => <ChkBtn key={v} value={v} current={petUnsure?"":petRestriction} onClick={() => {setPetRestriction(v);setPetUnsure(false)}} label={v}/>)}
+                <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",padding:"7px 0"}}>
+                  <input type="checkbox" checked={petUnsure} onChange={e => {setPetUnsure(e.target.checked);if(e.target.checked)setPetRestriction("")}}/>
+                  Not sure
+                </label>
+              </div>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Rental approval required?</label>
+              <div style={{display:"flex",flexWrap:"wrap"}}>
+                {["Yes","No"].map(v => <ChkBtn key={v} value={v} current={rentalUnsure?"":rentalRestriction} onClick={() => {setRentalRestriction(v);setRentalUnsure(false)}} label={v}/>)}
+                <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",padding:"7px 0"}}>
+                  <input type="checkbox" checked={rentalUnsure} onChange={e => {setRentalUnsure(e.target.checked);if(e.target.checked)setRentalRestriction("")}}/>
+                  Not sure
+                </label>
+              </div>
+            </div>
+            <div style={{display:"flex",gap:"8px"}}>
+              <button type="button" onClick={() => setStep(1)}
+                style={{flex:1,padding:"12px",borderRadius:"8px",backgroundColor:"#fff",color:"#1B2B6B",border:"1.5px solid #1B2B6B",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Back</button>
+              <button type="button" onClick={() => setStep(3)}
+                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Next — Optional details</button>
+            </div>
+          </div>
+        )}
+        {step === 3 && (
+          <div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 — Optional details</div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Management company</label>
+              <input v={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Seacrest Services" style={inputStyle}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Approximate number of units</label>
+              <input type="number" value={unitCount} onChange={e => setUnitCount(e.target.value)} placeholder="e.g. 250" style={inputStyle}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Any active special assessments?</label>
+              <div style={{display:"flex",flexWrap:"wrap"}}>
+                {["Yes","No"].map(v => <ChkBtn key={v} value={v} current={specialAssessment} onClick={() => setSpecialAssessment(v)} label={v}/>)}
+              </div>
+              {specialAssessment === "Yes" && (
+                <input type="number" value={assessmentAmount} onChange={e => setAssessmentAmount(e.target.value)}
+                  placeholder="Monthly assessment amount $" style={{...inputStyle,marginTop:"8px"}}/>
+              )}
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Overall rating (5 = Excellent)</label>
+              <div style={{display:"flex",gap:"4px",marginBottom:"4px"}}>
+                {[1,2,3,4,5].map(s => (
+                  <button key={s} type="button"
+                    onClick={() => setRating(s)}
+                    onMouseEnter={() => setRatingHover(s)}
+                    onMouseLeave={() => setRatingHover(0)}
+                    style={{background:"none",border:"none",cursor:"pointer",fontSize:"28px",padding:"0 2px",color:(ratingHover||rating)>=s?"#EF9F27":"#e5e5e5"}}>
+                    {String.fromCharCode(9733)}
+                  </button>
+                ))}
+                {rating > 0 && <button type="button" onClick={() => setRating(0)} style={{background:"none",border:"none",cursor:"pointer",fontSize:"11px",color:"#888",marginLeft:"8px"}}>Clear</button>}
+              </div>
+              <div style={{fontSize:"11px",color:"#aaa"}}>{rating===1?"Poor":rating===2?"Below average":rating===3?"Average":rating===4?"Good":rating===5?"Excellent":""}</div>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Share your experience (optional)</label>
+              <textarea value={comment} onChange={e => setComment(e.target.value)} rows={4}
+                placeholder="What is it like living here? HOA management, community atmosphere, anything buyers should know..."
+                style={{...inputStyle,resize:"vertical",fontFamily:"system-ui,sans-serif"}}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Your email (optional)</label>
+              <input type="email" value={submitterEmail} onChange={e => setSubmitterEmail(e.target.value)} placeholder="your@email.com" style={inputStyle}/>
+            </div>
+            <div style={sectionStyle}>
+              <label style={labelStyle}>Anything else buyers should know?</label>
+              <textarea value={notes} onChange={e => setNotes(e.target.value)} rows={3}
+                placeholder="Gate code policy, parking rules, recent fee increases..."
+                style={{...inputStyle,resize:"vertical",fontFamily:"system-ui,sans-serif"}}/>
+            </div>
+            <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"12px 16px",marginBottom:"16px",fontSize:"12px",color:"#888"}}>
+              Your submission will be reviewed before publishing. We never share your email publicly.
+            </div>
+            <div style={{display:"flex",gap:"8px"}}>
+              <button type="button" onClick={() => setStep(2)}
+                style={{flex:1,padding:"12px",borderRadius:"8px",backgroundColor:"#fff",color:"#1B2B6B",border:"1.5px solid #1B2B6B",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Back</button>
+              <button type="submit" disabled={status==="submitting"}
+                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
+                {status==="submitting" ? "Submitting..." : "Submit community"}
+              </button>
+            </div>
+          </div>
+        )}
+      </form>
     </div>
   )
 }
+
 
 export default function SearchPage() {
   const router = useRouter()
@@ -273,6 +463,12 @@ export default function SearchPage() {
                     </div>
                   </a>
                 ))}
+                <div style={{marginTop:"16px",textAlign:"center"}}>
+                  <button onClick={() => setShowSuggestForm(true)} style={{fontSize:"13px",color:"#1B2B6B",background:"none",border:"1px solid #1B2B6B",borderRadius:"8px",padding:"8px 20px",cursor:"pointer"}}>
+                    My community is not listed here
+                  </button>
+                  {showSuggestForm && <SuggestForm address={query} />}
+                </div>
               </div>
             ) : (
               <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
