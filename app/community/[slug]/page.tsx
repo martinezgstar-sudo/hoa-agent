@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 
 interface Community {
+  city_verified?: boolean
   id: string
   slug: string
   canonical_name: string
