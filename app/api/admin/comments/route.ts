@@ -48,11 +48,15 @@ export async function PATCH(request: NextRequest) {
         ? Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10
         : null
 
+      // Count fee observations from approved comments
+      const feeReports = comments.filter(c => (c as any).hoa_fee_reported).length
+
       await supabase
         .from('communities')
         .update({
           review_count: comments.length,
-          review_avg: avg
+          review_avg: avg,
+          fee_observation_count: feeReports
         })
         .eq('id', comment.community_id)
     }
