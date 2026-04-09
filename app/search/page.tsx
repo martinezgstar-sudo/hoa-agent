@@ -13,6 +13,8 @@ function SuggestForm({ address }: { address: string }) {
   const [step, setStep] = useState(1)
   const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
   const [communityName, setCommunityName] = useState("")
+  const [nameMatches, setNameMatches] = useState<any[]>([])
+  const [showNameDropdown, setShowNameDropdown] = useState(false)
   const [city, setCity] = useState("")
   const [hoaFee, setHoaFee] = useState("")
   const [feeUnsure, setFeeUnsure] = useState(false)
@@ -41,6 +43,15 @@ function SuggestForm({ address }: { address: string }) {
       const without = prev.filter(x => x !== "None")
       return without.includes(a) ? without.filter(x => x !== a) : [...without, a]
     })
+  }
+
+  async function fetchNameMatches(val: string) {
+    if (val.length < 2) { setNameMatches([]); setShowNameDropdown(false); return }
+    const res = await fetch("/api/address-search?q=" + encodeURIComponent(val))
+    const data = await res.json()
+    const communities = (data.suggestions || []).filter((s: any) => s.type === "community")
+    setNameMatches(communities)
+    setShowNameDropdown(communities.length > 0)
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -107,7 +118,29 @@ function SuggestForm({ address }: { address: string }) {
             <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 of 3 — Community basics</div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Community name *</label>
-              <input required value={communityName} onChange={e => setCommunityName(e.target.value)} placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
+              <div style={{position:"relative"}}>
+                <input required value={communityName}
+                  onChange={e => { setCommunityName(e.target.value); fetchNameMatches(e.target.value) }}
+                  onBlur={() => setTimeout(() => setShowNameDropdown(false), 200)}
+                  placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
+                {showNameDropdown && (
+                  <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e0e0e0",borderRadius:"8px",zIndex:100,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"4px"}}>
+                    <div style={{fontSize:"11px",color:"#888",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database — select to skip adding:</div>
+                    {nameMatches.map((m: any) => (
+                      <div key={m.slug} onClick={() => { window.open("/community/"+m.slug, "_blank"); setShowNameDropdown(false) }}
+                       tyle={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}
+                        onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f9f9f9")}
+                        onMouseLeave={e => (e.currentTarget.style.backgroundColor="transparent")}>
+                        <span style={{color:"#1a1a1a"}}>{m.label}</span>
+                        <span style={{fontSize:"11px",color:"#1D9E75"}}>View profile →</span>
+                      </div>
+                    ))}
+                    <div style={{padding:"8px 12px",fontSize:"12px",color:"#888",borderTop:"1px solid #f0f0f0"}}>
+                      Not listed? Continue filling the form to add it.
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div style={sectionStyle}>
               <label style={labelStyle}>City *</label>
@@ -335,6 +368,15 @@ export default function SearchPage() {
     const data = await res.json()
     setAddressResult(data)
     setSearching(false)
+  }
+
+  async function fetchNameMatches(val: string) {
+    if (val.length < 2) { setNameMatches([]); setShowNameDropdown(false); return }
+    const res = await fetch("/api/address-search?q=" + encodeURIComponent(val))
+    const data = await res.json()
+    const communities = (data.suggestions || []).filter((s: any) => s.type === "community")
+    setNameMatches(communities)
+    setShowNameDropdown(communities.length > 0)
   }
 
   async function handleSubmit(e: React.FormEvent) {
