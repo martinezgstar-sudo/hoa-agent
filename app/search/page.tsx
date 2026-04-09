@@ -149,7 +149,7 @@ function SuggestForm({ address }: { address: string }) {
             <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 of 3 — Restrictions *</div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Short-term rentals allowed? (Airbnb, VRBO)</label>
-              <div style={{display:"flex",flexWrap:"w}}>
+              <div style={{display:"flex",flexWrap:"wrap"}}>
                 {["Yes","No","Restricted"].map(v => <ChkBtn key={v} value={v} current={strUnsure?"":strRestriction} onClick={() => {setStrRestriction(v);setStrUnsure(false)}} label={v}/>)}
                 <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",padding:"7px 0"}}>
                   <input type="checkbox" checked={strUnsure} onChange={e => {setStrUnsure(e.target.checked);if(e.target.checked)setStrRestriction("")}}/>
