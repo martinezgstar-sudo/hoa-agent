@@ -105,7 +105,7 @@ function SuggestForm({ address }: { address: string }) {
         {step === 1 && (
           <div>
             <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 of 3 — Community basics</div>
-            <div style={sectionSte}>
+            <div style={sectionStyle}>
               <label style={labelStyle}>Community name *</label>
               <input required value={communityName} onChange={e => setCommunityName(e.target.value)} placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
             </div>
