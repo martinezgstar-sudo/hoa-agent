@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   const res = await fetch(
-    `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city&status=eq.published&canonical_name=ilike.*${q}*&limit=6`,
+    `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city&canonical_name=ilike.*${q}*&limit=6`,
     { headers: { apikey: supabaseKey!, Authorization: `Bearer ${supabaseKey}` } }
   )
   const data = await res.json()

@@ -73,6 +73,7 @@ export default function SearchPage() {
   const [communities, setCommunities] = useState<any[]>([])
   const [suggestions, setSuggestions] = useState<any[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [showSuggestForm, setShowSuggestForm] = useState(false)
   const [loading, setLoading] = useState(false)
   const [addressResult, setAddressResult] = useState<any>(null)
   const [searching, setSearching] = useState(false)
@@ -276,8 +277,9 @@ export default function SearchPage() {
             ) : (
               <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
                 <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"8px"}}>This HOA is not in our database yet</div>
-                <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover 37 communities in Palm Beach County and are adding more.</div>
-                <a href="mailto:info@hoa-agent.com" style={{fontSize:"13px",padding:"8px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",textDecoration:"none"}}>Suggest this community</a>
+                <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover 7,000+ communities in Palm Beach County. Help us add yours.</div>
+                <button onClick={() => setShowSuggestForm(true)} style={{fontSize:"13px",padding:"8px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer"}}>Suggest this community</button>
+                {showSuggestForm && <div style={{marginTop:"16px"}}><SuggestForm address={address} /></div>}
               </div>
             )}
           </div>
