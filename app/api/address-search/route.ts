@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const isAddress = /^\d/.test(q)
 
   if (isAddress) {
-    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+    const token = process.env.MAPBOX_TOKEN
     // Bounding box for Palm Beach County
     const bbox = '-80.9,26.3,-80.0,26.97'
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json?country=US&bbox=${bbox}&types=address&limit=6&access_token=${token}`
