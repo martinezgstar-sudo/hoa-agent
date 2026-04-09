@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : 'HOA fee data available.'
 
   const title = `${community.canonical_name} — ${community.city} HOA | HOA Agent`
-  const description = `${community.canonical_name} is a ${community.property_type || 'residential'} community in ${community.city_verified ? community.city + ', FL' : 'Palm Beach County, FL (location unverified)'. ${feeStr} View fees, assessments, restrictions and managemenmpany details.`
+  const description = `${community.canonical_name} is a ${community.property_type || 'residential'} community in ${community.city_verified ? community.city + ', FL' : 'Palm Beach County, FL'}. ${feeStr} View fees, assessments, restrictions and management company details.`
 
   return {
     title,
