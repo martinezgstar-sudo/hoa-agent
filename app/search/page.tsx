@@ -88,7 +88,7 @@ function SuggestForm({ address }: { address: string }) {
 
   const ChkBtn = ({value, current, onClick, label}: {value:string, current:string, onClick:()=>void, label:string}) => (
     <button type="button" onClick={onClick}
-      style={{padding:"7px 14px",borderRadius:"8px",border:"1.5px solid "+(current===value?"#1B2B6B":"#e0e0e0"),backgroundColor:current===value?"#1B2B6B":"#fff",color:current===value?"#fff":"#555",cursor:"pointer",fontSize:"13px",marginRight:"6px",marginBottom:"6px"}}>
+      sstyle={{padding:"7px 14px",borderRadius:"8px",border:"1.5px solid "+(current===value?"#1B2B6B":"#e0e0e0"),backgroundColor:current===value?"#1B2B6B":"#fff",color:current===value?"#fff":"#555",cursor:"pointer",fontSize:"13px",marginRight:"6px",marginBottom:"6px"}}>
       {label}
     </button>
   )
