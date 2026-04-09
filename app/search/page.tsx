@@ -369,16 +369,6 @@ export default function SearchPage() {
     setAddressResult(data)
     setSearching(false)
   }
-
-  async function fetchNameMatches(val: string) {
-    if (val.length < 2) { setNameMatches([]); setShowNameDropdown(false); return }
-    const res = await fetch("/api/address-search?q=" + encodeURIComponent(val))
-    const data = await res.json()
-    const communities = (data.suggestions || []).filter((s: any) => s.type === "community")
-    setNameMatches(communities)
-    setShowNameDropdown(communities.length > 0)
-  }
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setShowSuggestions(false)
