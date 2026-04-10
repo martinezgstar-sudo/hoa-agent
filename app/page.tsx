@@ -34,7 +34,7 @@ export default async function Home() {
 
       <section style={{backgroundColor: '#fff', padding: '72px 32px 64px', textAlign: 'center', borderBottom: '1px solid #e5e5e5'}}>
         <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>Florida HOA intelligence platform</div>
-        <h1 style={{fontSize: '42px', fontWeight: '600', color: '#1a1a1a', lineHeight: '1.2', marginBottom: '16px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto'}}>Know the HOA before you commit</h1>
+        <h1 style={{fontSize: '44px', fontWeight: '700', color: '#1B2B6B', lineHeight: '1.15', marginBottom: '16px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', letterSpacing: '-0.02em'}}>Know the HOA Before You Commit</h1>
         <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews all in one place.</p>
 
         <HomeSearch />
