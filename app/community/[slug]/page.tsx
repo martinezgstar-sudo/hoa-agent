@@ -306,17 +306,23 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#f9f9f9', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '14px 20px', marginBottom: '12px', fontSize: '12px', color: '#888', lineHeight: '1.6'}}>
           <strong style={{color: '#555', fontWeight: '500'}}>Data accuracy notice:</strong> Data is sourced from public records and resident submissions. HOA Agent does not guarantee accuracy. Verify all fees and restrictions directly with the association before making any real estate decision.
         </div>
-                <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', position: 'relative', overflow: 'hidden'}}>
+        <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
-          <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px', filter: 'blur(4px)', userSelect: 'none', pointerEvents: 'none'}}>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px'}}>
             <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>— Entity, registered agent, status.</span></div>
             <div><strong style={{fontWeight: '500'}}>Resident submissions ({community.fee_observation_count || 0} reports)</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
-            <div><strong style={{fontWeight: '500'}}>User subions</strong> <span style={{color: '#888'}}>— Additional data points with citation links.</span></div>
-            <div><strong style={{fontWeight: '500'}}>Public records cross-reference</strong> <span style={{color: '#888'}}>— County property appraiser, clerk of courts.</span></div>
+            <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points. Unverified.</span></div>
           </div>
-          <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '12px'}}>
-            <div style={{fontSize: '20px', marginBottom: '8px'}}>🔒</div>
-            <div style={{fo: '14px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px'}}>Full source trail included in report</div>
-            <div style={{fontSize: '12px', color: '#888', marginBottom: '16px', textAlign: 'center', maxWidth: '260px'}}>See every data point, where it came from, and when it was last verified.</div>
-            <ReportModal />
+          <div style={{marginTop: '12px', fontSize: '12px'}}><a href="mailto:fieldlogisticsfl@gmail.com" style={{color: '#1D9E75'}}>Submit a correction or additional source →</a>
           </div>
+        </div>
+      </div>
+
+      <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '20px'}}>
+        <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
+        <div>Florida HOA intelligence platform · Palm Beach County · © 2026</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
+      </footer>
+    </main>
+  )
+}
