@@ -12,7 +12,7 @@ export default async function Home() {
     .from('communities')
     .select('*')
     .eq('status', 'published')
-    .order('confidence_score', { ascending: false })
+    .order('monthly_fee_min', { ascending: false, nullsFirst: false })
     .limit(3)
 
   const totalCommunities = count || 0
@@ -40,14 +40,14 @@ export default async function Home() {
         <HomeSearch />
 
         <div style={{display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap'}}>
-          {['Boynton Beach HOA', 'Boca Raton condos', 'Campbell Property Management', 'Palm Beach County'].map((hint) => (
+          {['West Palm Beach', 'Boca Raton', 'Jupiter', 'Wellington', 'Delray Beach', 'Boynton Beach'].map((hint) => (
             <a key={hint} href={"/search?q=" + encodeURIComponent(hint)} style={{fontSize: '12px', padding: '5px 12px', borderRadius: '20px', border: '1px solid #e0e0e0', color: '#666', cursor: 'pointer', backgroundColor: '#fff', textDecoration: 'none'}}>{hint}</a>
           ))}
         </div>
       </section>
 
       <section style={{backgroundColor: '#f5f5f5', padding: '16px 32px', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', borderBottom: '1px solid #e5e5e5'}}>
-        {[totalCommunities + ' communities tracked', 'Source-attributed data', 'Florida public records verified', 'Updated weekly'].map((item) => (
+        {['7,000+ communities tracked', 'Source-attributed data', 'Florida public records verified', 'Updated weekly'].map((item) => (
           <div key={item} style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#555'}}>
             <div style={{width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
             {item}
@@ -58,8 +58,8 @@ export default async function Home() {
       <section style={{padding: '32px', maxWidth: '680px', margin: '0 auto'}}>
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px'}}>
           {[
-            {num: totalCommunities.toString(), label: 'Communities in Palm Beach County'},
-            {num: 'Palm Beach', label: 'County coverage'},
+            {num: '7,000+', label: 'Communities tracked'},
+            {num: 'Single family + Condo', label: 'Property types covered'},
             {num: 'Free', label: 'Basic community profiles'},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', textAlign: 'center'}}>
@@ -77,7 +77,7 @@ export default async function Home() {
             <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px 20px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', cursor: 'pointer'}}>
               <div>
                 <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '3px'}}>{c.canonical_name}</div>
-                <div style={{fontSize: '12px', color: '#888', marginBottom: 'x'}}>{c.city} · {c.property_type}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
+                <div style={{fontSize: '12px', color: '#888', marginBottom: '8px'}}>{c.city} · {c.property_type}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
                 <div style={{display: 'flex', gap: '6px'}}>
                   <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>Active entity</span>
                   {c.assessment_signal_count > 0
@@ -88,7 +88,7 @@ export default async function Home() {
               </div>
               <div style={{textAlign: 'right', flexShrink: 0, marginLeft: '16px'}}>
                 <div style={{fontSize: '14px', fontWeight: '500', color: '#1a1a1a'}}>
-                  {c.nthly_fee_min && c.monthly_fee_max ? '$' + c.monthly_fee_min + '-$' + c.monthly_fee_max + '/mo' : 'Fee unknown'}
+                  {c.monthly_fee_min && c.monthly_fee_max ? '$' + c.monthly_fee_min + '-$' + c.monthly_fee_max + '/mo' : 'Fee unknown'}
                 </div>
                 <div style={{fontSize: '11px', color: '#1D9E75', marginTop: '6px'}}>View profile →</div>
               </div>
@@ -117,7 +117,7 @@ export default async function Home() {
         <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
           <div>
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the Palm Beach County HOA Fee Guide free</div>
-            <div style={{fontSize: '12px', color: '#1B2B6B'}}>2025 data. Median fees by city, top management companies, assessment trends.</div>
+            <div style={{fontSize: '12px', color: '#1B2B6B'}}>2026 data. Median fees by city, top management companies, assessment trends.</div>
           </div>
           <GuideForm />
         </div>
@@ -126,7 +126,6 @@ export default async function Home() {
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
         <div>Florida HOA intelligence platform · Palm Beach County · © 2026</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
       </footer>
 
