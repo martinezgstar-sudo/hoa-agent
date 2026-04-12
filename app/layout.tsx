@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: '4xmo5he7NSp1789N5geio1yE7NcoxM1z0kCW66iKlxY',
+  },
   icons: {
     icon: '/logo.png',
     apple: '/logo.png',
