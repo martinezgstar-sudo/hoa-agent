@@ -116,16 +116,16 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </a>
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
-          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
-          <a href="/pricing" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
+          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse communities</a>
+          <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Share your HOA</a>
         </div>
       </nav>
 
       <div style={{maxWidth: '720px', margin: '0 auto', padding: '24px 32px'}}>
         <a href='/search' style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'13px',color:'#888',textDecoration:'none',marginBottom:'16px'}}>← Back to search</a>
         <div style={{fontSize: '12px', color: '#888', marginBottom: '16px'}}>
-          <a href="/" style={{color: '#888', textDecoration: 'none'}}>Florida</a>
+          <a href="/" style={{color: '#888', textDecoration: 'none'}}>HOA Agent</a>
           <span style={{margin: '0 6px'}}>›</span>
           <span>{community.county} County</span>
           <span style={{margin: '0 6px'}}>›</span>
