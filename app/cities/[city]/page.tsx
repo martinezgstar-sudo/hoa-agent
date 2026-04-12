@@ -150,7 +150,7 @@ export default async function CityPage({ params }: { params: { city: string } })
         )}
 
         <div style={{marginTop:"40px",backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
-          <div style={{fo:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Know a community in {city} not listed here?</div>
+          <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Know a community in {city} not listed here?</div>
           <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>Help buyers by sharing what you know about your HOA.</div>
           <a href="/search" style={{display:"inline-block",padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:"600"}}>Share your HOA experience</a>
         </div>
