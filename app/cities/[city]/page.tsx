@@ -47,14 +47,14 @@ export default async function CityPage({ params }: { params: { city: string } })
 
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
-      <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 32px",height:"72px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 16px",height:"64px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
           <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
         </a>
-        <div style={{display:"flex",gap:"24px",alignItems:"center"}}>
+        <div style={{display:"flex",gap:"12px",alignItems:"center"}}>
           <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Browse</a>
           <a href="/reports" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Reports</a>
-          <a href="/search" style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"8px 16px",borderRadius:"6px",textDecoration:"none"}}>Share your HOA</a>
+          <a href="/search" style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"6px 12px",borderRadius:"6px",whiteSpace:"nowrap",textDecoration:"none"}}>Share your HOA</a>
         </div>
       </nav>
 
