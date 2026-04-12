@@ -83,7 +83,7 @@ export default function Reports() {
               <div key={t.size} style={{backgroundColor:"rgba(255,255,255,0.1)",borderRadius:"10px",padding:"16px",textAlign:"center"}}>
                 <div style={{fontSize:"12px",color:"rgba(255,255,255,0.7)",marginBottom:"4px"}}>{t.size}</div>
                 <div style={{fontSize:"22px",fontWeight:"700",marginBottom:"2px"}}>{t.price}</div>
-                iv style={{fontSize:"11px",color:"rgba(255,255,255,0.6)"}}>{t.desc}</div>
+                <div style={{fontSize:"11px",color:"rgba(255,255,255,0.6)"}}>{t.desc}</div>
               </div>
             ))}
           </div>
