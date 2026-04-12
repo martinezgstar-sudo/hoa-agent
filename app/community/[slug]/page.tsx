@@ -314,7 +314,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points with citation links.</span></div>
             <div><strong style={{fontWeight: '500'}}>Public records</strong> <span style={{color: '#888'}}>— County property appraiser, clerk of courts.</span></div>
           </div>
-          <div style={{position: 'absolute', teft: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '12px'}}>
+          <div style={{position: 'absolute', top: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '12px'}}>
             <div style={{fontSize: '20px', marginBottom: '8px'}}>🔒</div>
             <div style={{fontSize: '14px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px'}}>Full source trail included in report</div>
             <div style={{fontSize: '12px', color: '#888', marginBottom: '16px', textAlign: 'center', maxWidth: '260px'}}>See every data point and when it was last verified.</div>
