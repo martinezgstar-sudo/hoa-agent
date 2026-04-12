@@ -12,7 +12,7 @@ const AREA_CONFIG: Record<string, { display: string, city?: string, description:
   "wellington": { display: "Wellington", city: "Wellington", description: "Best homeowners associations in Wellington, FL — real data from real residents." },
   "lake-worth": { display: "Lake Worth", city: "Lake Worth", description: "Top-rated HOA communities in Lake Worth, FL." },
   "royal-palm-beach": { display: "Royal Palm Beach", city: "Royal Palm Beach", description: "Find the best HOA communities in Royal Palm Beach, FL." },
-  "riviera-beach": { display: "Riviera Beach", city: "Riviera Beach", description: "Top-rated homeowners associations in Riviera Beach, FL.
+  "riviera-beach": { display: "Riviera Beach", city: "Riviera Beach", description: "Top-rated homeowners associations in Riviera Beach, FL." },
   "north-palm-beach": { display: "North Palm Beach", city: "North Palm Beach", description: "Best HOA communities in North Palm Beach, FL." },
 }
 
