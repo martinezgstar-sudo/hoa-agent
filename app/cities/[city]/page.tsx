@@ -21,26 +21,6 @@ const CITY_DISPLAY: Record<string, string> = {
   'lake-park': 'Lake Park',
 }
 
-export async function generateStaticParams() {
-  return [
-    {city: 'west-palm-beach'},
-    {city: 'boca-raton'},
-    {city: 'boynton-beach'},
-    {city: 'delray-beach'},
-    {city: 'jupiter'},
-    {city: 'palm-beach-gardens'},
-    {city: 'wellington'},
-    {city: 'lake-worth'},
-    {city: 'riviera-beach'},
-    {city: 'north-palm-beach'},
-    {city: 'tequesta'},
-    {city: 'greenacres'},
-    {city: 'royal-palm-beach'},
-    {city: 'palm-springs'},
-    {city: 'lantana'},
-    {city: 'lake-park'},
-  ]
-}
 
 export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
   const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
