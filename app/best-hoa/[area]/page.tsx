@@ -65,7 +65,7 @@ export default function BestHOAPage({ params }: { params: { area: string } }) {
         <h1 style={{fontSize:"28px",fontWeight:"700",color:"#1B2B6B",marginBottom:"8px"}}>
           Best HOA Communities in {config.display}
         </h1>
-        tyle={{fontSize:"14px",color:"#666",marginBottom:"24px",lineHeight:"1.6"}}>{config.description}</p>
+        <p style={{fontSize:"14px",color:"#666",marginBottom:"24px",lineHeight:"1.6"}}>{config.description}</p>
 
         <div style={{display:"flex",gap:"8px",flexWrap:"wrap",marginBottom:"24px"}}>
           {Object.entries(AREA_CONFIG).filter(([k]) => k !== params.area).slice(0,7).map(([key, val]) => (
