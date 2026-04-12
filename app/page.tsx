@@ -59,8 +59,8 @@ export default async function Home() {
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px'}}>
           {[
             {num: '7,000+', label: 'Communities tracked'},
-            {num: 'Single family + Condo', label: 'Property types covered'},
-            {num: 'Free', label: 'Basic community profiles'},
+            {num: 'Resident powered', label: 'Real data from real neighbors'},
+            {num: 'Free forever', label: 'Basic community profiles'},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', textAlign: 'center'}}>
               <div style={{fontSize: '28px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px'}}>{stat.num}</div>
@@ -100,9 +100,9 @@ export default async function Home() {
       <section style={{padding: '0 32px 32px', maxWidth: '680px', margin: '0 auto'}}>
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px'}}>
           {[
-            {step: 'Step 1', title: 'Search any community', desc: 'Find by name, address, city, county, or management company.'},
-            {step: 'Step 2', title: 'Read the profile', desc: 'Fee history, assessments, restrictions, entity status all source-labeled.'},
-            {step: 'Step 3', title: 'Get the full report', desc: '$29 deep-dive PDF with source trail and fee trend history.'},
+            {step: 'Step 1', title: 'Search your community', desc: 'Find by name, address, city or management company.'},
+            {step: 'Step 2', title: 'Read real experiences', desc: 'Fees, restrictions and reviews from actual residents — all source-labeled.'},
+            {step: 'Step 3', title: 'Share what you know', desc: '$29 deep-dive PDF with source trail and fee trend history.'},
           ].map((h) => (
             <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
               <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', marginBottom: '6px'}}>{h.step}</div>
