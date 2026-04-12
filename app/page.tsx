@@ -12,7 +12,7 @@ export default async function Home() {
     .from('communities')
     .select('*')
     .eq('status', 'published')
-    .order('monthly_fee_min', { ascending: false, nullsFirst: false })
+    .order('confidence_score', { ascending: false, nullsFirst: false })
     .limit(3)
 
   const totalCommunities = count || 0
@@ -48,7 +48,7 @@ export default async function Home() {
       </section>
 
       <section style={{backgroundColor: '#f5f5f5', padding: '16px 32px', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', borderBottom: '1px solid #e5e5e5'}}>
-        {['7,000+ communities tracked', 'Source-attributed data', 'Florida public records verified', 'Updated weekly'].map((item) => (
+        {['7,000+ communities tracked', 'Source-attributed data', 'Public records verified', 'Updated weekly'].map((item) => (
           <div key={item} style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#555'}}>
             <div style={{width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
             {item}
@@ -56,8 +56,8 @@ export default async function Home() {
         ))}
       </section>
 
-      <section style={{padding: '32px', maxWidth: '680px', margin: '0 auto'}}>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px'}}>
+      <section style={{padding: '24px 16px', maxWidth: '680px', margin: '0 auto'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px'}}>
           {[
             {num: '7,000+', label: 'Communities tracked'},
             {num: 'Resident powered', label: 'Real data from real neighbors'},
@@ -89,7 +89,7 @@ export default async function Home() {
               </div>
               <div style={{textAlign: 'right', flexShrink: 0, marginLeft: '16px'}}>
                 <div style={{fontSize: '14px', fontWeight: '500', color: '#1a1a1a'}}>
-                  {c.monthly_fee_min && c.monthly_fee_max ? '$' + c.monthly_fee_min + '-$' + c.monthly_fee_max + '/mo' : 'Fee unknown'}
+                  {c.monthly_fee_min && parseFloat(c.monthly_fee_min) < 1500 ? '$' + Math.round(parseFloat(c.monthly_fee_min)) + (c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? '-$' + Math.round(parseFloat(c.monthly_fee_max)) : '') + '/mo' : c.monthly_fee_min ? 'Fee data available' : 'Fee unknown'}
                 </div>
                 <div style={{fontSize: '11px', color: '#1D9E75', marginTop: '6px'}}>View profile →</div>
               </div>
@@ -99,11 +99,11 @@ export default async function Home() {
       </section>
 
       <section style={{padding: '0 32px 32px', maxWidth: '680px', margin: '0 auto'}}>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px'}}>
           {[
             {step: 'Step 1', title: 'Search your community', desc: 'Find by name, address, city or management company.'},
             {step: 'Step 2', title: 'Read real experiences', desc: 'Fees, restrictions and reviews from actual residents — all source-labeled.'},
-            {step: 'Step 3', title: 'Share what you know', desc: '$29 deep-dive PDF with source trail and fee trend history.'},
+            {step: 'Step 3', title: 'Share what you know', desc: 'Get the full report with source trail, fee history and resident intelligence.'},
           ].map((h) => (
             <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
               <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', marginBottom: '6px'}}>{h.step}</div>
