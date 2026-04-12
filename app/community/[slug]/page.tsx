@@ -174,7 +174,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           {[
             {val: community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min}–$${community.monthly_fee_max}/mo` : 'Unknown', label: 'Monthly fee', src: 'public record'},
             {val: community.review_avg ? `${community.review_avg}★` : 'No reviews', label: `${community.review_count || 0} reviews`, src: 'user-submitted'},
-            {val: `${community.assessment_signal_count || 0} signals`, label: 'Assessments', src: 'listing + user'},
+            {val: `${community.assessment_signal_count || 0} signals`, label: 'Assessments', src: 'public + resident'},
             {val: community.management_company || 'Unknown', label: 'Management', src: 'public record'},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center'}}>
@@ -200,7 +200,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Normalized median</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' listings' : ''}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' observations' : ''}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Observations</div>
             </div>
           </div>
