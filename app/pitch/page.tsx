@@ -8,7 +8,7 @@ export default function PitchPage() {
         <div style={{fontSize:"12px",color:"rgba(255,255,255,0.4)",letterSpacing:"0.1em",textTransform:"uppercase"}}>Confidential — Partner Overview</div>
       </nav>
       <section style={{padding:"80px 48px 64px",maxWidth:"900px",margin:"0 auto",textAlign:"center"}}>
-        <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"20px"}}>Florida HOA Intelligence Platform</div>
+        <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"20px"}}>HOA Intelligence Platform</div>
         <h1 style={{fontSize:"px",fontWeight:"700",lineHeight:"1.1",marginBottom:"24px",color:"#fff"}}>The missing data layer for Florida real estate</h1>
         <p style={{fontSize:"18px",color:"rgba(255,255,255,0.6)",lineHeight:"1.7",maxWidth:"620px",margin:"0 auto 40px"}}>HOA Agent aggregates fee data, restrictions, assessments, and resident reviews for HOA and condo communities — structured, source-attributed, and searchable.</p>
         <a href="https://hoa-agent.com" target="_blank" style={{display:"inline-block",padding:"14px 32px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"14px",fontWeight:"600"}}>View Live Platform</a>

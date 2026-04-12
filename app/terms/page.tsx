@@ -43,7 +43,7 @@ export default function TermsPage() {
       </div>
       <footer style={{borderTop:'1px solid #e5e5e5',padding:'24px 32px',textAlign:'center',fontSize:'12px',color:'#888'}}>
         <div style={{marginBottom:'8px',fontWeight:'500',color:'#1a1a1a'}}>HOA Agent</div>
-        <div>Florida HOA intelligence platform · Palm Beach County · © 2026</div>
+        <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
         <div style={{marginTop:'8px',fontSize:'11px',color:'#aaa'}}><a href='/terms' style={{color:'#aaa',textDecoration:'none',marginRight:'16px'}}>Terms of Service</a><a href='/privacy' style={{color:'#aaa',textDecoration:'none'}}>Privacy Policy</a></div>
       </footer>
     </main>
