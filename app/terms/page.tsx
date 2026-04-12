@@ -7,7 +7,7 @@ export default function TermsPage() {
         </a>
         <div style={{display:'flex',gap:'24px',alignItems:'center'}}>
           <a href='/search' style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Search</a>
-          <a href='/pricing' style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Pricing</a>
+          <a href='/reports' style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Reports</a>
         </div>
       </nav>
       <div style={{maxWidth:'720px',margin:'0 auto',padding:'48px 32px'}}>

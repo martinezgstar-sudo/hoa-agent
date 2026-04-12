@@ -7,7 +7,7 @@ export default function PricingPage() {
         </a>
         <div style={{display:'flex',gap:'24px',alignItems:'center'}}>
           <a href='/search' style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Search</a>
-          <a href='/pricing' style={{fontSize:'13px',color:'#1D9E75',textDecoration:'none',fontWeight:'500'}}>Pricing</a>
+          <a href='/reports' style={{fontSize:'13px',color:'#1D9E75',textDecoration:'none',fontWeight:'500'}}>Reports</a>
         </div>
       </nav>
       <section style={{padding:'80px 32px 64px',textAlign:'center',maxWidth:'800px',margin:'0 auto'}}>
