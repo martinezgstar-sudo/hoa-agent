@@ -72,6 +72,7 @@ interface Community {
   review_count: number
   review_avg: number
   data_freshness_date: string
+  city_verified?: boolean
 }
 
 async function getCommunity(slug: string) {
