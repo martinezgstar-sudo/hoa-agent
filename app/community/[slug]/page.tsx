@@ -322,6 +322,32 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </div>
       </div>
 
+      {relatedCommunities && relatedCommunities.length > 0 && (
+        <div style={{maxWidth:'720px',margin:'0 auto',padding:'0 32px 32px'}}>
+          <div style={{fontSize:'13px',fontWeight:'600',color:'#888',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:'12px'}}>
+            More HOA communities in {community.city_verified ? community.city : 'Palm Beach County'}
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'10px',marginBottom:'12px'}}>
+            {relatedCommunities.map((r: any) => (
+              <a key={r.id} href={'/community/'+r.slug} style={{textDecoration:'none'}}>
+                <div style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'10px',padding:'14px 16px'}}>
+                  <div style={{fontSize:'13px',fontWeight:'500',color:'#1a1a1a',marginBottom:'3px'}}>{r.canonical_name}</div>
+                  <div style={{fontSize:'11px',color:'#888'}}>
+                    {r.property_type || 'HOA'}
+                    {r.monthly_fee_min ? ' ·$'+r.monthly_fee_min+'/mo' : ''}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+          {community.city_verified && (
+            <a href={'/cities/'+community.city.toLowerCase().replace(/ /g,'-')} style={{fontSize:'12px',color:'#1D9E75',textDecoration:'none'}}>
+              View all HOA communities in {community.city} →
+            </a>
+          )}
+        </div>
+      )}
+
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '20px'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
