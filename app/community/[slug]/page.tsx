@@ -108,6 +108,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   const confidence = getConfidenceLabel(community.confidence_score)
   const amenitiesList = community.amenities ? community.amenities.split(',').map((a: string) => a.trim()) : []
 
+  const cityForSearch = community.city_verified ? community.city : null
+  const { data: relatedCommunities } = cityForSearch ? await supabase
+    .from('communities')
+    .select('id,canonical_name,slug,monthly_fee_min,property_type')
+    .ilike('city', `%${cityForSearch}%`)
+    .eq('status', 'published')
+    .neq('slug', slug)
+    .limit(4) : { data: [] }
+
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
       <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
