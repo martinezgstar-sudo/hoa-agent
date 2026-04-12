@@ -60,9 +60,9 @@ export default async function CityPage({ params }: { params: { city: string } })
     .eq('status', 'published')
     .order('canonical_name', { ascending: true })
 
-  const total = communities?.length || 0
-  const withFees = communities?.filter(c => c.monthly_fee_min).length || 0
-  const avgFee = communities?.filter(c => c.monthly_fee_min).reduce((a, c) => a + parseFloat(c.monthly_fee_min || 0), 0) / (withFees || 1) || 0
+  const total = (communities || []).length
+  const withFees = (communities || []).filter((c: any) => c.monthly_fee_min).length
+  const avgFee = (communities || []).filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
 
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
