@@ -77,7 +77,7 @@ interface Community {
 async function getCommunity(slug: string) {
   const { data, error } = await supabase
     .from('communities')
-    .select('*')
+    .select('*, city_verified')
     .eq('slug', slug)
     .single()
 
