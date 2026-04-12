@@ -40,7 +40,7 @@ export default async function CityPage({ params }: { params: { city: string } })
     .order('canonical_name', { ascending: true })
 
   const total = communities?.length || 0
-  const withFees = communities?.filter(c => c.monthly_fee_min).lenh || 0
+  const withFees = communities?.filter(c => c.monthly_fee_min).length || 0
   const avgFee = communities?.filter(c => c.monthly_fee_min).reduce((a, c) => a + parseFloat(c.monthly_fee_min), 0) / (withFees || 1)
 
   return (
