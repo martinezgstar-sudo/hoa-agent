@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent uses minimal cookies necessary for site functionality. We do not use advertising cookies or third-party tracking cookies.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>4. Data Storage</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Your data is stored securely on Supabase infrastructure. We take reasonable measures to protect your information but cannot guarantee absolute security.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Your data is stored securely on enterprise-grade cloud infrastructure. We take reasonable measures to protect your information but cannot guarantee absolute security.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>5. Your Rights</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>You may request deletion of your personal data at any time by emailing info@hoa-agent.com. We will process deletion requests within 30 days.</p>
