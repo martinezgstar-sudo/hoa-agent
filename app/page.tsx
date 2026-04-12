@@ -22,9 +22,9 @@ export default async function Home() {
 
       <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 16px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"20px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em",marginRight:"16px"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
         </div>
-        <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
+        <div style={{display: 'flex', gap: '12px', alignItems: 'center'}}>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
