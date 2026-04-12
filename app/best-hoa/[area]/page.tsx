@@ -112,7 +112,7 @@ export default function BestHOAPage({ params }: { params: { area: string } }) {
                   ) : (
                     <div style={{fontSize:"12px",color:"#aaa"}}>Fee unknown</div>
                   )}
-                  <div style={{fontSize:"11px",color:"#1D9E75",mnTop:"4px"}}>View profile →</div>
+                  <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>View profile →</div>
                 </div>
               </div>
             </a>
