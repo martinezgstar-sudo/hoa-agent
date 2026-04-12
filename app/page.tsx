@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
 
-      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 16px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
           <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
         </div>
