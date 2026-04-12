@@ -58,6 +58,24 @@ export default async function CityPage({ params }: { params: { city: string } })
         </div>
       </nav>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": `HOA Communities in ${city}`,
+          "description": `Browse all HOA and condo communities in ${city}, Palm Beach County. Compare fees, restrictions and resident reviews.`,
+          "url": `https://hoa-agent.com/cities/${params.city}`,
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "HOA Agent", "item": "https://hoa-agent.com"},
+              {"@type": "ListItem", "position": 2, "name": "Communities", "item": "https://hoa-agent.com/search"},
+              {"@type": "ListItem", "position": 3, "name": city}
+            ]
+          }
+        })}}
+      />
       <div style={{maxWidth:"800px",margin:"0 auto",padding:"32px"}}>
 
         <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>
