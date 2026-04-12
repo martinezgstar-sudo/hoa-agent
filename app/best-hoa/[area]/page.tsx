@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
+import { use } from "react"
 
 const AREA_CONFIG: Record<string, { display: string, city?: string, description: string }> = {
   "palm-beach-county": { display: "Palm Beach County", description: "Browse the top-rated HOA communities across Palm Beach County, ranked by resident reviews and data quality." },
@@ -19,8 +20,9 @@ const AREA_CONFIG: Record<string, { display: string, city?: string, description:
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export default function BestHOAPage({ params }: { params: { area: string } }) {
-  const config = AREA_CONFIG[params.area]
+export default function BestHOAPage({ params }: { params: Promise<{ area: string }> }) {
+  const { area } = use(params)
+  const config = AREA_CONFIG[area]
   const [communities, setCommunities] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -36,7 +38,7 @@ export default function BestHOAPage({ params }: { params: { area: string } }) {
       setLoading(false)
     }
     load()
-  }, [params.area])
+  }, [area])
 
   if (!config) return <div style={{padding:"40px",textAlign:"center"}}>Area not found. <a href="/">Go home</a></div>
 
@@ -68,7 +70,7 @@ export default function BestHOAPage({ params }: { params: { area: string } }) {
         <p style={{fontSize:"14px",color:"#666",marginBottom:"24px",lineHeight:"1.6"}}>{config.description}</p>
 
         <div style={{display:"flex",gap:"8px",flexWrap:"wrap",marginBottom:"24px"}}>
-          {Object.entries(AREA_CONFIG).filter(([k]) => k !== params.area).slice(0,7).map(([key, val]) => (
+          {Object.entries(AREA_CONFIG).filter(([k]) => k !== area).slice(0,7).map(([key, val]) => (
             <a key={key} href={"/best-hoa/"+key}
               style={{fontSize:"12px",padding:"5px 12px",borderRadius:"20px",border:"1px solid #e0e0e0",color:"#666",textDecoration:"none",backgroundColor:"#fff"}}>
               {val.display}
