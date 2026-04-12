@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     icon: '/logo.png',
     apple: '/logo.png',
   },
-  title: 'HOA Agent — Florida HOA Intelligence Platform',
+  title: 'HOA Agent — HOA Intelligence Platform',
   description: 'Structured data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews all in one place.',
   keywords: 'HOA fees, Palm Beach County HOA, Florida HOA, condo fees, HOA assessments, homeowners association',
   openGraph: {
-    title: 'HOA Agent — Florida HOA Intelligence Platform',
+    title: 'HOA Agent — HOA Intelligence Platform',
     description: 'Know the HOA before you commit. Fees, assessments, restrictions and reviews for Palm Beach County communities.',
     url: 'https://hoa-agent.com',
     siteName: 'HOA Agent',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'HOA Agent — Florida HOA Intelligence Platform',
+    title: 'HOA Agent — HOA Intelligence Platform',
     description: 'Know the HOA before you commit.',
     images: ['https://hoa-agent.com/logo.png'],
   },

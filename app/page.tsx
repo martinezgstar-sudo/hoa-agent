@@ -27,15 +27,15 @@ export default async function Home() {
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
-          <a href="/pricing" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Pricing</a>
-          <a href="#" style={{fontSize: '13px', backgroundColor: '#1B2B6B', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Sign in</a>
+          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse communities</a>
+          <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Share your HOA</a>
         </div>
       </nav>
 
       <section style={{backgroundColor: '#fff', padding: '72px 32px 64px', textAlign: 'center', borderBottom: '1px solid #e5e5e5'}}>
-        <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>Florida HOA intelligence platform</div>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>HOA Intelligence Platform</div>
         <h1 style={{fontSize: '44px', fontWeight: '700', color: '#1B2B6B', lineHeight: '1.15', marginBottom: '16px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', letterSpacing: '-0.02em'}}>Know the HOA Before You Commit</h1>
-        <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities across Florida. Fees, assessments, restrictions and reviews all in one place.</p>
+        <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities. Fees, assessments, restrictions and reviews all in one place.</p>
 
         <HomeSearch />
 
@@ -116,7 +116,7 @@ export default async function Home() {
       <section style={{margin: '0 32px 40px', maxWidth: '616px', marginLeft: 'auto', marginRight: 'auto'}}>
         <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
           <div>
-            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the Palm Beach County HOA Fee Guide free</div>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the HOA Fee Guide free</div>
             <div style={{fontSize: '12px', color: '#1B2B6B'}}>2026 data. Median fees by city, top management companies, assessment trends.</div>
           </div>
           <GuideForm />
@@ -125,7 +125,7 @@ export default async function Home() {
 
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
-        <div>Florida HOA intelligence platform · Palm Beach County · © 2026</div>
+        <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
       </footer>
 
