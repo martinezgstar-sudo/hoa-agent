@@ -27,7 +27,8 @@ export default async function Home() {
         <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
-          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse communities</a>
+          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
+          <a href="/reports" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Reports</a>
           <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Share your HOA</a>
         </div>
       </nav>
