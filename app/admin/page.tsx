@@ -482,7 +482,7 @@ function UploadTab() {
         <input id="csv-admin-input" type="file" accept=".csv" style={{display:"none"}} onChange={e => {const f=e.target.files?.[0];if(f)setFile(f)}}/>
       </div>
       {result && <div style={{padding:"12px",borderRadius:"8px",backgroundColor:"#E1F5EE",marginBottom:"16px",fontSize:"13px",color:"#1B2B6B"}}>{result.success} rows imported</div>}
-      <button onClick={handleUpload} disabled={!fi||uploading}
+      <button onClick={handleUpload} disabled={!file||uploading}
         style={{width:"100%",padding:"12px",borderRadius:"8px",backgroundColor:file?"#1B2B6B":"#ccc",color:"#fff",border:"none",cursor:file?"pointer":"not-allowed",fontSize:"14px",fontWeight:"600"}}>
         {uploading ? "Uploading..." : "Upload CSV"}
       </button>
