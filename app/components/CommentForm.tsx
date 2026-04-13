@@ -13,6 +13,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
   const [residentType, setResidentType] = useState<string>("")
   const [residencyLength, setResidencyLength] = useState<string>("")
   const [hoaFee, setHoaFee] = useState("")
+  const [rentAmount, setRentAmount] = useState("")
   const [feeIncludes, setFeeIncludes] = useState<string[]>([])
   const [feeIncreased, setFeeIncreased] = useState<string>("")
   const [specialAssessment, setSpecialAssessment] = useState<string>("")
@@ -51,6 +52,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
         resident_type: residentType || null,
         residency_length: residencyLength || null,
         hoa_fee_reported: hoaFee ? parseFloat(hoaFee) : null,
+        rent_reported: rentAmount ? parseFloat(rentAmount) : null,
         fee_includes: feeIncludes.length > 0 ? feeIncludes.join("|") : null,
         special_assessment: specialAssessment || null,
         assessment_amount: assessmentAmount ? parseFloat(assessmentAmount) : null,
@@ -188,14 +190,26 @@ export default function CommentForm({ communityId }: { communityId: string }) {
             <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 — HOA details</div>
             <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>This information helps buyee informed decisions. All fields are optional.</div>
 
-            <div style={{marginBottom:"16px"}}>
-              <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly HOA fee (your approximate amount)</div>
-              <div style={{position:"relative"}}>
-                <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
-                <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350"
-                  style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px 10px 24px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
+            {residentType === "renter" ? (
+              <div style={{marginBottom:"16px"}}>
+                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly rent amount</div>
+                <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>This helps us understand owner vs renter ratios in this community.</div>
+                <div style={{position:"relative"}}>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <input type="number" value={rentAmount} onChange={e => setRentAmount(e.target.value)} placeholder="2500"
+                    style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px 10px 24px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div style={{marginBottom:"16px"}}>
+                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly HOA fee (your approximate amount)</div>
+                <div style={{position:"relative"}}>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350"
+                    style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px 10px 24px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
+                </div>
+              </div>
+            )}
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"8px"}}>What does your HOA fee include? (select all that apply)</div>
