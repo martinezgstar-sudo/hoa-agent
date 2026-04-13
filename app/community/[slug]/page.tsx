@@ -100,7 +100,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   const { data: comments } = await supabase
     .from('community_comments')
-    .select('id,commenter_name,comment_text,rating,created_at')
+    .select('id,commenter_name,comment_text,rating,created_at,resident_type,is_resident')
     .eq('community_id', community.id)
     .eq('status', 'approved')
     .order('created_at', { ascending: false })
@@ -294,6 +294,11 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'6px'}}>
                     <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
                       <span style={{fontSize:'13px',fontWeight:'500',color:'#1a1a1a'}}>{c.commenter_name || 'Anonymous'}</span>
+                      {c.is_resident && (
+                        <span style={{fontSize:'10px',padding:'2px 8px',borderRadius:'20px',backgroundColor:'#E1F5EE',color:'#1B2B6B',fontWeight:'600'}}>
+                          {c.resident_type === 'renter' ? 'Verified Renter' : c.resident_type === 'former' ? 'Former Resident' : 'Verified Resident'}
+                        </span>
+                      )}
                       {c.rating && (
                         <span style={{fontSize:'12px',color:'#EF9F27'}}>
                           {'★'.repeat(c.rating)}{'☆'.repeat(5 - c.rating)}
