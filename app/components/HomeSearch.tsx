@@ -82,7 +82,7 @@ export default function HomeSearch() {
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             placeholder="Search by community name, city, or address..."
-            style={{width:"100%",border:"none",outline:"none",fontSize:"14px",color:"#1a1a1a",backgroundColor:"transparent"}}
+            style={{width:"100%",border:"none",outline:"none",fontSize:"16px",color:"#1a1a1a",backgroundColor:"transparent",WebkitTextFillColor:"#1a1a1a",opacity:1}}
           />
           {showSuggestions && suggestions.length > 0 && (
             <div style={{position:"absolute",top:"calc(100% + 12px)",left:"-16px",right:"-6px",backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 4px 12px rgba(0,0,0,0.1)",zIndex:100,overflow:"hidden"}}>
