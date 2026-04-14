@@ -117,5 +117,29 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  // Send email notification
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.RESEND_API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'HOA Agent <onboarding@resend.dev>',
+        to: 'fieldlogisticsfl@gmail.com',
+        subject: 'New HOA Agent review submitted',
+        html: '<h2>New review submitted</h2>' +
+          '<p><strong>Community:</strong> ' + (body.community_id || 'Unknown') + '</p>' +
+          '<p><strong>Name:</strong> ' + (body.commenter_name || 'Anonymous') + '</p>' +
+          '<p><strong>Rating:</strong> ' + (body.rating || 'No rating') + '</p>' +
+          '<p><strong>Comment:</strong> ' + body.comment_text + '</p>' +
+          '<p><strong>Status:</strong> ' + moderation.status + '</p>' +
+          '<p><a href="https://hoa-agent.com/admin">Review in Admin Dashboard</a></p>'
+      })
+    })
+  } catch(e) {
+    console.error('Email notification failed:', e)
+  }
   return NextResponse.json({ success: true, status: moderation.status })
 }
