@@ -38,7 +38,7 @@ function CommentsTab() {
 
   useEffect(() => {
     fetchComments(filter)
-  }, [authed, filter])
+  }, [filter])
 
   async function updateStatus(id: string, status: string) {
     await fetch('/api/admin/comments', { headers: { 'x-admin-password': ADMIN_PASSWORD, 'Content-Type': 'application/json' },
