@@ -24,8 +24,6 @@ interface Comment {
 
 
 function CommentsTab() {
-  const [authed, setAuthed] = useState(false)
-  const [password, setPassword] = useState('')
   const [comments, setComments] = useState<Comment[]>([])
   const [filter, setFilter] = useState('pending')
   const [loading, setLoading] = useState(false)
@@ -39,7 +37,7 @@ function CommentsTab() {
   }
 
   useEffect(() => {
-    if (authed) fetchComments(filter)
+    fetchComments(filter)
   }, [authed, filter])
 
   async function updateStatus(id: string, status: string) {
@@ -172,7 +170,6 @@ const EMPTY_FORM = {
 }
 
 function CommunitiesTab() {
-  const [authed, setAuthed] = useState(false)
   const [password, setPassword] = useState("")
   const [form, setForm] = useState({...EMPTY_FORM})
   const [saving, setSaving] = useState(false)
