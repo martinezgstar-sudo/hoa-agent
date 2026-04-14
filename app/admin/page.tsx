@@ -160,22 +160,6 @@ function CommunitiesTab() {
     setSaving(false)
   }
 
-  if (authed === false) {
-    return (
-      <div style={{minHeight:"100vh",backgroundColor:"#f9f9f9",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"32px",width:"320px"}}>
-          <div style={{fontSize:"18px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>HOA Agent Admin</div>
-          <div style={{fontSize:"13px",color:"#888",marginBottom:"20px"}}>Community Data Entry</div>
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}
-            style={{width:"100%",padding:"10px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"14px",marginBottom:"12px",boxSizing:"border-box"}}/>
-          <button onClick={() => password === ADMIN_PASSWORD && setAuthed(true)}
-            style={{width:"100%",padding:"10px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"500"}}>
-            Sign in
-          </button>
-        </div>
-      </div>
-    )
-  }
 
   const Field = ({label, k, placeholder="", type="text"}: {label:string,k:string,placeholder?:string,type?:string}) => (
     <div style={{marginBottom:"16px"}}>
