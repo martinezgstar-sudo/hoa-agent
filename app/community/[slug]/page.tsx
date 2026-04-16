@@ -200,8 +200,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Normalized median</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' observations' : ''}</div>
-              <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Observations</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' data points' : ''}</div>
+              <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Fee Reports</div>
             </div>
           </div>
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the HOA directly.</div>

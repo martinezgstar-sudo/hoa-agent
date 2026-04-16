@@ -18,7 +18,7 @@ export default function TermsPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent provides data about homeowner associations and condominium communities for informational purposes only. Nothing on this site constitutes legal, financial, or real estate advice. All data should be independently verified before making any real estate or financial decision.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>2. Data Accuracy</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>We source data from public records, MLS observations, and user submissions. HOA Agent does not guarantee the accuracy, completeness, or timeliness of any information on this site. Fee amounts, restrictions, and entity information may change without notice. Always verify directly with the association or management company.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>We source data from public records, government databases, and user submissions. HOA Agent does not guarantee the accuracy, completeness, or timeliness of any information on this site. Fee amounts, restrictions, and entity information may change without notice. Always verify directly with the association or management company.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>3. No Affiliation</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>HOA Agent is not affiliated with any homeowner association, condominium association, management company, or government agency. We are an independent information platform.</p>
