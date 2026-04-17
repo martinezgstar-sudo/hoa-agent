@@ -131,7 +131,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   const { data: relatedCommunities } = cityForSearch ? await supabase
     .from('communities')
     .select('id,canonical_name,slug,monthly_fee_min,property_type')
-    .ilike('city', \`%\${cityForSearch}%\`)
+    .ilike('city', `%${cityForSearch}%`)
     .eq('status', 'published')
     .neq('slug', slug)
     .limit(4) : { data: [] }
