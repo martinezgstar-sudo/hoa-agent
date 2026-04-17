@@ -328,7 +328,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{fontSize: '12px', color: '#1B2B6B'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
           </div>
           <ReportModal />
-        </d
+        </div>
         <div style={{backgroundColor: '#1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#fff', marginBottom: '6px'}}>
             Do you live in {community.canonical_name}?
