@@ -654,7 +654,7 @@ export default function SearchPage() {
                     <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
                       <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#E1F5EE",color:"#1B2B6B"}}>Active entity</span>
-                      {c.review_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{"★".repeat(Math.round(c.review_avg |)} {c.review_count} reviews</span>}
+                      {c.review_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{"★".repeat(Math.round(c.review_avg || 0))} {c.review_count} reviews</span>}
                       {c.assessment_signal_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>{c.assessment_signal_count} signals</span>}
                       {c.management_company && c.management_company !== "Unknown" && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{c.management_company}</span>}
                       {c.pet_restriction && c.pet_restriction !== "Unknown" && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:c.pet_restriction.toLowerCase().includes("yes")?"#E1F5EE":"#FEE9E9",color:c.pet_restriction.toLowerCase().includes("yes")?"#1B2B6B":"#A32D2D"}}>Pets: {c.pet_restriction}</span>}
