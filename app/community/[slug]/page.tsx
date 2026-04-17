@@ -168,7 +168,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div>
               <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: '0 0 6px 0'}}>{community.canonical_name}</h1>
               <div style={{fontSize: '13px', color: '#888', marginBottom: '12px'}}>
-                {community.city}, FL{coy.zip_code ? ' ' + community.zip_code : ''} · {community.county} County
+                {community.city}, FL{community.zip_code ? ' ' + community.zip_code : ''} · {community.county} County
               </div>
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
                 {community.property_type && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E6F1FB', color: '#0C447C'}}>{community.property_type}</span>}
