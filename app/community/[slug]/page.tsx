@@ -199,7 +199,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
           {[
-            {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src:public record'},
+            {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src: 'public record'},
             {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted'},
             {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident'},
             {val: community.management_company || 'Not listed', label: 'Management', src: 'public record'},
