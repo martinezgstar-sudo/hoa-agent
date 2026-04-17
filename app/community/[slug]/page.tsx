@@ -172,7 +172,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               </div>
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
                 {community.property_type && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E6F1FB', color: '#0C447C'}}>{community.property_type}</span>}
-                <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>{community.entity_status || 'Active'} entity</san>
+                <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>{community.entity_status || 'Active'} entity</span>
                 {community.unit_count && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#555'}}>{community.unit_count} units</span>}
               </div>
             </div>
