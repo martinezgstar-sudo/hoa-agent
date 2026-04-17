@@ -119,7 +119,7 @@ function SuggestForm({ address }: { address: string }) {
               <div style={{position:"relative"}}>
                 <input required value={communityName}
                   onChange={e => { setCommunityName(e.target.value); fetchNameMatches(e.target.value) }}
-                  onBlur={() => setTimeout(() => setShowNameDropdown(false 200)}
+                  onBlur={() => setTimeout(() => setShowNameDropdown(false), 200)}
                   placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
                 {showNameDropdown && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e0e0e0",borderRadius:"8px",zIndex:100,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"4px"}}>
