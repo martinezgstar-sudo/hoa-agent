@@ -128,7 +128,7 @@ function SuggestForm({ address }: { address: string }) {
                       <div key={m.slug} onClick={() => { window.open("/community/"+m.slug, "_blank"); setShowNameDropdown(false) }}
                         style={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                         <span style={{color:"#1a1a1a"}}>{m.label}</span>
-                        <span style={{fontSize:"11px",color:"#1D9E7}}>View profile →</span>
+                        <span style={{fontSize:"11px",color:"#1D9E75"}}>View profile →</span>
                       </div>
                     ))}
                     <div style={{padding:"8px 12px",fontSize:"12px",color:"#888",borderTop:"1px solid #f0f0f0"}}>
