@@ -553,7 +553,7 @@ export default function SearchPage() {
                 <div>
                   <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Monthly fee</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
-                    {[{val:"under200",label:"Under $200"},{val:"200to400",label:"$200–$400"},{val:"400to600",label:"$400–$600"},{val:"over600",l:"$600+"}].map(f => (
+                    {[{val:"under200",label:"Under $200"},{val:"200to400",label:"$200–$400"},{val:"400to600",label:"$400–$600"},{val:"over600",label:"$600+"}].map(f => (
                       <FilterBtn key={f.val} value={f.val} current={filterFeeRange}
                         onClick={() => handleFilterChange("fee_range", filterFeeRange === f.val ? "" : f.val, setFilterFeeRange)}
                         label={f.label} />
