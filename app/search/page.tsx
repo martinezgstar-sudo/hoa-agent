@@ -618,7 +618,7 @@ export default function SearchPage() {
                   <a key={c.slug} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"14px 20px",marginBottom:"8px",cursor:"pointer"}}>
                       <div style={{fontSize:"14px",fontWeight:"500",color:"#1a1a1a"}}>{c.canonical_name}</div>
-                      <div style={{fontSize:"12p,color:"#888"}}>{c.city}</div>
+                      <div style={{fontSize:"12px",color:"#888"}}>{c.city}</div>
                     </div>
                   </a>
                 ))}
