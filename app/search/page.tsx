@@ -8,7 +8,6 @@ function getConfidenceLabel(score: number) {
   return { label: "Low", color: "#E24B4A", bg: "#FEE9E9", stars: "★☆☆" }
 }
 
-
 function SuggestForm({ address }: { address: string }) {
   const [step, setStep] = useState(1)
   const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
@@ -18,8 +17,7 @@ function SuggestForm({ address }: { address: string }) {
   const [city, setCity] = useState("")
   const [hoaFee, setHoaFee] = useState("")
   const [feeUnsure, setFeeUnsure] = useState(false)
-  const [strRestriction, setStrRestriction] = useState("")
-  const [strUnsure, setStrUnsure] = useState(false)
+  const [strRestriction, setStrRestriction] = useState(sure, setStrUnsure] = useState(false)
   const [petRestriction, setPetRestriction] = useState("")
   const [petUnsure, setPetUnsure] = useState(false)
   const [rentalRestriction, setRentalRestriction] = useState("")
@@ -96,7 +94,6 @@ function SuggestForm({ address }: { address: string }) {
   if (status === "success") {
     return (
       <div style={{backgroundColor:"#E1F5EE",borderRadius:"12px",padding:"24px",textAlign:"center",marginTop:"16px"}}>
-        <div style={{fontSize:"32px",marginBottom:"8px"}}>checkmark</div>
         <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you for contributing</div>
         <div style={{fontSize:"13px",color:"#555"}}>Your submission will be reviewed and added to HOA Agent. This helps buyers make better decisions.</div>
       </div>
@@ -121,18 +118,16 @@ function SuggestForm({ address }: { address: string }) {
               <div style={{position:"relative"}}>
                 <input required value={communityName}
                   onChange={e => { setCommunityName(e.target.value); fetchNameMatches(e.target.value) }}
-                  onBlur={() => setTimeout(() => setShowNameDropdown(false), 200)}
+                  onBlur={() => setTimeout(() => setShowNameDropdown(false 200)}
                   placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
                 {showNameDropdown && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e0e0e0",borderRadius:"8px",zIndex:100,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"4px"}}>
                     <div style={{fontSize:"11px",color:"#888",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database — select to skip adding:</div>
                     {nameMatches.map((m: any) => (
                       <div key={m.slug} onClick={() => { window.open("/community/"+m.slug, "_blank"); setShowNameDropdown(false) }}
-                       style={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}
-                        
-                        >
+                        style={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                         <span style={{color:"#1a1a1a"}}>{m.label}</span>
-                        <span style={{fontSize:"11px",color:"#1D9E75"}}>View profile →</span>
+                        <span style={{fontSize:"11px",color:"#1D9E7}}>View profile →</span>
                       </div>
                     ))}
                     <div style={{padding:"8px 12px",fontSize:"12px",color:"#888",borderTop:"1px solid #f0f0f0"}}>
@@ -151,7 +146,7 @@ function SuggestForm({ address }: { address: string }) {
               <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
                 <div style={{position:"relative",flex:1}}>
                   <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
-                  <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350" disabled={feeUnsure}
+                <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350" disabled={feeUnsure}
                     style={{...inputStyle,paddingLeft:"24px",opacity:feeUnsure?0.4:1}}/>
                 </div>
                 <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",whiteSpace:"nowrap"}}>
@@ -181,7 +176,7 @@ function SuggestForm({ address }: { address: string }) {
           <div>
             <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 of 3 — Restrictions *</div>
             <div style={sectionStyle}>
-              <label style={labelStyle}>Short-term rentals allowed? (Airbnb, VRBO)</label>
+              <l style={labelStyle}>Short-term rentals allowed? (Airbnb, VRBO)</label>
               <div style={{display:"flex",flexWrap:"wrap"}}>
                 {["Yes","No","Restricted"].map(v => <ChkBtn key={v} value={v} current={strUnsure?"":strRestriction} onClick={() => {setStrRestriction(v);setStrUnsure(false)}} label={v}/>)}
                 <label style={{display:"flex",alignItems:"center",gap:"6px",fontSize:"13px",color:"#555",cursor:"pointer",padding:"7px 0"}}>
@@ -220,8 +215,7 @@ function SuggestForm({ address }: { address: string }) {
         )}
         {step === 3 && (
           <div>
-            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 — Optional details</div>
-            <div style={sectionStyle}>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 — Optional details</div>         <div style={sectionStyle}>
               <label style={labelStyle}>Management company</label>
               <input value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Seacrest Services" style={inputStyle}/>
             </div>
@@ -289,7 +283,6 @@ function SuggestForm({ address }: { address: string }) {
   )
 }
 
-
 export default function SearchPage() {
   const router = useRouter()
   const [query, setQuery] = useState("")
@@ -301,7 +294,16 @@ export default function SearchPage() {
   const [addressResult, setAddressResult] = useState<any>(null)
   const [searching, setSearching] = useState(false)
   const [selectedCity, setSelectedCity] = useState("")
+  const [showFilters, setShowFilters] = useState(false)
+  const [filterPropertyType, setFilterPropertyType] = useState("")
+  const [filterPets, setFilterPets] = useState("")
+  const [filterStr, setFilterStr] = useState("")
+  const [filterFeeRange, setFilterFeeRange] = useState("")
+  const [filterHasReviews, setFilterHasReviews] = useState("")
+  const [filterManagement, setFilterManagement] = useState("")
   const debounceRef = useRef<any>(null)
+
+  const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement].filter(Boolean).length
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -319,10 +321,25 @@ export default function SearchPage() {
     }
   }, [])
 
-  async function fetchCommunities(q: string, city: string = "") {
+  async function fetchCommunities(q: string, overrides: Record<string,string> = {}) {
     setLoading(true)
-    const cityParam = city ? "&city=" + encodeURIComponent(city) : ""
-    const res = await fetch("/api/communities-search?q=" + encodeURIComponent(q) + cityParam)
+    const params = new URLSearchParams()
+    params.set("q", q)
+    const city = overrides.city !== undefined ? overrides.city : selectedCity
+    const propertyType = overrides.property_type !== undefined ? overrides.property_type : filterPropertyType
+    const pets = overrides.pets !== undefined ? overrides.pets : filterPets
+    const str = overrides.str !== undefined ? overrides.str : filterStr
+    const feeRange = overrides.fee_range !== undefined ? overrides.fee_range : filterFeeRange
+    const hasReviews = overrides.has_reviews !== undefined ? overrides.has_reviews : filterHasReviews
+    const management = overrides.management !== undefined ? overrides.management : filterManagement
+    if (city) params.set("city", city)
+    if (propertyType) params.set("property_type", propertyType)
+    if (pets) params.set("pets", pets)
+    if (str) params.set("str", str)
+    if (feeRange) params.set("fee_range", feeRange)
+    if (hasReviews) params.set("has_reviews", hasReviews)
+    if (management) params.set("management", management)
+    const res = await fetch("/api/communities-search?" + params.toString())
     const data = await res.json()
     setCommunities(data.communities || [])
     setLoading(false)
@@ -340,7 +357,25 @@ export default function SearchPage() {
     const newCity = selectedCity === city ? "" : city
     setSelectedCity(newCity)
     setAddressResult(null)
-    fetchCommunities(query, newCity)
+    fetchCommunities(query, { city: newCity })
+  }
+
+  function handleFilterChange(key: string, value: string, setter: (v: string) => void) {
+    const newVal = value
+    setter(newVal)
+    setAddressResult(null)
+    fetchCommunities(query, { [key]: newVal })
+  }
+
+  function clearAllFilters() {
+    setSelectedCity("")
+    setFilterPropertyType("")
+    setFilterPets("")
+    setFilterStr("")
+    setFilterFeeRange("")
+    setFilterHasReviews("")
+    setFilterManagement("")
+    fetchCommunities(query, { city: "", property_type: "", pets: "", str: "", fee_range: "", has_reviews: "", management: "" })
   }
 
   function handleInput(val: string) {
@@ -369,6 +404,7 @@ export default function SearchPage() {
     setAddressResult(data)
     setSearching(false)
   }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setShowSuggestions(false)
@@ -383,9 +419,9 @@ export default function SearchPage() {
         const data2 = await res2.json()
         setAddressResult(data2)
       } else {
-        const parts = query.trim().toLowerCase().split(' ')
-        const knownCities = ['boynton','boca','delray','wellington','jupiter','greenacres','lantana','tequesta','riviera']
-        const cityHint = parts.find(p => knownCities.some(c => p.includes(c))) || ''
+        const parts = query.trim().toLowerCase().split(" ")
+        const knownCities = ["boynton","boca","delray","wellington","jupiter","greenacres","lantana","tequesta","riviera"]
+        const cityHint = parts.find(p => knownCities.some(c => p.includes(c))) || ""
         if (cityHint) {
           const res3 = await fetch("/api/address-lookup?streetName=&city=" + encodeURIComponent(cityHint))
           const data3 = await res3.json()
@@ -401,6 +437,13 @@ export default function SearchPage() {
   }
 
   const isAddress = /^\d/.test(query.trim())
+
+  const FilterBtn = ({ value, current, onClick, label }: { value: string, current: string, onClick: () => void, label: string }) => (
+    <button type="button" onClick={onClick}
+      style={{padding:"5px 12px",borderRadius:"20px",border:"1px solid "+(current===value?"#1B2B6B":"#e0e0e0"),backgroundColor:current===value?"#1B2B6B":"#fff",color:current===value?"#fff":"#555",cursor:"pointer",fontSize:"12px",fontWeight:current===value?"600":"400"}}>
+      {label}
+    </button>
+  )
 
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
@@ -428,17 +471,14 @@ export default function SearchPage() {
                   onChange={e => handleInput(e.target.value)}
                   onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                placeholder="Community name, city, or 123 Main St..."
-                  style={{width:"100%",border:"1.5px solid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
+                  placeholder="Community name, city, or 123 Main St..."
+                  style={{width:"100%",border:"1.5psolid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
                 />
                 {showSuggestions && suggestions.length > 0 && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 4px 12px rgba(0,0,0,0.1)",zIndex:100,marginTop:"4px",overflow:"hidden"}}>
                     {suggestions.map((s: any, i: number) => (
-                      <div
-                        key={i}
-                        onMouseDown={() => handleSuggestionClick(s)}
-                        style={{padding:"10px 16px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1 ? "1px solid #f0f0f0" : "none",display:"flex",alignItems:"center",gap:"8px"}}
-                      >
+                      <div key={i} onMouseDown={() => handleSuggestionClick(s)}
+                        style={{padding:"10px 16px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1 ? "1px solid #f0f0f0" : "none",display:"flex",alignItems:"center",gap:"8px"}}>
                         <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="address"?"#E1F5EE":"#EEF2FF",color:s.type==="address"?"#1B2B6B":"#4338CA",flexShrink:0}}>
                           {s.type === "address" ? "Address" : "HOA"}
                         </span>
@@ -451,20 +491,106 @@ export default function SearchPage() {
               <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap"}}>
                 {searching ? "Searching..." : "Search"}
               </button>
+              <button type="button" onClick={() => setShowFilters(!showFilters)}
+                style={{fontSize:"13px",padding:"10px 14px",borderRadius:"10px",backgroundColor:showFilters||activeFilterCount>0?"#1B2B6B":"#fff",color:showFilters||activeFilterCount>0?"#fff":"#555",border:"1px solid "+(showFilters||activeFilterCount>0?"#1B2B6B":"#e0e0e0"),cursor:"pointer",whiteSpace:"nowrap",fontWeight:"500"}}>
+                Filters{activeFilterCount > 0 ? " (" + activeFilterCount + ")" : ""}
+              </button>
             </div>
           </form>
+
           {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#888",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
+
           {!isAddress && (
             <div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginTop:"12px"}}>
               {["Boynton Beach","Boca Raton","Delray Beach","West Palm Beach","Lake Worth","Wellington","Jupiter","Greenacres"].map((city) => (
-                <button
-                  key={city}
-                  onClick={() => handleCityFilter(city)}
-                  style={{fontSize:"12px",padding:"5px 12px",borderRadius:"20px",border:"1px solid " + (selectedCity===city?"#1B2B6B":"#e0e0e0"),backgroundColor:selectedCity===city?"#1B2B6B":"#fff",color:selectedCity===city?"#fff":"#555",cursor:"pointer",fontWeight:selectedCity===city?"600":"400"}}
-                >
+                <button key={city} onClick={() => handleCityFilter(city)}
+                  style={{fontSize:"12px",padding:"5px 12px",borderRadius:"20px",border:"1px solid "+(selectedCity===city?"#1B2B6B":"#e0e0e0"),backgroundColor:selectedCity===city?"#1B2B6B":"#fff",color:selectedCity===city?"#fff":"#555",cursor:"pointer",fontWeight:selectedCity===city?"600":"400"}}>
                   {city}
                 </button>
               ))}
+            </div>
+          )}
+
+          {showFilters && (
+            <div style={{backgroundColor:"#f9f9f9",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",marginTop:"12px"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"14px"}}>
+                <div style={{fontSize:"13px",fontWeight:"500",color:"#1a1a1a"}}>Filter results</div>
+                {activeFilterCount > 0 && (
+                  <button onClick={clearAllFilters} style={{fontSize:"11px",color:"#E24B4A",background:"none",border:"none",cursor:"pointer",padding:0}}>Clear all filters</button>
+                )}
+              </div>
+
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px"}}>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Property type</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    {["Single family","Condo","Townhouse"].map(v => (
+                      <FilterBtn key={v} value={v} current={filterPropertyType}
+                        onClick={() => handleFilterChange("property_type", filterPropertyType === v ? "" : v, setFilterPropertyType)}
+                        label={v} />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Pets</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    <FilterBtn value="yes" current={filterPets} onClick={() => handleFilterChange("pets", filterPets === "yes" ? "" : "yes", setFilterPets)} label="Allowed" />
+                    <FilterBtn value="no" current={filterPets} onClick={() => handleFilterChange("pets", filterPets === "no" ? "" : "no", setFilterPets)} label="Not allowed" />
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Short-term rentals</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    <FilterBtn value="allowed" current={filterStr} onClick={() => handleFilterChange("str", filterStr === "allowed" ? "" : "allowed", setFilterStr)} label="Allowed" />
+                    <FilterBtn value="not_allowed" current={filterStr} onClick={() => handleFilterChange("str", filterStr === "not_allowed" ? "" : "not_allowed", setFilterStr)} label="Not allowed" />
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Monthly fee</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    {[{val:"under200",label:"Under $200"},{val:"200to400",label:"$200–$400"},{val:"400to600",label:"$400–$600"},{val:"over600",l:"$600+"}].map(f => (
+                      <FilterBtn key={f.val} value={f.val} current={filterFeeRange}
+                        onClick={() => handleFilterChange("fee_range", filterFeeRange === f.val ? "" : f.val, setFilterFeeRange)}
+                        label={f.label} />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Reviews</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    <FilterBtn value="yes" current={filterHasReviews} onClick={() => handleFilterChange("has_reviews", filterHasReviews === "yes" ? "" : "yes", setFilterHasReviews)} label="Has reviews" />
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Management company</div>
+                  <input
+                    type="text"
+                    value={filterManagement}
+                    onChange={e => handleFilterChange("management", e.target.value, setFilterManagement)}
+                    placeholder="e.g. Castle Group"
+                    style={{width:"100%",border:"1px solid #e0e0e0",borderRadius:"8px",padding:"7px 10px",fontSize:"12px",outline:"none",boxSizing:"border-box"}}
+                  />
+                </div>
+
+              </div>
+
+              {activeFilterCount > 0 && (
+                <div style={{marginTop:"14px",paddingTop:"12px",borderTop:"1px solid #e5e5e5",display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                  {selectedCity && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>City: {selectedCity} <button onClick={() => handleCityFilter("")} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterPropertyType && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>{filterPropertyType} <button onClick={() => handleFilterChange("property_type","",setFilterPropertyType)} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterPets && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>Pets: {filterPets} <button onClick={() => handleFilterChange("pets","",setFilterPets)} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterStr && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>STR: {filterStr} <button onClick={() => handleFilterChange("str","",setFilterStr)} style={{baround:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterFeeRange && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>Fee: {filterFeeRange} <button onClick={() => handleFilterChange("fee_range","",setFilterFeeRange)} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterHasReviews && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#fff"}}>Has reviews <button onClick={() => handleFilterChange("has_reviews","",setFilterHasReviews)} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                  {filterManagement && <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:"#1B2B6B",color:"#"}}>Mgmt: {filterManagement} <button onClick={() => handleFilterChange("management","",setFilterManagement)} style={{background:"none",border:"none",color:"#fff",cursor:"pointer",marginLeft:"4px",padding:0,fontSize:"11px"}}>×</button></span>}
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -478,7 +604,7 @@ export default function SearchPage() {
                 <div style={{fontSize:"13px",color:"#888",marginBottom:"12px"}}>HOA community found for this address:</div>
                 <a href={"/community/" + addressResult.match.slug} style={{textDecoration:"none"}}>
                   <div style={{backgroundColor:"#fff",border:"2px solid #1D9E75",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
-                    <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"3px"}}>{addressResult.match.canonical_name}</div>
+                    <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"3px"}}>{adressResult.match.canonical_name}</div>
                     <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{addressResult.match.city}</div>
                     <div style={{fontSize:"13px",color:"#1D9E75",fontWeight:"500"}}>View community profile →</div>
                   </div>
@@ -491,7 +617,7 @@ export default function SearchPage() {
                   <a key={c.slug} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"14px 20px",marginBottom:"8px",cursor:"pointer"}}>
                       <div style={{fontSize:"14px",fontWeight:"500",color:"#1a1a1a"}}>{c.canonical_name}</div>
-                      <div style={{fontSize:"12px",color:"#888"}}>{c.city}</div>
+                      <div style={{fontSize:"12p,color:"#888"}}>{c.city}</div>
                     </div>
                   </a>
                 ))}
@@ -517,7 +643,7 @@ export default function SearchPage() {
           <>
             <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>{loading ? "Searching..." : communities.length + " communities found in Palm Beach County"}</div>
             {communities.length === 0 && !loading && query && (
-              <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>No communities found. Try a different search.</div>
+              <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>No communities found. Try a different search or adjust your filters.</div>
             )}
             {communities.map((c: any) => (
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
@@ -527,8 +653,10 @@ export default function SearchPage() {
                     <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
                       <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#E1F5EE",color:"#1B2B6B"}}>Active entity</span>
+                      {c.review_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{"★".repeat(Math.round(c.review_avg |)} {c.review_count} reviews</span>}
                       {c.assessment_signal_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>{c.assessment_signal_count} signals</span>}
-                      {c.management_company && c.management_compan!== "Unknown" && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{c.management_company}</span>}
+                      {c.management_company && c.management_company !== "Unknown" && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{c.management_company}</span>}
+                      {c.pet_restriction && c.pet_restriction !== "Unknown" && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:c.pet_restriction.toLowerCase().includes("yes")?"#E1F5EE":"#FEE9E9",color:c.pet_restriction.toLowerCase().includes("yes")?"#1B2B6B":"#A32D2D"}}>Pets: {c.pet_restriction}</span>}
                     </div>
                   </div>
                   <div style={{textAlign:"right",flexShrink:0,marginLeft:"16px"}}>
@@ -546,7 +674,7 @@ export default function SearchPage() {
       <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agentides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
       </footer>
     </main>
   )
