@@ -405,7 +405,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{fontSize:'13px',fontWeight:'600',color:'#888',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:'12px'}}>
             More HOA communities in {community.city_verified ? community.city : 'Palm Beach County'}
           </div>
-          <div style={{display:'grid',gridTemplateComns:'repeat(2,1fr)',gap:'10px',marginBottom:'12px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'10px',marginBottom:'12px'}}>
             {relatedCommunities.map((r: any) => (
               <a key={r.id} href={'/community/' + r.slug} style={{textDecoration:'none'}}>
                 <div style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'10px',padding:'14px 16px'}}>
