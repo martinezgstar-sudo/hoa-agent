@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title,
-    descriptio   openGraph: {
+    description,
+    openGraph: {
       title,
       description,
       url: 'https://hoa-agent.com/community/' + slug,
