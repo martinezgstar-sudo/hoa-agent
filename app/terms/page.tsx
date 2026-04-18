@@ -69,7 +69,7 @@ export default function TermsPage() {
           <a href="/terms" style={{color:"#aaa",textDecoration:"none",marginRight:"16px"}}>Terms of Service</a>
           <a href="/privacy" style={{color:"#aaa",textDecoration:"none"}}>Privacy Policy</a>
         </div>
-      ooter>
+      </footer>
     </main>
   )
 }
