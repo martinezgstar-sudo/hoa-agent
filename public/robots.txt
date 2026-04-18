@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Disallow: /api/
+Disallow: /admin/
+Allow: /
+Allow: /community/
+Allow: /search
+Allow: /cities/
+
+Sitemap: https://hoa-agent.com/sitemap.xml
