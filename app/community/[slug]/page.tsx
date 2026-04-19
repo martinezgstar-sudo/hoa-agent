@@ -267,7 +267,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the HOA directly.</div>
         </div>
 
-   mmunity.assessment_signal_count > 0 && (
+        {community.assessment_signal_count > 0 && (
           <div style={{backgroundColor: '#fff', border: '1px solid #EF9F27', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
               <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Special assessment signals</div>
