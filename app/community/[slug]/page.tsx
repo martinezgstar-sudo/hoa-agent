@@ -239,7 +239,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center'}}>
               <div style={{fontSize: '13px', fontWeight: '500', color: stat.val === 'Not listed' || stat.val === 'Unknown' ? '#aaa' : '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
-              <div style={{fontSize: '10pxolor: '#888', marginBottom: '1px'}}>{stat.label}</div>
+              <div style={{fontSize: '10px', color: '#888', marginBottom: '1px'}}>{stat.label}</div>
               <div style={{fontSize: '9px', color: '#aaa'}}>{stat.src}</div>
             </div>
           ))}
