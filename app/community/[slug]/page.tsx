@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : 'HOA fee data available.'
 
   const title = community.canonical_name + ' — ' + community.city + ' HOA | HOA Agent'
-  const description = community.canonical_name + ' is a ' + (community.property_type || 'residentia+ ' community in ' + community.city + ', FL. ' + feeStr + ' View fees, assessments, restrictions and management company details.'
+  const description = community.canonical_name + ' is a ' + (community.property_type || 'residential') + ' community in ' + community.city + ', FL. ' + feeStr + ' View fees, assessments, restrictions and management company details.'
 
   return {
     title,
