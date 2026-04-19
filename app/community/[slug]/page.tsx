@@ -175,7 +175,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <span style={{margin: '0 6px'}}>›</span>
           <span>{community.city}</span>
           <span style={{margin: '0 6px'}}>›</span>
-    pan style={{color: '#1a1a1a', fontWeight: '500'}}>{community.canonical_name}</span>
+          <span style={{color: '#1a1a1a', fontWeight: '500'}}>{community.canonical_name}</span>
         </div>
 
         {/* SUB-HOA MASTER BANNER */}
