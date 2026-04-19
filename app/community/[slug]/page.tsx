@@ -464,7 +464,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
       </div>
 
       {relatedCommunities && relatedCommunities.length > 0 && (
-        <div style={{maxWidth:'720px',margin:'0 auto',pad:'0 32px 32px'}}>
+        <div style={{maxWidth:'720px',margin:'0 auto',padding:'0 32px 32px'}}>
           <div style={{fontSize:'13px',fontWeight:'600',color:'#888',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:'12px'}}>
             More HOA communities in {community.city_verified ? community.city : 'Palm Beach County'}
           </div>
