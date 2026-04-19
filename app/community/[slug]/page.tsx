@@ -494,6 +494,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
       </footer>
-    n>
+    </main>
   )
 }
