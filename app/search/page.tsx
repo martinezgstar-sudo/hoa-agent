@@ -304,7 +304,7 @@ export default function SearchPage() {
   const [filterManagement, setFilterManagement] = useState("")
   const debounceRef = useRef<any>(null)
 
-  const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement].filter(Boolean).length
+  const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement, filterHoaType].filter(Boolean).length
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -333,6 +333,7 @@ export default function SearchPage() {
     const feeRange = overrides.fee_range !== undefined ? overrides.fee_range : filterFeeRange
     const hasReviews = overrides.has_reviews !== undefined ? overrides.has_reviews : filterHasReviews
     const management = overrides.management !== undefined ? overrides.management : filterManagement
+    const hoaType = overrides.hoa_type !== undefined ? overrides.hoa_type : filterHoaType
     if (city) params.set("city", city)
     if (propertyType) params.set("property_type", propertyType)
     if (pets) params.set("pets", pets)
@@ -340,6 +341,7 @@ export default function SearchPage() {
     if (feeRange) params.set("fee_range", feeRange)
     if (hasReviews) params.set("has_reviews", hasReviews)
     if (management) params.set("management", management)
+    if (hoaType) params.set("hoa_type", hoaType)
     const res = await fetch("/api/communities-search?" + params.toString())
     const data = await res.json()
     setCommunities(data.communities || [])
@@ -376,7 +378,8 @@ export default function SearchPage() {
     setFilterFeeRange("")
     setFilterHasReviews("")
     setFilterManagement("")
-    fetchCommunities(query, { city: "", property_type: "", pets: "", str: "", fee_range: "", has_reviews: "", management: "" })
+    setFilterHoaType("")
+    fetchCommunities(query, { city: "", property_type: "", pets: "", str: "", fee_range: "", has_reviews: "", management: "", hoa_type: "" })
   }
 
   function handleInput(val: string) {
@@ -565,6 +568,15 @@ export default function SearchPage() {
                   <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Reviews</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     <FilterBtn value="yes" current={filterHasReviews} onClick={() => handleFilterChange("has_reviews", filterHasReviews === "yes" ? "" : "yes", setFilterHasReviews)} label="Has reviews" />
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>HOA type</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                    <FilterBtn value="master" current={filterHoaType} onClick={() => handleFilterChange("hoa_type", filterHoaType === "master" ? "" : "master", setFilterHoaType)} label="Master HOA" />
+                    <FilterBtn value="sub" current={filterHoaType} onClick={() => handleFilterChange("hoa_type", filterHoaType === "sub" ? "" : "sub", setFilterHoaType)} label="Sub-community" />
+                    <FilterBtn value="standalone" current={filterHoaType} onClick={() => handleFilterChange("hoa_type", filterHoaType === "standalone" ? "" : "standalone", setFilterHoaType)} label="Standalone" />
                   </div>
                 </div>
 
