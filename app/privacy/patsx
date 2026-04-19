@@ -1,0 +1,69 @@
+export default function PrivacyPage() {
+  return (
+    <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
+      <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 32px",height:"72px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+        <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
+          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+        </a>
+        <div style={{display:"flex",gap:"24px",alignItems:"center"}}>
+          <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Search</a>
+          <a href="/reports" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Reports</a>
+        </div>
+      </nav>
+      <div style={{maxWidth:"720px",margin:"0 auto",padding:"48px 32px"}}>
+        <h1 style={{fontSize:"28px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Privacy Policy</h1>
+        <p style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>Last updated: April 2026</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>1. Information We Collect</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We collect information you voluntarily provide including email addresses submitted for our HOA Fee Guide, review submissions including name and comment text, and community suggestions including address and contact email. We also collect standard server logs including IP addresses and browser information for security and rate limiting purposes.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>2. How We Use Your Information</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We use collected information to respond to community suggestions, display approved reviews on community pages, send requested guides or resources, enforce our Terms of Service, and improve our platform. We do not sell your personal information to third parties.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>3. Cookies</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent uses minimal cookies necessary for site functionality. We do not use advertising cookies or third-party tracking cookies. We do not run ads on HOA Agent and do not share your data with advertisers.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>4. Third Party Services</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent uses the following third party services to operate the platform. Each has its own privacy policy governing how they handle data:</p>
+        <ul style={{fontSize:"14px",color:"#555",lineHeight:"2",marginBottom:"16px",paddingLeft:"24px"}}>
+          <li>Supabase — database hosting and storage (supabase.com/privacy)</li>
+          <li>Vercel — website hosting and deployment (vercel.com/legal/privacy-policy)</li>
+          <li>Resend — transactional email delivery (resend.com/legal/privacy-policy)</li>
+        </ul>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We do not share your personal information with these services beyond what is necessary to operate the platform.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>5. Data Storage and Security</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Your data is stored securely on enterprise-grade cloud infrastructure in the United States. We take reasonable technical and organizational measures to protect your information including raiting, access controls, and encrypted connections. We cannot guarantee absolute security of any data transmitted over the internet.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>6. Your Rights</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>You may request access to, correction of, or deletion of your personal data at any time by emailing fieldlogisticsfl@gmail.com. We will process requests within 30 days. Note that approved reviews displayed publicly may be retained in anonymized form even after deletion of your personal information.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>7. Florida Privacy Notice</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent operates under Florida law. Under the Florida Information Protection Act (FIPA), we are required to take reasonable measures to protect personal information and notify affected individuals in the event of a data breach. If a breach occurs that compromises your personal information we will notify you within 30 days as required by Florida Statute 501.171.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>8. Public Records Data</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Community information displayed on HOA Agent is sourced from public records including Florida Division of Corporations, Palm Beach County property data, and resident submissions. This data is publicly available and not considered private information under Florida law.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>9. IP Address Logging</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We log IP addresses for security purposes including detecting and blocking automated scraping, rate limiting abusive requests, and investigating violations of our Terms of Service. IP logs are retained for 90 days and are not shared with third parties except where required by law.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>10. Children</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent is not directed at children under 13. We do not knowingly collect information from children. If you believe a child has submitted personal information to us contact fieldlogisticsfl@gmail.com and we will delete it.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>11. Changes to This Policy</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We may update this privacy policy from time to time. We will note the date of the last update at the top of this page. Continued use of the platform after changes constitutes acceptance of the updated policy.</p>
+
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>12. Contact</h2>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Questions about this privacy policy? Email us at fieldlogisticsfl@gmail.com.</p>
+      </div>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
+        <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
+        <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa"}}>
+          <a href="/terms" style={{color:"#aaa",textDecoration:"none",marginRight:"16px"}}>Terms of Service</a>
+          <a href="/privacy" style={{color:"#aaa",textDecoration:"none"}}>Privacy Policy</a>
+        </div>
+      </footer>
+    </main>
+  )
+}
