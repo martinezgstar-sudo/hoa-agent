@@ -400,7 +400,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             This profile is {completeness.pct}% complete. Residents who add missing info help buyers, renters, and neighbors make better decisions. It takes 2 minutes.
           </div>
           <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
-            <a href={'#'ommentFormId} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Leave a review</a>
+            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Leave a review</a>
             <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: 'rgba(255,255,255,0.12)', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Add missing info</a>
           </div>
         </div>
