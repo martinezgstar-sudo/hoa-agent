@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
   const feeRange = searchParams.get('fee_range') || ''
   const hasReviews = searchParams.get('has_reviews') || ''
   const management = searchParams.get('management') || ''
+  const hoaType = searchParams.get('hoa_type') || ''
 
   let dbQuery = supabase
     .from('communities')
@@ -52,6 +53,13 @@ export async function GET(request: NextRequest) {
   }
   if (management) {
     dbQuery = dbQuery.ilike('management_company', `%${management}%`)
+  }
+  if (hoaType === 'master') {
+    dbQuery = dbQuery.eq('is_sub_hoa', false).not('id', 'in', '(select master_hoa_id from communities where master_hoa_id is not null)')
+  } else if (hoaType === 'sub') {
+    dbQuery = dbQuery.eq('is_sub_hoa', true)
+  } else if (hoaType === 'standalone') {
+    dbQuery = dbQuery.eq('is_sub_hoa', false)
   }
 
   const { data: communities } = await dbQuery
