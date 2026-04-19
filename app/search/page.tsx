@@ -302,6 +302,7 @@ export default function SearchPage() {
   const [filterFeeRange, setFilterFeeRange] = useState("")
   const [filterHasReviews, setFilterHasReviews] = useState("")
   const [filterManagement, setFilterManagement] = useState("")
+  const [filterHoaType, setFilterHoaType] = useState("")
   const debounceRef = useRef<any>(null)
 
   const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement, filterHoaType].filter(Boolean).length
