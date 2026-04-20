@@ -1,0 +1,18 @@
+{
+  "palm_beach_county_master_hoa": [
+    {"name": "PGA National", "master_association": "PGA Property Owners Association (PGA-POA)"},
+    {"name": "Briar Bay", "master_association": "Briar Bay Community Association"},
+    {"name": "Breakers West", "master_association": "Breakers West Master Association"},
+    {"name": "Abacoa", "master_association": "Abacoa Property Owners Association"},
+    {"name": "Mirasol", "master_association": "Mirasol Master Association"},
+    {"name": "Ibis Golf & Country Club", "master_association": "Ibis Property Owners Association"},
+    {"name": "Olympia", "master_association": "Olympia Master Association"},
+    {"name": "RiverBridge", "master_association": "RiverBridge POA"},
+    {"name": "Baywinds", "master_association": "Baywinds HOA"},
+    {"name": "Andros Isle", "master_association": "Andros Isle Property Owners Association"},
+    {"name": "Evergrene", "master_association": "Evergrene Master HOA"},
+    {"name": "Alton", "master_association": "Alton Master Association"},
+    {"name": "Seven Bridges", "master_association": "Seven Bridges HOA"},
+    {"name": "The Bridges", "master_association": "The Bridges HOA"}
+  ]
+}

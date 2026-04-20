@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
 import ReportModal from '@/app/components/ReportModal'
+import RestrictionModal from '@/app/components/RestrictionModal'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -336,7 +337,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 </div>
                   </div>
                   {isUnknown && (
-                    <a href={'#' + commentFormId} style={{fontSize: '11px', color: '#1D9E75', border: '1px solid #1D9E75', borderRadius: '20px', padding: '2px 9px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0}}>+ Add</a>
+                    <RestrictionModal communityId={community.id} field={r.field as any} communityName={community.canonical_name} />
                   )}
                 </div>
               )
