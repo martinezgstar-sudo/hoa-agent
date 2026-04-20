@@ -21,7 +21,6 @@ export default function CommentForm({ communityId }: { communityId: string }) {
   const [strAllowed, setStrAllowed] = useState<string>("")
   const [petsAllowed, setPetsAllowed] = useState<string>("")
   const [rentalApproval, setRentalApproval] = useState<string>("")
-  const [managementCompany, setManagementCompany] = useState("")
   const [managementRating, setManagementRating] = useState(0)
   const [maintenanceRating, setMaintenanceRating] = useState(0)
   const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
@@ -61,7 +60,6 @@ export default function CommentForm({ communityId }: { communityId: string }) {
         pets_allowed: petsAllowed || null,
         rental_approval: rentalApproval || null,
         management_rating: managementRating || null,
-        management_company_reported: managementCompany || null,
         maintenance_rating: maintenanceRating || null,
       })
     })
@@ -190,11 +188,11 @@ export default function CommentForm({ communityId }: { communityId: string }) {
         {step === 2 && (
           <div>
             <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 — HOA details</div>
-          <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>Monthly fee and management company are required. Other fields are optional.</div>
+            <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>This information helps buyee informed decisions. All fields are optional.</div>
 
             {residentType === "renter" ? (
               <div style={{marginBottom:"16px"}}>
-                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly rent amount <span style={{color:"#E24B4A"}}>*</span></div>
+                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly rent amount</div>
                 <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>This helps us understand owner vs renter ratios in this community.</div>
                 <div style={{position:"relative"}}>
                   <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
@@ -204,7 +202,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               </div>
             ) : (
               <div style={{marginBottom:"16px"}}>
-                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly HOA fee <span style={{color:"#E24B4A"}}>*</span></div>
+                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly HOA fee (your approximate amount)</div>
                 <div style={{position:"relative"}}>
                   <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
                   <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350"
@@ -212,13 +210,6 @@ export default function CommentForm({ communityId }: { communityId: string }) {
                 </div>
               </div>
             )}
-
-            <div style={{marginBottom:"16px"}}>
-              <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Management company name <span style={{color:"#E24B4A"}}>*</span></div>
-              <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>Required — helps us keep management data accurate</div>
-              <input type="text" value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Castle Group, FirstService, Lang Management"
-                style={{width:"100%",border:"1.5px solid " + (managementCompany ? "#e5e5e5" : "#EF9F27"),borderRadius:"8px",padding:"10px 12px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
-            </div>
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"8px"}}>What does your HOA fee include? (select all that apply)</div>
