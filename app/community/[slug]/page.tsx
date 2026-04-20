@@ -3,6 +3,7 @@ import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
 import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
+import ManagementModal from '@/app/components/ManagementModal'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -289,7 +290,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <div style={{fontSize: '14px', color: '#aaa'}}>Not on record</div>
-                <a href={'#' + commentFormId} style={{fontSize: '11px', color: '#1D9E75', border: '1px solid #1D9E75', borderRadius: '20px', padding: '3px 10px', textDecoration: 'none', whiteSpace: 'nowrap'}}>+ Know this? Add it</a>
+                <ManagementModal communityId={community.id} communityName={community.canonical_name} />
               </div>
               <div style={{fontSize: '11px', color: '#aaa', marginTop: '6px'}}>Management company is one of the most searched fields. Your info helps other residents.</div>
             </>
