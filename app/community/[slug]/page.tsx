@@ -318,12 +318,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>public + resident</span>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
-            {[
-              {label: 'Short-term rentals', val: community.str_restriction},
-              {label: 'Pets', val: community.pet_restriction},
-              {label: 'Commercial vehicles', val: community.vehicle_restriction},
-              {label: 'Rental approval', val: community.rental_approval},
-            ].map((r) => {
+            {([
+              {label: 'Short-term rentals', val: community.str_restriction, field: 'str_restriction' as const},
+              {label: 'Pets', val: community.pet_restriction, field: 'pet_restriction' as const},
+              {label: 'Commercial vehicles', val: community.vehicle_restriction, field: 'vehicle_restriction' as const},
+              {label: 'Rental approval', val: community.rental_approval, field: 'rental_approval' as const},
+            ] as const).map((r) => {
               const isUnknown = !r.val || r.val === 'Unknown'
               return (
                 <div key={r.label} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f9f9f9', borderRadius: '8px', padding: '10px 12px', gap: '8px'}}>
