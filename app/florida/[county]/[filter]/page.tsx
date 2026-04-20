@@ -151,7 +151,7 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
 
         <h1 style={{fontSize:"28px",fontWeight:"700",color:"#1a1a1a",marginBottom:"8px",lineHeight:"1.3"}}>{label} in {countyName}</h1>
         <p style={{fontSize:"15px",color:"#555",lineHeight:"1.7",marginBottom:"8px"}}>{description}</p>
-        <div style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>{communities?.length || ommunities found</div>
+        <div style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>{communities?.length || 0} communities found</div>
 
         <div style={{display:"flex",flexDirection:"column",gap:"10px",marginBottom:"40px"}}>
           {(communities || []).map((c: any) => (
