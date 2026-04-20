@@ -165,7 +165,7 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
                   </div>
                   {(c.review_count || 0) > 0 && (
                     <div style={{fontSize:"11px",color:"#EF9F27",marginTop:"4px"}}>
-                      {"★".repeat(Math.r(c.review_avg || 0))} {c.review_avg} ({c.review_count} reviews)
+                      {"★".repeat(Math.round(c.review_avg || 0))} {c.review_avg} ({c.review_count} reviews)
                     </div>
                   )}
                 </div>
