@@ -38,7 +38,7 @@ const FIELD_CONFIG = {
   },
 }
 
-export default function RestrictionModal({ communityId, field, communityN}: Props) {
+export default function RestrictionModal({ communityId, field, communityName }: Props) {
   const [open, setOpen] = useState(false)
   const [answer, setAnswer] = useState("")
   const [details, setDetails] = useState("")
