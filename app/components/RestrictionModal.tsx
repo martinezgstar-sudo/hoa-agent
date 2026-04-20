@@ -101,7 +101,7 @@ export default function RestrictionModal({ communityId, field, communityN}: Prop
         {status === "success" ? (
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:"36px",marginBottom:"12px"}}>✓</div>
-            <div style={{fontSize:"15px",fontWeight:00",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
+            <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
             <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>Your submission will be reviewed and added to this profile within 24 hours.</div>
             <button onClick={() => { setOpen(false); setStatus("idle"); setAnswer(""); setDetails("") }}
               style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
