@@ -50,7 +50,7 @@ export default async function SuggestionsAdminPage() {
       ) : (
         <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
           {suggestions.map((s: any) => (
-            <div key={id} style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'12px',padding:'20px 24px'}}>
+            <div key={s.id} style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'12px',padding:'20px 24px'}}>
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'12px'}}>
                 <div>
                   <div style={{fontSize:'13px',fontWeight:'600',color:'#1B2B6B',marginBottom:'4px'}}>
