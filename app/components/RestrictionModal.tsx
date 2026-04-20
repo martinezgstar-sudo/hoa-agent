@@ -50,25 +50,15 @@ export default function RestrictionModal({ communityId, field, communityName }: 
     if (!answer) return
     setStatus("submitting")
 
-    const fieldMap: Record<string, string> = {
-      str_restriction: "str_allowed",
-      pet_restriction: "pets_allowed",
-      vehicle_restriction: "vehicle_restriction",
-      rental_approval: "rental_approval",
-    }
-
-    const body: any = {
-      community_id: communityId,
-      comment_text: details || `Restriction update: ${config.question} — ${answer}`,
-      is_anonymous: true,
-      is_resident: true,
-      [fieldMap[field]]: answer,
-    }
-
-    const res = await fetch("/api/comments", {
+    const res = await fetch("/api/suggestions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        community_id: communityId,
+        field,
+        suggested_value: answer,
+        deils: details || null,
+      }),
     })
 
     if (res.ok) {

@@ -53,16 +53,14 @@ export default function ManagementModal({ communityId, communityName }: Props) {
     if (!company.trim()) return
     setStatus("submitting")
 
-    const res = await fetch("/api/comments", {
+    const res = await fetch("/api/suggestions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         community_id: communityId,
-        comment_text: "Management company update: " + company.trim(),
-        is_anonymous: true,
-        is_resident: true,
-        management_company_reported: company.trim(),
-      })
+        field: "management_company",
+        suggested_value: company.trim(),
+      }),
     })
 
     if (res.ok) {
