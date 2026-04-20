@@ -157,6 +157,36 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        "name": community.canonical_name,
+        "description": `${community.canonical_name} is a ${community.property_type || 'residential'} HOA community in ${community.city}, Florida.`,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": community.city,
+          "addressRegion": "FL",
+          "postalCode": community.zip_code || "",
+          "addressCountry": "US"
+        },
+        "url": `https://hoa-agent.com/community/${community.slug}`,
+        ...(community.review_avg && community.review_count ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": community.review_avg,
+            "reviewCount": community.review_count,
+            "bestRating": 5,
+            "worstRating": 1
+          }
+        } : {}),
+        ...(community.management_company ? {
+          "amenityFeature": [{
+            "@type": "LocationFeatureSpecification",
+            "name": "Management Company",
+            "value": community.management_company
+          }]
+        } : {})
+      })}} />
       <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <a href="/" style={{display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'}}>
           <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>

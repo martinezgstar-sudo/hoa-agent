@@ -1,6 +1,20 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 
+const CITIES = [
+  'west-palm-beach','boca-raton','boynton-beach','delray-beach','jupiter',
+  'palm-beach-gardens','wellington','lake-worth','riviera-beach','north-palm-beach',
+  'royal-palm-beach','greenacres','tequesta','lantana','lake-park','palm-springs',
+  'belle-glade','pahokee','south-bay','loxahatchee','acreage','westlake'
+]
+
+const FILTERS = [
+  'pet-friendly','no-short-term-rentals','short-term-rental-allowed',
+  'low-hoa-fees','condos','single-family','no-rental-approval','master-hoa'
+]
+
+const COUNTIES = ['palm-beach-county']
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: communities } = await supabase
     .from('communities')
@@ -14,40 +28,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
+  const cityUrls = CITIES.flatMap(city => [
+    { url: `https://hoa-agent.com/cities/${city}`, lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `https://hoa-agent.com/best-hoa/${city}`, lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
+  ])
+
+  const filterUrls = COUNTIES.flatMap(county =>
+    FILTERS.map(filter => ({
+      url: `https://hoa-agent.com/florida/${county}/${filter}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    }))
+  )
+
   return [
-    { url: 'https://hoa-agent.com', lastModified: new Date().toISOString(), changeFrequency: 'daily', priority: 1 },
-    { url: 'https://hoa-agent.com/search', lastModified: new Date().toISOString(), changeFrequency: 'daily', priority: 0.9 },
-    { url: 'https://hoa-agent.com/terms', lastModified: new Date().toISOString(), changeFrequency: 'monthly', priority: 0.3 },
-    { url: 'https://hoa-agent.com/privacy', lastModified: new Date().toISOString(), changeFrequency: 'monthly', priority: 0.3 },
+    { url: 'https://hoa-agent.com', lastModified: new Date().toISOString(), changeFrequency: 'daily' as const, priority: 1 },
+    { url: 'https://hoa-agent.com/search', lastModified: new Date().toISOString(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: 'https://hoa-agent.com/reports', lastModified: new Date().toISOString(), changeFrequency: 'monthly' as const, priority: 0.7 },
-    { url: 'https://hoa-agent.com/cities/west-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/boca-raton', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/boynton-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/delray-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/jupiter', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/palm-beach-gardens', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/wellington', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/cities/lake-worth', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/riviera-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/north-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/royal-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/greenacres', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/tequesta', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/lantana', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/lake-park', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/cities/palm-springs', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/best-hoa/palm-beach-county', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.9 },
-    { url: 'https://hoa-agent.com/best-hoa/west-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/boca-raton', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/boynton-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/delray-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/jupiter', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/palm-beach-gardens', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/wellington', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.85 },
-    { url: 'https://hoa-agent.com/best-hoa/lake-worth', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/best-hoa/royal-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/best-hoa/riviera-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: 'https://hoa-agent.com/best-hoa/north-palm-beach', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.8 },
+    { url: 'https://hoa-agent.com/florida/palm-beach-county/pet-friendly', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.95 },
+    { url: 'https://hoa-agent.com/florida/palm-beach-county/low-hoa-fees', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.95 },
+    { url: 'https://hoa-agent.com/florida/palm-beach-county/condos', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.95 },
+    { url: 'https://hoa-agent.com/florida/palm-beach-county/no-short-term-rentals', lastModified: new Date().toISOString(), changeFrequency: 'weekly' as const, priority: 0.95 },
+    { url: 'https://hoa-agent.com/terms', lastModified: new Date().toISOString(), changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: 'https://hoa-agent.com/privacy', lastModified: new Date().toISOString(), changeFrequency: 'monthly' as const, priority: 0.3 },
+    ...filterUrls,
+    ...cityUrls,
     ...communityUrls,
   ]
 }
