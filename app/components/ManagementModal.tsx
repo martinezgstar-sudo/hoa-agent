@@ -6,10 +6,48 @@ interface Props {
   communityName: string
 }
 
+const KNOWN_COMPANIES = [
+  "FirstService Residential",
+  "Castle Group",
+  "Self-managed",
+  "Campbell Property Management",
+  "Jupiter Management",
+  "Lang Management",
+  "Sea Breeze Community Management",
+  "Davenport Professional Property Management",
+  "Realtime Property Management",
+  "Crest Management Group",
+  "Troon Golf & Leisure",
+  "Vista Blue Management",
+  "Hawkeye Management",
+  "Phoenix Management Services",
+  "AKAM Management",
+  "Associa Florida",
+  "CMC Management",
+  "CPM Property Management",
+  "Florida Skyline Management",
+  "Gulf Stream Management",
+  "Harbor Management of South Florida",
+  "JDM Property Managers LLC",
+  "Leland Management",
+  "Miami Management",
+  "Real Time Property Management",
+  "GRS Community Management",
+  "Vesta Property Services",
+  "KW Property Management",
+  "Sentry Management",
+  "Greystar",
+]
+
 export default function ManagementModal({ communityId, communityName }: Props) {
   const [open, setOpen] = useState(false)
   const [company, setCompany] = useState("")
+  const [showSuggestions, setShowSuggestions] = useState(false)
   const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
+
+  const suggestions = company.length > 1
+    ? KNOWN_COMPANIES.filter(c => c.toLowerCase().includes(company.toLowerCase())).slice(0, 6)
+    : []
 
   async function handleSubmit() {
     if (!company.trim()) return
@@ -45,7 +83,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
 
   return (
     <>
-      <div onClick={() => setOpen(false)}
+      <div onClick={() => { setOpen(false); setShowSuggestions(false) }}
         style={{position:"fixed",inset:0,backgroundColor:"rgba(0,0,0,0.4)",zIndex:999}} />
 
       <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",backgroundColor:"#fff",borderRadius:"16px",padding:"28px 24px",width:"min(420px, 90vw)",zIndex:1000,boxShadow:"0 20px 60px rgba(0,0,0,0.15)"}}>
@@ -54,9 +92,9 @@ export default function ManagementModal({ communityId, communityName }: Props) {
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:"36px",marginBottom:"12px"}}>✓</div>
             <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
-            <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>T management company info will be reviewed and added within 24 hours.</div>
+            <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>The management company info will be reviewed and added within 24 hours.</div>
             <button onClick={() => { setOpen(false); setStatus("idle"); setCompany("") }}
-              style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
+              style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
               Close
             </button>
           </div>
@@ -64,17 +102,40 @@ export default function ManagementModal({ communityId, communityName }: Props) {
           <>
             <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Add management info</div>
             <div style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"6px",lineHeight:"1.4"}}>Who manages {communityName}?</div>
-            <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Enter the name of the property management company for this community.</div>
+            <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Start typing to see suggestions from known Palm Beach County management companies.</div>
 
-            <div style={{marginBottom:"16px"}}>
+            <div style={{marginBottom:"16px",position:"relative"}}>
               <input
                 type="text"
                 value={company}
-                onChange={e => setCompany(e.target.value)}
+                onChange={e => { setCompany(e.target.value); setShowSuggestions(true) }}
+                onFocus={() => setShowSuggestions(true)}
                 placeholder="e.g. Castle Group, FirstService, Lang Management"
                 autoFocus
                 style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"10px",padding:"12px 14px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
               />
+              {showSuggestions && suggestions.length > 0 && (
+                <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1.5px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 8px 24px rgba(0,0,0,0.1)",zIndex:10,marginTop:"4px",overflow:"hidden"}}>
+                  {suggestions.map(s => (
+                    <div key={s}
+                      onClick={() => { setCompany(s); setShowSuggestions(false) }}
+                      style={{padding:"10px 14px",fontSize:"13px",color:"#1a1a1a",cursor:"pointer",borderBottom:"1px solid #f5f5f5"}}
+                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
+                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#fff")}>
+                      {s}
+                    </div>
+                  ))}
+                  {company.length > 1 && !KNOWN_COMPANIES.some(c => c.toLowerCase() === company.toLowerCase()) && (
+                    <div
+                      onClick={() => setShowSuggestions(false)}
+                      style={{padding:"10px 14px",fontSize:"12px",color:"#888",cursor:"pointer",fontStyle:"italic"}}
+                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
+                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#fff")}>
+                      Use "{company}" (not in our list)
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div style={{backgroundColor:"#FEF9EC",border:"1px solid #EF9F27",borderRadius:"8px",padding:"10px 14px",marginBottom:"16px",fontSize:"11px",color:"#854F0B",lineHeight:"1.6"}}>
