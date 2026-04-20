@@ -52,7 +52,7 @@ const FILTERS: Record<string, {
   'master-hoa': {
     label: 'Master HOA Communities',
     title: 'Master HOA Communities in {county} — Full Sub-Community Guide | HOA Agent',
-    descrin: 'Explore master-planned HOA communities in {county}, Florida. Browse all sub-communities, combined fee totals, and resident reviews.',
+    description: 'Explore master-planned HOA communities in {county}, Florida. Browse all sub-communities, combined fee totals, and resident reviews.',
     query: { is_sub_hoa: 'eq.false' }
   }
 }
