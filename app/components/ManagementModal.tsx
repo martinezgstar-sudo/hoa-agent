@@ -94,7 +94,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
             <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
             <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>The management company info will be reviewed and added within 24 hours.</div>
             <button onClick={() => { setOpen(false); setStatus("idle"); setCompany("") }}
-              style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
+              style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
               Close
             </button>
           </div>
