@@ -209,7 +209,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
               style={{flex:1,padding:"11px",borderRadius:"8px",backgroundColor:"#fff",color:"#555",border:"1.5px solid #e5e5e5",cursor:"pointer",fontSize:"13px"}}>
               Cancel
             </button>
-            <button onClick={handleSubmit} disabled={!name.trim() || !city.im() || status==="submitting"}
+            <button onClick={handleSubmit} disabled={!name.trim() || !city.trim() || status==="submitting"}
               style={{flex:2,padding:"11px",borderRadius:"8px",backgroundColor:(name.trim()&&city.trim())?"#1B2B6B":"#ccc",color:"#fff",border:"none",cursor:(name.trim()&&city.trim())?"pointer":"not-allowed",fontSize:"13px",fontWeight:"600"}}>
               {status==="submitting" ? "Submitting..." : "Submit suggestion"}
             </button>
