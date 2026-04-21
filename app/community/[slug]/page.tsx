@@ -265,8 +265,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         {!community.master_hoa_id && !community.is_sub_hoa && (
           <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
         )}
-        {!community.master_hoa_id && !community.is_sub_hoa && (
-        )}
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
           {[
