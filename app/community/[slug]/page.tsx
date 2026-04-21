@@ -5,7 +5,6 @@ import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
 import ManagementModal from '@/app/components/ManagementModal'
 import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
-import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
