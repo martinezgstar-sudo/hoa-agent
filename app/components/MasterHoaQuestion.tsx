@@ -78,7 +78,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
   return (
     <div style={{backgroundColor:"#FEF9EC",border:"1px solid #EF9F27",borderRadius:"10px",padding:"16px 18px",marginBottom:"12px"}}>
       <div style={{fontSize:"13px",fontWeight:"600",color:"#854F0B",marginBottom:"4px"}}>Community structure question</div>
-      <div style={{fontSize:"13px",color:"#633806"ginBottom:"14px",lineHeight:"1.5"}}>
+      <div style={{fontSize:"13px",color:"#633806",marginBottom:"14px",lineHeight:"1.5"}}>
         Is <strong>{communityName}</strong> part of a larger master HOA community?
       </div>
 
