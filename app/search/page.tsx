@@ -1,4 +1,5 @@
 "use client"
+import SuggestCommunityForm from "@/app/components/SuggestCommunityForm"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 
@@ -657,7 +658,8 @@ export default function SearchPage() {
           <>
             <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>{loading ? "Searching..." : communities.length + " communities found in Palm Beach County"}</div>
             {communities.length === 0 && !loading && query && (
-              <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>No communities found. Try a different search or adjust your filters.</div>
+              <div style={{textAlign:"center",padding:"24px 0 8px",color:"#888",fontSize:"14px"}}>No communities found for "{query}". Try a different search or suggest it below.</div>
+              <SuggestCommunityForm searchQuery={query} />
             )}
             {communities.map((c: any) => (
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
