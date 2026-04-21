@@ -93,7 +93,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
       <div style={{backgroundColor:"#E1F5EE",borderRadius:"16px",padding:"32px",textAlign:"center",margin:"16px 0"}}>
         <div style={{fontSize:"32px",marginBottom:"12px"}}>✓</div>
         <div style={{fontSize:"16px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thanks! We received your suggestion.</div>
-        <div style={{fontSize:"13px",color:"#555",lineHght:"1.6"}}>We will research and add this community within 48 hours. If you left your email we will notify you when it goes live.</div>
+        <div style={{fontSize:"13px",color:"#555",lineHeight:"1.6"}}>We will research and add this community within 48 hours. If you left your email we will notify you when it goes live.</div>
       </div>
     )
   }
