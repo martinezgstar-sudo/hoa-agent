@@ -660,7 +660,6 @@ export default function SearchPage() {
             {communities.length === 0 && !loading && query && (
               <div style={{textAlign:"center",padding:"24px 0 8px",color:"#888",fontSize:"14px"}}>No communities found for "{query}". Try a different search or suggest it below.</div>
             )}
-            {query && <SuggestCommunityForm searchQuery={query} />}
             {communities.map((c: any) => (
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                 <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",marginBottom:"10px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",cursor:"pointer"}}>
