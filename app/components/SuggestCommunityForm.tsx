@@ -151,7 +151,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
             <div>
               <div style={{fontSize:"12px",fontWeight:"600",color:"#555",marginBottom:"6px"}}>City <span style={{color:"#E24B4A"}}>*</span></div>
               <input type="text" value={city} onChange={e => setCity(e.target.value)} placeholder="West Palm Beach"
-                style={{width:"100%",pad:"10px 12px",borderRadius:"8px",border:"1.5px solid #e5e5e5",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
+                style={{width:"100%",padding:"10px 12px",borderRadius:"8px",border:"1.5px solid #e5e5e5",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
             </div>
             <div>
               <div style={{fontSize:"12px",fontWeight:"600",color:"#555",marginBottom:"6px"}}>Monthly HOA fee</div>
