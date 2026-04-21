@@ -104,7 +104,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
       <div style={{fontSize:"13px",color:"#888",marginBottom:"20px"}}>Suggest it and we'll add it to HOA Agent. Start typing to see if it already exists in our database.</div>
 
       {!expanded ? (
-        <button onClick={() => setExpanded(true); if (name.length >= 2) setShowDrafts(true) }}
+        <button onClick={() => { setExpanded(true); if (name.length >= 2) setShowDrafts(true) }}
           style={{width:"100%",padding:"12px",borderRadius:"10px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
           + Suggest a community
         </button>
