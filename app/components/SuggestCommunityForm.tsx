@@ -134,8 +134,8 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                 <div onClick={() => { setShowDrafts(false); setSelectedDraft(null) }}
                   style={{padding:"10px 14px",fontSize:"12px",color:"#1D9E75",cursor:"pointer",fontWeight:"500",borderTop:"1px solid #f0f0f0",backgroundColor:"#f9f9f9"}}
                   onMouseEnter={e => (e.currentTarget.style.backgroundColor="#E1F5EE")}
-                  onMouseLeave={e => (e.currentTarget.style.bacroundColor="#f9f9f9")}>
-                  + None of these — submit{name}" as a new community
+                  onMouseLeave={e => (e.currentTarget.style.backgroundColor="#f9f9f9")}>
+                  + None of these — submit "{name}" as a new community
                 </div>
               </div>
             )}
