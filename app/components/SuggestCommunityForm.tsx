@@ -20,9 +20,9 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
   const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
   const [expanded, setExpanded] = useState(false)
 
-  // Search draft communities as user types
+  // Search draft communities on mount and as user types
   useEffect(() => {
-    if (name.length < 2) { setDraftMatches([]); return }
+    if (name.length < 2) { setDraftMatches([]); setShowDrafts(false); return }
     const timer = setTimeout(async () => {
       const res = await fetch(
         SUPABASE_URL + "/rest/v1/communities?canonical_name=ilike.*" + encodeURIComponent(name) + "*&status=eq.draft&select=id,canonical_name,city,monthly_fee_min,monthly_fee_max,property_type&limit=6",
@@ -33,7 +33,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
       setShowDrafts(true)
     }, 300)
     return () => clearTimeout(timer)
-  }, [name])
+  }, [name, expanded])
 
   // Search master HOAs as user types
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
       <div style={{fontSize:"13px",color:"#888",marginBottom:"20px"}}>Suggest it and we'll add it to HOA Agent. Start typing to see if it already exists in our database.</div>
 
       {!expanded ? (
-        <button onClick={() => setExpanded(true)}
+        <button onClick={() => setExpanded(true); if (name.length >= 2) setShowDrafts(true) }}
           style={{width:"100%",padding:"12px",borderRadius:"10px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
           + Suggest a community
         </button>
