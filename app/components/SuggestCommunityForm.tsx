@@ -133,7 +133,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                 ))}
                 <div onClick={() => setShowDrafts(false)}
                   style={{padding:"10px 14px",fontSize:"12px",color:"#888",cursor:"pointer",fontStyle:"italic"}}
-                  onMouser={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
                   onMouseLeave={e => (e.currentTarget.style.backgroundColor="#fff")}>
                   None of these — add "{name}" as new
                 </div>
