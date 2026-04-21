@@ -132,7 +132,6 @@ function SuggestForm({ address }: { address: string }) {
                         <span style={{fontSize:"11px",color:"#1D9E75"}}>View profile →</span>
                       </div>
                     ))}
-            {query && <SuggestCommunityForm searchQuery={query} />}
                     <div style={{padding:"8px 12px",fontSize:"12px",color:"#888",borderTop:"1px solid #f0f0f0"}}>
                       Not listed? Continue filling the form to add it.
                     </div>
@@ -683,6 +682,7 @@ export default function SearchPage() {
                 </div>
               </a>
             ))}
+            {query && <SuggestCommunityForm searchQuery={query} />}
           </>
         )}
       </div>
