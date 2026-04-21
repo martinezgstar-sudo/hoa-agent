@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
 import ManagementModal from '@/app/components/ManagementModal'
+import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
+import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -261,6 +263,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#FAEEDA', border: '1px solid #EF9F27', borderRadius: '8px', padding: '10px 14px', marginBottom: '12px', fontSize: '12px', color: '#633806', lineHeight: '1.5'}}>
           <strong>Data transparency:</strong> This profile combines public records and resident-submitted data. Each field is labeled by source. Unverified data is clearly marked.
         </div>
+        {!community.master_hoa_id && !community.is_sub_hoa && (
+          <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
+        )}
+        {!community.master_hoa_id && !community.is_sub_hoa && (
+          <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
+        )}
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
           {[
