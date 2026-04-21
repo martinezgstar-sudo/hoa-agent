@@ -131,11 +131,11 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                     <div style={{fontSize:"11px",color:"#888"}}>{d.city}{d.property_type ? " · " + d.property_type : ""}{d.monthly_fee_min ? " · $" + d.monthly_fee_min + "/mo" : ""}</div>
                   </div>
                 ))}
-                <div onClick={() => setShowDrafts(false)}
-                  style={{padding:"10px 14px",fontSize:"12px",color:"#888",cursor:"pointer",fontStyle:"italic"}}
-                  onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
-                  onMouseLeave={e => (e.currentTarget.style.backgroundColor="#fff")}>
-                  None of these — add "{name}" as new
+                <div onClick={() => { setShowDrafts(false); setSelectedDraft(null) }}
+                  style={{padding:"10px 14px",fontSize:"12px",color:"#1D9E75",cursor:"pointer",fontWeight:"500",borderTop:"1px solid #f0f0f0",backgroundColor:"#f9f9f9"}}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor="#E1F5EE")}
+                  onMouseLeave={e => (e.currentTarget.style.bacroundColor="#f9f9f9")}>
+                  + None of these — submit{name}" as a new community
                 </div>
               </div>
             )}
