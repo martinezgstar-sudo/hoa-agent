@@ -1,11 +1,20 @@
 "use client"
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
+import { fetchMapboxAddressSuggestions } from "@/lib/mapbox-address-suggestions"
 
-function isAddressOrZipInput(value: string) {
+function isPureZipInput(value: string) {
+  return /^\d{5}(-\d{4})?$/.test(value.trim())
+}
+
+function startsWithDigit(value: string) {
+  return /^\d/.test(value.trim())
+}
+
+/** Show Mapbox / ZIP style dropdown (includes footer) */
+function isAddressLikeForDropdown(value: string) {
   const t = value.trim()
-  if (/^\d{5}(-\d{4})?$/.test(t)) return true
-  return /\d/.test(t) && /[a-zA-Z]/.test(t)
+  return isPureZipInput(t) || startsWithDigit(t)
 }
 
 export default function HomeSearch() {
@@ -16,16 +25,34 @@ export default function HomeSearch() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   async function fetchSuggestions(q: string) {
-    if (q.trim().length < 3) {
+    const t = q.trim()
+    if (t.length < 3) {
       setSuggestions([])
       setShowSuggestions(false)
       return
     }
-    const res = await fetch("/api/address-search?q=" + encodeURIComponent(q))
+
+    if (isPureZipInput(t)) {
+      const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
+      const data = await res.json()
+      const list = data.suggestions || []
+      setSuggestions(list)
+      setShowSuggestions(true)
+      return
+    }
+
+    if (startsWithDigit(t)) {
+      const list = await fetchMapboxAddressSuggestions(t)
+      setSuggestions(list)
+      setShowSuggestions(true)
+      return
+    }
+
+    const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
     const data = await res.json()
     const list = data.suggestions || []
     setSuggestions(list)
-    setShowSuggestions(isAddressOrZipInput(q) || list.length > 0)
+    setShowSuggestions(list.length > 0)
   }
 
   function handleInput(val: string) {
@@ -49,10 +76,16 @@ export default function HomeSearch() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const t = query.trim()
-    if (isAddressOrZipInput(t)) {
+    if (isAddressLikeForDropdown(t)) {
       const zipOnly = t.match(/^(\d{5})(?:-\d{4})?$/)
       if (zipOnly) {
         router.push("/search?zip=" + encodeURIComponent(zipOnly[1]))
+        return
+      }
+      const list = await fetchMapboxAddressSuggestions(t)
+      const first = list.find((s) => s.postcode)
+      if (first?.postcode) {
+        router.push("/search?zip=" + encodeURIComponent(first.postcode))
         return
       }
       await fetchSuggestions(t)
@@ -83,7 +116,7 @@ export default function HomeSearch() {
             value={query}
             onChange={(e) => handleInput(e.target.value)}
             onFocus={() =>
-              (suggestions.length > 0 || isAddressOrZipInput(query)) && setShowSuggestions(true)
+              (suggestions.length > 0 || isAddressLikeForDropdown(query)) && setShowSuggestions(true)
             }
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             placeholder="Search by community name, city, or address..."
@@ -147,7 +180,7 @@ export default function HomeSearch() {
                 ))
               ) : (
                 <div style={{ padding: "12px 16px", fontSize: "13px", color: "#888", minHeight: "44px" }}>
-                  {isAddressOrZipInput(query)
+                  {isAddressLikeForDropdown(query)
                     ? "No matching addresses. Try another street or ZIP."
                     : "No matching communities yet. Try a different name."}
                 </div>

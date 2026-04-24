@@ -1,5 +1,6 @@
 "use client"
 import SuggestCommunityForm from "@/app/components/SuggestCommunityForm"
+import { fetchMapboxAddressSuggestions } from "@/lib/mapbox-address-suggestions"
 import { supabase } from "@/lib/supabase"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
@@ -391,11 +392,26 @@ export default function SearchPage() {
 
   async function fetchSuggestions(q: string) {
     if (q.length < 2) { setSuggestions([]); setShowSuggestions(false); return }
-    const res = await fetch("/api/address-search?q=" + encodeURIComponent(q))
+    const t = q.trim()
+    if (/^\d{5}(-\d{4})?$/.test(t)) {
+      const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
+      const data = await res.json()
+      const list = data.suggestions || []
+      setSuggestions(list)
+      setShowSuggestions(true)
+      return
+    }
+    if (/^\d/.test(t)) {
+      const list = await fetchMapboxAddressSuggestions(t)
+      setSuggestions(list)
+      setShowSuggestions(true)
+      return
+    }
+    const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
     const data = await res.json()
     const list = data.suggestions || []
     setSuggestions(list)
-    setShowSuggestions(list.length > 0 || isAddressOrZipQuery(q))
+    setShowSuggestions(list.length > 0)
   }
 
   function handleCityFilter(city: string) {
@@ -466,6 +482,15 @@ export default function SearchPage() {
     }
     if (isAddressOrZipQuery(t)) {
       setSearching(true)
+      if (/^\d/.test(t)) {
+        const mapboxList = await fetchMapboxAddressSuggestions(t)
+        const first = mapboxList.find((s) => s.postcode)
+        if (first?.postcode) {
+          router.push("/search?zip=" + encodeURIComponent(first.postcode))
+          setSearching(false)
+          return
+        }
+      }
       const res = await fetch("/api/address-search?q=" + encodeURIComponent(query))
       const data = await res.json()
       const first = (data.suggestions || [])[0]
