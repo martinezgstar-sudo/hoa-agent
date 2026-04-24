@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "analyze-cama": "ts-node scripts/analyze-cama.ts",
+    "match-subdivisions": "ts-node scripts/match-subdivisions.ts",
+    "update-subdivision-names": "ts-node scripts/update-subdivision-names.ts",
+    "research-subdivisions": "ts-node scripts/research-subdivisions.ts",
+    "match-cordata": "ts-node scripts/match-cordata.ts",
+    "ingest-communities": "ts-node scripts/ingest-communities.ts",
+    "extract-communities": "ts-node scripts/extract-communities.ts",
+    "ingest-new-communities": "ts-node scripts/ingest-new-communities.ts",
+    "extract-sales": "ts-node scripts/extract-sales.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.101.1",
@@ -21,9 +30,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "csv-parse": "^6.1.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.6.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "fast-levenshtein": "^3.0.0",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

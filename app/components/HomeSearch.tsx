@@ -7,7 +7,6 @@ export default function HomeSearch() {
   const [query, setQuery] = useState("")
   const [suggestions, setSuggestions] = useState<any[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [searching, setSearching] = useState(false)
   const debounceRef = useRef<any>(null)
 
   async function fetchSuggestions(q: string) {
@@ -26,47 +25,17 @@ export default function HomeSearch() {
 
   async function handleSuggestionClick(s: any) {
     setShowSuggestions(false)
-    if (s.type === "community") {
-      router.push("/community/" + s.slug)
-      return
-    }
-    // Address — go to search page with lookup
-    setSearching(true)
-    const params = new URLSearchParams({ streetName: s.streetName || "", neighborhood: s.neighborhood || "", locality: s.locality || "", city: s.city || "" })
-    const res = await fetch("/api/address-lookup?" + params.toString())
-    const data = await res.json()
-    setSearching(false)
-    if (data.match) {
-      router.push("/community/" + data.match.slug)
-    } else {
-      router.push("/search?address=" + encodeURIComponent(s.label) + "&result=" + encodeURIComponent(JSON.stringify(data)))
-    }
+    if (s.type === "community") router.push("/community/" + s.slug)
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setShowSuggestions(false)
     const isAddress = /^\d/.test(query.trim())
     if (isAddress) {
-      setSearching(true)
-      const res = await fetch("/api/address-search?q=" + encodeURIComponent(query))
-      const data = await res.json()
-      if (data.suggestions && data.suggestions.length > 0) {
-        const s = data.suggestions[0]
-        const res2 = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
-        const data2 = await res2.json()
-        setSearching(false)
-        if (data2.match) {
-          router.push("/community/" + data2.match.slug)
-          return
-        }
-        const encoded = encodeURIComponent(JSON.stringify(data2))
-        router.push("/search?address=" + encodeURIComponent(query) + "&result=" + encoded)
-        return
-      }
-      setSearching(false)
-      router.push("/search?address=" + encodeURIComponent(query) + "&result=" + encodeURIComponent(JSON.stringify({match:null})))
+      await fetchSuggestions(query)
+      setShowSuggestions(true)
     } else {
+      setShowSuggestions(false)
       router.push("/search?q=" + encodeURIComponent(query))
     }
   }
@@ -84,25 +53,40 @@ export default function HomeSearch() {
             placeholder="Search by community name, city, or address..."
             style={{width:"100%",border:"none",outline:"none",fontSize:"16px",color:"#1a1a1a",backgroundColor:"transparent",WebkitTextFillColor:"#1a1a1a",opacity:1}}
           />
-          {showSuggestions && suggestions.length > 0 && (
+          {showSuggestions && (
             <div style={{position:"absolute",top:"calc(100% + 12px)",left:"-16px",right:"-6px",backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 4px 12px rgba(0,0,0,0.1)",zIndex:100,overflow:"hidden"}}>
-              {suggestions.map((s: any, i: number) => (
-                <div
-                  key={i}
-                  onMouseDown={() => handleSuggestionClick(s)}
-                  style={{padding:"10px 16px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1?"1px solid #f0f0f0":"none",display:"flex",alignItems:"center",gap:"8px",textAlign:"left"}}
-                >
-                  <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="address"?"#E1F5EE":"#EEF2FF",color:s.type==="address"?"#1B2B6B":"#4338CA",flexShrink:0}}>
-                    {s.type === "address" ? "Address" : "HOA"}
-                  </span>
-                  {s.label}
+              {suggestions.length > 0 ? (
+                suggestions.map((s: any, i: number) => (
+                  <div
+                    key={i}
+                    onMouseDown={() => handleSuggestionClick(s)}
+                    style={{padding:"12px 16px",minHeight:"44px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1?"1px solid #f0f0f0":"none",display:"flex",alignItems:"center",gap:"8px",textAlign:"left"}}
+                  >
+                    <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="address"?"#E1F5EE":"#EEF2FF",color:s.type==="address"?"#1B2B6B":"#4338CA",flexShrink:0}}>
+                      {s.type === "address" ? "Address" : "HOA"}
+                    </span>
+                    {s.label}
+                  </div>
+                ))
+              ) : (
+                <div style={{padding:"12px 16px",fontSize:"13px",color:"#888",minHeight:"44px"}}>
+                  No associations found for this ZIP yet.
                 </div>
-              ))}
+              )}
+              <div style={{padding:"10px 16px",borderTop:"1px solid #f0f0f0",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
+                Not seeing your association?
+              </div>
+              <a
+                href="/search"
+                style={{display:"block",padding:"12px 16px",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}
+              >
+                + Submit your association
+              </a>
             </div>
           )}
         </div>
         <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap"}}>
-          {searching ? "Searching..." : "Search"}
+          Search
         </button>
       </form>
     </div>

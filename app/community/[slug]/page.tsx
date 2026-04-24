@@ -3,7 +3,6 @@ import CommentForm from '@/app/components/CommentForm'
 import { notFound } from 'next/navigation'
 import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
-import ManagementModal from '@/app/components/ManagementModal'
 import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -103,12 +102,6 @@ function getCompletenessScore(community: Community) {
   return { filled, total: fields.length, pct: Math.round((filled / fields.length) * 100) }
 }
 
-function getCompletenessLabel(pct: number) {
-  if (pct >= 80) return { label: 'Complete', color: '#1D9E75', bg: '#E1F5EE' }
-  if (pct >= 50) return { label: 'Partial', color: '#EF9F27', bg: '#FAEEDA' }
-  return { label: 'Incomplete', color: '#E24B4A', bg: '#FEE9E9' }
-}
-
 export default async function CommunityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const community = await getCommunity(slug)
@@ -123,7 +116,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     .limit(10)
 
   const completeness = getCompletenessScore(community)
-  const completenessLabel = getCompletenessLabel(completeness.pct)
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
 
   const cityForSearch = community.city_verified ? community.city : null
@@ -195,7 +187,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{display: 'flex', gap: '12px', alignItems: 'center'}}>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
           <a href="/reports" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Reports</a>
-          <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '6px 12px', borderRadius: '6px', whiteSpace: 'nowrap', textDecoration: 'none'}}>Share your HOA</a>
+          <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '6px 12px', borderRadius: '6px', whiteSpace: 'nowrap', textDecoration: 'none'}}>Share your association</a>
         </div>
       </nav>
 
@@ -211,50 +203,60 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <span style={{color: '#1a1a1a', fontWeight: '500'}}>{community.canonical_name}</span>
         </div>
 
-        {/* SUB-HOA MASTER BANNER */}
-        {community.is_sub_hoa && masterHoa && (
-          <div style={{backgroundColor: '#FAEEDA', border: '1px solid #EF9F27', borderRadius: '10px', padding: '14px 18px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
+        {/* MASTER HOA BANNER */}
+        {community.master_hoa_id && (
+          <div style={{backgroundColor: '#E1F5EE', border: '1px solid #1D9E75', borderRadius: '10px', padding: '12px 14px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             <div>
-              <div style={{fontSize: '12px', fontWeight: '600', color: '#854F0B', marginBottom: '3px', textTransform: 'uppercase', letterSpacing: '0.05em'}}>Sub-community</div>
-              <div style={{fontSize: '13px', color: '#633806', lineHeight: '1.5'}}>
-                This community is part of <strong>{masterHoa.canonical_name}</strong>. A master HOA fee may apply in addition to this community fee. Always verify total fees with both associations before purchasing.
+              <div style={{fontSize: '12px', fontWeight: '600', color: '#1D9E75', marginBottom: '3px', textTransform: 'uppercase', letterSpacing: '0.05em'}}>Master association</div>
+              <div style={{fontSize: '13px', color: '#1B2B6B', lineHeight: '1.5'}}>
+                This community is linked to a master association. Verify both association fee structures before purchasing.
               </div>
             </div>
-            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', backgroundColor: '#EF9F27', color: '#fff', padding: '7px 14px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0}}>
+            {masterHoa?.slug && (
+            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '7px 14px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0}}>
               View master HOA →
             </a>
+            )}
           </div>
         )}
 
         {/* HEADER CARD */}
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px'}}>
-            <div>
-              <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: '0 0 6px 0'}}>{community.canonical_name}</h1>
+            <div style={{flex: 1, minWidth: '220px'}}>
+              {community.is_sub_hoa && (
+                <div style={{display:'inline-block',fontSize:'10px',padding:'2px 8px',borderRadius:'999px',backgroundColor:'#FAEEDA',color:'#854F0B',marginBottom:'6px',maxWidth:'100%'}}>Sub-association</div>
+              )}
+              <div style={{display:'flex',alignItems:'center',gap:'8px',flexWrap:'wrap',marginBottom:'6px'}}>
+                <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name}</h1>
+                {String(community.entity_status || '').toLowerCase() === 'active' && (
+                  <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#1D9E75',fontWeight:600}}>
+                    <span style={{width:'6px',height:'6px',backgroundColor:'#1D9E75',borderRadius:'999px'}}></span>
+                    Active
+                  </span>
+                )}
+              </div>
               <div style={{fontSize: '13px', color: '#888', marginBottom: '12px'}}>
                 {community.city}, FL{community.zip_code ? ' ' + community.zip_code : ''} · {community.county} County
               </div>
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
              {community.property_type && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E6F1FB', color: '#0C447C'}}>{community.property_type}</span>}
-                <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>{community.entity_status || 'Active'} entity</span>
                 {community.unit_count && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#555'}}>{community.unit_count} units</span>}
                 {subCommunities && subCommunities.length > 0 && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>}
                 {community.is_sub_hoa && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>Sub-community</span>}
               </div>
+              <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'12px'}}>
+                <a href="/search" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',border:'1px solid #d9d9d9',textDecoration:'none',color:'#444'}}>Browse</a>
+                <a href="/reports" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',border:'1px solid #d9d9d9',textDecoration:'none',color:'#444'}}>Reports</a>
+                <a href="/search" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',backgroundColor:'#1D9E75',textDecoration:'none',color:'#fff'}}>Share your association</a>
+              </div>
             </div>
-            <div style={{textAlign: 'right', minWidth: '130px'}}>
-              <div style={{fontSize: '11px', color: '#888', marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px'}}>
-                Profile completeness
-                <span title="Based on how many fields in this profile are verified vs missing. More resident data raises this score." style={{width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#f0f0f0', color: '#888', fontSize: '9px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'help', flexShrink: 0}}>?</span>
+            <div style={{textAlign: 'right', minWidth: '130px', width:'100%', maxWidth:'220px'}}>
+              <div style={{fontSize:'18px',color:'#EF9F27',lineHeight:'1.2'}}>
+                {'★'.repeat(Math.round(community.review_avg || 0)).padEnd(5, '☆')}
               </div>
-              <div style={{display: 'inline-block', padding: '5px 12px', borderRadius: '20px', backgroundColor: completenessLabel.bg, color: completenessLabel.color, fontSize: '12px', fontWeight: '600', marginBottom: '6px'}}>
-                {completenessLabel.label}
-              </div>
-              <div style={{backgroundColor: '#f0f0f0', borderRadius: '4px', height: '5px', overflow: 'hidden', marginBottom: '4px'}}>
-                <div style={{width: completeness.pct + '%', height: '100%', backgroundColor: completenessLabel.color, borderRadius: '4px'}}></div>
-              </div>
-              <div style={{fontSize: '10px', color: '#aaa'}}>{completeness.filled} of {completeness.total} fields complete</div>
-              <div style={{fontSize: '10px', color: '#aaa', marginTop: '2px'}}>Fee reliability: {community.confidence_score || 1}/5</div>
+              <div style={{fontSize:'12px',color:'#666'}}>{community.review_count || 0} reviews</div>
+              <a href="#leave-review" style={{fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{community.review_count || 0} reviews</a>
             </div>
           </div>
         </div>
@@ -266,12 +268,11 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
         )}
 
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '12px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
           {[
             {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src: 'public record'},
             {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted'},
             {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident'},
-            {val: community.management_company || 'Not listed', label: 'Management', src: 'public record'},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center'}}>
               <div style={{fontSize: '13px', fontWeight: '500', color: stat.val === 'Not listed' || stat.val === 'Unknown' ? '#aaa' : '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
@@ -300,7 +301,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Fee reports</div>
             </div>
           </div>
-          <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the HOA directly.</div>
+          <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the association directly.</div>
         </div>
 
         {community.assessment_signal_count > 0 && (
@@ -314,21 +315,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         )}
 
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
-          <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Management company</div>
-          {community.management_company ? (
-            <>
-              <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>{community.management_company}</div>
-              <div style={{fontSize: '12px', color: '#1D9E75', marginTop: '2px'}}>Public record verified</div>
-            </>
-          ) : (
-            <>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <div style={{fontSize: '14px', color: '#aaa'}}>Not on record</div>
-                <ManagementModal communityId={community.id} communityName={community.canonical_name} />
-              </div>
-              <div style={{fontSize: '11px', color: '#aaa', marginTop: '6px'}}>Management company is one of the most searched fields. Your info helps other residents.</div>
-            </>
-          )}
+          <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Association details</div>
+          <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}><span style={{color:'#888',fontSize:'12px'}}>Property type</span><span style={{color:'#1a1a1a',fontSize:'13px'}}>{community.property_type || 'Unknown'}</span></div>
+            <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}><span style={{color:'#888',fontSize:'12px'}}>Units</span><span style={{color:'#1a1a1a',fontSize:'13px'}}>{community.unit_count || 'Unknown'}</span></div>
+            <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+              <span style={{color:'#888',fontSize:'12px'}}>Management company</span>
+              <span style={{color:'#1a1a1a',fontSize:'13px',maxWidth:'60%',textAlign:'right'}}>{community.management_company || 'Not listed'}</span>
+            </div>
+          </div>
         </div>
 
         {amenitiesList.length > 0 && (
@@ -420,26 +415,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         )}
 
-        <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
-          <div>
-            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the full HOA Agent report</div>
-            <div style={{fontSize: '12px', color: '#1B2B6B'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
-          </div>
-          <ReportModal />
-        </div>
-
-        <div style={{backgroundColor: '#1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
-          <div style={{fontSize: '15px', fontWeight: '500', color: '#fff', marginBottom: '6px'}}>
-            Do you live in {community.canonical_name}?
-          </div>
-          <div style={{fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginBottom: '14px', lineHeight: '1.6'}}>
-            This profile is {completeness.pct}% complete. Residents who add missing info help buyers, renters, and neighbors make better decisions. It takes 2 minutes.
-          </div>
-          <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
-            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Leave a review</a>
-            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: 'rgba(255,255,255,0.12)', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Add missing info</a>
-          </div>
-        </div>
 
         {comments && comments.length > 0 && (
           <div style={{backgroundColor:'#fff',border:'1px solid #e5e5e5',borderRadius:'12px',padding:'20px 24px',marginBottom:'12px'}}>
@@ -476,6 +451,27 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div id={commentFormId}>
           <CommentForm communityId={community.id} />
+        </div>
+
+        <div style={{backgroundColor: '#1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+          <div style={{fontSize: '15px', fontWeight: '500', color: '#fff', marginBottom: '6px'}}>
+            Do you live in {community.canonical_name}?
+          </div>
+          <div style={{fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginBottom: '14px', lineHeight: '1.6'}}>
+            This profile is {completeness.pct}% complete. Residents who add missing info help buyers, renters, and neighbors make better decisions. It takes 2 minutes.
+          </div>
+          <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
+            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Leave a review</a>
+            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: 'rgba(255,255,255,0.12)', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Add missing info</a>
+          </div>
+        </div>
+
+        <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
+          <div>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1B2B6B', marginBottom: '4px'}}>Get the full HOA Agent report</div>
+            <div style={{fontSize: '12px', color: '#1B2B6B'}}>Fee trend PDF · Full source trail · All assessment signals · Restriction detail · Management history</div>
+          </div>
+          <ReportModal />
         </div>
 
         <div style={{backgroundColor: '#f9f9f9', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '14px 20px', marginBottom: '12px', fontSize: '12px', color: '#888', lineHeight: '1.6'}}>
@@ -525,10 +521,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </div>
       )}
 
-      <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '20px'}}>
-        <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
-        <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
+      <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 16px', textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '20px', lineHeight:'1.6'}}>
+        <div>© {new Date().getFullYear()} HOA Agent LLC · All rights reserved · hoa-agent.com</div>
       </footer>
     </main>
   )

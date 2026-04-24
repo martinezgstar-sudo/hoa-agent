@@ -17,7 +17,8 @@ export async function GET(request: NextRequest) {
     try {
       const res = await fetch(url)
       const data = await res.json()
-      const suggestions = (data.features || []).map((f: any) => {
+      const features = (data.features || [])
+      const addressSuggestions = features.map((f: any) => {
         const [lng, lat] = f.center
         const context = f.context || []
         const neighborhood = context.find((c: any) => c.id.startsWith('neighborhood'))?.text || ''
@@ -37,7 +38,23 @@ export async function GET(request: NextRequest) {
           type: 'address'
         }
       })
-      return NextResponse.json({ suggestions })
+      const topPostcode = addressSuggestions.find((s: any) => s.postcode)?.postcode
+      if (!topPostcode) return NextResponse.json({ suggestions: [] })
+
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      const commRes = await fetch(
+        `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city,zip_code&zip_code=eq.${encodeURIComponent(topPostcode)}&limit=8`,
+        { headers: { apikey: supabaseKey!, Authorization: `Bearer ${supabaseKey}` } },
+      )
+      const commData = await commRes.json()
+      const suggestions = (Array.isArray(commData) ? commData : []).map((c: any) => ({
+        label: `${c.canonical_name} — ${c.city}`,
+        slug: c.slug,
+        zip_code: c.zip_code,
+        type: 'community'
+      }))
+      return NextResponse.json({ suggestions, postcode: topPostcode })
     } catch {
       return NextResponse.json({ suggestions: [] })
     }
