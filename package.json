@@ -18,8 +18,10 @@
     "extract-sales": "ts-node scripts/extract-sales.ts"
   },
   "dependencies": {
+    "@mapbox/search-js-react": "^1.5.1",
     "@supabase/supabase-js": "^2.101.1",
     "@vercel/analytics": "^2.0.1",
+    "mapbox-gl": "^3.22.0",
     "next": "16.2.2",
     "playwright": "^1.59.1",
     "react": "19.2.4",

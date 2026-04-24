@@ -1,9 +1,15 @@
 "use client"
 import SuggestCommunityForm from "@/app/components/SuggestCommunityForm"
-import { fetchMapboxAddressSuggestions } from "@/lib/mapbox-address-suggestions"
+import type { SearchBoxRetrieveResponse } from "@mapbox/search-js-core"
 import { supabase } from "@/lib/supabase"
-import { useState, useEffect, useRef } from "react"
+import dynamic from "next/dynamic"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+
+const SearchBox = dynamic(
+  () => import("@mapbox/search-js-react").then((m) => m.SearchBox),
+  { ssr: false },
+)
 
 function isAddressOrZipQuery(val: string) {
   const t = val.trim()
@@ -297,8 +303,6 @@ export default function SearchPage() {
   const router = useRouter()
   const [query, setQuery] = useState("")
   const [communities, setCommunities] = useState<any[]>([])
-  const [suggestions, setSuggestions] = useState<any[]>([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
   const [showSuggestForm, setShowSuggestForm] = useState(false)
   const [loading, setLoading] = useState(false)
   const [addressResult, setAddressResult] = useState<any>(null)
@@ -312,7 +316,7 @@ export default function SearchPage() {
   const [filterHasReviews, setFilterHasReviews] = useState("")
   const [filterManagement, setFilterManagement] = useState("")
   const [filterHoaType, setFilterHoaType] = useState("")
-  const debounceRef = useRef<any>(null)
+  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
   const [zipMode, setZipMode] = useState<string | null>(null)
   const [zipCommunities, setZipCommunities] = useState<any[]>([])
   const [zipLoading, setZipLoading] = useState(false)
@@ -390,35 +394,6 @@ export default function SearchPage() {
     setLoading(false)
   }
 
-  async function fetchSuggestions(q: string) {
-    if (q.length < 2) { setSuggestions([]); setShowSuggestions(false); return }
-    const t = q.trim()
-    if (/^\d{5}(-\d{4})?$/.test(t)) {
-      const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
-      const data = await res.json()
-      const list = data.suggestions || []
-      setSuggestions(list)
-      setShowSuggestions(true)
-      return
-    }
-    if (/^\d/.test(t)) {
-      if (t.length < 4) {
-        setSuggestions([])
-        setShowSuggestions(false)
-        return
-      }
-      const list = await fetchMapboxAddressSuggestions(t)
-      setSuggestions(list)
-      setShowSuggestions(true)
-      return
-    }
-    const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
-    const data = await res.json()
-    const list = data.suggestions || []
-    setSuggestions(list)
-    setShowSuggestions(list.length > 0)
-  }
-
   function handleCityFilter(city: string) {
     const newCity = selectedCity === city ? "" : city
     setSelectedCity(newCity)
@@ -445,40 +420,21 @@ export default function SearchPage() {
     fetchCommunities(query, { city: "", property_type: "", pets: "", str: "", fee_range: "", has_reviews: "", management: "", hoa_type: "" })
   }
 
-  function handleInput(val: string) {
+  function handleSearchBoxChange(val: string) {
     setQuery(val)
     setAddressResult(null)
-    clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => fetchSuggestions(val), 300)
   }
 
-  async function handleSuggestionClick(s: any) {
-    setShowSuggestions(false)
-    if (s.type === "community") {
-      router.push("/community/" + s.slug)
-      return
-    }
-    if ((s.type === "address" || s.type === "zip") && s.postcode) {
-      router.push("/search?zip=" + encodeURIComponent(s.postcode))
-      return
-    }
-    setSearching(true)
-    setQuery(s.label)
-    const params = new URLSearchParams({
-      streetName: s.streetName || "",
-      neighborhood: s.neighborhood || "",
-      locality: s.locality || "",
-      city: s.city || "",
-    })
-    const res = await fetch("/api/address-lookup?" + params.toString())
-    const data = await res.json()
-    setAddressResult(data)
-    setSearching(false)
+  function handleSearchBoxRetrieve(res: SearchBoxRetrieveResponse) {
+    const feature = res.features[0]
+    if (!feature?.properties) return
+    const postcode = feature.properties.context?.postcode?.name
+    const zip5 = postcode ? String(postcode).match(/\b(\d{5})\b/)?.[1] : ""
+    if (zip5) router.push("/search?zip=" + encodeURIComponent(zip5))
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setShowSuggestions(false)
     const t = query.trim()
     const zipOnly = t.match(/^(\d{5})(?:-\d{4})?$/)
     if (zipOnly) {
@@ -487,25 +443,17 @@ export default function SearchPage() {
     }
     if (isAddressOrZipQuery(t)) {
       setSearching(true)
-      if (/^\d/.test(t)) {
-        const mapboxList = await fetchMapboxAddressSuggestions(t)
-        const first = mapboxList.find((s) => s.postcode)
-        if (first?.postcode) {
-          router.push("/search?zip=" + encodeURIComponent(first.postcode))
-          setSearching(false)
-          return
-        }
-      }
       const res = await fetch("/api/address-search?q=" + encodeURIComponent(query))
       const data = await res.json()
-      const first = (data.suggestions || [])[0]
-      if (first?.postcode) {
-        router.push("/search?zip=" + encodeURIComponent(first.postcode))
+      const list = data.suggestions || []
+      const firstCommunity = list.find((s: any) => s.type === "community")
+      if (firstCommunity?.slug) {
+        router.push("/community/" + firstCommunity.slug)
         setSearching(false)
         return
       }
-      if (data.suggestions && data.suggestions.length > 0) {
-        const s = data.suggestions[0]
+      if (list.length > 0) {
+        const s = list[0]
         const res2 = await fetch("/api/address-lookup?pcn=" + (s.pcn || "") + "&streetName=" + encodeURIComponent(s.streetName || "") + "&city=" + encodeURIComponent(s.city || ""))
         const data2 = await res2.json()
         setAddressResult(data2)
@@ -559,56 +507,54 @@ export default function SearchPage() {
               ? "Published associations in this ZIP code, sorted by unit count."
               : "Search by community name, city, management company — or enter a property address"}
           </p>
-          <form onSubmit={handleSubmit} style={{position:"relative"}}>
-            <div style={{display:"flex",gap:"8px"}}>
-              <div style={{position:"relative",flex:1}}>
-                <input
-                  type="text"
-                  value={query}
-                  onChange={e => handleInput(e.target.value)}
-                  onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
-                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                  placeholder="Community name, city, or 123 Main St..."
-                  style={{width:"100%",border:"1.5px solid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
-                />
-                {showSuggestions && (suggestions.length > 0 || isAddressOrZipQuery(query)) && (
-                  <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 4px 12px rgba(0,0,0,0.1)",zIndex:100,marginTop:"4px",overflow:"hidden"}}>
-                    {suggestions.length > 0 ? (
-                      suggestions.map((s: any, i: number) => (
-                        <div key={i} onMouseDown={() => handleSuggestionClick(s)}
-                          style={{padding:"12px 16px",minHeight:"44px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1 ? "1px solid #f0f0f0" : "none",display:"flex",alignItems:"center",gap:"8px"}}>
-                          <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="community"?"#EEF2FF":"#E1F5EE",color:s.type==="community"?"#4338CA":"#1B2B6B",flexShrink:0}}>
-                            {s.type === "community" ? "Association" : s.type === "zip" ? "ZIP" : "Address"}
-                          </span>
-                          <span style={{wordBreak:"break-word"}}>{s.label}</span>
-                        </div>
-                      ))
-                    ) : (
-                      <div style={{padding:"12px 16px",fontSize:"13px",color:"#888",minHeight:"44px"}}>
-                        No matching addresses. Try another street or ZIP.
-                      </div>
-                    )}
-                    {isAddressOrZipQuery(query) && (
-                      <>
-                        <div style={{padding:"10px 16px",borderTop:"1px solid #f0f0f0",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
-                          Not seeing your association?
-                        </div>
-                        <a href="/search" style={{display:"block",padding:"12px 16px",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
-                          + Submit your association
-                        </a>
-                      </>
-                    )}
-                  </div>
+          <form onSubmit={handleSubmit} style={{position:"relative",width:"100%"}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"8px",alignItems:"stretch",width:"100%"}}>
+              <div style={{flex:"1 1 220px",minWidth:0}}>
+                {mapboxToken ? (
+                  <SearchBox
+                    accessToken={mapboxToken}
+                    options={{
+                      country: "US",
+                      proximity: { lng: -80.1918, lat: 26.7153 },
+                      language: "en",
+                      types: "address",
+                      limit: 6,
+                    }}
+                    value={query}
+                    onChange={handleSearchBoxChange}
+                    onRetrieve={handleSearchBoxRetrieve}
+                    placeholder="Community name, city, or address..."
+                    theme={{
+                      variables: {
+                        fontFamily: "inherit",
+                        borderRadius: "8px",
+                      },
+                    }}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => handleSearchBoxChange(e.target.value)}
+                    placeholder="Community name, city, or ZIP..."
+                    style={{width:"100%",border:"1.5px solid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
+                  />
                 )}
               </div>
-              <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap"}}>
+              <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap",minHeight:"44px"}}>
                 {searching ? "Searching..." : "Search"}
               </button>
               <button type="button" onClick={() => setShowFilters(!showFilters)}
-                style={{fontSize:"13px",padding:"10px 14px",borderRadius:"10px",backgroundColor:showFilters||activeFilterCount>0?"#1B2B6B":"#fff",color:showFilters||activeFilterCount>0?"#fff":"#555",border:"1px solid "+(showFilters||activeFilterCount>0?"#1B2B6B":"#e0e0e0"),cursor:"pointer",whiteSpace:"nowrap",fontWeight:"500"}}>
+                style={{fontSize:"13px",padding:"10px 14px",borderRadius:"10px",backgroundColor:showFilters||activeFilterCount>0?"#1B2B6B":"#fff",color:showFilters||activeFilterCount>0?"#fff":"#555",border:"1px solid "+(showFilters||activeFilterCount>0?"#1B2B6B":"#e0e0e0"),cursor:"pointer",whiteSpace:"nowrap",fontWeight:"500",minHeight:"44px"}}>
                 Filters{activeFilterCount > 0 ? " (" + activeFilterCount + ")" : ""}
               </button>
             </div>
+            <div style={{marginTop:"12px",paddingTop:"12px",borderTop:"1px solid #eee",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
+              Not seeing your association?
+            </div>
+            <a href="/search" style={{display:"block",padding:"10px 0",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
+              + Submit your association
+            </a>
           </form>
 
           {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#888",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
