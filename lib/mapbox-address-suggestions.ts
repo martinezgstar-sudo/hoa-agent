@@ -15,10 +15,10 @@ export type MapboxAddressSuggestion = {
 
 function featureToSuggestion(f: any): MapboxAddressSuggestion {
   const context = f.context || []
-  const locality = context.find((c) => c.id?.startsWith('locality'))?.text || ''
-  const place = context.find((c) => c.id?.startsWith('place'))?.text || ''
+  const locality = context.find((c: any) => c.id?.startsWith('locality'))?.text || ''
+  const place = context.find((c: any) => c.id?.startsWith('place'))?.text || ''
   const postcodeCtx = context.find(
-    (c) => typeof c.id === 'string' && c.id.startsWith('postcode'),
+    (c: any) => typeof c.id === 'string' && c.id.startsWith('postcode'),
   )
   const postcodeMatch = (postcodeCtx?.text || '').trim().match(/\b(\d{5})\b/)
   const postcode = postcodeMatch ? postcodeMatch[1] : ''
