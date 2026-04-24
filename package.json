@@ -15,7 +15,9 @@
     "ingest-communities": "ts-node scripts/ingest-communities.ts",
     "extract-communities": "ts-node scripts/extract-communities.ts",
     "ingest-new-communities": "ts-node scripts/ingest-new-communities.ts",
-    "extract-sales": "ts-node scripts/extract-sales.ts"
+    "extract-sales": "ts-node scripts/extract-sales.ts",
+    "enrich-zip-codes": "ts-node scripts/enrich-zip-codes.ts",
+    "fix-unit-counts": "ts-node scripts/fix-unit-counts.ts"
   },
   "dependencies": {
     "@mapbox/search-js-react": "^1.5.1",

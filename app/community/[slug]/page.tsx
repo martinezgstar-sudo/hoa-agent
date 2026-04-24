@@ -180,11 +180,11 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           }]
         } : {})
       })}} />
-      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', height: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', minHeight: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <a href="/" style={{display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'}}>
           <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
         </a>
-        <div style={{display: 'flex', gap: '12px', alignItems: 'center'}}>
+        <div style={{display: 'flex', gap: '24px', alignItems: 'center'}}>
           <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
           <a href="/reports" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Reports</a>
           <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '6px 12px', borderRadius: '6px', whiteSpace: 'nowrap', textDecoration: 'none'}}>Share your association</a>
@@ -203,17 +203,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <span style={{color: '#1a1a1a', fontWeight: '500'}}>{community.canonical_name}</span>
         </div>
 
-        {/* MASTER HOA BANNER */}
+        {/* MASTER HOA BANNER — slim bar, no card chrome */}
         {community.master_hoa_id && (
-          <div style={{backgroundColor: '#E1F5EE', border: '1px solid #1D9E75', borderRadius: '10px', padding: '12px 14px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
-            <div>
-              <div style={{fontSize: '12px', fontWeight: '600', color: '#1D9E75', marginBottom: '3px', textTransform: 'uppercase', letterSpacing: '0.05em'}}>Master association</div>
-              <div style={{fontSize: '13px', color: '#1B2B6B', lineHeight: '1.5'}}>
-                This community is linked to a master association. Verify both association fee structures before purchasing.
-              </div>
+          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', borderTop: '1px solid #b8e5d4', borderBottom: '1px solid #b8e5d4', borderRadius: 0, padding: '8px 12px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
+            <div style={{fontSize: '12px', color: '#1B2B6B', lineHeight: '1.45'}}>
+              <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Master association.</span>
+              Verify both association fee structures before purchasing.
             </div>
             {masterHoa?.slug && (
-            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '7px 14px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0}}>
+            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', color: '#1D9E75', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', whiteSpace: 'nowrap', flexShrink: 0}}>
               View master HOA →
             </a>
             )}
@@ -245,18 +243,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 {subCommunities && subCommunities.length > 0 && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>}
                 {community.is_sub_hoa && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>Sub-community</span>}
               </div>
-              <div style={{display:'flex',gap:'8px',flexWrap:'wrap',marginTop:'12px'}}>
-                <a href="/search" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',border:'1px solid #d9d9d9',textDecoration:'none',color:'#444'}}>Browse</a>
-                <a href="/reports" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',border:'1px solid #d9d9d9',textDecoration:'none',color:'#444'}}>Reports</a>
-                <a href="/search" style={{fontSize:'12px',padding:'8px 12px',borderRadius:'6px',backgroundColor:'#1D9E75',textDecoration:'none',color:'#fff'}}>Share your association</a>
-              </div>
             </div>
             <div style={{textAlign: 'right', minWidth: '130px', width:'100%', maxWidth:'220px'}}>
               <div style={{fontSize:'18px',color:'#EF9F27',lineHeight:'1.2'}}>
                 {'★'.repeat(Math.round(community.review_avg || 0)).padEnd(5, '☆')}
               </div>
-              <div style={{fontSize:'12px',color:'#666'}}>{community.review_count || 0} reviews</div>
-              <a href="#leave-review" style={{fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{community.review_count || 0} reviews</a>
+              <a href="#leave-review" style={{display: 'inline-block', marginTop: '4px', fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{community.review_count || 0} reviews</a>
             </div>
           </div>
         </div>
