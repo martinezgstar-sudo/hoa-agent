@@ -1,7 +1,7 @@
 /**
  * Client-side Mapbox Geocoding (browser only — URL-restricted tokens).
  */
-const MAPBOX_BBOX = '-80.9,26.3,-80.0,26.97'
+const MAPBOX_PROXIMITY = '-80.1918,26.7153'
 
 export type MapboxAddressSuggestion = {
   label: string
@@ -37,13 +37,13 @@ function featureToSuggestion(f: any): MapboxAddressSuggestion {
 export async function fetchMapboxAddressSuggestions(query: string): Promise<MapboxAddressSuggestion[]> {
   const q = query.trim()
   const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
-  if (!token || q.length < 2) return []
+  if (!token || q.length < 4) return []
 
   const url =
     `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
     `?country=US` +
-    `&bbox=${MAPBOX_BBOX}` +
     `&types=address` +
+    `&proximity=${MAPBOX_PROXIMITY}` +
     `&limit=6` +
     `&access_token=${encodeURIComponent(token)}`
 

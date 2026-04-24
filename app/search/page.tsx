@@ -402,6 +402,11 @@ export default function SearchPage() {
       return
     }
     if (/^\d/.test(t)) {
+      if (t.length < 4) {
+        setSuggestions([])
+        setShowSuggestions(false)
+        return
+      }
       const list = await fetchMapboxAddressSuggestions(t)
       setSuggestions(list)
       setShowSuggestions(true)

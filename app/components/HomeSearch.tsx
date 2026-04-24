@@ -26,11 +26,6 @@ export default function HomeSearch() {
 
   async function fetchSuggestions(q: string) {
     const t = q.trim()
-    if (t.length < 3) {
-      setSuggestions([])
-      setShowSuggestions(false)
-      return
-    }
 
     if (isPureZipInput(t)) {
       const res = await fetch("/api/address-search?q=" + encodeURIComponent(t))
@@ -42,9 +37,20 @@ export default function HomeSearch() {
     }
 
     if (startsWithDigit(t)) {
+      if (t.length < 4) {
+        setSuggestions([])
+        setShowSuggestions(false)
+        return
+      }
       const list = await fetchMapboxAddressSuggestions(t)
       setSuggestions(list)
       setShowSuggestions(true)
+      return
+    }
+
+    if (t.length < 3) {
+      setSuggestions([])
+      setShowSuggestions(false)
       return
     }
 
