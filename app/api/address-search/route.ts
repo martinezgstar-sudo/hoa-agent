@@ -1,27 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-function normalizeZip5(text: string) {
-  const m = text.trim().match(/\b(\d{5})\b/)
-  return m ? m[1] : ''
+const BBOX = '-80.9,26.3,-80.0,26.97'
+
+function directZipMatch(q: string) {
+  return q.trim().match(/^(\d{5})(?:-\d{4})?$/)
 }
 
-function isLikelyStreetAddress(input: string) {
-  const q = input.trim()
-  if (/^\d{5}(-\d{4})?$/.test(q)) return false
-  return /\d/.test(q) && /[a-zA-Z]/.test(q)
-}
-
-function mapboxFeatureToSuggestion(f: any) {
+function mapboxFeatureToAddressSuggestion(f: any) {
   const context = f.context || []
+  const locality = context.find((c: any) => c.id?.startsWith('locality'))?.text || ''
+  const place = context.find((c: any) => c.id?.startsWith('place'))?.text || ''
   const postcodeCtx = context.find(
     (c: any) => typeof c.id === 'string' && c.id.startsWith('postcode'),
   )
-  const postcode = normalizeZip5(postcodeCtx?.text || '') || normalizeZip5(f.properties?.address || '')
+  const postcodeMatch = (postcodeCtx?.text || '').trim().match(/\b(\d{5})\b/)
+  const postcode = postcodeMatch ? postcodeMatch[1] : ''
+  const [lng, lat] = Array.isArray(f.center) ? f.center : [0, 0]
   return {
-    type: 'address' as const,
     label: f.place_name as string,
-    place_name: f.place_name as string,
+    address: f.place_name as string,
+    city: locality || place,
     postcode,
+    lat,
+    lng,
+    type: 'address' as const,
   }
 }
 
@@ -29,22 +31,13 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const q = (searchParams.get('q') || '').trim()
 
-  if (q === 'debug') {
-    return NextResponse.json({
-      hasMapboxToken: !!process.env.MAPBOX_TOKEN,
-      hasNextPublicToken: !!process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
-      tokenPrefix: (process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'none').substring(0, 15),
-    })
-  }
-
   if (q.length < 2) {
     return NextResponse.json({ suggestions: [] })
   }
 
-  // Direct 5-digit (or ZIP+4) — skip geocoding; client redirects to /search?zip=
-  const directZip = q.trim().match(/^(\d{5})(?:-\d{4})?$/)
-  if (directZip) {
-    const zip = directZip[1]
+  const zipMatch = directZipMatch(q)
+  if (zipMatch) {
+    const zip = zipMatch[1]
     return NextResponse.json({
       suggestions: [
         {
@@ -58,49 +51,40 @@ export async function GET(request: NextRequest) {
     })
   }
 
-  if (isLikelyStreetAddress(q)) {
-    if (q.length < 3) {
+  if (/^\d/.test(q)) {
+    const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+    if (!token) {
       return NextResponse.json({ suggestions: [] })
     }
-    const token =
-      process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
-    if (!token) {
-      return NextResponse.json({ suggestions: [], error: 'no_token' })
-    }
 
-    const proximity = '-80.1918,26.7153'
     const mapboxUrl =
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
-      `?access_token=${encodeURIComponent(token)}` +
-      `&autocomplete=true` +
-      `&country=US` +
+      `?country=US` +
+      `&bbox=${BBOX}` +
       `&types=address` +
-      `&proximity=${proximity}` +
-      `&limit=5`
+      `&limit=6` +
+      `&access_token=${encodeURIComponent(token)}`
 
     try {
       const res = await fetch(mapboxUrl)
       if (!res.ok) {
-        console.warn('[address-search] Mapbox HTTP', res.status, await res.text().catch(() => ''))
         return NextResponse.json({ suggestions: [] })
       }
       const data = await res.json()
       const features = Array.isArray(data.features) ? data.features : []
-      const suggestions = features.map(mapboxFeatureToSuggestion)
-      console.log('[address-search] Mapbox address suggestions', q, suggestions.length)
+      const suggestions = features.map(mapboxFeatureToAddressSuggestion)
       return NextResponse.json({ suggestions })
-    } catch (e) {
-      console.warn('[address-search] Mapbox fetch error', e)
+    } catch {
       return NextResponse.json({ suggestions: [] })
     }
   }
 
-  // Community name search
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!supabaseUrl || !supabaseKey) {
     return NextResponse.json({ suggestions: [] })
   }
+
   const ilikePattern = encodeURIComponent(`*${q}*`)
   const res = await fetch(
     `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city&canonical_name=ilike.${ilikePattern}&limit=6`,
