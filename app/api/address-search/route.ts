@@ -1,61 +1,86 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+function normalizeZip(input: string) {
+  const match = input.trim().match(/\b(\d{5})(?:-\d{4})?\b/)
+  return match ? match[1] : ''
+}
+
+function isLikelyAddress(input: string) {
+  const q = input.trim()
+  if (normalizeZip(q)) return true
+  return /\d/.test(q) && /[a-zA-Z]/.test(q)
+}
+
+async function fetchCommunitiesByZip(zip: string) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!supabaseUrl || !supabaseKey) {
+    console.log('[address-search] Missing Supabase env vars')
+    return []
+  }
+
+  const query = `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city,zip_code,unit_count&zip_code=eq.${encodeURIComponent(zip)}&order=unit_count.desc.nullslast&limit=10`
+  const commRes = await fetch(query, {
+    headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+  })
+
+  if (!commRes.ok) {
+    console.log('[address-search] Supabase query failed', commRes.status, zip)
+    return []
+  }
+
+  const commData = await commRes.json()
+  const suggestions = (Array.isArray(commData) ? commData : []).map((c: any) => ({
+    label: `${c.canonical_name} — ${c.city}`,
+    slug: c.slug,
+    zip_code: c.zip_code,
+    unit_count: c.unit_count || null,
+    type: 'community',
+  }))
+  console.log('[address-search] communities for zip', zip, suggestions.length)
+  return suggestions
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
-  const q = searchParams.get('q') || ''
+  const q = (searchParams.get('q') || '').trim()
 
-  if (q.length < 2) return NextResponse.json({ suggestions: [] })
+  console.log('[address-search] query received', q)
+  if (q.length < 3) return NextResponse.json({ suggestions: [] })
 
-  const isAddress = /^\d/.test(q)
+  const zip = normalizeZip(q)
+  if (zip) {
+    console.log('[address-search] direct ZIP path', zip)
+    const suggestions = await fetchCommunitiesByZip(zip)
+    return NextResponse.json({ suggestions, postcode: zip })
+  }
 
-  if (isAddress) {
-    const token = process.env.MAPBOX_TOKEN
-    // Bounding box for Palm Beach County
-    const bbox = '-80.9,26.3,-80.0,26.97'
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json?country=US&bbox=${bbox}&types=address&limit=6&access_token=${token}`
+  const looksAddressLike = isLikelyAddress(q)
+  console.log('[address-search] looksAddressLike', looksAddressLike)
+  if (looksAddressLike) {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&addressdetails=1&limit=5&countrycodes=us`
 
     try {
-      const res = await fetch(url)
-      const data = await res.json()
-      const features = (data.features || [])
-      const addressSuggestions = features.map((f: any) => {
-        const [lng, lat] = f.center
-        const context = f.context || []
-        const neighborhood = context.find((c: any) => c.id.startsWith('neighborhood'))?.text || ''
-        const locality = context.find((c: any) => c.id.startsWith('locality'))?.text || ''
-        const place = context.find((c: any) => c.id.startsWith('place'))?.text || ''
-        const postcode = context.find((c: any) => c.id.startsWith('postcode'))?.text || ''
-        return {
-          label: f.place_name,
-          address: f.place_name,
-          streetName: f.text,
-          neighborhood,
-          locality,
-          city: locality || place,
-          postcode,
-          lat,
-          lng,
-          type: 'address'
-        }
+      console.log('[address-search] geocoding with Nominatim')
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'hoa-agent/1.0 (address search)',
+          Accept: 'application/json',
+        },
       })
-      const topPostcode = addressSuggestions.find((s: any) => s.postcode)?.postcode
+      if (!res.ok) {
+        console.log('[address-search] Nominatim request failed', res.status)
+        return NextResponse.json({ suggestions: [] })
+      }
+      const data = await res.json()
+      const entries = Array.isArray(data) ? data : []
+      console.log('[address-search] Nominatim results', entries.length)
+      const topPostcode = normalizeZip(entries.find((e: any) => e?.address?.postcode)?.address?.postcode || '')
       if (!topPostcode) return NextResponse.json({ suggestions: [] })
-
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-      const commRes = await fetch(
-        `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city,zip_code&zip_code=eq.${encodeURIComponent(topPostcode)}&limit=8`,
-        { headers: { apikey: supabaseKey!, Authorization: `Bearer ${supabaseKey}` } },
-      )
-      const commData = await commRes.json()
-      const suggestions = (Array.isArray(commData) ? commData : []).map((c: any) => ({
-        label: `${c.canonical_name} — ${c.city}`,
-        slug: c.slug,
-        zip_code: c.zip_code,
-        type: 'community'
-      }))
+      const suggestions = await fetchCommunitiesByZip(topPostcode)
       return NextResponse.json({ suggestions, postcode: topPostcode })
-    } catch {
+    } catch (err) {
+      console.log('[address-search] address path error', err)
       return NextResponse.json({ suggestions: [] })
     }
   }
@@ -63,6 +88,10 @@ export async function GET(request: NextRequest) {
   // Community name search
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!supabaseUrl || !supabaseKey) {
+    console.log('[address-search] Missing Supabase env vars for name search')
+    return NextResponse.json({ suggestions: [] })
+  }
   const res = await fetch(
     `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city&canonical_name=ilike.*${q}*&limit=6`,
     { headers: { apikey: supabaseKey!, Authorization: `Bearer ${supabaseKey}` } }

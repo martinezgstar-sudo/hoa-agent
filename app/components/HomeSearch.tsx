@@ -2,6 +2,12 @@
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 
+function isAddressLike(value: string) {
+  const q = value.trim()
+  if (/^\d{5}$/.test(q)) return true
+  return /\d/.test(q) && /[a-zA-Z]/.test(q)
+}
+
 export default function HomeSearch() {
   const router = useRouter()
   const [query, setQuery] = useState("")
@@ -10,11 +16,11 @@ export default function HomeSearch() {
   const debounceRef = useRef<any>(null)
 
   async function fetchSuggestions(q: string) {
-    if (q.length < 2) { setSuggestions([]); setShowSuggestions(false); return }
+    if (q.trim().length < 3) { setSuggestions([]); setShowSuggestions(false); return }
     const res = await fetch("/api/address-search?q=" + encodeURIComponent(q))
     const data = await res.json()
     setSuggestions(data.suggestions || [])
-    setShowSuggestions((data.suggestions || []).length > 0)
+    setShowSuggestions(isAddressLike(q) || (data.suggestions || []).length > 0)
   }
 
   function handleInput(val: string) {
@@ -30,7 +36,7 @@ export default function HomeSearch() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const isAddress = /^\d/.test(query.trim())
+    const isAddress = isAddressLike(query)
     if (isAddress) {
       await fetchSuggestions(query)
       setShowSuggestions(true)
@@ -48,7 +54,7 @@ export default function HomeSearch() {
             type="text"
             value={query}
             onChange={e => handleInput(e.target.value)}
-            onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+            onFocus={() => (suggestions.length > 0 || isAddressLike(query)) && setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             placeholder="Search by community name, city, or address..."
             style={{width:"100%",border:"none",outline:"none",fontSize:"16px",color:"#1a1a1a",backgroundColor:"transparent",WebkitTextFillColor:"#1a1a1a",opacity:1}}
@@ -63,7 +69,7 @@ export default function HomeSearch() {
                     style={{padding:"12px 16px",minHeight:"44px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1?"1px solid #f0f0f0":"none",display:"flex",alignItems:"center",gap:"8px",textAlign:"left"}}
                   >
                     <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="address"?"#E1F5EE":"#EEF2FF",color:s.type==="address"?"#1B2B6B":"#4338CA",flexShrink:0}}>
-                      {s.type === "address" ? "Address" : "HOA"}
+                      {s.type === "address" ? "Address" : "Association"}
                     </span>
                     {s.label}
                   </div>
