@@ -1,7 +1,14 @@
 "use client"
 import SuggestCommunityForm from "@/app/components/SuggestCommunityForm"
+import { supabase } from "@/lib/supabase"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
+
+function isAddressOrZipQuery(val: string) {
+  const t = val.trim()
+  if (/^\d{5}(-\d{4})?$/.test(t)) return true
+  return /\d/.test(t) && /[a-zA-Z]/.test(t)
+}
 
 function getConfidenceLabel(score: number) {
   if (score >= 3) return { label: "High", color: "#1D9E75", bg: "#E1F5EE", stars: "★★★" }
@@ -305,14 +312,46 @@ export default function SearchPage() {
   const [filterManagement, setFilterManagement] = useState("")
   const [filterHoaType, setFilterHoaType] = useState("")
   const debounceRef = useRef<any>(null)
+  const [zipMode, setZipMode] = useState<string | null>(null)
+  const [zipCommunities, setZipCommunities] = useState<any[]>([])
+  const [zipLoading, setZipLoading] = useState(false)
 
   const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement, filterHoaType].filter(Boolean).length
 
+  async function loadZipCommunities(zip: string) {
+    setZipLoading(true)
+    setZipCommunities([])
+    const { data, error } = await supabase
+      .from("communities")
+      .select(
+        "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg",
+      )
+      .eq("status", "published")
+      .eq("zip_code", zip)
+      .order("unit_count", { ascending: false, nullsFirst: false })
+    if (error) {
+      console.warn("[search] zip communities error", error)
+      setZipCommunities([])
+    } else {
+      setZipCommunities(data || [])
+    }
+    setZipLoading(false)
+  }
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
+    const zipRaw = (params.get("zip") || "").trim()
+    const zipMatch = zipRaw.match(/^(\d{5})(?:-\d{4})?$/)
     const q = params.get("q") || ""
     const address = params.get("address") || ""
     const result = params.get("result") || ""
+    if (zipMatch) {
+      const zip = zipMatch[1]
+      setZipMode(zip)
+      setAddressResult(null)
+      loadZipCommunities(zip)
+      return
+    }
     if (address) {
       setQuery(address)
       if (result) {
@@ -354,8 +393,9 @@ export default function SearchPage() {
     if (q.length < 2) { setSuggestions([]); setShowSuggestions(false); return }
     const res = await fetch("/api/address-search?q=" + encodeURIComponent(q))
     const data = await res.json()
-    setSuggestions(data.suggestions || [])
-    setShowSuggestions((data.suggestions || []).length > 0)
+    const list = data.suggestions || []
+    setSuggestions(list)
+    setShowSuggestions(list.length > 0 || isAddressOrZipQuery(q))
   }
 
   function handleCityFilter(city: string) {
@@ -397,6 +437,10 @@ export default function SearchPage() {
       router.push("/community/" + s.slug)
       return
     }
+    if ((s.type === "address" || s.type === "zip") && s.postcode) {
+      router.push("/search?zip=" + encodeURIComponent(s.postcode))
+      return
+    }
     setSearching(true)
     setQuery(s.label)
     const params = new URLSearchParams({
@@ -414,14 +458,25 @@ export default function SearchPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setShowSuggestions(false)
-    const isAddress = /^\d/.test(query.trim())
-    if (isAddress) {
+    const t = query.trim()
+    const zipOnly = t.match(/^(\d{5})(?:-\d{4})?$/)
+    if (zipOnly) {
+      router.push("/search?zip=" + encodeURIComponent(zipOnly[1]))
+      return
+    }
+    if (isAddressOrZipQuery(t)) {
       setSearching(true)
       const res = await fetch("/api/address-search?q=" + encodeURIComponent(query))
       const data = await res.json()
+      const first = (data.suggestions || [])[0]
+      if (first?.postcode) {
+        router.push("/search?zip=" + encodeURIComponent(first.postcode))
+        setSearching(false)
+        return
+      }
       if (data.suggestions && data.suggestions.length > 0) {
         const s = data.suggestions[0]
-        const res2 = await fetch("/api/address-lookup?pcn=" + s.pcn + "&streetName=" + encodeURIComponent(s.streetName) + "&city=" + encodeURIComponent(s.city))
+        const res2 = await fetch("/api/address-lookup?pcn=" + (s.pcn || "") + "&streetName=" + encodeURIComponent(s.streetName || "") + "&city=" + encodeURIComponent(s.city || ""))
         const data2 = await res2.json()
         setAddressResult(data2)
       } else {
@@ -442,7 +497,7 @@ export default function SearchPage() {
     }
   }
 
-  const isAddress = /^\d/.test(query.trim())
+  const isAddress = isAddressOrZipQuery(query.trim())
 
   const FilterBtn = ({ value, current, onClick, label }: { value: string, current: string, onClick: () => void, label: string }) => (
     <button type="button" onClick={onClick}
@@ -466,8 +521,14 @@ export default function SearchPage() {
 
       <div style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"24px 32px"}}>
         <div style={{maxWidth:"720px",margin:"0 auto"}}>
-          <h1 style={{fontSize:"22px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Search HOA communities</h1>
-          <p style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>Search by community name, city, management company — or enter a property address</p>
+          <h1 style={{fontSize:"22px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>
+            {zipMode ? `Associations in ZIP ${zipMode}` : "Search HOA communities"}
+          </h1>
+          <p style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>
+            {zipMode
+              ? "Published associations in this ZIP code, sorted by unit count."
+              : "Search by community name, city, management company — or enter a property address"}
+          </p>
           <form onSubmit={handleSubmit} style={{position:"relative"}}>
             <div style={{display:"flex",gap:"8px"}}>
               <div style={{position:"relative",flex:1}}>
@@ -478,19 +539,35 @@ export default function SearchPage() {
                   onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   placeholder="Community name, city, or 123 Main St..."
-                  style={{width:"100%",border:"1.5psolid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
+                  style={{width:"100%",border:"1.5px solid #1B2B6B",borderRadius:"10px",padding:"10px 16px",fontSize:"14px",outline:"none",boxSizing:"border-box"}}
                 />
-                {showSuggestions && suggestions.length > 0 && (
+                {showSuggestions && (suggestions.length > 0 || isAddressOrZipQuery(query)) && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 4px 12px rgba(0,0,0,0.1)",zIndex:100,marginTop:"4px",overflow:"hidden"}}>
-                    {suggestions.map((s: any, i: number) => (
-                      <div key={i} onMouseDown={() => handleSuggestionClick(s)}
-                        style={{padding:"10px 16px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1 ? "1px solid #f0f0f0" : "none",display:"flex",alignItems:"center",gap:"8px"}}>
-                        <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="address"?"#E1F5EE":"#EEF2FF",color:s.type==="address"?"#1B2B6B":"#4338CA",flexShrink:0}}>
-                          {s.type === "address" ? "Address" : "HOA"}
-                        </span>
-                        {s.label}
+                    {suggestions.length > 0 ? (
+                      suggestions.map((s: any, i: number) => (
+                        <div key={i} onMouseDown={() => handleSuggestionClick(s)}
+                          style={{padding:"12px 16px",minHeight:"44px",cursor:"pointer",fontSize:"13px",borderBottom:i < suggestions.length-1 ? "1px solid #f0f0f0" : "none",display:"flex",alignItems:"center",gap:"8px"}}>
+                          <span style={{fontSize:"11px",padding:"2px 6px",borderRadius:"4px",backgroundColor:s.type==="community"?"#EEF2FF":"#E1F5EE",color:s.type==="community"?"#4338CA":"#1B2B6B",flexShrink:0}}>
+                            {s.type === "community" ? "Association" : s.type === "zip" ? "ZIP" : "Address"}
+                          </span>
+                          <span style={{wordBreak:"break-word"}}>{s.label}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <div style={{padding:"12px 16px",fontSize:"13px",color:"#888",minHeight:"44px"}}>
+                        No matching addresses. Try another street or ZIP.
                       </div>
-                    ))}
+                    )}
+                    {isAddressOrZipQuery(query) && (
+                      <>
+                        <div style={{padding:"10px 16px",borderTop:"1px solid #f0f0f0",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
+                          Not seeing your association?
+                        </div>
+                        <a href="/search" style={{display:"block",padding:"12px 16px",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
+                          + Submit your association
+                        </a>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -506,7 +583,7 @@ export default function SearchPage() {
 
           {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#888",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
 
-          {!isAddress && (
+          {!isAddress && !zipMode && (
             <div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginTop:"12px"}}>
               {["Boynton Beach","Boca Raton","Delray Beach","West Palm Beach","Lake Worth","Wellington","Jupiter","Greenacres"].map((city) => (
                 <button key={city} onClick={() => handleCityFilter(city)}
@@ -612,7 +689,52 @@ export default function SearchPage() {
       </div>
 
       <div style={{maxWidth:"720px",margin:"0 auto",padding:"20px 32px"}}>
-        {addressResult && (
+        {zipMode && (
+          <div style={{marginBottom:"24px"}}>
+            {zipLoading && (
+              <div style={{fontSize:"14px",color:"#888",padding:"16px 0"}}>Loading associations…</div>
+            )}
+            {!zipLoading && zipCommunities.length === 0 && (
+              <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center",color:"#666",fontSize:"14px"}}>
+                No published associations found for ZIP {zipMode}.
+              </div>
+            )}
+            {!zipLoading && zipCommunities.map((c: any) => (
+              <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none",display:"block",marginBottom:"10px"}}>
+                <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
+                  <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{c.canonical_name}</div>
+                  <div style={{fontSize:"13px",color:"#888"}}>
+                    {c.city}
+                    {c.unit_count != null ? ` · ${c.unit_count} units` : ""}
+                    {c.property_type ? ` · ${c.property_type}` : ""}
+                  </div>
+                </div>
+              </a>
+            ))}
+            <div style={{marginTop:"20px",textAlign:"center"}}>
+              <a
+                href="/search"
+                style={{
+                  display:"inline-block",
+                  width:"100%",
+                  maxWidth:"400px",
+                  padding:"14px 20px",
+                  borderRadius:"10px",
+                  backgroundColor:"#1D9E75",
+                  color:"#fff",
+                  fontSize:"15px",
+                  fontWeight:600,
+                  textDecoration:"none",
+                  boxSizing:"border-box",
+                }}
+              >
+                + Submit your association
+              </a>
+            </div>
+          </div>
+        )}
+
+        {!zipMode && addressResult && (
           <div style={{marginBottom:"24px"}}>
             {addressResult.match ? (
               <div>
@@ -654,7 +776,7 @@ export default function SearchPage() {
           </div>
         )}
 
-        {!addressResult && (
+        {!zipMode && !addressResult && (
           <>
             <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>{loading ? "Searching..." : communities.length + " communities found in Palm Beach County"}</div>
             {communities.length === 0 && !loading && query && (
