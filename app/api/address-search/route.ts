@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-/** Prefer public token name; allow MAPBOX_TOKEN on server for same value per deploy docs */
-function getMapboxToken() {
-  return process.env.NEXT_PUBLIC_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN || ''
-}
-
 function normalizeZip5(text: string) {
   const m = text.trim().match(/\b(\d{5})\b/)
   return m ? m[1] : ''
@@ -34,6 +29,14 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const q = (searchParams.get('q') || '').trim()
 
+  if (q === 'debug') {
+    return NextResponse.json({
+      hasMapboxToken: !!process.env.MAPBOX_TOKEN,
+      hasNextPublicToken: !!process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+      tokenPrefix: (process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'none').substring(0, 15),
+    })
+  }
+
   if (q.length < 2) {
     return NextResponse.json({ suggestions: [] })
   }
@@ -59,10 +62,10 @@ export async function GET(request: NextRequest) {
     if (q.length < 3) {
       return NextResponse.json({ suggestions: [] })
     }
-    const token = getMapboxToken()
+    const token =
+      process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
     if (!token) {
-      console.warn('[address-search] Missing NEXT_PUBLIC_MAPBOX_TOKEN (or MAPBOX_TOKEN)')
-      return NextResponse.json({ suggestions: [], error: 'missing_mapbox_token' })
+      return NextResponse.json({ suggestions: [], error: 'no_token' })
     }
 
     const proximity = '-80.1918,26.7153'
