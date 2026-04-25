@@ -2,9 +2,9 @@
 import { useState } from "react"
 
 export default function CommentForm({ communityId }: { communityId: string }) {
+  const [isOpen, setIsOpen] = useState(false)
   const [step, setStep] = useState(1)
   const [rating, setRating] = useState(0)
-  const [hovered, setHovered] = useState(0)
   const [comment, setComment] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -85,6 +85,24 @@ export default function CommentForm({ communityId }: { communityId: string }) {
     )
   }
 
+  if (!isOpen) {
+    return (
+      <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px 24px",marginBottom:"12px"}}>
+        <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"6px"}}>Share your HOA experience</div>
+        <div style={{fontSize:"12px",color:"#888",marginBottom:"14px",lineHeight:"1.6"}}>
+          Add your fee, rules, management experience, or review to help future residents.
+        </div>
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"10px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:"600"}}
+        >
+          Open share form
+        </button>
+      </div>
+    )
+  }
+
   const SelectBtn = ({value, current, onClick, label}: {value:string, current:string, onClick:()=>void, label:string}) => (
     <button type="button" onClick={onClick}
       style={{padding:"8px 14px",borderRadius:"8px",border:"1.5px solid " + (current===value?"#1B2B6B":"#e0e0e0"),backgroundColor:current===value?"#1B2B6B":"#fff",color:current===value?"#fff":"#555",cursor:"pointer",fontSize:"13px",fontWeight:current===value?"600":"400"}}>
@@ -111,6 +129,13 @@ export default function CommentForm({ communityId }: { communityId: string }) {
     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px"}}>
       <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Share your HOA experience</div>
       <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Your identity is protected. Anonymous submissions are fully supported. We never share your information with the HOA, managemt company, or any third party.</div>
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            style={{fontSize:"12px",color:"#777",background:"transparent",border:"none",padding:0,marginBottom:"16px",cursor:"pointer",textDecoration:"underline"}}
+          >
+            Hide form
+          </button>
 
       <div style={{display:"flex",gap:"8px",marginBottom:"24px"}}>
         {[1,2,3].map(s => (

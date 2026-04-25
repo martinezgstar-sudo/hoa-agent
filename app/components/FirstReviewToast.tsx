@@ -80,12 +80,12 @@ export default function FirstReviewToast({
   }, [communityId])
 
   const scrollToReview = useCallback(() => {
-    const el = document.getElementById(reviewSectionId)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    } else {
-      window.location.hash = reviewSectionId
-    }
+    setVisible(false)
+    requestAnimationFrame(() => {
+      document.getElementById(reviewSectionId || 'leave-review')?.scrollIntoView({
+        behavior: 'smooth',
+      })
+    })
   }, [reviewSectionId])
 
   if (!visible) return null
