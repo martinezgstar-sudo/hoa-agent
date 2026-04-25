@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 const sessionKey = (communityId: string) =>
   `hoa-agent:first-review-toast-skip-session:${communityId}`
@@ -88,9 +89,9 @@ export default function FirstReviewToast({
     })
   }, [reviewSectionId])
 
-  if (!visible) return null
+  if (!visible || typeof document === 'undefined') return null
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -105,6 +106,8 @@ export default function FirstReviewToast({
         alignItems: 'center',
         justifyContent: 'center',
         padding: isVerySmallScreen ? '0' : '16px',
+        width: '100vw',
+        height: '100dvh',
       }}
     >
       <div
@@ -207,6 +210,7 @@ export default function FirstReviewToast({
           Skip for now
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

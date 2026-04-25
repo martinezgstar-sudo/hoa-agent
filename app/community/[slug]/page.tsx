@@ -116,7 +116,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     .order('created_at', { ascending: false })
     .limit(10)
 
-  const completeness = getCompletenessScore(community)
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
 
   const cityForSearch = community.city_verified ? community.city : null
@@ -444,19 +443,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div id={commentFormId}>
           <CommentForm communityId={community.id} />
-        </div>
-
-        <div style={{backgroundColor: '#1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
-          <div style={{fontSize: '15px', fontWeight: '500', color: '#fff', marginBottom: '6px'}}>
-            Do you live in {community.canonical_name}?
-          </div>
-          <div style={{fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginBottom: '14px', lineHeight: '1.6'}}>
-            This profile is {completeness.pct}% complete. Residents who add missing info help buyers, renters, and neighbors make better decisions. It takes 2 minutes.
-          </div>
-          <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap'}}>
-            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Leave a review</a>
-            <a href={'#' + commentFormId} style={{fontSize: '12px', backgroundColor: 'rgba(255,255,255,0.12)', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', whiteSpace: 'nowrap'}}>Add missing info</a>
-          </div>
         </div>
 
         <div style={{backgroundColor: '#E1F5EE', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
