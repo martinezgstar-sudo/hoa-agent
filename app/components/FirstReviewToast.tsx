@@ -2,52 +2,77 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-const storageKey = (communityId: string) =>
-  `hoa-agent:first-review-toast-dismissed:${communityId}`
+const sessionKey = (communityId: string) =>
+  `hoa-agent:first-review-toast-skip-session:${communityId}`
 
 type Props = {
   communityId: string
   /** Anchor id of the review form section */
   reviewSectionId?: string
+  monthlyFeeMin: number | null
+  managementCompany: string | null
+  reviewCount: number | null
+  assessmentSignalCount: number | null
 }
 
 export default function FirstReviewToast({
   communityId,
   reviewSectionId = 'leave-review',
+  monthlyFeeMin,
+  managementCompany,
+  reviewCount,
+  assessmentSignalCount,
 }: Props) {
   const [visible, setVisible] = useState(false)
+  const [isVerySmallScreen, setIsVerySmallScreen] = useState(false)
+
+  const hasAnyCommunityData =
+    (monthlyFeeMin ?? 0) > 0 ||
+    Boolean(String(managementCompany ?? '').trim()) ||
+    (reviewCount ?? 0) > 0 ||
+    (assessmentSignalCount ?? 0) > 0
 
   useEffect(() => {
+    if (hasAnyCommunityData) return
+
     let cancelled = false
-    let timer: ReturnType<typeof setTimeout> | undefined
-
-    const schedule = () => {
+    const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+      if (cancelled) return
       try {
-        if (localStorage.getItem(storageKey(communityId))) return
+        if (sessionStorage.getItem(sessionKey(communityId))) return
       } catch {
-        /* private mode etc. */
+        /* ignore */
       }
-      timer = setTimeout(() => {
-        if (cancelled) return
-        try {
-          if (localStorage.getItem(storageKey(communityId))) return
-        } catch {
-          /* ignore */
-        }
-        setVisible(true)
-      }, 3000)
-    }
+      setVisible(true)
+    }, 3000)
 
-    schedule()
     return () => {
       cancelled = true
-      if (timer) clearTimeout(timer)
+      clearTimeout(timer)
     }
-  }, [communityId])
+  }, [communityId, hasAnyCommunityData])
+
+  useEffect(() => {
+    const updateScreenSize = () => {
+      setIsVerySmallScreen(window.innerWidth < 400)
+    }
+    updateScreenSize()
+    window.addEventListener('resize', updateScreenSize)
+    return () => window.removeEventListener('resize', updateScreenSize)
+  }, [])
+
+  useEffect(() => {
+    if (!visible) return
+    const onKeyDown = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') setVisible(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [visible])
 
   const dismiss = useCallback(() => {
     try {
-      localStorage.setItem(storageKey(communityId), '1')
+      sessionStorage.setItem(sessionKey(communityId), '1')
     } catch {
       /* ignore */
     }
@@ -68,27 +93,35 @@ export default function FirstReviewToast({
   return (
     <div
       role="dialog"
+      aria-modal="true"
       aria-labelledby="first-review-toast-title"
+      onClick={dismiss}
       style={{
         position: 'fixed',
-        zIndex: 60,
-        right: 'max(16px, env(safe-area-inset-right))',
-        bottom: 'max(16px, env(safe-area-inset-bottom))',
-        left: 'auto',
-        maxWidth: 'min(320px, calc(100vw - 32px))',
-        width: 'calc(100vw - 32px)',
-        boxSizing: 'border-box',
+        inset: 0,
+        zIndex: 9999,
+        backgroundColor: 'rgba(0, 0, 0, 0.48)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: isVerySmallScreen ? '0' : '16px',
       }}
     >
       <div
+        onClick={(ev) => ev.stopPropagation()}
         style={{
           backgroundColor: '#fff',
-          borderRadius: '10px',
+          borderRadius: isVerySmallScreen ? '0' : '14px',
           border: '1px solid #e8e8e8',
           borderLeft: '4px solid #1D9E75',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
-          padding: '14px 40px 14px 14px',
+          boxShadow: '0 18px 40px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12)',
+          padding: '32px',
           position: 'relative',
+          width: isVerySmallScreen ? '100vw' : 'min(480px, 90vw)',
+          minHeight: isVerySmallScreen ? '100vh' : 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
       >
         <button
@@ -119,14 +152,18 @@ export default function FirstReviewToast({
           id="first-review-toast-title"
           style={{
             margin: '0 0 12px 0',
-            fontSize: '14px',
-            lineHeight: 1.45,
+            fontSize: '20px',
+            lineHeight: 1.3,
             color: '#1a1a1a',
-            fontWeight: 500,
+            fontWeight: 600,
             paddingRight: '4px',
           }}
         >
-          Be the first to share information about this association
+          Be the first to contribute to this association
+        </p>
+        <p style={{ margin: '0 0 20px 0', fontSize: '15px', lineHeight: 1.55, color: '#555' }}>
+          This association page has no information yet. Share what you know — HOA fees, rules,
+          management experience, or anything that would help future residents.
         </p>
         <button
           type="button"
@@ -142,8 +179,8 @@ export default function FirstReviewToast({
             color: '#fff',
             backgroundColor: '#1D9E75',
             border: 'none',
-            borderRadius: '8px',
-            padding: '10px 14px',
+            borderRadius: '10px',
+            padding: '14px 16px',
             cursor: 'pointer',
             textDecoration: 'none',
             width: '100%',
@@ -152,6 +189,22 @@ export default function FirstReviewToast({
           }}
         >
           Add your experience →
+        </button>
+        <button
+          type="button"
+          onClick={dismiss}
+          style={{
+            marginTop: '12px',
+            border: 'none',
+            background: 'transparent',
+            color: '#888',
+            fontSize: '14px',
+            cursor: 'pointer',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          Skip for now
         </button>
       </div>
     </div>

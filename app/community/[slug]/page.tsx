@@ -488,9 +488,14 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </div>
       </div>
 
-      {(community.review_count == null || Number(community.review_count) === 0) && (
-        <FirstReviewToast communityId={community.id} reviewSectionId={commentFormId} />
-      )}
+      <FirstReviewToast
+        communityId={community.id}
+        reviewSectionId={commentFormId}
+        monthlyFeeMin={community.monthly_fee_min ?? null}
+        managementCompany={community.management_company ?? null}
+        reviewCount={community.review_count ?? null}
+        assessmentSignalCount={community.assessment_signal_count ?? null}
+      />
 
       {relatedCommunities && relatedCommunities.length > 0 && (
         <div style={{maxWidth:'720px',margin:'0 auto',padding:'0 32px 32px'}}>
