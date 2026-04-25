@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
 import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
+import FirstReviewToast from '@/app/components/FirstReviewToast'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -65,7 +66,7 @@ interface Community {
   rental_approval: string
   assessment_signal_count: number
   amenities: string
-  review_count: number
+  review_count: number | null
   review_avg: number
   data_freshness_date: string
   city_verified?: boolean
@@ -486,6 +487,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         </div>
       </div>
+
+      {(community.review_count == null || Number(community.review_count) === 0) && (
+        <FirstReviewToast communityId={community.id} reviewSectionId={commentFormId} />
+      )}
 
       {relatedCommunities && relatedCommunities.length > 0 && (
         <div style={{maxWidth:'720px',margin:'0 auto',padding:'0 32px 32px'}}>
