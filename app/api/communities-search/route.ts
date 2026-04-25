@@ -15,7 +15,9 @@ export async function GET(request: NextRequest) {
 
   let dbQuery = supabase
     .from('communities')
-    .select('*')
+    .select(
+      'id, canonical_name, slug, city, city_verified, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, confidence_score, review_count, review_avg, assessment_signal_count, management_company, pet_restriction, is_sub_hoa'
+    )
     .eq('status', 'published')
     .order('confidence_score', { ascending: false })
     .limit(50)
