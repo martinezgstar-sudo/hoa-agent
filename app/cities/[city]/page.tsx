@@ -23,8 +23,9 @@ const CITY_DISPLAY: Record<string, string> = {
 }
 
 
-export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
-  const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
+  const { city: citySlug } = await params
+  const city = CITY_DISPLAY[citySlug] || citySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'City'
   return {
     title: `${city} HOA Communities — Fees, Reviews & Restrictions | HOA Agent`,
     description: `Browse HOA communities in ${city}. Find fees, restrictions, reviews and management company details for every homeowners association in ${city}, Palm Beach County.`,
@@ -32,15 +33,17 @@ export async function generateMetadata({ params }: { params: { city: string } })
   }
 }
 
-export default async function CityPage({ params }: { params: { city: string } }) {
+export default async function CityPage({ params }: { params: Promise<{ city: string }> }) {
+  const { city: citySlug } = await params
+
   console.log('[city] env check:', {
     hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
     hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-    city: params.city,
+    city: citySlug,
   })
 
   try {
-    const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    const city = CITY_DISPLAY[citySlug] || citySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'City'
 
     const serverSupabase = process.env.SUPABASE_SERVICE_ROLE_KEY
       ? createClient(
@@ -94,7 +97,7 @@ export default async function CityPage({ params }: { params: { city: string } })
           "@type": "CollectionPage",
           "name": `HOA Communities in ${city}`,
           "description": `Browse all HOA and condo communities in ${city}, Palm Beach County. Compare fees, restrictions and resident reviews.`,
-          "url": `https://hoa-agent.com/cities/${params.city}`,
+          "url": `https://hoa-agent.com/cities/${citySlug}`,
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -193,7 +196,7 @@ export default async function CityPage({ params }: { params: { city: string } })
     )
   } catch (error) {
     console.error('[city page] error:', error)
-    const fallbackCity = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    const fallbackCity = CITY_DISPLAY[citySlug] || citySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'City'
     return (
       <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
         <div style={{maxWidth:"720px",margin:"0 auto",padding:"48px 24px",textAlign:"center"}}>
