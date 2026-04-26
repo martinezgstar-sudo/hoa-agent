@@ -146,6 +146,38 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     .eq('status', 'published')
     .order('canonical_name', { ascending: true })
 
+  const encodedCity = encodeURIComponent(community.city || '')
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'HOA Agent',
+        item: 'https://www.hoa-agent.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Palm Beach County',
+        item: 'https://www.hoa-agent.com/florida/palm-beach-county',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: community.city,
+        item: `https://www.hoa-agent.com/search?city=${encodedCity}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: community.canonical_name,
+        item: `https://www.hoa-agent.com/community/${community.slug}`,
+      },
+    ],
+  }
+
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
@@ -178,6 +210,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           }]
         } : {})
       })}} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 32px', minHeight: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
         <a href="/" style={{display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none'}}>
           <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
