@@ -33,40 +33,48 @@ export async function generateMetadata({ params }: { params: { city: string } })
 }
 
 export default async function CityPage({ params }: { params: { city: string } }) {
-  const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+  console.log('[city] env check:', {
+    hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+    hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+    city: params.city,
+  })
 
-  // Use service role on the server when available to avoid anon/RLS failures.
-  const serverSupabase =
-    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
-      ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
+  try {
+    const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+
+    const serverSupabase = process.env.SUPABASE_SERVICE_ROLE_KEY
+      ? createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY
+        )
       : supabase
 
-  let communities: any[] = []
-  try {
-    const { data, error } = await serverSupabase
-      .from('communities')
-      .select('id,canonical_name,slug,city,monthly_fee_min,monthly_fee_max,property_type,review_count,review_avg,management_company,entity_status')
-      .ilike('city', `%${city}%`)
-      .eq('status', 'published')
-      .order('canonical_name', { ascending: true })
-      .limit(500)
+    let communities: any[] = []
+    try {
+      const { data, error } = await serverSupabase
+        .from('communities')
+        .select('id,canonical_name,slug,city,monthly_fee_min,monthly_fee_max,property_type,review_count,review_avg,management_company,entity_status')
+        .ilike('city', `%${city}%`)
+        .eq('status', 'published')
+        .order('canonical_name', { ascending: true })
+        .limit(500)
 
-    if (error) {
+      if (error) {
+        console.error('[city page] error:', error)
+        communities = []
+      } else {
+        communities = data || []
+      }
+    } catch (error) {
       console.error('[city page] error:', error)
       communities = []
-    } else {
-      communities = data || []
     }
-  } catch (error) {
-    console.error('[city page] error:', error)
-    communities = []
-  }
 
-  const total = communities.length
-  const withFees = communities.filter((c: any) => c.monthly_fee_min).length
-  const avgFee = communities.filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
+    const total = communities.length
+    const withFees = communities.filter((c: any) => c.monthly_fee_min).length
+    const avgFee = communities.filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
 
-  return (
+    return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 16px",height:"64px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
@@ -182,5 +190,24 @@ export default async function CityPage({ params }: { params: { city: string } })
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
       </footer>
     </main>
-  )
+    )
+  } catch (error) {
+    console.error('[city page] error:', error)
+    const fallbackCity = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    return (
+      <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
+        <div style={{maxWidth:"720px",margin:"0 auto",padding:"48px 24px",textAlign:"center"}}>
+          <h1 style={{fontSize:"26px",fontWeight:700,color:"#1B2B6B",marginBottom:"10px"}}>
+            HOA Communities in {fallbackCity}
+          </h1>
+          <p style={{fontSize:"14px",color:"#666",lineHeight:"1.6",marginBottom:"18px"}}>
+            We could not load city communities right now. Please try again in a moment.
+          </p>
+          <a href="/search" style={{display:"inline-block",padding:"10px 18px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:600}}>
+            Browse all communities
+          </a>
+        </div>
+      </main>
+    )
+  }
 }
