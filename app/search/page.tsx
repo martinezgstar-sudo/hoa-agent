@@ -316,6 +316,7 @@ export default function SearchPage() {
   const [filterHasReviews, setFilterHasReviews] = useState("")
   const [filterManagement, setFilterManagement] = useState("")
   const [filterHoaType, setFilterHoaType] = useState("")
+  const [sortBy, setSortBy] = useState<"units" | "az">("units")
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
   const [zipMode, setZipMode] = useState<string | null>(null)
   const [zipCommunities, setZipCommunities] = useState<any[]>([])
@@ -323,22 +324,29 @@ export default function SearchPage() {
 
   const activeFilterCount = [selectedCity, filterPropertyType, filterPets, filterStr, filterFeeRange, filterHasReviews, filterManagement, filterHoaType].filter(Boolean).length
 
-  async function loadZipCommunities(zip: string) {
+  async function loadZipCommunities(zip: string, sortOverride?: "units" | "az") {
     setZipLoading(true)
     setZipCommunities([])
-    const { data, error } = await supabase
+    const activeSort = sortOverride || sortBy
+    let zipQuery = supabase
       .from("communities")
       .select(
         "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg",
       )
       .eq("status", "published")
       .eq("zip_code", zip)
-      .order("unit_count", { ascending: false, nullsFirst: false })
-    if (error) {
-      console.warn("[search] zip communities error", error)
+    zipQuery =
+      activeSort === "az"
+        ? zipQuery.order("canonical_name", { ascending: true })
+        : zipQuery.order("unit_count", { ascending: false, nullsFirst: false })
+    const zipRes = await zipQuery
+    const zipData = zipRes.data
+    const zipError = zipRes.error
+    if (zipError) {
+      console.warn("[search] zip communities error", zipError)
       setZipCommunities([])
     } else {
-      setZipCommunities(data || [])
+      setZipCommunities(zipData || [])
     }
     setZipLoading(false)
   }
@@ -380,6 +388,7 @@ export default function SearchPage() {
     const hasReviews = overrides.has_reviews !== undefined ? overrides.has_reviews : filterHasReviews
     const management = overrides.management !== undefined ? overrides.management : filterManagement
     const hoaType = overrides.hoa_type !== undefined ? overrides.hoa_type : filterHoaType
+    const sort = overrides.sort !== undefined ? overrides.sort : sortBy
     if (city) params.set("city", city)
     if (propertyType) params.set("property_type", propertyType)
     if (pets) params.set("pets", pets)
@@ -388,6 +397,7 @@ export default function SearchPage() {
     if (hasReviews) params.set("has_reviews", hasReviews)
     if (management) params.set("management", management)
     if (hoaType) params.set("hoa_type", hoaType)
+    if (sort) params.set("sort", sort)
     const res = await fetch("/api/communities-search?" + params.toString())
     const data = await res.json()
     setCommunities(data.communities || [])
@@ -418,6 +428,18 @@ export default function SearchPage() {
     setFilterManagement("")
     setFilterHoaType("")
     fetchCommunities(query, { city: "", property_type: "", pets: "", str: "", fee_range: "", has_reviews: "", management: "", hoa_type: "" })
+  }
+
+  function handleSortChange(nextSort: "units" | "az") {
+    if (nextSort === sortBy) return
+    setSortBy(nextSort)
+    if (zipMode) {
+      loadZipCommunities(zipMode, nextSort)
+      return
+    }
+    if (!addressResult) {
+      fetchCommunities(query, { sort: nextSort })
+    }
   }
 
   function handleSearchBoxChange(val: string) {
@@ -548,6 +570,22 @@ export default function SearchPage() {
                 style={{fontSize:"13px",padding:"10px 14px",borderRadius:"10px",backgroundColor:showFilters||activeFilterCount>0?"#1B2B6B":"#fff",color:showFilters||activeFilterCount>0?"#fff":"#555",border:"1px solid "+(showFilters||activeFilterCount>0?"#1B2B6B":"#e0e0e0"),cursor:"pointer",whiteSpace:"nowrap",fontWeight:"500",minHeight:"44px"}}>
                 Filters{activeFilterCount > 0 ? " (" + activeFilterCount + ")" : ""}
               </button>
+              <div style={{display:"flex",border:"1px solid #e0e0e0",borderRadius:"10px",overflow:"hidden",minHeight:"44px"}}>
+                <button
+                  type="button"
+                  onClick={() => handleSortChange("units")}
+                  style={{fontSize:"12px",padding:"10px 12px",border:"none",backgroundColor:sortBy==="units"?"#1D9E75":"#fff",color:sortBy==="units"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="units"?"600":"500"}}
+                >
+                  Most units
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSortChange("az")}
+                  style={{fontSize:"12px",padding:"10px 12px",border:"none",borderLeft:"1px solid #e0e0e0",backgroundColor:sortBy==="az"?"#1D9E75":"#fff",color:sortBy==="az"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="az"?"600":"500"}}
+                >
+                  A to Z
+                </button>
+              </div>
             </div>
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:"1px solid #eee",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
               Not seeing your association?

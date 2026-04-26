@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
   const hasReviews = searchParams.get('has_reviews') || ''
   const management = searchParams.get('management') || ''
   const hoaType = searchParams.get('hoa_type') || ''
+  const sort = searchParams.get('sort') || 'units'
 
   let dbQuery = supabase
     .from('communities')
@@ -19,7 +20,6 @@ export async function GET(request: NextRequest) {
       'id, canonical_name, slug, city, city_verified, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, confidence_score, review_count, review_avg, assessment_signal_count, management_company, pet_restriction, is_sub_hoa'
     )
     .eq('status', 'published')
-    .order('confidence_score', { ascending: false })
     .limit(50)
 
   if (q.length > 1) {
@@ -62,6 +62,12 @@ export async function GET(request: NextRequest) {
     dbQuery = dbQuery.eq('is_sub_hoa', true)
   } else if (hoaType === 'standalone') {
     dbQuery = dbQuery.eq('is_sub_hoa', false)
+  }
+
+  if (sort === 'az') {
+    dbQuery = dbQuery.order('canonical_name', { ascending: true })
+  } else {
+    dbQuery = dbQuery.order('unit_count', { ascending: false, nullsFirst: false })
   }
 
   const { data: communities } = await dbQuery
