@@ -130,7 +130,7 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
 
       <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888",marginTop:"40px"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
-      <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
+      <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
       </footer>
     </main>
   )

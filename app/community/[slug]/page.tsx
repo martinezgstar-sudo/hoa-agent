@@ -16,12 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!community) return { title: 'Community Not Found — HOA Agent' }
 
-  const feeStr = community.monthly_fee_min && community.monthly_fee_max
-    ? 'HOA fees $' + community.monthly_fee_min + '-$' + community.monthly_fee_max + '/mo.'
-    : 'HOA fee data available.'
-
   const title = community.canonical_name + ' — ' + community.city + ' HOA | HOA Agent'
-  const description = community.canonical_name + ' is a ' + (community.property_type || 'residential') + ' community in ' + community.city + ', FL. ' + feeStr + ' View fees, assessments, restrictions and management company details.'
+  const description =
+    community.canonical_name +
+    ' — HOA fees, management company, entity status, and resident reviews. Palm Beach County — HOA Agent.'
 
   return {
     title,

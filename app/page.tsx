@@ -1,6 +1,12 @@
 import { supabase } from '@/lib/supabase'
 import GuideForm from '@/app/components/GuideForm'
 import HomeSearch from '@/app/components/HomeSearch'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  description:
+    'Search 7,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+}
 
 export default async function Home() {
   const { count } = await supabase
@@ -126,8 +132,8 @@ export default async function Home() {
 
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
-        <div>HOA Intelligence Platform · Palm Beach County · © 2026</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Content is not verified for accuracy and should not be relied upon for legal, financial, or real estate decisions. We are not affiliated with any HOA, management company, or government agency.</div>
+        <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>
 
     </main>

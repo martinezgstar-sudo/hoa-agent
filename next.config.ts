@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://www.hoa-agent.com/:path*',
+        permanent: true,
+        has: [{ type: 'host', value: 'hoa-agent.com' }],
+      },
+    ]
+  },
 };
 
 export default nextConfig;
