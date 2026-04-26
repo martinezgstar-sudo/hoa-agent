@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 
 const CITY_DISPLAY: Record<string, string> = {
   'west-palm-beach': 'West Palm Beach',
@@ -34,16 +35,36 @@ export async function generateMetadata({ params }: { params: { city: string } })
 export default async function CityPage({ params }: { params: { city: string } }) {
   const city = CITY_DISPLAY[params.city] || params.city.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
 
-  const { data: communities } = await supabase
-    .from('communities')
-    .select('id,canonical_name,slug,city,monthly_fee_min,monthly_fee_max,property_type,review_count,review_avg,management_company,entity_status')
-    .ilike('city', `%${city}%`)
-    .eq('status', 'published')
-    .order('canonical_name', { ascending: true })
+  // Use service role on the server when available to avoid anon/RLS failures.
+  const serverSupabase =
+    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
+      ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
+      : supabase
 
-  const total = (communities || []).length
-  const withFees = (communities || []).filter((c: any) => c.monthly_fee_min).length
-  const avgFee = (communities || []).filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
+  let communities: any[] = []
+  try {
+    const { data, error } = await serverSupabase
+      .from('communities')
+      .select('id,canonical_name,slug,city,monthly_fee_min,monthly_fee_max,property_type,review_count,review_avg,management_company,entity_status')
+      .ilike('city', `%${city}%`)
+      .eq('status', 'published')
+      .order('canonical_name', { ascending: true })
+      .limit(500)
+
+    if (error) {
+      console.error('[city page] error:', error)
+      communities = []
+    } else {
+      communities = data || []
+    }
+  } catch (error) {
+    console.error('[city page] error:', error)
+    communities = []
+  }
+
+  const total = communities.length
+  const withFees = communities.filter((c: any) => c.monthly_fee_min).length
+  const avgFee = communities.filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
 
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
