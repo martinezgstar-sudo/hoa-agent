@@ -18,7 +18,8 @@
     "extract-sales": "ts-node scripts/extract-sales.ts",
     "enrich-zip-codes": "ts-node scripts/enrich-zip-codes.ts",
     "fix-unit-counts": "ts-node scripts/fix-unit-counts.ts",
-    "fetch-news": "ts-node scripts/fetch-news.ts"
+    "fetch-news": "ts-node scripts/fetch-news.ts",
+    "fetch-news-archive": "ts-node scripts/fetch-news-archive.ts"
   },
   "dependencies": {
     "@mapbox/search-js-react": "^1.5.1",

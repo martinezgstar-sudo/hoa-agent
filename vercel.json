@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/daily-report",
       "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/news-archive",
+      "schedule": "0 9 * * *"
     }
   ]
 }

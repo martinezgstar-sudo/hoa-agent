@@ -103,20 +103,27 @@ export async function PATCH(request: NextRequest) {
   }
 
   const sb = getSupabaseAdmin()
-  const updates = {
-    status,
-    admin_notes: adminNotes,
-    updated_at: new Date().toISOString(),
-  }
-
   if (type === 'news_item') {
-    const { error } = await sb.from('news_items').update(updates).eq('id', id)
+    const { error } = await sb
+      .from('news_items')
+      .update({
+        status,
+        admin_notes: adminNotes,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', id)
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ ok: true })
   }
 
   if (type === 'community_news') {
-    const { error } = await sb.from('community_news').update(updates).eq('id', id)
+    const { error } = await sb
+      .from('community_news')
+      .update({
+        status,
+        admin_notes: adminNotes,
+      })
+      .eq('id', id)
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ ok: true })
   }
