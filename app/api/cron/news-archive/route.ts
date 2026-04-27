@@ -8,11 +8,20 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    await runNewsArchive()
+    console.log('[cron/news-archive] starting run')
+    await runNewsArchive({
+      onGdeltFetch(articles) {
+        console.log('[cron/news-archive] GDELT returned:', articles.length)
+      },
+    })
     return NextResponse.json({ ok: true })
-  } catch (error) {
+  } catch (error: unknown) {
+    const e = error instanceof Error ? error : new Error(String(error))
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: e.message,
+        stack: e.stack?.split('\n').slice(0, 3),
+      },
       { status: 500 },
     )
   }

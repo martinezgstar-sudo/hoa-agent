@@ -292,6 +292,7 @@ function getMatches(
 
 export async function runNewsArchive(options?: {
   logger?: Pick<Console, 'log' | 'warn' | 'error'>
+  onGdeltFetch?: (articles: GdeltArticle[]) => void
 }): Promise<void> {
   const logger = options?.logger || console
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
@@ -318,6 +319,7 @@ export async function runNewsArchive(options?: {
 
   logger.log(`Processing range: ${runStart} → ${runEnd}`)
   const gdelt = await fetchGdeltArticles(runStart, runEnd)
+  options?.onGdeltFetch?.(gdelt)
   logger.log(`GDELT rows found: ${gdelt.length}`)
 
   const candidates = gdelt
