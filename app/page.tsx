@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import GuideForm from '@/app/components/GuideForm'
 import HomeSearch from '@/app/components/HomeSearch'
+import NavBar from '@/app/components/NavBar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -26,18 +27,16 @@ export default async function Home() {
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
 
-      <nav style={{backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 16px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <span style={{fontSize:"20px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em",marginRight:"16px"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
-        </div>
-        <div style={{display: 'flex', gap: '12px', alignItems: 'center'}}>
-          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Search</a>
-          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Cities</a>
-          <a href="/search" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Browse</a>
-          <a href="/reports" style={{fontSize: '13px', color: '#666', textDecoration: 'none'}}>Reports</a>
-          <a href="/search" style={{fontSize: '13px', backgroundColor: '#1D9E75', color: '#fff', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none'}}>Share your HOA</a>
-        </div>
-      </nav>
+      <NavBar
+        desktopLinks={[
+          { href: '/search', label: 'Search' },
+          { href: '/search', label: 'Cities' },
+          { href: '/search', label: 'Browse' },
+          { href: '/reports', label: 'Reports' },
+        ]}
+        shareHref="/search"
+        shareLabel="Share your association"
+      />
 
       <section style={{backgroundColor: '#fff', padding: '72px 32px 64px', textAlign: 'center', borderBottom: '1px solid #e5e5e5'}}>
         <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>HOA Intelligence Platform</div>

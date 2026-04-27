@@ -2,6 +2,8 @@ export const dynamic = 'force-dynamic'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { createClient } from '@supabase/supabase-js'
+import CitySearch from './CitySearch'
+import NavBar from '@/app/components/NavBar'
 
 const CITY_DISPLAY: Record<string, string> = {
   'west-palm-beach': 'West Palm Beach',
@@ -20,6 +22,20 @@ const CITY_DISPLAY: Record<string, string> = {
   'palm-springs': 'Palm Springs',
   'lantana': 'Lantana',
   'lake-park': 'Lake Park',
+}
+
+type Community = {
+  id: string
+  canonical_name: string
+  slug: string
+  city: string
+  monthly_fee_min: number | null
+  monthly_fee_max: number | null
+  property_type: string | null
+  review_count: number | null
+  review_avg: number | null
+  management_company: string | null
+  entity_status: string | null
 }
 
 
@@ -52,7 +68,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         )
       : supabase
 
-    let communities: any[] = []
+    let communities: Community[] = []
     try {
       const { data, error } = await serverSupabase
         .from('communities')
@@ -74,21 +90,21 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     }
 
     const total = communities.length
-    const withFees = communities.filter((c: any) => c.monthly_fee_min).length
-    const avgFee = communities.filter(c => c.monthly_fee_min).reduce((a: number, c: any) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
+    const withFees = communities.filter((c) => c.monthly_fee_min).length
+    const avgFee = communities
+      .filter((c) => c.monthly_fee_min)
+      .reduce((a: number, c) => a + parseFloat(String(c.monthly_fee_min || 0)), 0) / (withFees || 1)
 
     return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
-      <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 16px",height:"64px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
-        </a>
-        <div style={{display:"flex",gap:"12px",alignItems:"center"}}>
-          <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Browse</a>
-          <a href="/reports" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Reports</a>
-          <a href="/search" style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"6px 12px",borderRadius:"6px",whiteSpace:"nowrap",textDecoration:"none"}}>Share your HOA</a>
-        </div>
-      </nav>
+      <NavBar
+        desktopLinks={[
+          { href: '/search', label: 'Browse' },
+          { href: '/reports', label: 'Reports' },
+        ]}
+        shareHref="/search"
+        shareLabel="Share your association"
+      />
 
       <script
         type="application/ld+json"
@@ -140,37 +156,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         </div>
 
         {communities && communities.length > 0 ? (
-          <div>
-            {communities.map(c => (
-              <a key={c.id} href={"/community/"+c.slug} style={{textDecoration:"none"}}>
-                <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",marginBottom:"10px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div>
-                    <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"3px"}}>{c.canonical_name}</div>
-                    <div style={{fontSize:"12px",color:"#888"}}>
-                      {c.property_type || "HOA"}
-                      {c.management_company ? " · " + c.management_company : ""}
-                      {c.entity_status ? " · " + c.entity_status : ""}
-                    </div>
-                    {c.review_count > 0 && (
-                      <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>
-                        {"★".repeat(Math.round(c.review_avg || 0))} {c.review_avg} · {c.review_count} review{c.review_count !== 1 ? "s" : ""}
-                      </div>
-                    )}
-                  </div>
-                  <div style={{textAlign:"right",flexShrink:0,marginLeft:"16px"}}>
-                    {c.monthly_fee_min ? (
-                      <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a"}}>
-                   ${c.monthly_fee_min}{c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? "–$"+c.monthly_fee_max : ""}/mo
-                      </div>
-                    ) : (
-                      <div style={{fontSize:"12px",color:"#aaa"}}>Fee unknown</div>
-                    )}
-                    <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>View profile →</div>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
+          <CitySearch city={city} communities={communities} />
         ) : (
           <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>
             No published communities found for {city} yet.
