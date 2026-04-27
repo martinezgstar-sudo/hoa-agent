@@ -278,6 +278,99 @@ export default function NewsAdminPage() {
         </Link>
       </nav>
 
+      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #e5e5e5', padding: '0 24px', display: 'flex' }}>
+        <a
+          href="/admin"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid transparent',
+            backgroundColor: 'transparent',
+            color: '#666',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '400',
+            textDecoration: 'none',
+          }}
+        >
+          Comments
+        </a>
+        <a
+          href="/admin"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid transparent',
+            backgroundColor: 'transparent',
+            color: '#666',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '400',
+            textDecoration: 'none',
+          }}
+        >
+          Add Community
+        </a>
+        <a
+          href="/admin"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid transparent',
+            backgroundColor: 'transparent',
+            color: '#666',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '400',
+            textDecoration: 'none',
+          }}
+        >
+          CSV Upload
+        </a>
+        <a
+          href="/admin"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid transparent',
+            backgroundColor: 'transparent',
+            color: '#666',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '400',
+            textDecoration: 'none',
+          }}
+        >
+          Suggestions
+        </a>
+        <a
+          href="/admin"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid transparent',
+            backgroundColor: 'transparent',
+            color: '#666',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '400',
+            textDecoration: 'none',
+          }}
+        >
+          Field Updates
+        </a>
+        <a
+          href="/admin/news"
+          style={{
+            padding: '16px 20px',
+            borderBottom: '3px solid #1B2B6B',
+            backgroundColor: 'transparent',
+            color: '#1B2B6B',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '600',
+            textDecoration: 'none',
+          }}
+        >
+          News
+        </a>
+      </div>
+
       <div style={{ maxWidth: '980px', margin: '0 auto', padding: '28px 20px' }}>
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
           {tabs.map((t) => (

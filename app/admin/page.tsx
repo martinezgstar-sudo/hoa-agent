@@ -534,7 +534,14 @@ export default function AdminPage() {
     )
   }
 
-  const TABS = [{key:"comments",label:"Comments"},{key:"communities",label:"Add Community"},{key:"upload",label:"CSV Upload"},{key:"suggestions",label:"Suggestions"},{key:"field_updates",label:"Field Updates"}]
+  const TABS = [
+    {key:"comments",label:"Comments"},
+    {key:"communities",label:"Add Community"},
+    {key:"upload",label:"CSV Upload"},
+    {key:"suggestions",label:"Suggestions"},
+    {key:"field_updates",label:"Field Updates"},
+    {key:"news",label:"News",href:"/admin/news"},
+  ]
 
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
@@ -546,10 +553,20 @@ export default function AdminPage() {
       </nav>
       <div style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 24px",display:"flex"}}>
         {TABS.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)}
-            style={{padding:"16px 20px",border:"none",borderBottom:tab===t.key?"3px solid #1B2B6B":"3px solid transparent",backgroundColor:"transparent",color:tab===t.key?"#1B2B6B":"#666",cursor:"pointer",fontSize:"13px",fontWeight:tab===t.key?"600":"400"}}>
-            {t.label}
-          </button>
+          t.href ? (
+            <a
+              key={t.key}
+              href={t.href}
+              style={{padding:"16px 20px",borderBottom:"3px solid transparent",backgroundColor:"transparent",color:"#666",cursor:"pointer",fontSize:"13px",fontWeight:"400",textDecoration:"none"}}
+            >
+              {t.label}
+            </a>
+          ) : (
+            <button key={t.key} onClick={() => setTab(t.key)}
+              style={{padding:"16px 20px",border:"none",borderBottom:tab===t.key?"3px solid #1B2B6B":"3px solid transparent",backgroundColor:"transparent",color:tab===t.key?"#1B2B6B":"#666",cursor:"pointer",fontSize:"13px",fontWeight:tab===t.key?"600":"400"}}>
+              {t.label}
+            </button>
+          )
         ))}
       </div>
       <div style={{maxWidth:"900px",margin:"0 auto",padding:"32px 24px"}}>
