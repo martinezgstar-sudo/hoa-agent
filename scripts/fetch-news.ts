@@ -31,13 +31,10 @@ const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL?.trim() || 'claude-sonnet-4-
 
 const GDELT_URL =
   'https://api.gdeltproject.org/api/v2/doc/doc' +
-  '?query=' +
-  encodeURIComponent('"homeowners association" OR "HOA" "Palm Beach County" Florida') +
+  '?query=HOA+%22Palm+Beach+County%22+Florida' +
   '&mode=ArtList' +
-  '&maxrecords=250' +
+  '&maxrecords=50' +
   '&format=json' +
-  '&startdatetime=20150101000000' +
-  '&enddatetime=20251231235959' +
   '&sort=DateDesc'
 
 type GdeltArticle = {
@@ -138,10 +135,37 @@ function saveProgress(progress: ProgressFile) {
 }
 
 async function fetchGdeltArticles(): Promise<GdeltArticle[]> {
-  const res = await fetch(GDELT_URL)
-  if (!res.ok) throw new Error(`GDELT error ${res.status}`)
-  const payload = (await res.json()) as { articles?: GdeltArticle[] }
-  return payload.articles || []
+  const maxAttempts = 4 // initial attempt + 3 retries
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 30_000)
+    try {
+      const response = await fetch(GDELT_URL, { signal: controller.signal })
+      clearTimeout(timeout)
+
+      if (!response.ok) {
+        if (attempt === maxAttempts) {
+          throw new Error(`GDELT error ${response.status} after ${maxAttempts} attempts`)
+        }
+        console.warn(
+          `GDELT responded ${response.status}, retrying in 10s (${attempt}/${maxAttempts})...`,
+        )
+        await sleep(10_000)
+        continue
+      }
+
+      const payload = (await response.json()) as { articles?: GdeltArticle[] }
+      return payload.articles || []
+    } catch (err) {
+      clearTimeout(timeout)
+      if (attempt === maxAttempts) {
+        throw err instanceof Error ? err : new Error('GDELT fetch failed')
+      }
+      console.warn(`GDELT fetch failed, retrying in 10s (${attempt}/${maxAttempts})...`, err)
+      await sleep(10_000)
+    }
+  }
+  return []
 }
 
 async function fetchUrlText(url: string): Promise<string | null> {
