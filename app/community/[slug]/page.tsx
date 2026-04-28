@@ -297,16 +297,18 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
         )}
 
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
           {[
-            {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src: 'public record'},
-            {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted'},
-            {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident'},
+            {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src: 'public record', link: null},
+            {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted', link: null},
+            {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident', link: null},
+            {val: community.news_reputation_score ? community.news_reputation_score + '/10' : 'No data', label: community.news_reputation_label || 'News reputation', src: 'AI-analyzed', link: `/community/${community.slug}/news`},
           ].map((stat) => (
-            <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center'}}>
-              <div style={{fontSize: '13px', fontWeight: '500', color: stat.val === 'Not listed' || stat.val === 'Unknown' ? '#aaa' : '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
+            <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center', position: 'relative'}}>
+              <div style={{fontSize: '13px', fontWeight: '500', color: stat.val === 'Not listed' || stat.val === 'Unknown' || stat.val === 'No data' ? '#aaa' : stat.label === (community.news_reputation_label || 'News reputation') && community.news_reputation_score ? community.news_reputation_score <= 3 ? '#dc2626' : community.news_reputation_score <= 5 ? '#d97706' : community.news_reputation_score <= 7 ? '#2563eb' : '#16a34a' : '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
               <div style={{fontSize: '10px', color: '#888', marginBottom: '1px'}}>{stat.label}</div>
               <div style={{fontSize: '9px', color: '#aaa'}}>{stat.src}</div>
+              {stat.link && <a href={stat.link} style={{fontSize: '9px', color: '#1B2B6B', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '4px'}}>View news →</a>}
             </div>
           ))}
         </div>
