@@ -6,6 +6,7 @@ import RestrictionModal from '@/app/components/RestrictionModal'
 import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 import FirstReviewToast from '@/app/components/FirstReviewToast'
 import NavBar from '@/app/components/NavBar'
+import NewsFeed from '@/app/components/NewsFeed'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -505,6 +506,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <ReportModal />
           </div>
         </div>
+
+        <NewsFeed communityId={community.id} communityName={community.canonical_name} />
       </div>
 
       <FirstReviewToast

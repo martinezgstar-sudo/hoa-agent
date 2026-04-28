@@ -4,7 +4,7 @@ import { join } from 'path'
 
 const OUTPUT_DIR = join(process.cwd(), 'scripts', 'output')
 const PROGRESS_PATH = join(OUTPUT_DIR, 'archive_progress.json')
-const MAX_ARTICLES_PER_RUN = 25
+const MAX_ARTICLES_PER_RUN = 100
 const MAX_CONTENT_CHARS = 3000
 const FETCH_DELAY_MS = 500
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL?.trim() || 'claude-sonnet-4-20250514'
@@ -144,7 +144,7 @@ function gdeltUrl(start: string, end: string): string {
     'https://api.gdeltproject.org/api/v2/doc/doc' +
     '?query=HOA+%22Palm+Beach+County%22+Florida' +
     '&mode=ArtList' +
-    '&maxrecords=50' +
+    '&maxrecords=250' +
     '&format=json' +
     '&sort=DateDesc' +
     `&startdatetime=${start}` +
@@ -424,8 +424,8 @@ export async function runNewsArchive(options?: {
 
   // Advance by one week for next historical chunk.
   const startDate = parseDateTime(runStart)
-  const nextStartDate = plusDays(startDate, 7)
-  const nextEndDate = plusDays(nextStartDate, 7)
+  const nextStartDate = plusDays(startDate, 28)
+  const nextEndDate = plusDays(nextStartDate, 28)
   let completed = progress.completed
   if (!completed && nextEndDate.getTime() > now.getTime()) completed = true
 
