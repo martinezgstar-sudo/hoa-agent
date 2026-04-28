@@ -105,15 +105,7 @@ export default function LegalCases({ communityId, communityName }: LegalCasesPro
                 </div>
               )}
               <div className={isLocked ? 'blur-sm select-none' : ''}>
-                
-                  href={c.absolute_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold text-gray-900 hover:text-blue-900 leading-snug flex items-start gap-1"
-                >
-                  {c.case_name}
-                  <ExternalLink className="w-3 h-3 mt-0.5 flex-shrink-0 text-gray-400" />
-                </a>
+                <a href={c.absolute_url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gray-900 hover:text-blue-900 leading-snug flex items-start gap-1">{c.case_name}<ExternalLink className="w-3 h-3 mt-0.5 flex-shrink-0 text-gray-400" /></a>
                 {c.ai_summary && (
                   <p className="text-xs text-gray-500 mt-1 line-clamp-2">{c.ai_summary}</p>
                 )}
