@@ -99,15 +99,7 @@ export default function NewsFeed({ communityId, communityName }: NewsFeedProps) 
               <div className={isLocked ? 'blur-sm select-none' : ''}>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-semibold text-gray-900 hover:text-blue-900 leading-snug line-clamp-2 flex items-start gap-1"
-                    >
-                      {article.title}
-                      <ExternalLink className="w-3 h-3 mt-0.5 flex-shrink-0 text-gray-400" />
-                    </a>
+                    <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-gray-900 hover:text-blue-900 leading-snug line-clamp-2 flex items-start gap-1">{article.title}<ExternalLink className="w-3 h-3 mt-0.5 flex-shrink-0 text-gray-400" /></a>
                     {article.ai_summary && (
                       <p className="text-xs text-gray-500 mt-1 line-clamp-2">{article.ai_summary}</p>
                     )}
