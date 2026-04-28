@@ -7,6 +7,7 @@ import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 import FirstReviewToast from '@/app/components/FirstReviewToast'
 import NavBar from '@/app/components/NavBar'
 import NewsFeed from '@/app/components/NewsFeed'
+import LegalCases from '@/app/components/LegalCases'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -513,6 +514,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         </div>
 
         <NewsFeed communityId={community.id} communityName={community.canonical_name} />
+        <LegalCases communityId={community.id} communityName={community.canonical_name} />
       </div>
 
       <FirstReviewToast
