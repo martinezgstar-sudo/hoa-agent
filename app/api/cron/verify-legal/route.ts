@@ -55,7 +55,7 @@ Return only the summary, no labels.`,
       })
       const aiData = await aiRes.json()
       const summary = aiData.content?.[0]?.text?.trim() || null
-      await supabase.table('legal_cases').update({ ai_summary: summary }).eq('id', legalCase.id).execute()
+      await supabase.from('legal_cases').update({ ai_summary: summary }).eq('id', legalCase.id).execute()
 
       for (const word of words) {
         const { data: communities } = await supabase
@@ -107,7 +107,7 @@ Reply with only JSON: {"match": true/false, "confidence": 0.0-1.0}`,
           if (existing.data && existing.data.length > 0) continue
 
           const status = isMatch && confidence >= 0.75 ? 'approved' : 'rejected'
-          await supabase.table('community_legal_cases').insert({
+          await supabase.from('community_legal_cases').insert({
             legal_case_id: legalCase.id,
             community_id: community.id,
             match_confidence: confidence,
@@ -135,7 +135,7 @@ Reply with only JSON: {"match": true/false, "confidence": 0.0-1.0}`,
     }
 
     for (const [communityId, count] of Object.entries(counts)) {
-      await supabase.table('communities').update({ litigation_count: count }).eq('id', communityId).execute()
+      await supabase.from('communities').update({ litigation_count: count }).eq('id', communityId).execute()
     }
 
     return NextResponse.json({ success: true, cases_processed: newCases?.length || 0, matched, approved, rejected })
