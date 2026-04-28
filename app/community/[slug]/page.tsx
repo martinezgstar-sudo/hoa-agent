@@ -66,6 +66,7 @@ interface Community {
   vehicle_restriction: string
   rental_approval: string
   assessment_signal_count: number
+  litigation_count: number | null
   amenities: string
   review_count: number | null
   review_avg: number
@@ -82,7 +83,7 @@ interface Community {
 async function getCommunity(slug: string) {
   const { data, error } = await supabase
     .from('communities')
-    .select('*, city_verified, news_reputation_score, news_reputation_label')
+    .select('*, city_verified, news_reputation_score, news_reputation_label, litigation_count')
     .eq('slug', slug)
     .single()
   if (error || !data) return null
@@ -300,16 +301,16 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
           {[
-            {val: community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + '–$' + community.monthly_fee_max + '/mo' : 'Unknown', label: 'Monthly fee', src: 'public record', link: null},
-            {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted', link: null},
-            {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident', link: null},
-            {val: community.news_reputation_score ? community.news_reputation_score + '/10' : 'No data', label: community.news_reputation_label || 'News reputation', src: 'AI-analyzed', link: `/community/${community.slug}/news`},
+            {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted', link: null, color: null},
+            {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident', link: null, color: null},
+            {val: community.news_reputation_score ? community.news_reputation_score + '/10' : 'No data', label: community.news_reputation_label || 'News reputation', src: 'AI-analyzed', link: `/community/${community.slug}/news`, color: community.news_reputation_score ? community.news_reputation_score <= 3 ? '#dc2626' : community.news_reputation_score <= 5 ? '#d97706' : community.news_reputation_score <= 7 ? '#2563eb' : '#16a34a' : null},
+            {val: community.litigation_count ? community.litigation_count + ' cases' : 'Search record', label: 'Litigation', src: 'CourtListener', link: `/community/${community.slug}/legal`, color: (community.litigation_count || 0) > 0 ? '#7c3aed' : null},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center', position: 'relative'}}>
-              <div style={{fontSize: '13px', fontWeight: '500', color: stat.val === 'Not listed' || stat.val === 'Unknown' || stat.val === 'No data' ? '#aaa' : stat.label === (community.news_reputation_label || 'News reputation') && community.news_reputation_score ? community.news_reputation_score <= 3 ? '#dc2626' : community.news_reputation_score <= 5 ? '#d97706' : community.news_reputation_score <= 7 ? '#2563eb' : '#16a34a' : '#1a1a1a', marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
+              <div style={{fontSize: '13px', fontWeight: '500', color: stat.color || (stat.val === 'Not listed' || stat.val === 'Unknown' || stat.val === 'No data' || stat.val === 'Search record' ? '#aaa' : '#1a1a1a'), marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
               <div style={{fontSize: '10px', color: '#888', marginBottom: '1px'}}>{stat.label}</div>
               <div style={{fontSize: '9px', color: '#aaa'}}>{stat.src}</div>
-              {stat.link && <a href={stat.link} style={{fontSize: '9px', color: '#1B2B6B', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '4px'}}>View news →</a>}
+              {stat.link && <a href={stat.link} style={{fontSize: '9px', color: '#1B2B6B', fontWeight: 600, textDecoration: 'none', display: 'block', marginTop: '4px'}}>View →</a>}
             </div>
           ))}
         </div>
