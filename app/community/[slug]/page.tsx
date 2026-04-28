@@ -69,6 +69,9 @@ interface Community {
   review_count: number | null
   review_avg: number
   data_freshness_date: string
+  news_reputation_score: number | null
+  news_reputation_label: string | null
+  news_reputation_updated_at: string | null
   city_verified?: boolean
   website_url?: string
   is_sub_hoa?: boolean
@@ -78,7 +81,7 @@ interface Community {
 async function getCommunity(slug: string) {
   const { data, error } = await supabase
     .from('communities')
-    .select('*, city_verified')
+    .select('*, city_verified, news_reputation_score, news_reputation_label')
     .eq('slug', slug)
     .single()
   if (error || !data) return null

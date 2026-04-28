@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    return NextResponse.json({ articles: data || [], matched: false })
+    return NextResponse.json({ articles: data || [], matched: false, total: data?.length || 0 })
   } catch (err) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
