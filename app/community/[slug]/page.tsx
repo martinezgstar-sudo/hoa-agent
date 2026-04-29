@@ -354,7 +354,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}><span style={{color:'#888',fontSize:'12px'}}>Units</span><span style={{color:'#1a1a1a',fontSize:'13px'}}>{community.unit_count || 'Unknown'}</span></div>
             <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
               <span style={{color:'#888',fontSize:'12px'}}>Management company</span>
-              <span style={{color:'#1a1a1a',fontSize:'13px',maxWidth:'60%',textAlign:'right'}}>{community.management_company || 'Not listed'}</span>
+              <span style={{color:'#1a1a1a',fontSize:'13px',textAlign:'right',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',maxWidth:'60%'}}>{community.management_company || 'Not listed'}</span>
             </div>
           </div>
         </div>
