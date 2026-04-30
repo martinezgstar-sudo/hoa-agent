@@ -15,6 +15,15 @@ NEWSAPI_ENDPOINT = "https://newsapi.org/v2/everything"
 PAGE_SIZE = 100
 MAX_PAGES = 1
 
+ADDITIONAL_QUERIES = [
+    "HOA Florida lawsuit",
+    "homeowners association Palm Beach County",
+    "HOA special assessment Florida 2025",
+    "condominium association Florida dispute",
+    "HOA board recall Florida",
+    "HOA lien foreclosure Florida",
+]
+
 FLORIDA_TAGS = [
     ("HB 1203", "hb_1203"),
     ("HB 1021", "hb_1021"),
@@ -45,9 +54,11 @@ def extract_tags(text):
             found.append(tag)
     return list(set(found))
 
-def fetch_newsapi_page(page, from_date, to_date):
+def fetch_newsapi_page(page, from_date, to_date, query=None):
+    if query is None:
+        query = "(Florida HOA) OR (Florida \"homeowners association\") OR (Florida \"condo association\")"
     params = {
-        "q": "(Florida HOA) OR (Florida \"homeowners association\") OR (Florida \"condo association\")",
+        "q": query,
         "language": "en",
         "sortBy": "publishedAt",
         "pageSize": PAGE_SIZE,
@@ -176,33 +187,41 @@ def save_article(supabase, article, hoas):
     return news_id
 
 def save_community_matches(supabase, news_id, matches):
+    has_high_confidence = any(m["confidence"] >= 0.90 for m in matches)
     for m in matches:
+        confidence = m["confidence"]
+        if confidence < 0.70:
+            print(f"    -> DISCARD (low confidence {confidence}): {m['community_name']}")
+            continue
+        match_status = "approved" if confidence >= 0.90 else "pending"
+        existing = (
+            supabase.table("community_news")
+            .select("id")
+            .eq("news_item_id", news_id)
+            .eq("community_id", m["community_id"])
+            .execute()
+        )
+        if existing.data:
+            continue
         supabase.table("community_news").insert(
             {
                 "news_item_id": news_id,
                 "community_id": m["community_id"],
-                "match_confidence": m["confidence"],
+                "match_confidence": confidence,
                 "match_reason": m["match_reason"],
-                "status": "pending",
+                "status": match_status,
             }
         ).execute()
-        print(f"    -> Matched: {m['community_name']} ({m['confidence']})")
+        print(f"    -> Matched [{match_status}]: {m['community_name']} ({confidence})")
+    if has_high_confidence:
+        supabase.table("news_items").update({"status": "approved"}).eq("id", news_id).execute()
 
-def main():
-    days_back = int(sys.argv[1]) if len(sys.argv) > 1 else 30
-    to_date = datetime.utcnow().strftime("%Y-%m-%d")
-    from_date = (datetime.utcnow() - timedelta(days=days_back)).strftime("%Y-%m-%d")
-
-    print(f"NewsAPI Fetcher -- {from_date} to {to_date}")
-    print(f"API Key: {NEWSAPI_KEY[:8]}...")
-
-    supabase = get_supabase()
-    total_saved = 0
-    total_matched = 0
-
+def run_query(supabase, query, from_date, to_date):
+    saved = 0
+    matched = 0
     for page in range(1, MAX_PAGES + 1):
-        print(f"\n-- Page {page} --")
-        data = fetch_newsapi_page(page, from_date, to_date)
+        print(f"\n-- Page {page} | Query: {query[:60]} --")
+        data = fetch_newsapi_page(page, from_date, to_date, query=query)
 
         if data.get("status") != "ok":
             print(f"API error: {data.get('message', 'unknown')}")
@@ -213,25 +232,51 @@ def main():
         print(f"{total_results} total results -- processing {len(articles)} articles")
 
         if not articles:
-            print("No articles returned.")
             break
 
         for article in articles:
             title = article.get("title") or ""
             body = article.get("content") or article.get("description") or ""
-            tags = extract_tags(title + " " + body)
             hoas = ai_extract_hoas(title, body)
             news_id = save_article(supabase, article, hoas)
             if news_id:
-                total_saved += 1
+                saved += 1
                 if hoas:
                     matches = match_communities(supabase, hoas)
                     if matches:
                         save_community_matches(supabase, news_id, matches)
-                        total_matched += len(matches)
+                        matched += len(matches)
             time.sleep(0.3)
 
         time.sleep(2)
+    return saved, matched
+
+
+def main():
+    days_back = int(sys.argv[1]) if len(sys.argv) > 1 else 30
+    to_date = datetime.utcnow().strftime("%Y-%m-%d")
+    from_date = (datetime.utcnow() - timedelta(days=days_back)).strftime("%Y-%m-%d")
+
+    if not NEWSAPI_KEY:
+        print("WARNING: NEWSAPI_KEY not set — skipping")
+        sys.exit(0)
+
+    print(f"NewsAPI Fetcher -- {from_date} to {to_date}")
+    print(f"API Key: {NEWSAPI_KEY[:8]}...")
+
+    supabase = get_supabase()
+    total_saved = 0
+    total_matched = 0
+
+    all_queries = [
+        "(Florida HOA) OR (Florida \"homeowners association\") OR (Florida \"condo association\")",
+    ] + ADDITIONAL_QUERIES
+
+    for query in all_queries:
+        saved, matched = run_query(supabase, query, from_date, to_date)
+        total_saved += saved
+        total_matched += matched
+        time.sleep(3)
 
     print(f"\nDone -- {total_saved} articles saved, {total_matched} community matches")
 

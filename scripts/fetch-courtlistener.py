@@ -265,6 +265,13 @@ def main():
         "Florida HOA special assessment",
         "Florida HOA foreclosure",
         "Florida condominium structural",
+        # Palm Beach County targeted queries
+        "homeowners association Palm Beach",
+        "HOA assessment Palm Beach",
+        "special assessment Palm Beach County",
+        "condominium association Palm Beach",
+        "community association lien Palm Beach",
+        "HOA foreclosure Palm Beach County",
     ]
 
     for query in queries:

@@ -217,16 +217,17 @@ def match_to_database(supabase, hoa_list):
     return matches
 
 def process_articles(supabase):
-    print("Fetching approved articles...")
+    print("Fetching articles for enrichment (approved + pending)...")
     result = (
         supabase.table("news_items")
-        .select("id, title, url, source, published_date, raw_content, ai_summary, ai_extracted_hoas")
-        .eq("status", "approved")
+        .select("id, title, url, source, published_date, raw_content, ai_summary, ai_extracted_hoas, status")
+        .in_("status", ["approved", "pending"])
         .order("published_date", desc=True)
+        .limit(200)
         .execute()
     )
     articles = result.data or []
-    print(f"Found {len(articles)} approved articles")
+    print(f"Found {len(articles)} articles to process")
 
     total_matched = 0
     for article in articles:
@@ -253,7 +254,12 @@ def process_articles(supabase):
         print(f"  Found {len(hoas)} HOA mentions: {[h.get('name') for h in hoas]}")
         matches = match_to_database(supabase, hoas)
 
+        has_high_confidence = any(m["confidence"] >= 0.90 for m in matches)
         for m in matches:
+            confidence = m["confidence"]
+            if confidence < 0.70:
+                print(f"  -> DISCARD (low confidence {confidence}): {m['community_name']}")
+                continue
             existing_match = (
                 supabase.table("community_news")
                 .select("id")
@@ -263,15 +269,18 @@ def process_articles(supabase):
             )
             if existing_match.data:
                 continue
+            match_status = "approved" if confidence >= 0.90 else "pending"
             supabase.table("community_news").insert({
                 "news_item_id": article["id"],
                 "community_id": m["community_id"],
-                "match_confidence": m["confidence"],
+                "match_confidence": confidence,
                 "match_reason": m["match_reason"],
-                "status": "approved" if m["confidence"] >= 0.85 else "pending",
+                "status": match_status,
             }).execute()
-            print(f"  -> Matched: {m['community_name']} ({m['confidence']})")
+            print(f"  -> Matched [{match_status}]: {m['community_name']} ({confidence})")
             total_matched += 1
+        if has_high_confidence:
+            supabase.table("news_items").update({"status": "approved"}).eq("id", article["id"]).execute()
 
         time.sleep(0.5)
 
