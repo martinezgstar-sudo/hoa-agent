@@ -19,7 +19,10 @@ export const metadata: Metadata = {
     google: '4xmo5he7NSp1789N5geio1yE7NcoxM1z0kCW66iKlxY',
   },
   icons: {
-    icon: '/logo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.png', type: 'image/png' },
+    ],
     apple: '/logo.png',
   },
   title: 'HOA Agent — HOA Intelligence Platform',
