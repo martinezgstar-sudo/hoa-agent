@@ -20,7 +20,8 @@ const UPDATABLE_FIELDS = [
 const BATCH_SIZE = 20
 const RESEARCH_COOLDOWN_DAYS = 30
 
-async function ensureResearchLogTable(supabase: ReturnType<typeof createClient>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function ensureResearchLogTable(supabase: any) {
   try {
     await supabase.from('community_research_log').select('id').limit(1)
   } catch {
