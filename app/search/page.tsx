@@ -332,7 +332,7 @@ export default function SearchPage() {
     let zipQuery = supabase
       .from("communities")
       .select(
-        "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg",
+        "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg, is_master, parent_id, is_sub_hoa",
       )
       .eq("status", "published")
       .eq("zip_code", zip)
@@ -716,11 +716,17 @@ export default function SearchPage() {
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none",display:"block",marginBottom:"10px"}}>
                 <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
                   <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{c.canonical_name}</div>
-                  <div style={{fontSize:"13px",color:"#888"}}>
+                  <div style={{fontSize:"13px",color:"#888",marginBottom: (c.is_master || c.parent_id || c.is_sub_hoa) ? "6px" : "0"}}>
                     {c.city}
                     {c.unit_count != null ? ` · ${c.unit_count} units` : ""}
                     {c.property_type ? ` · ${c.property_type}` : ""}
                   </div>
+                  {c.is_master && (
+                    <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>
+                  )}
+                  {(c.parent_id || c.is_sub_hoa) && !c.is_master && (
+                    <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>
+                  )}
                 </div>
               </a>
             ))}
@@ -802,6 +808,8 @@ export default function SearchPage() {
                     <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"3px"}}>{c.canonical_name}</div>
                     <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
+                      {c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>}
+                      {(c.parent_id || c.is_sub_hoa) && !c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>}
                       <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#E1F5EE",color:"#1B2B6B"}}>Active entity</span>
                       {c.review_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{"★".repeat(Math.round(c.review_avg || 0))} {c.review_count} reviews</span>}
                       {c.assessment_signal_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>{c.assessment_signal_count} signals</span>}

@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   let dbQuery = supabase
     .from('communities')
     .select(
-      'id, canonical_name, slug, city, city_verified, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, confidence_score, review_count, review_avg, assessment_signal_count, management_company, pet_restriction, is_sub_hoa'
+      'id, canonical_name, slug, city, city_verified, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, confidence_score, review_count, review_avg, assessment_signal_count, management_company, pet_restriction, is_sub_hoa, is_master, parent_id'
     )
     .eq('status', 'published')
     .limit(50)
@@ -57,11 +57,12 @@ export async function GET(request: NextRequest) {
     dbQuery = dbQuery.ilike('management_company', `%${management}%`)
   }
   if (hoaType === 'master') {
-    dbQuery = dbQuery.eq('is_sub_hoa', false).not('id', 'in', '(select master_hoa_id from communities where master_hoa_id is not null)')
+    // is_master=true preferred; fall back to communities referenced as master_hoa_id
+    dbQuery = dbQuery.or('is_master.eq.true,and(is_sub_hoa.eq.false,parent_id.is.null)')
   } else if (hoaType === 'sub') {
-    dbQuery = dbQuery.eq('is_sub_hoa', true)
+    dbQuery = dbQuery.or('is_sub_hoa.eq.true,parent_id.not.is.null')
   } else if (hoaType === 'standalone') {
-    dbQuery = dbQuery.eq('is_sub_hoa', false)
+    dbQuery = dbQuery.eq('is_sub_hoa', false).is('parent_id', null).eq('is_master', false)
   }
 
   if (sort === 'az') {
