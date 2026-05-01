@@ -1,0 +1,167 @@
+============================================================
+HOA Agent — Master/Sub HOA Linking System
+Final Report — 2026-05-01
+============================================================
+
+STATUS: SQL GENERATED — AWAITING DB EXECUTION
+The SUPABASE_SERVICE_ROLE_KEY is a placeholder locally.
+All SQL has been written and must be run manually in the
+Supabase SQL Editor. See instructions at the bottom.
+
+------------------------------------------------------------
+TASK 1 — Audit
+------------------------------------------------------------
+Audit SQL: scripts/output/master-sub-audit.sql
+Source-code analysis of existing schema:
+  - master_hoa_id (uuid FK): EXISTS — used by community page
+  - is_sub_hoa (boolean):    EXISTS — used by search API
+  - parent_id (uuid FK):     NEW — added by migration
+  - is_master (boolean):     NEW — added by migration
+
+------------------------------------------------------------
+TASK 2 — Migration
+------------------------------------------------------------
+File: supabase/migrations/20260501_master_sub_hoa.sql
+Actions:
+  ADD COLUMN IF NOT EXISTS parent_id  uuid REFERENCES communities(id)
+  ADD COLUMN IF NOT EXISTS is_master  boolean DEFAULT false
+  CREATE INDEX IF NOT EXISTS idx_communities_parent_id
+  UPDATE communities SET parent_id = master_hoa_id (migration)
+  UPDATE communities SET is_master = true (seed from master_hoa_id refs)
+
+------------------------------------------------------------
+TASK 3 — Research Findings
+------------------------------------------------------------
+Full research log: scripts/output/master-sub-research.md
+
+BALLENISLES — Palm Beach Gardens, FL
+  Master: BallenIsles Community Association, Inc. (Sunbiz N34060)
+  True sub-associations: 2
+    1. Palm Bay Club Condominium Association, Inc.
+       (Sunbiz N00000004013, ACTIVE, coach homes, 112 residences)
+    2. The Palms at BallenIsles Condominium Association, Inc.
+       (Sunbiz N95000004997, ACTIVE, 84 coach homes)
+  Note: The 33 neighborhood names (Ironwood, Paloma, Prestwick, etc.
+  from the original task brief) are NOT BallenIsles sub-communities.
+  Ironwood & Prestwick = PGA National subs. Paloma = standalone.
+  Shaughnessy = Olympia village.
+
+EVERGRENE — Palm Beach Gardens, FL
+  Master: Evergrene Master Association, Inc. (Sunbiz N01000008777)
+  True sub-associations: 2
+    1. The Mansions at Evergrene Condominium Association, Inc.
+       (Sunbiz N02000000439, ACTIVE)
+    2. The Mansions at Evergrene West Condominium Association, Inc.
+       (Sunbiz N03000000353, ACTIVE)
+  Note: 10 section names (Fall Creek, Heritage Park, etc.) are plat
+  identifiers only, not separately incorporated HOAs.
+
+OLYMPIA — Wellington, FL
+  Master: Olympia Master HOA (Sunbiz N00000005303)
+  True sub-associations: 17 (all independently chartered villages)
+    1.  Bryden Village HOA, Inc.
+    2.  Cooper Village HOA
+    3.  Danforth Village HOA, Inc.         (~129 homes, GRS Mgmt)
+    4.  Easton Village HOA, Inc.           (~231 homes, GRS Mgmt)
+    5.  Hamblin Village HOA, Inc.          (~128 homes, GRS Mgmt)
+    6.  Merriweather Village HOA, Inc.     (Phoenix Management)
+    7.  Payson Village HOA                 (JDM Property Managers)
+    8.  Phipps Village HOA, Inc.           (~144 homes, GRS Mgmt)
+    9.  Postley Village HOA, Inc.          (GRS Management)
+    10. Scribner Village HOA, Inc.
+    11. Shaughnessy Village HOA, Inc.      (~170 homes, GRS Mgmt)
+    12. Stotesbury Village HOA
+    13. Thomson Village HOA, Inc.          (~48 homes, GRS Mgmt)
+    14. Treanor Village HOA, Inc.          (GRS Management)
+    15. Waburton Village HOA
+    16. Widener Village HOA
+    17. Woodworth Village HOA, Inc.        (~126 homes, GRS Mgmt)
+
+SEVEN BRIDGES — Delray Beach, FL
+  Master: Seven Bridges HOA, Inc. (Sunbiz N14000002022)
+  True sub-associations: NONE
+  Note: 9 sections (Chelsea, Greenwich, Kensington, Madison, Newbury,
+  Oxford, Parkside, Preston, Woodlands) are plat identifiers under one
+  master HOA. No separately incorporated sub-associations found.
+
+------------------------------------------------------------
+TASK 4 — Sub-Community Inserts
+------------------------------------------------------------
+SQL file: scripts/output/master-sub-inserts.sql
+Communities to insert: 21
+  BallenIsles:  2 (both status=draft, property_type=Condo)
+  Evergrene:    2 (both status=draft, property_type=Condo)
+  Olympia:     17 (all status=draft, property_type=HOA)
+  Seven Bridges: 0 (no sub-associations exist)
+
+All inserts use ON CONFLICT (slug) DO UPDATE so it is safe to
+re-run if any records already exist.
+
+------------------------------------------------------------
+TASK 5 — Link Existing Subs
+------------------------------------------------------------
+SQL file: scripts/output/master-sub-inserts.sql (Steps 5-6)
+The script uses UPDATE ... FROM to link any pre-existing orphaned
+sub-community records that match known sub names but lack parent_id.
+
+------------------------------------------------------------
+TASK 6 — Community Page UI
+------------------------------------------------------------
+File: app/community/[slug]/page.tsx
+Changes committed:
+  - Community interface: added parent_id, is_master; kept legacy fields
+  - effectiveParentId = parent_id ?? master_hoa_id ?? null
+  - isSub = is_sub_hoa || !!effectiveParentId
+  - Sub-communities fetched via BOTH parent_id and master_hoa_id,
+    merged and deduplicated
+  - Draft subs shown with grey "draft" badge on master pages
+  - Part-of banner: "Part of [Master Name]" with link to master profile
+  - Header badges: uses is_master flag and isSub derived value
+  - MasterHoaQuestion hidden when already linked as master or sub
+
+------------------------------------------------------------
+TASK 7 — Search Result Badges
+------------------------------------------------------------
+Files: app/search/page.tsx, app/api/communities-search/route.ts
+Changes committed:
+  - API SELECT now includes is_master, parent_id
+  - hoaType filter updated for new columns
+  - Main search cards: "Master Community" (navy) or "Sub-community"
+    (amber) badge as first chip in the badge row
+  - ZIP result cards: same badges added
+  - ZIP query updated to include is_master, parent_id, is_sub_hoa
+
+------------------------------------------------------------
+EXPECTED RESULTS AFTER SQL EXECUTION
+------------------------------------------------------------
+Master     | Subs Linked | Notes
+-----------|-------------|--------------------------------
+BallenIsles|      2      | Palm Bay Club, Palms at BI
+Evergrene  |      2      | Mansions at Evergrene x2
+Olympia    |     17      | All 17 villages
+Seven Bridges|    0      | Single master HOA, no subs
+
+Total masters:    4
+Total new subs:  21
+Total unlinked:   0 (Seven Bridges has no subs by design)
+
+------------------------------------------------------------
+HOW TO EXECUTE
+------------------------------------------------------------
+1. Go to https://app.supabase.com → hoa-agent project
+2. Settings → API → copy service_role key → add to .env.local
+3. Open SQL Editor (left sidebar)
+4. Run: supabase/migrations/20260501_master_sub_hoa.sql
+5. Run: scripts/output/master-sub-inserts.sql
+6. Run: scripts/output/master-sub-verify.sql  ← confirms results
+7. Check verify output matches the Expected Results table above
+
+------------------------------------------------------------
+COMMITS
+------------------------------------------------------------
+3bfe504  feat: add master/sub HOA migration + audit SQL (Tasks 1-2)
+60f22eb  feat: master/sub research log + complete insert/link SQL (Tasks 3-5)
+63bb4f9  feat: update community page to use parent_id/is_master (Task 6)
+b7a2fea  feat: add master/sub badges to search results (Task 7)
+
+============================================================

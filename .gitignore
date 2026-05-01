@@ -40,10 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local CAMA / PBC analysis outputs (binary/large files excluded)
+# local CAMA / PBC analysis outputs (bulk data files excluded)
 /scripts/output/*.json
 /scripts/output/*.csv
-/scripts/output/*.txt
+/scripts/output/dry-run-emails.txt
 /scripts/output/lighthouse*
 
 # Google OAuth credentials — never commit these
