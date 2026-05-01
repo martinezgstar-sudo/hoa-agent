@@ -55,6 +55,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://api.mapbox.com" />
+        <link rel="preconnect" href="https://events.mapbox.com" />
+        <link rel="dns-prefetch" href="https://api.mapbox.com" />
+      </head>
       <body className="min-h-full flex flex-col">{children}<Analytics /></body>
     </html>
   );

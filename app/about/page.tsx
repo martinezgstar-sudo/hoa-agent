@@ -82,37 +82,20 @@ export default function AboutPage() {
             'Monthly HOA fees — minimum, maximum, and median based on observed data',
             'Restrictions — short-term rentals, pets, vehicles, and rental approval requirements',
             'Management company name and contact',
-            'Entity status from Florida Division of Corporations filings',
-            'Litigation history from CourtListener federal and state court records',
+            'Entity status and registration details',
+            'Litigation history and active court cases',
             'News reputation scoring from aggregated media coverage',
-            'Special assessment signals from public records and news',
+            'Special assessment signals',
             'Resident reviews and ratings from verified community members',
           ].map((item) => (
             <li key={item} style={{ fontSize: '14px', color: '#444', lineHeight: 1.7 }}>{item}</li>
           ))}
         </ul>
 
-        <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#1B2B6B', marginBottom: '14px', letterSpacing: '-0.01em' }}>
-          Data sources
-        </h2>
-        <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.8, marginBottom: '28px' }}>
-          HOA Agent pulls from multiple public sources and updates them regularly:
+        <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.8, marginBottom: '36px' }}>
+          HOA Agent aggregates publicly available information to give you a clear picture of any community before you commit.
+          We update our data regularly so you can research with confidence.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', marginBottom: '36px' }}>
-          {[
-            { source: 'CourtListener', desc: 'Federal and Florida state court records' },
-            { source: 'NewsAPI', desc: 'Florida HOA news from major outlets' },
-            { source: 'Florida Division of Corporations', desc: 'Entity status and registered agents' },
-            { source: 'Public property records', desc: 'Address, parcel, and ownership data' },
-            { source: 'The Guardian', desc: 'Historical HOA and condo news archive' },
-            { source: 'Resident submissions', desc: 'Verified fee and restriction data' },
-          ].map((s) => (
-            <div key={s.source} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#1a1a1a', marginBottom: '4px' }}>{s.source}</div>
-              <div style={{ fontSize: '12px', color: '#888' }}>{s.desc}</div>
-            </div>
-          ))}
-        </div>
 
         <div style={{ backgroundColor: '#FFFBF0', border: '1px solid #F5E6C8', borderRadius: '12px', padding: '20px 24px', marginBottom: '40px' }}>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#854F0B', marginBottom: '8px' }}>Disclaimer</div>

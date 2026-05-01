@@ -1,8 +1,17 @@
 import { supabase } from '@/lib/supabase'
-import GuideForm from '@/app/components/GuideForm'
-import HomeSearch from '@/app/components/HomeSearch'
 import NavBar from '@/app/components/NavBar'
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
+
+const HomeSearch = dynamic(() => import('@/app/components/HomeSearch'), {
+  loading: () => (
+    <div style={{ maxWidth: '560px', margin: '0 auto 20px', width: '100%' }}>
+      <div style={{ height: '44px', backgroundColor: '#f0f0f0', borderRadius: '8px', width: '100%' }} />
+    </div>
+  ),
+})
+
+const GuideForm = dynamic(() => import('@/app/components/GuideForm'))
 
 export const metadata: Metadata = {
   title: 'HOA Agent — Know the HOA Before You Commit',
