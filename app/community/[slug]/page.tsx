@@ -77,8 +77,12 @@ interface Community {
   news_reputation_updated_at: string | null
   city_verified?: boolean
   website_url?: string
+  // master/sub HOA columns (new canonical names)
+  parent_id?: string | null
+  is_master?: boolean
+  // legacy columns kept for backward compatibility
   is_sub_hoa?: boolean
-  master_hoa_id?: string
+  master_hoa_id?: string | null
 }
 
 async function getCommunity(slug: string) {
@@ -135,24 +139,43 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   const commentFormId = 'leave-review'
 
-  // Master HOA data
+  // Resolve the effective parent id — prefer new parent_id, fall back to legacy master_hoa_id
+  const effectiveParentId = community.parent_id ?? community.master_hoa_id ?? null
+  const isSub = !!(community.is_sub_hoa || effectiveParentId)
+
+  // Master HOA data (shown on sub-community pages)
   let masterHoa: any = null
-  if (community.is_sub_hoa && community.master_hoa_id) {
+  if (isSub && effectiveParentId) {
     const { data } = await supabase
       .from('communities')
       .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,city')
-      .eq('id', community.master_hoa_id)
+      .eq('id', effectiveParentId)
       .single()
     masterHoa = data
   }
 
-  // Sub-communities data (if this is a master HOA)
-  const { data: subCommunities } = await supabase
+  // Sub-communities (shown on master pages)
+  // Query by parent_id first, fall back to master_hoa_id for legacy records
+  const subByParent = await supabase
     .from('communities')
-    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count')
-    .eq('master_hoa_id', community.id)
-    .eq('status', 'published')
+    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count,status')
+    .eq('parent_id', community.id)
     .order('canonical_name', { ascending: true })
+
+  const subByLegacy = await supabase
+    .from('communities')
+    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count,status')
+    .eq('master_hoa_id', community.id)
+    .order('canonical_name', { ascending: true })
+
+  // Merge, deduplicate by id, include both draft and published so master page
+  // always shows complete picture (draft subs show a status badge)
+  const subMap = new Map<string, any>()
+  for (const s of [...(subByParent.data ?? []), ...(subByLegacy.data ?? [])]) {
+    subMap.set(s.id, s)
+  }
+  const subCommunities = Array.from(subMap.values())
+    .sort((a, b) => a.canonical_name.localeCompare(b.canonical_name))
 
   const encodedCity = encodeURIComponent(community.city || '')
   const breadcrumbJsonLd = {
@@ -243,18 +266,23 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <span style={{color: '#1a1a1a', fontWeight: '500'}}>{community.canonical_name}</span>
         </div>
 
-        {/* MASTER HOA BANNER — slim bar, no card chrome */}
-        {community.master_hoa_id && (
+        {/* PART-OF BANNER — shown on sub-community pages */}
+        {isSub && masterHoa && (
           <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', borderTop: '1px solid #b8e5d4', borderBottom: '1px solid #b8e5d4', borderRadius: 0, padding: '8px 12px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             <div style={{fontSize: '12px', color: '#1B2B6B', lineHeight: '1.45'}}>
-              <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Master association.</span>
+              <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Part of {masterHoa.canonical_name}.</span>
               Verify both association fee structures before purchasing.
             </div>
-            {masterHoa?.slug && (
             <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', color: '#1D9E75', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', whiteSpace: 'nowrap', flexShrink: 0}}>
               View master HOA →
             </a>
-            )}
+          </div>
+        )}
+        {/* Legacy fallback: parent known but not fetched */}
+        {isSub && !masterHoa && effectiveParentId && (
+          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', padding: '8px 12px', marginBottom: '12px', fontSize: '12px', color: '#1B2B6B'}}>
+            <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Sub-community.</span>
+            This community is part of a master HOA. Verify both fee structures before purchasing.
           </div>
         )}
 
@@ -262,7 +290,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px'}}>
             <div style={{flex: 1, minWidth: '220px'}}>
-              {community.is_sub_hoa && (
+              {isSub && (
                 <div style={{display:'inline-block',fontSize:'10px',padding:'2px 8px',borderRadius:'999px',backgroundColor:'#FAEEDA',color:'#854F0B',marginBottom:'6px',maxWidth:'100%'}}>Sub-association</div>
               )}
               <div style={{display:'flex',alignItems:'center',gap:'8px',flexWrap:'wrap',marginBottom:'6px'}}>
@@ -280,8 +308,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{display: 'flex', gap: '6px', flexWrap: 'wrap'}}>
              {community.property_type && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#E6F1FB', color: '#0C447C'}}>{community.property_type}</span>}
                 {community.unit_count && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#555'}}>{community.unit_count} units</span>}
-                {subCommunities && subCommunities.length > 0 && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>}
-                {community.is_sub_hoa && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>Sub-community</span>}
+                {(community.is_master || subCommunities.length > 0) && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>}
+                {isSub && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>Sub-community</span>}
               </div>
             </div>
             <div style={{textAlign: 'right', minWidth: '130px', width:'100%', maxWidth:'220px'}}>
@@ -296,7 +324,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#FAEEDA', border: '1px solid #EF9F27', borderRadius: '8px', padding: '10px 14px', marginBottom: '12px', fontSize: '12px', color: '#633806', lineHeight: '1.5'}}>
           <strong>Data transparency:</strong> This profile combines public records and resident-submitted data. Each field is labeled by source. Unverified data is clearly marked.
         </div>
-        {!community.master_hoa_id && !community.is_sub_hoa && (
+        {!isSub && !community.is_master && subCommunities.length === 0 && (
           <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
         )}
 
@@ -428,12 +456,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         )}
 
         {/* SUB-COMMUNITIES HUB SECTION — shown on master HOA pages */}
-        {subCommunities && subCommunities.length > 0 && (
+        {subCommunities.length > 0 && (
           <div style={{backgroundColor: '#fff', border: '1px solid #1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px'}}>
-            <div>
+              <div>
                 <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Communities within {community.canonical_name}</div>
-                <div style={{fontSize: '12px', color: '#888', marginTop: '2px'}}>{subCommunities.length} sub-communities</div>
+                <div style={{fontSize: '12px', color: '#888', marginTop: '2px'}}>{subCommunities.length} sub-communit{subCommunities.length === 1 ? 'y' : 'ies'}</div>
               </div>
               <span style={{fontSize: '11px', padding: '3px 10px', borderRadius: '20px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>
             </div>
@@ -441,11 +469,16 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               {subCommunities.map((sub: any) => (
                 <a key={sub.id} href={'/community/' + sub.slug} style={{textDecoration: 'none'}}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f9f9f9', borderRadius: '8px', padding: '10px 14px', cursor: 'pointer'}}>
-                    <div>
-                      <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a', marginBottom: '2px'}}>{sub.canonical_name}</div>
+                    <div style={{flex: 1, minWidth: 0}}>
+                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px'}}>
+                        <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a'}}>{sub.canonical_name}</div>
+                        {sub.status === 'draft' && (
+                          <span style={{fontSize: '9px', padding: '1px 6px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#888', flexShrink: 0}}>draft</span>
+                        )}
+                      </div>
                       <div style={{fontSize: '11px', color: '#888'}}>{sub.property_type || 'HOA'}{sub.unit_count ? ' · ' + sub.unit_count + ' units' : ''}</div>
                     </div>
-                    <div style={{textAlign: 'right', flexShrink: 0}}>
+                    <div style={{textAlign: 'right', flexShrink: 0, marginLeft: '12px'}}>
                       <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a'}}>{sub.monthly_fee_min && sub.monthly_fee_max ? '$' + sub.monthly_fee_min + '–$' + sub.monthly_fee_max + '/mo' : 'Fee unknown'}</div>
                       <div style={{fontSize: '11px', color: '#1D9E75'}}>View profile →</div>
                     </div>
