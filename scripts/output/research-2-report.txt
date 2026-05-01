@@ -1,0 +1,177 @@
+============================================================
+HOA Agent — Focused Research Run Report
+Date: 2026-05-01
+Communities Targeted: 2
+============================================================
+
+SELECTION METHOD
+  Query: published communities, management_company IS NULL,
+         monthly_fee_min IS NULL, city IS NOT NULL,
+         ordered by canonical_name ASC, limit 5.
+  Skipped: "10080 COMMERCIAL CONDO *(***)" — CAMA artifact
+  Skipped: "101 BUILDING COND *"            — CAMA artifact
+  Skipped: "101 LOFTS CONDOMINIUM***"       — CAMA artifact (asterisks)
+
+  Selected:
+    1. 10 Palms North Townhomes Homeowners' Association, Inc.
+       ID: 930ccde6-3e3e-4000-92f8-09cabbd17637 | Delray Beach, FL
+    2. 10 Palms South Townhomes Homeowners' Association, Inc.
+       ID: 33fb0786-9e04-4cd6-8619-aea4f3a0ad77 | Delray Beach, FL
+
+============================================================
+COMMUNITY 1 — 10 PALMS NORTH TOWNHOMES
+============================================================
+
+Sources checked: 10 (+ ~15 follow-up fetches)
+
+  1.  DDG: "10 Palms North Townhomes" Delray Beach HOA
+      → No results for target HOA
+  2.  DDG: "10 Palms North" Delray Beach "homeowners association" management
+      → No results for target HOA
+  3.  DDG: "10 Palms North" Delray Beach townhomes fee monthly
+      → No results for target HOA
+  4.  DDG: "10 Palms North" Delray Beach site:yelp.com OR site:hoamanagement.com
+      → No results
+  5.  Sunbiz (search.sunbiz.org)
+      → HTTP 403 Forbidden — blocked programmatic access
+      → Entity confirmed via indirect references (HOA aggregators cite both
+        "10 Palms North" and "10 Palms South" as registered FL HOAs)
+  6.  Florida DBPR (myfloridalicense.com)
+      → HTTP 403 / access denied
+  7.  DDG: "10 Palms North" Delray Beach Zillow OR Realtor OR Trulia
+      → No subdivision listing found
+  8.  DDG: "10 Palms North Townhomes" Delray Beach FL 33444/33445/33446/33483/33484
+      → No results for target HOA
+  9.  DDG: "10 Palms North" Delray Beach management company contact
+      → No management company identified
+  10. DDG: "10 Palms" Delray Beach North South townhomes HOA association
+      → Confirmed entity exists; no contact/fee data surfaced
+
+FINDINGS:
+  management_company : NULL (not found)
+  hoa_website        : NULL (not found)
+  phone              : NULL (not found)
+  email              : NULL (not found)
+  unit_count         : NULL (not found)
+  monthly_fee_min    : NULL (not found)
+  amenities          : NULL (not found)
+  pet_restriction    : NULL (not found)
+  rental_approval    : NULL (not found)
+  age_restricted     : NULL (not found)
+  gated              : NULL (not found)
+
+Fields updated: 0
+
+============================================================
+COMMUNITY 2 — 10 PALMS SOUTH TOWNHOMES
+============================================================
+
+Sources checked: 10 (+ ~25 follow-up fetches)
+
+  1.  DDG: "10 Palms South Townhomes" Delray Beach HOA
+      → No results for target HOA
+  2.  DDG: "10 Palms South" Delray Beach "homeowners association" management
+      → No results
+  3.  DDG: "10 Palms South" Delray Beach townhomes fee monthly
+      → No results
+  4.  DDG: "10 Palms South" Delray Beach site:yelp.com OR site:hoamanagement.com
+      → No results
+  5.  Sunbiz (search.sunbiz.org)
+      → HTTP 403 Forbidden — blocked programmatic access
+  6.  Florida DBPR (myfloridalicense.com)
+      → HTTP 403 / access denied
+  7.  DDG: "10 Palms South" Delray Beach Zillow OR Realtor OR Trulia
+      → No subdivision listing found
+  8.  DDG: "10 Palms South Townhomes" Delray Beach FL 33444/33445/33446/33483/33484
+      → No results for target HOA
+  9.  DDG: "10 Palms South" Delray Beach management company contact
+      → No management company identified
+  10. DDG: "10 Palms" Delray Beach North South townhomes HOA association
+      → Confirmed entity exists; no contact/fee data surfaced
+
+FINDINGS:
+  management_company : NULL (not found)
+  hoa_website        : NULL (not found)
+  phone              : NULL (not found)
+  email              : NULL (not found)
+  unit_count         : NULL (not found)
+  monthly_fee_min    : NULL (not found)
+  amenities          : NULL (not found)
+  pet_restriction    : NULL (not found)
+  rental_approval    : NULL (not found)
+  age_restricted     : NULL (not found)
+  gated              : NULL (not found)
+
+Fields updated: 0
+
+============================================================
+ROOT CAUSE ANALYSIS
+============================================================
+
+Two compounding problems prevented data extraction:
+
+1. PROGRAMMATIC BLOCKS
+   Every authoritative Florida HOA data source returns HTTP 403 or
+   equivalent when accessed via automated requests:
+     - search.sunbiz.org           → 403
+     - myfloridalicense.com        → 403
+     - florida-hoa.net             → 403
+     - floridacommunitynetwork.net → 403
+     - communitypay.us             → 403
+     - pbcpao.gov (PAPA)           → 500 / form-only
+   These sites require browser-level sessions or JS rendering.
+
+2. NAME COLLISION
+   A newer luxury townhome development "10Palms" by Stamm Development
+   Group (10 units, 912-930 Palm Trail, Delray Beach FL 33483, built
+   2022-2023) dominates every web search for "10 Palms Delray Beach."
+   This development drowns out all references to the older "10 Palms
+   North" and "10 Palms South" HOA communities.
+
+============================================================
+RECOMMENDATIONS FOR MANUAL FOLLOW-UP
+============================================================
+
+Both communities can likely be filled in a single 10-minute manual
+browser session:
+
+STEP 1 — Sunbiz (2 min)
+  Go to: https://search.sunbiz.org
+  Search: "10 PALMS NORTH TOWNHOMES"
+  Search: "10 PALMS SOUTH TOWNHOMES"
+  Record: Document Number, Registered Agent name/address, Principal
+  address, Officers/Directors. The Principal address = HOA location.
+
+STEP 2 — PBCPAO (3 min)
+  Go to: https://pbcpao.gov → Search by Subdivision Name
+  Search: "10 PALMS NORTH"
+  Search: "10 PALMS SOUTH"
+  Record: Number of parcels (= unit_count), ZIP code (confirms which
+  of the 33444/45/46/83/84 ZIPs this is).
+
+STEP 3 — Management company (5 min)
+  Once you have the Sunbiz registered agent address or officers, search
+  for the management company name on:
+    - florida-hoa.net (browser)
+    - floridacommunitynetwork.net (browser)
+  Or call the registered agent directly to ask who manages the HOA.
+
+STEP 4 — Update DB
+  Run scripts/output/research-2-communities.sql in Supabase SQL Editor
+  (inserts the research_log audit rows), then UPDATE communities with
+  any data collected in Steps 1-3.
+
+============================================================
+SUMMARY
+============================================================
+
+  Communities researched : 2
+  Fields filled          : 0  (no data extractable via automation)
+  Sources per community  : 10+ (all sources checked; most blocked)
+  DB updates written     : 0  (research-2-communities.sql = log only)
+  research_log rows      : 2  (audit trail preserved)
+
+  Next action: Manual browser research (see recommendations above).
+  Estimated time to fill both communities: ~10 minutes manually.
+
+============================================================
