@@ -1,3 +1,19 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | HOA Agent',
+  description: 'HOA Agent privacy policy. Learn how we collect, use, and protect your data.',
+  openGraph: {
+    title: 'Privacy Policy | HOA Agent',
+    description: 'How HOA Agent collects and protects your data.',
+    url: 'https://hoa-agent.com/privacy',
+    siteName: 'HOA Agent',
+    type: 'website',
+    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+  },
+  twitter: { card: 'summary', title: 'Privacy Policy | HOA Agent', description: 'HOA Agent privacy policy.' },
+}
+
 export default function PrivacyPage() {
   return (
     <main style={{fontFamily:'system-ui,sans-serif',backgroundColor:'#f9f9f9',minHeight:'100vh'}}>

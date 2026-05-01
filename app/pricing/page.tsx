@@ -1,3 +1,19 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Pricing | HOA Agent',
+  description: 'HOA Agent is free for homeowners. See what\'s included at every tier — free community profiles, resident reviews, fee data, and more.',
+  openGraph: {
+    title: 'Pricing | HOA Agent',
+    description: 'HOA Agent is free for homeowners. Browse fees, restrictions, litigation history and reviews at no cost.',
+    url: 'https://hoa-agent.com/pricing',
+    siteName: 'HOA Agent',
+    type: 'website',
+    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+  },
+  twitter: { card: 'summary', title: 'Pricing | HOA Agent', description: 'Free HOA community intelligence for Palm Beach County.' },
+}
+
 export default function PricingPage() {
   return (
     <main style={{fontFamily:'system-ui,sans-serif',backgroundColor:'#f9f9f9',minHeight:'100vh'}}>

@@ -1,3 +1,19 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service | HOA Agent',
+  description: 'HOA Agent terms of service. Informational use only — not legal advice.',
+  openGraph: {
+    title: 'Terms of Service | HOA Agent',
+    description: 'HOA Agent terms of service. Data is informational only, not legal advice.',
+    url: 'https://hoa-agent.com/terms',
+    siteName: 'HOA Agent',
+    type: 'website',
+    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+  },
+  twitter: { card: 'summary', title: 'Terms of Service | HOA Agent', description: 'HOA Agent terms of service.' },
+}
+
 export default function TermsPage() {
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>

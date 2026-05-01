@@ -5,8 +5,23 @@ import NavBar from '@/app/components/NavBar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  title: 'HOA Agent — Know the HOA Before You Commit',
   description:
     'Search 7,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+  openGraph: {
+    title: 'HOA Agent — Know the HOA Before You Commit',
+    description: 'Search 7,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews — free.',
+    url: 'https://hoa-agent.com',
+    siteName: 'HOA Agent',
+    type: 'website',
+    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'HOA Agent — Know the HOA Before You Commit',
+    description: 'Search Palm Beach County HOA communities. Fees, restrictions, litigation history, and reviews — free.',
+    images: ['https://hoa-agent.com/logo.png'],
+  },
 }
 
 export default async function Home() {
@@ -141,6 +156,64 @@ export default async function Home() {
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is HOA Agent?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. It aggregates fees, restrictions, management company details, litigation history, news reputation, and resident reviews from public records and resident-submitted data."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does HOA Agent cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HOA Agent is free for homeowners, buyers, and renters. Basic community profiles, fee data, restrictions, and resident reviews are all available at no cost."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does HOA Agent data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Data is sourced from Florida Division of Corporations public filings, CourtListener federal and state court records, NewsAPI and other news aggregators, public property records, and resident-submitted information. All sources are attributed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which cities in Palm Beach County does HOA Agent cover?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HOA Agent covers all cities in Palm Beach County including West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Delray Beach, Boynton Beach, Lake Worth, Wellington, and more — over 7,000 communities total."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the HOA data on HOA Agent legally accurate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HOA Agent provides data for informational purposes only and is not legal advice. Fees, restrictions, and governance documents can change. Always verify current information directly with the association or your attorney before making real estate decisions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a special assessment in an HOA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A special assessment is a one-time charge levied by an HOA or condo association above regular dues, typically to fund unexpected repairs, capital improvements, or reserve shortfalls. Under Florida law passed after the Surfside collapse, condo associations now face stricter requirements around structural inspections and reserve funding that have triggered large special assessments in many communities."
+              }
+            }
+          ]
+        })}}
+      />
 
     </main>
   )
