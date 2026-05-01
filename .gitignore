@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local CAMA / PBC analysis outputs
 /scripts/output/
+
+# Google OAuth credentials — never commit these
+scripts/credentials.json
+scripts/gmail-token.json
