@@ -27,10 +27,15 @@ UNMATCHED_FILE = os.path.join(OUTPUT_DIR, "pbc-gis-unmatched.csv")
 
 SIMILARITY_THRESHOLD = 0.75
 
-# Primary endpoint from the task brief
-BASE_URL = "https://maps.co.palm-beach.fl.us/arcgis/rest/services/open_data_v2/FeatureServer"
+# Primary endpoint (correct path — under OpenData folder)
+BASE_URL = "https://maps.co.palm-beach.fl.us/arcgis/rest/services/OpenData/open_data_v2/FeatureServer"
 
-# Fallback: Property Appraiser parcel endpoint (has SUBDIV_NAME)
+# Housing and Community Open Data — has dedicated Subdivisions layer (layer 9, SUBNAME field)
+HOUSING_URL = "https://maps.co.palm-beach.fl.us/arcgis/rest/services/OpenData/Housing_and_Community_Open_Data/MapServer"
+HOUSING_SUBDIV_LAYER = 9   # "Subdivisions" layer
+HOUSING_SUBDIV_FIELD = "SUBNAME"
+
+# Fallback: Property Appraiser parcel endpoint
 PA_URL = "https://maps.co.palm-beach.fl.us/arcgis/rest/services/PAO/Parcels/FeatureServer"
 
 # Target cities — map GIS city codes and full names to canonical values
@@ -52,9 +57,8 @@ for code, name in CITY_CODES.items():
 
 
 def get_supabase():
-    if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
-        print("ERROR: Missing SUPABASE env vars — cannot fetch communities")
-        sys.exit(1)
+    if not SUPABASE_URL or not SUPABASE_SERVICE_KEY or SUPABASE_SERVICE_KEY == "your_service_role_key_here":
+        raise RuntimeError("SUPABASE_SERVICE_ROLE_KEY is missing or is still a placeholder")
     return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
@@ -150,12 +154,60 @@ def query_layer_records(base_url: str, layer_id: int, fields: List[str],
         return []
 
 
+def fetch_all_paginated(base_url: str, layer_id: int, fields: List[str],
+                        where: str = "1=1", page_size: int = 1000) -> List[Dict]:
+    """Fetch all records from a layer using offset-based pagination."""
+    all_records: List[Dict] = []
+    offset = 0
+    while True:
+        url = f"{base_url}/{layer_id}/query"
+        params = {
+            "where": where,
+            "outFields": ",".join(fields),
+            "returnGeometry": "false",
+            "resultRecordCount": page_size,
+            "resultOffset": offset,
+            "f": "json",
+        }
+        try:
+            r = requests.get(url, params=params, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+        except Exception as e:
+            print(f"  Pagination error at offset {offset}: {e}")
+            break
+        batch = [feat.get("attributes", {}) for feat in data.get("features", [])]
+        all_records.extend(batch)
+        print(f"  Fetched {len(all_records)} records so far (batch={len(batch)})...")
+        if len(batch) < page_size:
+            break
+        offset += page_size
+        time.sleep(0.5)
+    return all_records
+
+
+def fetch_housing_subdivisions() -> List[Dict]:
+    """Pull all records from the dedicated Housing/Subdivisions layer (SUBNAME + CTY)."""
+    print(f"  Fetching from Housing Subdivisions layer (all pages)...")
+    records = fetch_all_paginated(HOUSING_URL, HOUSING_SUBDIV_LAYER,
+                                  [HOUSING_SUBDIV_FIELD, "CTY"])
+    results: List[Dict] = []
+    for rec in records:
+        name = (rec.get(HOUSING_SUBDIV_FIELD) or "").strip()
+        if not name:
+            continue
+        # CTY here is a numeric code; we can't easily map to city name without
+        # a reference table, so we leave city as None for this source.
+        results.append({"name": name, "city": None, "source_field": HOUSING_SUBDIV_FIELD})
+    return results
+
+
 def find_subdiv_layer(base_url: str, layers: List[Dict]) -> Tuple[Optional[int], Optional[str]]:
     """
     Search all layers for a SUBDIV_NAME (or similar) field.
     Returns (layer_id, field_name) or (None, None).
     """
-    candidates = ["SUBDIV_NAME", "SUBDIVISION", "SUBDIV", "SUB_NAME", "SUBDVNAME",
+    candidates = ["SUBDIV_NAME", "SUBNAME", "SUBDIVISION", "SUBDIV", "SUB_NAME", "SUBDVNAME",
                   "SUBDIVISION_NAME", "NAME", "PLACE_NAME", "COMMUNITY"]
     for layer in layers:
         lid = layer.get("id")
@@ -318,26 +370,38 @@ def deduplicate(records: List[Dict], key: str) -> List[Dict]:
     return out
 
 
-def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    print("=== PBC GIS Subdivision Fetch ===\n")
+RAW_FILE = os.path.join(OUTPUT_DIR, "pbc-gis-raw.json")
 
-    # Step 1: Fetch communities from Supabase
-    print("Fetching communities from Supabase...")
-    supabase = get_supabase()
-    communities = fetch_communities(supabase)
-    target_cities_communities = [
-        c for c in communities
-        if (c.get("city") or "") in CITY_NAMES
-    ]
-    print(f"  Total published communities: {len(communities)}")
-    print(f"  In target cities: {len(target_cities_communities)}\n")
 
-    # Step 2: Discover layers in primary endpoint
-    subdivisions = []
+def fetch_gis_subdivisions() -> Tuple[List[Dict], bool]:
+    """
+    Hit the ArcGIS endpoints and return (subdivisions, found_subdiv_layer).
+    Priority order:
+      1. Housing_and_Community_Open_Data/MapServer layer 9 (SUBNAME — 10k+ records)
+      2. open_data_v2/FeatureServer layer scan
+      3. PAO/Parcels scan
+      4. Situs Address fallback (street name proxy)
+    Does NOT require Supabase — safe to call before auth.
+    """
+    subdivisions: List[Dict] = []
     found_subdiv_layer = False
 
-    print(f"Discovering layers in primary endpoint: {BASE_URL}")
+    # ── Priority 1: Housing Subdivisions layer (best source) ────────────────
+    print(f"Checking Housing Subdivisions layer: {HOUSING_URL} / layer {HOUSING_SUBDIV_LAYER}")
+    try:
+        raw = fetch_housing_subdivisions()
+        if raw:
+            subdivisions.extend(raw)
+            found_subdiv_layer = True
+            print(f"  Got {len(raw)} records from Housing Subdivisions layer")
+    except Exception as e:
+        print(f"  Housing layer failed: {e}")
+
+    if found_subdiv_layer:
+        return subdivisions, found_subdiv_layer
+
+    # ── Priority 2: Scan open_data_v2 layers ────────────────────────────────
+    print(f"\nDiscovering layers in primary endpoint: {BASE_URL}")
     layers = discover_layers(BASE_URL)
     print(f"  Found {len(layers)} layers")
 
@@ -346,9 +410,8 @@ def main():
         if layer_id is not None:
             found_subdiv_layer = True
             print(f"\nUsing layer {layer_id} field '{subdiv_field}'")
-            # Check for a city field
             fields = get_layer_fields(BASE_URL, layer_id)
-            city_field = next(
+            city_field: Optional[str] = next(
                 (f for f in ["CITY", "CTY", "MUNICIPALITY", "MUNI"] if f in fields),
                 None
             )
@@ -357,9 +420,9 @@ def main():
             subdivisions.extend(raw)
             print(f"  Fetched {len(raw)} records")
 
-    # Step 3: Try PAO/Parcels fallback if SUBDIV_NAME not found
+    # ── Priority 3: PAO/Parcels scan ────────────────────────────────────────
     if not found_subdiv_layer:
-        print(f"\nNo SUBDIV_NAME found in primary endpoint. Trying PAO Parcels: {PA_URL}")
+        print(f"\nTrying PAO Parcels: {PA_URL}")
         pa_layers = discover_layers(PA_URL)
         print(f"  Found {len(pa_layers)} layers")
         if pa_layers:
@@ -375,25 +438,63 @@ def main():
                 subdivisions.extend(raw)
                 print(f"  Fetched {len(raw)} records")
 
-    # Step 4: Last resort — use Situs Address layer (layer 0 of primary)
+    # ── Priority 4: Situs Address fallback ──────────────────────────────────
     if not found_subdiv_layer or not subdivisions:
-        print("\nNo subdivision field found. Using Situs Address layer as fallback.")
-        situs_layer = next((l for l in layers if "situs" in l.get("name", "").lower()), None)
-        if situs_layer is None and layers:
-            situs_layer = layers[0]  # default to layer 0
+        print("\nNo subdivision layer found. Using Situs Address layer as last resort.")
+        layers_for_fallback = layers if layers else []
+        situs_layer = next(
+            (l for l in layers_for_fallback if "situs" in l.get("name", "").lower()), None
+        )
+        if situs_layer is None and layers_for_fallback:
+            situs_layer = layers_for_fallback[0]
         if situs_layer:
             raw = fetch_from_situs_address(BASE_URL, situs_layer["id"])
             subdivisions.extend(raw)
 
+    return subdivisions, found_subdiv_layer
+
+
+def main():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    print("=== PBC GIS Subdivision Fetch ===\n")
+
+    # ── Step 1: Fetch GIS data FIRST (no Supabase needed) ──────────────────
+    subdivisions, found_subdiv_layer = fetch_gis_subdivisions()
+
     if not subdivisions:
-        print("\nERROR: No subdivision data retrieved from any source. Exiting.")
+        print("\nERROR: No subdivision data retrieved from any GIS source. Exiting.")
         sys.exit(1)
 
-    # Deduplicate by name
     subdivisions = deduplicate(subdivisions, "name")
-    print(f"\nTotal unique subdivision names: {len(subdivisions)}")
+    print(f"\nTotal unique GIS subdivision names: {len(subdivisions)}")
 
-    # Step 5: Fuzzy match
+    # Save raw GIS data immediately so it's not lost even if Supabase fails
+    with open(RAW_FILE, "w") as f:
+        json.dump(subdivisions, f, indent=2)
+    print(f"Raw GIS data saved to: {RAW_FILE}")
+
+    # ── Step 2: Fetch communities from Supabase (may fail on placeholder key) ──
+    print("\nFetching communities from Supabase...")
+    try:
+        supabase = get_supabase()
+        communities = fetch_communities(supabase)
+    except SystemExit:
+        print("  Supabase auth failed — raw GIS data is saved. Exiting without matching.")
+        print(f"  Fix SUPABASE_SERVICE_ROLE_KEY in .env.local and re-run to complete matching.")
+        sys.exit(0)
+    except Exception as e:
+        print(f"  Supabase error: {e}")
+        print(f"  Raw GIS data saved to {RAW_FILE}. Re-run after fixing credentials.")
+        sys.exit(0)
+
+    target_cities_communities = [
+        c for c in communities
+        if (c.get("city") or "") in CITY_NAMES
+    ]
+    print(f"  Total published communities: {len(communities)}")
+    print(f"  In target cities: {len(target_cities_communities)}")
+
+    # ── Step 3: Fuzzy match ─────────────────────────────────────────────────
     print(f"\nFuzzy-matching against {len(communities)} communities (threshold={SIMILARITY_THRESHOLD})...")
     matches, unmatched = match_subdivisions(subdivisions, communities)
     print(f"  Matched:   {len(matches)}")
@@ -402,7 +503,7 @@ def main():
         rate = len(matches) / len(subdivisions) * 100
         print(f"  Match rate: {rate:.1f}%")
 
-    # Step 6: Save outputs
+    # ── Step 4: Save outputs ────────────────────────────────────────────────
     with open(MATCHES_FILE, "w") as f:
         json.dump(matches, f, indent=2)
     print(f"\nMatches saved to: {MATCHES_FILE}")
@@ -414,10 +515,10 @@ def main():
         writer.writerows(unmatched)
     print(f"Unmatched saved to: {UNMATCHED_FILE}")
 
-    # Step 7: Summary
+    # ── Step 5: Summary ─────────────────────────────────────────────────────
     print("\n=== Summary ===")
     print(f"  GIS source: {'SUBDIV_NAME layer' if found_subdiv_layer else 'Situs Address fallback'}")
-    print(f"  Total subdivisions: {len(subdivisions)}")
+    print(f"  Total GIS subdivisions: {len(subdivisions)}")
     print(f"  Matched: {len(matches)}")
     print(f"  Unmatched: {len(unmatched)}")
     if matches:
