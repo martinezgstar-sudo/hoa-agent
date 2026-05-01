@@ -555,6 +555,11 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 16px', textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '20px', lineHeight:'1.6'}}>
         <div>© {new Date().getFullYear()} HOA Agent LLC · All rights reserved · hoa-agent.com</div>
+        <div style={{marginTop: '12px'}}>
+          <a href={`/claim/${community.slug}`} style={{fontSize: '11px', color: '#bbb', textDecoration: 'none'}}>
+            Are you an HOA representative? Claim this page →
+          </a>
+        </div>
       </footer>
     </main>
   )
