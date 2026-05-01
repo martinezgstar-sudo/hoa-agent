@@ -163,6 +163,14 @@ export default async function Home() {
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
+        <div style={{marginTop: '12px', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap'}}>
+          <a href="/about" style={{color: '#888', textDecoration: 'none'}}>About</a>
+          <a href="/for-agents" style={{color: '#888', textDecoration: 'none'}}>For Agents</a>
+          <a href="/press" style={{color: '#888', textDecoration: 'none'}}>Press</a>
+          <a href="/advertise" style={{color: '#888', textDecoration: 'none'}}>Advertise</a>
+          <a href="/privacy" style={{color: '#888', textDecoration: 'none'}}>Privacy</a>
+          <a href="/terms" style={{color: '#888', textDecoration: 'none'}}>Terms</a>
+        </div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>
 
