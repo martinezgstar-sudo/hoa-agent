@@ -1,0 +1,235 @@
+============================================================
+HOA Agent — Master/Sub HOA Extended Audit Report
+Final Report — 2026-05-01
+============================================================
+
+STATUS: SQL GENERATED — AWAITING DB EXECUTION
+All SQL written to scripts/output/master-sub-extended-inserts.sql
+Run in Supabase SQL Editor after master-sub-inserts.sql.
+Supabase service role key is a placeholder locally.
+
+============================================================
+PART A — PREVIOUSLY LINKED COMMUNITIES (from master-sub-inserts.sql)
+============================================================
+
+BALLENISLES — Palm Beach Gardens, FL
+  Master:   BallenIsles Community Association, Inc.
+  Status:   is_master = true ✓
+  Sub-HOAs: 2
+    1. Palm Bay Club Condominium Association, Inc. (Sunbiz N00000004013)
+    2. The Palms at BallenIsles Condominium Association, Inc. (Sunbiz N95000004997)
+
+EVERGRENE — Palm Beach Gardens, FL
+  Master:   Evergrene Master Association, Inc. (Sunbiz N01000008777)
+  Status:   is_master = true ✓
+  Sub-HOAs: 2
+    1. The Mansions at Evergrene Condominium Association, Inc. (Sunbiz N02000000439)
+    2. The Mansions at Evergrene West Condominium Association, Inc. (Sunbiz N03000000353)
+
+OLYMPIA — Wellington, FL
+  Master:   Olympia Master HOA (Sunbiz N00000005303)
+  Status:   is_master = true ✓
+  Sub-HOAs: 17 (all independently chartered villages)
+    Bryden, Cooper, Danforth, Easton, Hamblin, Merriweather, Payson,
+    Phipps, Postley, Scribner, Shaughnessy, Stotesbury, Thomson,
+    Treanor, Waburton, Widener, Woodworth
+
+SEVEN BRIDGES — Delray Beach, FL
+  Master:   Seven Bridges HOA, Inc. (Sunbiz N14000002022)
+  Status:   is_master = true ✓
+  Sub-HOAs: 0 (9 sections are plat identifiers only — no separate HOAs)
+
+============================================================
+PART B — EXTENDED AUDIT (this session)
+============================================================
+
+------------------------------------------------------------
+PGA NATIONAL — Palm Beach Gardens, FL 33418
+------------------------------------------------------------
+Master:   PGA Property Owners Association, Inc.
+          Sunbiz 747410 | 4440 PGA Blvd Suite 308, PBG FL 33418
+Status:   to be set: is_master = true
+Structure: ~46 sub-HOAs under PGA-POA umbrella.
+           An inner "Championship POA" overlays the Eagleton section.
+
+Sub-HOAs inserted by this script (17 confirmed):
+  1.  Ironwood No. 1 HOA                           ~87 SF homes
+  2.  Prestwick Chase HOA (N03525)                 226 units (patio/TH)
+  3.  Marlwood Estates HOA (755359)                SF estates
+  4.  Townhomes of Marlwood HOA (767254)           townhomes
+  5.  Patio Homes at PGA National                  ~140 units
+  6.  Barclay Club at PGA National (N13295)        ~288 SF homes
+  7.  Bristol Club at PGA National (N22060)        SF homes
+  8.  Eagleton Lakes HOA (N19587)                  SF homes
+  9.  Eagleton Estates HOA (N29906)                SF homes
+  10. Glenwood HOA (750782)                        SF homes
+  11. Golf Villas at PGA National (N94000003461)   condos
+  12. Preston Courts at PGA National (N36993)      25 units
+  13. Villas of Burwick & Thurston (753030)        villas/TH
+  14. Club Cottages at PGA National                ~220 TH (built 1981)
+  15. Thurston at PGA National                     ~150 SF homes
+  16. Meadowbrook at PGA National                  ~76 condos
+  17. Coventry at PGA National                     58 SF homes
+
+Names from task brief — CLARIFIED:
+  Paloma          → STANDALONE community, NOT inside PGA National
+                    (~400 homes on PGA Blvd; Harbor Management)
+  Siena (Oaks)    → STANDALONE community, NOT inside PGA National
+                    (~300 homes between PGA Blvd & Northlake Blvd)
+  Shaughnessy     → Shaughnessy Village HOA in OLYMPIA (Wellington)
+                    — already handled in master-sub-inserts.sql
+  Seminole Landing→ SEPARATE community in North Palm Beach (33408),
+                    NOT related to PGA National — 65 estate homes
+  Rookery, Stratford, Wentworth, Whitehall, Garden Court
+                  → NOT FOUND in PGA National's 46 communities
+                    (verified against PGA-POA official community list)
+
+------------------------------------------------------------
+ABACOA — Jupiter, FL 33458
+------------------------------------------------------------
+Master:   Abacoa Property Owners' Assembly, Inc.
+          Sunbiz N96000005933 | 1031 Community Drive, Jupiter FL 33458
+Status:   to be set: is_master = true
+Structure: ~19-20 residential sub-HOAs + commercial districts
+
+Sub-HOAs inserted by this script (15 confirmed):
+  1.  Antigua at Town Center HOA (N02000009107)    ~280 TH
+  2.  Mallory Creek at Abacoa HOA (N06000003793)   ~581 homes
+  3.  Village at Abacoa Condo Assoc. (N04000006013)~413 condos
+  4.  Windsor Park Abacoa HOA (N06000010430)       ~380 homes
+  5.  Cambridge at Abacoa HOA (N01000000072)       ~209 units
+  6.  Tuscany at Abacoa HOA (N01000006205)         ~453 units
+  7.  Valencia at Abacoa HOA (N01000000067)        ~136 homes
+  8.  Osceola Woods at Abacoa HOA (N01000003459)   ~146 TH
+  9.  Somerset at Abacoa Condo Assoc. (N03000009144)~266 units
+  10. Canterbury Place at Abacoa HOA               ~317 units (144SFH+173TH)
+  11. Charleston Court at Abacoa HOA               ~192 TH (golf frontage)
+  12. Greenwich at Abacoa POA                       live/work TH
+  13. NewHaven at Abacoa HOA                       ~505 units
+  14. Martinique at Abacoa HOA                     ~456 units
+  15. The Island at Abacoa HOA                     ~176 units (134SFH+42TH)
+
+Names from task brief — CLARIFIED:
+  Botanica        → SEPARATE master community (NOT an Abacoa sub)
+                    Botanica/Sea Plum Master Association, Inc.
+                    ~540 homes, 3 sub-neighborhoods off Military Trail
+  Camellia        → NOT FOUND in Abacoa (exists only in Stuart, FL)
+  Heritage        → NOT FOUND in Abacoa
+  Homewood        → NOT FOUND in Abacoa
+  Legends at the Fields → NOT FOUND anywhere in Jupiter or Abacoa
+  Princeton Place → NOT FOUND in Abacoa
+
+------------------------------------------------------------
+IBIS GOLF & COUNTRY CLUB — West Palm Beach, FL 33412
+------------------------------------------------------------
+Master:   The Club at Ibis Property Owners' Association, Inc.
+          Sunbiz N39275 | 8225 Ibis Blvd, West Palm Beach FL 33412
+Status:   to be set: is_master = true
+Structure: ~33 separately incorporated neighborhood HOAs under POA
+           All buyers mandatory dual membership: POA + individual HOA
+
+Sub-HOAs inserted by this script (9 confirmed, with unit data):
+  1.  Sand Cay at Ibis HOA                         37 SF homes (confirmed)
+  2.  Bent Creek at Ibis HOA (N03000004169)        ~50 SF homes
+  3.  Grande at Ibis HOA (N97000001535)            ~70 SF homes
+  4.  Hawks Landing at Ibis HOA (N970000071410)    ~60 SF homes
+  5.  Larkspur Landing at Ibis HOA (N97000005347)  ~45 SF homes
+  6.  The Preserve at Ibis HOA (N42410)            ~80 SF homes
+  7.  Ibis Lakes HOA (N39277)                      ~60 SF homes
+  8.  Quail Meadow at Ibis HOA (N39276)            ~50 SF homes
+  9.  Terra Lago at Ibis HOA (N01000003956)        ~60 SF homes
+
+Additional neighborhoods confirmed (not inserted — entity #s not surfaced):
+  Bay Pointe, Blue Heron Bay, Cascaya, Crane's Pointe, Eagle's Isle,
+  Egrets (The), Falcon Green, Herongate, Heritage Club, Isla Vista,
+  La Strada, Legend Club, Monte Verde, Orchid Hammock, Orchid Reserve,
+  Osprey Creek, Sandhill Trace, Sandpiper Cove, Terra Lago,
+  Tradition Cove, Villagio, Woodlands (The)
+
+------------------------------------------------------------
+MIRASOL — Palm Beach Gardens, FL 33418
+------------------------------------------------------------
+Master:   Mirasol Club & Association, Inc.
+          Sunbiz N00000002392 | 8409 N. Military Trail #123, PBG FL 33410
+Status:   to be set: is_master = true
+Structure: 23 named villages; most have separate sub-HOAs.
+           Dual fee structure: master (~$700-800/mo) + sub (~$200-400/mo)
+
+Sub-HOAs inserted by this script (7 confirmed with entity #s):
+  1.  Esperanza at Mirasol POA (N00000007943)      ~45 SF homes
+  2.  Palacio at Mirasol POA (N02000001537)        ~40 SF homes
+  3.  Olivera at Mirasol POA (N01000007291)        41 SF homes (confirmed)
+  4.  Mariposa at Mirasol POA (N02000001540)       ~35 SF homes
+  5.  San Remo at Mirasol POA (N04000006401)       56 SF homes (confirmed)
+  6.  Siesta at Mirasol POA (N04000010103)         ~30 SF homes
+  7.  Mirasol I Condominium Association (N05000012248) ~40 condos
+
+IMPORTANT NOTE — Mirabella at Mirasol (N01000006194):
+  492 single-family homes across 3 internal sub-neighborhoods
+  (Sedona, Isle Verde, Condado). This is a SEPARATE standalone
+  gated community — NOT a sub-HOA of Mirasol Country Club.
+  Do NOT link Mirabella as a Mirasol sub.
+
+Additional Mirasol villages (23 total; most have own POAs):
+  Andalusia (~70), Bianca, Capri, Florenza (~33), Magdalena,
+  Monte Carlo (~49), Paradisio (~46), Playa Rienta, Porto Vecchio (~56),
+  Quantera, Riviera, Talavera, Terra Linda, Tranquilla, Via Verde,
+  Villa Vasari, Vizcaya Estates
+
+------------------------------------------------------------
+THE ACREAGE / LOXAHATCHEE
+------------------------------------------------------------
+Status:   NO MASTER HOA — confirmed. No records to create.
+
+The Acreage is a census-designated place in western Palm Beach County
+(~37 sq miles, ~1.25 acre lots). It has NO mandatory master HOA.
+
+Governing body: Indian Trail Improvement District (ITID) — a special
+taxing district maintaining roads and drainage. Not an HOA.
+
+Acreage Landowners Association (N92000000603): 501(c)(4) voluntary
+civic advocacy organization. NOT a mandatory HOA. No CC&Rs.
+
+Newer adjacent communities (Arden, Westlake) have their own HOAs
+but are NOT part of The Acreage's original platting/structure.
+
+============================================================
+EXPECTED RESULTS AFTER SQL EXECUTION
+============================================================
+
+Master              | New Subs | Notes
+--------------------|----------|-----------------------------------
+PGA National        |    17    | Wide range of confirmed sub-HOAs
+Abacoa              |    15    | All 15 confirmed Abacoa HOAs
+Ibis Golf & CC      |     9    | 9 of ~33 neighborhoods (confirmed)
+Mirasol             |     7    | 7 of 23 villages (entity #s found)
+
+Previously linked:
+BallenIsles         |     2    | Palm Bay Club, Palms at BI
+Evergrene           |     2    | Mansions at Evergrene x2
+Olympia             |    17    | All 17 villages
+Seven Bridges       |     0    | Single master HOA, no subs
+
+TOTAL new masters this session:  4
+TOTAL new sub-communities:      48
+TOTAL (all sessions combined):  52 subs + 8 master communities
+
+============================================================
+HOW TO EXECUTE
+============================================================
+1. Go to https://app.supabase.com → hoa-agent project
+2. Open SQL Editor (left sidebar)
+3. Run (if not already run): supabase/migrations/20260501_master_sub_hoa.sql
+4. Run (if not already run): scripts/output/master-sub-inserts.sql
+5. Run: scripts/output/master-sub-extended-inserts.sql
+6. Run: scripts/output/master-sub-verify.sql → confirms original 4 masters
+7. Run the verification query at the bottom of extended-inserts.sql
+8. Check verify output matches Expected Results table above
+
+============================================================
+COMMITS (this session)
+============================================================
+bc68486  feat: Part B nightly research pipeline (Tasks 5-9)
+[next]   feat: Part A extended master/sub SQL (Tasks 1-4, 48 new subs)
+
+============================================================

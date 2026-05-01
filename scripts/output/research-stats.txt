@@ -25,3 +25,49 @@ NOTE: This file is overwritten each time the cron runs.
       Persistent stats are stored in the research_stats table.
       Run the cron at /api/cron/research to populate.
 ============================================================
+
+============================================================
+MANUAL STATS QUERY (run in Supabase SQL Editor)
+============================================================
+
+SELECT
+  COUNT(*)                            AS total_published,
+  COUNT(management_company)           AS has_management,
+  COUNT(hoa_website)                  AS has_website,
+  COUNT(phone)                        AS has_phone,
+  COUNT(email)                        AS has_email,
+  COUNT(unit_count)                   AS has_units,
+  COUNT(monthly_fee_min)              AS has_fee,
+  COUNT(age_restricted)               AS has_age_restricted,
+  COUNT(gated)                        AS has_gated,
+  ROUND(COUNT(management_company) * 100.0 / COUNT(*), 1) AS pct_management,
+  ROUND(COUNT(hoa_website)        * 100.0 / COUNT(*), 1) AS pct_website,
+  ROUND(COUNT(unit_count)         * 100.0 / COUNT(*), 1) AS pct_units
+FROM communities
+WHERE status = 'published';
+
+-- Thin community count (5+ missing updatable fields)
+SELECT
+  COUNT(*)                                    AS total_published,
+  COUNT(*) FILTER (WHERE missing >= 5)        AS thin_5_plus,
+  COUNT(*) FILTER (WHERE missing >= 8)        AS thin_8_plus,
+  ROUND(COUNT(*) FILTER (WHERE missing >= 5) * 100.0 / COUNT(*), 1) AS pct_thin
+FROM (
+  SELECT (
+    CASE WHEN management_company IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN hoa_website        IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN phone              IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN email              IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN unit_count         IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN monthly_fee_min    IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN amenities          IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN pet_restriction    IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN rental_approval    IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN age_restricted     IS NULL THEN 1 ELSE 0 END +
+    CASE WHEN gated              IS NULL THEN 1 ELSE 0 END
+  ) AS missing
+  FROM communities
+  WHERE status = 'published'
+) sub;
+
+============================================================
