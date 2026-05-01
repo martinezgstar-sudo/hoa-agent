@@ -160,6 +160,51 @@ export default async function Home() {
         </div>
       </section>
 
+      <section style={{padding: '0 32px 48px', maxWidth: '680px', margin: '0 auto'}}>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px'}}>Frequently asked questions</div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '1px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e5e5'}}>
+          {[
+            {
+              q: 'What is HOA Agent?',
+              a: 'HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, litigation history, and resident reviews so buyers and residents can research any community before committing.',
+            },
+            {
+              q: 'Is HOA Agent free to use?',
+              a: 'Yes — completely free for homeowners, buyers, renters, and real estate professionals. Basic community profiles, fee data, restrictions, and resident reviews are available at no cost with no account required.',
+            },
+            {
+              q: 'How often is the data updated?',
+              a: 'Public records are refreshed on a weekly basis. Resident-submitted information is reviewed and added on an ongoing basis. Some communities have more data than others depending on available records.',
+            },
+            {
+              q: 'What counties does HOA Agent cover?',
+              a: 'HOA Agent currently covers Palm Beach County, Florida — over 7,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
+            },
+            {
+              q: 'Can I trust the litigation data?',
+              a: 'Litigation data is pulled from public court records and reflects what is publicly available at the time of the last update. It may not capture all cases or the current status of ongoing proceedings. Consult an attorney for legal advice before making real estate decisions.',
+            },
+            {
+              q: 'How do I claim my community page?',
+              a: 'HOA representatives and board members can claim their community page by visiting the community profile and clicking "Claim this page" at the bottom. We verify all claims before granting management access.',
+            },
+            {
+              q: 'What is a news reputation score?',
+              a: 'The news reputation score reflects how frequently a community has appeared in local and regional news coverage, and whether that coverage skewed positive or negative. A lower score may indicate the community has been in the news for disputes, lawsuits, or financial issues.',
+            },
+            {
+              q: 'What is a special assessment in an HOA?',
+              a: 'A special assessment is a one-time charge levied by an HOA or condo association above regular dues, typically to fund unexpected repairs, capital improvements, or reserve shortfalls. Under Florida law passed after the Surfside collapse, condo associations face stricter reserve funding requirements that have triggered large special assessments in many communities.',
+            },
+          ].map((item, i, arr) => (
+            <div key={item.q} style={{backgroundColor: '#fff', padding: '18px 20px', borderBottom: i < arr.length - 1 ? '1px solid #f0f0f0' : 'none'}}>
+              <div style={{fontSize: '14px', fontWeight: '600', color: '#1B2B6B', marginBottom: '6px'}}>{item.q}</div>
+              <div style={{fontSize: '13px', color: '#555', lineHeight: '1.65'}}>{item.a}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
@@ -183,50 +228,42 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "What is HOA Agent?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. It aggregates fees, restrictions, management company details, litigation history, news reputation, and resident reviews from public records and resident-submitted data."
-              }
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, litigation history, and resident reviews so buyers and residents can research any community before committing." }
             },
             {
               "@type": "Question",
-              "name": "How much does HOA Agent cost?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "HOA Agent is free for homeowners, buyers, and renters. Basic community profiles, fee data, restrictions, and resident reviews are all available at no cost."
-              }
+              "name": "Is HOA Agent free to use?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes — completely free for homeowners, buyers, renters, and real estate professionals. Basic community profiles, fee data, restrictions, and resident reviews are available at no cost with no account required." }
             },
             {
               "@type": "Question",
-              "name": "Where does HOA Agent data come from?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Data is sourced from Florida Division of Corporations public filings, CourtListener federal and state court records, NewsAPI and other news aggregators, public property records, and resident-submitted information. All sources are attributed."
-              }
+              "name": "How often is the data updated?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Public records are refreshed on a weekly basis. Resident-submitted information is reviewed and added on an ongoing basis. Some communities have more data than others depending on available records." }
             },
             {
               "@type": "Question",
-              "name": "Which cities in Palm Beach County does HOA Agent cover?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "HOA Agent covers all cities in Palm Beach County including West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Delray Beach, Boynton Beach, Lake Worth, Wellington, and more — over 7,000 communities total."
-              }
+              "name": "What counties does HOA Agent cover?",
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent currently covers Palm Beach County, Florida — over 7,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned." }
             },
             {
               "@type": "Question",
-              "name": "Is the HOA data on HOA Agent legally accurate?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "HOA Agent provides data for informational purposes only and is not legal advice. Fees, restrictions, and governance documents can change. Always verify current information directly with the association or your attorney before making real estate decisions."
-              }
+              "name": "Can I trust the litigation data?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Litigation data is pulled from public court records and reflects what is publicly available at the time of the last update. It may not capture all cases or the current status of ongoing proceedings. Consult an attorney for legal advice before making real estate decisions." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I claim my community page?",
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA representatives and board members can claim their community page by visiting the community profile and clicking 'Claim this page' at the bottom. We verify all claims before granting management access." }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a news reputation score?",
+              "acceptedAnswer": { "@type": "Answer", "text": "The news reputation score reflects how frequently a community has appeared in local and regional news coverage, and whether that coverage skewed positive or negative. A lower score may indicate the community has been in the news for disputes, lawsuits, or financial issues." }
             },
             {
               "@type": "Question",
               "name": "What is a special assessment in an HOA?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "A special assessment is a one-time charge levied by an HOA or condo association above regular dues, typically to fund unexpected repairs, capital improvements, or reserve shortfalls. Under Florida law passed after the Surfside collapse, condo associations now face stricter requirements around structural inspections and reserve funding that have triggered large special assessments in many communities."
-              }
+              "acceptedAnswer": { "@type": "Answer", "text": "A special assessment is a one-time charge levied by an HOA or condo association above regular dues, typically to fund unexpected repairs, capital improvements, or reserve shortfalls. Under Florida law passed after the Surfside collapse, condo associations face stricter reserve funding requirements that have triggered large special assessments in many communities." }
             }
           ]
         })}}
