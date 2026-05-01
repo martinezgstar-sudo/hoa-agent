@@ -8,6 +8,7 @@ import FirstReviewToast from '@/app/components/FirstReviewToast'
 import NavBar from '@/app/components/NavBar'
 import NewsFeed from '@/app/components/NewsFeed'
 import LegalCases from '@/app/components/LegalCases'
+import AssessmentSignalForm from '@/app/components/AssessmentSignalForm'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -337,15 +338,22 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the association directly.</div>
         </div>
 
-        {community.assessment_signal_count > 0 && (
-          <div style={{backgroundColor: '#fff', border: '1px solid #EF9F27', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
-              <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Special assessment signals</div>
+        <div style={{backgroundColor: '#fff', border: `1px solid ${community.assessment_signal_count > 0 ? '#EF9F27' : '#e5e5e5'}`, borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Special assessment signals</div>
+            {community.assessment_signal_count > 0 && (
               <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>{community.assessment_signal_count} signals found</span>
-            </div>
-            <div style={{fontSize: '13px', color: '#666', lineHeight: '1.5'}}>Assessment signals detected. Get the full report for complete details.</div>
+            )}
           </div>
-        )}
+          {community.assessment_signal_count > 0 ? (
+            <div style={{fontSize: '13px', color: '#666', lineHeight: '1.5', marginBottom: '4px'}}>Assessment signals detected. Get the full report for complete details.</div>
+          ) : (
+            <div style={{fontSize: '13px', color: '#888', lineHeight: '1.5'}}>
+              No assessment signals reported yet. Know something? Submit a signal below.
+            </div>
+          )}
+          <AssessmentSignalForm communityId={community.id} />
+        </div>
 
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Association details</div>
