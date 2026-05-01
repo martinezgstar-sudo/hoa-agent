@@ -48,7 +48,6 @@ export async function POST(request: NextRequest) {
       monthly_fee_median: 263,
       amenities: 'Pool, Clubhouse, Playground, Dog Park, Walking Trails, Gated',
       status: 'published',
-      published: true,
       subdivision_aliases: ['Pointe of Woods', 'Pointe of Woods PUD', 'Solcera'],
     }).select('id')
 

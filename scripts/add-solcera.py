@@ -66,7 +66,6 @@ def main():
         "monthly_fee_median": 263,
         "amenities": "Pool, Clubhouse, Playground, Dog Park, Walking Trails, Gated",
         "status": "published",
-        "published": True,
         "subdivision_aliases": ["Pointe of Woods", "Pointe of Woods PUD", "Solcera"],
     }
 
