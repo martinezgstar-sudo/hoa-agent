@@ -6,6 +6,9 @@ Finds communities with thin data and enriches them from public sources:
   - Florida DBPR community association manager search (myfloridalicense.com)
   - Community's own hoa_website (if populated)
   - Yelp via DuckDuckGo search
+  - PBC Code Enforcement (via search)
+  - Age-restricted (55+) and gated status detection
+  - Board meeting date extraction
 """
 import os
 import sys
@@ -65,7 +68,7 @@ def get_recently_researched_ids(supabase):
 def get_thin_communities(supabase, exclude_ids, limit=BATCH_SIZE):
     result = (
         supabase.table("communities")
-        .select("id, canonical_name, city, zip_code, county, state, management_company, hoa_website, phone, email, unit_count, monthly_fee_min, amenities, subdivision_aliases")
+        .select("id, canonical_name, city, zip_code, county, state, management_company, hoa_website, phone, email, unit_count, monthly_fee_min, monthly_fee_max, amenities, amenity_count, pet_restriction, rental_approval, str_restriction, age_restricted, gated, last_board_meeting, active_violations, subdivision_aliases")
         .eq("status", "published")
         .execute()
     )
@@ -219,6 +222,50 @@ def search_yelp(name, city):
     return web_search(query)
 
 
+def search_pbc_code_enforcement(name, city):
+    """Search PBC code enforcement records via DuckDuckGo."""
+    results = web_search(f"{name} Palm Beach County code enforcement violation")
+    # Also try the PBC complaint search portal
+    try:
+        pbc_url = (
+            "https://www.pbcgov.org/pzb/code/CodeComplaintSearch.aspx"
+            f"?owner={quote_plus(name)}"
+        )
+        resp = _SESSION.get(pbc_url, timeout=15)
+        if resp.status_code == 200 and len(resp.text) > 500:
+            snippet = resp.text[:2000] if not HAS_BS4 else BeautifulSoup(resp.text, "html.parser").get_text(separator=" ")[:2000]
+            results.append({"title": "PBC Code Enforcement Search", "snippet": snippet, "url": pbc_url})
+    except Exception:
+        pass
+    return results
+
+
+def search_board_meetings(name, city):
+    """Search for board meeting minutes to find last meeting date."""
+    queries = [
+        f"{name} HOA board meeting minutes {city}",
+        f"{name} homeowners association annual meeting 2024 2025",
+    ]
+    results = []
+    for q in queries:
+        results.extend(web_search(q))
+        time.sleep(0.5)
+    return results
+
+
+def search_age_gated_status(name, city):
+    """Search for age-restricted (55+) and gated community status."""
+    queries = [
+        f"{name} 55+ age restricted community {city} Florida",
+        f"{name} gated community {city} Florida guard gate",
+    ]
+    results = []
+    for q in queries:
+        results.extend(web_search(q))
+        time.sleep(0.5)
+    return results
+
+
 def ai_extract_community_data(community_name, city, search_results):
     if not ANTHROPIC_API_KEY or not search_results:
         return {}
@@ -251,9 +298,14 @@ def ai_extract_community_data(community_name, city, search_results):
                     "- monthly_fee_min: number (monthly dollar amount) or null\n"
                     "- monthly_fee_max: number (monthly dollar amount) or null\n"
                     "- amenities: comma-separated string or null\n"
+                    "- amenity_count: integer count of distinct amenities or null\n"
                     "- pet_restriction: string describing pet policy or null\n"
                     "- rental_approval: string describing rental rules or null\n"
-                    "- str_restriction: 'yes' if short-term rentals are banned, 'no' if allowed, or null\n\n"
+                    "- str_restriction: 'yes' if short-term rentals are banned, 'no' if allowed, or null\n"
+                    "- age_restricted: true if this is a 55+ or adult-only community, false if not, null if unknown\n"
+                    "- gated: true if this is a gated community with a gate or guard, false if not, null if unknown\n"
+                    "- last_board_meeting: ISO date string (YYYY-MM-DD) of the most recent board meeting found, or null\n"
+                    "- active_violations: integer count of active code enforcement violations found, or null\n\n"
                     "Only include fields you are confident about. Return only valid JSON."
                 ),
             }
@@ -334,6 +386,28 @@ def research_community(supabase, community):
         sources_used.append("yelp_ddg")
     time.sleep(1)
 
+    # 6. PBC Code Enforcement violations
+    pbc_results = search_pbc_code_enforcement(name, city)
+    if pbc_results:
+        all_results.extend(pbc_results)
+        sources_used.append("pbc_code_enforcement")
+    time.sleep(1)
+
+    # 7. Board meeting date search
+    meeting_results = search_board_meetings(name, city)
+    if meeting_results:
+        all_results.extend(meeting_results)
+        sources_used.append("board_meetings")
+    time.sleep(1)
+
+    # 8. Age-restricted / gated status — only search if fields are unknown
+    if community.get("age_restricted") is None or community.get("gated") is None:
+        age_gate_results = search_age_gated_status(name, city)
+        if age_gate_results:
+            all_results.extend(age_gate_results)
+            sources_used.append("age_gated_search")
+        time.sleep(1)
+
     print(f"  Sources checked: {sources_used} ({len(all_results)} total results)")
     sources_checked = list({r.get("url", "") for r in all_results if r.get("url")})
 
@@ -346,12 +420,22 @@ def research_community(supabase, community):
     updatable_fields = [
         "management_company", "hoa_website", "phone", "email",
         "unit_count", "monthly_fee_min", "monthly_fee_max",
-        "amenities", "pet_restriction", "rental_approval", "str_restriction",
+        "amenities", "amenity_count", "pet_restriction", "rental_approval", "str_restriction",
+        "age_restricted", "gated", "last_board_meeting", "active_violations",
     ]
     for field in updatable_fields:
-        if extracted.get(field) is not None and not community.get(field):
-            update_payload[field] = extracted[field]
-            fields_updated.append(field)
+        extracted_val = extracted.get(field)
+        if extracted_val is None:
+            continue
+        current_val = community.get(field)
+        # For boolean fields, only update if currently null (not false)
+        if field in ("age_restricted", "gated") and current_val is not None:
+            continue
+        # For all other fields, only update if currently null/empty
+        if field not in ("age_restricted", "gated") and current_val:
+            continue
+        update_payload[field] = extracted_val
+        fields_updated.append(field)
 
     if update_payload:
         supabase.table("communities").update(update_payload).eq("id", cid).execute()
