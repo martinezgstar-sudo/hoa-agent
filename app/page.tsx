@@ -30,8 +30,8 @@ export default async function Home() {
       <NavBar
         desktopLinks={[
           { href: '/search', label: 'Search' },
-          { href: '/search', label: 'Cities' },
-          { href: '/search', label: 'Browse' },
+          { href: '/city', label: 'Cities' },
+          { href: '/about', label: 'About' },
           { href: '/reports', label: 'Reports' },
         ]}
         shareHref="/search"
@@ -46,8 +46,15 @@ export default async function Home() {
         <HomeSearch />
 
         <div style={{display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap'}}>
-          {['West Palm Beach', 'Boca Raton', 'Jupiter', 'Wellington', 'Delray Beach', 'Boynton Beach'].map((hint) => (
-            <a key={hint} href={"/search?q=" + encodeURIComponent(hint)} style={{fontSize: '12px', padding: '5px 12px', borderRadius: '20px', border: '1px solid #e0e0e0', color: '#666', cursor: 'pointer', backgroundColor: '#fff', textDecoration: 'none'}}>{hint}</a>
+          {[
+            { label: 'West Palm Beach', href: '/city/west-palm-beach' },
+            { label: 'Boca Raton', href: '/city/boca-raton' },
+            { label: 'Jupiter', href: '/city/jupiter' },
+            { label: 'Delray Beach', href: '/city/delray-beach' },
+            { label: 'Boynton Beach', href: '/city/boynton-beach' },
+            { label: 'Wellington', href: '/search?q=Wellington' },
+          ].map((hint) => (
+            <a key={hint.label} href={hint.href} style={{fontSize: '12px', padding: '5px 12px', borderRadius: '20px', border: '1px solid #e0e0e0', color: '#666', cursor: 'pointer', backgroundColor: '#fff', textDecoration: 'none'}}>{hint.label}</a>
           ))}
         </div>
       </section>
