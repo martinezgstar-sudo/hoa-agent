@@ -272,6 +272,15 @@ def main():
         "condominium association Palm Beach",
         "community association lien Palm Beach",
         "HOA foreclosure Palm Beach County",
+        # Deep-research queries (task 12)
+        "HOA fraud Palm Beach",
+        "condo association special assessment Florida",
+        "HOA board recall Florida",
+        "homeowners association embezzlement Florida",
+        "community association manager fraud Florida",
+        "HOA discrimination Florida",
+        "condo termination Florida",
+        "bulk buyer condo Florida",
     ]
 
     for query in queries:
