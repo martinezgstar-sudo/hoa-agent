@@ -34,7 +34,7 @@ SUPABASE_URL = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
-BATCH_SIZE = 20
+BATCH_SIZE = 35
 SEARCH_COOLDOWN = 30  # days before re-researching a community
 
 
@@ -222,6 +222,33 @@ def search_yelp(name, city):
     return web_search(query)
 
 
+def search_nextdoor(name, city):
+    """Search Nextdoor public posts mentioning the community via DuckDuckGo."""
+    query = f'site:nextdoor.com "{name}" {city} Florida HOA'
+    results = web_search(query)
+    # Also try without quotes for broader match
+    if not results:
+        results = web_search(f"nextdoor {name} {city} Florida HOA residents")
+    return results
+
+
+def search_facebook_groups(name, city):
+    """Search Facebook public groups mentioning the community via DuckDuckGo."""
+    query = f'site:facebook.com "{name}" {city} Florida'
+    results = web_search(query)
+    if not results:
+        results = web_search(f"facebook group {name} {city} Florida HOA residents")
+    return results
+
+
+def search_hoa_management_sites(name, city):
+    """Search HOA management directory sites for community info."""
+    results = web_search(f'site:hoamanagement.com "{name}"')
+    if not results:
+        results = web_search(f"hoamanagement.com {name} {city} Florida management company")
+    return results
+
+
 def search_pbc_code_enforcement(name, city):
     """Search PBC code enforcement records via DuckDuckGo."""
     results = web_search(f"{name} Palm Beach County code enforcement violation")
@@ -386,21 +413,42 @@ def research_community(supabase, community):
         sources_used.append("yelp_ddg")
     time.sleep(1)
 
-    # 6. PBC Code Enforcement violations
+    # 6. Nextdoor public posts
+    nextdoor_results = search_nextdoor(name, city)
+    if nextdoor_results:
+        all_results.extend(nextdoor_results)
+        sources_used.append("nextdoor")
+    time.sleep(1)
+
+    # 7. Facebook public groups
+    fb_results = search_facebook_groups(name, city)
+    if fb_results:
+        all_results.extend(fb_results)
+        sources_used.append("facebook_groups")
+    time.sleep(1)
+
+    # 8. HOA management directory sites
+    mgmt_results = search_hoa_management_sites(name, city)
+    if mgmt_results:
+        all_results.extend(mgmt_results)
+        sources_used.append("hoa_management_sites")
+    time.sleep(1)
+
+    # 10. PBC Code Enforcement violations
     pbc_results = search_pbc_code_enforcement(name, city)
     if pbc_results:
         all_results.extend(pbc_results)
         sources_used.append("pbc_code_enforcement")
     time.sleep(1)
 
-    # 7. Board meeting date search
+    # 11. Board meeting date search
     meeting_results = search_board_meetings(name, city)
     if meeting_results:
         all_results.extend(meeting_results)
         sources_used.append("board_meetings")
     time.sleep(1)
 
-    # 8. Age-restricted / gated status — only search if fields are unknown
+    # 12. Age-restricted / gated status — only search if fields are unknown
     if community.get("age_restricted") is None or community.get("gated") is None:
         age_gate_results = search_age_gated_status(name, city)
         if age_gate_results:
