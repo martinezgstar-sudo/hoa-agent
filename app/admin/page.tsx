@@ -540,7 +540,9 @@ export default function AdminPage() {
     {key:"upload",label:"CSV Upload"},
     {key:"suggestions",label:"Suggestions"},
     {key:"field_updates",label:"Field Updates"},
+    {key:"research",label:"Research"},
     {key:"news",label:"News",href:"/admin/news"},
+    {key:"pending",label:"Pending ›",href:"/admin/pending"},
   ]
 
   return (
@@ -574,7 +576,138 @@ export default function AdminPage() {
         {tab === "communities" && <CommunitiesTab/>}
         {tab === "suggestions" && <SuggestionsTab/>}
         {tab === "field_updates" && <FieldSuggestionsTab/>}
+        {tab === "research" && <ResearchTab/>}
       </div>
     </main>
+  )
+}
+
+// ── Research Tools Tab ────────────────────────────────────────────────────────
+
+function ResearchTab() {
+  const [stats, setStats]       = useState<{pending_data_count:number,pending_fee_count:number,last_run:any}|null>(null)
+  const [running, setRunning]   = useState(false)
+  const [output, setOutput]     = useState("")
+  const [dryRun, setDryRun]     = useState(true)
+  const [batchSize, setBatchSize] = useState(10)
+
+  useEffect(() => {
+    fetch("/api/admin/research", { headers: { "x-admin-password": ADMIN_PASSWORD } })
+      .then(r => r.json())
+      .then(d => setStats(d))
+      .catch(() => {})
+  }, [])
+
+  async function runResearch() {
+    setRunning(true)
+    setOutput("Starting research batch…\n")
+    try {
+      const res = await fetch("/api/admin/research", {
+        method: "POST",
+        headers: { "x-admin-password": ADMIN_PASSWORD, "Content-Type": "application/json" },
+        body: JSON.stringify({ batch: batchSize, dry_run: dryRun })
+      })
+      const json = await res.json()
+      if (json.ok) {
+        setOutput(json.stdout || json.summary || "Done.")
+      } else {
+        setOutput("Error: " + (json.error || "unknown") + "\n" + (json.stderr || ""))
+      }
+    } catch (e: unknown) {
+      setOutput("Network error: " + String(e))
+    }
+    setRunning(false)
+  }
+
+  return (
+    <div>
+      <h2 style={{fontSize:"16px",fontWeight:"700",color:"#1a1a1a",marginBottom:"4px"}}>Research Tools</h2>
+      <p style={{fontSize:"13px",color:"#888",marginBottom:"24px"}}>
+        Run the comprehensive research pipeline against thin communities.
+        Government-sourced data auto-approves; listing fees and other data go to the pending review queue.
+      </p>
+
+      {/* Stats cards */}
+      {stats && (
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"24px"}}>
+          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
+            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Pending Data Items</div>
+            <div style={{fontSize:"28px",fontWeight:"700",color:"#1B2B6B"}}>{stats.pending_data_count ?? "—"}</div>
+          </div>
+          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
+            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Pending Fee Observations</div>
+            <div style={{fontSize:"28px",fontWeight:"700",color:"#1B2B6B"}}>{stats.pending_fee_count ?? "—"}</div>
+          </div>
+          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
+            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Last Run</div>
+            <div style={{fontSize:"13px",fontWeight:"600",color:"#333"}}>
+              {stats.last_run
+                ? new Date(stats.last_run.run_at).toLocaleString()
+                : "Never"}
+            </div>
+            {stats.last_run && (
+              <div style={{fontSize:"11px",color:"#888",marginTop:"4px"}}>
+                {stats.last_run.communities_researched} communities · {stats.last_run.fields_filled} fields
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Controls */}
+      <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px",marginBottom:"16px"}}>
+        <div style={{display:"flex",gap:"16px",alignItems:"flex-end",flexWrap:"wrap"}}>
+          <div>
+            <label style={{display:"block",fontSize:"11px",fontWeight:600,color:"#888",marginBottom:"6px",textTransform:"uppercase"}}>
+              Batch Size
+            </label>
+            <select value={batchSize} onChange={e => setBatchSize(Number(e.target.value))}
+              style={{padding:"8px 12px",borderRadius:"8px",border:"1px solid #e5e5e5",fontSize:"13px",backgroundColor:"#fff"}}>
+              {[5,10,20,50].map(n => <option key={n} value={n}>{n} communities</option>)}
+            </select>
+          </div>
+          <div>
+            <label style={{display:"block",fontSize:"11px",fontWeight:600,color:"#888",marginBottom:"6px",textTransform:"uppercase"}}>
+              Mode
+            </label>
+            <select value={dryRun ? "dry" : "live"}
+              onChange={e => setDryRun(e.target.value === "dry")}
+              style={{padding:"8px 12px",borderRadius:"8px",border:"1px solid #e5e5e5",fontSize:"13px",backgroundColor:"#fff"}}>
+              <option value="dry">Dry Run (log only)</option>
+              <option value="live">Live (write to DB)</option>
+            </select>
+          </div>
+          <button onClick={runResearch} disabled={running}
+            style={{padding:"9px 20px",borderRadius:"8px",border:"none",
+              backgroundColor: running ? "#ccc" : "#1B2B6B",
+              color:"#fff",fontSize:"13px",fontWeight:600,cursor:running?"not-allowed":"pointer"}}>
+            {running ? "Running…" : `▶ Run Research Batch (${batchSize} communities)`}
+          </button>
+          <a href="/admin/pending"
+            style={{padding:"9px 20px",borderRadius:"8px",border:"1px solid #e5e5e5",
+              color:"#1B2B6B",fontSize:"13px",fontWeight:600,textDecoration:"none",
+              backgroundColor:"#fff",display:"inline-block"}}>
+            View Pending Approvals →
+          </a>
+        </div>
+        {dryRun && (
+          <div style={{marginTop:"12px",fontSize:"12px",color:"#e65c00",backgroundColor:"#fff8f0",
+            padding:"8px 12px",borderRadius:"6px",border:"1px solid #ffd5a8"}}>
+            ⚠ Dry Run mode — findings will be logged but NOT written to the database.
+            Switch to Live mode to write auto-approvable data and queue pending items.
+          </div>
+        )}
+      </div>
+
+      {/* Output */}
+      {output && (
+        <div style={{backgroundColor:"#1a1a1a",borderRadius:"12px",padding:"16px",
+          fontFamily:"monospace",fontSize:"12px",color:"#e5e5e5",
+          whiteSpace:"pre-wrap",maxHeight:"500px",overflowY:"auto",
+          lineHeight:"1.6"}}>
+          {output}
+        </div>
+      )}
+    </div>
   )
 }
