@@ -138,13 +138,15 @@ export default async function FeeReportPage() {
         </p>
 
         <div style={{ display: 'flex', gap: '12px', marginBottom: '40px', flexWrap: 'wrap' }}>
-          <a
-            href="/api/reports/fee-report-csv"
-            download
-            style={{ fontSize: '13px', color: '#1D9E75', fontWeight: 600, textDecoration: 'none', border: '1px solid #1D9E75', padding: '6px 14px', borderRadius: '8px', display: 'inline-block' }}
+          <Link
+            href="/pricing"
+            style={{ fontSize: '13px', color: '#fff', fontWeight: 600, textDecoration: 'none', backgroundColor: '#1B2B6B', padding: '8px 16px', borderRadius: '8px', display: 'inline-block' }}
           >
-            Download CSV ↓
-          </a>
+            Unlock Full Report — $2.99
+          </Link>
+          <span style={{ fontSize: '12px', color: '#888', alignSelf: 'center' }}>
+            Get the full community table with citations, source URLs, and CSV export.
+          </span>
         </div>
 
         {/* Overall stats */}
