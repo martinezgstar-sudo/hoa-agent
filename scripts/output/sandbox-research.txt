@@ -1,0 +1,101 @@
+[15:00:37] HOA Research Pipeline
+[15:00:37] Mode: DRY RUN | Batch: 5 | Status: published
+[15:00:37] Output: scripts/output/research-log-2026-05-02.txt
+[15:00:37] LaCie: mounted
+[15:00:37] 
+Fetched 5 communities to research
+[15:00:37] 
+────────────────────────────────────────────────────────────
+[15:00:37] Researching: 10 Palms North Townhomes Homeowners' Association, Inc. [930ccde6…]
+[15:00:37] ────────────────────────────────────────────────────────────
+[15:00:37]   [Tier 1] Local LaCie files…
+[15:00:38]   [Sunbiz local] searching for: 'PALMS NORTH TOWNHOMES'
+[15:03:40]   [Sunbiz local] HIT: N230000011641 0 PALMS NORTH TOWNHOMES HOMEOWNERS' ASSOCIATION, I
+[15:03:40]   [PBCPAO local] scanning for: '10 PALMS NORTH TOWNHOMES '
+[15:03:47]   [Tier 2] Government APIs…
+[15:03:49]   [Tier 3] DuckDuckGo searches…
+[15:03:58]   [Tier 4] Listing sites (fee obs only)…
+[15:04:01]   [Tier 5] Browser sources (Playwright)…
+[15:04:01]   [Playwright] launching browser for PBCPAO + DBPR…
+[15:04:11]   AUTO-APPROVE  state_entity_number = 'N230000011641'  [sunbiz_local]  [DRY_RUN]
+[15:04:11]   AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [DRY_RUN]
+[15:04:11]   AUTO-APPROVE  incorporation_date = '2023-02-03'  [sunbiz_local]  [DRY_RUN]
+[15:04:11]   AUTO-APPROVE  street_address = '927 WITHERSPOON LANE'  [sunbiz_local]  [DRY_RUN]
+[15:04:11]   AUTO-APPROVE  zip_code = '33483'  [sunbiz_local]  [DRY_RUN]
+[15:04:11]   FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+[15:04:11]   FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+[15:04:11]   FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+[15:04:11]   FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+[15:04:11]   FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+[15:04:11]   DONE: auto=5 | pending=0 | fee_obs=5
+[15:04:11] 
+────────────────────────────────────────────────────────────
+[15:04:11] Researching: 10 Palms South Townhomes Homeowners' Association, Inc. [33fb0786…]
+[15:04:11] ────────────────────────────────────────────────────────────
+[15:04:11]   [Tier 1] Local LaCie files…
+[15:04:11]   [Sunbiz local] searching for: 'PALMS SOUTH TOWNHOMES'
+[15:06:34]   [Sunbiz local] HIT: N230000011631 0 PALMS SOUTH TOWNHOMES HOMEOWNERS' ASSOCIATION, I
+[15:06:34]   [PBCPAO local] scanning for: '10 PALMS SOUTH TOWNHOMES '
+[15:06:41]   [Tier 2] Government APIs…
+[15:06:41]   [Tier 3] DuckDuckGo searches…
+[15:06:49]   [Tier 4] Listing sites (fee obs only)…
+[15:06:51]   [Tier 5] Browser sources (Playwright)…
+[15:06:51]   [Playwright] launching browser for PBCPAO + DBPR…
+[15:07:01]   AUTO-APPROVE  state_entity_number = 'N230000011631'  [sunbiz_local]  [DRY_RUN]
+[15:07:01]   AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [DRY_RUN]
+[15:07:01]   FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+[15:07:01]   FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+[15:07:01]   FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+[15:07:01]   FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+[15:07:01]   FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+[15:07:01]   DONE: auto=2 | pending=0 | fee_obs=5
+[15:07:01] 
+────────────────────────────────────────────────────────────
+[15:07:01] Researching: 101 SE 7TH AVENUE [9ac60f3f…]
+[15:07:01] ────────────────────────────────────────────────────────────
+[15:07:01]   [Tier 1] Local LaCie files…
+[15:07:01]   [PBCPAO local] scanning for: '101 SE 7TH AVENUE'
+[15:07:08]   [PBCPAO local] 3 parcels → unit_count=3
+[15:07:08]   [Tier 2] Government APIs…
+[15:07:10]   [Tier 3] DuckDuckGo searches…
+[15:07:17]   [Tier 4] Listing sites (fee obs only)…
+[15:07:19]   [Tier 5] Browser sources (Playwright)…
+[15:07:19]   [Playwright] launching browser for PBCPAO + DBPR…
+[15:07:23]   DONE: auto=0 | pending=0 | fee_obs=0
+[15:07:23] 
+────────────────────────────────────────────────────────────
+[15:07:23] Researching: 1016 CLARE AVENUE COMMERCIAL CONDO [b889f49c…]
+[15:07:23] ────────────────────────────────────────────────────────────
+[15:07:23]   [Tier 1] Local LaCie files…
+[15:07:23]   [Sunbiz local] searching for: '1016 CLARE AVENUE'
+[15:14:50]   [PBCPAO local] scanning for: '1016 CLARE AVENUE COMMERC'
+[15:14:57]   [PBCPAO local] 5 parcels → unit_count=5
+[15:14:57]   [Tier 2] Government APIs…
+[15:14:57]   [Tier 3] DuckDuckGo searches…
+[15:15:05]   [Tier 4] Listing sites (fee obs only)…
+[15:15:07]   [Tier 5] Browser sources (Playwright)…
+[15:15:07]   [Playwright] launching browser for PBCPAO + DBPR…
+[15:15:11]   DONE: auto=0 | pending=0 | fee_obs=0
+[15:15:11] 
+────────────────────────────────────────────────────────────
+[15:15:11] Researching: 1031 Crown Property Owner, Llc [2d3d4594…]
+[15:15:11] ────────────────────────────────────────────────────────────
+[15:15:11]   [Tier 1] Local LaCie files…
+[15:15:11]   [Sunbiz local] searching for: '1031 CROWN OWNER'
+[15:22:40]   [PBCPAO local] scanning for: '1031 CROWN PROPERTY OWNER'
+[15:22:47]   [Tier 2] Government APIs…
+[15:22:49]   [Tier 3] DuckDuckGo searches…
+[15:22:57]   [Tier 4] Listing sites (fee obs only)…
+[15:22:59]   [Tier 5] Browser sources (Playwright)…
+[15:22:59]   [Playwright] launching browser for PBCPAO + DBPR…
+[15:23:07]   FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+[15:23:07]   FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+[15:23:07]   FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+[15:23:07]   FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+[15:23:07]   FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+[15:23:07]   DONE: auto=0 | pending=0 | fee_obs=5
+[15:23:07] 
+Log saved to: scripts/output/research-log-2026-05-02.txt
+[15:23:07] Dry-run output saved to: scripts/output/dry-run-research.txt
+[15:23:07] 
+Done.

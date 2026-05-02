@@ -1,0 +1,100 @@
+Admin Research Verification — 2026-05-02
+=========================================
+
+ROOT CAUSE OF MISSING RESEARCH TAB
+-------------------------------------
+All 23 commits from the previous session (including Research tab, 
+pending pages, research script) were local-only — never pushed to 
+origin/main. The live site was running the pre-Research version.
+Fix: pushed all commits in pre-flight step of this session.
+
+BACKUP
+------
+Branch: backup/admin-research-tab-20260502 pushed to origin
+Snapshot: scripts/output/backup-admin-page.tsx
+
+RESEARCH TAB STATUS
+-------------------
+Code location: app/admin/page.tsx (ResearchTab component, lines 587–713)
+Tab in TABS array: {key:"research", label:"Research"}  ✓
+Render conditional: {tab === "research" && <ResearchTab/>}  ✓
+API route: app/api/admin/research/route.ts  ✓
+  GET: returns {pending_data_count, pending_fee_count, last_run}
+  POST: triggers research-hoa-comprehensive.py script
+Local JS bundle: .next/static/chunks/033im4i-b1v3r.js  ✓
+  Contains: "Research", "Run Research", "Batch Size", "Pending Fee"
+
+ADDITIONAL FIXES MADE THIS SESSION
+-------------------------------------
+1. /admin/upload 307 redirect fixed
+   app/admin/upload/page.tsx replaced with full standalone page
+   
+2. Missing {tab === "upload" && <UploadTab/>} render added
+   app/admin/page.tsx line 577
+
+LOCAL ROUTE STATUS (all 200)
+------------------------------
+/admin          → 200
+/admin/communities → 200
+/admin/comments    → 200
+/admin/news        → 200
+/admin/pending     → 200
+/admin/upload      → 200
+
+LIVE SITE ROUTE STATUS (all 200)
+----------------------------------
+/admin          → 200
+/admin/communities → 200
+/admin/comments    → 200
+/admin/news        → 200
+/admin/pending     → 200
+/admin/upload      → 200
+
+VERCEL DEPLOYMENT
+-----------------
+Deployment ID before push: dpl_7Q73wCfG9mk8ND1u8EdyAg9sGdtG (old)
+Deployment ID after push:  dpl_8zusGRqkDdNr1unkHRceNBySUTs2 (new, Research tab included)
+
+RESEARCH PIPELINE TEST
+-----------------------
+Dry run (5 communities):
+  Communities researched: 5
+  Auto-approvable items found: 7
+    - 10 Palms North: entity_number, status, incorporation_date, 
+                      street_address, zip_code (5 fields)
+    - 10 Palms South: entity_number, status (2 fields)
+  Fee observations: 15 (Zillow slider noise — queued for admin review)
+  
+Live run attempt:
+  SUPABASE_SERVICE_ROLE_KEY = placeholder locally
+  Result: 0 DB writes (expected — use admin dashboard for real writes)
+  On Vercel: real service role key set → writes will succeed
+
+PENDING MIGRATIONS (must run in Supabase SQL Editor)
+------------------------------------------------------
+1. supabase/migrations/20260501_research_stats.sql
+   Adds: gated, age_restricted columns to communities
+   
+2. supabase/migrations/20260502_pending_data.sql
+   Adds: monthly_fee_max, monthly_fee_median, website_url,
+         registered_agent, street_address, zip_code, entity_status,
+         state_entity_number, incorporation_date, str_restriction,
+         vehicle_restriction columns to communities
+   Creates: pending_community_data table
+   Creates: pending_fee_observations table
+
+GIT LOG (last 10 commits)
+---------------------------
+e182b3c Fix UploadTab missing render + /admin/upload 307 redirect
+998bf79 Fix 307 redirects on /admin/comments and /admin/communities
+3df0cd8 feat: research trigger + stats in admin dashboard (Task 7)
+b859b7b feat: dry-run research batch + script fixes (Task 6)
+67a9ec2 feat: comprehensive research script — 5-tier pipeline (Tasks 4+5)
+93a59f4 feat: admin pending review page + API route (Tasks 3)
+17ce0af feat: migration 20260502_pending_data — pending approval tables + communities columns
+831849c research: Shoma Homes communities @ Royal Palm Beach (7 communities, 443 units)
+
+BRANCHES
+--------
+main (current, up to date with origin/main)
+backup/admin-research-tab-20260502 (pushed to origin)

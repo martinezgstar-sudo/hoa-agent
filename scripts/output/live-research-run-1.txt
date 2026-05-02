@@ -1,0 +1,100 @@
+[17:05:32] HOA Research Pipeline
+[17:05:32] Mode: LIVE | Batch: 5 | Status: published
+[17:05:32] Output: scripts/output/research-log-2026-05-02.txt
+[17:05:32] LaCie: mounted
+[17:05:33] 
+Fetched 5 communities to research
+[17:05:33] 
+────────────────────────────────────────────────────────────
+[17:05:33] Researching: 10 Palms North Townhomes Homeowners' Association, Inc. [930ccde6…]
+[17:05:33] ────────────────────────────────────────────────────────────
+[17:05:33]   [Tier 1] Local LaCie files…
+[17:05:33]   [Sunbiz local] searching for: 'PALMS NORTH TOWNHOMES'
+[17:08:38]   [Sunbiz local] HIT: N230000011641 0 PALMS NORTH TOWNHOMES HOMEOWNERS' ASSOCIATION, I
+[17:08:38]   [PBCPAO local] scanning for: '10 PALMS NORTH TOWNHOMES '
+[17:08:45]   [Tier 2] Government APIs…
+[17:08:46]   [Tier 3] DuckDuckGo searches…
+[17:08:55]   [Tier 4] Listing sites (fee obs only)…
+[17:08:58]   [Tier 5] Browser sources (Playwright)…
+[17:08:58]   [Playwright] launching browser for PBCPAO + DBPR…
+[17:09:08]   AUTO-APPROVE  state_entity_number = 'N230000011641'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:09:08]   AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:09:08]   AUTO-APPROVE  incorporation_date = '2023-02-03'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:09:08]   AUTO-APPROVE  street_address = '927 WITHERSPOON LANE'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:09:08]   AUTO-APPROVE  zip_code = '33483'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:09:08]   FEE OBS       $100.0  (rnd $100)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:09:08]   FEE OBS       $200.0  (rnd $200)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:09:08]   FEE OBS       $300.0  (rnd $300)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:09:08]   FEE OBS       $400.0  (rnd $400)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:09:08]   FEE OBS       $500.0  (rnd $500)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:09:08]   DONE: auto=5 | pending=0 | fee_obs=5
+[17:09:08] 
+────────────────────────────────────────────────────────────
+[17:09:08] Researching: 10 Palms South Townhomes Homeowners' Association, Inc. [33fb0786…]
+[17:09:08] ────────────────────────────────────────────────────────────
+[17:09:08]   [Tier 1] Local LaCie files…
+[17:09:08]   [Sunbiz local] searching for: 'PALMS SOUTH TOWNHOMES'
+[17:11:34]   [Sunbiz local] HIT: N230000011631 0 PALMS SOUTH TOWNHOMES HOMEOWNERS' ASSOCIATION, I
+[17:11:34]   [PBCPAO local] scanning for: '10 PALMS SOUTH TOWNHOMES '
+[17:11:41]   [Tier 2] Government APIs…
+[17:11:42]   [Tier 3] DuckDuckGo searches…
+[17:11:50]   [Tier 4] Listing sites (fee obs only)…
+[17:11:52]   [Tier 5] Browser sources (Playwright)…
+[17:11:52]   [Playwright] launching browser for PBCPAO + DBPR…
+[17:12:01]   AUTO-APPROVE  state_entity_number = 'N230000011631'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:12:01]   AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set]
+[17:12:01]   FEE OBS       $100.0  (rnd $100)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:12:01]   FEE OBS       $200.0  (rnd $200)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:12:01]   FEE OBS       $300.0  (rnd $300)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:12:01]   FEE OBS       $400.0  (rnd $400)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:12:01]   FEE OBS       $500.0  (rnd $500)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:12:01]   DONE: auto=2 | pending=0 | fee_obs=5
+[17:12:01] 
+────────────────────────────────────────────────────────────
+[17:12:01] Researching: 101 SE 7TH AVENUE [9ac60f3f…]
+[17:12:01] ────────────────────────────────────────────────────────────
+[17:12:01]   [Tier 1] Local LaCie files…
+[17:12:01]   [PBCPAO local] scanning for: '101 SE 7TH AVENUE'
+[17:12:09]   [PBCPAO local] 3 parcels → unit_count=3
+[17:12:09]   [Tier 2] Government APIs…
+[17:12:10]   [Tier 3] DuckDuckGo searches…
+[17:12:17]   [Tier 4] Listing sites (fee obs only)…
+[17:12:19]   [Tier 5] Browser sources (Playwright)…
+[17:12:19]   [Playwright] launching browser for PBCPAO + DBPR…
+[17:12:22]   DONE: auto=0 | pending=0 | fee_obs=0
+[17:12:22] 
+────────────────────────────────────────────────────────────
+[17:12:22] Researching: 1016 CLARE AVENUE COMMERCIAL CONDO [b889f49c…]
+[17:12:22] ────────────────────────────────────────────────────────────
+[17:12:22]   [Tier 1] Local LaCie files…
+[17:12:22]   [Sunbiz local] searching for: '1016 CLARE AVENUE'
+[17:19:49]   [PBCPAO local] scanning for: '1016 CLARE AVENUE COMMERC'
+[17:19:56]   [PBCPAO local] 5 parcels → unit_count=5
+[17:19:56]   [Tier 2] Government APIs…
+[17:19:58]   [Tier 3] DuckDuckGo searches…
+[17:20:05]   [Tier 4] Listing sites (fee obs only)…
+[17:20:07]   [Tier 5] Browser sources (Playwright)…
+[17:20:07]   [Playwright] launching browser for PBCPAO + DBPR…
+[17:20:11]   DONE: auto=0 | pending=0 | fee_obs=0
+[17:20:11] 
+────────────────────────────────────────────────────────────
+[17:20:11] Researching: 1031 Crown Property Owner, Llc [2d3d4594…]
+[17:20:11] ────────────────────────────────────────────────────────────
+[17:20:11]   [Tier 1] Local LaCie files…
+[17:20:11]   [Sunbiz local] searching for: '1031 CROWN OWNER'
+[17:27:41]   [PBCPAO local] scanning for: '1031 CROWN PROPERTY OWNER'
+[17:27:48]   [Tier 2] Government APIs…
+[17:27:49]   [Tier 3] DuckDuckGo searches…
+[17:27:56]   [Tier 4] Listing sites (fee obs only)…
+[17:27:59]   [Tier 5] Browser sources (Playwright)…
+[17:27:59]   [Playwright] launching browser for PBCPAO + DBPR…
+[17:28:08]   FEE OBS       $100.0  (rnd $100)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:28:08]   FEE OBS       $200.0  (rnd $200)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:28:08]   FEE OBS       $300.0  (rnd $300)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:28:08]   FEE OBS       $400.0  (rnd $400)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:28:08]   FEE OBS       $500.0  (rnd $500)  [zillow]  [ERR:SUPABASE_SERVICE_ROLE_KEY not set — cannot write to DB]
+[17:28:08]   DONE: auto=0 | pending=0 | fee_obs=5
+[17:28:08] 
+Log saved to: scripts/output/research-log-2026-05-02.txt
+[17:28:08] 
+Done.

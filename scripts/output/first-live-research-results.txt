@@ -1,0 +1,44 @@
+First Live Research Run — 2026-05-02
+====================================
+Mode: LIVE (service role key placeholder — no DB writes locally)
+Batch: 5 communities
+Run started: ~17:04 EDT
+Run completed: ~17:28 EDT
+
+FINDINGS:
+---------
+10 Palms North Townhomes HOA (930ccde6)
+  AUTO-APPROVE: state_entity_number = N230000011641 [sunbiz_local]
+  AUTO-APPROVE: entity_status = ACTIVE [sunbiz_local]
+  AUTO-APPROVE: incorporation_date = 2023-02-03 [sunbiz_local]
+  AUTO-APPROVE: street_address = 927 WITHERSPOON LANE [sunbiz_local]
+  AUTO-APPROVE: zip_code = 33483 [sunbiz_local]
+  FEE OBS: $100–$500 (Zillow slider — pending review)
+
+10 Palms South Townhomes HOA (33fb0786)
+  AUTO-APPROVE: state_entity_number = N230000011631 [sunbiz_local]
+  AUTO-APPROVE: entity_status = ACTIVE [sunbiz_local]
+  FEE OBS: $100–$500 (Zillow slider — pending review)
+
+101 SE 7TH AVENUE (9ac60f3f)
+  No data found.
+
+1016 CLARE AVENUE COMMERCIAL CONDO (b889f49c)
+  PBCPAO: 5 parcels found → unit_count=5 (new column, needs migration)
+
+1031 Crown Property Owner, LLC (2d3d4594)
+  FEE OBS: $100–$500 (Zillow slider — pending review)
+
+TOTALS:
+  Communities researched: 5
+  Auto-approvable fields: 7
+  Pending fee observations: 15 (all Zillow slider noise — need admin review)
+  DB writes: 0 (SUPABASE_SERVICE_ROLE_KEY=placeholder locally)
+
+NOTE: To run live with real DB writes, use the admin dashboard on
+the live site at https://www.hoa-agent.com/admin (Research tab),
+which has the real SUPABASE_SERVICE_ROLE_KEY in Vercel env vars.
+
+Also needed: run supabase/migrations/20260502_pending_data.sql in
+Supabase SQL Editor to enable pending_community_data and 
+pending_fee_observations tables and new columns.
