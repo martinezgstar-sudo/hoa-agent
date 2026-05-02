@@ -574,6 +574,7 @@ export default function AdminPage() {
       <div style={{maxWidth:"900px",margin:"0 auto",padding:"32px 24px"}}>
         {tab === "comments" && <CommentsTab/>}
         {tab === "communities" && <CommunitiesTab/>}
+        {tab === "upload" && <UploadTab/>}
         {tab === "suggestions" && <SuggestionsTab/>}
         {tab === "field_updates" && <FieldSuggestionsTab/>}
         {tab === "research" && <ResearchTab/>}
