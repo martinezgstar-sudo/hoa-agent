@@ -61,11 +61,6 @@ export default function AdvertisePage() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Search' },
-          { href: '/city', label: 'Cities' },
-          { href: '/about', label: 'About' },
-        ]}
         shareHref="/search"
         shareLabel="Find my HOA"
       />

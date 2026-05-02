@@ -510,10 +510,6 @@ export default function SearchPage() {
   return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Search' },
-          { href: '/reports', label: 'Reports' },
-        ]}
         shareHref="/search"
         shareLabel="Share your association"
       />

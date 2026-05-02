@@ -52,12 +52,6 @@ export default async function Home() {
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
 
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Search' },
-          { href: '/city', label: 'Cities' },
-          { href: '/about', label: 'About' },
-          { href: '/reports', label: 'Reports' },
-        ]}
         shareHref="/search"
         shareLabel="Share your association"
       />

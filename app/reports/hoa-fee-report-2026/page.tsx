@@ -112,12 +112,6 @@ export default async function FeeReportPage() {
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Search' },
-          { href: '/city', label: 'Cities' },
-          { href: '/reports', label: 'Reports' },
-          { href: '/about', label: 'About' },
-        ]}
         shareHref="/search"
         shareLabel="Find my HOA"
       />

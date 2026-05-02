@@ -98,10 +98,6 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     return (
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Browse' },
-          { href: '/reports', label: 'Reports' },
-        ]}
         shareHref="/search"
         shareLabel="Share your association"
       />

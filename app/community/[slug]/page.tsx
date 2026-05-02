@@ -8,6 +8,7 @@ import FirstReviewToast from '@/app/components/FirstReviewToast'
 import NavBar from '@/app/components/NavBar'
 import NewsFeed from '@/app/components/NewsFeed'
 import LegalCases from '@/app/components/LegalCases'
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const { data: community } = await supabase
@@ -244,10 +245,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <NavBar
-        desktopLinks={[
-          { href: '/search', label: 'Browse' },
-          { href: '/reports', label: 'Reports' },
-        ]}
         shareHref="/search"
         shareLabel="Share your association"
       />

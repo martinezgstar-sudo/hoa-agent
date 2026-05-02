@@ -8,11 +8,18 @@ type NavLink = {
   label: string
 }
 
+// Canonical site nav — used on every page unless a caller overrides
+export const SITE_NAV: NavLink[] = [
+  { href: '/search', label: 'Search' },
+  { href: '/city', label: 'Cities' },
+  { href: '/reports', label: 'Reports' },
+  { href: '/about', label: 'About' },
+  { href: '/for-agents', label: 'For Agents' },
+  { href: '/pricing', label: 'Pricing' },
+]
+
 export default function NavBar({
-  desktopLinks = [
-    { href: '/search', label: 'Browse' },
-    { href: '/reports', label: 'Reports' },
-  ],
+  desktopLinks = SITE_NAV,
   shareHref = '/search',
   shareLabel = 'Share your association',
 }: {
@@ -146,10 +153,8 @@ export default function NavBar({
           }}
         >
           {[
-            { href: '/search', label: 'Browse' },
-            { href: '/reports', label: 'Reports' },
+            ...desktopLinks,
             { href: shareHref, label: shareLabel },
-            { href: '/search', label: 'Search' },
           ].map((item) => (
             <Link
               key={item.label + item.href}
