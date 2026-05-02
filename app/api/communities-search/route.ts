@@ -1,6 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
+// SELECT only columns confirmed to exist in production. The legacy schema uses
+// is_sub_hoa + master_hoa_id; the newer migration adds is_master + parent_id
+// but it has not yet been applied. Including a non-existent column makes the
+// entire query return null silently in supabase-js, which used to surface as
+// "0 results for shoma" on /search.
+const SELECT_COLUMNS = [
+  'id', 'canonical_name', 'slug', 'city', 'city_verified', 'zip_code',
+  'unit_count', 'property_type', 'monthly_fee_min', 'monthly_fee_max',
+  'confidence_score', 'review_count', 'review_avg', 'assessment_signal_count',
+  'management_company', 'pet_restriction', 'is_sub_hoa', 'master_hoa_id',
+].join(', ')
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const q = searchParams.get('q') || ''
@@ -16,9 +28,7 @@ export async function GET(request: NextRequest) {
 
   let dbQuery = supabase
     .from('communities')
-    .select(
-      'id, canonical_name, slug, city, city_verified, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, confidence_score, review_count, review_avg, assessment_signal_count, management_company, pet_restriction, is_sub_hoa, is_master, parent_id'
-    )
+    .select(SELECT_COLUMNS)
     .eq('status', 'published')
     .limit(50)
 
@@ -56,13 +66,17 @@ export async function GET(request: NextRequest) {
   if (management) {
     dbQuery = dbQuery.ilike('management_company', `%${management}%`)
   }
+  // hoa_type filter — uses legacy schema only (is_sub_hoa + master_hoa_id)
+  // until the migration adding is_master/parent_id runs in production.
   if (hoaType === 'master') {
-    // is_master=true preferred; fall back to communities referenced as master_hoa_id
-    dbQuery = dbQuery.or('is_master.eq.true,and(is_sub_hoa.eq.false,parent_id.is.null)')
+    // Master = communities that have other communities pointing to them via master_hoa_id.
+    // We can't easily express "is referenced as master_hoa_id" in a single supabase-js
+    // call, so approximate with: not a sub-HOA (no master_hoa_id and is_sub_hoa false).
+    dbQuery = dbQuery.eq('is_sub_hoa', false).is('master_hoa_id', null)
   } else if (hoaType === 'sub') {
-    dbQuery = dbQuery.or('is_sub_hoa.eq.true,parent_id.not.is.null')
+    dbQuery = dbQuery.or('is_sub_hoa.eq.true,master_hoa_id.not.is.null')
   } else if (hoaType === 'standalone') {
-    dbQuery = dbQuery.eq('is_sub_hoa', false).is('parent_id', null).eq('is_master', false)
+    dbQuery = dbQuery.eq('is_sub_hoa', false).is('master_hoa_id', null)
   }
 
   if (sort === 'az') {
@@ -71,6 +85,10 @@ export async function GET(request: NextRequest) {
     dbQuery = dbQuery.order('unit_count', { ascending: false, nullsFirst: false })
   }
 
-  const { data: communities } = await dbQuery
+  const { data: communities, error } = await dbQuery
+  if (error) {
+    console.error('[api/communities-search]', { q, error: error.message })
+    return NextResponse.json({ communities: [], error: error.message }, { status: 200 })
+  }
   return NextResponse.json({ communities: communities || [] })
 }

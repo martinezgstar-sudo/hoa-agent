@@ -332,7 +332,8 @@ export default function SearchPage() {
     let zipQuery = supabase
       .from("communities")
       .select(
-        "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg, is_master, parent_id, is_sub_hoa",
+        // is_master/parent_id not in production schema yet — use legacy is_sub_hoa + master_hoa_id
+        "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg, is_sub_hoa, master_hoa_id",
       )
       .eq("status", "published")
       .eq("zip_code", zip)
