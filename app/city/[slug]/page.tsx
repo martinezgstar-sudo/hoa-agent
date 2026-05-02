@@ -40,6 +40,16 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
     blurb:
       'Boynton Beach is one of Palm Beach County\'s most affordable HOA markets, with a large inventory of 55+ communities originally built in the 1970s and 1980s. Many are self-managed, with all-volunteer boards and lower professional oversight. Buyers should pay close attention to reserve adequacy and deferred maintenance disclosures, particularly for older condo associations navigating the new Florida milestone inspection requirements.',
   },
+  'royal-palm-beach': {
+    name: 'Royal Palm Beach',
+    blurb:
+      'Royal Palm Beach is a master-planned village in central Palm Beach County built largely in the 1980s and 1990s. Communities here lean heavily toward single-family homes and townhomes inside HOA-governed subdivisions, with monthly fees that are typically modest compared with coastal cities. The Shoma Homes developments and other townhome enclaves dominate the market — most share a single master association that handles common-area maintenance and gates.',
+  },
+  'wellington': {
+    name: 'Wellington',
+    blurb:
+      'Wellington is a planned community known for equestrian neighborhoods, golf course estates, and family-oriented HOAs. Property values trend upward with proximity to Wellington International (the international polo and equestrian venue). HOA fees vary widely — from under $200/month in older townhome communities to over $1,000/month in equestrian estates with shared barn and arena access. Buyers should review covenant restrictions on horse keeping, fencing, and outbuildings carefully.',
+  },
 }
 
 interface Props {

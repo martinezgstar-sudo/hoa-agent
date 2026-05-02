@@ -32,6 +32,8 @@ const CITIES = [
   { slug: 'lake-worth', name: 'Lake Worth', tagline: 'Affordable condos, older buildings, beach proximity' },
   { slug: 'delray-beach', name: 'Delray Beach', tagline: '55+ active adult communities, coastal neighborhoods' },
   { slug: 'boynton-beach', name: 'Boynton Beach', tagline: 'Value-oriented 55+ communities, self-managed HOAs' },
+  { slug: 'royal-palm-beach', name: 'Royal Palm Beach', tagline: 'Master-planned townhomes, family neighborhoods, central county' },
+  { slug: 'wellington', name: 'Wellington', tagline: 'Equestrian estates, golf communities, family HOAs' },
 ]
 
 async function getCityCounts(): Promise<Record<string, number>> {
