@@ -82,12 +82,28 @@ export default async function CityPage({ params }: Props) {
   const city = CITIES[slug]
   if (!city) notFound()
 
-  const { data: communities } = await supabase
+  // Try exact ilike first; if zero results (e.g. city stored with different
+  // formatting), fall back to a wildcard match anchored to the city name.
+  let { data: communities } = await supabase
     .from('communities')
-    .select('id, slug, canonical_name, property_type, monthly_fee_min, monthly_fee_max, unit_count, management_company')
+    .select(
+      'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url'
+    )
     .eq('status', 'published')
     .ilike('city', city.name)
     .order('canonical_name', { ascending: true })
+
+  if (!communities || communities.length === 0) {
+    const fallback = await supabase
+      .from('communities')
+      .select(
+        'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url'
+      )
+      .eq('status', 'published')
+      .ilike('city', '%' + city.name + '%')
+      .order('canonical_name', { ascending: true })
+    communities = fallback.data ?? null
+  }
 
   const list = communities || []
 

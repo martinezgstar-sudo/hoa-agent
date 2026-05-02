@@ -1,6 +1,9 @@
 import NavBar from '@/app/components/NavBar'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { supabase } from '@/lib/supabase'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'HOA Communities by City | Palm Beach County | HOA Agent',
@@ -31,7 +34,23 @@ const CITIES = [
   { slug: 'boynton-beach', name: 'Boynton Beach', tagline: 'Value-oriented 55+ communities, self-managed HOAs' },
 ]
 
-export default function CityIndexPage() {
+async function getCityCounts(): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {}
+  await Promise.all(
+    CITIES.map(async (c) => {
+      const { count } = await supabase
+        .from('communities')
+        .select('id', { count: 'exact', head: true })
+        .eq('status', 'published')
+        .ilike('city', c.name)
+      counts[c.slug] = count ?? 0
+    })
+  )
+  return counts
+}
+
+export default async function CityIndexPage() {
+  const counts = await getCityCounts()
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <NavBar
@@ -65,7 +84,12 @@ export default function CityIndexPage() {
               <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', height: '100%', transition: 'border-color 0.15s' }}>
                 <div style={{ fontSize: '16px', fontWeight: 600, color: '#1B2B6B', marginBottom: '6px' }}>{city.name}</div>
                 <div style={{ fontSize: '12px', color: '#888' }}>{city.tagline}</div>
-                <div style={{ marginTop: '14px', fontSize: '12px', color: '#1D9E75', fontWeight: 500 }}>Browse communities →</div>
+                <div style={{ marginTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '12px', color: '#1D9E75', fontWeight: 500 }}>Browse communities →</span>
+                  {counts[city.slug] > 0 && (
+                    <span style={{ fontSize: '11px', color: '#888' }}>{counts[city.slug]} listed</span>
+                  )}
+                </div>
               </div>
             </Link>
           ))}
