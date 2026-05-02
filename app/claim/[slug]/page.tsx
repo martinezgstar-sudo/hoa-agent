@@ -1,15 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const TITLES = ['Board Member', 'Property Manager', 'Community Manager', 'Board President', 'Other']
 const CONTACT_PREFS = ['Email', 'Phone', 'Either']
 
-export default function ClaimPage({ params }: { params: { slug: string } }) {
-  const communityName = params.slug
+function slugToName(slug: string): string {
+  if (!slug || typeof slug !== 'string') return 'this community'
+  return slug
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
+export default function ClaimPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+  // params may be a plain object (older Next) or a Promise (Next 15/16). Handle both.
+  const [slug, setSlug] = useState<string>('')
+  useEffect(() => {
+    Promise.resolve(params)
+      .then((p) => setSlug(p?.slug ?? ''))
+      .catch(() => setSlug(''))
+  }, [params])
+
+  const communityName = slugToName(slug)
 
   const [form, setForm] = useState({
     name: '',
@@ -20,6 +33,13 @@ export default function ClaimPage({ params }: { params: { slug: string } }) {
     preferredContact: '',
   })
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+
+  // Keep form.communityName in sync once the async slug resolves
+  useEffect(() => {
+    if (communityName && communityName !== 'this community') {
+      setForm((f) => (f.communityName ? f : { ...f, communityName }))
+    }
+  }, [communityName])
 
   function set(field: string) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -75,7 +95,7 @@ export default function ClaimPage({ params }: { params: { slug: string } }) {
             Our team will review it and follow up with you at <strong>{form.email}</strong>.
           </p>
           <Link
-            href={`/community/${params.slug}`}
+            href={`/community/${slug}`}
             style={{ fontSize: '14px', color: '#1D9E75', fontWeight: 600, textDecoration: 'none' }}
           >
             ← Back to community page
@@ -89,7 +109,7 @@ export default function ClaimPage({ params }: { params: { slug: string } }) {
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <div style={{ maxWidth: '560px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <Link href={`/community/${params.slug}`} style={{ fontSize: '13px', color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: '32px' }}>
+        <Link href={`/community/${slug}`} style={{ fontSize: '13px', color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: '32px' }}>
           ← Back to community page
         </Link>
 
