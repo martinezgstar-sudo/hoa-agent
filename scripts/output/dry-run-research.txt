@@ -1,0 +1,147 @@
+HOA Research Run — 2026-05-02 08:12
+Mode: DRY RUN
+Communities: 5
+============================================================
+
+=== 10 Palms North Townhomes Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'L09000030660I'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  street_address = '7359 HERITAGE PALMS ESTATE DR'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  zip_code = '33966'  [sunbiz_local]  [DRY_RUN]
+  FEE OBS       $50.0  (rnd $50)  [zillow]  [DRY_RUN]
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+  FEE OBS       $600.0  (rnd $600)  [zillow]  [DRY_RUN]
+  FEE OBS       $700.0  (rnd $700)  [zillow]  [DRY_RUN]
+  FEE OBS       $800.0  (rnd $800)  [zillow]  [DRY_RUN]
+  FEE OBS       $900.0  (rnd $900)  [zillow]  [DRY_RUN]
+  FEE OBS       $1000.0  (rnd $1000)  [zillow]  [DRY_RUN]
+  FEE OBS       $1500.0  (rnd $1500)  [zillow]  [DRY_RUN]
+  FEE OBS       $2000.0  (rnd $2000)  [zillow]  [DRY_RUN]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=13
+  Sources checked: 19
+  Notes: Sunbiz: NDEPENDENT RESOURCE FACILITATION, LLC | doc=L09000030660I | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== 10 Palms South Townhomes Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'L24000099100U'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  street_address = '138 TIERRA VERDE WAY'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  zip_code = '32407'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  registered_agent = 'BLUEPOINT FINANCIAL LLC'  [sunbiz_local]  [DRY_RUN]
+  FEE OBS       $50.0  (rnd $50)  [zillow]  [DRY_RUN]
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+  FEE OBS       $600.0  (rnd $600)  [zillow]  [DRY_RUN]
+  FEE OBS       $700.0  (rnd $700)  [zillow]  [DRY_RUN]
+  FEE OBS       $800.0  (rnd $800)  [zillow]  [DRY_RUN]
+  FEE OBS       $900.0  (rnd $900)  [zillow]  [DRY_RUN]
+  FEE OBS       $1000.0  (rnd $1000)  [zillow]  [DRY_RUN]
+  FEE OBS       $1500.0  (rnd $1500)  [zillow]  [DRY_RUN]
+  FEE OBS       $2000.0  (rnd $2000)  [zillow]  [DRY_RUN]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=13
+  Sources checked: 19
+  Notes: Sunbiz: NDER THE PALMS REAL ESTATE LLC | doc=L24000099100U | status=ACTIVE | ra=BLUEPOINT FINANCIAL LLC; CourtListener: no cases found
+
+=== 101 SE 7TH AVENUE ===
+  AUTO-APPROVE  state_entity_number = 'L24000255040S'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  street_address = '15 HICKORY AVENUE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  zip_code = '34498'  [sunbiz_local]  [DRY_RUN]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 18
+  Notes: Sunbiz: TILLWATER OUTFITTERS LLC | doc=L24000255040S | status=ACTIVE | ra=None; PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== 1016 CLARE AVENUE COMMERCIAL CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N96000005910D'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  incorporation_date = '1996-11-15'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  street_address = '5225 FOX TRACE                                                                      WEST'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  zip_code = '33417'  [sunbiz_local]  [DRY_RUN]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 18
+  Notes: Sunbiz: KG ENTERPRISES, INC. | doc=N96000005910D | status=INACTIVE | ra=None; PBCPAO: 5 parcels found → unit_count=5; CourtListener: no cases found
+
+=== 1031 Crown Property Owner, Llc ===
+  AUTO-APPROVE  state_entity_number = '733420      C'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [DRY_RUN]
+  AUTO-APPROVE  incorporation_date = '1975-07-29'  [sunbiz_local]  [DRY_RUN]
+  FEE OBS       $50.0  (rnd $50)  [zillow]  [DRY_RUN]
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [DRY_RUN]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [DRY_RUN]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [DRY_RUN]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [DRY_RUN]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [DRY_RUN]
+  FEE OBS       $600.0  (rnd $600)  [zillow]  [DRY_RUN]
+  FEE OBS       $700.0  (rnd $700)  [zillow]  [DRY_RUN]
+  FEE OBS       $800.0  (rnd $800)  [zillow]  [DRY_RUN]
+  FEE OBS       $900.0  (rnd $900)  [zillow]  [DRY_RUN]
+  FEE OBS       $1000.0  (rnd $1000)  [zillow]  [DRY_RUN]
+  FEE OBS       $1500.0  (rnd $1500)  [zillow]  [DRY_RUN]
+  FEE OBS       $2000.0  (rnd $2000)  [zillow]  [DRY_RUN]
+
+  TOTALS: auto=3 | pending=0 | fee_obs=13
+  Sources checked: 19
+  Notes: Sunbiz: ROWN CRAFTSMEN, INC | doc=733420      C | status=INACTIVE | ra=None; CourtListener: no cases found
+
+============================================================
+GRAND TOTALS
+  Communities researched : 5
+  Auto-approved          : 21
+  Queued for admin review: 0
+  Fee observations       : 39
+============================================================
+
+============================================================
+DRY-RUN ANALYSIS — ISSUES FOUND + FIXES APPLIED
+============================================================
+
+ISSUE 1: Sunbiz name matching — false positives
+  Problem: search_sunbiz_local() was checking if words appeared
+  *anywhere* in the full cordata line (including address fields).
+  Example: "10 Palms North Townhomes" matched "INDEPENDENT RESOURCE
+  FACILITATION, LLC" whose address happened to contain "PALMS".
+  Result: wrong entity — wrong doc#, wrong status, wrong address.
+
+  FIX (applied to script):
+  - Match only against entity name field (cols 13–93 of record).
+  - All search words must appear in the 80-char name field only.
+  - Added more stop words to reduce single-word ambiguity.
+  - Added minimum 2-word requirement for name matching.
+
+ISSUE 2: Zillow fee range slider noise
+  Problem: extract_from_text() was capturing "$50/mo" through
+  "$2000/mo" from Zillow's fee range filter UI, not real HOA fees.
+  Result: 13 junk fee observations per community.
+
+  FIX (applied to script):
+  - Fee regex now requires explicit HOA context within 100 chars:
+    "HOA fee", "monthly HOA", "HOA dues", "HOA assessment".
+  - Bare "$XXX/month" only counted if preceded by HOA-related text.
+  - Minimum fee raised from $50 to $75 to filter small slider values.
+
+ISSUE 3: New DB columns not yet live
+  Problem: communities table doesn't yet have gated, age_restricted,
+  entity_status, state_entity_number, registered_agent, street_address,
+  zip_code, incorporation_date, monthly_fee_max, monthly_fee_median,
+  website_url, etc. (migration 20260502_pending_data.sql not run yet).
+  The select query was updated to only query existing columns.
+
+  FIX (applied to script):
+  - DB select uses only confirmed-existing columns.
+  - Auto-approve writes still attempt to update new columns —
+    these will fail gracefully until migration is run in production.
+
+RECOMMENDATION: Run supabase/migrations/20260502_pending_data.sql
+in Supabase SQL Editor before running in live mode.
+
+============================================================

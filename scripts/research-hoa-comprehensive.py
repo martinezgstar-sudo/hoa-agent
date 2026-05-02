@@ -34,7 +34,7 @@ import urllib.parse
 import urllib.request
 from datetime import date, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -79,7 +79,7 @@ def log(msg: str):
     print(f"[{ts}] {msg}", flush=True)
 
 
-def fetch(url: str, timeout: int = 12, headers: dict | None = None) -> str:
+def fetch(url: str, timeout: int = 12, headers: Optional[dict] = None) -> str:
     try:
         h = dict(HTTP_HEADERS)
         if headers:
@@ -106,7 +106,7 @@ def round_fee(amount: float, direction: str = "nearest") -> float:
     return round(amount / 25) * 25
 
 
-def supabase_get(path: str, params: dict | None = None) -> dict:
+def supabase_get(path: str, params: Optional[dict] = None) -> dict:
     """Read-only Supabase REST API call using anon key."""
     url = f"{SUPABASE_URL}/rest/v1/{path}"
     if params:
@@ -213,7 +213,7 @@ class CommunityFindings:
             "confidence": confidence,
         })
 
-    def add_fee_obs(self, amount: float, source_url: str, source_type: str, listing_date: str | None = None):
+    def add_fee_obs(self, amount: float, source_url: str, source_type: str, listing_date: Optional[str] = None):
         """Record a fee observation (always goes to pending_fee_observations)."""
         self.fee_obs.append({
             "fee_amount": amount,
@@ -255,10 +255,16 @@ def search_sunbiz_local(f: CommunityFindings) -> None:
         return
 
     name_upper = f.name.upper()
-    # Build search terms from community name
-    words = [w for w in re.split(r"\W+", name_upper) if len(w) > 3 and w not in
-             {"HOMEOWNERS","ASSOCIATION","CONDOMINIUM","PROPERTY","OWNERS","THE","AND"}]
-    search_term = " ".join(words[:3])
+    # Build search terms — require match in the ENTITY NAME portion (cols 13-93)
+    stop_words = {"HOMEOWNERS","ASSOCIATION","CONDOMINIUM","PROPERTY","OWNERS","THE","AND",
+                  "INCORPORATED","INC","LLC","CORP","LTD","ESTATE","ESTATES","AT","OF","IN"}
+    words = [w for w in re.split(r"\W+", name_upper) if len(w) > 3 and w not in stop_words]
+    # Need at least 2 significant words; use first 3 for matching
+    if len(words) < 2:
+        f.log_source(f"Sunbiz local: name too short for reliable search ({f.name[:40]})")
+        return
+    search_words = words[:3]
+    search_term = " ".join(search_words)
 
     log(f"  [Sunbiz local] searching for: {search_term!r}")
     found_line = None
@@ -270,7 +276,9 @@ def search_sunbiz_local(f: CommunityFindings) -> None:
         try:
             with open(fpath, "r", errors="ignore") as fh:
                 for line in fh:
-                    if all(w in line.upper() for w in words[:2] if w):
+                    # Only match against the entity name field (cols 13–93 of the record)
+                    entity_name_field = line[13:93].upper()
+                    if all(w in entity_name_field for w in search_words):
                         found_line = line
                         break
         except Exception:
@@ -470,17 +478,24 @@ def extract_from_text(text: str) -> dict[str, Any]:
     """Extract structured data from arbitrary text using regex."""
     out: dict[str, Any] = {}
 
-    # Fees: $XXX/mo, $XXX per month, HOA fee: $XXX
+    # Fees: require specific HOA context to avoid Zillow range slider noise
+    # Valid patterns: "HOA fee: $350/mo", "monthly HOA $425", "$350 /month HOA"
     fee_matches = re.findall(
-        r"(?:hoa fee|dues|monthly fee|assessment|hoa|fee)[^\$\d]{0,20}\$\s*([\d,]+)",
+        r"(?:hoa\s+fee|monthly\s+(?:hoa|dues|fee)|hoa\s+dues|hoa\s+assessment)"
+        r"[^\$\d]{0,30}\$\s*([\d,]+)",
         text, re.IGNORECASE
     )
-    fee_matches += re.findall(r"\$\s*([\d,]+)\s*/\s*mo", text, re.IGNORECASE)
+    # Also: "$XXX /mo" only if preceded by relevant context within 100 chars
+    for m in re.finditer(r"\$\s*([\d,]+)\s*/\s*(?:mo|month)\b", text, re.IGNORECASE):
+        ctx = text[max(0, m.start()-100):m.start()]
+        if re.search(r"hoa|dues|fee|assessment|homeowner", ctx, re.IGNORECASE):
+            fee_matches.append(m.group(1))
     fees = []
     for fm in fee_matches:
         try:
             v = float(fm.replace(",", ""))
-            if 50 <= v <= 5000:
+            # Plausible HOA fee range: $75–$5000/month
+            if 75 <= v <= 5000:
                 fees.append(v)
         except Exception:
             pass
@@ -784,7 +799,8 @@ def write_findings(f: CommunityFindings, dry_run: bool, output_lines: list[str])
         }
         result = supabase_post("pending_community_data", row, dry_run)
         status = "DRY_RUN" if dry_run else ("OK" if "error" not in result else f"ERR:{result.get('error','')}")
-        line = f"  PENDING       {field} = {best['value']!r[:60]}  [{best['source_type']}]  [{status}]"
+        val_repr = repr(best['value'])[:60]
+        line = f"  PENDING       {field} = {val_repr}  [{best['source_type']}]  [{status}]"
         output_lines.append(line)
         log(line)
         pending_queued += 1
@@ -875,11 +891,11 @@ def research_community(community: dict, dry_run: bool) -> dict:
 
 # ── Fetch communities from Supabase ──────────────────────────────────────────
 
-def fetch_communities(community_id: str | None, batch: int, status: str) -> list[dict]:
+def fetch_communities(community_id: Optional[str], batch: int, status: str) -> list[dict]:
     """Fetch communities to research from Supabase."""
     if community_id:
         data = supabase_get("communities", {"id": f"eq.{community_id}", "limit": "1",
-            "select": "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities,gated,age_restricted,entity_status,state_entity_number,registered_agent,street_address"})
+            "select": "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities"})
         return data if isinstance(data, list) else []
 
     # Fetch thinnest communities (most null fields)
@@ -888,7 +904,7 @@ def fetch_communities(community_id: str | None, batch: int, status: str) -> list
         "management_company": "is.null",
         "order":            "canonical_name.asc",
         "limit":            str(batch * 4),  # fetch extra so we can skip CAMA junk
-        "select":           "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities,gated,age_restricted,entity_status,state_entity_number,registered_agent,street_address",
+        "select":           "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities",
     })
     if not isinstance(data, list):
         log(f"Error fetching communities: {data}")
