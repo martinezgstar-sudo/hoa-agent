@@ -1,0 +1,253 @@
+============================================================
+HOA Agent — Research Report
+Date: 2026-05-02
+Developer: Shoma Homes / Shoma Group
+============================================================
+
+NOTE: 7 communities found — all governed by ONE HOA entity.
+      Data below applies to all 7 unless noted otherwise.
+
+============================================================
+COMMUNITY 1 OF 7: SHOMA COURTYARDS 3 AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 32  (confirmed — PBCPAO)
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No  (inferred — family condo, no evidence of restriction)
+- Gated:              Yes (confirmed — Zillow listing)
+
+Fields filled: 2 of 12 (gated, age_restricted)
+
+============================================================
+COMMUNITY 2 OF 7: SHOMA COURTYARDS I AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 20  (confirmed — PBCPAO)
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+COMMUNITY 3 OF 7: SHOMA COURTYARDS II AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 80  (confirmed — PBCPAO)
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+COMMUNITY 4 OF 7: SHOMA TOWNHOMES AT ROYAL PALM BEACH CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 193  (confirmed — PBCPAO) — LARGEST COMMUNITY
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+COMMUNITY 5 OF 7: SHOMA VILLAS I AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 8  (confirmed — PBCPAO) — SMALLEST COMMUNITY
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+COMMUNITY 6 OF 7: SHOMA VILLAS II AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 58  (confirmed — PBCPAO)
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+COMMUNITY 7 OF 7: SHOMA VILLAS III AT ROYAL PALM CONDO
+============================================================
+City: Royal Palm Beach, FL 33414
+Unit count: 52  (confirmed — PBCPAO)
+
+- Management company: not found
+- Website:            not found
+- Phone:              not found
+- Email:              not found
+- Monthly fee:        not found
+- Year built:         2003
+- Amenities:          not found
+- Pet policy:         not found
+- Rental restrictions:not found
+- Age restricted:     No
+- Gated:              Yes
+
+Fields filled: 2 of 12
+
+============================================================
+HOA ENTITY — SUNBIZ RECORD (from local /Volumes/LaCie)
+============================================================
+
+  Name:       SHOMA AT ROYAL PALM CONDOMINIUM ASSOCIATION, INC.
+  Doc #:      N03000002013
+  Status:     ACTIVE
+  Type:       Florida Not For Profit Corporation
+              Governed by Fla. Stat. §718 (Florida Condominium Act)
+  Filed:      03/06/2003
+  EIN:        77-0596558
+  Address:    2300 Shoma Dr, Royal Palm Beach, FL 33414
+  Reg. Agent: POLIAKOFF BACKER
+              2424 North Federal Highway, Boca Raton, FL 33431
+              (Law firm — NOT the management company)
+  Officers:
+    President:  Saad, Sarkis
+    Treasurer:  Steele Sternbach, Brenden
+    VP:         Quick, Stacy
+    Secretary:  Guerrero, Jessica
+    VP:         Evans, Colten
+
+  Note: ONE association governs all 7 communities (443 total units).
+
+============================================================
+SOURCES CHECKED
+============================================================
+
+  [1]  DDG: Shoma Homes Royal Palm Beach HOA homeowners association
+  [2]  DDG: Shoma Homes Royal Palm Beach HOA fees monthly
+  [3]  DDG: Shoma Homes Royal Palm Beach management company HOA
+  [4]  DDG: Shoma Townhomes Royal Palm Beach HOA fees monthly amenities
+  [5]  DDG: Shoma Homes Royal Palm Beach amenities pool gate gated
+  [6]  DDG: Shoma Homes Royal Palm Beach Zillow HOA fee
+  [7]  DDG: Shoma Homes Royal Palm Beach realtor.com HOA
+  [8]  DDG: site:hoamanagement.com Shoma Royal Palm Beach
+  [9]  shomagroup.com — developer website fetched (38K chars); no HOA ops data
+  [10] Sunbiz — local LaCie cordata3.txt (line 1,040,943) → HOA ENTITY FOUND
+  [11] PBCPAO Property Information Table (LaCie CSV) → 443 units confirmed
+  [12] DBPR myfloridalicense.com — no CAM results for Shoma RPB
+  [13] CommunityPay.us — entity confirmed, no fee/mgmt data returned
+  [14] FloridaCommunityNetwork.net — HTTP 403
+  [15] florida-hoa.net — HTTP 403
+  [16] Zillow listing (2254/2511 Shoma Dr) — "gated community" confirmed;
+       fee detail pages returned HTTP 403
+  [17] Realtor.com — HTTP 429 (rate limited)
+  [18] hoamanagement.com — no Shoma RPB results
+  [19] Campbell Property Management, KW Property, Vesta, FirstService,
+       Seacrest Services — no Shoma community listed on any site
+  [20] OpenGovUS, OpenCorporates — 404 / captcha blocked
+  [21] Cordata scan for management entities at 2300 Shoma Dr — none found
+
+Sources with data: [10] Sunbiz cordata, [11] PBCPAO CSV, [16] Zillow snippet
+
+============================================================
+TOTAL ACROSS ALL 7 COMMUNITIES
+============================================================
+
+  Communities researched : 7
+  Total units            : 443
+  Fields filled per comm : 2 (gated=Yes, age_restricted=No)
+  Fields NOT filled      : management_company, hoa_website, phone, email,
+                           monthly_fee_min, amenities, pet_restriction,
+                           rental_approval  (8 fields)
+
+============================================================
+MANUAL FOLLOW-UP — HOW TO FILL REMAINING FIELDS
+============================================================
+
+The management company and HOA fees can be found in ~15 minutes:
+
+OPTION A — FloridaCommunityNetwork.net (browser only)
+  Go to: https://www.floridacommunitynetwork.net
+  Search: "SHOMA AT ROYAL PALM" or ZIP 33414
+  Expected: management company name, phone, board contacts
+
+OPTION B — Poliakoff Backer (registered agent = HOA law firm)
+  They can confirm which management company serves this HOA.
+  2424 North Federal Highway, Suite 462, Boca Raton, FL 33431
+  They likely have this relationship documented.
+
+OPTION C — Zillow / Realtor.com listing (browser)
+  Open: https://www.zillow.com → search "Shoma Townhomes Royal Palm Beach"
+  HOA fee is shown on each individual listing page (browser required).
+  Any active Shoma Dr listing will show the monthly HOA fee.
+
+OPTION D — Direct contact
+  Call the HOA at 2300 Shoma Drive, Royal Palm Beach FL 33414.
+  Officers: Sarkis Saad (President), Jessica Guerrero (Secretary).
+  Ask for management company name, fee schedule, and amenities list.
+
+============================================================
+DEVELOPER REFERENCE
+============================================================
+
+  Developer: Shoma Group
+  Website:   https://shomagroup.com
+  Address:   201 Sevilla Ave, Suite 300, Coral Gables, FL 33134
+  Phone:     (786) 437-8658
+  Note:      This is the DEVELOPER's number, not the HOA's.
+             The developer no longer manages these communities
+             (sold 2003; community self-governing with elected board).
+
+============================================================
