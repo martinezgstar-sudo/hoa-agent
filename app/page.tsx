@@ -39,12 +39,30 @@ export default async function Home() {
     .select('*', { count: 'exact', head: true })
     .eq('status', 'published')
 
-  const { data: featured } = await supabase
+  // Featured communities: only show ones with real data, not empty placeholder rows
+  const { data: featuredRaw } = await supabase
     .from('communities')
     .select('*')
     .eq('status', 'published')
+    .or('management_company.not.is.null,monthly_fee_median.not.is.null,news_reputation_score.not.is.null')
+    .order('news_reputation_score', { ascending: false, nullsFirst: false })
+    .order('review_count', { ascending: false, nullsFirst: false })
     .order('confidence_score', { ascending: false, nullsFirst: false })
-    .limit(3)
+    .limit(20)
+  // Take 3 with the highest data-completeness score
+  const richness = (c: Record<string, unknown>): number => {
+    let s = 0
+    if (c.management_company) s += 1
+    if (c.monthly_fee_median) s += 1
+    if (c.news_reputation_score) s += 1
+    if (typeof c.review_count === 'number' && (c.review_count as number) > 0) s += 1
+    return s
+  }
+  const featured = (featuredRaw ?? [])
+    .map((c: Record<string, unknown>) => ({ c, score: richness(c) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((x) => x.c)
 
   const totalCommunities = count || 0
 
@@ -141,7 +159,7 @@ export default async function Home() {
           {[
             {num: totalCommunities ? totalCommunities.toLocaleString() + '+' : '8,000+', label: 'Communities tracked'},
             {num: 'Resident powered', label: 'Real data from real neighbors'},
-            {num: 'Free forever', label: 'Basic community profiles'},
+            {num: 'From $2.99', label: 'Detailed reports per community'},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', textAlign: 'center'}}>
               <div style={{fontSize: '28px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px'}}>{stat.num}</div>
@@ -214,7 +232,7 @@ export default async function Home() {
             },
             {
               q: 'Is HOA Agent free to use?',
-              a: 'Yes — completely free for homeowners, buyers, renters, and real estate professionals. Basic community profiles, fee data, restrictions, and resident reviews are available at no cost with no account required.',
+              a: 'Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community.',
             },
             {
               q: 'How often is the data updated?',
@@ -277,7 +295,7 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "Is HOA Agent free to use?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Yes — completely free for homeowners, buyers, renters, and real estate professionals. Basic community profiles, fee data, restrictions, and resident reviews are available at no cost with no account required." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community." }
             },
             {
               "@type": "Question",
