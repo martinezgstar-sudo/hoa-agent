@@ -76,6 +76,7 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
       style={{
         backgroundColor: "#fff",
         border: "0.5px solid #e0e0e0",
+        borderLeft: "3px solid #1B2B6B",
         borderRadius: "12px",
         overflow: "hidden",
         position: "relative",
@@ -106,6 +107,14 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
         const init = initials(ad.company_name) || "??"
         const cta = ad.cta_text || "Learn More"
         const ctaHref = ad.cta_url || "#"
+        const hasNext = idx < advertisers.length - 1
+
+        // Divider between multiple ads = 0.5px line with 8px breathing room above + below.
+        // First row: 16px top, +8 bottom if a divider follows.
+        // Middle row: +8 top, +8 bottom.
+        // Last row: +8 top (divider above), 16px bottom.
+        const padTop = idx === 0 ? "16px" : "24px"
+        const padBottom = hasNext ? "24px" : "16px"
 
         return (
           <div
@@ -114,23 +123,23 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
               display: "flex",
               flexWrap: "wrap",
               alignItems: "center",
-              gap: "16px",
-              padding: "16px 18px",
+              gap: "18px",
+              padding: `${padTop} 20px ${padBottom}`,
               borderTop: idx === 0 ? "none" : "0.5px solid #e0e0e0",
             }}
           >
             {/* Initials / logo circle */}
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: "52px",
+                height: "52px",
                 borderRadius: "50%",
                 backgroundColor: bg,
                 color: "#fff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "13px",
+                fontSize: "14px",
                 fontWeight: 700,
                 flexShrink: 0,
                 backgroundImage: ad.logo_url ? `url(${ad.logo_url})` : undefined,
@@ -145,8 +154,8 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
             <div style={{ flex: "1 1 200px", minWidth: 0 }}>
               <div
                 style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
+                  fontSize: "16px",
+                  fontWeight: 500,
                   color: "#1B2B6B",
                   lineHeight: 1.3,
                 }}
@@ -156,17 +165,17 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
               {ad.tagline && (
                 <div
                   style={{
-                    fontSize: "12px",
+                    fontSize: "13px",
                     color: "#666",
-                    marginTop: "2px",
-                    lineHeight: 1.4,
+                    marginTop: "3px",
+                    lineHeight: 1.45,
                   }}
                 >
                   {ad.tagline}
                 </div>
               )}
               {ad.phone && (
-                <div style={{ fontSize: "12px", marginTop: "4px" }}>
+                <div style={{ fontSize: "14px", marginTop: "6px" }}>
                   <a
                     href={`tel:${ad.phone.replace(/[^0-9+]/g, "")}`}
                     style={{ color: "#1D9E75", textDecoration: "none", fontWeight: 500 }}
@@ -178,18 +187,19 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
             </div>
 
             {/* CTA column */}
-            <div style={{ flexShrink: 0 }}>
+            <div style={{ flexShrink: 0 }} data-sponsored-cta-wrap>
               <a
                 href={ctaHref}
                 target="_blank"
                 rel="noopener sponsored"
                 onClick={() => track("click", ad, communitySlug, city)}
+                data-sponsored-cta
                 style={{
                   display: "inline-block",
-                  padding: "9px 16px",
+                  padding: "10px 20px",
                   backgroundColor: "#1D9E75",
                   color: "#fff",
-                  fontSize: "13px",
+                  fontSize: "14px",
                   fontWeight: 600,
                   borderRadius: "8px",
                   textDecoration: "none",
@@ -202,6 +212,14 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
           </div>
         )
       })}
+
+      {/* Mobile: full-width CTA */}
+      <style>{`
+        @media (max-width: 600px) {
+          [data-sponsored-cta-wrap] { width: 100% !important; flex: 1 1 100% !important; }
+          [data-sponsored-cta] { display: block !important; width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
+        }
+      `}</style>
     </div>
   )
 }
