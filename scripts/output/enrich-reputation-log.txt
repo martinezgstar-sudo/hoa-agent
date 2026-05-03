@@ -1,0 +1,646 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Fetching articles for enrichment (approved + pending)...
+Found 200 articles to process
+
+Processing: Condo crisis spreads far from Florida as owners are hit by financial t
+  No specific HOAs found
+
+Processing: “Diabolical scheme”: Inside the guilty pleas in Hammocks fraud that to
+  Found 1 HOA mentions: ['Hammocks']
+
+Processing: Zillow listings show just how desperate sellers are getting in Florida
+  No specific HOAs found
+
+Processing: Miami-Dade couple sentenced for massive HOA fraud scheme - NBC 6 South
+  No specific HOAs found
+
+Processing: Family Decides To Replace Their Roof With A Metal One, But The HOA Tri
+  No specific HOAs found
+
+Processing: Clash over e-bikes in luxury Boca community leads to man's arrest - Th
+  No specific HOAs found
+
+Processing: E-bike clash in luxury HOA community leads to Boca man's arrest - MSN
+  No specific HOAs found
+
+Processing: Fecal vandal's nearly weeklong crime spree comes to an end when police
+  No specific HOAs found
+
+Processing: West Palm Beach tenants blindsided as condo faces foreclosure over $1.
+  No specific HOAs found
+
+Processing: “Buyer beware”: Aston Martin condo owners allege litany of constructio
+  Found 1 HOA mentions: ['Aston Martin Residences']
+
+Processing: My wife and I returned to NYC after 2 years in Miami. The cost of livi
+  No specific HOAs found
+
+Processing: Canyon Springs Corruption Claim Leads To Libel Lawsuit
+  Already has community matches — skipping extraction
+
+Processing: USCB ( USCB ) Q1 2026 Earnings Call Transcript
+  No specific HOAs found
+
+Processing: HOA compliance rating system coming to California home sales
+  No specific HOAs found
+
+Processing: Map reveals just FIVE US cities where sellers still hold the power - a
+  No specific HOAs found
+
+Processing: Developer nixes Costco, pares down Ag Reserve project, but opposition 
+  No specific HOAs found
+
+Processing: The tables have turned: Florida and Texas are the biggest losers in th
+  No specific HOAs found
+
+Processing: Florida resident wants to know neighbors who owe HOA dues. Can HOA say
+  No specific HOAs found
+
+Processing: Condo owners stuck with homes no one will buy as they wake up to grim 
+  No specific HOAs found
+
+Processing: Judge accuses Delray rec association of 'gross mismanagement' - The Pa
+  Found 1 HOA mentions: ['Delray rec association']
+
+Processing: Byron Donalds wants to expel two colleagues from Congress , ends dayli
+  No specific HOAs found
+
+Processing: Byron Donalds ready to expel two colleagues from Congress
+  No specific HOAs found
+
+Processing: Byron Donalds ready to expel two colleagues from Congress
+  No specific HOAs found
+
+Processing: In Canyon Isles , Small Past Due Leads To Foreclosure Attempt
+  Already has community matches — skipping extraction
+
+Processing: Tenant Who Is Renting A Home Isn’t Given A Set Of The HOA Rules, But I
+  No specific HOAs found
+
+Processing: Rising Homeowner Association Fees Strain Household Budgets
+  No specific HOAs found
+
+Processing: Tattoo helps nab woman accused in Palm Beach County check - washing , 
+  No specific HOAs found
+
+Processing: Deputies : Man threatened Lake Worth LGBTQ bar patrons in violent Face
+  No specific HOAs found
+
+Processing: Ex-HOA property manager arrested in Martin County after alleged six-fi
+  No specific HOAs found
+
+Processing: Detectives Investigating Lotus Child Attack , HOA Revoking Barcodes Fr
+  Already has community matches — skipping extraction
+
+Processing: Homeowner In An HOA In Florida Notices The House Next Door Has Constru
+  No specific HOAs found
+
+Processing: Accused HOA swindler on the run after blowing residents’ cash on plast
+  No specific HOAs found
+
+Processing: Florida bookkeeper accused of embezeling hundreds of thousands in HOA 
+  No specific HOAs found
+
+Processing: Manhunt Underway for Florida Woman Accused of Stealing HOA Funds for P
+  No specific HOAs found
+
+Processing: Florida HOA bookkeeper accused of stealing hundreds of thousands of do
+  No specific HOAs found
+
+Processing: Florida News That Impacts You – April 7th , 2026 | Vero Patriot
+  No specific HOAs found
+
+Processing: Florida News That Impacts You – April 7th , 2026 | 1290 WJNO
+  No specific HOAs found
+
+Processing: Arden Community voices opposition to proposed AI data center in Palm B
+  Found 1 HOA mentions: ['Arden Community']
+
+Processing: Florida property manager on the run accused of HOA embezzlement for tr
+  No specific HOAs found
+
+Processing: Warrant issued for property manager accused of embezzling thousands fr
+  No specific HOAs found
+
+Processing: FIRST ARREST IN LOTUS CHILD BATTERY IS MITCHELL SCHUMAN
+  Already has community matches — skipping extraction
+
+Processing: HOA irrigation pipe is leaking under my driveway. Who pays to fix it? 
+  No specific HOAs found
+
+Processing: Florida handyman Bali Ramnarace fined $345 for parking work truck at h
+  No specific HOAs found
+
+Processing: Select Garage Doors Introduces Guaranteed HOA Compliance Service for R
+  No specific HOAs found
+
+Processing: Delray condo bankruptcy hits another snag; second lawyer wants out - T
+  No specific HOAs found
+
+Processing: Delray condo's bankruptcy meeting ends in chaos, resignation calls - T
+  No specific HOAs found
+
+Processing: HOA Verified Introduces BoardShield™ with 5-Year Legal Defense Coverag
+  No specific HOAs found
+
+Processing: Is your HOA president getting paid? It might be illegal - The Palm Bea
+  No specific HOAs found
+
+Processing: Delray Beach condo's bankruptcy case has new twist. What to know - The
+  No specific HOAs found
+
+Processing: Delray Beach condo association fires lawyer, claims 'excessive' fees -
+  No specific HOAs found
+
+Processing: The Weekly Dirt: Wave of lawsuits hits South Florida developers
+  No specific HOAs found
+
+Processing: Florida Laws and Regulations Regarding HOAs and Condo Associations - |
+  No specific HOAs found
+
+Processing: My Safe Florida Home issues , dog park concerns at Let Hear It in Boyn
+  Found 1 HOA mentions: ["Let's Hear It"]
+
+Processing: Palm Beach code board again defers fines for historic condo building -
+  No specific HOAs found
+
+Processing: FL condo law leaves some definitions up to interpretation, expert says
+  No specific HOAs found
+
+Processing: Bankruptcy filing blames Delray Beach condo misconduct in dispute - Th
+  No specific HOAs found
+
+Processing: Best Luxury Gated Communities in Palm Beach County: Comparing the True
+  No specific HOAs found
+
+Processing: New bankruptcies show dire toll of litigation for condo associations |
+  No specific HOAs found
+
+Processing: Condo board member is denied access to legal records. Is that allowed?
+  No specific HOAs found
+
+Processing: Power South Florida 2026
+  No specific HOAs found
+
+Processing: My HOA bans pets over 40 lbs. Is that legal? - The Palm Beach Post
+  No specific HOAs found
+
+Processing: South Florida clean dining for February 2026 : 85 eateries ace inspect
+  No specific HOAs found
+
+Processing: Lawsuit filed to overturn approval of Paramount redevelopment in Palm 
+  No specific HOAs found
+
+Processing: Can your HOA hide delinquent owner debts or insurance policies? - The 
+  No specific HOAs found
+
+Processing: $202M on the table but resistance emerges at Portofino South - The Pal
+  Found 1 HOA mentions: ['Portofino South']
+
+Processing: One City Plaza condo next to Mr. C in West Palm Beach is "shored up" -
+  Found 1 HOA mentions: ['One City Plaza']
+
+Processing: What to know about the Palm Greens bankruptcy in suburban Delray - The
+  Found 1 HOA mentions: ['Palm Greens']
+
+Processing: South Beach condo association manager, maintenance worker arrested in 
+  No specific HOAs found
+
+Processing: 'Not in a good way': Boynton Beach codes feel like HOA rules, resident
+  No specific HOAs found
+
+Processing: Boca Grove Sues Homeowner For Nearly $100K In Unpaid Fees Dues
+  Already has community matches — skipping extraction
+
+Processing: Pet bans increasingly difficult to enforce in condominiums - The Palm 
+  No specific HOAs found
+
+Processing: Florida Homeowners Finally Get Answers: HOA Verified Launches the Firs
+  No specific HOAs found
+
+Processing: HOA homeowners urged to check bank accounts after 'million dollar scam
+  No specific HOAs found
+
+Processing: HOA Verified launches free Florida community risk reports - Coverager
+  No specific HOAs found
+
+Processing: Billionaire Stephen Ross expected to complete condo buyout in West Pal
+  No specific HOAs found
+
+Processing: Entity overseeing Palm Greens recreational facilities files for bankru
+  Found 1 HOA mentions: ['Palm Greens']
+
+Processing: Florida HOA rules: Can homeowners association suspend your rights? - T
+  No specific HOAs found
+
+Processing: 7 Florida metro areas with the most expensive HOA fees in the US - Tre
+  No specific HOAs found
+
+Processing: Pickleball noise sparks lawsuit in tony Boca Raton community - The Pal
+  No specific HOAs found
+
+Processing: Pickleball noise dispute in Boca Raton heads to court - WPEC
+  No specific HOAs found
+
+Processing: South Florida condo association files for bankruptcy with over $40 mil
+  No specific HOAs found
+
+Processing: Condo board aims to 'borrow' from reserve fund for nonbudgeted expense
+  No specific HOAs found
+
+Processing: Rising HOA fees strain homeowners' budgets across Palm Beach County, T
+  No specific HOAs found
+
+Processing: Rising HOA fees strain homeowners’ budgets across Palm Beach County, T
+  No specific HOAs found
+
+Processing: Homeowner refuses to pay fines, clean up property, now what? - The Pal
+  No specific HOAs found
+
+Processing: Flood insurance won't cover cost of most Palm Beach condos, expert war
+  No specific HOAs found
+
+Processing: Southwest Florida sees significant rise in HOA fees - Gulfshore Busine
+  No specific HOAs found
+
+Processing: One City Plaza condo lawsuit: Mr. C construction eroding our foundatio
+  Found 1 HOA mentions: ['One City Plaza']
+
+Processing: HOA changes tennis courts to pickleball without vote. Is that legal? -
+  No specific HOAs found
+
+Processing: Can owner's roommate use power of attorney to vote, see HOA records? -
+  No specific HOAs found
+
+Processing: New year, new condo transparency rules now in effect, what buyers need
+  No specific HOAs found
+
+Processing: Panache At Boca Pointe Condo Association Files Lien Foreclosure Suit
+  Already has community matches — skipping extraction
+
+Processing: Delray Beach condo bankruptcy case has new twist
+  Found 1 HOA mentions: ['Palm Greens Recreation Association']
+
+Processing: Delray condo bankruptcy hits another snag second lawyer wants out
+  Found 1 HOA mentions: ['Palm Greens Recreation Association']
+
+Processing: Palm Greens bankruptcy reveals Delray Beach condo financial crisis
+  Already has community matches — skipping extraction
+
+Processing: Judge appoints trustee to oversee Delray Beach condo rec association a
+  Found 1 HOA mentions: ['Palm Greens Recreation Association']
+
+Processing: Delray Beach condo association fires lawyer claims excessive fees
+  Found 1 HOA mentions: ['Palm Greens Recreation Association']
+
+Processing: Pickleball noise sparks lawsuit in tony Boca Raton community
+  Found 1 HOA mentions: ['Parkside at Boca Trail HOA']
+
+Processing: Boca Via Mizner beset by delays lawsuits now Chapter 11 bankruptcy
+  Found 1 HOA mentions: ['Boca Via Mizner']
+
+Processing: Buyer Sues Via Mizner First American Over $529K Deposit
+  Already has community matches — skipping extraction
+
+Processing: Boca Buyer Sues Via Mizner Developer Over $1.16M Deposit at Tower 105
+  Found 1 HOA mentions: ['Tower 105 Residences']
+
+Processing: New bankruptcies show dire toll of litigation for condo associations
+  Already has community matches — skipping extraction
+
+Processing: Alarming South Florida foreclosure shows ease of separating homeowners
+  No specific HOAs found
+
+Processing: Palm Beach condo gets Town Council OK for work done without permits
+  Found 1 HOA mentions: ['The Claridges Condominium Association']
+
+Processing: Owner moved in, now HOA wants to change rules about guests, renting - 
+  No specific HOAs found
+
+Processing: Condo sellers must tell buyers about special assessment costs — or ris
+  No specific HOAs found
+
+Processing: What does Florida HOA law say about pickup truck parking bans? - The P
+  No specific HOAs found
+
+Processing: Baywinds HOA wins fight to remove flashing yellow arrow after crash - 
+  Found 1 HOA mentions: ['Baywinds HOA']
+
+Processing: Condo says no to hurricane windows, doors despite Florida law. Is that
+  No specific HOAs found
+
+Processing: Luxury condo association sues developers over 'misleading' constructio
+  No specific HOAs found
+
+Processing: Florida condo board president says his ouster wasn't legal. What's nex
+  No specific HOAs found
+
+Processing: New HOA Bill Could Reshape Condo, HOA Disputes In Boca Raton And Acros
+  No specific HOAs found
+
+Processing: Kolter, Perko near completion of controversial bulk condo buyout in Te
+  No specific HOAs found
+
+Processing: 'Puts homeowners first': New bill to allow residents to terminate HOAs
+  No specific HOAs found
+
+Processing: What does new Florida law say about condo boards streaming meetings? -
+  No specific HOAs found
+
+Processing: The high cost of high-rise condo living in South Florida - WLRN
+  No specific HOAs found
+
+Processing: New condo blues: Construction issues, lawsuits bedevil owners - The Pa
+  No specific HOAs found
+
+Processing: Condo board withholds records in support animal dispute. What's legal?
+  No specific HOAs found
+
+Processing: Must HOA pay for damage from tree if oak isn't on owner's property? - 
+  No specific HOAs found
+
+Processing: Homeowner association doubles fees without member vote. Is that legal?
+  No specific HOAs found
+
+Processing: 'Florida snow' may irk your HOA but can be tough to get rid of - The P
+  No specific HOAs found
+
+Processing: Wanting to head off skyrocketing condo fees, can board take loan to me
+  No specific HOAs found
+
+Processing: New poll shows property owners want to see reform of HOA's. They don't
+  No specific HOAs found
+
+Processing: 'Buyer beware': Local homeowners mull pros and cons of abolishing HOAs
+  No specific HOAs found
+
+Processing: South Florida realtors emphasize importance of researching homeowners 
+  No specific HOAs found
+
+Processing: 'OUR FAILED EXPERIMENT': Legislator renews calls to abolish HOAs follo
+  No specific HOAs found
+
+Processing: Dispute over HOA eviction led to deadly double homicide in Port St. Lu
+  No specific HOAs found
+
+Processing: Seven years of stalling may cost a Boca Raton condo board $200,000 in 
+  No specific HOAs found
+
+Processing: Can HOA ban guns from pool areas, board meetings despite Florida's new
+  No specific HOAs found
+
+Processing: Billionaire developer Jeff Greene sues West Palm Beach over Northwood 
+  No specific HOAs found
+
+Processing: HOA Verified Launches Florida’s First AI-Powered Network for Boards to
+  No specific HOAs found
+
+Processing: Seagate of Gulfstream condo residents in Boynton Beach suddenly learn 
+  Found 1 HOA mentions: ['Seagate of Gulfstream']
+
+Processing: Florida HOA aims to remove streetlights to save cash. Can they do that
+  No specific HOAs found
+
+Processing: Orthodox family’s suit against Boca HOA hits snag; creator of video th
+  No specific HOAs found
+
+Processing: Owners sued in developer battle for Harbor Towers condominium in West 
+  Found 1 HOA mentions: ['Harbor Towers']
+
+Processing: Owners in dispute over cutting down shared tree. Can HOA break the tie
+  No specific HOAs found
+
+Processing: 'Failed experiment': South Florida lawmaker floats statewide HOA ban -
+  No specific HOAs found
+
+Processing: Can an HOA be dissolved? Why it might be 'almost impossible' - WPTV
+  No specific HOAs found
+
+Processing: Palm Beach condo association settles suit over $2.7M AC project OK'd w
+  No specific HOAs found
+
+Processing: Chaos at Halcyon Condo: Can court-appointed receiver assume control ov
+  Found 1 HOA mentions: ['Halcyon Condo']
+
+Processing: This Florida HOA Thought It Could Get Away with Anti-Semitism - First 
+  No specific HOAs found
+
+Processing: More courts or more green space? New pickleball war divides upscale We
+  No specific HOAs found
+
+Processing: 'They don't care': Property manager for Palm Springs community has tou
+  No specific HOAs found
+
+Processing: HOA violations involving woman's brown grass led to her being arrested
+  No specific HOAs found
+
+Processing: Residents of this Florida condo pushed to sell for $1M a unit — rather
+  No specific HOAs found
+
+Processing: ‘Unacceptable’: Boca HOA disputes claims in lawsuit challenging suspen
+  No specific HOAs found
+
+Processing: ‘Unacceptable’: Boca HOA disputes claims in lawsuit challenging suspen
+  No specific HOAs found
+
+Processing: HOA Q&A: A tree blocks my view of the ocean and affects my condo value
+  No specific HOAs found
+
+Processing: 'Waving bags of money': The newest dilemma facing condo owners in Palm
+  No specific HOAs found
+
+Processing: Flagler Pointe residents: Complain to your condo association at your o
+  Found 1 HOA mentions: ['Flagler Pointe']
+
+Processing: Orthodox Jewish Family Sues Boca Raton HOA for Religious Discriminatio
+  No specific HOAs found
+
+Processing: HOA Q&A: Can we name a delinquent owner and the amount owed in the min
+  No specific HOAs found
+
+Processing: City not shutting off water to HOA with $1.4 million unpaid water bill
+  No specific HOAs found
+
+Processing: West Palm Beach condo wars heat up as Related Ross, Fort Partners vie 
+  No specific HOAs found
+
+Processing: Green Terrace condos HOA begins repaying debt to city. What's next for
+  Found 1 HOA mentions: ['Green Terrace condos HOA']
+
+Processing: Condo Crisis: Two-story buildings are one story short for state grants
+  No specific HOAs found
+
+Processing: Florida condo crisis: HOA's insurance can block owners from refinancin
+  No specific HOAs found
+
+Processing: “Problematic”: Judge blasts defense attorneys over slow progress in Ha
+  Found 1 HOA mentions: ['Hammocks']
+
+Processing: 'It's time to pull the plug': Residents scramble as HOA files for bank
+  No specific HOAs found
+
+Processing: Why Florida’s Condo Owners Are So Desperate to Sell - WSJ
+  No specific HOAs found
+
+Processing: 'I would like to see the HOA be held accountable': Extreme debt to dis
+  Found 1 HOA mentions: ['Green Terrace']
+
+Processing: Florida bills aim to boost HOA and condo association oversight, ease s
+  No specific HOAs found
+
+Processing: Could change be coming to how HOAs operate in Florida? - WPTV
+  No specific HOAs found
+
+Processing: Can HOA make rules about where a dog can be walked in a neighborhood? 
+  No specific HOAs found
+
+Processing: Florida lawmaker seeks to bring more transparency and accountability t
+  No specific HOAs found
+
+Processing: Inside Florida’s brewing condo crisis as property values drop in once-
+  No specific HOAs found
+
+Processing: Why it’s not enough for just the police to crack down on community ass
+  No specific HOAs found
+
+Processing: Florida condo sales move inland as fees, HOA dues surge. Where are the
+  No specific HOAs found
+
+Processing: 'People losing their homes': Florida condo owners struggling to afford
+  No specific HOAs found
+
+Processing: 'Condos are a different animal': Will condo association fees ever go d
+  No specific HOAs found
+
+Processing: South Florida condo association files for bankruptcy with over $40M in
+  Found 1 HOA mentions: ['Palm Greens at Villa Del Ray Recreation Condominium Association']
+
+Processing: Palm Beach condo allegedly scammed out of $100k by Michigan man
+  No specific HOAs found
+
+Processing: Palm Beach Halcyon condo association settles suit from resident
+  Already has community matches — skipping extraction
+
+Processing: Halcyon settles AC repair lawsuit and agrees to accept forensic audit
+  Already has community matches — skipping extraction
+
+Processing: Luxury condo association sues developers over construction defects
+  Found 1 HOA mentions: ['La Clara Condominium Association']
+
+Processing: Seagate of Gulfstream condo residents in Boynton Beach suddenly learn 
+  Already has community matches — skipping extraction
+
+Processing: Condo Crisis: Boynton Beach property a microcosm of Florida woes
+  Already has community matches — skipping extraction
+
+Processing: Libel Lawsuit Pits Boca Raton Condo Owners Against Each Other in Court
+  Found 1 HOA mentions: ['Atlantic Cloisters Condominium']
+
+Processing: Wellington residents hope HOA addresses persistent rat infestation
+  No specific HOAs found
+
+Processing: Boca HOA disputes claims in lawsuit challenging suspension of Orthodox
+  Found 1 HOA mentions: ['Boca Grove Property Owners Association']
+
+Processing: New bill to allow residents to terminate HOAs in Florida HB 657
+  No specific HOAs found
+
+Processing: Pickleball War Erupts in Exclusive West Palm Beach Gated Community
+  Already has community matches — skipping extraction
+
+Processing: VistaBlue Luxury Condo Developer Accused of Shoddy Construction
+  Already has community matches — skipping extraction
+
+Processing: Boca Grove HOA Sues Developer Over Alleged $347K In Unpaid Assessments
+  Already has community matches — skipping extraction
+
+Processing: 'We were happy': Young owner is among those forced to sell as South Fl
+  No specific HOAs found
+
+Processing: HOA Q&A: Can the Board do something about my neighbor's marijuana smok
+  No specific HOAs found
+
+Processing: Florida condo owners look at higher costs as new regulations take effe
+  No specific HOAs found
+
+Processing: Is a Christmas tree or menorah secular holiday decor? What if HOA boar
+  No specific HOAs found
+
+Processing: Palm Beach County Commission calls for immediate special session on co
+  No specific HOAs found
+
+Processing: PB County may set up fund to help condo owners - WPEC
+  No specific HOAs found
+
+Processing: Boca Raton HOA sues GL Homes over alleged construction defects at 504-
+  No specific HOAs found
+
+Processing: Can our homeowners association dictate where residents can and cannot 
+  No specific HOAs found
+
+Processing: GL Homes hit with another construction-defect lawsuit; this one filed 
+  Found 1 HOA mentions: ['Boca Bridges']
+
+Processing: Florida's condo crisis: Is it bad enough to call a special legislative
+  No specific HOAs found
+
+Processing: SPECIAL REPORT: Why Florida's new safety inspection law is creating ha
+  No specific HOAs found
+
+Processing: Florida's condo crisis: In 3 Palm Beach County communities, big issues
+  No specific HOAs found
+
+Processing: A checklist of what condos need to know about the new law and how it w
+  No specific HOAs found
+
+Processing: 'I won't be able to hang on': Seniors fear they'll be displaced by ons
+  No specific HOAs found
+
+Processing: A Boynton country club condo for $1,000? New equity rights rule create
+  No specific HOAs found
+
+Processing: Palm Beach Co. may help condo owners struggling to pay special assessm
+  No specific HOAs found
+
+Extraction done — 0 new community matches
+
+Updating reputation scores...
+Found 11 communities with matched news
+
+Scoring: Canyon Isles Homeowners Association, Inc. (1 articles)
+  Score: 5/10 — Under Scrutiny
+
+Scoring: SEAGATE OF GULFSTREAM 1-2 CONDO (2 articles)
+  Score: 3/10 — High Risk
+
+Scoring: Boca Grove Property Owner'S Association, Inc. (2 articles)
+  Score: 4/10 — Under Scrutiny
+
+Scoring: PANACHE AT BOCA POINTE CONDO (1 articles)
+  Score: 5/10 — Under Scrutiny
+
+Scoring: Palm Greens At Villa Del Ray (1 articles)
+  Score: 2/10 — High Risk
+
+Scoring: Canyon Springs Homeowners Association, Inc. (1 articles)
+  Score: 3/10 — High Risk
+
+Scoring: VISTABLUE SINGER ISLAND CONDO (1 articles)
+  Score: 4/10 — Under Scrutiny
+
+Scoring: HALCYON OF PALM BEACH CONDO (2 articles)
+  Score: 4/10 — Under Scrutiny
+
+Scoring: Fountains Of Palm Beach (1 articles)
+  Score: 5/10 — Under Scrutiny
+
+Scoring: Lotus Palm Homeowners Association, Inc. (2 articles)
+  Score: 2/10 — High Risk
+
+Scoring: BOCA VIEW CONDO*** (3 articles)
+  Score: 2/10 — High Risk
+
+Reputation scoring done
+
+All done.

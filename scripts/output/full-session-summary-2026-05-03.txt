@@ -1,0 +1,66 @@
+Full Session Summary — 2026-05-03
+============================================================
+
+=== ADMIN AUDIT ===
+  /admin              200
+  /admin/communities  200
+  /admin/news         200 (over-filter bug fixed)
+  /admin/comments     200
+  /admin/pending      200
+  /admin/upload       200
+  /admin/outreach     404 (page not built — TODO)
+  /admin/ads          404 (page not built — TODO)
+
+=== NEWS PIPELINE FIX ===
+  Bug: /api/admin/news over-filtered pending items requiring an
+       existing community_news match — 7 pending news_items had
+       no matches → admin saw 0 pending despite 7 in DB.
+  Fix: removed secondary filter; now shows all status=pending items.
+
+=== INSERTS THIS SESSION ===
+  news_items total: 0-0/296
+  legal_cases total: 0-0/74
+  community_legal_cases total: 0-0/170
+
+  News articles inserted: 216 (200 approved + 16 pending)
+  Legal cases inserted:    20 (all from Google Scholar)
+  High-severity links:      2 (Sausalito Place + Lakes Of Sherbrooke)
+  litigation_count bumps:   2
+
+=== REPUTATION ENRICHMENT ===
+  Communities updated: 11
+  HIGH RISK (1-3):     5
+  UNDER SCRUTINY (4-5): 6
+
+  HIGH RISK communities:
+    Lotus Palm Homeowners Association, Inc.                 (Boca Raton) — 2/10
+    BOCA VIEW CONDO***                                      (Boca Raton) — 2/10
+    Palm Greens At Villa Del Ray                            (Delray Beach) — 2/10
+    SEAGATE OF GULFSTREAM 1-2 CONDO                         (Boynton Beach) — 3/10
+    Canyon Springs Homeowners Association, Inc.             (Boynton Beach) — 3/10
+
+  UNDER SCRUTINY communities:
+    Boca Grove Property Owner'S Association, Inc.           (Boca Raton) — 4/10
+    VISTABLUE SINGER ISLAND CONDO                           (Riviera Beach) — 4/10
+    HALCYON OF PALM BEACH CONDO                             (Palm Beach) — 4/10
+    PANACHE AT BOCA POINTE CONDO                            (Boca Raton) — 5/10
+    Fountains Of Palm Beach                                 (Lake Worth) — 5/10
+    Canyon Isles Homeowners Association, Inc.               (Boynton Beach) — 5/10
+
+=== OTHER FIXES (verified in place from earlier commits) ===
+  Editable fee inputs in /admin/pending: confirmed (commit ad422d1)
+  Eastpointe comment count: 1 review showing (commit 492f8f0)
+
+=== KNOWN ISSUES / NEXT STEPS ===
+  - community_research_log table missing in production schema
+    (audit trail writes silently fail; non-blocking)
+    Apply: supabase/migrations/20260430_community_research_log.sql
+  - News retry: 0 results — all RSS endpoints structurally blocked
+    (PBPost/Sun-Sentinel 403, DDG/legislative/court empty)
+    Need different access strategy (paid scraper, archive.org, etc.)
+  - 40 Zillow-noise fee observations awaiting admin review/reject
+
+=== LIVE ADMIN URLs ===
+  https://www.hoa-agent.com/admin/news      (now shows 7+ pending)
+  https://www.hoa-agent.com/admin/pending   (40 fee obs awaiting review)
+  https://www.hoa-agent.com/admin/comments
