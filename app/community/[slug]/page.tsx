@@ -125,6 +125,29 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     .order('created_at', { ascending: false })
     .limit(10)
 
+  // Live count + average from community_comments. The communities.review_count
+  // and communities.review_avg cached fields can fall out of sync when comments
+  // are inserted/approved without a trigger updating them — read live to avoid
+  // showing 0 reviews when an approved comment exists.
+  const { count: liveCommentCount } = await supabase
+    .from('community_comments')
+    .select('id', { count: 'exact', head: true })
+    .eq('community_id', community.id)
+    .eq('status', 'approved')
+
+  const { data: ratingRows } = await supabase
+    .from('community_comments')
+    .select('rating')
+    .eq('community_id', community.id)
+    .eq('status', 'approved')
+    .not('rating', 'is', null)
+
+  const liveReviewCount = liveCommentCount ?? (comments?.length ?? 0)
+  const ratings: number[] = (ratingRows ?? []).map((r: { rating: number | null }) => r.rating!).filter((n) => typeof n === 'number')
+  const liveReviewAvg = ratings.length > 0
+    ? Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10
+    : (community.review_avg ?? null)
+
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
 
   const cityForSearch = community.city_verified ? community.city : null
@@ -223,11 +246,11 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           "addressCountry": "US"
         },
         "url": `https://hoa-agent.com/community/${community.slug}`,
-        ...(community.review_avg && community.review_count ? {
+        ...(liveReviewAvg && liveReviewCount > 0 ? {
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": community.review_avg,
-            "reviewCount": community.review_count,
+            "ratingValue": liveReviewAvg,
+            "reviewCount": liveReviewCount,
             "bestRating": 5,
             "worstRating": 1
           }
@@ -309,9 +332,9 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             </div>
             <div style={{textAlign: 'right', minWidth: '130px', width:'100%', maxWidth:'220px'}}>
               <div style={{fontSize:'18px',color:'#EF9F27',lineHeight:'1.2'}}>
-                {'★'.repeat(Math.round(community.review_avg || 0)).padEnd(5, '☆')}
+                {'★'.repeat(Math.round(liveReviewAvg || 0)).padEnd(5, '☆')}
               </div>
-              <a href="#leave-review" style={{display: 'inline-block', marginTop: '4px', fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{community.review_count || 0} reviews</a>
+              <a href="#leave-review" style={{display: 'inline-block', marginTop: '4px', fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{liveReviewCount} reviews</a>
             </div>
           </div>
         </div>
@@ -325,7 +348,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
           {[
-            {val: community.review_avg ? community.review_avg + '★' : 'No reviews', label: (community.review_count || 0) + ' reviews', src: 'user-submitted', link: null, color: null},
+            {val: liveReviewAvg ? liveReviewAvg + '★' : (liveReviewCount > 0 ? liveReviewCount + ' reviews' : 'No reviews'), label: liveReviewCount + ' reviews', src: 'user-submitted', link: null, color: null},
             {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident', link: null, color: null},
             {val: community.news_reputation_score ? community.news_reputation_score + '/10' : 'No data', label: community.news_reputation_label || 'News reputation', src: 'AI-analyzed', link: `/community/${community.slug}/news`, color: community.news_reputation_score ? community.news_reputation_score <= 3 ? '#dc2626' : community.news_reputation_score <= 5 ? '#d97706' : community.news_reputation_score <= 7 ? '#2563eb' : '#16a34a' : null},
             {val: community.litigation_count ? community.litigation_count + ' cases' : 'Search record', label: 'Litigation', src: 'CourtListener', link: `/community/${community.slug}/legal`, color: (community.litigation_count || 0) > 0 ? '#7c3aed' : null},
@@ -558,7 +581,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         reviewSectionId={commentFormId}
         monthlyFeeMin={community.monthly_fee_min ?? null}
         managementCompany={community.management_company ?? null}
-        reviewCount={community.review_count ?? null}
+        reviewCount={liveReviewCount}
         assessmentSignalCount={community.assessment_signal_count ?? null}
       />
 
