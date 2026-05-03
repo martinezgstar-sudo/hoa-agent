@@ -1,0 +1,197 @@
+[
+  {
+    "id": "da33513c-6ad5-446d-9506-daab478b6754",
+    "canonical_name": "BELLA VISTA ON THE PARK CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 64,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'BELLA VISTA ON THE PARK CONDO' clearly indicates a condominium association, which is a residential property type despite the commercial filing designation."
+  },
+  {
+    "id": "bf733a84-0ba2-4c89-a60b-63e0afcea290",
+    "canonical_name": "OCEAN PARKS CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 328,
+    "management_company": "Phoenix Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "Despite being filed as commercial property, this is clearly a residential condominium association with 328 units, which is typical for large residential condo communities."
+  },
+  {
+    "id": "65c62cfc-41d2-444e-b41f-decaaa07ef58",
+    "canonical_name": "PASSAGES JUPITER ISLAND CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 39,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.95,
+    "reason": "Despite being filed as commercial property, this is clearly a condominium association with 39 units, which are residential dwelling units."
+  },
+  {
+    "id": "7b92bfcb-1015-49da-9f25-dd184273d2fa",
+    "canonical_name": "VILLAGE GREEN #4 CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 153,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "Despite being filed as commercial property, the name 'Village Green #4 Condo' with 153 units clearly indicates a residential condominium community."
+  },
+  {
+    "id": "ed804519-7fb7-4e0a-aed4-d696a3bde02e",
+    "canonical_name": "VILLAGE GREEN AVON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 63,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN AVON CONDO' clearly indicates a condominium community, which is a residential property type despite being filed as commercial."
+  },
+  {
+    "id": "f25af19c-8e5b-44f9-8fbd-1eb6ff0362c8",
+    "canonical_name": "VILLAGE GREEN BOCA RATON CONDO",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 60,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "Despite being filed as commercial property, the name 'VILLAGE GREEN BOCA RATON CONDO' clearly indicates a condominium association, which is a residential property type."
+  },
+  {
+    "id": "6887542c-af06-4600-acab-b84c5f29a7b5",
+    "canonical_name": "VILLAGE GREEN BUCKINGHAM CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN BUCKINGHAM CONDO' clearly indicates a condominium association, which is a residential property type despite being filed as commercial."
+  },
+  {
+    "id": "ffdb8fbe-f0f9-46bb-abd9-d42e70e1fc20",
+    "canonical_name": "VILLAGE GREEN COVENTRY CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 66,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "Despite being filed as commercial property, this is clearly a condominium community with 66 units, which indicates a residential condo association."
+  },
+  {
+    "id": "d439026a-a0fb-4f70-a555-dee4d6c1b818",
+    "canonical_name": "VILLAGE GREEN DORCHESTER CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "Despite being filed as commercial property, this is clearly a condominium association with 54 units, which indicates a residential community."
+  },
+  {
+    "id": "153c40f2-6e64-43db-871f-f94cc1484197",
+    "canonical_name": "VILLAGE GREEN HAMPTON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 60,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN HAMPTON CONDO' clearly indicates a condominium association, which is a residential property type despite the commercial filing designation."
+  },
+  {
+    "id": "b338b421-ea47-4c84-ba99-79cd995ad54c",
+    "canonical_name": "VILLAGE GREEN KENSINGTON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN KENSINGTON CONDO' clearly indicates a condominium association, which is a residential property type despite being filed as commercial."
+  },
+  {
+    "id": "11251384-7519-4ab2-80ae-ade0819ccb9f",
+    "canonical_name": "VILLAGE GREEN SUSSEX CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 84,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN SUSSEX CONDO' clearly indicates a condominium community, which is a residential property type despite the commercial filing designation."
+  },
+  {
+    "id": "ca0bda64-883d-42f6-8b9b-eb6dcba564d0",
+    "canonical_name": "VILLAGE GREEN WINDSOR CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 57,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "confidence": 0.9,
+    "reason": "The name 'VILLAGE GREEN WINDSOR CONDO' clearly indicates a condominium association, which is a residential property type despite the commercial filing designation."
+  }
+]

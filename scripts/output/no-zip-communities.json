@@ -1,0 +1,646 @@
+[
+  {
+    "id": "e84c2bd5-9208-478c-b59f-4af1f9f652f7",
+    "canonical_name": "Annunziata Estates Homeowners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "c01ae041-2fc2-43a0-bcf0-4703fc3e9487",
+    "canonical_name": "Associated property management",
+    "city": "West Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "e7bc4bd7-8d4c-42ed-992c-029088adf80b",
+    "canonical_name": "Avila At Jensen Beach Homeowners Association, Inc.",
+    "city": "Jensen Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "c3a1b8d3-b595-4990-837b-33789ab96fea",
+    "canonical_name": "Bear Lakes Estates North Property Owners' Association, Inc.",
+    "city": "West Palm Bch.",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "e35d55d0-64d0-47d4-99ba-c3b63b5d15c6",
+    "canonical_name": "Bedford Park At Tradition Homeowners Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "968ac344-a400-4340-bb03-72a47e065bac",
+    "canonical_name": "BELLAMAR HOUSE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "f683f1a1-cb33-4257-a69d-123b8a4eac88",
+    "canonical_name": "Benoist Farms Industrial Park North Property Owners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "3a0b8b95-7bb2-4f38-81f9-7a1c47d617be",
+    "canonical_name": "BERMUDA CLUB OF GULFSTRM CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "81a3d34e-51ed-4062-97ba-23d8de82e2db",
+    "canonical_name": "BERMUDA HOUSE OF GLFSTRM CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "5194ce65-aac0-4c63-862f-83b8e273a3da",
+    "canonical_name": "Boynton Isles Plat No. 2 Homeowners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "92426c44-ddd2-4196-9694-7104efdea4f4",
+    "canonical_name": "Bryant Park Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "8038af94-25e8-4e49-9e7e-5a7091738056",
+    "canonical_name": "Brynlie At Tradition Homeowner'S Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b6b173de-55a6-4660-b336-68a942ef5af6",
+    "canonical_name": "Cadence At Tradition Homeowner'S Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "de83ad3e-fcb6-443d-9d33-c7ad6b13c161",
+    "canonical_name": "CASA SERENA THS",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "f1d0b021-f670-4702-82b3-822c91daeb49",
+    "canonical_name": "Casas De Marbella Property Owner'S Association, Inc.",
+    "city": "Palm Beach Garden",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "e9b19ad9-d5f2-4d9e-8ba2-aaa74991b357",
+    "canonical_name": "Coral Bay At Boca Chase Homeowners Association, Inc.",
+    "city": "Boca Raton,",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "18a8f8f0-3439-422c-99c9-68cfc981aad8",
+    "canonical_name": "Coral Cove Homeowner'S Association, Inc.",
+    "city": "N. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "27de4f42-dca1-4799-8d09-a404a7497e86",
+    "canonical_name": "Cottage District Homeowners Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "2591748d-01e9-4cdc-a4da-f5c322fd504f",
+    "canonical_name": "Counterpoint Estates Property Owners' Association, Inc.",
+    "city": "Royal Palm Bch.",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b608bc33-966e-4409-8d48-174942d9d360",
+    "canonical_name": "Cresthaven Homeowners Civic Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "186661e5-29a2-4ef8-8bd6-acacec941400",
+    "canonical_name": "Cypress Lakes Homeowners Association Iv, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "a742375b-8fd3-42a2-93e1-c68a7981b5c8",
+    "canonical_name": "Dorman Estates Homeowners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "8b794a16-1680-4e23-bdb5-cd47bc76cd8a",
+    "canonical_name": "Dunbar Village Residents Association Of The West Palm Beach Housing Authority, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "dee8201f-8900-4d80-a494-0e9294cebda9",
+    "canonical_name": "Eden Place Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "6777dcbc-9e9f-401f-997a-61cc8a21afc2",
+    "canonical_name": "EL CORTIJO CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "3b0128a0-94a2-467b-9235-1fa2aa1e7515",
+    "canonical_name": "El Rancho Estates-Parcel \"A\" Property Owners Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "07bbd689-b9e4-49dc-93f7-f6631bd66d0f",
+    "canonical_name": "Embassy Drive Neighborhood Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "6e0099e1-2675-471f-ae0e-dd4ff7dde166",
+    "canonical_name": "Emerald Creek Homeowner'S Association, Inc.",
+    "city": "West Palm Bch.",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b4662099-9668-44e8-bc7e-8998f025f8b3",
+    "canonical_name": "Emery At Tradition Homeowner'S Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d8444ca0-b14c-453f-82fe-41e4b8f6f013",
+    "canonical_name": "Escondida Property Owners' Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "9a7dbd49-7bc3-4138-9908-72e022f70570",
+    "canonical_name": "Evian Homeowners' Association, Inc.",
+    "city": "Greenacres, Fl 33463",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "5b619949-c294-41f4-b3be-222099ba8389",
+    "canonical_name": "Farrell Estates Wellington Neighborhood Association, Inc., A Florida Corporation Not-For-Profit",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "52e8edcd-8526-423a-848c-032e61dfb4fe",
+    "canonical_name": "FOREST HILL CLUB CONDOMINIUM***",
+    "city": "Lake Clarke Shores",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d5147967-156f-44e2-9971-70343615597c",
+    "canonical_name": "FOREST PLAZA COND*(***)",
+    "city": "Lake Clarke Shores",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "4b4493ae-45c0-40e8-b0de-a2d795c4858b",
+    "canonical_name": "Gold Coast Ranches Property Owners Association, Inc.",
+    "city": "North Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "c67594d8-193b-41d1-8dd2-0df1c4f84f87",
+    "canonical_name": "Greater Loxahatchee Property Owners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "26d620d7-76c8-4be9-b7aa-66c5bdb1051f",
+    "canonical_name": "GULFSTREAM MANORS CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "1ac042ca-44b3-47b8-9a64-33828801122a",
+    "canonical_name": "GULFSTREAM SHORES CONDO ***",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "863487d9-fe5a-48a6-813b-025da9a419b8",
+    "canonical_name": "GULFSTREAM VILLAS CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "0188df31-a31b-4e76-90b8-b138b158da3f",
+    "canonical_name": "GULFSTREAM VILLAS SOUTH CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "1885eb89-4ad4-44f6-bcc0-1068b178d8d8",
+    "canonical_name": "Harbour Pointe At River Bridge Community Association, Inc.",
+    "city": "West Palm Beacg",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "0ca7739c-5d49-4d4d-b05c-6741f7dcf2b6",
+    "canonical_name": "Hidden Lakes Homeowners' Association Of Delray, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "1af50ddf-9c74-4258-89ca-d07ba72a9685",
+    "canonical_name": "HILLSIDE HSE GULFSTREAM CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "72f05502-dd0f-492f-ab74-8da140b4a66a",
+    "canonical_name": "Homeowners Financial, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "881fbaad-afb3-4fba-a66d-5bea3c7f4a8a",
+    "canonical_name": "Homeowners' Association Of Eagle Point, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b9ca3fac-526c-4877-9f9d-e2e70308c239",
+    "canonical_name": "JAMAICA SQUARE INC CO-OP",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "c830614d-59df-4985-983a-c3ce2c246262",
+    "canonical_name": "KEN-LEE Gardens",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "72331a72-af7c-47c4-8163-366d91d2455b",
+    "canonical_name": "Kenley At Tradition Homeowner'S Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "ec512631-4932-4c33-ae4f-73a977ea8739",
+    "canonical_name": "Knollwood Home Owners Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "4b3d9093-7dea-400d-8c49-d1802b0e948a",
+    "canonical_name": "Lagorce Village Neighborhood Association, Inc.",
+    "city": "Lake Worth Fl",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "2011d24b-b5de-4c50-b8c3-606d02554b39",
+    "canonical_name": "Lake Crystal Property Owners' Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "48bd2459-2cfd-45c8-a22f-3c10f1818da4",
+    "canonical_name": "Lake Patrick Subdivision Property Owners Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d3735ae9-e9a3-4d64-acdf-194988f2fbc0",
+    "canonical_name": "Lake Worth'S College Park Homeowners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "9514ec66-c580-4343-9d5f-2ac3fde7a085",
+    "canonical_name": "Laurel Villa Home Owners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "899fcfe6-f265-4e58-a181-f3b8b89ccfb8",
+    "canonical_name": "LHERMITAGE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "82c0e7ac-08ee-462f-bad5-5713f82504fc",
+    "canonical_name": "Manalapan Property Owners Association, Inc.",
+    "city": "Pt Manalapan",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "287e2059-ab50-4b0b-9c52-60c0ea835359",
+    "canonical_name": "Mango Groves NA",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "c4397eed-40a5-4194-b222-a5e668008007",
+    "canonical_name": "Mango Groves Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "18128b4e-5722-42f5-a632-54a650ac7044",
+    "canonical_name": "Memorial Park Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "ab588fd3-aeb9-44d6-a631-062a4ff47727",
+    "canonical_name": "National Village Property Owners Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "724b92e5-4fba-401c-99cc-f43af0982bf4",
+    "canonical_name": "Neighborhood Association President'S Council Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "3cd1916f-1f3f-4ef9-a574-3fd65ee011b5",
+    "canonical_name": "Nora - West Palm Beach Property Owners' Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "8b183fc6-b0bd-4b67-8a9b-f081c1ffa9f1",
+    "canonical_name": "North Ten Acres Homeowners Association,Inc.",
+    "city": "Royal Palm Bch.",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "93fbe140-0493-4d42-a0ff-e3089a242362",
+    "canonical_name": "OCEAN AVENUE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "40213501-930a-419c-99e3-ede7051f12d6",
+    "canonical_name": "Old Northwood Neighborhood Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "653f991f-fc2f-4165-b99a-72ad99d0dc57",
+    "canonical_name": "Palm Beach Mobile Home Park Homeowners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "234d4468-41cc-41c1-887d-a50f9b18505a",
+    "canonical_name": "Parrot Cove Homeowners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d04edf9e-d50a-4959-9fe5-9b5848f7b9b6",
+    "canonical_name": "Parrot Cove Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "fcc589e8-28d3-4d03-bc88-83ab088019ff",
+    "canonical_name": "Patriot Home Owners Association, Inc.",
+    "city": "Greenacres City",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "f94a0f04-fe8d-421a-a554-4c1fdb16b0cc",
+    "canonical_name": "POLO RIDGE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "0af4ffff-bac3-481d-8724-60d02c71f633",
+    "canonical_name": "Promenade At Tradition Community Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "518d56fb-878b-4d85-809a-63c2c40fb6f7",
+    "canonical_name": "Prosperity Bay Village Homeowners Association, Inc.",
+    "city": "N. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "096f0e94-5f69-4cbd-89f9-6942ae82f12d",
+    "canonical_name": "Providencia Park Neighborhood Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d471b6fc-9a69-4a4d-be35-563e4f04c727",
+    "canonical_name": "Royal Poinciana Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "ad10cf09-9aed-40d5-a505-27d65a6a8933",
+    "canonical_name": "SEA RIDGE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "21f5dece-0faa-4525-a50c-6fd54ba68e0a",
+    "canonical_name": "Seville At Tradition Homeowner'S Association, Inc.",
+    "city": "Port St. Lucie",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "66ef74b5-b739-47e0-b7d0-598a5761ba00",
+    "canonical_name": "SOMERSET OF GULFSTREAM INC",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "afbeb8a9-de6e-4473-8e6a-592c73d5978f",
+    "canonical_name": "Strawberry Fields Homeowners Association, Inc.",
+    "city": "West Palm Bch",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "09bf0c60-9a65-4c64-8937-cf1c7314f4b9",
+    "canonical_name": "The Brazils Home Owners Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "727813ba-7ce1-45cc-aa43-6b072666a59c",
+    "canonical_name": "The Estates At Juno Beach Homeowners Association, Inc.",
+    "city": "W Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d7726c12-63d8-44c9-b41a-5e9fcd98e012",
+    "canonical_name": "The Little Ranches Homeowners' Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "777ea633-7f4e-4a3b-a2be-d6d47682b270",
+    "canonical_name": "The Tuscan Villas Of Lake Worth Property Owners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "08e3e624-1301-4078-8e8e-97c51eeb1ce7",
+    "canonical_name": "Tropical Ridge Neighborhood Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "916b3d0e-5992-49a7-b37f-df920f216e21",
+    "canonical_name": "Urban Arts Lofts Homeowner'S Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b70211a9-7639-44c4-8774-4e97a012c849",
+    "canonical_name": "Vedado Neighborhood Association, Inc.",
+    "city": "W. Palm Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "b6755b72-48dd-40bd-8751-27ab5886e1f3",
+    "canonical_name": "VILLA D ESTE CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "0394d46c-2779-4908-97e0-cc034f161d57",
+    "canonical_name": "VILLAS AT 4001 NORTH OCEAN CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "cc720edc-7b2d-4772-8901-4b74d46f99bc",
+    "canonical_name": "VISTA VILLAS CONDO",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "f889f6a6-e117-4686-9b74-09b881a6f5cf",
+    "canonical_name": "WELLESLEY LK CLARK SHORES",
+    "city": "Lake Clarke Shores",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "04886419-4d46-4127-bc1f-ac85d1705388",
+    "canonical_name": "Wellington Green Master Property Owners Association, Inc.",
+    "city": "Lake Worth Beach",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "1e5314e5-2357-4c91-8997-0c81823ab105",
+    "canonical_name": "WESTMINSTER INC CO-OP",
+    "city": "Gulf Stream",
+    "zip_code": null,
+    "county": "Palm Beach"
+  },
+  {
+    "id": "d86e7d40-6105-4656-8742-9101c7c1a9e0",
+    "canonical_name": "Yacht Club Drive Civic Association, Inc.",
+    "city": "North Palm Bch.",
+    "zip_code": null,
+    "county": "Palm Beach"
+  }
+]

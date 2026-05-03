@@ -1,0 +1,1209 @@
+id,canonical_name,old_city,new_city,method,zip_code,corrected_at
+8d2b4d0f-e552-468c-8fc2-0ad4ec85afcd,10080 COMMERCIAL CONDO *(***)=*(***),Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:38:59.487868
+af6d53b9-3262-444e-881a-5f77bda1d952,1100 CABANA CONDO***,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:38:59.705453
+b824db9e-ad81-42a1-b8e0-9928f2897c4d,111 FIRST DELRAY CONDO,Delray Beach,Boca Raton,zip_lookup,33431,2026-05-03T14:38:59.918026
+cf594005-4ad5-46c8-9c32-f4253f5942c8,177 179 MAIN STREET CONDO ***,Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:39:00.122564
+d82f33bf-b00c-42bf-b749-e0e6e9adee15,1820 WEST TENTH CONDO*,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:00.331254
+2c95eccc-11c9-4123-bbe5-d48d03921d87,1880 10TH CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:00.540164
+bc462102-97f9-4106-89f3-66627fe88c43,2560 SOUTH OCEAN BOULEVARD CONDOMINIUM***,Palm Beach,Boca Raton,zip_lookup,33432,2026-05-03T14:39:00.743908
+056979be-2e59-49f0-9a89-9fd37ac5fc94,2700 NORTH OCEAN CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:00.949879
+1fe74212-23e7-40d8-8933-c246de12eb19,2774 SOUTH OCEAN INC,Palm Beach,Boca Raton,zip_lookup,33432,2026-05-03T14:39:01.166826
+b5a8bd37-3aa5-49c0-b2cf-11f74756b9de,3200 SOUTH OCEAN A SEAGATE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:01.728786
+31bd4754-84fe-48a7-986a-a70506267350,3550 SOUTH OCEAN CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:01.937420
+87eb7cad-7301-46a0-bf58-7bac28fe2eed,3621 SOUTH OCEAN VILLAS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:02.201936
+c6057d01-d5ba-463d-a4fc-840bfcdd448d,4001 NORTH OCEAN CONDO,Gulf Stream,Delray Beach,zip_lookup,33483,2026-05-03T14:39:02.628627
+89261708-9f51-4888-8d82-c1a2093c5299,45 Ocean Condo,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:02.845727
+3fbc11d4-5e28-423a-bab7-e433121a173a,45 OCEAN CONDOMINIUM,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:03.065983
+f6e8a0cb-bcd0-43a8-bcba-757475174f9a,4513 SOUTH OCEAN CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:03.257759
+d15d8e31-198d-494d-93f1-035b35397a43,5000 NORTH OCEAN CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:03.447767
+9ada5415-4710-4bfa-b1b1-09667a3c4170,"700 Ocean Drive Homeowners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:03.677527
+9cde8c72-71f9-4092-9bc7-7bddaf9a1d06,802 OLD DIXIE HIGHWAY CONDOMINIUM BUILDING*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:03.890145
+780d36a8-f660-4c86-b926-6ebf59fd577d,804 OLD DIXIE HIGHWAY CONDOMINIUM BUILDING*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:04.119620
+0d610d71-dacb-409b-9ee6-dd0c7f67bada,ABERDEEN ARMS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:04.331834
+63151cd0-dd3b-4a5a-8158-68193b0de3a6,Aberdeen Arms Condominium Th Pt Of Sly,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:04.552439
+080cf189-a792-445d-b069-373a85c052a4,ACREHOME PARK IN,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:04.751692
+7d586128-319f-4610-90ab-8b5e1a5f951a,ACREHOME PARK SECOND ADD IN,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:04.954280
+63620c75-7c12-40ff-b9b0-49995eab3c53,ADDISON AT SINGER ISLAND CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:05.118991
+30a7d4c7-ed14-4de1-9ac5-5fb0ca5581ac,ALHO HEIGHTS,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:05.294704
+bcbeb288-a3ea-4aaf-ba3b-640879b807a7,ALMONT VILLAS CONDO**,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:05.550710
+fb611b83-7e94-4574-865c-b54e5312493c,"Alpine Villas West Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:05.726392
+eb72306c-8b16-405c-af90-0c0593a7f414,Ambassadors V North,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:05.899496
+8ce9bd8d-04ae-4aaf-b85f-63fb3a3c5236,AMBASSADORS V NORTH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:06.087387
+44e4a949-5efd-4c73-9960-27ef0860fa46,AMBASSADORS V SOUTH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:06.268813
+083f8b38-6309-4e8b-97fb-b7f74e71c7de,AMENDED PLAT OF LANTANA,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:06.450968
+64063ecd-02d1-46b1-b7ac-307bc470eb53,"Anchorage Point Property Owners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:06.607393
+0b7300d0-c694-44db-9f3a-c5fb58da2ab9,ANGUILLA CAY CONDOMINIUM***,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:06.781625
+9248eaa9-0b46-4b58-a6f5-29f140f6fb3d,Anthony Groves,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:39:06.990991
+83c974c1-0e60-4460-95e9-5e36af139708,Apartments At Timberlake Condominium,Lake Park,Palm Beach Gardens,zip_lookup,33418,2026-05-03T14:39:07.159026
+6faebb8c-4c46-419a-85a5-0d979d981fba,APARTMENTS AT TIMBERLAKE CONDOMINIUM***,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:07.343543
+e083bfc0-7112-4687-881e-18216bebe948,AQUARIUS CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:07.513612
+79805a35-cb76-4306-b205-f729a9606fee,ARMOUR MANOR,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:07.687078
+ad7b5d81-0554-4ffa-8ea4-fb8d64d255c3,"Armour Manor Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:07.874815
+9f50e8e2-45e3-4bfc-9973-3b1b1bc324c4,ARSI CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.045614
+96fad567-d622-44ca-af6e-d18757e3e5f9,ATLANTIS ATRIUMS,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.227497
+20452cc4-041c-49a3-8a87-5ea00975a890,Atlantis City Of 222 &,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.393643
+c26b367e-8496-4b3e-9cce-33ebfa59b5dc,ATLANTIS REGENCY CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.577116
+9e3fa3f5-0855-40c4-8c8c-3878cbe46efa,ATLANTIS REGENCY E GRDNS CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.749086
+bf31d395-7aef-4ecc-b307-c3dcef75236f,ATLANTIS RETAIL BUILDING CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:08.929592
+56a35921-7959-4375-ac03-d3cc4c15624c,ATLANTIS SHERBROOKE VILL CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:09.114265
+c918c46c-89f7-4f39-a854-a5afc5fa2cef,ATLANTIS SHERBROOKE VLS E CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:09.290253
+3cfb1417-8efa-4ade-8315-cbaefa3e7cc6,ATLANTIS SHERBROOKE VLS S CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:09.464448
+116f588e-ef2b-47b2-a8ba-cb6bf2a5ae45,ATRIUM AT PALM BEACH SHORES CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:09.644822
+9287582c-897a-4add-b451-ce3add10ae4f,"Augustine Acres Homeowners' Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:09.823674
+69949740-49f4-4f57-9638-9a70203def31,AUSTRALIAN WAREHOUSE CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:10.007890
+1268f67a-60a5-4520-9bd3-7c569af7e925,Avenir Pod,Palm Beach Gardens,West Palm Beach,zip_lookup,33412,2026-05-03T14:39:10.171896
+b43763b8-a938-419c-b7de-35861e993bcb,Avenir Site Plan 1 Pod,Palm Beach Gardens,West Palm Beach,zip_lookup,33412,2026-05-03T14:39:10.344751
+70e605ed-d308-476f-af49-7bc47c39d7d7,Avenir Site Plan 2 Pod,Palm Beach Gardens,West Palm Beach,zip_lookup,33412,2026-05-03T14:39:10.526655
+20632fe5-9219-4495-8534-46d9a53aa888,Avenir Site Plan 3 Pod,Palm Beach Gardens,West Palm Beach,zip_lookup,33412,2026-05-03T14:39:10.705531
+a4a8fd4c-f636-4e6f-bcb7-93d638a14ed7,B & G BLDG CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:10.884804
+818673e3-f011-4814-8e93-ca504ffc208a,BALI WATERFRONT CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:11.065965
+dfc80306-b98b-48c9-9de0-fbd96705760f,BALLANTRAE CONDO,Gulf Stream,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:11.249965
+928d7d5a-acef-4ce8-b525-c3d2e5b3f871,BARBICAN COND,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:11.420133
+f8a46955-128f-4b38-b423-d20ae3cb0bde,Barclay,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:11.596784
+c13021ce-760d-44f2-88ec-dd51bd9a6a4c,BARCLAY APTS CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:11.796009
+8dca0be7-6029-4ae1-9e34-b62f0e4e91e1,BARCLAY COND,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:11.989585
+48001a18-55c3-4170-904c-0fa4eb1ca428,BAREFOOT COVE TOWNHOMES,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:39:12.172837
+0cddfa3e-09a8-48b6-aa76-0ef7d4794560,BARTON HOUSE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:12.361995
+1930524f-439c-4150-bed3-bb2a3774abc2,BARTON HOUSE SOUTH CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:12.539132
+fa022783-580a-4454-9d3e-03103c00c64f,BAY COLONY CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:12.719739
+48bacc62-ad80-49a8-ac84-128882d14816,"Bay Harbor Property Owners' Association, Inc,",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:12.898279
+d9838862-51b7-4b7a-99bf-8faebd54c51c,BAY REACH CONDO ***,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:13.063766
+5e956232-0ef1-4a24-aa4e-15c236f2b39b,Bay Reach Condominium,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:13.242864
+6d7ed319-14e7-4c12-b780-acd520f5c412,BAY VILLAS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:13.417021
+56b75ba3-7819-4175-a3a9-2b73e7ff1e4d,"Bayview Terrace Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:13.634506
+0ac573e6-d43f-4c64-be7b-5b2f480d880e,BEACH FRONT AT SINGER ISLAND CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:13.814721
+82179271-3b4a-4831-aa71-2b6b337f1594,BEACH HOUSE #1 CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:13.987352
+123e1a4e-d7cf-4282-a587-eae2e87f6221,BEACH HOUSE #2 CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:14.159233
+668b54a9-8cd4-46b0-911e-209f11a17319,BEACH WALK EAST CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:14.336743
+adbe9adb-1258-4a2d-983f-1f96491580c7,BEACHFRONT AT JUNO CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:14.534302
+2108aa89-2285-4029-aff4-346d511bcc64,"Beachwalk Of Jupiter Homeowners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:14.710219
+dc4c38ce-7d16-4996-8168-f13f3076ab0b,BEAUVOIS ON THE LAKE CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:14.892996
+ec8b0141-6a38-43ac-948f-e45ff6d04378,BEL AIR PLACE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:15.057588
+4ce374ac-45e9-4ecc-9785-81ac4a086440,BEL HIGHLAND CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:15.228037
+51279baf-acd5-44d6-a3ef-a7294a5a7161,BEL HIGHLAND CONDO #002,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:15.450743
+954fb8fa-82a1-4b47-8347-af567988d184,BEL HIGHLAND CONDO #003,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:15.646651
+4894d37b-ecb7-4b07-9636-22d51b65b7c0,BEL HIGHLAND CONDO #004,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:15.836800
+9b8b9fb8-72b9-4789-84b1-753c9ef5102a,Bel Lido,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:16.044663
+c122a715-5a00-421c-86e9-0176e839314c,BEL LIDO 2 THS  AKA HIGHLAND BEACH VILLAS,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:16.228945
+54327041-6e83-4d57-a349-bd99605e7aee,BEL LIDO ESTATES CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:16.446477
+dd16f74d-c206-4faa-96af-d9e47742b018,BEL LIDO MANOR CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:16.632472
+42be69a6-bf49-4f7f-a5df-b31f42ea3692,BEL-AIR CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:16.818325
+cdfcbf25-b585-496f-a5d8-d9b66a173133,"Bella Terra Community Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:16.991338
+fd039df5-d648-48fd-8664-964360c6f50d,Bella Terra Pud,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:17.166741
+ed553c11-3f7d-48ab-b905-c11e20ef435d,BELLA TERRA PUD PL 4,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:17.340125
+6ac7c504-ce8c-4e2a-bbdf-c259a5e100e7,BELLA TERRA PUD PL 4 REPL,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:17.526050
+81d86887-89cc-4008-aca9-d70301f8c1df,BELLA VILLAGGIO CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:17.732207
+569fd0f4-f7ea-49a1-ace7-b9198c4ee6ad,BELLA VITA,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:17.905629
+bb0a0e0c-c699-4104-9edf-cd3f27832c7a,"Bella Vita At Royal Palm Beach Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:18.094350
+65460720-d5d2-48ed-930f-eb677d62362b,"Bermuda Terrace Property Owners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:18.275461
+8e54edb6-7006-4bf3-99ec-4d3a8407bf0c,"Bink'S Commercial Centre Property Owner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:18.457535
+dad334a5-e107-477d-b782-4f78cf5414fa,"Binks Pointe Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:18.650457
+d84d0a57-1c7c-4bca-af3c-7e49c22178bc,BIRKDALE COND APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:18.836892
+3ade4b3a-cc4e-442e-8e23-e8509a3c3563,BLAIR HOUSE CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:19.011895
+34f942ee-9403-43a8-bf76-7514283df2d8,BLAIR HOUSE CONDO APARTMENTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:19.210416
+9c8ed8db-b78a-41c9-832c-07188d72d777,BLOSSOM TRAIL,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:19.379076
+ca9947c5-2fd4-4fac-9bfc-7825366d81d3,Blowing Rocks Property Owner Nna Llc,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:19.560738
+8cd2e0cd-26ee-4b1f-9aaa-cccbbaf3ad86,Blue Heron Park,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:19.738618
+ad888d57-0fed-4a54-80b3-da97a9d6bd85,Blue Heron Park Pb23p244 & Pb21p68,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:19.914533
+a8f512e2-12cb-4fc8-9df2-ff1727b7f7d1,BLUE OCEAN LODGE INC ***,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:20.109652
+d9fece11-5c3a-4fd0-89e8-c49bd1b740f5,BOATMAN HAMMOCK,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:20.282682
+e24cb783-fef5-4874-a9d9-56c3fdfc8a4e,Boundbrook Condo S,Palm Springs,West Palm Beach,zip_lookup,33406,2026-05-03T14:39:20.466676
+53fa3b39-ca79-483e-b298-b5ae6c9afc94,BRABEN CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:20.646294
+40d09388-4aa1-4a82-a241-ed8de5b35fb9,BRAEMAR ISLE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:20.820362
+6f94157b-a0e4-42b0-881f-73b6476aa453,Braemar Isle Filed 2 18 81,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:21.018720
+f3ccd134-e780-4c95-bf1c-6b74864407ac,BRANET SQUARE CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:21.194655
+b2cb6feb-d813-43c1-a528-f40948e019b5,BRAVADO OCEAN CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:21.379172
+119fecaf-1f74-481b-a80d-7f4862bc6623,Brigadoon,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:21.562905
+b472199c-344d-4007-943d-9167f926ef61,BRIGADOON EAST & WEST CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:21.741056
+e4f61d5f-cc1e-47a7-a816-981e38df8de0,BRITTANY CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:21.916253
+2359c6e7-9e4f-4ff5-b0c1-e183d3a84670,"Brook'S Subdivision Homeowner'S Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:22.094391
+c6880c57-1f7a-4eab-b635-208edc442fc0,BUCCANEER COND***,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:22.257160
+52848b6c-59d2-484b-a37f-dba253fc210b,Buena Vida,Wellington,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:22.446211
+57fcbd20-8d4f-4710-bb8f-2fce7488cd46,BUNKER OFFICE WAREHOUSE CONDO *(***),Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:22.626960
+cfdfd36d-b79c-438a-931c-d73255dc7842,Buttonwood Plat,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:22.800487
+78f6de6c-284c-4033-b861-da5a4eb12a73,"C. L. E. Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:22.977264
+8d530736-e09c-40f5-b577-e6ebc5c7f65e,"Cambridge At Aberdeen Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:23.150029
+6e5bfcf9-0909-4542-90d3-21e5d3c5d20e,"Camino Gardens Villas Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:23.330742
+0a856b11-c188-4f85-ba74-9b888b2aa05f,Canalake,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:23.496404
+7edf05c9-7713-46fb-b462-394a2ed7bf7e,"Canalake Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:23.679423
+07134141-e047-43e0-be7e-94c3e6caa99a,CANALAKE THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:23.836373
+557377a8-1618-4737-b18b-234ccea1a093,CANALAKES REPLAT THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:24.002021
+99a7ec7d-6208-49c7-bf0f-e8bbefe562d5,"Capistara Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:24.180822
+67fb00c5-91b8-419e-9cc3-5df9bc3d6e92,CAPRI CO-OP APTS INC,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:24.353738
+0057b7e6-56ca-45bd-a958-f6fd68f4f270,CAPRI OF SINGER ISLAND CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:24.535304
+cddd0896-87f9-44cf-9832-793741ea4cd6,"Carefree Home Owners Association, Inc.",Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:39:24.701549
+c497fa70-52e9-44ed-864c-6d4f77e60512,"Caribe Isle Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:24.886087
+89677fc7-c82a-4089-890d-4465ed9d0b9e,CARILLON CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:25.038349
+46d382db-bfb6-4d21-9643-3f766aed5cd0,CARISSA CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:25.203774
+c5092fb6-36a9-4611-a796-13defac880ea,CARLTON HOUSE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:25.405388
+eb505c28-063f-4713-99b7-ab7f10261b24,CARRIAGE HOUSE CONDO ***,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:25.588778
+817e3541-f2f2-4ee7-83e3-599fee124b3a,CARRON HOUSE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:25.779049
+ba7cf8ae-a335-4085-ade5-a543dfe8862a,CASA DEL LAGO CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:25.951115
+e8072512-3bf7-4a31-9dc9-02cefbef58f1,CASA DEL SOL OF TEQUESTA,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:26.115845
+695874cb-5d2c-48df-82cc-c6e9c537aade,CASA MARINA AT HIGHLAND BEACH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:26.297571
+b5135ad1-18b5-402a-9bd0-2f8f11257af4,CEAIRE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:26.471826
+6f7164a1-cc91-483a-88ac-36ec49e695f5,CEDAR COURT CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:26.648884
+19934f33-76f8-4f9e-b08c-ec5b1d6c9cfe,CEDAR CREST,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:26.823063
+9d7eeb1f-de44-41a1-9527-1900f25bbc02,"Cedar Key Villas Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:26.981078
+b2d76ee3-47e8-405a-8dbf-42e439719272,"Cedar Ridge Estates Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:27.165213
+4ab4040a-1941-4521-a8cc-0b178ca28157,"Center Street Village Homeowner'S Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:27.326838
+a5c7b2f7-2fa8-4eb1-b9ea-5fc4511d34b3,"Century Plaza Property Owners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:27.496283
+3fba1890-7f3c-4306-bab9-50bfcd3186d0,"Chapel Court, Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:27.654295
+33a5eb55-ab30-4842-b801-a6d42cf52d0f,CHAROLAIS COND VILLAS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:27.818917
+825460d8-6f00-4fb2-80ae-1f77c90af46b,CHARTER CLUB OF PALM BEACH,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:27.985202
+07b1ce61-2019-4879-b4d3-b6384fe40d68,Charter Club Of Palm Beach Fil,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:39:28.200109
+195ab02e-dd1c-4136-866c-c51b6f333a62,CHARTER CLUB PALM BEACH CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:28.389428
+140a6d96-bb44-45ba-9524-feea18b34a0d,CHRIS HAVEN CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:28.560343
+73cf3771-6aec-466a-9d3e-86077e930154,City Of Atlantis,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:28.749248
+5ca085ad-37b4-45e5-8c96-815aea362acd,CLAREMONT LANE CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:28.941939
+42059b3b-ac5f-4698-b817-29c7f218c60a,CLARENDON CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:29.132780
+2297b630-c8eb-4720-948b-c1ed3196a64a,CLIVEDEN JUPITER ISLAND,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:29.295257
+760e6bba-87f5-4790-afe2-6846135b1a91,CLOISTER POINTE CONDO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:29.454889
+b053e921-3a3b-4491-aebd-fd94b5866a41,CO CO DE-MER CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:29.635210
+2e433b75-b398-4acd-b8cd-b973e5c29e9a,Coastal Bay Homeowners Association Inc,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:29.800234
+a6c9ceb4-ba33-48d9-a1aa-324b7f9a2ab0,"Coastal View Homeowners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:29.976056
+a3ebf600-85a7-4bfc-b413-4bf19b4c68e5,"Coconut Cove Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:30.163749
+81df275a-ea9c-4bd1-a96f-ac3ddcc3de8d,COCONUT COVE OF LANTANA CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:30.339061
+51ebcb17-7088-4e28-9908-948062d9194d,"Coconut Trail Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:30.531228
+22b2943f-51e0-47c1-8462-8ae19936bd85,"Colonial Coach Estates Mobile Home Residents Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:30.727598
+814a2f2f-fa9c-465c-9ca7-cc32862a0fcc,COLONIAL RIDGE CORP,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:30.908167
+722e8004-b459-42ff-ad14-db0bb79a4b2a,COLONY APTS CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:31.092852
+02e0fdaf-809b-4269-89a5-769a6d4f2be2,COLONY COND NO 1,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:31.267972
+e572cda5-3954-4a92-8c13-615ca6f3e77e,COMMONS AT SWAIN CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:31.436508
+a9e6ff95-8c93-4eb1-820c-b9d1f7f634ed,"Community Association Consulting Experts, Inc",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:31.611825
+09d59183-2a09-45fd-b25e-b334b1244c9f,"Concept Homes Of Lantana, Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:31.783476
+321824c0-f16f-4626-8dbf-b53175e2a413,CONDADO INC,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:31.955756
+cf240782-1767-4678-8158-4e4eae6edbea,"Condohoa List, Llc",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:32.138912
+1a11ab06-74df-4384-bee7-2018777ec7a6,CONGRESS MEDICAL CENTER CONDO (*),Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:32.328328
+79fa69a1-13ec-466c-814b-88ed29320ceb,"Congress Park Homes Ii Property Owners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:32.502548
+cd62fd43-93f2-40a1-8d60-3f7d7da48a01,"Congress Park Ii Property Owners Association, Inc.",Palm Beach Gardens,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:32.676688
+19351a75-a26a-4477-912b-bc7684c533a7,CONGRESS PARK OFFICE COND*,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:32.873717
+29f9a020-e293-411d-9db4-b9a6cf8691b3,CONGRESS PARK OFFICE CONDO #3*,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:33.043728
+885cc453-f3db-47b2-ab41-ed7486d6f387,Connemara,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:33.219780
+2a7ca9c9-8c0a-4010-b4c4-f51a98cc31a3,CONNEMARA CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:33.393004
+f12ce9f0-099b-415f-8e22-00f08c79ca2a,"Coral Cove At Oak Harbour Homeowners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:33.570107
+6458ae71-d0fe-420b-b30a-e15410cdd26e,CORAL GARDEN OF PALM BEACH SHORES COND,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:33.754724
+eac28f73-1930-47b4-901a-a40cc3254d01,CORAL RIDGE CONDO ***,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:33.934924
+09202eb3-3127-4411-8e55-483f1bcdde76,Coronado At Highland Beach Fil,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:34.106190
+be3a2823-79b6-4d16-85d6-b58d786999f4,COTE D AZUR COND BLDG ONE & TWO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:34.292357
+a1c07158-28f8-4878-b646-01e99bdd5c6c,COTE DE LA MER,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:34.472477
+ca86257e-c867-4879-a31d-18f39abc3093,Counterpoint Estates,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:34.647395
+6aca1512-0b5d-4c10-bfdc-a322273dbdd5,Counterpoint Estates Plat,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:34.826798
+c9e41ba8-1489-44b2-8e2d-4c947e4851b8,Counterpoint Ests,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:34.978619
+b52fd3e3-76d5-4911-b265-7ffdfeb9cfa3,Country Club Point Pt Of Gov Lts 2 & 5 I,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:35.155042
+8594c62d-7a77-484f-b0f5-dd3a14a83533,"Country Club Views Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:35.405661
+5648e413-99f2-4299-b922-bd9845df6c9a,"Country Club Village Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:35.575084
+81f8c2c1-d026-4acd-8160-29d20ca04afb,"Country Farm Estates Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:35.756745
+933ee38c-3bd8-4c46-9915-15a0523e7af9,"Country Lakes West Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:35.929604
+9cde23b8-e504-4c19-ba7d-e3372b7f186e,"Country West Property Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:36.109254
+c0ad4100-05b4-459e-8c50-71afd7384ae0,"Countrywood Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:36.278706
+6c285f93-a40c-4176-90bc-056e5bb53ab4,"Courtyard Cay At Oak Harbour Homeowners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:36.449157
+3e495b7e-00a8-4eb7-b5ae-a52989ae72d0,"Courtyards Of Lake Worth At College Park Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:36.621001
+3b448750-42ae-4c2d-aebf-fc81b630baf1,"Crane'S Pointe At Ibis Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:36.795812
+44a0cf82-a87a-4be4-ae06-f07a9dc5aac6,Cresswind Palm Beach,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:39:36.976224
+75b9d268-8ca5-4f1c-994d-16c886410fed,Crestwood North,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:37.136555
+681f8fb5-2cc3-404a-89e0-921b8c144c20,Crestwood Sub,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:37.314099
+7b9b8425-d1ae-40b5-930d-76f0187c9ff3,CROSSINGS OF WESTLAKE,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:39:37.499558
+4519c21e-d703-4b51-aff5-4f695ca870be,CROSSWINDS @ RIVER BRIDGE CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:37.683773
+6b72f94c-9d46-450e-95b2-3f825ffbbb0d,Crosswinds At River Bridge Fil,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:39:37.868866
+d3bc7060-c381-4ec1-8962-afc04c083d1d,CROSSWINDS II AT RIVERBRIDGE CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:38.072489
+0512b955-79ba-4fc2-be4d-0a4fbef4f85a,CROTON HARBOUR CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:38.232550
+adbfebfd-94d8-4a4b-a3e2-0fa4ae26171d,"Crystal Key At Woolbright Place Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:38.404792
+ceeb06c9-c76a-43fb-a3fe-81b633ba514f,CYPRESS COURT CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:38.567578
+25b3be38-3a43-4251-a42f-fbc58616eba6,CYPRESS ESTATES OF PALM SPRINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:38.730907
+2ae0c3f5-b795-431d-8c24-08402bad1156,Cypress Head,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:38.910479
+f8e6875c-945c-405c-a22b-c7cfde250147,"Cypress Ridge Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:39.089537
+798bf1d8-bb24-452f-a47e-a9aa4ce749c3,CYPRESS VILLAS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:39.262825
+e37656e4-6cb7-4719-9cb6-a74b06ff5bbc,DAISY CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:39.447356
+20aeec9b-0bd4-4c4f-b08d-eaabfd570ac4,DALTON PLACE CONDO  AKA BOCA HIGHLANDS,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:39.624523
+49be0315-3852-4d1a-9415-28ca27512d93,DELRAY BY THE SEA THS,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:39.799146
+016239bd-8dd7-43af-8447-f172fbb8db9a,DIAMOND BEACH,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:39.972611
+2754a163-98a9-48aa-9bec-f8cf19452f35,Dillman Farms,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:39:40.155107
+83550067-dd9e-40f8-9be3-14e297d52d8d,DOCTORS MEDICAL COMPLEX COND*,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:40.325344
+1cd9928c-36c0-4692-9c88-a5c9c04d7941,DOLAN SUB IN,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:40.501431
+aa1a021e-9ad4-4c44-9fa1-e6b584ce4702,DOLCE VITA CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:40.678715
+89518064-d62c-4b63-ba2a-7d4f8a4c8465,DRIFTWOOD APTS INC,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:40.860395
+2d1a273f-5642-4a94-b10b-2272f5e3696d,DUNE DECK OF PALM BEACH CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:39:41.043856
+9ad3466b-04df-45e4-b3e1-628d4e3ff32e,DUNES CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:41.212536
+e12ab735-c8f6-4498-89ca-0dcb3c46594a,DUNES OF OCEAN RIDGE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:39:41.414715
+f6abd0ce-0cd5-4485-ad3f-a0f616cb9ed1,DUNES TOWERS A & B CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:41.595598
+5f316b54-bb0e-4614-bcf8-b471b5d1ce3a,"Eagle Trace At River Bridge Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:41.776946
+bffe376c-fe43-4330-8cb0-981e4f906712,EAST POINTE I & II CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:41.927839
+233e5cd6-be32-4292-80b8-3baec3928a8a,"Eastridge Estates Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:42.111733
+b558bd92-9afb-46d8-a3f8-c759d020f3aa,EASTWIND COND APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:42.298600
+186c673c-7f11-4bb9-b403-571b60838742,EASTWIND OF ATLANTIS CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:42.483124
+c8b0c974-4611-436b-8e86-ea5608f46474,"Eastwinds Landing Home Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:42.655172
+24c3b140-a472-45e9-833d-5e533bf1acc8,Edge,West Palm Beach,Boca Raton,zip_lookup,33434,2026-05-03T14:39:42.811522
+6ca71552-6d2f-4d08-b768-f03cc7e5266b,EDGEWATER TOWNHOMES THS,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:42.983838
+021ec4ae-e570-4bd5-ac85-5614e9714eb9,EDWARDIAN CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:43.152717
+a671f893-b6ff-4ac5-9d66-dca4ca0fc170,"Egret Point Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:43.318447
+7fff2130-a4db-41ec-bacd-38f4e12ca6c6,EL DORADO CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:43.501751
+fee3197d-81c4-414b-841a-cc977e5700f2,"El Lago Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:43.678920
+1ffcad01-484e-4491-8db2-bbcbc8449db3,ELEVEN 0 FOUR CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:43.859019
+28898ddd-3d8b-4c51-9c67-3ba43ccd1d03,ELEVEN THIRTY THREE CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:44.052940
+e868c8d8-fb91-4c1c-9c0a-e2da01f8f23d,ELEVEN TWENTY FIVE CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:44.245086
+cac6d088-3425-433a-a0db-543c6ece24ec,"Elmarc Townhouse Homeowners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:44.411408
+48eccdc6-20e5-4c9b-97b2-0ec8f2f35c85,Elysium At The Arbors Homeowners Association Inc.,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:44.588108
+7be54cc3-63db-44f1-9001-317bd53fbad0,"Emerald Cove Of Haverhill Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:44.761984
+dc4f3af8-e77b-488f-8b1b-6a7f8c0a3f92,"Emerald Harbour Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:44.933404
+ffa17664-ec4d-4dc0-8f9d-6c111a12e612,EMERALD HOUSE INC,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:45.105483
+3341a0e8-f812-4726-9f4a-576b52a33c28,ENCLAVE AT MANGONIA PARK,Mangonia Park,West Palm Beach,zip_lookup,33407,2026-05-03T14:39:45.286098
+5eb7418a-d6d5-49fe-b4d3-cbb9d28d5d4c,ENCLAVE SANDPIPER CONDOMINIUM***,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:45.613742
+675367ec-9e2b-41e0-ad13-27fa128c86ac,ESTANCIA AT PALM SPRINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:45.791691
+a6bf386d-7a7c-44a3-a307-c6086a107ca0,"Estancia Concerned Homeowners Organization, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:45.984502
+080d7c0e-322c-44ac-a7c6-d586acad8e26,"Estancia Palm Springs Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:46.170311
+e0a1982e-5869-4930-95fa-01542d729d95,"Estates At Baywinds Neighborhood Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:46.344592
+86a40347-e432-4cb4-81d5-1ef674591f0d,Estates Of Lake Clarke Shores,Lake Clarke Shores,West Palm Beach,zip_lookup,33406,2026-05-03T14:39:46.516077
+ef8ce67d-59be-4ed9-b21c-167e3182138d,Estates Of Royal Palm Beach,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:46.690763
+5faadc2a-039b-4ded-a644-b5ac826c3a78,Estates Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:39:46.865714
+1bb8fe3e-6ba8-4912-99f5-31398949b5fa,EVANTON BAYE TOWNHOMES CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:39:47.038025
+92f1d345-a1aa-428a-89e4-d45d47dd80ff,"Executive Estates Of Boynton Beach Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:47.203701
+11359bda-e058-4ce1-90ad-033abba3c118,FAIRVIEW CONDO ***,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:47.384019
+2fdfb6bd-5ed4-4b4a-9595-fdba8eec7c4a,FAIRVIEW VILLAS A THRU J CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:47.558093
+8e43846e-75e3-4a7e-ab6f-1e6807bda941,"Fairway Club Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:47.730275
+98f6cda4-ae43-4119-9278-abece2ca1a70,"Fairway Cove Of Wellington Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:47.896768
+b749e44f-8e59-460a-a0e3-4e1fb99292d4,FAIRWAY VILLAS AT ROYAL PALM BEACH PL NO 1,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:48.056639
+73b66168-53cd-4876-bca5-6018f59e9c6c,"Fairway Villas Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:48.232555
+f99b07c2-7307-4ffa-b559-350e2c60ca55,FAIRWAYS AT ROYAL PALM BEACH,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:48.393862
+284910a3-3bf7-424d-a41b-48e0ac3040ac,FAIRWAYS AT ROYAL PALM BEACH  PARTIAL REPL,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:48.564503
+32bee9de-2d1b-48a7-96e0-ad60ede2ade2,"Fairways Of Royal Palm Beach Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:48.721350
+28436660-c41a-468c-ab89-216a96f100a8,FALCON APTS COND,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:48.883707
+92087966-ec30-4c73-bb61-ac466b9874e7,"Falcon Trace Homeowner'S Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:49.056325
+5a2d99c8-e2d0-4362-af7d-c0f0cdbdd60d,FARM CREDIT BUILDING CONDO *(***),Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:49.238710
+8e2d4177-b4a3-495c-9545-9000fa953d81,"Federal Gardens Neighborhood Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:49.410597
+b1aa1ad0-4479-4d26-8ad7-15c501178ad9,FIFTEEN HUNDRED  AUSTRALIAN COND*,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:49.600565
+d637283a-be8a-456f-8f0b-31f93873b280,"First Source Commerce Park Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:49.779027
+d0c7d72f-c303-403d-bbf6-ed95eac4c715,FLAGLER SQUARE MEDICAL CONDO *,Lake Clarke Shores,West Palm Beach,zip_lookup,33406,2026-05-03T14:39:49.940452
+91169994-8a02-41b5-a5d8-20988a709523,"Flamango Lake Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:50.132024
+435d0070-2f21-4f72-9b0a-6c140a611aaf,"Florida League Of Neighborhood Associations, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:50.309443
+b60cddc3-4239-4777-a83f-5a3c18c7a957,Floridian Ocean Park Home Owners Association Incorporated,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:50.481601
+b3462e4d-447e-4ad7-a535-ad69b2de5bb0,FONTANA TOWNHOMES,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:39:50.655497
+0f172b43-d902-4cff-8f3e-e3cce08b0e92,"Forest Hill Gardens Property Owners Association,Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:50.820151
+e688a6f6-f18b-491b-bafa-1ab30d723daf,FOREST HILL PROFESSIONAL CONDO* (***),Lake Clarke Shores,West Palm Beach,zip_lookup,33406,2026-05-03T14:39:50.990584
+088eae92-636e-4b18-bcbe-578a01263944,FOUR PALMS APTS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:51.185339
+758ab530-99d3-4d09-9d34-6a087a06cada,FOURSOME AT ATLANTIS CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:39:51.361867
+679b6266-8198-48a5-8908-741d952e8f23,FOURTEEN HNDRD OLD DIXIE COND*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:51.558792
+e3a35163-837e-40a3-a6b2-eec0b5765b02,"Franklin Farms Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:51.744858
+7febff4a-3942-4929-a93f-acb36f8fafac,GARDEN COVE CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:51.914010
+1e333f3a-1e1f-48de-a918-64d579248c76,"Garden Oaks Homeowners Association, Inc.",Palm Beach Gardens,West Palm Beach,zip_lookup,33403,2026-05-03T14:39:52.100840
+5d231bbf-ce9b-4902-a117-6fa940cc3b15,GATEWAY ARMS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:52.282396
+0082d396-29fd-452f-bda9-80b8f9d570a0,"Gateway Palms Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:52.461936
+dfabe7fc-9174-477b-99e4-60a54ae0c989,"Gatlin Boulevard Center Property Owner'S Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:52.655918
+20d7b802-c8fe-4e3e-80b8-6506aa895395,"Georgetowne Place Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:52.837846
+953bfce8-bb6a-4f9b-a1dc-ba431bcb5bb7,GEORGETOWNE PLACE PH I & II,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:53.000588
+ace12035-d7e1-4e0c-9207-0b18033cb93b,"Georgetowne Tequesta Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:39:53.181975
+fa402b98-ffd6-4efc-83a6-f9550e25c747,"Grand Bay At Oak Harbour Homeowner'S Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:53.350916
+70b62b90-de75-4c30-955f-4d47e8b8051e,GRAND VIEW AT CRESTWOOD CONDO ***,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:53.521437
+afcca996-cc0a-453f-815e-125aba0ba571,Grand View At Crestwood Condominium,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:53.695612
+3b237d39-3d64-4333-b816-61ce987d0e16,GREEN LANE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:53.862026
+40605f8b-7877-43d8-8687-64d910a52342,Greenacres 3 &,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:54.040943
+78b006d5-388c-4d21-9803-1e1ec052e567,GREENACRES PL 2 IN PB 13 PGS 3 & 4,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:54.235661
+fe8beb9a-b166-4569-9968-00923809bdaf,GREENACRES PL 2 REPL IN,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:54.414928
+ed55a4f9-0906-45cc-b5a2-729049c3f5e5,GREENBRIER CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:39:54.580974
+dbb63b7b-413f-4976-806c-ae268aa097c2,GREENWAY AT RIVIERA BEACH CONDO *(***),Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:54.732838
+f9593436-f4c7-4fb1-ac6c-8d13a1ebb454,"Greenway Village Association North, Inc., A Condominium Association",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:54.898993
+d2a51a9d-15f2-4059-b5c5-e1a3496f55d5,GREENWAY VILLAGE COND NO 1,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.070367
+1afb6177-5161-4a74-855c-d626d3be0c44,GREENWAY VILLAGE COND NORTH NO 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.229793
+53e01a5d-71fd-4620-bb6e-f0509c31b3f7,GREENWAY VILLAGE NORTH COND,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.406178
+1b6fc6f2-0ab7-4442-a329-a75da58c8c87,GREENWAY VILLAGE SO COND TWO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.563229
+88ccc483-1622-4c69-b052-7abf400b1740,GREENWAY VILLAGE SOUTH 4 CONDO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.728030
+ac3f0590-5436-4c62-af2c-4b1fcd3272bb,GREENWAY VILLAGE SOUTH COND NO 3,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:55.912096
+256ff90b-261f-4ffd-be8a-d13ddfe1b8d9,GREENWAY VILLAGE SOUTH COND NO ONE,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:56.082437
+cf048a8b-8c9d-4c8b-908b-801cf03fec96,Greenway Village South D,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:56.244644
+6b543f3f-a56b-4659-be3d-a1499bc67b4c,Greenway Village South No One Pt Of,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:56.399809
+f681a77e-9d18-4c7d-a435-ca606824da63,Groves Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:39:56.558314
+77cf5ae9-2f2f-4c58-8dbe-3b47a7033639,"Gulf Stream Cottages Homeowners Association,    Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:56.724856
+e6ae24de-1714-4566-9444-d76f344ca4ef,"Haitian Education Community Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:56.892753
+eff14fc3-8672-4a12-8f3f-c86fe1906de4,HALF MOON BAY CONDO,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:39:57.070010
+0c14ec2c-b379-417a-99f9-2e63014c3137,Half Moon Bay Filed 10 20 89,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:39:57.246717
+dafa4c13-a828-4bb6-b567-ab9f2e0cd336,HALF MOON BAY PH 1 & 2 CONDO,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:39:57.453583
+5e85a384-8954-443c-9a74-98603a6f6bbb,Hammocks Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:39:57.643426
+57816cf3-c049-4e97-a93b-4d002bf65ad2,HAMPSHIRE AT HUNTERS RUN CONDO,Boynton Beach,Delray Beach,zip_lookup,33444,2026-05-03T14:39:57.809133
+eb3b15d3-4e17-456d-a429-4a48f40b95a8,"Hampton Bay Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:57.980314
+5aa6989a-888f-4875-8abb-07e707c53d5f,"Hampton Lakes Property Owners Association, Inc.",Boynton Beach,Delray Beach,zip_lookup,33445,2026-05-03T14:39:58.140871
+ce34913b-ec59-4dea-8717-b380197c0775,HANGAR ALPHA CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:58.317968
+8f9092fc-69c1-44f8-b724-eb3710aba77f,Happy Hoagie Inc.,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:39:58.477741
+ed965b56-91f1-4bff-9321-50fe37551da4,"Harbor Cay Hoa, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:39:58.644545
+c5c71ff5-38a7-4bbe-b388-f44e54408b7a,"Harbour Greens @ Lacuna Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:58.829372
+3a32d5f6-f76a-43f2-a8de-8960fa374e37,Harbour Isles,North Palm Beach,Palm Beach Gardens,zip_lookup,33410,2026-05-03T14:39:58.993653
+35b5edf8-ed91-477a-8a67-434eddded795,Harbour Pointe At River Bridge,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:39:59.163727
+7bf2a324-b4b9-4528-9ac8-b20c2cab6799,HARBOUR PT @ RIVER BRIDGE CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:59.326553
+0df8d705-ee18-4159-9b1d-b9c496f405d5,HARBOURSIDE SINGER ISLAND,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:59.500354
+ce3ab05f-d211-4d00-8d5d-7bb38a961813,"Harwich Courts Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:39:59.668867
+0effae71-dad6-4683-a23c-b3426dca2ae1,"Haverhill Business Park Property Owners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:39:59.891731
+f25debb0-5106-467a-aca2-a6a60a2ddcdb,HAVERHILL COURTS,Haverhill,West Palm Beach,zip_lookup,33417,2026-05-03T14:40:00.074249
+f223345f-b663-4558-90d3-bd284a200f17,HEATHER ESTATES,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:00.230587
+cf17c94f-7a9c-4b65-a6ea-49d8991c92fc,HIDDEN BANYAN CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:00.394853
+6f1f920a-b8a2-4815-9745-22f688e12919,Hidden Harbour Of The Palm Beaches,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:00.568439
+7c2e9641-fb2c-4ace-9ca6-51810bb5a236,HIDDEN HARBOUR OF THE PB CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:00.733741
+ef000ede-2dd0-413e-b411-5e0072e5bd7e,"Hidden Pines Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:00.920681
+738428c2-a591-4f58-b1f8-62f622f0d422,Hien & Hoa Corp,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:01.112017
+f8cbe953-b0c4-4535-90a5-177297749ed7,HIGHLAND BEACH CLUB CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:01.291155
+b0323b54-5451-4048-bd31-4a863d6c87ac,Highland Beach Club Condominium,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:01.466837
+9b28b484-8e80-4346-9c7d-dfe0bf661099,HIGHLAND COURT CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:01.644271
+0d9c9569-cb28-4284-bbc0-bb8fadefdd66,HIGHLAND HARBOUR CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:01.818137
+85e65832-d7eb-4d8b-875b-332e2870679d,HIGHLAND HOUSE PALM BCH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:02.002153
+f5d6efb7-2d72-4716-b8e4-b0398b141a93,HIGHLAND OCEAN HOUSE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:02.186438
+1b51b71d-9bfc-4d4d-b8a8-5eccd21e3a5c,HIGHLAND PLACE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:02.360707
+16ec8542-9d08-4101-b4d2-cd6ad92596d3,HIGHLAND TOWERS INC CO-OP,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:02.535909
+9910fb7a-dc44-4634-9c1c-df89f277487e,"Hillsborough Estates Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:02.711004
+99b815f1-4f7c-42fb-963d-f685de537d24,Hoa Assistant Llc,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:02.878339
+ba93cdb9-c5d3-4388-a0da-c40e5ba61f14,HOLLY HOUSE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:03.075973
+0de0633a-6417-4c10-83e8-dda235b3a06d,Homeowner'S Assistance Program Inc.,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:03.262192
+84b5ab71-7d74-4c6d-9a13-624d8b49a7e9,Homeowner'S Financial Planning Corp.,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:03.445720
+4db3dac9-3d57-4373-9838-84acfc5f0817,"Homeplace West Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:03.609985
+b5b042ea-e409-4a38-bb60-763a5286d0f3,"Homes At Lawrence Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:03.792268
+3e493efd-b611-448a-9205-7be6d1c5e3d6,HORIZON CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:03.975551
+e200209c-7bfa-4e65-8e1b-74e512c21c68,HORIZONS EAST CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:04.166431
+9f92973f-9046-4f45-8ab4-f9c7dea9c8e4,HORIZONS WEST CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:04.338918
+871fb676-16a8-4b30-8476-09f05ea7830e,"Hunt Club Colony Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:04.516208
+fe02aae7-b8db-4904-8967-7b96046b6862,Huntington Woods,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:04.695325
+ec49bc05-a4c2-404d-b46c-5b3ba24e6c89,"Huntington Woods Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:04.870796
+53f8d304-75b4-4a56-abbf-436057690b42,HYPOLUXO COMMONS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:05.045583
+acbe2a29-5a29-4f08-a43c-15abe3a1436d,"Hypoluxo Harbor Club Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:05.225986
+668b8196-bd8f-4de7-9c7d-59889cbc0e80,"Hypoluxo Park Civic Association, Inc.",Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:05.412782
+656d2c63-5060-44af-9610-b8a92ff01dfd,HYPOLUXOS MARINERS CAY CONDO ***,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:05.584354
+bc1bf61c-f42f-49a8-93ee-19ce2e1fab89,Hypoluxos Mariners Cay Condominium,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:05.764809
+9c2beb5a-17e9-4466-ac4e-02b2d922245e,ICON AT PALM BEACH SHORES 150 CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:05.944793
+f082f46d-ead0-4c8a-b6a6-c2c4346a30b5,ICON AT PALM BEACH SHORES 200 CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:06.135455
+01f13c6f-e40e-4804-8c41-e7c09ff89a85,ICON AT PALM BEACH SHORES 206 CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:06.314474
+2c6105bc-ecfc-4d14-8285-78c36d789f9d,IMPERIAL HOUSE INC CO-OP,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:06.493551
+f06d9389-a194-43df-b3b9-e33ff16da5ab,"Indian Hills Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:06.662760
+dd22c2ed-810e-46c9-afa3-3aee42212f1e,Indian Trail Homeowners Association Inc.,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:06.846253
+91b8cb6b-8a17-4ca2-a2a6-44f623ad59c5,Indian Trail Villas Plat,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:07.005513
+ca91782f-7f35-42d7-ae38-4af045f96909,INDIAN TRAIL VILLAS PLAT #1,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:07.196043
+26f95aaa-291f-4992-b48a-ece102cf6220,INDIAN TRAIL VILLAS PLAT #2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:07.381603
+ba190989-732d-40f5-8bb8-45065dc1b521,INLAND TOWERS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:07.544375
+d693b47d-6a91-4cfc-b00b-b2cf3a2bf081,INLET BEACH CLUB EAST CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:07.725013
+14a862ab-fe08-45f4-8610-0d58a1dac701,INLET BEACH CLUB WEST CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:07.894531
+2ab90ab9-1539-4c37-aeeb-56870662477d,Inlet City,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:08.087179
+46434966-4b8e-4531-b3ba-bd47b41be202,"Inlet Harbor Civic Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:08.272346
+f528f7b6-2efb-4bb7-8695-b88ef88fc98c,INLET PLAZA CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:08.455485
+dff29007-625c-46fb-b65f-88739247f5aa,INLET POINTE CONDOMINIUM,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:08.625387
+854abf9e-f310-4512-b215-d450cefcb13f,INLET VIEW APTS INC,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:08.782614
+985f3b4f-16cd-4195-8958-9e4f15612753,Intracoastal House Property Owners Association Llc,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:08.958571
+2ac01d69-5585-4d91-ab37-74729ec895fe,"Intracoastal House Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:09.120621
+3bba9960-1dee-41dd-99c1-bc404b94f9a8,ISLAND HOUSE NORTHEAST CONDO APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:09.273194
+64fc38ce-756d-423f-823a-f94b3e77ded4,ISLAND HOUSE SOUTHWEST CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:09.426905
+69c2e9e7-ea13-4446-8b21-d940fad86336,ISLAND OF RIVER BRIDGE,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:09.607870
+170214f1-b1ec-4e01-bf8d-da19fde7b26c,ISLAND TOWERS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:09.788017
+17cca799-d55e-41c3-b40c-4ef8918befa3,"Island Way Estates Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:09.980356
+446ba67e-7fc2-488e-adbc-ee28787616ef,Isles At Wellington,Wellington,Lake Worth,zip_lookup,33449,2026-05-03T14:40:10.154143
+4f63f94f-8e89-4778-af9d-a08a20e66447,JAMAICA MANOR CO-OP,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:10.335751
+9d0b549c-d126-461d-9def-3b0af5409523,JAMES PLACE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:10.516504
+e4c9c70a-c78a-4cae-a7f4-35e979f51e54,"Jardin Homeowners' Sub-Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:10.698057
+c698b201-d9db-456b-b4a8-95cf8d6fcffe,"Jc Community Association Management Services, Llc",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:10.878677
+7e3e50c9-a77e-4533-a7cd-0c5fa6e1271c,JFK MEDICAL HEALTH CONDO *,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:40:11.078282
+fb190d2a-adbf-43bd-bb03-a10ae6399cde,JIB YACHT CLUB & MARINA CONDO*(***),Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:11.236750
+5d30f1bd-5c41-44cd-8c3d-467f6813bafd,JOGGERS RUN,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:11.409338
+7e114481-3c12-4319-aeb8-b48adc7b03ee,JUNO BAY COLONY CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:11.577976
+56ef3871-74ad-457c-93a8-c0d64b02c003,"Juno Beach Civic Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:11.748798
+7d0fa432-2b75-4ad1-b511-6f17aef9c781,Juno Beach Condo,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:11.938956
+b3b91ca0-7d36-4c12-b655-5e9794c9ac60,"Juno Beach Intracoastal Landings Homeowner'S Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.110189
+3587422e-ca9d-4cd3-82b9-b9208614cd4f,Juno Beach Mobile Home Owners Association (Inc.),Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.264325
+80caa1be-7287-4d1a-97a0-7d715d20a002,JUNO BEACH PROFESSIONAL BUILDING CONDO * (***),Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.422706
+88e461b5-e664-4762-8213-9daacbb56e77,"Juno Beach Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.594992
+93ba3ba6-ac65-4067-878d-95c52f16a0f8,JUNO BY THE SEA CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.770164
+1acb3eb8-ab28-46a1-b5bf-5cf192879c28,JUNO BY THE SEA NO. MANOR CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:12.942751
+f66b8bf6-9817-41ee-ac8d-c4688032393c,JUNO BY THE SEA NO. SURF CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:13.103469
+b864485e-5f14-4271-a7af-7d875a0bf9c6,JUNO BY THE SEA NORTH CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:13.284425
+117e9284-e050-4e39-b26b-d81735b145a8,"Juno By The Sea North Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:13.451855
+cfbce8d9-72db-4534-a691-405db3aae2ee,Juno By The Sea North The Surf,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:13.626794
+f2ef3c03-ea64-484f-901b-c55082dddee4,JUNO DUNES THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:13.820876
+5a4f9da8-69a7-47c4-a88d-3d13b0b40f12,JUNO OCEAN CLUB CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.013074
+6a5ad8a9-7cae-4977-94f2-77c75cfc7094,JUNO OCEAN KEY CONDOMINIUM,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.168463
+3a03a37e-d9dd-4b32-bdfd-f3a4b78d5233,JUNO OCEAN KEY PROFESSIONAL BUILDING CONDO *,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.339904
+2e223f44-ae22-4dc3-a725-88918c4d9cea,JUNO OCEAN WALK COND,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.496318
+39ed6eb1-f11e-49f1-ad1b-6a2edfdebbef,Juno Ocean Walk Condo,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.669313
+27b3dd02-7132-45f0-9ab1-13441a8d68e2,JUNO SHORES CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:14.842229
+69492ccc-5eb1-4075-8fa6-23510aa32180,KELSEY CITY IN PB 8 PGS 15 TO 18~ 23~ 27,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:15.010695
+5d46364e-6b14-4d75-a46d-1a1f23123a07,KELSEY STATION CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:15.187730
+0ca3a542-ddf4-44a7-b2f4-ff79714d398e,"Kennedy Estates Homeowners' Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:15.399272
+e7b5f5d6-0696-4d31-93d4-fd0a3db5cb77,Kensington Of Royal Palm Beach Condomini,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:15.577474
+54310f4d-3c95-497f-bb5e-8107d681cd1f,KENSINGTON OF ROYAL PALM BEACH CONDOMINIUM***,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:15.754297
+6ba3d02c-1810-4312-9b8c-82fc58246e98,KEY HAVEN COND APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:15.925300
+9fc4718a-61a9-43e3-a386-c080c4a4581d,"Key West Village Homeowners Association Of Tequesta, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:16.109652
+6d0f33f8-73d5-4338-a6d4-2ccd025a78b1,KILLIAN COMMERCIAL CONDO *,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:16.293976
+cd79ba02-bd6e-46c3-9d18-55277247b46f,KILLIAN PROFESSIONAL CENTER CONDOMINIUM*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:16.479810
+c629ba2b-5dbd-433c-8a21-1f36ef5f0b45,KINGS BAY HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:16.653402
+07f1b8e3-e710-4803-8976-62a073436208,"Kokomo Key Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:16.832016
+5f4f83d7-e4a5-48c8-aa1c-3fa41636f78e,L ERMITAGE PALM BEACH CONDO,Palm Beach,Boca Raton,zip_lookup,33433,2026-05-03T14:40:17.008379
+9eb49cef-9df5-4c6e-b707-ca94c58d7d65,L P CENTRE CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:17.188093
+a9ee182d-cc7e-47e4-8089-c38a8bc79bb6,LA Mancha 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:17.364221
+6c89365e-d45a-443b-837c-bc3eae60e763,"La Mancha Of Royal Palm Beach Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:17.549105
+0d4ea327-5d2c-4a2e-b815-e76380b3d2d9,La Mancha Two,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:17.716289
+4dfff4a8-0cc2-4442-8644-39f6cf6871d3,LA MAR COND APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:17.884324
+91b649a2-45e5-4f80-9731-d3bbcd3dacf7,LA PENSEE CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:18.050314
+2eb3d6a7-7525-4198-986c-fa2984500bf0,LA Pinata,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:18.217056
+00a6d459-0ebb-4d82-b8ec-22ec09faf81f,LA PINATA I THRU III CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:18.378179
+9512f929-8281-4716-8e7e-c4fef4f2ac49,"Lago Del Sol Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:18.552414
+3e3a982b-dab0-45bf-8a79-d24ebe5875d8,LAKE BREEZE CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:18.728046
+cf1d17c6-52f1-4685-99b2-a841c6495ad7,"Lake Cove Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:18.899450
+c950caa5-65d2-408a-8189-b88e3faf5ee9,LAKE DRIVE & INLET CORP,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:19.067817
+d2482756-fbb6-42ad-a83f-9532daff3d97,LAKE HARBOUR COVE CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:19.241848
+f28f0db1-1f99-4acb-846e-f87eb89b1d15,Lake Harbour Towers,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:19.418572
+9bc46c6e-8e5b-460c-8350-c261667aad66,LAKE HARBOUR TOWERS CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:19.595068
+68e0ec33-a7b6-4e91-8388-c88183871a89,LAKE HARBOUR TOWERS EAST CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:19.826941
+81f49c75-f2ad-4799-a96b-9b1024337646,Lake Harbour Towers East Condo Assn Inc,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.015526
+8c96643d-4410-493d-8c64-2046e835a9e6,Lake Harbour Towers North,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.182093
+5d03ae5c-094c-4f17-bdeb-7f6092ac3340,LAKE HARBOUR TOWERS NORTH CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.369338
+1e11cd03-97a1-4772-8c89-ddf5ce9f0922,LAKE HARBOUR TOWERS SOUTH CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.545225
+aa4ce234-7e1b-4de6-9eab-edb6083cf727,Lake Park Add 222 &,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.720400
+74a13ff8-a1f5-4d7e-bd13-577033b15239,Lake Park Add 3,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:20.909582
+6ac7ddbd-3211-4fe1-9262-43b1d2a466e4,LAKE PARK ADD NO 1,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:21.082445
+28989ddf-04c9-449d-8cab-007fb81c2b7a,LAKE PARK COMMERCE CENTER CONDOMINIUM*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:21.258224
+db4fc154-ff16-4abb-b4b4-89286e19b7c1,LAKE SHORE CONDO,Lake Park,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:21.445699
+1c8c5763-9c73-4efc-94b5-2eed5e4c3694,Lake Worth Hills,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:21.622290
+7a7eeecb-a15c-4f25-bcb6-aa1830d25e2f,Lake Worth Hills 2nd Add Sw 1 4,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:21.801723
+4a7388f9-4c55-452c-9887-b3bf0d2ab8f1,LAKESHORE COLONY I CONDO,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:21.976493
+2aa4f7cb-deeb-4756-9ba1-1c5eda3fd61f,"Lakeshore Colony Master Association, Inc.",Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:22.146923
+1867dbb5-74fa-4857-99f5-b6a86e2c86fb,LAKESHORE COLONY THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:22.311744
+217aec84-2f66-4c27-823b-4511d1d7a42f,Lakeshore North,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:22.493985
+d86090e3-be22-4e55-a16c-3b14f9543d97,"Lakeshore North Homeowners Association, Inc.",Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:22.670600
+4bf69ef0-1479-4dc8-98f8-66648f2fc1d9,LAKESHORE NORTH THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:22.862199
+0f4b9d6c-2797-4f76-88d2-40caf1753ad6,LAKESIDE LANDING,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:23.072166
+66ce6b08-9af1-4cb1-b7a6-38a5ed7fff38,Lakeside Village,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:23.234404
+72331c7e-6daf-474d-ae37-472a6d8f09ac,LAKESIDE VILLAGE COND NO 1,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:23.402430
+e12fbe3c-ccc1-4be4-9734-55ddb81675ae,LAKESIDE VILLAGE COND NO 10,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:23.577284
+ca64e685-bc6b-4b3c-afe6-24c4755c9cf2,LAKESIDE VILLAGE COND NO 11,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:23.731707
+09ed65f0-c427-4595-b2a5-d727ea8d62b4,LAKESIDE VILLAGE COND NO 2,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:23.925353
+94dd2c9d-0ef6-4a66-b650-06d9817f5b00,LAKESIDE VILLAGE COND NO 3,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.091144
+9f6e3794-6b00-49ee-aa74-5dfc982e9d42,LAKESIDE VILLAGE COND NO 4,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.257726
+ab7e23c2-b0b5-47d4-8fc0-ca629fefee14,LAKESIDE VILLAGE COND NO 5,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.436185
+3e190c2b-1099-48f0-8131-ecb80a0010a6,LAKESIDE VILLAGE COND NO 6,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.611343
+ee6e97b6-b2d1-4750-bc09-90965106958b,LAKESIDE VILLAGE COND NO 7,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.796556
+68847fc5-8b71-40c8-9640-b8e1a40b8c6a,LAKESIDE VILLAGE COND NO 8,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:24.948973
+be0bae81-138a-463c-b300-d58805e341d1,LAKESIDE VILLAGE COND NO 9,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:25.126489
+29c8f00c-ee6a-4aa5-82d4-556d457cd45d,LAKEVIEW APTS CONDO ***,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:25.285674
+a9f83895-3872-497b-aea8-a93f1bbffbea,"Lakeview Area Neighborhood Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:25.532560
+4169455f-1bdb-4f82-b09f-374d9aec1950,"Lakeview Center Property Owners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:25.716655
+1c8638cc-cf59-47b5-86c0-b9e8ec00f01e,LAKEVIEW GARDENS CONDOMINIUM***,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:25.890314
+157bca3f-9957-4483-a865-1c85634c6dd4,LAKEWOOD AT PALM BEACH CONDO,South Palm Beach,West Palm Beach,zip_lookup,33405,2026-05-03T14:40:26.072697
+8339f08d-a27f-4abc-9d21-bda7f566991e,LAKEWOOD FIRST ADDITION OF PALM SPRINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:26.260596
+14bf2b56-345a-4d5e-9b7c-7360d19992ed,Lakewood Gardens,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:26.440241
+7343c502-6b6e-46f4-ab8c-17a5ac3bbe82,LAKEWOOD OF PALM SPRINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:26.623623
+c69f7464-54e3-44f2-bdf8-63a3cadc62f5,"Lanca Homeowners, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:26.807912
+d6691111-bb64-4fbc-917d-7b90e3f9124e,LANDINGS @ RIVER BRDG LTS 41-78~ 87-112,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:27.011761
+1502be01-5ff1-41c5-9644-b151a5881ed6,LANDINGS @ RIVER BRDG REPL LTS 83-86,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:27.194361
+87f97a78-f92e-45ba-8e1c-f7426cb0e257,LANDINGS AT RIVER BRIDGE REPL,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:27.364280
+edd0dcb5-dbde-4607-b22c-7435ee13e568,"Lands End Homeowners Association, Inc.",N. Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:40:27.539668
+3575982f-ee09-4ed5-9e57-7d9647e64fb7,LANTANA BETWEEN S. LAKE DR. & INTRACOASTAL,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:27.701105
+be4ee567-c610-4f69-a8e7-6b58793f0d87,"Lantana Cascade Mobile Homeowners`Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:27.871169
+1617ca85-954c-446b-96da-75165a6d0ff0,"Lantana Cascade Residents Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:28.068483
+3497ec12-a73a-419f-9ac3-b91ce0401f6d,Lantana Hgts,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:28.252272
+ae14fe93-0131-4b27-978e-52512720ae32,"Lantana Property Owners Assn., Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:28.426237
+39b45a36-dd1a-4285-8bdb-aa91807f23aa,Lantern Walk,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:28.603525
+25944a11-0913-4a6a-9805-bc19d1829b54,"Lantern Walk Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:28.778981
+5d6f1865-12a2-4819-9f2f-3294538390ca,LANTERN WALK PL 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:28.935389
+6ce17484-76b2-4ed6-8063-51fa65c3a414,LAS BRISAS THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:29.115501
+6f7c0313-d7da-4ba2-8c6c-77430ff07a2c,LATITUDE DELRAY,Delray Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:29.294322
+ca06f14e-6b01-4065-b51b-78082f57dc1a,LATITUDE DELRAY BEACH CONDO,Delray Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:29.457689
+49b5cbeb-321c-48a7-a4b6-0407a2a3a5a8,LAUREL OAKS ENCLAVE,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:29.627155
+6ef3668f-cdf9-4dd2-babf-3190a6210ec8,Laurels At Sherwood Condominium,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:29.797865
+56cb343d-d537-4882-84cd-73317adad110,LAURELS AT SHERWOOD CONDOMINIUM***,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:29.977828
+68c8680c-16d7-41ba-b2cd-72728810eb15,LE CHATEAU ROYAL CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:30.162882
+deed57f9-42bb-449e-9b91-847e1388fa15,LE SANCTUAIRE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:30.340376
+ff52516a-4f24-4f43-b4f3-58ab94df4d43,"Legend Lake Estates Home Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:30.521027
+3f92dd96-14c1-40c5-8609-91570865e96f,LIGHTHOUSE COVE AT TEQUESTA CONDO ***,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:30.682025
+942ad8a3-363c-4ad0-b657-3d78ffad40ae,Lighthouse Cove At Tequesta Condominium,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:30.860204
+9e4eccfc-b53d-4c57-b899-aea1d6271184,"Lighthouse Pointe At Baywinds Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:31.054925
+19fb51d0-78f7-4016-8150-1ba7981db09f,"Limestone Creek Addition No. One Homeowners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:31.293177
+c4d7d0c1-f93e-4b1d-b8ef-723a40ff8cc7,LINDA LANE GARDEN TWNHS,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:31.464917
+d50ce728-ed15-4c02-a4d5-b939f04567db,LITTLE POND PARK CONDO,Manalapan,Lake Worth,zip_lookup,33462,2026-05-03T14:40:31.638980
+7fc27e5e-5f8d-46c9-b10a-81bb80b31df4,LLORETT DE MAR CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:31.804404
+bf31089f-6e65-48d8-bc87-d26bfa8520a4,LODGES OF SOUTH CONGRESS AVE COND*,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:31.981002
+28e46a9e-4647-4ca6-839b-1dd990b265e2,Lucerne Homes East,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:32.152069
+b584c9c8-a5d7-4d85-b0a7-3362e20d9ae0,"Lucerne Homes East Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:32.321672
+b3e43364-ed43-4d17-8d96-693bdaa14fe5,Lucerne Park Conds,Greenacres,Lake Worth,zip_lookup,33467,2026-05-03T14:40:32.500521
+46774799-c99c-49c7-b143-721b298a5d5d,LUCERNE PARK CONDS 1-15~23-28,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:32.682639
+d7af34a0-077d-444a-a56e-201344b3eb42,"Lykes Landing Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:32.865526
+6ff76af8-bb7a-475c-a39c-9d312e101ae3,LYMAN VILLAGE,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:33.051204
+fd6a0613-9c0c-4089-a2b5-c7a97d151bf6,Madison Green,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:33.264138
+56df3f00-c93a-4003-999d-070819d38003,"Madison Green Master Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:33.428490
+6130f005-d5a6-45d3-a734-a8f2f7071bb3,MAGNOLIA BAY CONDOMIMIUM,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:33.598681
+8199280f-a2d0-4c50-becd-4ef8cd2d2699,MAGNOLIA PLACE,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:33.784262
+a84db022-69c2-46d3-a2c7-31fd7ee7a090,"Manalapan Beach Homeowners Association, Inc.",Manalapan,Lake Worth,zip_lookup,33462,2026-05-03T14:40:33.961446
+93f3f496-6f85-49a9-8940-aeb846e478bf,MANATEE KEY THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:34.130852
+c860a73a-2cf0-4603-ba19-4ffbb6508991,"Manchester Lakes Property Owners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:34.293319
+334c48a6-42bf-4f37-9973-3942fe5f2054,MANGONIA BUSINESS CENTER CONDO *,Mangonia Park,West Palm Beach,zip_lookup,33407,2026-05-03T14:40:34.470482
+782e6c3c-4a90-4974-b3e1-b2e7b9f72d6b,MANILA PARK IN,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:34.657582
+9defb9f6-7d76-4c4c-b044-dad4acf090d7,"Manor Homes At Emerald Forest Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:34.834711
+030e48f0-3984-4fa4-82a1-6e3b9a99721a,"Maralago Cay Homeowners Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:34.995296
+5c6a6fa3-48a1-4c82-b13f-6b4969942665,MARAPAT NO 1 CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:35.165827
+e01ecd6d-8d87-478b-9e7c-3cabbbec89e4,MARINA GRANDE RIVIERA BEACH CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:35.401510
+f0ddec08-8568-425e-885a-34dc91e471b8,MARINA HARBOUR CONDO,North Palm Beach,West Palm Beach,zip_lookup,33407,2026-05-03T14:40:35.565603
+6caa2d91-890a-4077-ac4b-6fada3ca7903,MARINER COURT CONDO,North Palm Beach,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:35.728552
+a00705b4-f1f4-4293-bd60-2bb85482bb4d,MARSH HARBOUR,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:35.896140
+f9cf584a-0c4d-4e1a-9a06-08a9c0b6a757,MARSH HARBOUR 1 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.072978
+69ba1c87-c9d8-44c8-a433-1fec8243982c,MARSH HARBOUR 2 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.259979
+a072c09b-9499-4fbb-b144-ec5b27fffa24,MARSH HARBOUR 3 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.426737
+cecd2407-e793-48a3-9e80-dbc9b456b12c,MARSH HARBOUR 4 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.612151
+756888a7-6f6a-4e12-93d8-1cca330bed12,MARSH HARBOUR 41 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.787217
+78902ec3-8d9c-4f64-835e-825a4b5aebd9,MARSH HARBOUR 49 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:36.974559
+3975437d-a1bb-4315-ab1d-f09339fcd261,MARSH HARBOUR 50 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:37.159697
+65da2fa3-c7dd-4479-98ee-de2b899e041b,MARSH HARBOUR 51 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:37.318582
+565fed47-5324-490b-9370-31f27132ffdf,MARSH HARBOUR 52 CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:37.504642
+e7ba09e6-c570-434d-8719-6b31fbf4b4f8,MARTINIQUE TWO CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:37.680285
+b272e4cc-3eee-4648-a0c1-44673d7bf375,MAYAN TOWERS COND I,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:37.849952
+dda9f283-cac3-44e8-9088-b4d5f5f1cdb4,Mayfair House,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:38.011390
+26a79778-1ef1-45ab-9b08-58d89c09a159,MAYFAIR HOUSE CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:40:38.192010
+8756dc7f-04f7-4991-8d03-873a4a75103d,Meadows Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:40:38.364341
+5476d8f7-a7dc-455e-afb1-f72ce88a6b99,Mediterranea,Riviera Beach,Palm Beach Gardens,zip_lookup,33410,2026-05-03T14:40:38.543393
+9051cbf1-5195-470f-9635-25663e7725c5,MEDITERRANEA PH 1,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:38.719454
+65734149-a27c-426d-8c9f-3811ef8652e2,MEDITERRANEA PHASE 2,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:38.900580
+08166ee9-fbab-4723-985a-2ede1cd098eb,MERCURY RISING,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:39.077218
+82ab4b69-0ef7-4c6a-9b88-80362c54fc20,Mercury Rising Property Owners Association Inc.,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:39.244970
+c2be7f01-31eb-43b3-a271-881544e36251,METROPOLITAN PROFESSIONAL BUILDING CONDOMINIUM (*)***,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:39.425075
+8db21754-4496-423b-acd4-a10cb0d19b6e,MIL LAKE ESTATES PLAT 3,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:39.596331
+06bf34de-9abd-4c62-8036-45f23a525764,MIL-LAKE ESTATES ADD NO 1,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:39.774978
+6180a29c-d22c-48b1-b720-7adeee2ffa1a,MIL-LAKE ESTATES AMENDED PL,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:39.952276
+c3e92bc2-3f30-46c6-8723-0acfc6c5083f,MIL-LAKE ESTATES II,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:40.126059
+ff8ae484-b3fb-45ee-9934-7fbb4ea0b4a8,"Mil-Lake Estates Iii Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:40.312763
+20f3470b-a7bd-4fbc-bcb2-0088c2844498,"Milano Village Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:40.483883
+c6889786-a77a-4d36-9273-0bb95e930143,MILEMARK OF OCEAN RIDGE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:40.665506
+7822a912-96ff-4175-9a4e-fa55950a8725,MILITARY TRAIL WAREHOUSE COND*,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:40.845470
+759e7b40-8a47-44a1-98e8-eabe51be0392,MODERN VILLAS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:41.012114
+c13487c4-253c-4ae5-bd11-a2608639d3ba,"Modern Villas Ii Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:41.186621
+fe2f5b6b-ae73-4349-ac65-e96867a720c4,Monroe Heights,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:41.370658
+e5edb1b9-7b01-4480-b2f9-80b0ca86e712,Monterey House,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:41.560472
+5cbe1849-a5ee-44a8-8db5-fce8f248bf59,MONTEREY HOUSE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:41.744822
+78308e08-f362-4103-9fee-6c18a084ffe4,MOORINGS AT LANTANA CONDO 1,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:41.917889
+ee257e99-fed2-43fc-b803-c061c8e93636,MOORINGS AT LANTANA CONDOMINIUM 2,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:42.204335
+7ad7b0a9-ea87-4328-9888-ccec14e07200,MOORINGS AT LANTANA CONDOMINIUM NO 3,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:42.392041
+4df77619-c566-4bd5-aabc-12069d193ad8,"Moorings At Lantana Master Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:42.574228
+4c37df11-50bf-4829-89a3-97434feab1e7,MOORINGS AT LANTANA TOWNHOUSES CONDOMINIUM,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:42.746851
+a009eaca-63e4-441a-8981-bf8db3e96221,National Property Owners Location Service Co.,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:40:42.930516
+2896925c-3c14-49d2-8132-1d0133885290,"National Property Owners Location Service Consulting, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:43.110106
+2bc8528f-ecd1-40a2-adab-67cafed92670,"National Village/ Timber Pine Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:43.279168
+5d7b3d66-8f91-4606-bd16-6205bdca5bb7,Nautica Isles,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:43.466492
+70a28ec1-8e67-47b4-90a7-65f1a0b4dd54,"Nautica Isles Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:43.641870
+ec0ebdbd-5e9b-4d0d-b7a0-f09143c57160,Nautica Isles West,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:43.817700
+90c5b171-3dd7-44a0-acf1-b15c39aca935,"Nautica Isles West Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:43.999358
+90ca16f9-1ea5-45f2-a7d3-cbd212f69063,NAUTICA LAKES PUD PL 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:44.179578
+411b6a22-2cf8-4f02-b8db-4b5717cb9289,NEW WORLD TOWNHOUSE CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:44.363111
+d59c71a2-2f84-426a-a327-33171f3f0df6,NINE NINTY & 992 CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:44.539779
+e99ff09d-ed09-49a3-a426-c594619eee14,"Noit Gedacht Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:44.720026
+ef50c76f-6dc8-4000-99b0-c9a907b097fe,"Normandy Village Property Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:44.895191
+7352b872-4011-43e6-8ab5-b3f121ffe29f,NORTH BAY COLONY CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:45.071770
+053d4092-f4be-4c8b-900c-9c1c9c6cdb6c,North County Pud,Riviera Beach,West Palm Beach,zip_lookup,33407,2026-05-03T14:40:45.249864
+9460bae6-66b4-4e56-be78-eeeb5b61c321,NORTH COUNTY PUD PLAT 1,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:45.487770
+9c1d0551-18b0-4051-a216-8f0f3ca245c8,NORTH COUNTY PUD PLAT 2,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:45.665300
+2cf734c3-a5d2-4e01-8138-4ae81a5f3bae,"North Landing Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:45.837254
+94e4466d-4f0e-4a9c-beb3-ccf468566642,"North Passage Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:46.008081
+868b3f1c-aaa2-4ab9-90c3-27526b1e5ec7,"North River Plantation Home Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:46.194089
+6ec266f8-8399-4993-a13e-888d96b119eb,NORTHWOODS I @ HUNTERS RUN CONDO,Boynton Beach,Delray Beach,zip_lookup,33445,2026-05-03T14:40:46.360953
+a667783a-128f-44fc-85ba-3641ef137b3d,NYDAL TOWNHOUSES THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:46.533529
+2d147796-6009-494b-aa6d-bf8520a9aceb,OAK COURT CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:46.705503
+cc3c809c-97ed-492f-b480-93e75ef4d520,Oak Harbour,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:46.886110
+46911758-5824-42e7-a573-80898fbca81d,OAK HARBOUR CONDS I THRU IV,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:47.077609
+70e4fbcb-8be9-4cf4-9541-e5d96029d863,OAK HARBOUR MARINA CONDO PH I *,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:47.235017
+181dab79-3c31-48c8-8f4f-2bc1d0ab32c2,OAK HARBOUR PL 4 THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:47.422793
+0409401e-6db3-471e-a79d-1542f00f9777,"Oak Haven Property Owners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:47.603529
+87b53b02-d8e8-4f3d-9252-e99308fedd1e,OAK TERRACE CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:47.777763
+8c9d8849-d5e0-4e47-8267-46e2d91cd859,"Oak Terrace Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:47.950159
+8611f439-1547-4934-81e7-5b3e70277267,"Oakmont Village Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:48.121628
+af3869ac-82ed-47c5-8d17-2859117ab024,"Oakton Preserve Residential Property Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:48.304314
+36a11597-3f7b-4040-b77e-dccb0ce7b938,"Oanh Hoang, O.D., Llc",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:48.471812
+af572cf3-4ab3-4c3e-8f89-01fe9cdd56b1,"Oasis Court Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:48.631961
+1dcb563b-766f-4bd6-bee0-a72e30d6901a,OASIS SINGER ISLAND CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:48.806516
+ef08701b-e331-4b3c-b035-97822f546bca,OCEAN AIRE CONDO I,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:48.981008
+500df170-975f-4a76-b2ed-a8ce3433d86a,Ocean Breeze,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:49.172257
+cb1ab294-ee99-4c4b-8465-1e8d78083b3f,Ocean Breeze Townhomes at,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:49.332359
+6d3de7a3-c19c-4576-91f1-c6e357d59472,OCEAN BREEZE TOWNHOMES AT JUNO BEACH,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:49.505973
+03807de0-2d5e-4116-bf4f-f984e3da7caf,"Ocean Breeze Townhomes Property Owners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:49.664973
+4e9fb9d9-24fd-49f8-acae-3d3179993027,Ocean Cay,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:49.829578
+b6530048-0224-48b1-a192-dc11ea5d435e,"Ocean Cay Community Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:50.010340
+5f81efe7-a1fe-4518-a401-09f467e2ca7b,OCEAN CAY CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:50.185012
+23cd8dac-8364-4704-844e-4dbcc99eb5e4,OCEAN CAY THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:40:50.358853
+a544a13e-7c81-4a6f-b1a7-c299ee840a00,OCEAN COLONY PALM BEACH CONDO,Palm Beach,Jupiter,zip_lookup,33469,2026-05-03T14:40:50.542806
+e4a1a59d-33ad-46c2-82de-84f210fc6908,OCEAN DUNES CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:50.712038
+1ab92381-bfc1-4171-b961-e78991102169,OCEAN EIGHTEEN CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:50.881238
+41a5742e-965e-4c55-9cd9-60e39bee535f,Ocean Lane Estates Property Owners' Association Inc.,Manalapan,Lake Worth,zip_lookup,33462,2026-05-03T14:40:51.044835
+ec990385-c111-45c4-b9ed-9a55886696f3,"Ocean Lane Estates Property Owners' Association, Inc.",Manalapan,Lake Worth,zip_lookup,33462,2026-05-03T14:40:51.218519
+87186ac5-fb44-45b9-a9bc-6c43a0bba2c0,OCEAN MANOR CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:51.395662
+55ad360d-5d93-4ddc-9309-2c52b14a7bcf,OCEAN MIST CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:51.569296
+aa022500-5fbf-4189-9158-8e01c5618324,OCEAN ONE PUD,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:51.796203
+c3e39276-4958-4f47-9eb9-8d2afe196529,OCEAN PARK MANOR CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:51.965351
+3602f2a9-d470-4069-b324-3d2831321340,OCEAN PINES CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:52.147812
+7f15ead2-4f12-4148-9b48-4150e775c491,OCEAN PLACE VILLAS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:52.306708
+9d5360d8-21ef-43ae-a4f1-037d62cb586f,OCEAN POINTE CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:52.493797
+aec91cd2-dcf5-4924-934c-7868e11e471e,OCEAN RIDGE AT JUNO BEACH THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:52.663848
+4beabd4a-1270-42ea-892e-74c8b424dad7,OCEAN RIDGE YACHT CLUB,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:52.845720
+06f8a85b-4ac8-48fc-8aa9-5bf4c26bfe8f,OCEAN RIDGE YACHT CLUB ANNEX,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:53.029989
+ff3a413f-78af-4963-8353-f8fdbb606eca,OCEAN ROYALE CONDO,Juno Beach,Jupiter,zip_lookup,33477,2026-05-03T14:40:53.218398
+2c0ef46b-8745-445b-ab36-c39d76e59ef4,Ocean Royale Condominium,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:53.392637
+0482f25f-5163-4748-8701-61b1c5479265,"Ocean Side At Juno Beach Homeowners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:53.559289
+f1b6f7b2-07c8-4577-be9e-31c28bd907c8,OCEAN SOUTH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:53.735294
+f31706a8-2e0a-426c-808c-bcbe38b0b653,OCEAN TERRACE NORTH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:40:53.894876
+a4569ed5-e940-4f9e-b0f2-cbf78809f898,OCEAN TOWERS COND APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:54.092142
+8f82d595-0a49-45f8-91e9-a479674cdaae,Ocean Towers South Condo Apts,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:54.271856
+cce5a1db-74a0-4a89-b866-cb24e6f806a0,OCEAN TOWNHOMES CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:54.429584
+9f9186dc-1a8b-4cc5-800f-d026eec758f8,OCEAN TRACE CONDO ***,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:54.596355
+a1b814fb-2ead-4994-9bd9-6d2500aa2ace,Ocean Trace Condominium,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:54.746593
+24da8a3c-e89e-4222-9ce6-89dcd141e967,OCEAN VILLAS CONDOMINIUM APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:40:54.909470
+3e4ce6ff-ce71-45b5-a79b-5ba679ca809b,OCEANA PALMS CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:55.072917
+6cec24c4-0e78-4c6a-a0fb-19c0ce45bb6e,OCEANFRONT @ JUNO BEACH CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:55.234866
+883d9559-08e7-4386-8855-9f1a84037f22,OCEANS EDGE AT SINGER ISLAND,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:55.405821
+a0927768-f0b2-4ec3-b4f5-4c85e3671697,OCEANSIDE CONDO APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:55.562816
+1ad14f4a-3639-4202-a159-7fe035ad4edb,Oceantree,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:55.725893
+c83a08e2-4133-4a79-a910-c8de2d4066d5,OCEANTREE CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:55.900399
+141f7984-c7cf-4db1-9137-5e2656672b94,OCEANVIEW CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:56.072037
+335280fe-3339-4c28-8a69-4fb95a4db660,OCEANWALK CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:56.246676
+02784b90-4b75-401f-ad06-b6b55f23ee66,Ochoa Hasan Llc,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:56.402650
+2ed7408b-c417-4b5f-8a13-d3462d41056c,"Ochoa Property Investments, Llc",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:56.570559
+f537c30c-d2c9-4eaa-9084-b026d4499aeb,OLD DIXIE PARK WAREHOUSE COND*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:56.738951
+cf21a0ef-c34a-4de3-bd0e-87cc41de05a0,Old Juno Court Homeowner Association Inc.,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:56.905199
+3e294835-04ae-4341-9bec-047c0cfc5ed1,OLD JUNO COURT THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:57.074367
+2c9a8d75-d273-4175-8898-374f8f5aa553,"Old Towne At Juno Beach Homeowner'S Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:40:57.245369
+6836aba6-475d-426a-bfab-f71be5b04730,OLDE VILLAGE POINTE CONDOMINIUM,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:40:57.407743
+72d464c1-1667-46f5-8d50-3aab1a3aa3f2,Olive Tree Par 5c,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:57.586021
+770d211d-7e72-4a9d-91a5-ae1c2a36aa1f,Olive Tree Par 5d,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:57.763087
+de42be3e-b33b-4515-a802-d409a6ef6460,Olive Tree Par 6a,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:57.945924
+4849d69f-9939-45e5-b3d4-211909eb6f64,Olive Tree Par 6b,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:58.115539
+8856d6ef-2f4e-452e-8f1f-d5de389dbd63,Olive Tree Par 6c,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:40:58.294739
+a5a5eecf-57ac-4aee-9b12-da3ba0e1e70e,ONE PARK PLACE CONDOMINIUM,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:40:58.457693
+65ed5896-48b6-4649-acad-eb8ec294c365,ONE ROYAL PALM WAY CONDO,Palm Beach,Boca Raton,zip_lookup,33432,2026-05-03T14:40:58.620706
+b28b1108-84bb-4841-b4d0-3abf593bc81c,ONE SINGER ISLAND CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:58.776000
+361b1b52-bb9b-4d5f-9e1f-d8c5f761437b,Orange Grove Estates,Wellington,Lake Worth,zip_lookup,33449,2026-05-03T14:40:58.930788
+7a25342b-5cde-4d4e-bc87-6199e0a1834d,Orchards Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:40:59.096068
+a0439e3c-42a8-4070-be0e-50f5ec2d8d2a,"Osceola Woods Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:40:59.290648
+ae72f8d2-270c-4fdb-b64a-a6a07198ca1d,"P.G.A. Resort Community Plat Of Glenwood Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:40:59.494546
+656e7714-3a02-40d1-8e0a-1a6ee3c72b71,"P.L.E.S. Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:40:59.669894
+d5aa9cc4-55f4-4c01-a673-33df5a64f8ca,PAGET HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:40:59.839293
+1593b38e-67d6-426e-93f3-95148e3660ba,PALM BEACH ATLANTIC CONDO,Palm Beach,West Palm Beach,zip_lookup,33401,2026-05-03T14:41:00.014188
+27c1f4a5-9a00-4a49-b8fd-643d0f0e83c6,"Palm Beach Civic Association, Inc.",Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:00.189448
+99ef4d37-49d6-4944-b2fa-c0d9c7735ed7,Palm Beach Colony Sec 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:00.375522
+0669bbf1-87b3-4277-ae32-3094acd4098a,PALM BEACH HARBOUR CLUB CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:00.549012
+da12edcf-2237-4a12-b1d5-99e9fc9405a4,Palm Beach Isles Amnded,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:00.718910
+f91e80ef-d87b-4215-8660-5d5b00ca8641,"Palm Beach Isles Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:00.912932
+678b6304-85cf-4313-a836-5d3a091f10a1,"Palm Beach Plantation Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:01.108436
+9df3d680-e75d-48c9-b83a-39580e2046d3,Palm Beach Shores,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:01.284250
+1f2533d9-c3b2-4901-b197-4a213b722b7c,PALM BEACH SHORES APTS,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:01.443630
+d6790f70-3f91-4aaa-9608-de54a6de446e,"Palm Beach Shores Property Owners' Association, Inc.",Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:01.611673
+29561a0a-88ba-4d31-af2c-43d8ff1aa196,"Palm Beach Shores Resort And Vacation Villas Association, Inc.",Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:01.793787
+f26486e7-10d4-45bb-8f06-3129c7bbe604,PALM BEACH SHORES RESORT CONDO * (***),Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:01.980745
+a7e47947-574b-404a-9c20-234e15af8286,PALM BEACH TRACE CONDO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:02.146015
+e5658bff-af1a-43e9-aaa8-a01b0260c80f,Palm Beach Trace Filed 8 7 90,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:02.303530
+270337dd-b190-4bd4-ac3b-535394388aa1,Palm Beach Villas,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:02.478040
+0b8e67ef-3a5a-424b-973a-7d86dfd5178f,PALM BEACH VILLAS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:02.639697
+20579126-4b93-4c11-9c4b-78dd7b959a1d,PALM BEACH VILLAS COND H THRU  M,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:02.822647
+0300103b-9c9a-4b74-ba7c-6e8b6797092a,PALM BEACH VILLAS II AS IN,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:03.001791
+a4a4020f-818a-4353-9693-545d1ff9a2f2,PALM BEACH WINDEMERE CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:03.174181
+6cd2c35b-de06-40ac-b0c4-0883123302b8,"Palm Hill Villas Home Owners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:03.344609
+d6ad071d-a38e-4cc1-b7a4-2650eef68777,Palm Ridge Ests,Lake Clarke Shores,West Palm Beach,zip_lookup,33406,2026-05-03T14:41:03.508522
+4715e5b5-3af4-4b7a-8854-2419ae29794e,PALM SEA CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:03.688219
+a42527d7-8e08-4c57-b9c7-3371f240dbfa,PALM SPRINGS TOWNHOMES,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:03.871197
+81135a7f-e094-4b97-a2a0-9e52ae205306,Palm Springs Village,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:04.044431
+2c468f34-c66d-4666-9633-3c4fd6ed1b02,Palm Springs Village 2,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:04.211844
+7a2545dd-067c-4c1a-bffa-9c949a0e2453,PALM WORTH INC,Palm Beach,Lake Worth,zip_lookup,33467,2026-05-03T14:41:04.393220
+1b924f6b-7212-4f86-badc-2113c02ebae4,Palms At Atlantis,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:41:04.595327
+f01fff91-b4e7-4192-88ae-8d2f0454f922,Palms West HOA,Wellington,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:04.776816
+10feaf16-b184-4a7d-af40-ae1d80b726cf,PALMS WEST INDUSTRIAL PARK CONDO *,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:04.948779
+874fc708-5fce-4b74-ac9d-3f0194738969,PALMS WEST PROFESSIONAL CENTER CONDOMINIUM*,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:05.123513
+ff3166b5-93ad-4496-a09e-b4c39aad6922,"Palmyra Estates Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:05.312349
+a93c2e1d-77a6-4044-a210-56e9c83dc8ce,"Par 4 Town Homes Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:05.543785
+dd5d9aea-cd36-4922-8a67-3618ea9f33d7,Paradise Villas Marina Condo,,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:05.717787
+464bd196-c54f-4ceb-9355-b33f6c349f55,"Parcel 5A Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:05.878307
+f0ec4e0f-58c8-438c-8954-f8fd4bd7c42b,PARK AVE CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:41:06.070741
+e452e487-b2d3-4898-bed8-6ef8954271c2,PARK CENTRAL AT CYPRESS KEY,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:06.277450
+bd350f76-e9a8-442a-8652-1ea17fd099e5,Park Manor 126 & 127,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:06.489760
+7f4fc229-0ee0-4a07-8f76-d2714eac680f,PARK PLACE OFFICE BLDG CONDO *,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:06.714190
+b30d5d09-116f-4471-86db-c67cc3f21e5b,PARK POINT PH II A D E & F CND,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:06.895060
+513741a9-a037-4847-8756-0afe94f47ef5,"Park Pointe Community Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:07.082662
+668863bb-945b-46bc-bbba-06e3240a077f,Park Pointe Phase Ii Condos A,Greenacres,Lake Worth,zip_lookup,33467,2026-05-03T14:41:07.264328
+dcdf5478-9120-44cd-8d5e-31e591e5d341,PARK VIEW AT PALM BEACH CONDOMINIUM***,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:07.436555
+9c301c90-1f5b-4651-b5ae-b71865d3e99a,PARKDALE MANOR HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:07.655458
+6d012fcc-f977-430a-b983-3723eacf902f,PARKER HIGHLAND EAST CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:07.847060
+681bcdba-f66b-4134-89a1-ce303292acdf,PARKSIDE GREEN,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:08.017157
+f0ab0414-05fb-444e-a53c-11e208d903ca,"Passage Islands Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:08.189503
+da9caba7-3b97-4160-b7f7-e173eb1d5c8c,PATIO COURT TOWNHOMES,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:08.358250
+c8e857ab-a513-41c1-8b0b-35e659b50b07,PELICAN BAY APTS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:08.571709
+5434b9ca-e7e0-42b7-b2f6-2d3df68dea4b,PELICAN COVE,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:08.738874
+32ccc992-d6b8-4dca-80d5-5e1aebb13a71,"Pelican Cove Neighborhood Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:08.911417
+b01b50ac-8c70-42e1-95a0-dd15900552c9,PELICAN POINTE CONDO,Delray Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:09.080023
+8d904c33-59a3-4214-b0a5-50c2cea07d85,PELICAN WALK 1 CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:09.248082
+75756f3c-f04e-4d48-8f69-dc86af9bd2d7,"Pennock Landing Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:09.414254
+2879fa37-c884-4c6d-a4b7-6bbab16f3514,Penthouse Highlands,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:09.626679
+995c767b-9d94-4bbc-9575-dd54b62bb0bd,PENTHOUSE HIGHLANDS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:09.828568
+4ce04cb2-f30a-4c8a-b5b7-2bcc5454ceb5,Penthouse Towers,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:10.004354
+56f2a3cd-3c4e-4aa1-8cb2-43c9d3a4c57c,PENTHOUSE TOWERS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:10.194521
+40b4d750-773d-4f5e-bd1a-dae503b60904,PHOENIX TOWERS CONDO NO 1,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:10.385718
+c7c8b5d9-4f64-4e5c-94f7-b115730018c8,Phoenix Towers O,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:10.593215
+b11ab9e4-495e-4b50-9ee3-fc317f648ec5,"Pickwick Park Mobile Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:10.764421
+c02f94ea-9505-40f1-80d4-adec1a7708c7,PINE AIR CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:10.977718
+0f5f2adf-b4ca-480a-be1a-53719322a0e7,PINE COURT CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:11.232439
+aae23d3b-1d59-4d64-af95-9e7ce7bdf97f,"Pine Glen At Abbey Park I Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:11.465811
+65bea9fc-4ed8-4114-85a7-490fb9f47637,Pine Grove Farm,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:11.631203
+c47d0f1b-201f-4c4a-8ee6-6eb08d164744,"Pine Grove Hoa, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:11.819978
+df2aec04-8162-4e31-b8af-0e15166a5c88,PINE GROVE TOWNHOMES,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:12.125972
+aefa058a-78e3-406f-a656-6d135d74c94c,PINE HOLLOW CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:12.717753
+3539293b-8f2e-43eb-a763-cb17a3ef1e88,"Pine Hollow Estates Homeowners' Association, Inc",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:12.954060
+9862b4ca-6c41-40e5-b96c-a198e3c9ff3a,PINE HOLLOW II CONDOMINIUM***,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:13.143472
+d222e68d-397d-4b55-9805-c14fc3a6cf49,PINE LAKE,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:13.335633
+79380997-14e4-4212-aef5-c5b3d2f57caf,PINE NEEDLE PARK,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:13.533543
+b2a70fee-ce06-4e1e-84d8-c906b6324b99,PINE NEEDLE PARK PH 2,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:13.702047
+0c70cb59-2ef3-4341-923f-28eac18ccd78,"Pine Needle Park Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:13.860890
+4848d494-de3b-4891-aed4-ab531dc0ebe6,"Pine Point Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:14.028406
+fc8bca6e-d9a9-4a11-82e4-2953a64c2927,PINE RIDGE III CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:14.211516
+8b065f86-054b-4d24-9873-6e4294920073,Pine Ridge Iii Filed 10 22 79,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:14.388950
+e56cd611-6d40-476b-9351-b56f3dd92214,PINE RIDGE IV CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:14.558805
+c0efbb66-ad2e-4820-a781-8dfbb8bcc3e9,Pine Ridge Iv Filed 6 16 80,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:14.738129
+9e454e7e-2e50-46e5-acfb-9b3410b78b15,PINE RIDGE NO VLG III #1 CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:14.900513
+4fe38feb-6c48-4db3-87d2-8870bce914bb,PINE RIDGE NO VLG IV CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:15.086135
+fdb54d98-0ef2-4a6e-9c82-8639a09e2860,PINE RIDGE NORTH I CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:15.269069
+0cfdbd0e-204f-48fd-9a2a-7737cf4da5ae,Pine Ridge North I Filed 1 5 8,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:15.528273
+03450988-766d-4300-863d-168961851969,PINE RIDGE NORTH II CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:15.704226
+568fda5b-9714-4e87-b421-94a0fc691cc3,Pine Ridge North Ii Filed 10,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:15.869146
+1eda1819-91ac-4069-925e-3aaf528495e7,Pine Ridge North Village Iii #1 Dec,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:16.052744
+51dfe414-80c8-489a-8bb3-68b673f002c7,PINE RIDGE SOUTH I CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:16.313398
+5c7a789b-e8a0-4837-be5d-27fab7895434,PINE RIDGE SOUTH II CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:16.504343
+8627bec9-3a69-49ce-9a34-c523e9df5a59,PINE RIDGE SOUTH III CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:16.682186
+bea0effe-262a-45a9-b59a-ab943697ac60,PINE RIDGE SOUTH IV CONDO,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:16.839369
+4a118727-3004-49e7-bcea-041b2bcfd491,PINECREST CONDOMINIUM,West Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:17.004855
+a10a1908-36b5-4875-a319-ca1e2ff02c53,PINERIDGE II,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:17.204490
+1e86c325-382c-4eb4-81a0-4acef2e862f4,"Pines Of Wellington, Parcel ""C"" Property Owners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:17.389549
+65b5adca-46b2-48a5-b8f2-1c0469a256aa,Pines Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:41:17.568921
+c1215f1d-d03a-4993-b24b-29ebf381666a,PINES PLAT 2,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:17.742729
+fa45ad88-6cfc-4383-8100-f7177416cb5c,Pinewood Lake,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:17.908062
+24cdf8dc-19aa-47db-b70e-1dbb1b2b10bc,PINEWOOD LAKES,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:18.112720
+5fbfcb4d-0559-4263-9a55-91c0e6bb349c,PIONEER ESTATES,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:18.289909
+f5003244-0e16-4886-9d3c-bc3cb56553de,Poinciana Park,Palm Beach,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:18.448772
+e02b3635-855f-4c5f-9433-afd8d3c67da4,"Poinciana Village Master Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:18.626930
+4e2bdc99-6150-4ef0-ac3d-f34801dc5dcd,Poinciana West,Boynton Beach,Boca Raton,zip_lookup,33433,2026-05-03T14:41:18.802449
+8b0a4c77-34fa-40f7-961c-9d76d09e233c,POINT MANALAPAN COTTAGE COLONY,Manalapan,Lake Worth,zip_lookup,33462,2026-05-03T14:41:18.969346
+8fa63128-cd51-4cb5-acc6-349fa6347602,PONCE CENTRE CONDO *,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:19.123725
+a126e698-d905-4fbd-9bb6-6f0812f72624,"Pond'S Subdivision Property Owner'S Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:19.300199
+2dbfd149-4282-407c-be22-d2b6fb13348d,PORTOFINO OF OCEAN RIDGE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:19.462450
+34fd4227-029a-4efc-9daf-5c9de51e8754,Portosol,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:19.627070
+40145170-357a-4324-a34d-aca37148493b,"Portosol Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:19.786694
+c1d1061b-67dc-44b2-b28a-bb18776ea44f,PORTSIDE WAREHOUSE CONDOMINIUM *(***),Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:19.964902
+fd0f0619-18a0-4f47-b038-46b9467ca383,Presidential Golfview Filed 5,West Palm Beach,Jupiter,zip_lookup,33469,2026-05-03T14:41:20.120746
+a9f8e958-7c1b-4271-a9f2-8f683687de5a,PRESTON SQUARE,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:20.279091
+bb503e2c-748b-418b-9e5b-b40e6579251d,PRESTON SQUARE REPLAT NO 1,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:20.438766
+5fd1280a-d566-4ac8-84c1-5a992a6bd748,PRINCE PLACE,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:20.606293
+f23bebb9-64cc-4cfd-806c-b9e7671aa51e,"Property Owners Association Of Juno Beach, Inc",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:20.782626
+6b41afaa-d5bd-4a9a-adef-2d43eb3203ba,"Prosperity Harbor North Master Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:20.971756
+83041ed7-1f1c-4712-bfb8-40198add9554,"Prosperity Oaks Court Homeowners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:21.145671
+e60bb1b2-c9ca-4b85-81fe-ce305b1214df,"Prosperity Oaks Property Owners Association, Inc.",Palm Beach Gardens,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:21.316492
+e84e491d-2532-409e-b93f-75c247543355,Quadrille,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:41:21.487118
+751ff688-acf8-4fcb-945d-a2a19fc05188,QUADRILLE THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:41:21.655008
+2f66c27a-7b3b-426a-8c3f-30488b76c8a7,QUAIL HOLLOW CONDO,West Palm Beach,Boca Raton,zip_lookup,33434,2026-05-03T14:41:21.845867
+51c01284-bf77-40b1-8e06-a6ec3f23f0a7,QUEENS COVE HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:22.034207
+be97771b-80eb-4539-bf08-512fffb951f2,Queens Cove House Condominium Inc,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:22.218602
+7e6725ca-0db8-432c-8804-31ee318f363d,RANCHETTE ROAD TOWNHOMES,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:22.375160
+01c9e78c-0c19-40ad-8c81-4bbc5f25f1bd,"Randolph Siding Saddle Club Property Owners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:22.529297
+55128c84-8229-415f-b3bf-10bf813b6d0c,REACHES CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:22.702788
+9f40fc40-9845-4c15-a5e6-eef1fdc3c3d1,"Regatta Cove Neighborhood Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:22.869147
+1b0321bf-a5d7-44c7-b9df-8a01e841d06b,REGENCY CONDOMINIUM APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:23.082831
+c5e6db3b-7d11-4a06-aad3-0f0d51a1e5e5,Regency Highland Club,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:23.260266
+1404b10f-5c6c-4817-95f5-37f2e23bd696,REGENCY HIGHLAND CLUB CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:23.439046
+c7bafdad-8c8d-4ba4-8e86-d8936d29b83b,REGIONAL ASSOCIATES COND*(***),Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:23.599201
+f090a32e-2952-4467-91d6-c29c461378e5,Reserve At Summit,Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:23.762776
+05f16b73-33fa-42e3-84e0-7ed671a201aa,RESERVE AT TEQUESTA,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:23.933787
+002f6c22-9e11-4781-a396-cd25888fca19,"Residences At Prairie Key Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:24.112407
+f31fcd66-ec26-4bfa-bb59-d5dbe9d13581,RESORT AT SINGER ISLAND HOTEL CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:24.269239
+23ba96cf-ead9-41f8-a991-c54eadfeee38,RESORT AT SINGER ISLAND RESIDENTIAL CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:24.444153
+8dfe5db5-df10-4153-9bc9-d7e7a68210dc,RESSLER TOWNHOMES CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:24.603378
+a6002657-4090-40fc-a9c1-00905b09097c,RIDGE CONDO ***,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:24.769557
+a8c09e10-b0a2-4655-8fd0-c56797ed8a17,RIDGE HOMES CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:24.961637
+20d86859-cce8-487b-89e3-40a076cb1600,RIDGE HOUSE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:25.128076
+50bf4774-3614-41fe-925f-b777391989a1,River Bridge Par 2a,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:25.290399
+6a3d9336-6650-4f67-b250-e1868a44ac62,River Bridge Par 2c,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:26.502643
+be00d490-28ff-4b30-89b7-6ae4d84d50ca,"River Bridge Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:26.693666
+61ce16a5-60ba-425d-ae6f-aa59688790a6,"River Pines Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:26.885274
+7880b462-993c-4a1e-82ad-f21fffcf14a8,"Riverside Oaks Homeowners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:27.146997
+5655391d-7df5-498c-bf60-a102db2a5429,"Riverside Pines Property Owners Association,    Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:27.329194
+0bf02b53-bb70-4fba-9ee2-eaced1436867,"Riviera Beach Community Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:27.542052
+d10ad2a6-67eb-4ace-838e-cb6143b7d033,Riviera Beach Hgts Add 3,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:27.746927
+c8602be7-11ef-4f60-a7a8-e4440bafde58,Riviera Beach Hgts Add 4,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:27.970226
+c7751887-cfdc-4399-b375-724764d7fbde,Riviera Beach Hgts Add 8,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:28.155225
+89fca87b-02b2-44c8-9178-3203a16d4e1b,RIVIERA COVE,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:28.342064
+ca2d3645-eb85-4d0a-aa42-309d849bb5c6,ROMAINE INC,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:28.529322
+89f15b95-ca5c-4560-8c4b-7986ec9b087f,ROSEMONT CONDOMINIUM,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:28.710609
+b01517a1-8f47-4dd2-a7dc-125f67045841,ROYAL COMMERCE PARK COMMERCIAL CONDO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:28.907614
+d0a73a32-7dd9-4d0e-bafa-d4202548e4ee,ROYAL GARDENS VILLAS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:29.080978
+ad431df9-5bfd-4f01-8dc8-cd4cc558a289,ROYAL HOMESTEAD CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:29.240551
+29ddc5e6-6e02-4391-9936-13f91d95ed6d,ROYAL PALM BUSINESS PLAZA CONDO *,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:29.393950
+04563f0e-b36d-40cd-892b-b58e8c0abf98,Royal Pines Estates,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:29.555657
+e8b1fea0-d4a4-4c19-8986-95627248ed29,ROYAL VILLAGE TOWNHOUSES CONDO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:29.730352
+bdb57b73-4c63-47a1-8453-b51348c42527,Sabal Pointe Condominium,Palm Springs,Boynton Beach,zip_lookup,33426,2026-05-03T14:41:29.908033
+af7beec4-ec04-4ae8-bda2-91f1dd6938a2,SABAL POINTE CONDOMINIUM***,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:30.084028
+aa6eaa63-9a43-4eec-a826-ef96749d43ae,Sagewood,Greenacres,West Palm Beach,zip_lookup,33413,2026-05-03T14:41:30.315192
+8243134b-fd47-4418-a229-72cc316987ba,"San Messina Community Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:30.470010
+04b59591-5928-4a52-bed6-ba1bea85f233,SAN REMO TOWNHOUSES CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:30.640995
+45bfbd21-7a12-4324-9149-b3009eb2efee,SAND DUNE SHORES RESORT CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:30.831687
+bb637c0b-17ec-429d-8904-396c8680eca2,SANDS CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:31.007104
+4dd8fa26-7e32-467b-8767-cba13834d16d,Sandtree,Palm Beach Gardens,West Palm Beach,zip_lookup,33403,2026-05-03T14:41:31.183441
+0a8f5c7e-4f71-4a5b-bd25-a42923be18c7,SANTA CATALINA,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:31.362297
+1b395d7a-8647-4453-ae07-77bc37f8dac2,"Santa Catalina Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:31.533386
+d6fc9539-d680-4e2d-a737-045f6ef3c162,"Sapphire Cove Neighborhood Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:31.713548
+6159ddaf-87b5-478f-9b6d-19ac7a2ae1e1,"Saratoga At Madison Green Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:31.898212
+0bc2bd18-0dc4-4b1f-b351-e26b01961992,Saratoga At Royal Palm,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:32.098303
+c9090239-9bd8-4336-8656-2aa4787b67af,"Saratoga At Royal Palm Property Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:32.271519
+24118554-7066-41de-930e-85d7758db112,"Saratoga Lakes At Royal Palm Beach Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:32.448303
+87f488c8-4a6b-47ce-ab47-60134a6bbe0b,"Saratoga Pines Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:32.638382
+49b37c15-2f0e-4f32-88a3-e6cab31f8538,"Sausalito Homeowners Association, Inc.",South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:32.813177
+3a4f510e-ba3f-4905-a688-d5853c1bd95f,SAUSALITO TOWNHOUSES,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:33.000581
+a8582d6c-aa13-422d-a83a-9948efe66352,SEA FROLIC CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:33.220127
+743eb7bc-8e77-4711-8bd5-3e3771f0399f,SEA IMAGES OF JUNO BEACH CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:33.408909
+9aced93c-2b02-4a3e-807c-6cac381a519d,SEA ISLE @ PB SHORES CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:33.595624
+528941fe-84b9-42f1-9017-8fb94939c254,SEA OATS JUNO BCH 501-705 CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:33.772347
+a645bec6-e96b-4ebc-b7cf-53882c5d6f90,SEA OATS OF JUNO BEACH CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:33.946745
+cd50bbf4-72df-47c0-9e16-9ed8e0fd760c,Sea Oats Of Juno Beach Conds 1 Thru 18 D,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:34.122378
+37308019-439a-4ce6-b733-6b328829bcb1,Sea Oats Of Juno Beach Conds 501 Thru,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:34.294117
+18736191-7c32-4c33-9062-af9ad1b79791,SEA SUNRISE CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:34.459893
+dd9d2cd9-396f-4c41-9d47-5176be59801c,SEAGATE OF HIGHLAND 1-4 CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:34.621717
+d2d6dd6d-b603-4a25-8269-1e65652bc2cb,Seagate Of Highland Condos 1 Thru,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:34.780004
+fa5ce790-9ee9-4a84-ab97-23c014f027eb,SEAGLASS CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:34.949394
+80a30008-49b7-4cc2-9ab0-7400b32e3a3b,SEAMIST COND APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:35.126441
+ec5a1d8a-dcd9-49a0-90d6-5617a623270b,SEASCAPE CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:35.408092
+965028bc-aab8-4c1b-a718-157f2d25c32a,SEAVIEW AT JUNO BEACH PARTIAL REPL,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:35.618219
+c743667a-b7f8-465e-9c19-037d0782ad34,SEAVIEW AT JUNO BEACH REPL LTS B-1 THRU,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:35.789082
+ffe83d04-2e0c-4d97-aaf8-c48cfca601ea,SEAVIEW AT JUNO BEACH REPL LTS D-1 THRU,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:35.960225
+7ddd3b56-3f07-48ec-964d-3407c9fbdc2f,SEAWINDS NORTH & SOUTH COND,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:36.126160
+0af19711-d6f3-42e5-8cd0-da40b1f543ef,SEMINOLE CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:36.288977
+9cb4b2fb-b852-42b3-b35b-102d1a00c970,Seminole Estates & Townhomes,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:36.470693
+fe163a27-ed4c-4b94-be48-7213a7b4f43f,SEMINOLE ESTATES AND TOWNHOMES,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:36.639901
+429f0c8a-e09f-415b-a760-01909f5344bd,SEMINOLE GARDENS AT WOODBINE PAR F,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:36.807950
+8d56f002-d9a6-4b5f-a548-dfccf0e7b7f2,Seminole Palms,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:37.003350
+7d9c5591-56b2-4bd4-8e59-2ba3785f5740,SEMINOLE PALMS 2 THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:37.279029
+d2d98c06-2a8b-46c5-b065-ba000bb7a2a0,"Seminole Palms Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:37.470982
+5c8adcac-4d7d-4edc-bfa3-dbfc5bf70969,"Sequoia Homeowners Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:37.642651
+bc47d05a-878c-4aa0-b4ff-97d6fc895d73,SEVEN SPRING PL 2 AMND,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:37.886233
+8aaa71fa-a996-436e-bd6f-e3f8497dd1ea,SEVEN SPRINGS PLAT 1,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:38.062850
+3a6cd64d-4b74-446c-bfbf-0f3fe0260c4e,"Shady Lane Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:38.255344
+b48edb9a-ad04-41a7-bbfa-ab75f04f3d2e,"Shady Lane Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:38.420268
+ab31e163-30a8-4db6-a80e-27fbe9e22819,"Shadywoods Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:38.627765
+a2095073-771e-45ab-a0c2-9c4962ea17f2,SHAMROCK I CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:38.793702
+276dad4f-5151-4f03-a918-3a488312f26e,SHARP BLDG CONDO *,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:38.953055
+8c30a87e-c1bc-4781-964d-70c311e3e043,Sherwood Lakes,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:39.123174
+8b4e96fe-07f7-4c9a-922d-577786240fa9,Sherwood Lakes Plat,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:39.288357
+fdd6b58a-0fab-4fbf-ad17-b870d587569d,SHERWOOD LAKES PLAT 2 THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:39.441863
+e3b3c2a5-00cf-4235-805e-c80efcbce1fe,SHERWOOD LAKES THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:39.606129
+85ec86aa-75ac-4463-a915-1ffb47513104,SHOMA COURTYARDS 3 AT ROYAL PALM CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:39.775053
+bf063e2e-a746-4e7c-a596-098088ca76ee,SHOMA COURTYARDS I AT ROYAL PALM CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:39.938550
+d3604f4b-05ab-491e-a7f8-18f9eaf76d1b,SHOMA COURTYARDS II AT ROYAL PALM CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:40.112103
+dd7bcbd5-ea86-409e-86d9-0a8b31283117,SHOMA TOWNHOMES AT ROYAL PALM BEACH CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:40.274564
+3a7d8bfe-b23d-47c8-95a1-90514cccb8cf,SHOMA VILLAS I  AT ROYAL PALM  CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:40.442190
+3ca8eb06-8c29-4e5a-911f-e7c96df52f19,SHOMA VILLAS II AT ROYAL PALM CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:40.622538
+c0f64c33-4599-4a97-9689-f74a236305cb,SHOMA VILLAS III AT ROYAL PALM CONDO,Royal Palm Beach,Wellington,zip_lookup,33414,2026-05-03T14:41:40.777244
+cccae6ef-86cf-4928-8f59-a07345efdafc,SHORE PLACE CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:40.941630
+df210e1a-7693-456b-87c4-e9797102d604,SHORE SIDE CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:41.114390
+768e52ca-f3b3-41a2-aac9-6ca1e6e141f5,SHORE WALK CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:41.281101
+eab3d2b8-e7ac-4a8e-bdef-f27919472a1d,SIERRA BAY REPL,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:41.454555
+ac8fc8c8-90aa-4231-95b7-b43b1631c505,SIERRA CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:41.627218
+ebb776aa-c1ef-4fbc-8c67-dd26865c2e1b,SILVER BEACH EAST VILLAGE CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:41.798610
+bb6928b2-3933-44e3-a631-64c75f8eac72,"Sims Creek Property Owners Association, Inc",Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:41.964153
+ead4303d-893a-4505-ab46-dc06fae030e5,"Singer Island Civic Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:42.261337
+c47719af-087b-47ac-b037-2615ee37a5c1,SINGER ISLAND PALMS CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:42.446582
+b5a389ea-3463-439a-80b5-74dc440dc670,SIX SEVEN SIX SEVEN NORTH OCEAN BLVD INC,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:42.691375
+80b73cb5-120b-4a7b-840c-8409960bb049,Sky Cove A,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:41:42.854523
+a3b6ca7a-ac31-48ff-9b5f-c78e066fd6de,Sky Cove South A,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:41:43.098356
+9484890e-a5a1-4891-a7ec-5ed9f557c643,Sky Cove South B,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:41:43.291223
+59e3fca7-965b-4841-aec3-ab7637f183ad,"Society Hill Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:43.443885
+9d5a23d5-1d42-473d-a663-207a97861499,SONOMA BAY,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:43.617282
+ee4460c1-baa1-4bb2-a24b-1f3a509aec47,"Sonoma Bay Community Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:43.809714
+a476b8db-9122-4030-971f-df02885551e1,"South Cove Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:43.970912
+c02bd6c4-0535-4347-829d-36e54049df76,SOUTH PALM BEACH VILLAS CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:44.147550
+57ffae1d-6a24-4caf-b8f5-cfb2bcb1efb4,SOUTH PALM RESIDENCE INC,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:44.334157
+0c770573-083b-4064-8a5e-71c94c20ed47,"Southeast Landing Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:44.508460
+298e49eb-8f62-4f97-960f-680b185192d2,"Southfields Of Palm Beach Polo And Country      Club Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:44.748566
+2450e6a1-ef91-41ff-9c28-b89b3982e48b,Southgate,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:45.013745
+f37b0645-2d13-4513-aec8-21434b1cb04b,SOUTHGATE CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:41:45.189929
+81ea3304-632e-4ac0-9b83-c6de59d8a067,"Southlake Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:45.421320
+99bd8d8e-77ab-41bd-9fe9-0b331fe04b35,"Southwind Springs Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:45.575079
+7ad57188-7675-4ea1-aa49-df030d02712d,SOUTHWIND THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:45.906311
+378b7cac-f0b3-4cbb-b4ec-69f7b5fc971e,"Springdale Homeowners Association, Inc.",Palm Springs,West Palm Beach,zip_lookup,33415,2026-05-03T14:41:46.064898
+411e17a2-3e13-43a1-af2d-036a96fec1e8,SPRINGDALE HOMES,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:46.431997
+f43b6c24-cf47-44d9-a9f0-76a3258d9653,"Springhill Property Owners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:41:46.597153
+611f828c-f265-4076-b5d6-1422fbe5c618,ST ANDREWS PALM BEACH CONDOMINIUM ***,West Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:46.853038
+bd6e9d45-2d09-4b39-8ef5-09cadefc2277,ST ANDREWS PALM BEACH CONDOMINIUM II***,West Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:47.114828
+3d54077f-f3f2-4e4c-b2b3-5f849e7249c4,ST ANDREWS PALM BEACH CONDOMINIUM IV***,West Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:47.291921
+39cf0c2d-7b39-45ce-a895-0ba48928258a,ST ANDREWS PALM BEACH CONDOMINIUM V***,West Palm Beach,Jupiter,zip_lookup,33458,2026-05-03T14:41:47.485100
+93278f18-1adb-4ca4-90de-95cd9daa05c7,ST CHARLES LANDINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:47.657496
+8b70e117-fa7c-4b36-bce2-b9e3b9188e18,ST. GEORGE HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:48.008286
+edbdf6eb-8411-4356-8e90-94f4be3dc827,"St. Paul Estates Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:48.183115
+f2027672-b93e-43bd-8f0e-161e3245b5b2,STAMFORD AT ROYAL PALM BEACH,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:48.447259
+abe8363b-0243-4fa1-9ce7-2b710214758e,"Stanford Park Property Owners Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:48.693491
+6cc0ac8c-c022-4c56-a667-633c5f1f966f,STEPI CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:41:49.052079
+8e409b32-96d7-48bd-888c-c3a434eb9f5d,STRATFORD AT HUNTERS RUN CONDO,Boynton Beach,Delray Beach,zip_lookup,33445,2026-05-03T14:41:49.267306
+6456b892-3049-4438-aeba-dbaa9375ae08,"Strathmore Gate -I Homeowners' Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:49.579353
+7981c7c2-2e4e-4cd8-81f6-399ee0cc153e,STRATHMORE GATE I UNIT ONE THS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:49.741876
+cf8b0d43-9db1-46ca-b704-49bfd42b2419,STRATHMORE GATE I UNIT TWO,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:49.912189
+12e01d31-20b3-479a-8964-d445bcdd8a69,Strathmore Gate West Unit 2,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:50.102689
+55d8e7b6-bbfe-45f0-ad09-31124a6b6156,Strathmore Gate West Unit 3,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:50.296623
+6cf6e8e3-b64a-4d6e-b09e-30c3de1e2180,STRATHMORE GATE WEST UNIT THREE,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:50.626990
+7dad0b4b-f97a-4a59-83b0-08abdc34004c,STRATHMORE GATE WST UNIT 1,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:50.801551
+2466fcc0-249f-4193-ac02-59825e017658,"Strathmore Gate-West Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:41:51.051675
+04034dcf-a29a-480c-b5fd-04f0a2decc6e,Sugar Sands,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:51.302070
+d3bbc960-410b-4ec6-805c-5b8534714a0d,SUGAR SANDS CONDO #012,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:51.487893
+180aba59-a5a5-42d2-8652-1e8e485bb52c,SUGAR SANDS CONDO #1,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:51.677275
+b52ff043-ac04-4d61-823a-e5ca8ed3033e,SUGAR SANDS CONDO #10,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:51.863302
+7b654138-e452-453e-9c90-a187a64fd9ff,SUGAR SANDS CONDO #11,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:52.230154
+71614071-6458-49e0-acb1-aeef7821d3f0,SUGAR SANDS CONDO #14,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:52.531303
+3c481ae2-337f-4ad8-ac6d-b0f170880f93,SUGAR SANDS CONDO #15,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:52.725006
+cc1d9dff-7b7b-4534-9d48-a77e26c145b5,SUGAR SANDS CONDO #16,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:52.899242
+20aba185-5221-43ea-8516-853700ddecc8,SUGAR SANDS CONDO #17,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:53.251121
+49042510-47c6-411f-befc-82e11d9a1cbc,SUGAR SANDS CONDO #18,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:53.427442
+42df5928-5429-424c-8858-29609c94dfa1,SUGAR SANDS CONDO #19,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:53.775626
+e7ac6fd6-cc74-4608-8d98-6bdbcc09edc7,SUGAR SANDS CONDO #2,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:53.960973
+e6cf6809-ebc4-42b7-840b-6d0f12419cf9,SUGAR SANDS CONDO #20,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:54.224693
+5abf5339-1330-40a0-987e-1da1da861ef2,SUGAR SANDS CONDO #21,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:54.384888
+f9490fbe-bde2-43f3-a592-cd2b398d3a63,SUGAR SANDS CONDO #22,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:54.631692
+8f2745d9-7590-46c8-8033-d0380982dbb8,SUGAR SANDS CONDO #23,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:54.806888
+b8917cfd-2931-4b92-b216-bf219b66804e,SUGAR SANDS CONDO #3,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:54.985640
+0141bad3-9171-4388-984d-d5c4a54348df,SUGAR SANDS CONDO #4,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:55.157145
+96111122-2ba1-42be-be70-5d2f4b278344,SUGAR SANDS CONDO #5,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:55.324846
+72e0d682-ba9e-40e9-bb44-790cbd85a030,SUGAR SANDS CONDO #6,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:55.562184
+d5bf4eec-afb0-47f7-8702-3587bd00a2f6,SUGAR SANDS CONDO #7,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:55.827251
+d2150c53-1e3d-4664-9514-4a675d1a9590,SUGAR SANDS CONDO #8,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:55.999469
+67134ac9-95ee-495d-ae25-264c606f0846,SUGAR SANDS CONDO #9,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:56.207662
+1959fddb-61d7-4aa0-8d05-c61a39a6a2d4,SUMMER VILLAS CONDOMINIUM***,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:56.380553
+b39b74da-d695-47bd-8f76-9fd88bf76e32,"Summit Lake Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:41:56.531677
+d1d974c0-064c-4dd8-a32a-857fd498b2e2,SUN HARBOR INC,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:56.730337
+1313e861-bf6a-4b16-ad5e-b7bd43a6543d,"Sunny Hills Property Owners Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:56.900823
+0b023ff7-bbf3-4d4b-b5bf-4f6d2d3e6636,SUNPORT CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:57.109265
+d2926c72-2bb0-497a-8b70-b673ae244d12,SUNRISE HARBOR CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:57.364669
+b89b3fbc-9bbf-4d6d-b9d7-186b5a5ddb22,SUNRISE TERRACE CONDO ***,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:41:57.534043
+69d34724-8ba4-4a9d-b6c8-2eaf3acc0469,SUPEREIGHT SHOPPES CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:57.778006
+f03d8e2f-7b7e-4df8-b6b9-dafbc72069c4,SURF & SAND CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:57.956727
+9e298bf9-b295-41a0-9da1-c36bb6c35cdd,SURF CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:58.140755
+8240ceeb-af08-4b67-b571-b316fc269d31,SURF PARK SEVEN CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:58.393943
+6099363a-fa50-4d9e-9b1c-7f8ca2d249e4,SURF WAY CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:41:58.627492
+e6685b3d-6953-4bec-8324-2a3b421907fb,SURFSIDE PARK PH I THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:41:58.826491
+ca94a33f-9f13-4333-bbd6-556550e60f6d,SUTTON PLACE CONDO,Palm Beach,Delray Beach,zip_lookup,33484,2026-05-03T14:41:58.993089
+5c8f40f5-7676-41ce-9872-e63b550e44b8,TAMARIND CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:41:59.166778
+a4064fc5-38b2-426a-877b-f01300903d9b,Tequesta 7 To 15 Inc,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:59.356641
+b5f7091a-2c8f-4388-9ec9-f710dba3e685,TEQUESTA CAY CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:59.516310
+489b14db-0151-4dcb-9193-aef662c42c37,"Tequesta Civic Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:59.698136
+8b6015ea-ea7a-47ed-9f86-e72d82530122,"Tequesta Civic Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:41:59.874070
+36e73e2c-bbdd-4b3d-bbb3-64cfb15d6db9,TEQUESTA COMMERCE BUILDING CONDOMINIUM*,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:00.039071
+4bec825b-e65d-42af-9f6d-1333b3b0c3eb,TEQUESTA COMMERCE CENTER COND*,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:00.217540
+3e0548be-1592-45e2-a268-55889fab3c02,"Tequesta Country Club Point Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:00.513683
+dcb6f025-b4ce-429a-bec1-1317d911a666,TEQUESTA COVE CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:00.685778
+b915cd19-c31a-4fce-b802-0cd4c304b33d,TEQUESTA GARDEN COND NO 6,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:00.925782
+12311c68-d904-4799-8a0d-cb514c17ce2b,TEQUESTA GARDEN COND NO 7,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.096474
+5bb6858d-cb0a-4bc7-af0b-e5064229522b,TEQUESTA GARDEN COND NO 8,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.277475
+b3f91f8f-f306-4783-952c-b4d874e21cd9,TEQUESTA GARDEN CONDOMINIUM NO 1,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.447102
+0fed82c0-82e9-4860-a08e-dec77e20854b,TEQUESTA GARDEN CONDOMINIUM NO 3,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.618419
+bd0b7983-979c-4971-b1df-36e7fd9d2349,TEQUESTA GARDEN CONDOMINIUM NO 4,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.789373
+19ed4cf1-b014-4223-850e-b4b5ddd39914,TEQUESTA GARDEN CONDOMINIUM NO 5,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:01.962022
+7b629125-8c8c-48dd-a940-5db882322fc6,TEQUESTA GARDEN NO 2 COND,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:02.132437
+abd910a1-507f-40f5-a4ba-c780464a0f09,Tequesta Hills,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:02.301983
+72b949f8-5aca-49ef-acbc-6b297177f6eb,TEQUESTA OAKS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:02.477722
+b0ac1c63-2746-4696-902f-c974b5238e42,Tequesta Pines,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:02.673175
+5a70d68c-94bf-400b-a3c3-44a45d73c9a8,"Tequesta Pines Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:02.831765
+fd538076-203f-4c68-8a63-7a6d88c83382,Tequesta Property Owner 100 Llc,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:03.000275
+a1d0e7cb-a593-47b7-ae9c-8216a4b7e3af,TEQUESTA SQUARE CONDOMINIUM *,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:03.244495
+c65d2a1c-6533-4268-b28d-8d45012c6e80,TEQUESTA TOWERS COND APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:03.757153
+9df2262a-376b-4f3d-863b-81b098c48191,TEQUESTA TRACE CONDO,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:04.268616
+bd9d874b-da03-41dc-85c5-0f5b6f75480f,Tequesta Trace Condominium,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:04.782740
+10d1612f-9d58-400b-b328-762ffbb4119a,TERRACES OF WESTLAKE PHASE 1,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:42:05.290643
+a16472aa-7aff-4178-b967-e092205684ab,TERRACES OF WESTLAKE PHASE 2,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:42:05.801557
+bfbc85d2-4e1d-4e5b-85f3-84ecf4aa1c77,TERRACES OF WESTLAKE PHASE 3,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:42:06.332844
+8f08d275-c166-42a7-860c-52ca33ae5bec,"The Charter Club Of Palm Beach #1 Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:06.830086
+8082fbdb-3205-4320-b8d7-7910f0435dbe,"The Colony At Boynton Beach Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:07.357503
+f2b6689e-1006-46b6-bcd1-49a96fef5123,"The Enclave At Fairway Isles Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:07.885966
+1258427f-b3b0-43f6-8bf1-b2698d1548ac,"The French Quarter Ii Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:08.410733
+e4d6ac2f-b82d-4960-be6c-8a1c5935c1ea,"The Golden Sanctuary Phase I Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:08.767839
+ad925bfe-8e67-46c7-bd28-f82e74aafa6a,"The Gramercy Park Homeowner'S Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:09.290477
+c450b1ce-a7c8-4954-a553-201f1d60d9b1,"The Hammock Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:09.474754
+cf192d17-4ed1-44b5-b144-a56d848373ea,"The Hobe Pines Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:09.649468
+5096812c-96fa-4f79-af59-ed24c0a8e544,"The Hunt Club Hoa, Corp",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:09.823074
+2111aaf6-839c-494d-a0f2-19f82c59a5ce,"The Hypoluxo Island Property Owners' Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:09.982437
+2445ce8c-73a3-41d0-9c0c-13971d387f90,"The Island Club At Wellington Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:10.151926
+fbc06b2b-650b-4efa-9abb-cf9c288f12c8,"The Jupiter Hills Home Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:10.325902
+925b6f56-89ef-42c7-ac4b-8a13f8146cc4,"The Little Club Homeowners' Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:10.515641
+3cb1882a-9a03-48cc-ac1b-5de4bf9a5992,"The Lyman Village Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:10.677617
+b0fc0c47-60d1-495a-94f9-37be88ee824f,"The Manors At Wedgewood Lake Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:10.847532
+de806698-fe47-4422-871f-7b7dfbc13e73,"The Pines Of Boca Del Mar Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:11.009274
+05fe5dc2-8b29-4191-b194-0c883b9197ba,THE PINES PLAT I & 2,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:11.200260
+c6c6a969-3f50-4dc3-b83b-9ed2afe6f651,"The Preserve At Crestwood Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:11.365488
+8b752296-84bd-4c3b-a7d7-77f655557628,"The Rainbows Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:11.540512
+600b4f51-da84-4c37-8121-a43460edf0ed,"The River Ridge Home Owners Association Of Martin County, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:11.699955
+4e49ba98-ae56-46f3-911f-6149a12127b1,"The Royal Palm Beach Civic Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:11.869068
+2006711a-be9c-4f8c-810f-cdf9ff1474ca,"The S.P.O. Community Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:12.025635
+dfee6786-2edf-4071-9968-fd5d2c231c1d,"The Sedona Commons Property Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:12.202899
+8d58a7a8-cc65-42d4-bf5f-e17d55ada8b5,"The Shores At Wellington Property Owner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:12.391499
+3dfdd4b9-5ea7-45b1-83a5-ed1c6fe5b7f8,"The Waters Edge Homeowners Association I, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:12.561985
+78781cd8-ff97-486a-a612-4aa0eb3d289f,"The Waters Edge Property Owners Association Phase Two, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:12.738537
+b5b7768a-419d-4271-b6b1-4230e87a4790,"The Willows Landing Homeowner'S Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:12.893061
+5ae17966-f78a-4043-a5cd-a155e97a961c,THIRTEEN FORTY OLD DIXIE COND*,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:42:13.079759
+5788cafd-7248-4789-9016-17de81fa6ef9,THIRTEEN-0-TWO NEW WORLD AVE COND,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:13.240625
+07337777-71d1-440b-848b-00971acbc729,THIRTY FIVE SIXTY COND,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:42:13.416505
+0b7ad98a-8be0-4db7-af31-f12c270723cf,THIRTY SIX HUNDRED SOUTH OCEAN COND,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:42:13.583431
+836c84a3-ac3d-4e84-8389-3e26c850186c,"Thornhill Mews Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:13.760516
+adc073e2-8b3b-4472-b37d-e784d31c3da6,"Thoroughbred Lakes Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:13.941237
+742b1298-07e6-47a5-b74a-140e3262b461,THOUSAND OAKS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:14.123715
+19081b22-0b7b-4eea-8def-c5643b3d20b1,THREE THOUSAND THREE CONDO *,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:14.296555
+7e2ed310-e9e5-4223-a405-5359b148c503,TIARA CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:14.465493
+7d4994d5-6beb-4736-8ad6-98ad774bd9d5,"Tifama Estates Homeowner'S Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:14.620778
+408663f0-4130-4448-810f-76a067f474fb,TIFFANY LAKE CONDO PHASE #001,Mangonia Park,West Palm Beach,zip_lookup,33407,2026-05-03T14:42:14.792681
+f44d267d-a8e6-4c3b-9b80-1dedd941ac13,TIFFANY LAKE CONDO PHASE #002,Mangonia Park,West Palm Beach,zip_lookup,33407,2026-05-03T14:42:14.958951
+33f65803-3d26-4c7b-8ac6-84372c78a2e6,TIFFANY LAKE CONDO PHASE #003,Mangonia Park,West Palm Beach,zip_lookup,33407,2026-05-03T14:42:15.112562
+df5a2c3a-913b-480a-b741-e05b3b48d7b4,TIMBER PINE CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:15.275569
+6d15a37a-e64e-4ca6-b587-7749be8d0738,"Timber Pine Condominium Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:15.523925
+6608d8f2-8784-4d65-bc0e-f16db357159a,Timber Pine North,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:15.692651
+f0a50b33-3178-465f-9b0d-298ec20f7c88,TIMBER PINE NORTH PL 1,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:15.853168
+12edc6ea-2fd7-47c2-bccb-a59f4131926b,TIMBER PINE WEST,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:16.029261
+f9b1c8e8-13bc-4376-ba3c-ac5cfd0eee1f,TIMBERCREEK TOWNHOMES & VILLAS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:16.188855
+5b141f6c-b8be-4bea-8363-d74b8a9328fe,Timberlane,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:16.372076
+24c4f997-38a4-4e7a-940a-4aaf11717d38,TIMBERLANE THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:16.549996
+342d5b77-3353-48d8-bcda-d8d5137057f5,TOSCANA EAST CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:16.718162
+6289c047-62e3-4666-bf1a-16db2b58774c,TOSCANA NORTH COND0,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:16.896564
+d5c85d7c-72ac-486e-8aae-85a1597d4b83,Toscana North Condo,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:17.078303
+c9eecacc-454d-41d9-8927-b47f9955c746,TOSCANA SOUTH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:17.235992
+33577e1a-2db3-4ea8-a883-7e8f36e7bb1d,Toscana South Condominium,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:17.421590
+111f3a4f-4a5a-4107-862a-290f7da8a4df,TOSCANA WEST CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:17.599216
+90a2575a-5757-49cc-81d8-066a62f8eba5,Toscana West Condominium,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:17.769768
+b5db463e-079a-4bcd-8f43-7ab0a29c50c1,TOWN PINE VILLAS CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:17.952857
+8713ed1a-ba44-48da-ab49-8b413cbfd800,"Townhomes At Pine Grove Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:18.148700
+a104840b-8687-4ca6-827f-f69e2c0b44ef,TOWNHOUSES AT PALM BEACH SHORES COND,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:18.316077
+f9c1075f-f232-4160-aafd-a205cc0b90a2,"Tradition Cove Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:18.478892
+cd132d1b-9023-4cea-93ff-c30a859df6e3,TRAFALGAR OF HIGHLND BCH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:18.674670
+07733c65-ba26-4ec1-a743-57d7333ad46f,TRAILS 2 AT ROYAL PALM BEACH,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:18.850393
+7a851425-7d25-4422-abda-5b75700a6d96,TRAILS AT ROYAL PALM BEACH COND,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:19.026538
+90a34edb-2649-4003-9069-fe1a5ed34062,TREE HOUSE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:42:19.198966
+ff2d31c6-515f-4570-bdb8-a3f62aa2ef63,TREE LAKE,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:19.377645
+04b57008-5246-402c-84e3-166607ed8fe8,TROPICAL VILLAS AT FOREST HILL CONDOMINIUM***,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:19.557059
+2ac111f8-3383-494a-96ab-dbd1eb4fc355,TROPICANA GARDENS INC,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:42:19.730504
+a91dfc1a-cbbf-496d-aafe-866f5b7c00d4,TUDOR CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:42:19.922523
+769962e4-e5d2-490b-b142-95db567a896f,TUDOR II NORTH CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:42:20.086188
+84204855-0b5c-4c69-bf72-26f1b9e47097,TUDOR II SOUTH CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:42:20.263969
+a4025a3f-246d-4355-b2fb-83202ae83324,TUDOR IN THE PINES I & II CONDO,Atlantis,Lake Worth,zip_lookup,33462,2026-05-03T14:42:20.440174
+afbc7b5f-2341-4fc5-a674-6e68fdc72420,TURTLE BEACH CONDO ***,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:42:20.597381
+4bc312ac-c8be-4270-a7ae-4bb108fa4be7,"Turtle Cay Master Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:20.774573
+e5d75c1b-d537-4cb8-a0c5-543051a6a4e2,"Turtle Creek Master Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:20.942250
+b06d8212-0188-45fd-b697-bc4d0e5fb851,TUSCANY OF PALM BEACH CONDO,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:42:21.116307
+03d0221e-e8be-4f50-bc4c-c69ed69d7f6f,Tuscany Of Palm Beach Condominium,South Palm Beach,Palm Beach,zip_lookup,33480,2026-05-03T14:42:21.272163
+ccfa9053-d5eb-401d-9c6a-b0bfe9f1e516,Uno Lago,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:21.441463
+7792543f-d531-4618-882d-ff253b8d3e52,"Uno Lago Condominiums Master Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:21.620105
+a1cdfabb-f054-41cc-8cf3-6cc648084c78,"Uno Lago Condominiums Master Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:21.783060
+7c650b3e-577e-475d-8cba-972d0af13caa,UNO LAGO NO 6 CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:21.962331
+87804cdf-169a-4701-8818-e2d937c2a1e9,UNO LAGO NO 7 CONDO,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:22.132550
+25216343-2633-4dd3-b964-24cc76e49feb,UNO LAGO REPLAT,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:22.297113
+1fcb3374-b375-485a-9c87-240e4acd46bc,UNO LAGO THS,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:22.484184
+55f46477-7729-4679-8488-4e4a8c3a16ce,"Uno Lago Villas Property Owners Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:22.663271
+ced43fce-a95d-4031-8fa1-f4716b4b746a,"V.D.L. Master Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:22.847123
+4341f345-4916-4d7f-b0a2-8986734eaa50,VENTA CONDO ***,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:23.015016
+9ebd414b-fb22-4806-bc11-5fef52db8184,VENUS DRIVE,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:23.186332
+789855dc-9bf0-48f3-90e2-6fe752390ef3,Verona Palms,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:23.360317
+b8d183e2-411c-4371-941f-47eb4a333b53,VERONA PALMS THS,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:23.532070
+99901ca4-f4c8-4f2e-8046-de6caf844e24,Versailles Pud,Wellington,Lake Worth,zip_lookup,33449,2026-05-03T14:42:23.706526
+185f38c8-034c-4749-9676-c420577df8ba,VIA DELFINO CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:23.875407
+0734e28f-a20a-445f-a9d6-c902ed890073,"Victoria Woods Homeowners' Association, Inc.",West Palm Beach,Lake Worth,zip_lookup,33460,2026-05-03T14:42:24.051790
+220b70fd-21a7-4d45-9f05-2e457d402526,VICTORIAN CONDOMINIUM APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:24.230422
+1a75514b-66ba-4f88-a0db-12e2404d7080,"View Street Home Owners' Association, Inc.",Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:24.399618
+4d4da3f1-1a35-4afa-ac40-96ba87528d84,VILLA AURORA CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:24.575910
+bf031716-6b23-484b-9518-819bdf4ef85d,VILLA BOUF CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:24.744477
+9a3764a9-3374-4d20-8d58-f0408c52910c,VILLA COSTA CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:24.921430
+dd70c6e1-85ca-4b60-8654-e7b69890ff64,VILLA DEL TRIO AS IN,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:25.100087
+73268631-703d-43ba-acfc-8329a1e7f224,VILLA MAGNA CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:25.261900
+4f59e3ab-633c-462d-bad5-5a765b625af6,VILLA MARE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:25.497316
+25ecf9ae-cf51-42ea-8722-b4f0fca9e278,VILLA MARIS CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:25.667259
+36463df1-047e-49ab-bf58-dab7c0061564,VILLA NOVA CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:25.831028
+b1605ab0-264d-4a8a-bf03-fdbef897c651,VILLA PALMS CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:26.009631
+e95566e2-7198-488d-8c8a-d615fc539302,"Villa Rosa Homeowners' Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:26.206431
+2857a21f-64e0-4932-8126-8a6d23d83ba2,VILLA TOWERS CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:26.368685
+765ba056-8ed0-4954-aa18-da93357ccda2,VILLAGE AT OCEAN WALK CONDO,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:26.527474
+83082f55-8ac0-44ec-b012-277f5c1a98d4,Village Green,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:26.689319
+ed804519-7fb7-4e0a-aed4-d696a3bde02e,VILLAGE GREEN AVON CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:26.859508
+ffdb8fbe-f0f9-46bb-abd9-d42e70e1fc20,VILLAGE GREEN COVENTRY CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:27.038485
+153c40f2-6e64-43db-871f-f94cc1484197,VILLAGE GREEN HAMPTON CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:27.227752
+b338b421-ea47-4c84-ba99-79cd995ad54c,VILLAGE GREEN KENSINGTON CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:27.389353
+11251384-7519-4ab2-80ae-ade0819ccb9f,VILLAGE GREEN SUSSEX CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:27.559713
+ca0bda64-883d-42f6-8b9b-eb6dcba564d0,VILLAGE GREEN WINDSOR CONDO,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:27.725314
+1e3c6584-7a95-4a92-8f50-290255bc791e,"Village Professional Park Property Owners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:27.904392
+3f26666e-52f8-45f3-8a22-d198880c3f3b,Village Walk,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:28.081964
+98b338d3-b01d-479c-993d-3fdf89d3c5f6,Villages Of Woodlake,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:28.249301
+d85a75ce-f3f4-46fd-8bf1-c42064f42684,"Villages Of Woodlake Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:28.404965
+f9319f6a-ae71-4269-8903-352db1e43d60,VILLAGES OF WOODLAKE PL 1,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:28.588209
+d7df5227-dfc7-458f-8510-2c4e11eb4c26,VILLAGES OF WOODLAKE PL 4,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:28.779599
+cdd3335b-1291-4cc0-923c-8c19c0a162d1,VILLAGES WOODLAKE 2 REPL,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:28.973586
+8c7aa011-2445-4eb4-835e-3c18218ff0a5,VILLAGIO DEL MAR THS,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:42:29.162995
+fe810c2d-1cc1-42b6-aff4-f92fbcb0b896,VILLAS AT HIGHLAND BEACH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:29.344643
+05a69b5c-2523-4a70-b5dc-4023f908c5be,"Villas At Palm Springs Homeowners Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:29.514426
+29c53aa8-99f7-4ce2-a416-7aeee8604443,VILLAS INC,Palm Beach,Lake Worth,zip_lookup,33463,2026-05-03T14:42:29.670717
+b68b49a9-a287-4042-af90-8d946911636e,VILLAS OF ALICE AVENUE CONDOMINIUM***,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:29.850414
+efdbe377-e702-48ca-bf12-b55296cef374,VILLAS OF OCEAN RIDGE CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:42:30.016320
+2c6b922a-0592-4160-b4a5-6b6f3a74603e,VILLAS OF PALM ACRES CONDOMINIUM,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:30.188202
+5dd1b911-c663-452a-b3e8-6b8dbef7b8dd,VILLAS OF PALM SPRINGS REPL 1,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:30.347590
+7ca023d0-5dbe-4c90-b1ed-b1fb6b52b1da,VILLAS OF SOLANA A TOWNHOUSE PROJECT,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:30.501134
+69490271-35f5-4a03-a0d7-095589856b2f,"Villas Of Solana Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:30.672460
+c7a7bb80-0ee4-485b-8544-92a01fd0b96d,VILLAS ON THE OCEAN NO 1 INC,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:30.858844
+3ce15afa-a5b3-4ebd-9d9f-b95e17ce2929,VILNIS CONDO ***,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:31.041911
+27882055-5e03-43f6-a513-634a86552592,"Vision I Homeowners Association, Inc.",Greenacres,West Palm Beach,zip_lookup,33415,2026-05-03T14:42:31.223210
+70a2a1cb-4dae-4147-b28a-bf335cee3941,VISTA MARINA CONDO,Lake Park,West Palm Beach,zip_lookup,33403,2026-05-03T14:42:31.407340
+891589ca-06ce-43c0-9e13-06832e0cba1f,VISTABLUE SINGER ISLAND CONDO,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:31.575792
+993fd672-47b4-435f-b090-533be425140f,Water Glades 100,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:31.739688
+3fd9315f-163f-456e-af57-95f3874007c1,WATER GLADES 100~ 200 & 300 COND,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:31.912074
+e40e5fcf-d330-43f1-b311-c7a50418e74e,"Waterford Courtyards At Crystal Lake North Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:32.084331
+e4d0a6f9-73df-40cd-a181-59231994b413,WATERFRONT O/T OCEAN @JUNO BCH,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:32.250362
+1f1474cd-26c0-4c88-b4aa-7c24d1ddae0e,"Waterside At Boca Trail Community Association,  Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:32.434936
+877e255a-e256-4900-8726-c64e4d69ad0d,WATERSIDE VGE PALM BEACH CONDO,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:42:32.612041
+63884f2c-a947-401f-aedf-9b00c390cae4,Waterside Village Of Palm Beach Dec,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:42:32.776632
+6948ed61-f76c-4667-92c3-7d2f96b1d11d,WATERVIEW ESTATES,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:32.957660
+9e069234-ede0-48b3-9a28-70f926b1291e,"Waterview Estates Homeowner'S Association, Inc.",Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:33.129048
+bd3559f5-6588-4d41-bfe5-4ec2ab3ccd45,"Waterway Apartments Homeowners Association, Inc.",Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:33.296720
+ab8dfeb5-4a46-488f-aeb0-4ed4f5d18520,Waterway Club,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:33.484082
+c6cf4dcc-672d-4569-995e-1ce6d9e6c4a2,"Waterway Cove Of Wellington Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:33.655900
+ed76ef90-c664-4a9b-9d15-77bc280fc427,"Waterway Village Property Owners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:33.828748
+fd7f1c27-73b2-4b02-b730-ba0382c804ef,Wellesley At Lake Clarke Shores,Lake Clarke Shores,West Palm Beach,zip_lookup,33406,2026-05-03T14:42:34.007834
+b0e90c17-f225-43a9-a6a7-fa625721c23c,WELLINGTON ARMS CONDO,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:42:34.191735
+fd02a477-f082-41ba-9d51-62045477447a,Wellington Parc,Wellington,Lake Worth,zip_lookup,33449,2026-05-03T14:42:34.360576
+bbc8c626-b56e-4a2d-a034-554a60b169f3,WENDIMERE VILLAS PHASE II COND,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:34.532799
+262f4253-83e0-4b5e-a923-67023307e08a,WENDIMERE VILLAS PHASE ONE,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:34.695457
+e41d851e-e3df-4df8-82a4-3910ebad9eba,"West Side Civic Association, Inc",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:34.856799
+db851b12-ebf5-4ad0-9909-61fbb74e62c1,"Westchester Country Club Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:35.029171
+efbd1102-955d-4073-bbb8-fe8a37b793b6,WESTGATE AT HUNTERS RUN CONDO,Boynton Beach,Delray Beach,zip_lookup,33445,2026-05-03T14:42:35.207896
+3a565215-33f7-4cd2-9ed2-940fb1b7c392,"Westgate Village Homeowners Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:35.423855
+81484709-dfff-45b4-b1b7-c9547e85b45b,WESTROADS CENTER CONDO *,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:35.618379
+18339cf1-dcb2-419d-809e-e528666a5b06,WESTROADS COMMERCE CENTER CONDOMINIUM,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:35.804568
+73ebb5ac-f0a9-4b5b-bcb7-36c65c365913,WEXFORD COURT,Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:35.984848
+406e4042-e77c-4cca-bfbc-07b720c60804,"Wexford Court Townhomes Property Owners' Association, Inc.",Juno Beach,North Palm Beach,zip_lookup,33408,2026-05-03T14:42:36.162046
+bc358f5d-2f85-4366-97b5-4932e88fc546,WEYBRIDGE TOWNHOMES PH 3 THS,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:36.329918
+62bdae9e-968a-4d18-bd0c-512d86d4b37c,WEYBRIDGE TOWNHOMES PH I,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:36.499653
+266f2fa3-5d9b-4111-8723-589368494007,WEYBRIDGE TOWNHOMES PH II,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:36.674429
+d2d7bf87-7456-4c78-9962-b55a88f58335,Whispering Pines,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:36.858824
+7adcb806-fe38-4ae9-ab10-603d00f55374,WHISPERING WATERS CONDO APTS,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:37.033862
+b280fa7c-2588-42b4-bade-6f335c652b54,WHISPERING WINDS OF GREENACRES CONDO ***,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:37.223961
+7b294261-e0c3-4179-bfc1-f3b82062fea1,"White Fences Equestrian Estates Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:37.408169
+0a98228d-3ebb-4ec2-b7c2-d62bf7fa658e,WHITEHALL CONDO APTS,Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:37.598234
+5b6e4299-3d0e-4c56-98bc-494b527c67f1,"Willowbrook Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:37.772390
+ff4e28c0-5972-4edc-b017-9b4f540a5a20,Willows,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:37.940978
+24587aad-999c-41a7-9500-958e330f27a2,WILLOWS PB 29 P 102 THRU 106,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:38.124576
+4893bb86-2a6f-4b2e-9597-408f90fe4a25,Willows The First Add,Royal Palm Beach,West Palm Beach,zip_lookup,33411,2026-05-03T14:42:38.304061
+dea40aee-b436-4c00-bc18-bfbbe48f4ad9,WILSHIRE EAST CONDO APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:38.474012
+bc52fb3c-8306-468a-98fb-321fa6a49b4d,WILSHIRE NORTH COND APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:38.642510
+9f499796-90b7-47c1-8ebc-4283387cd069,WILSHIRE WEST COND APTS,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:38.819808
+9dc1c5de-133a-4dbc-8079-739a66170463,WILSON APTS CONDO,Palm Beach Shores,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:39.012103
+90ce7506-4d4c-463d-8e86-d564984ad786,WILTSHIRE HOUSE CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:39.189355
+77ebf940-1cfd-42e5-93dd-20cb6b3fdf52,"Winchester Courts Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:39.341374
+f317e436-5a93-4c6b-9213-bd9b3a03e394,Windsong Estates Homeowners Association Inc,Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:39.509511
+5712d0f3-6847-48c9-865d-41193a2ba577,"Windsor Palm Beach Estates Homeowners Association, Inc.",Palm Beach,Lake Worth,zip_lookup,33449,2026-05-03T14:42:39.677930
+52715dec-089b-4f0e-987c-2f60639742e6,WINDSOR PARK COMMERCE CENTER CONDOMINIUM*,Lantana,Lake Worth,zip_lookup,33462,2026-05-03T14:42:39.842696
+20ee0f42-6cfa-46ab-bec1-65aecaf3e05d,WINDSOR WAY PL 1,Wellington,Lake Worth,zip_lookup,33449,2026-05-03T14:42:40.027977
+f74f7eff-e4d1-4a77-8715-4cd2b3f78db2,"Windswept Pines Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:40.202816
+34902a3f-7f45-4a49-a575-8c3887a8821e,"Windward Isle Homeowners' Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:40.371418
+f1eacc5d-90ab-4d3d-9aa4-d489149508cd,Woodbine Par C,Riviera Beach,Palm Beach Gardens,zip_lookup,33418,2026-05-03T14:42:40.525602
+97dc114a-1c72-4b17-8706-b73bb2ed3dd3,Woodbine Par E,Riviera Beach,Palm Beach Gardens,zip_lookup,33418,2026-05-03T14:42:40.699951
+976301d2-ce12-4ed4-a2e1-aadfe3667f39,Woodbine Par J,Riviera Beach,Palm Beach Gardens,zip_lookup,33418,2026-05-03T14:42:40.852204
+0ccfa57c-34a2-4b05-a385-4c2311ca4ee9,WOODBINE PAR J,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:41.030937
+e9d642f8-c9ed-4c20-bb60-8bc2574a867a,WOODBINE PAR J  REPL 3,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:41.204037
+45370e94-1c7a-4cde-bfa0-8bfb23271b29,WOODBINE PAR J PARTIAL REPL,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:41.366071
+240cb535-783f-4658-a232-4d5c68a91fde,WOODBINE PAR J PARTIAL REPL 2,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:41.549274
+f587139e-a3cd-4060-8bbd-5ebd23353bad,"Woodbridge Lakes Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:41.700239
+17b74282-467e-472d-b1a4-5e2599731016,WOODLANDS OF PALM SPRINGS,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:41.858962
+d6c8e9e1-a841-44ac-85d8-070fdb7feb01,Woodlands Of Palm Springs As,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:42.010356
+3b3d921d-edd0-4794-9c36-1451cf5df6e8,Woodlands Of Westlake,Westlake,Loxahatchee,zip_lookup,33470,2026-05-03T14:42:42.203220
+ef65249e-cf14-42ca-9c5d-7e453259dcdf,WORTH COMMERCE PARK CONDO *,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:42.375925
+b686d93e-b7d1-42df-8577-57ac98926285,WORTH PROF PARK PH 1 & 2 COND*,Palm Springs,Lake Worth,zip_lookup,33461,2026-05-03T14:42:42.543477
+76ce038d-6936-40f7-b05e-edf24cf34660,"Wyndam Park Homeowners Association, Inc.",Greenacres,Lake Worth,zip_lookup,33463,2026-05-03T14:42:42.740998
+39ddf591-ea41-4c35-a43e-817a47e9f95d,Yacht Club On The Intracoastal Condomini,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:42:42.909900
+270e9bcb-30d6-4087-89af-20a03867dff5,YACHT CLUB ON THE INTRACOASTAL CONDOMINIUM***,Hypoluxo,Lake Worth,zip_lookup,33462,2026-05-03T14:42:43.100635
+53b22384-3640-422b-89d4-2800811d6bbf,"Yacht Club Point Homeowners Association, Inc.",Tequesta,Jupiter,zip_lookup,33469,2026-05-03T14:42:43.258778
+92b8c040-df75-4721-a3cc-1b2abc241dc0,YACHT HARBOR ESTATES,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:43.414104
+d1519d99-db0a-488a-ab7e-e393c1f6c6d4,Yacht Harbor Manor,Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:43.577605
+84910575-15c3-4c9f-9a52-275ada30438e,"Yacht Harbor Manor Property Owners' Association, Inc.",Riviera Beach,West Palm Beach,zip_lookup,33404,2026-05-03T14:42:43.760117
+d3b08c87-08c9-4005-aabc-0fd976c23351,YACHT HOUSE CONDO***,Ocean Ridge,Boynton Beach,zip_lookup,33435,2026-05-03T14:42:43.940730
+f653cf29-f5d9-4b25-a38a-4ff8669cc390,YACHTSMAN COVE TH CONDO,Highland Beach,Boca Raton,zip_lookup,33487,2026-05-03T14:42:44.131957

@@ -1,0 +1,1213 @@
+[
+  {
+    "id": "0a432cd1-73d5-414e-ba56-e63a4eac4fb7",
+    "canonical_name": "1450 Treeland Property Owner, Llc",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The property type is explicitly filed as 'Commercial' and the LLC structure with 'Property Owner' in the name typically indicates commercial real estate ownership."
+    }
+  },
+  {
+    "id": "c6c8dd2b-edc7-46ed-ba72-2fc873773d47",
+    "canonical_name": "150 Oceanside Homeowner'S Association, Inc.",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite the commercial filing designation, the name '150 Oceanside Homeowner's Association' strongly suggests a residential oceanfront condominium or townhome community, as homeowner associations are typically residential entities."
+    }
+  },
+  {
+    "id": "c52bb784-9364-4e1a-8bd2-82475ddb51ce",
+    "canonical_name": "3900 Business Center Property Owners' Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Business Center Property Owners' Association' strongly indicates a commercial office or business park development despite the 'single family' filing designation."
+    }
+  },
+  {
+    "id": "f3eadb67-2b6f-4dc0-9f4a-7a50a7a9eda5",
+    "canonical_name": "Boca Raton Commerce Center Ii Property Owner'S Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commerce Center' strongly indicates a commercial business park or office complex, despite the contradictory 'single family' property type filing."
+    }
+  },
+  {
+    "id": "28659ed7-9a9d-463d-8855-59025793c14f",
+    "canonical_name": "Congress Business Center Property Owners' Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Congress Business Center Property Owners' Association' clearly indicates a business center, which is a commercial property type despite the conflicting 'single family' designation on file."
+    }
+  },
+  {
+    "id": "87466729-7fbf-45e9-9964-4f86fc326d8d",
+    "canonical_name": "Downtown Delray Commercial Property Owners, Inc.",
+    "city": "Delray Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name explicitly identifies it as a 'Commercial Property Owners' association, which strongly indicates commercial properties despite the conflicting 'single family' designation that may be a filing error."
+    }
+  },
+  {
+    "id": "5d345cf6-fd2e-4619-8987-11c14795c1a5",
+    "canonical_name": "Estero Interstate Commerce Park Property Owners Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Interstate Commerce Park' strongly indicates a commercial business or industrial park despite the 'single family' property type filing, which is likely a clerical error."
+    }
+  },
+  {
+    "id": "f2e17ade-9944-4edd-99b7-01fb1b331c59",
+    "canonical_name": "Executive Park Of Jupiter Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "EXECUTIVE PARK"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Executive Park' strongly suggests a business or office park rather than a residential community, despite the single family property type designation which may refer to individual office buildings or commercial structures."
+    }
+  },
+  {
+    "id": "d637283a-be8a-456f-8f0b-31f93873b280",
+    "canonical_name": "First Source Commerce Park Property Owners' Association, Inc.",
+    "city": "Greenacres",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commerce Park Property Owners' Association' strongly indicates a commercial business park despite the 'single family' property type filing, which may be an administrative error or misclassification."
+    }
+  },
+  {
+    "id": "8fae5fc1-747f-43f1-9864-3d2a8357d493",
+    "canonical_name": "Fort Pierce Commercial Property Owners Association, Inc.",
+    "city": "Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commercial Property Owners Association' explicitly indicates this is for commercial properties, despite the conflicting 'single family' property type which may be a filing error."
+    }
+  },
+  {
+    "id": "7d7cbd5c-a0db-4fbe-b333-e11ef26bbd54",
+    "canonical_name": "GEORGIAN PARK THS",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 107,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.85,
+      "reason": "The 'THS' likely stands for 'townhomes' or 'townhouses' and the 107 unit count is typical for residential townhome communities, despite the commercial property type filing which may be an administrative error."
+    }
+  },
+  {
+    "id": "3f8f0308-8c8c-4947-8927-811e7dd5b8f5",
+    "canonical_name": "Glades Corporate Center Property Owners Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "CORPORATE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Glades Corporate Center' strongly suggests a commercial office or business park development, despite the 'single family' property type designation which may be a filing error."
+    }
+  },
+  {
+    "id": "497d840f-5eff-4577-b79a-636a5e6dbe13",
+    "canonical_name": "Home Owners Network, Llc",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly filed as 'Commercial' and the LLC structure suggests a business-oriented property management entity."
+    }
+  },
+  {
+    "id": "ec7afb00-511a-4125-abbf-30e42559f0de",
+    "canonical_name": "Jupiter Commerce Center Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Jupiter Commerce Center' strongly indicates a commercial business park or office complex despite the 'single family' property type designation which appears to be a filing error."
+    }
+  },
+  {
+    "id": "d42ab111-f75f-4240-b1d7-6b059c1e927e",
+    "canonical_name": "Jupiter Creek Commercial Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name explicitly includes 'Commercial Property Owners Association' which clearly indicates it manages commercial properties, despite the contradictory 'single family' filing designation."
+    }
+  },
+  {
+    "id": "9f2c3ca8-b866-4370-897b-a4851f064e7c",
+    "canonical_name": "Jupiter Park Drive Master Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly filed as 'Commercial' and the name 'Jupiter Park Drive Master Association' suggests a business or office park development rather than a residential community."
+    }
+  },
+  {
+    "id": "b53776df-968b-4484-a6a5-5efd95e61144",
+    "canonical_name": "Midway Commerce Center Property Owners Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Midway Commerce Center Property Owners Association' clearly indicates a commercial business center despite the conflicting 'single family' property type filing."
+    }
+  },
+  {
+    "id": "7822a912-96ff-4175-9a4e-fa55950a8725",
+    "canonical_name": "MILITARY TRAIL WAREHOUSE COND*",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Military Trail Warehouse Cond' clearly indicates a warehouse facility, which is a commercial/industrial property type despite being filed as a condo association."
+    }
+  },
+  {
+    "id": "332dadd0-889b-4363-ac19-ab32620162a5",
+    "canonical_name": "Oakton Commons Commercial Property Owners' Association, Inc.",
+    "city": "Delray Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commercial Property Owners' Association' explicitly indicates it manages commercial properties, despite the conflicting 'single family' property type on file which appears to be a data error."
+    }
+  },
+  {
+    "id": "f537c30c-d2c9-4eaa-9084-b026d4499aeb",
+    "canonical_name": "OLD DIXIE PARK WAREHOUSE COND*",
+    "city": "Lake Park",
+    "property_type": "Condo",
+    "unit_count": 24,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'OLD DIXIE PARK WAREHOUSE COND' explicitly indicates a warehouse condominium, which is typically used for commercial/industrial purposes rather than residential living."
+    }
+  },
+  {
+    "id": "d4839847-5e82-4b40-89fb-75f79deef236",
+    "canonical_name": "Palomino Executive Park Property Owners' Association, Inc.",
+    "city": "Wellington",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "EXECUTIVE PARK"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Executive Park' strongly suggests a business/office park rather than a residential community, despite the 'Single family' property type designation which may be a filing error or refer to the zoning classification."
+    }
+  },
+  {
+    "id": "6dd53890-1bf5-4b67-a9ae-b698f5420fc1",
+    "canonical_name": "Pbg Legends Commercial Property Owners Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name explicitly includes 'Commercial Property Owners Association' which strongly indicates it governs commercial properties despite the conflicting 'single family' designation in records."
+    }
+  },
+  {
+    "id": "b9f496f8-de8e-466b-8f35-612d4bbf6f26",
+    "canonical_name": "Pga Hotel-Retail Property Owners' Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "RETAIL"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Hotel-Retail Property Owners' Association' clearly indicates commercial hospitality and retail properties despite the contradictory 'single family' filing designation."
+    }
+  },
+  {
+    "id": "e434c546-1327-438d-8cf9-5a8e655e50e5",
+    "canonical_name": "Port Commerce Center Ii Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Port Commerce Center' strongly indicates a commercial business park or industrial facility, despite the 'single family' designation which appears to be a filing error."
+    }
+  },
+  {
+    "id": "036a0a3a-4b9d-4fdf-ba19-db18cc5dcfcd",
+    "canonical_name": "Port Commerce Center Iii Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Port Commerce Center' strongly suggests a commercial business park or industrial facility, despite the 'single family' property type filing which may be a clerical error or zoning classification."
+    }
+  },
+  {
+    "id": "932821a9-e5cc-4134-83ce-3d8500df33e8",
+    "canonical_name": "Port Commerce Center Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Port Commerce Center' strongly suggests a commercial business or industrial park despite the 'single family' property type filing, which may be a data entry error or misleading classification."
+    }
+  },
+  {
+    "id": "54ae781e-d7ed-413e-8206-544843e61dbe",
+    "canonical_name": "Triangle Commerce Center Property Owners Association, Inc.",
+    "city": "Jupiter",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Triangle Commerce Center' strongly indicates a commercial business park or office complex despite the single family property type filing."
+    }
+  },
+  {
+    "id": "7b09df91-e5ab-4581-b373-fe3ef8513fb3",
+    "canonical_name": "Us 441 Land Trust Commerce Park Property Owners' Association, Inc.",
+    "city": "Lake Worth",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commerce Park Property Owners' Association' strongly indicates a commercial business park despite the 'single family' filing designation, which is likely a filing error or misclassification."
+    }
+  },
+  {
+    "id": "b6c96185-13a8-4254-b9f8-e5d255c8e46d",
+    "canonical_name": "WINDSOR PARK AT ABACO PL NO 2",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 44,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite being filed as commercial, the name 'Windsor Park' with 44 units strongly suggests a residential condo or townhome community, as commercial properties rarely use park naming conventions or have this unit count structure."
+    }
+  },
+  {
+    "id": "ad0b0f73-8baa-49af-9e52-8446aa612c39",
+    "canonical_name": "WINDSOR PARK AT ABACOA PL 3",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 58,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite the commercial filing, 'Windsor Park at Abacoa' suggests a residential community name pattern, and Abacoa is known as a mixed-use development in Jupiter with significant residential components."
+    }
+  },
+  {
+    "id": "d562ec0e-6364-458d-bc1c-a8f16195797c",
+    "canonical_name": "WINDSOR PARK AT ABACOA PL NO 1",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 56,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Windsor Park at Abacoa is a known residential planned community in Jupiter, despite the commercial property type filing which may be an administrative error."
+    }
+  },
+  {
+    "id": "13d92fb5-2123-4a8e-8199-df220d576ecc",
+    "canonical_name": "WINDSOR PARK AT ABACOA PL NO 4",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 38,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite the commercial property type filing, 'Windsor Park at Abacoa' suggests a residential community name pattern, and Abacoa is known as a master-planned residential community in Jupiter."
+    }
+  },
+  {
+    "id": "7f6ec468-9492-40df-9a42-1ed72dcd137c",
+    "canonical_name": "ANCHOR WAREHOUSE CONDO*",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 3,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'ANCHOR WAREHOUSE CONDO' strongly suggests a commercial warehouse facility that has been converted to condominiums, and with only 3 units, this is likely a small commercial/industrial property rather than a residential community."
+    }
+  },
+  {
+    "id": "bf31d395-7aef-4ecc-b307-c3dcef75236f",
+    "canonical_name": "ATLANTIS RETAIL BUILDING CONDO",
+    "city": "Atlantis",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "RETAIL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'ATLANTIS RETAIL BUILDING CONDO' explicitly indicates this is a retail commercial property, not a residential community."
+    }
+  },
+  {
+    "id": "69949740-49f4-4f57-9638-9a70203def31",
+    "canonical_name": "AUSTRALIAN WAREHOUSE CONDO *",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 22,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Australian Warehouse Condo' strongly suggests a commercial warehouse or industrial facility rather than a residential community."
+    }
+  },
+  {
+    "id": "d4142ed0-404b-4b5a-b1a9-f8156883c1c1",
+    "canonical_name": "Boynton Center No. 5 Hoa, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly listed as 'Commercial' and the name 'Boynton Center' suggests a business or retail center rather than a residential community."
+    }
+  },
+  {
+    "id": "5836e424-1e9e-47ae-924c-14ab78d03308",
+    "canonical_name": "COLONIAL PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "unclear",
+      "confidence": 0.4,
+      "reason": "While 'condo' typically indicates residential property, the official property type is listed as 'Commercial' and the small 13-unit count could represent either commercial condos or a mixed-use development."
+    }
+  },
+  {
+    "id": "31441831-e266-4b19-9c2e-a203cdb73d7c",
+    "canonical_name": "Condo Hoa Solutions, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly listed as 'Commercial' and the name suggests it's a management company rather than a residential community association."
+    }
+  },
+  {
+    "id": "cf240782-1767-4678-8158-4e4eae6edbea",
+    "canonical_name": "Condohoa List, Llc",
+    "city": "Royal Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly listed as 'Commercial' and the entity name 'Condohoa List, Llc' suggests a commercial business rather than a residential property association."
+    }
+  },
+  {
+    "id": "0962a6bc-f1e9-4d6b-86b6-c9dc3a7056be",
+    "canonical_name": "Donald Ross Village Commercial/Mixed Use Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "MIXED USE",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The name explicitly states 'Commercial/Mixed Use Property Owners Association' which clearly indicates a commercial property despite the conflicting 'single family' designation on file."
+    }
+  },
+  {
+    "id": "af54a8cc-bf32-4cef-801e-5c3a56c18631",
+    "canonical_name": "Equity Hoa, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The property type is explicitly listed as 'Commercial' and the LLC structure is more commonly used for commercial property associations than residential communities."
+    }
+  },
+  {
+    "id": "bf58695b-bc36-43c5-b126-3b835ff3da4a",
+    "canonical_name": "EXECUTIVE CENTER PLAZA CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "EXECUTIVE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Executive Center Plaza' strongly suggests a commercial office building or business center rather than a residential condominium community."
+    }
+  },
+  {
+    "id": "d455e18f-be2f-4cae-9d9c-161aaa9b7bec",
+    "canonical_name": "GARDENS WAREHOUSE CONDO *",
+    "city": "Palm Beach Gardens",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,GARDENS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'GARDENS WAREHOUSE CONDO' strongly suggests a commercial warehouse facility organized as a condominium, despite the low unit count of 6."
+    }
+  },
+  {
+    "id": "50c80809-8500-42ce-b360-c806120d529f",
+    "canonical_name": "Golden Lakes Professional Park Property Owners Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Professional Park Property Owners Association' strongly indicates a commercial office or business park despite the 'single family' property type designation, which appears to be a filing inconsistency."
+    }
+  },
+  {
+    "id": "de4d4706-3f92-46e9-9ef6-93aace820a55",
+    "canonical_name": "GULFSTREAM PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The property is filed as commercial type with only 13 units and 'Plaza' in the name, which typically indicates a commercial retail or office complex rather than a residential condominium."
+    }
+  },
+  {
+    "id": "cfbd8636-b2c1-4ef2-871c-43ab083babe7",
+    "canonical_name": "Hammocks Community Assoc. Properties, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.7,
+      "reason": "The name 'Hammocks Community Assoc.' strongly suggests a residential community association despite the commercial property type filing, as 'Hammocks' is a common name for residential developments and the word 'Community' typically indicates residential neighborhoods."
+    }
+  },
+  {
+    "id": "3a24e275-c890-4fff-b6cd-eaded95a3b8f",
+    "canonical_name": "Hp Hoa Lot Acquisitions, Llc.",
+    "city": "Boynton Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly listed as commercial and the LLC structure with 'Lot Acquisitions' in the name suggests commercial real estate investment rather than residential community management."
+    }
+  },
+  {
+    "id": "b52a5ed6-874d-4f94-b17c-d360a2fd7f0a",
+    "canonical_name": "JPOC PARK PLAZA CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 18,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'PARK PLAZA CONDOMINIUM' with 18 units and commercial property type designation suggests a commercial condominium development, likely office or retail spaces."
+    }
+  },
+  {
+    "id": "fbe87e43-4a81-4f1c-8ad6-c76899f82adf",
+    "canonical_name": "JUPITER PARK DRIVE CONDO 1",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "unclear",
+      "confidence": 0.4,
+      "reason": "The name suggests a residential condo but it's filed as commercial property type, and with only 9 units it could be either a small residential condo or commercial office/retail units."
+    }
+  },
+  {
+    "id": "eadc780b-6aae-424f-a8cf-0d6647c02c53",
+    "canonical_name": "JUPITER PARK DRIVE CONDO 2",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 4,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite being filed as commercial property, the name 'JUPITER PARK DRIVE CONDO 2' clearly indicates a condominium association, which is inherently residential housing."
+    }
+  },
+  {
+    "id": "99cfd488-6a2f-4d9b-909a-4e8c34c9eafe",
+    "canonical_name": "Lakes At Boca Raton Commercial Property Owners' Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The name explicitly states 'Commercial Property Owners' Association' despite the single family property type filing, indicating it likely manages commercial properties in the Lakes at Boca Raton area."
+    }
+  },
+  {
+    "id": "1ea362b5-4858-4485-8cb1-bb2c13089625",
+    "canonical_name": "LAKESIDE WAREHOUSE CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 32,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'LAKESIDE WAREHOUSE CONDO' strongly suggests an industrial/warehouse facility organized as a condominium for commercial use rather than residential living."
+    }
+  },
+  {
+    "id": "3e5aa2bf-6cc5-4688-bff2-88b63c26c920",
+    "canonical_name": "LATHAM WAREHOUSE 1 CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'LATHAM WAREHOUSE 1 CONDO' clearly indicates a warehouse facility organized as a condominium structure, which is typical for commercial/industrial properties."
+    }
+  },
+  {
+    "id": "ded6e23c-0fe9-49d8-98e1-cad3f67326c9",
+    "canonical_name": "MERCER CONDO WAREHOUSE *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 8,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'MERCER CONDO WAREHOUSE' suggests a warehouse facility that has been converted to condominiums, which typically indicates commercial use rather than traditional residential condos."
+    }
+  },
+  {
+    "id": "07594e60-3eb1-4458-ba46-f3bbcb79455e",
+    "canonical_name": "Mr Hoa Management, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly listed as 'Commercial' on file, indicating this is likely a commercial property management entity rather than a residential community association."
+    }
+  },
+  {
+    "id": "d4f73f5f-42a2-4b9a-a77b-cb929c72bc0c",
+    "canonical_name": "Naples Lakes Commercial Property Owner'S Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name explicitly includes 'Commercial Property Owner's Association' which clearly indicates it manages commercial properties despite the conflicting 'single family' designation on file."
+    }
+  },
+  {
+    "id": "74163680-2b06-4baa-b852-6222cc89475a",
+    "canonical_name": "OLD DIXIE PARK I CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "Despite being filed as commercial, the name 'OLD DIXIE PARK I CONDO' clearly indicates a condominium association, which is residential by nature."
+    }
+  },
+  {
+    "id": "081b573a-12f4-414b-8114-90fb3baa001e",
+    "canonical_name": "OLD DIXIE PARK II CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 26,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.85,
+      "reason": "Despite the 'Commercial' property type on file, the name 'OLD DIXIE PARK II CONDO' clearly indicates a condominium association, which is residential in nature."
+    }
+  },
+  {
+    "id": "8f605cd2-5eb9-4a25-8f89-d9e59793ed22",
+    "canonical_name": "PARK PLAZA APTS CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 50,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.85,
+      "reason": "Despite being filed as commercial property, this is a 50-unit condominium apartment building which is a residential condo association."
+    }
+  },
+  {
+    "id": "fcc4275c-b82b-4b02-9157-806b5a6bcd9a",
+    "canonical_name": "PARKWAY PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 32,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The name 'PARKWAY PLAZA CONDO' suggests a commercial plaza or retail center structure, and it's filed as commercial property type despite the 'condo' terminology which likely refers to commercial condominiums."
+    }
+  },
+  {
+    "id": "655a7407-416a-497e-b23e-24c81283f024",
+    "canonical_name": "PENAPARK I & II CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.85,
+      "reason": "The name 'PENAPARK I & II CONDO' clearly indicates a condominium association, which is a residential property type despite the commercial filing designation."
+    }
+  },
+  {
+    "id": "705c5fe3-e8e1-4f85-b6ae-8c5cf4240ca0",
+    "canonical_name": "PENINSULA VILLAGE GREENS",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 155,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "The name 'Peninsula Village Greens' with 155 units strongly suggests a residential community despite the commercial property type filing, which may be an administrative error."
+    }
+  },
+  {
+    "id": "c1d1061b-67dc-44b2-b28a-bb18776ea44f",
+    "canonical_name": "PORTSIDE WAREHOUSE CONDOMINIUM *(***)",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'PORTSIDE WAREHOUSE CONDOMINIUM' clearly indicates a warehouse facility, which is commercial/industrial property despite being structured as a condominium."
+    }
+  },
+  {
+    "id": "6df7160f-c318-4ee5-943f-ffe8ee7ccc9a",
+    "canonical_name": "SEA PALMS REPLAT THS",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 48,
+    "management_company": "Sea Breeze Community Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "residential",
+      "confidence": 0.8,
+      "reason": "The name 'Sea Palms Replat THS' suggests townhouses (THS) in a residential development, and the 48-unit count with residential-focused management company indicates a townhome community despite the commercial filing designation."
+    }
+  },
+  {
+    "id": "c6977ea1-c684-426a-8f24-79c28b8226dd",
+    "canonical_name": "The Gardens Commerce Center Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:GARDENS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commerce Center' strongly indicates a commercial business park or office complex, despite the 'single family' property type filing which may be a data entry error."
+    }
+  },
+  {
+    "id": "1e3c6584-7a95-4a92-8f50-290255bc791e",
+    "canonical_name": "Village Professional Park Property Owners Association, Inc.",
+    "city": "Royal Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Village Professional Park' strongly indicates a commercial office or business park despite the 'single family' property type filing, which may be a clerical error or outdated classification."
+    }
+  },
+  {
+    "id": "c125c47e-f88b-4766-8dd1-9539c8152665",
+    "canonical_name": "Village Square Professional Park Property Owners' Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Professional Park Property Owners' Association' strongly indicates a commercial office or business park development, despite the conflicting 'single family' property type designation which appears to be a filing error."
+    }
+  },
+  {
+    "id": "0db5bd59-3e17-4c57-83b1-703086deefc1",
+    "canonical_name": "Woodbridge Commerce Center Property Owner'S Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:RIDGE"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.85,
+      "reason": "The name 'Commerce Center' strongly indicates a commercial business park or office complex, despite the 'single family' property type listing which appears to be a filing error."
+    }
+  },
+  {
+    "id": "656436d8-4f53-45c6-b74e-2572193c7001",
+    "canonical_name": "Wra Hoa Services, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ],
+    "evaluation": {
+      "classification": "commercial",
+      "confidence": 0.8,
+      "reason": "The property type is explicitly filed as commercial and the name suggests a services company rather than a residential community."
+    }
+  }
+]

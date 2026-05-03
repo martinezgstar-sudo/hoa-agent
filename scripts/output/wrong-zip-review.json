@@ -1,0 +1,154 @@
+[
+  {
+    "id": "5db9735e-251f-4b33-9659-3d6c25454079",
+    "canonical_name": "Bermuda Cay Condominium",
+    "city": "Boynton Beach",
+    "zip_code": "02909",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "b3adc5e8-3557-4dfd-a1ad-038f27d03d9d",
+    "canonical_name": "Buena Vida Homeowners Association, Inc.",
+    "city": "Wellington",
+    "zip_code": "33447",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "74353d07-3358-4b45-9e46-d22f4ad27297",
+    "canonical_name": "Enclave At Crown Park Condominium",
+    "city": "Lake Worth",
+    "zip_code": "32765",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "93515bde-6a79-4d6d-b1e0-8ba8bad2b9d6",
+    "canonical_name": "Green Terrace Phase I",
+    "city": "West Palm Beach",
+    "zip_code": "22202",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "b6c53a4d-bb11-4954-8d45-aed1c0e860f8",
+    "canonical_name": "Jupiter Palm Beach Motor Coach Resort Co",
+    "city": "Jupiter",
+    "zip_code": "57032",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "96947047-6fb8-40df-8d50-7863ad7950fa",
+    "canonical_name": "LAKE DRIVE APTS INC",
+    "city": "Palm Beach",
+    "zip_code": "33447",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "4c614934-d661-4de9-8759-4d9cf17df8b4",
+    "canonical_name": "LAS CASITAS PL 3",
+    "city": "Wellington",
+    "zip_code": "33447",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "c12073d6-46c0-4263-8e71-6f5de80ee32e",
+    "canonical_name": "LAS CASITAS PL 4",
+    "city": "Wellington",
+    "zip_code": "33447",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "223fbae9-69d9-4f7d-94f0-7c0c35103ca7",
+    "canonical_name": "Palm Court At Wellington Condo",
+    "city": "Wellington",
+    "zip_code": "10019",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "c420a4d1-57fb-4b03-b78e-4c43534d901a",
+    "canonical_name": "Pineapple Grove Condominium Of North Pal",
+    "city": "North Palm Beach",
+    "zip_code": "11791",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "351ce6e4-d8d8-428b-9bde-6fbc379b31a8",
+    "canonical_name": "Polo Homeowners Association, Inc.",
+    "city": "Wellington",
+    "zip_code": "33447",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "53daddc7-4726-4009-91db-a3e37c4a6aa2",
+    "canonical_name": "Ponte Verde At Palm Beach Lakes Condomin",
+    "city": "West Palm Beach",
+    "zip_code": "33179",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "ff067656-146b-494e-b8b0-9520b5f4a411",
+    "canonical_name": "Riverwalk Homeowners Association, Inc.",
+    "city": "Jupiter",
+    "zip_code": "33456",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "0108e79c-abe1-44ad-b146-b0fc5c55d670",
+    "canonical_name": "Sandpiper Village",
+    "city": "West Palm Beach",
+    "zip_code": "11218",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "44d75334-4554-42b1-bee1-202beada1f55",
+    "canonical_name": "Sonoma Isles Homeowners Association, Inc.",
+    "city": "Jupiter",
+    "zip_code": "33468",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "b433f18e-dbd3-4690-ba57-b71d798dd438",
+    "canonical_name": "South Bay Amended",
+    "city": "South Bay",
+    "zip_code": "33493",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "dd637937-d4b6-47e4-af21-f7473ea96f6d",
+    "canonical_name": "St Andrews Palm Beach Condominium I",
+    "city": "West Palm Beach",
+    "zip_code": "92110",
+    "county": "Palm Beach",
+    "location": "outside_florida"
+  },
+  {
+    "id": "c3944a4d-9698-4f2c-a324-39f068344df1",
+    "canonical_name": "Tiffany Lake Phase I",
+    "city": "Mangonia Park",
+    "zip_code": "33126",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  },
+  {
+    "id": "bdaaa266-f0c8-4812-b56b-88cee6ba5603",
+    "canonical_name": "VILLA LAGO",
+    "city": "South Bay",
+    "zip_code": "33493",
+    "county": "Palm Beach",
+    "location": "florida_outside_pbc"
+  }
+]

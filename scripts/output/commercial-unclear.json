@@ -1,0 +1,2527 @@
+[
+  {
+    "id": "8d2b4d0f-e552-468c-8fc2-0ad4ec85afcd",
+    "canonical_name": "10080 COMMERCIAL CONDO *(***)=*(***)",
+    "city": "Royal Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "b889f49c-b4c2-4131-a251-e6dc696c4147",
+    "canonical_name": "1016 CLARE AVENUE COMMERCIAL CONDO",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "4164b86e-38eb-48ec-a42f-c3af018abfb3",
+    "canonical_name": "1401 Village Green Property Owner, Llc",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "4d8a0c4e-72b4-4ea2-8d87-c87f4321cfdb",
+    "canonical_name": "1662 OFFICE CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "5b3482f4-5d9e-4ab1-a9d5-f1d612269d06",
+    "canonical_name": "2720 Center Place Property Owner, Llc",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "4d6cd886-0910-4b6e-8df2-082e4aad3255",
+    "canonical_name": "7280 BOYNTON BEACH PROFESSIONAL CENTER CONDO *",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,BEACH"
+    ]
+  },
+  {
+    "id": "c4cd6db0-adbc-4e63-b3d4-2d6fe9b76dc6",
+    "canonical_name": "861 COMMERCIAL CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "0292db69-f976-4f0d-bab4-18c63be1b437",
+    "canonical_name": "9291 GLADES ROAD MEDICAL OFFICE CONDO * (***)",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "406e0ada-dc13-4a5c-a1a1-c383dc76b9f0",
+    "canonical_name": "AC PB PARK COMMERCE CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 19,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "f269971e-3cd2-4b11-bbab-66b91fe2a61c",
+    "canonical_name": "Ainhoa And Dad Trucking, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "7f6ec468-9492-40df-9a42-1ed72dcd137c",
+    "canonical_name": "ANCHOR WAREHOUSE CONDO*",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 3,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "e63e93bb-70dc-421c-b389-3521944e5eda",
+    "canonical_name": "ARNOLD INDUSTRIAL PARK CONDO *",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 3,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "bf31d395-7aef-4ecc-b307-c3dcef75236f",
+    "canonical_name": "ATLANTIS RETAIL BUILDING CONDO",
+    "city": "Atlantis",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "RETAIL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "8c662cda-5fb2-4732-816c-9bf5587319fc",
+    "canonical_name": "ATRIUM 2 OFFICE CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "69949740-49f4-4f57-9638-9a70203def31",
+    "canonical_name": "AUSTRALIAN WAREHOUSE CONDO *",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 22,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "91cb59d9-38f5-4256-870e-fa6926abba7c",
+    "canonical_name": "AVENUE EAST RETAIL CONDOMINIUM*",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "RETAIL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "2cc74be2-e3d1-433e-9a17-8cf4cc4d5e62",
+    "canonical_name": "BEACON SQUARE PROFESSIONAL CAMPUS CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 184,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "da33513c-6ad5-446d-9506-daab478b6754",
+    "canonical_name": "BELLA VISTA ON THE PARK CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 64,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "d7ff54c5-c23f-4ca7-a3a8-44bae3fbad41",
+    "canonical_name": "BELVEDERE WEST INDUSTRIAL PARK CONDOMINIUM*",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 48,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "4df0567d-64f4-49e7-b358-af4b5aa6fe39",
+    "canonical_name": "BOCA COMMERCIAL INDUSTRIAL CONDO #2*",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 27,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "fd78ab36-8c0f-46e3-8bae-09786e13e49f",
+    "canonical_name": "BOCA OFFICE & WAREHOUSE CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 18,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "054f5a22-86f4-4528-9d87-64664ebfdc2c",
+    "canonical_name": "BOCA PALM PROFESSIONAL CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 27,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "b3dc646c-b99c-403a-b5d0-fca19d09dc57",
+    "canonical_name": "BOCA RATON MEDICAL ARTS CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 24,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "01fbd52c-3d30-49ee-a041-4b6d21ce905c",
+    "canonical_name": "BOULEVARD INDUSTRIAL PK CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "d4142ed0-404b-4b5a-b1a9-f8156883c1c1",
+    "canonical_name": "Boynton Center No. 5 Hoa, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "57fcbd20-8d4f-4710-bb8f-2fce7488cd46",
+    "canonical_name": "BUNKER OFFICE WAREHOUSE CONDO *(***)",
+    "city": "Lake Park",
+    "property_type": "Condo",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "1754d4df-93d7-43c2-8df1-ebf188e2aa87",
+    "canonical_name": "Centre Place Professional Park Property Owners' Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:PLACE"
+    ]
+  },
+  {
+    "id": "5836e424-1e9e-47ae-924c-14ab78d03308",
+    "canonical_name": "COLONIAL PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "c1404585-a21b-4d5f-90ed-dfb4add193aa",
+    "canonical_name": "COMMERCE ROAD COMMERCIAL CONDO",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "4ab2e819-14ea-4581-adba-96810fc140cf",
+    "canonical_name": "COMMUNITY MEDICAL PLAZA CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL PLAZA",
+      "+RESIDENTIAL_TERMS:CONDO,COMMUNITY"
+    ]
+  },
+  {
+    "id": "31441831-e266-4b19-9c2e-a203cdb73d7c",
+    "canonical_name": "Condo Hoa Solutions, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "cf240782-1767-4678-8158-4e4eae6edbea",
+    "canonical_name": "Condohoa List, Llc",
+    "city": "Royal Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "edd5381e-f058-4bb5-99ba-0b21f6ff7cc3",
+    "canonical_name": "CONGRESS COMMERCE CENTER CONDO*",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 147,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "91a7df2a-796b-4aa6-9d8c-8169a009e051",
+    "canonical_name": "CONGRESS COMMERCIAL CENTER CONDOMINIUM",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 19,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "a850932c-1d02-4d14-b718-1ab52d0cc960",
+    "canonical_name": "CONGRESS CORPORATE PLAZA I CONDOMINIUM*",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 17,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "1a11ab06-74df-4384-bee7-2018777ec7a6",
+    "canonical_name": "CONGRESS MEDICAL CENTER CONDO (*)",
+    "city": "Atlantis",
+    "property_type": "Condo",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "5acc73ae-6834-4f54-bd64-6eb429b9be3f",
+    "canonical_name": "CONGRESS PROFESSIONAL BUILDING CONDO*",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": 4,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "fa48f533-7c3a-4a3e-95b0-b631b0ee7f0c",
+    "canonical_name": "CONTRACTOR BUSINESS PARK CONDO INC",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 31,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "6abd88ed-71c1-4c1c-95a4-604db8e11f29",
+    "canonical_name": "CONTRACTORS BUSINESS PARK VISTA CENTER CONDOMINIUM *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 136,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "c57aa2f5-2e65-4b3f-9687-72c734e490b4",
+    "canonical_name": "CORAL TRACE OFFICE PARK CONDOMINIUM",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "OFFICE PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "0495bb1e-7e44-485a-a702-f724763a0da3",
+    "canonical_name": "CORPORATE COMMERCE CENTER CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 12,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "004f6dba-0a54-42b3-87cb-3daed9c6a792",
+    "canonical_name": "CORPORATE PLAZA CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 60,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "99cd182f-e587-44da-b0e5-5949581c059d",
+    "canonical_name": "CROSSPOINTE INDUSTRIAL PLAZA CONDOMINIUM*",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "24c0f3de-7d9b-4ada-b212-84a4ac01ea94",
+    "canonical_name": "DANIEL MEDICAL CTR OFCE CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "47bf87c9-99df-4680-bd24-2ed115a11b6e",
+    "canonical_name": "Dellagio Commercial Condominium Property Owners' Association, I Nc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "1f16da5a-2f06-4234-8323-3a3aad3f656f",
+    "canonical_name": "DELRAY MEDICAL CENTER I CONDO *",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 18,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "0962a6bc-f1e9-4d6b-86b6-c9dc3a7056be",
+    "canonical_name": "Donald Ross Village Commercial/Mixed Use Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "MIXED USE",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ]
+  },
+  {
+    "id": "fa06ab4d-5901-4157-bda1-9f299d17bb78",
+    "canonical_name": "DOWNTOWN BUSINESS PARK CONDOMINIUM(*)",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 34,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "2b46f398-c18b-4df0-afb2-7362cefc5988",
+    "canonical_name": "Dr Scott Hoar, Llc",
+    "city": "Boynton Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "af54a8cc-bf32-4cef-801e-5c3a56c18631",
+    "canonical_name": "Equity Hoa, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "bf58695b-bc36-43c5-b126-3b835ff3da4a",
+    "canonical_name": "EXECUTIVE CENTER PLAZA CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "EXECUTIVE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "4708f84a-ea51-458b-a685-790877171891",
+    "canonical_name": "FIFTEEN HUNDRED MEDICAL CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 7,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "9b2be0b9-d3db-43b8-b87b-5c4be85135f7",
+    "canonical_name": "Fiscal Court Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "ae32fa5d-539c-4680-b28a-ef70a2e78ea1",
+    "canonical_name": "FORUM PROFESSIONAL CENTER CONDO *",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "ed1d8d80-b89e-4941-a57e-596b24e094a1",
+    "canonical_name": "GARDENS LAND PROFESSIONAL CENTER CONDOMINIUM*",
+    "city": "Palm Beach Gardens",
+    "property_type": "Condo",
+    "unit_count": 4,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "d455e18f-be2f-4cae-9d9c-161aaa9b7bec",
+    "canonical_name": "GARDENS WAREHOUSE CONDO *",
+    "city": "Palm Beach Gardens",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,GARDENS"
+    ]
+  },
+  {
+    "id": "cebfc96d-d541-43bf-9a6a-b6aa984f1b2e",
+    "canonical_name": "GASLIGHT BUSINESS PARK CONDO *",
+    "city": "Lake Worth",
+    "property_type": "Condo",
+    "unit_count": 21,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "5b890b8b-716a-4acf-9c98-fb65ac952f6f",
+    "canonical_name": "GINAIRE WAREHOUSE CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 3,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "3b9292da-d0c8-4651-bf8e-debe9953939b",
+    "canonical_name": "GLADES MEDICAL CENTER CONDOMINIUM *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 15,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "7bca2f3a-fb80-41f9-85ac-146011d0d6b4",
+    "canonical_name": "GLADES MEDICAL PLAZA CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL PLAZA",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "50c80809-8500-42ce-b360-c806120d529f",
+    "canonical_name": "Golden Lakes Professional Park Property Owners Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ]
+  },
+  {
+    "id": "2baeef0c-92c4-4093-9910-cf3652600451",
+    "canonical_name": "Gonzalo Ochoa Enterprises, Llc",
+    "city": "Wellington",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "c0bb91ef-d819-45c8-9e35-8f86caa038b9",
+    "canonical_name": "GRAND BAHAMA PROFESSIONAL PARK CONDO*",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 15,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "f4c45efc-e093-4fdd-ba52-77dd090caa0f",
+    "canonical_name": "GREENWAY PROFESSIONAL CENTER I CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 15,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "95e2175c-8fc9-41ec-a46c-6ee676511577",
+    "canonical_name": "GREENWAY PROFESSIONAL CENTER II CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "c300a955-ac35-4009-8759-8f27e5e4bcbe",
+    "canonical_name": "GREENWAY PROFESSIONAL CENTER III CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "ab77be4c-3f71-4789-8259-faf8e5ef5e7f",
+    "canonical_name": "GREENWICH COMMERCIAL CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 21,
+    "management_company": "Jupiter Management",
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "7d34c986-cdd5-4b37-ae19-e6929cccedb7",
+    "canonical_name": "GREENWICH MEDICAL CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 26,
+    "management_company": "Jupiter Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "210df86e-3aa7-4006-9df8-5488fa3ccf07",
+    "canonical_name": "Guild Court Property Owner, Llc",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "de4d4706-3f92-46e9-9ef6-93aace820a55",
+    "canonical_name": "GULFSTREAM PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "b58a4ae6-03dd-402b-af66-6242f0c619d4",
+    "canonical_name": "GULFSTREAM WAREHOUSE CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 22,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "62e00f64-21b4-4647-a8ca-3eec0b529f7b",
+    "canonical_name": "H H H COMMERCE CENTER CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "8e3e3486-979d-4a80-b904-6157eeddbccf",
+    "canonical_name": "H STREET COMMERCE PARK CONDOMINIUM",
+    "city": "Lake Worth",
+    "property_type": "Condo",
+    "unit_count": 8,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "4efc3510-7a61-4be4-8fe4-665250ecd86a",
+    "canonical_name": "HAMILTON & STE GEORGE OFFICE CONDO*",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 63,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "cfbd8636-b2c1-4ef2-871c-43ab083babe7",
+    "canonical_name": "Hammocks Community Assoc. Properties, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "d838f36c-0bb1-4d80-872e-3003d553e651",
+    "canonical_name": "Hanh Hong Duong & Hoang Tan Truong, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "140606f3-3697-4d04-8e48-911cc9c69140",
+    "canonical_name": "HIGH RIDGE COMMERCE CENTER 2 CONDO*",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 40,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,RIDGE"
+    ]
+  },
+  {
+    "id": "0ba38246-3055-4a19-befa-a2156882694c",
+    "canonical_name": "High Ridge Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "0314f58c-4446-45d8-b3ea-a3b73489d4a4",
+    "canonical_name": "Hoa Enterprises, Llc",
+    "city": "Palm Beach Gardens",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "39898932-395e-405c-a3e0-fe85760f583b",
+    "canonical_name": "Hoa Rentals, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "f384bca2-e37f-4bda-8e34-dd2553391ab4",
+    "canonical_name": "Hoa Tech Solutions, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "41af4b12-5fcd-4502-89a4-ffabce1ad092",
+    "canonical_name": "Hoozies Hoagies, Llc.",
+    "city": "Boynton Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "3a24e275-c890-4fff-b6cd-eaded95a3b8f",
+    "canonical_name": "Hp Hoa Lot Acquisitions, Llc.",
+    "city": "Boynton Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "d799a5c5-ba08-40c3-a6bc-2135b0ed75cc",
+    "canonical_name": "Ipcp 2292 West Sand Lake Property Owner, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "54997b73-2457-483d-ae3b-88cc6d33df04",
+    "canonical_name": "JOG MEDICAL CENTER CONDO",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "b52a5ed6-874d-4f94-b17c-d360a2fd7f0a",
+    "canonical_name": "JPOC PARK PLAZA CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 18,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "80caa1be-7287-4d1a-97a0-7d715d20a002",
+    "canonical_name": "JUNO BEACH PROFESSIONAL BUILDING CONDO * (***)",
+    "city": "Juno Beach",
+    "property_type": "Commercial",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "3a03a37e-d9dd-4b32-bdfd-f3a4b78d5233",
+    "canonical_name": "JUNO OCEAN KEY PROFESSIONAL BUILDING CONDO *",
+    "city": "Juno Beach",
+    "property_type": "Commercial",
+    "unit_count": 22,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "16c87658-6b7d-496d-a58b-1145a55ed499",
+    "canonical_name": "Juno Point Property Owner, Llc",
+    "city": "Palm Beach Gardens",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "8e7879ee-5050-41d9-a14c-c719f3ba8f78",
+    "canonical_name": "JUPITER COMMERCE CENTER PHASE I CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 16,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "9557f4ec-f10e-4553-a12b-7646deefa87e",
+    "canonical_name": "JUPITER GARDENS OFFICE CONDO (***)",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 36,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "05673449-5088-41c8-a417-ccfdb6e2669e",
+    "canonical_name": "JUPITER LAKES MEDICAL CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 38,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "fbe87e43-4a81-4f1c-8ad6-c76899f82adf",
+    "canonical_name": "JUPITER PARK DRIVE CONDO 1",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "eadc780b-6aae-424f-a8cf-0d6647c02c53",
+    "canonical_name": "JUPITER PARK DRIVE CONDO 2",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 4,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "c6c019e4-d2b7-4942-a88f-5c8c0f9bed87",
+    "canonical_name": "JUPITER PROFESSIONAL PLAZA CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 7,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "ea483c1f-857b-4a16-a724-74d3e5e56f6f",
+    "canonical_name": "JUPITER TRADE CENTER CONDOMINIUM*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 76,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "6d0f33f8-73d5-4338-a6d4-2ccd025a78b1",
+    "canonical_name": "KILLIAN COMMERCIAL CONDO *",
+    "city": "Lake Park",
+    "property_type": "Condo",
+    "unit_count": 12,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "cd79ba02-bd6e-46c3-9d18-55277247b46f",
+    "canonical_name": "KILLIAN PROFESSIONAL CENTER CONDOMINIUM*",
+    "city": "Lake Park",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "28989ddf-04c9-449d-8cab-007fb81c2b7a",
+    "canonical_name": "LAKE PARK COMMERCE CENTER CONDOMINIUM*",
+    "city": "Lake Park",
+    "property_type": "Condo",
+    "unit_count": 42,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "783ce419-fc8e-4034-9d15-c628b5f87d98",
+    "canonical_name": "LAKE WORTH BUSINESS PARK CONDO *(***)",
+    "city": "Lake Worth",
+    "property_type": "Condo",
+    "unit_count": 24,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "c3f98899-d7b3-44f8-bc05-0415b715cbb0",
+    "canonical_name": "Lake Worth Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "99cfd488-6a2f-4d9b-909a-4e8c34c9eafe",
+    "canonical_name": "Lakes At Boca Raton Commercial Property Owners' Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ]
+  },
+  {
+    "id": "0aa06260-98b3-4ac2-99e2-5cae55c5078b",
+    "canonical_name": "LAKESIDE INDUSTRIAL CTR CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 18,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "1ea362b5-4858-4485-8cb1-bb2c13089625",
+    "canonical_name": "LAKESIDE WAREHOUSE CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 32,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "eeea0f54-f8a1-47bc-a742-e697d5f52899",
+    "canonical_name": "LAKESIDE WEST WAREHOUSE CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 17,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "3e5aa2bf-6cc5-4688-bff2-88b63c26c920",
+    "canonical_name": "LATHAM WAREHOUSE 1 CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "d5f7eabe-d45a-4ce7-9066-c1fca0e8740e",
+    "canonical_name": "LHI PROFESSIONAL CENTER CONDO * (***)",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 12,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "ac5b02e3-4974-4e5f-8126-af46fbd59ae7",
+    "canonical_name": "LOXAHATCHEE OFFICE CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "334c48a6-42bf-4f37-9973-3942fe5f2054",
+    "canonical_name": "MANGONIA BUSINESS CENTER CONDO *",
+    "city": "Mangonia Park",
+    "property_type": "Condo",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "14c90ea6-03c6-4a95-88e1-e1813435b0b2",
+    "canonical_name": "MAPLEWOOD PROF CENTER OFFICE CONDO*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 7,
+    "management_company": "Realtime Property Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "9d4108b5-7a1b-4685-ae0e-9fb82ed64e96",
+    "canonical_name": "MAPLEWOOD PROFESSIONAL CENTER PH 5 CONDOMINIUM *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 16,
+    "management_company": "Realtime Property Management",
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "e1d112ca-e32b-4c37-b258-0d031cc601aa",
+    "canonical_name": "MARLIN COMMERCE CENTER CONDOMINIUM*",
+    "city": "Lake Worth",
+    "property_type": "Condo",
+    "unit_count": 26,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "270849d1-60ea-4fe5-b22b-28c8df79b22c",
+    "canonical_name": "MEADOWS SQUARE COMMERCIAL CONDO*(***)",
+    "city": "Boynton Beach",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "ded6e23c-0fe9-49d8-98e1-cad3f67326c9",
+    "canonical_name": "MERCER CONDO WAREHOUSE *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 8,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "c2be7f01-31eb-43b3-a271-881544e36251",
+    "canonical_name": "METROPOLITAN PROFESSIONAL BUILDING CONDOMINIUM (*)***",
+    "city": "Greenacres",
+    "property_type": "Commercial",
+    "unit_count": 19,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "39ddc8d4-eb1d-4611-879d-f66d3c51243e",
+    "canonical_name": "MID POINT COMMERCE CENTER CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,POINT"
+    ]
+  },
+  {
+    "id": "c0c93583-e0cd-46a0-a26c-3eef4d5d5993",
+    "canonical_name": "MONA RD OFF & WAREHOUSE CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 7,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "07594e60-3eb1-4458-ba46-f3bbcb79455e",
+    "canonical_name": "Mr Hoa Management, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "d4f73f5f-42a2-4b9a-a77b-cb929c72bc0c",
+    "canonical_name": "Naples Lakes Commercial Property Owner'S Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:LAKE,LAKES"
+    ]
+  },
+  {
+    "id": "5b5e9852-1fd3-4eaf-b0a2-e5bb91f08aa2",
+    "canonical_name": "NORTHLAKE BUSINESS PARK CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "7ece0369-5aca-4b2d-bb3b-e5e0ef4215ff",
+    "canonical_name": "Northpoint Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "bd5bd3d6-4f0b-4a5f-b7ce-38f9e39c7a55",
+    "canonical_name": "NORTHWOOD COMMERCE PARK CONDOMINIUM*",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 11,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "80b28cfb-aa96-4489-a6eb-68a83258aaff",
+    "canonical_name": "NORTON COMMERCE CENTER CONDOMINIUM",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 7,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "b3910463-763b-4ec7-90b6-5991484f61af",
+    "canonical_name": "OAK CIRCLE CONDO WAREHOUSE *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 48,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "0788ea83-129f-4420-b30a-f655090ea645",
+    "canonical_name": "OAK RIDGE BUSINESS PARK CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:CONDO,RIDGE"
+    ]
+  },
+  {
+    "id": "56955bae-c7cf-4053-956c-f1320f90daa1",
+    "canonical_name": "OAKS MEDICAL COMPLEX CONDO*",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 31,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "36a11597-3f7b-4040-b77e-dccb0ce7b938",
+    "canonical_name": "Oanh Hoang, O.D., Llc",
+    "city": "Royal Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "bf733a84-0ba2-4c89-a60b-63e0afcea290",
+    "canonical_name": "OCEAN PARKS CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 328,
+    "management_company": "Phoenix Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "39d31346-46f8-4cb6-8285-cf4d4b4e02fd",
+    "canonical_name": "Ochoa Dental Studio, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "2ed7408b-c417-4b5f-8a13-d3462d41056c",
+    "canonical_name": "Ochoa Property Investments, Llc",
+    "city": "Greenacres",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "74163680-2b06-4baa-b852-6222cc89475a",
+    "canonical_name": "OLD DIXIE PARK I CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "081b573a-12f4-414b-8114-90fb3baa001e",
+    "canonical_name": "OLD DIXIE PARK II CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 26,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "9b764b23-2759-40fd-b865-6e592186f452",
+    "canonical_name": "On 3Rd Steak And Hoagies, Llc",
+    "city": "West Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "922c9e06-256d-4c60-a609-0ae41edcc192",
+    "canonical_name": "Palm Beach Business Park Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "BUSINESS PARK",
+      "+RESIDENTIAL_TERMS:BEACH"
+    ]
+  },
+  {
+    "id": "aad79f2e-7409-40d0-9de7-c90fa64dc722",
+    "canonical_name": "Palm Beach Gardens Professional Building Property Owners Association, Inc.",
+    "city": "Palm Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "449252fe-b3c0-47a5-a6d7-e9f921b7ecde",
+    "canonical_name": "PALM BEACH INDUSTRIAL CONDO *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,BEACH"
+    ]
+  },
+  {
+    "id": "35fb7557-caef-4cde-b3cc-4ca1e948b1cc",
+    "canonical_name": "PALM BEACH PROFESSIONAL CENTER CONDOMINIUM *",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "c14e1fb0-476d-4d0c-a7ec-764e1267c69c",
+    "canonical_name": "PALMETTO WEST PROFESSIONAL BLDG. CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 11,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "10feaf16-b184-4a7d-af40-ae1d80b726cf",
+    "canonical_name": "PALMS WEST INDUSTRIAL PARK CONDO *",
+    "city": "Royal Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 45,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,PALMS"
+    ]
+  },
+  {
+    "id": "bac0a909-fc43-4a70-acdb-1f97fc3dd76e",
+    "canonical_name": "Palms West Industrial Property Owners Association, Inc.",
+    "city": "West Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:PALMS"
+    ]
+  },
+  {
+    "id": "874fc708-5fce-4b74-ac9d-3f0194738969",
+    "canonical_name": "PALMS WEST PROFESSIONAL CENTER CONDOMINIUM*",
+    "city": "Royal Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "91d6bdcd-881e-43f5-b94c-62cca70765ee",
+    "canonical_name": "PALOMINO  PARK PROFESSIONAL CENTER III CONDO",
+    "city": "Wellington",
+    "property_type": "Condo",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "07ac96f3-0b63-4a95-819e-fc4f1eebbb57",
+    "canonical_name": "PALOMINO PARK PROFESSIONAL CENTER II CONDO",
+    "city": "Wellington",
+    "property_type": "Condo",
+    "unit_count": 44,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "41918ab5-6bb5-41a4-bc29-83298cca77f6",
+    "canonical_name": "PARK CIRCLE CENTRE COMMERCIAL CONDO*",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 8,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "bb77dd12-1b4f-4f7a-8390-1fd5bccbc259",
+    "canonical_name": "PARK MEDICAL PLAZA CONDO *",
+    "city": "Lake Worth",
+    "property_type": "Condo",
+    "unit_count": 4,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "MEDICAL PLAZA",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "7f4fc229-0ee0-4a07-8f76-d2714eac680f",
+    "canonical_name": "PARK PLACE OFFICE BLDG CONDO *",
+    "city": "Juno Beach",
+    "property_type": "Commercial",
+    "unit_count": 12,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "8f605cd2-5eb9-4a25-8f89-d9e59793ed22",
+    "canonical_name": "PARK PLAZA APTS CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 50,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "7cb04d17-3681-424d-bc9e-7d86a3e763db",
+    "canonical_name": "Park Ridge Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "fcc4275c-b82b-4b02-9157-806b5a6bcd9a",
+    "canonical_name": "PARKWAY PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 32,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "65c62cfc-41d2-444e-b41f-decaaa07ef58",
+    "canonical_name": "PASSAGES JUPITER ISLAND CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 39,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "93bb97be-0c5a-4b59-832a-46d14ca4a724",
+    "canonical_name": "PEBWORTH PROFESSIONAL PLAZA CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 12,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "655a7407-416a-497e-b23e-24c81283f024",
+    "canonical_name": "PENAPARK I & II CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 20,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "705c5fe3-e8e1-4f85-b6ae-8c5cf4240ca0",
+    "canonical_name": "PENINSULA VILLAGE GREENS",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 155,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "5489f9ec-9290-4a39-94c1-87bf003bdb59",
+    "canonical_name": "PGA FLYOVER CORPORATE CENTER BLDG 2 CONDO *",
+    "city": "Palm Beach Gardens",
+    "property_type": "Condo",
+    "unit_count": 6,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "CORPORATE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "0d502011-68f7-4c0e-a0b0-d6c516fb46a0",
+    "canonical_name": "PORTICOS COMMERCIAL CONDO",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "c1d1061b-67dc-44b2-b28a-bb18776ea44f",
+    "canonical_name": "PORTSIDE WAREHOUSE CONDOMINIUM *(***)",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "908b60a1-e66d-4f88-acbc-a80b0c90a92d",
+    "canonical_name": "PREMIER COMMERCIAL CONDO",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 7,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "6c5bf7ec-f117-49d7-85d3-bf05f27772f6",
+    "canonical_name": "Privcap Hoa Acquisitions, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "b01517a1-8f47-4dd2-a7dc-125f67045841",
+    "canonical_name": "ROYAL COMMERCE PARK COMMERCIAL CONDO",
+    "city": "Royal Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "COMMERCE PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "594b44bd-c056-457e-ba39-c9fcb4dd25e0",
+    "canonical_name": "Royal Palm Beach Industrial Park Property Owners Association, Inc.",
+    "city": "Delray Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:BEACH"
+    ]
+  },
+  {
+    "id": "f94eb332-014f-4add-b176-a834bae17992",
+    "canonical_name": "ROYAL PALM MEDICAL CTR CONDO *",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 9,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "06f467ba-57d2-42a1-b605-98cdb9ffae0c",
+    "canonical_name": "Samantha Ochoa Pa",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "0b6754e0-d8ac-41e8-a99a-d39a816dde36",
+    "canonical_name": "Sandalfoot Estates East Property Owner, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "02b655ef-5feb-4f6d-957d-9ebf4566cf31",
+    "canonical_name": "SAWFISH BAY OFFICE CONDO *",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 5,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "6df7160f-c318-4ee5-943f-ffe8ee7ccc9a",
+    "canonical_name": "SEA PALMS REPLAT THS",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 48,
+    "management_company": "Sea Breeze Community Management",
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "09b99513-e2ee-4d52-910b-a5b48bd6aba6",
+    "canonical_name": "SQUARE LAKE SOUTH COMMERCIAL CONDO*",
+    "city": "Palm Beach Gardens",
+    "property_type": "Condo",
+    "unit_count": 27,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCIAL",
+      "+RESIDENTIAL_TERMS:CONDO,LAKE"
+    ]
+  },
+  {
+    "id": "24b7eaac-7b21-4ace-ab41-fbee21c838c9",
+    "canonical_name": "SUMMIT PINES OFFICE-WAREHOUSE CONDOMINIUM*",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 58,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "WAREHOUSE",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "1c475f55-c47a-44d8-bc36-fd82fd97f749",
+    "canonical_name": "TALL PINES INDUSTRIAL PARK I CONDOMINIUM",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 24,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "INDUSTRIAL",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "497e5bca-c7e1-4f71-adc2-2d8ccaff7d7f",
+    "canonical_name": "Tall Pines Property Owner, Llc",
+    "city": "Delray Beach",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "c6977ea1-c684-426a-8f24-79c28b8226dd",
+    "canonical_name": "The Gardens Commerce Center Property Owners Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:GARDENS"
+    ]
+  },
+  {
+    "id": "fd647b14-7a73-4a1f-b73a-669b8ab4f9cc",
+    "canonical_name": "THREE PALMS CENTER CONDOMINIUM*(***)",
+    "city": "Jupiter",
+    "property_type": "Commercial",
+    "unit_count": 43,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "91aedac1-da59-4a71-a6ad-54136974f4b2",
+    "canonical_name": "TWIN LAKES PROFESSIONAL CENTER CONDOMINIUM*",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 28,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "7b92bfcb-1015-49da-9f25-dd184273d2fa",
+    "canonical_name": "VILLAGE GREEN #4 CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 153,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "ed804519-7fb7-4e0a-aed4-d696a3bde02e",
+    "canonical_name": "VILLAGE GREEN AVON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 63,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "f25af19c-8e5b-44f9-8fbd-1eb6ff0362c8",
+    "canonical_name": "VILLAGE GREEN BOCA RATON CONDO",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": 60,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "6887542c-af06-4600-acab-b84c5f29a7b5",
+    "canonical_name": "VILLAGE GREEN BUCKINGHAM CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "ffdb8fbe-f0f9-46bb-abd9-d42e70e1fc20",
+    "canonical_name": "VILLAGE GREEN COVENTRY CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 66,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "d439026a-a0fb-4f70-a555-dee4d6c1b818",
+    "canonical_name": "VILLAGE GREEN DORCHESTER CONDO",
+    "city": "Lake Worth",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "153c40f2-6e64-43db-871f-f94cc1484197",
+    "canonical_name": "VILLAGE GREEN HAMPTON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 60,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "b338b421-ea47-4c84-ba99-79cd995ad54c",
+    "canonical_name": "VILLAGE GREEN KENSINGTON CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 54,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "11251384-7519-4ab2-80ae-ade0819ccb9f",
+    "canonical_name": "VILLAGE GREEN SUSSEX CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 84,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "ca0bda64-883d-42f6-8b9b-eb6dcba564d0",
+    "canonical_name": "VILLAGE GREEN WINDSOR CONDO",
+    "city": "Palm Springs",
+    "property_type": "Commercial",
+    "unit_count": 57,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "1e3c6584-7a95-4a92-8f50-290255bc791e",
+    "canonical_name": "Village Professional Park Property Owners Association, Inc.",
+    "city": "Royal Palm Beach",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ]
+  },
+  {
+    "id": "c125c47e-f88b-4766-8dd1-9539c8152665",
+    "canonical_name": "Village Square Professional Park Property Owners' Association, Inc.",
+    "city": "Palm Beach Gardens",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "PROFESSIONAL PARK",
+      "+RESIDENTIAL_TERMS:VILLAGE"
+    ]
+  },
+  {
+    "id": "9ee2602e-fb5e-4512-856b-2950d74970d1",
+    "canonical_name": "WALLACE DRIVE COMMERCE CENTER CONDOMINIUM*",
+    "city": "Delray Beach",
+    "property_type": "Condo",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "ae1cf8d5-abfe-4001-bb24-84d48ca8de99",
+    "canonical_name": "WELLINGTON RESERVE OFFICE PARK-BLDG B CONDOMINIUM*",
+    "city": "Wellington",
+    "property_type": "Condo",
+    "unit_count": 14,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "OFFICE PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "b9669986-bd74-488e-a4b9-c4dcc9c70367",
+    "canonical_name": "WELLINGTON RESERVE OFFICE PARK-BLDG F CONDO",
+    "city": "Wellington",
+    "property_type": "Condo",
+    "unit_count": 2,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "OFFICE PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "bea0c8ff-cc09-4817-bb0d-ca7469e66e68",
+    "canonical_name": "WEST PALM BEACH COMMERCE PARK CONDOMINIUM*",
+    "city": "West Palm Beach",
+    "property_type": "Condo",
+    "unit_count": 44,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "18339cf1-dcb2-419d-809e-e528666a5b06",
+    "canonical_name": "WESTROADS COMMERCE CENTER CONDOMINIUM",
+    "city": "Riviera Beach",
+    "property_type": "Condo",
+    "unit_count": 55,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "52715dec-089b-4f0e-987c-2f60639742e6",
+    "canonical_name": "WINDSOR PARK COMMERCE CENTER CONDOMINIUM*",
+    "city": "Lantana",
+    "property_type": "Condo",
+    "unit_count": 13,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:CONDO,CONDOMINIUM"
+    ]
+  },
+  {
+    "id": "0db5bd59-3e17-4c57-83b1-703086deefc1",
+    "canonical_name": "Woodbridge Commerce Center Property Owner'S Association, Inc.",
+    "city": "Boca Raton",
+    "property_type": "Single family",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE CENTER",
+      "+RESIDENTIAL_TERMS:RIDGE"
+    ]
+  },
+  {
+    "id": "ef65249e-cf14-42ca-9c5d-7e453259dcdf",
+    "canonical_name": "WORTH COMMERCE PARK CONDO *",
+    "city": "Palm Springs",
+    "property_type": "Condo",
+    "unit_count": 10,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "COMMERCE PARK",
+      "+RESIDENTIAL_TERMS:CONDO"
+    ]
+  },
+  {
+    "id": "656436d8-4f53-45c6-b74e-2572193c7001",
+    "canonical_name": "Wra Hoa Services, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  },
+  {
+    "id": "2f2e5831-0aaa-4cbb-b4fe-4f156d385f8b",
+    "canonical_name": "Yamato Village Associates, Llc",
+    "city": "Boca Raton",
+    "property_type": "Commercial",
+    "unit_count": null,
+    "management_company": null,
+    "status": "published",
+    "indicator_hits": [
+      "property_type:Commercial",
+      "+RESIDENTIAL_TERMS"
+    ]
+  }
+]
