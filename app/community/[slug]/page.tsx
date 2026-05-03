@@ -8,6 +8,7 @@ import FirstReviewToast from '@/app/components/FirstReviewToast'
 import NavBar from '@/app/components/NavBar'
 import NewsFeed from '@/app/components/NewsFeed'
 import LegalCases from '@/app/components/LegalCases'
+import SponsoredCard from '@/app/components/SponsoredCard'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -149,6 +150,23 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     : (community.review_avg ?? null)
 
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
+
+  // Sponsored ads — fetch advertisers targeting this community's city. Falls
+  // back to [] silently if the table doesn't exist yet (table needs migration
+  // 20260503_advertiser_system.sql in production).
+  let pageAdvertisers: Array<{ id: string; company_name: string; tagline: string|null; phone: string|null; cta_text: string|null; cta_url: string|null; category: string|null; logo_url: string|null }> = []
+  try {
+    const { data: ads } = await supabase
+      .from('advertisers')
+      .select('id, company_name, tagline, phone, cta_text, cta_url, category, logo_url, plan, target_cities, target_counties, status')
+      .eq('status', 'active')
+      .contains('target_cities', [community.city])
+      .order('plan', { ascending: false })
+      .limit(3)
+    if (ads) pageAdvertisers = ads
+  } catch {
+    // Table missing — gracefully no ads
+  }
 
   const cityForSearch = community.city_verified ? community.city : null
   const { data: relatedCommunities } = cityForSearch ? await supabase
@@ -383,6 +401,20 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the association directly.</div>
         </div>
+
+        {/* Sponsored card (only shows if advertisers configured for this city) */}
+        {pageAdvertisers.length > 0 && (
+          <div style={{marginBottom: '12px'}}>
+            <div style={{fontSize: '11px', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px'}}>
+              Support local businesses
+            </div>
+            <SponsoredCard
+              advertisers={pageAdvertisers}
+              communitySlug={community.slug}
+              city={community.city}
+            />
+          </div>
+        )}
 
         <div style={{backgroundColor: '#fff', border: `1px solid ${community.assessment_signal_count > 0 ? '#EF9F27' : '#e5e5e5'}`, borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
