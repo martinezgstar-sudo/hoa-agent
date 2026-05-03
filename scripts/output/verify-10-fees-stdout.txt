@@ -1,0 +1,37 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Fee research for 10 communities
+
+=== 1515 FLAGLER CONDO (West Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== 200 EAST PALMETTO PARK CONDO (Boca Raton)
+   total inserted: 0, noise dropped: 0
+
+=== 2100 COND AT SLOANS CURVE (Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== 2500 BOCA CONDO (Boca Raton)
+   total inserted: 0, noise dropped: 0
+
+=== 2700 NORTH OCEAN CONDO (West Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== 2774 SOUTH OCEAN INC (Boca Raton)
+   total inserted: 0, noise dropped: 0
+
+=== 45 OCEAN CONDOMINIUM (Boca Raton)
+   total inserted: 0, noise dropped: 0
+
+=== 610 CLEMATIS CONDOMINIUM (West Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== ABBEY PARK GARDENS I CONDOMINIUM (West Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== ABBEY PARK PLAT NO 1 (West Palm Beach)
+   total inserted: 0, noise dropped: 0
+
+=== TOTALS ===
+  Fee observations inserted: 0
+  Slider noise dropped:       0

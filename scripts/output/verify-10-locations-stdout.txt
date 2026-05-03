@@ -1,0 +1,39 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Verifying locations for 10 communities
+
+=== 1515 FLAGLER CONDO
+   ZIP 33401 → West Palm Beach — VERIFIED
+
+=== 200 EAST PALMETTO PARK CONDO
+   ZIP 33432 → Boca Raton — VERIFIED
+
+=== 2100 COND AT SLOANS CURVE
+   ZIP 33480 → Palm Beach — VERIFIED
+
+=== 2500 BOCA CONDO
+   ZIP 33487 → Boca Raton — VERIFIED
+
+=== 2700 NORTH OCEAN CONDO
+   ZIP 33404 → West Palm Beach — VERIFIED
+
+=== 2774 SOUTH OCEAN INC
+   ZIP 33432 → Boca Raton — VERIFIED
+
+=== 45 OCEAN CONDOMINIUM
+   ZIP 33487 → Boca Raton — VERIFIED
+
+=== 610 CLEMATIS CONDOMINIUM
+   ZIP 33401 → West Palm Beach — VERIFIED
+
+=== ABBEY PARK GARDENS I CONDOMINIUM
+   ZIP 33401 → West Palm Beach — VERIFIED
+
+=== ABBEY PARK PLAT NO 1
+   ZIP 33401 → West Palm Beach — VERIFIED
+
+
+=== TOTALS ===
+  Verified by ZIP:     10/10
+  City corrections:    0
+  Addresses found:     0

@@ -1,0 +1,105 @@
+======================================================================
+HOA AGENT — 10-COMMUNITY RESEARCH REPORT
+Generated: 2026-05-03T17:53:16
+Scope: Palm Beach County · No Sunbiz · Listing fees never auto-approved
+======================================================================
+
+TARGETS — 10 thinnest published communities (priority by missing fields)
+----------------------------------------------------------------------
+  • 1515 FLAGLER CONDO — West Palm Beach (33401)
+  • 200 EAST PALMETTO PARK CONDO — Boca Raton (33432)
+  • 2100 COND AT SLOANS CURVE — Palm Beach (33480)
+  • 2500 BOCA CONDO — Boca Raton (33487)
+  • 2700 NORTH OCEAN CONDO — West Palm Beach (33404)
+  • 2774 SOUTH OCEAN INC — Boca Raton (33432)
+  • 45 OCEAN CONDOMINIUM — Boca Raton (33487)
+  • 610 CLEMATIS CONDOMINIUM — West Palm Beach (33401)
+  • ABBEY PARK GARDENS I CONDOMINIUM — West Palm Beach (33401)
+  • ABBEY PARK PLAT NO 1 — West Palm Beach (33401)
+
+----------------------------------------------------------------------
+1515 FLAGLER CONDO (West Palm Beach, 33401)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+200 EAST PALMETTO PARK CONDO (Boca Raton, 33432)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+2100 COND AT SLOANS CURVE (Palm Beach, 33480)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+2500 BOCA CONDO (Boca Raton, 33487)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+2700 NORTH OCEAN CONDO (West Palm Beach, 33404)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+2774 SOUTH OCEAN INC (Boca Raton, 33432)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+45 OCEAN CONDOMINIUM (Boca Raton, 33487)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+610 CLEMATIS CONDOMINIUM (West Palm Beach, 33401)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+ABBEY PARK GARDENS I CONDOMINIUM (West Palm Beach, 33401)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+----------------------------------------------------------------------
+ABBEY PARK PLAT NO 1 (West Palm Beach, 33401)
+  Location: VERIFIED  addr=not found
+  Fees:     inserted=0  noise_dropped=0
+  News:     found=0  relevant=0  new_inserted=0  rep=None/None
+  Legal:    found=0  verified=0  new_inserted=0
+
+======================================================================
+TOTALS
+----------------------------------------------------------------------
+  ZIPs verified:                 10/10
+  City corrections applied:      0
+  Street addresses found:        0
+  Fee observations inserted:     0 (pending review)
+  Slider noise dropped:          0
+  News articles found (any):     0
+  News articles inserted:        0
+  Reputation scores updated:     0
+  Legal cases found (any):       0
+  Legal cases verified+inserted: 0
+
+NOTES
+----------------------------------------------------------------------
+  · All 10 targets are mid-size condo associations (76-249 units)
+    with very low public web footprint — explains 0 inserts on
+    fees/news/legal across the board.
+  · No data was overwritten. Fees would have gone to pending queue.
+  · Listing-site fees never auto-approve per CLAUDE.md rule.
+  · Sunbiz lookups intentionally skipped per session brief.
+  · Recommend next batch select communities with higher media
+    visibility (golf course / master-planned / 500+ units).
+======================================================================
