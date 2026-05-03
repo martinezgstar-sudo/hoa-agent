@@ -153,6 +153,59 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
 ---
 
+## Pages Directory (May 2026 inventory)
+
+Public pages:
+  /                       homepage
+  /search                 community search
+  /city                   city index
+  /city/[slug]            city landing (hero + stats + news + sort)
+  /city/[slug]/[filter]   city × filter sub-pages (8 filters × 9 cities = 72)
+  /community/[slug]       community detail (full schema bundle)
+  /management             management company directory
+  /management/[slug]      per-company community list
+  /guides                 guides hub
+  /guides/[5 cornerstone] HOA guides (700+ words each)
+  /florida-hoa-law        Chapter 718 / 720 / SB 4-D explainer
+  /methodology            data methodology
+  /editorial-standards    editorial standards
+  /corrections            corrections policy
+  /about                  about page
+  /about/team             editorial team
+  /press                  press kit
+  /for-agents             real estate agent landing
+  /pricing                pricing tiers
+  /reports                reports index
+  /reports/hoa-fee-report-2026  PBC fee report
+  /advertise              advertiser landing
+  /advertise/{signup,login,forgot-password}  auth flow
+  /advertise/portal       authed dashboard
+  /advertise/portal/plan  plan selection
+  /advertise/portal/checkout/[plan]  Stripe placeholder
+  /advertise/portal/create  AI ad generator
+  /claim/[slug]           claim community page
+  /terms /privacy         legal
+
+Admin pages (require ADMIN_PASSWORD):
+  /admin /admin/communities /admin/comments /admin/news
+  /admin/pending /admin/upload /admin/research
+
+API routes:
+  /api/admin/*            admin-only (x-admin-password)
+  /api/advertise/generate-ads  advertiser-only (Bearer)
+  /api/ads/track          public (analytics)
+  /api/communities-search /api/address-search
+  /api/community-comments /api/suggest /api/report-request
+  /api/cron/*             CRON_SECRET protected
+
+Special files:
+  /llms.txt /llms-full.txt  AI crawler context
+  /sitemap.xml              8,492+ URLs (paginated fetch)
+  /robots.txt               AI crawler allow-list
+  /<INDEXNOW_KEY>.txt       IndexNow verification
+
+---
+
 ## Existing Scripts
 All scripts live in /scripts folder.
 Run from project root with `python3 scripts/<name>.py`
@@ -377,6 +430,20 @@ for [County Name] County, Florida.
     Never stop to ask for permission.
     Make best decisions based on this file and continue.
 
+14. SEO rules (May 2026):
+    - All community page titles follow:
+      "{Name} HOA Fees, Reviews & Restrictions — {City}, FL | HOA Agent"
+    - All community H1s include city: "{Name} — {City}, FL"
+    - Every page has alternates.canonical in generateMetadata
+    - Every community page has 5 FAQ schema questions
+    - Every community page has neighborhood context paragraph + Florida law
+      section + Similar Communities + Last Updated timestamp
+    - Use https://www.hoa-agent.com (with www) as the canonical host —
+      next.config.ts handles the 301 from apex
+    - Similar communities query uses RANDOM() with LIMIT 6
+    - Listing-site fees never auto-approve, always go to pending review
+    - Slider noise filter: drop any source with 3+ exact-$100 multiples
+
 ---
 
 ## Key Git Recovery Commits
@@ -407,6 +474,10 @@ CRITICAL:
    ad_generation_sessions + RLS + seeds MorningStar)
 - Apply migration: supabase/migrations/20260430_community_research_log.sql
   (audit trail table missing in production)
+- Add INDEXNOW_KEY to .env.local + Vercel env (the value of
+  public/e344841d5716ce3f619cc602d0554157.txt — that filename IS the key)
+- Once INDEXNOW_KEY is set: run `python3 scripts/submit-indexnow.py`
+  to bulk-submit ~8,500 URLs to Bing/ChatGPT-search/Copilot/Yandex
 
 COMPLETED THIS WEEK:
 - Search results page fix ✓ (commit 3286758)
@@ -418,6 +489,34 @@ COMPLETED THIS WEEK:
 - /admin/news over-filter bug fix ✓ (b4d95d3) — pending now shows real items
 - 216 news articles + 20 legal cases inserted into Supabase ✓ (6c76473)
 - 11 communities scored — 5 HIGH RISK, 6 UNDER SCRUTINY ✓ (5e7f59e)
+
+WORLD-CLASS SEO PUSH (May 2026):
+- /llms.txt + /llms-full.txt — AI crawler context ✓ (563f9dd)
+- robots.ts allow-listed: GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot,
+  ChatGPT-User, Google-Extended, Applebot-Extended, CCBot ✓ (563f9dd)
+- Comprehensive Schema.org JSON-LD: ResidentialComplex + Dataset +
+  FAQPage + BreadcrumbList + AggregateRating on every community page,
+  ItemList + BreadcrumbList on every city page, Organization + LocalBusiness
+  + WebSite SearchAction on homepage ✓ (e1316d9)
+- Improved titles + H1 + meta descriptions site-wide ✓ (e1316d9)
+- Thin-page enrichment: every community page ends with 4 sections —
+  About <name> auto-context, Florida HOA Law explainer, Similar Communities
+  in <city>, Profile last updated ✓ (0a7bc76)
+- 12 new content hub pages: /guides + 5 cornerstone guides
+  (700+ words each), /florida-hoa-law, /methodology, /editorial-standards,
+  /corrections, /about/team ✓ (0a7bc76)
+- 72 new city filter sub-pages: /city/<slug>/<filter> for
+  condos / single-family / townhomes / pet-friendly / affordable /
+  high-fee / with-litigation / good-standing ✓ (538dfae)
+- /management directory + per-company sub-pages ✓ (538dfae)
+- Sitemap expanded: 8,364 → 8,492+ URLs (now includes guides, content
+  hubs, city filters, management directory) ✓ (7379ed4)
+- SiteFooter: 4-column footer rendered globally — major internal
+  link boost across every page ✓ (7379ed4)
+- next.config.ts: 301 redirect from apex (hoa-agent.com) to www ✓ (7379ed4)
+- IndexNow: lib/indexnow.ts helper + scripts/submit-indexnow.py
+  bulk-submit script + public/<KEY>.txt verification ✓ (7379ed4)
+- metadataBase changed to https://www.hoa-agent.com (single canonical host) ✓ (7379ed4)
 
 FEATURES IN QUEUE:
 - Stripe integration for advertiser portal
