@@ -14,27 +14,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const { data: community } = await supabase
     .from('communities')
-    .select('canonical_name,city,monthly_fee_min,monthly_fee_max,management_company,property_type')
+    .select('canonical_name,city,monthly_fee_min,monthly_fee_max,management_company,property_type,unit_count')
     .eq('slug', slug)
     .single()
 
   if (!community) return { title: 'Community Not Found — HOA Agent' }
 
-  const title = community.canonical_name + ' — ' + community.city + ' HOA | HOA Agent'
+  const title = `${community.canonical_name} HOA Fees, Reviews & Restrictions — ${community.city}, FL | HOA Agent`
   const description =
-    community.canonical_name +
-    ' — HOA fees, management company, entity status, and resident reviews. Palm Beach County — HOA Agent.'
+    `${community.canonical_name} is a ${community.unit_count ? community.unit_count + '-unit ' : ''}` +
+    `${community.property_type || 'HOA'} community in ${community.city}, Florida. ` +
+    `View fees, restrictions, management info, and resident reviews. Free at HOA Agent.`
+  const canonical = `https://www.hoa-agent.com/community/${slug}`
 
   return {
     title,
     description,
+    alternates: { canonical },
     openGraph: {
       title,
       description,
-      url: 'https://hoa-agent.com/community/' + slug,
+      url: canonical,
       siteName: 'HOA Agent',
       type: 'website',
-      images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+      images: [{ url: 'https://www.hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
     },
     twitter: { card: 'summary', title, description },
   }
@@ -217,74 +220,128 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   const subCommunities = Array.from(subMap.values())
     .sort((a, b) => a.canonical_name.localeCompare(b.canonical_name))
 
-  const encodedCity = encodeURIComponent(community.city || '')
-  const breadcrumbJsonLd = {
+  // ── Schema.org JSON-LD bundle ──────────────────────────────────────────
+  const citySlug = (community.city || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const communityUrl = `https://www.hoa-agent.com/community/${community.slug}`
+  const isCondo = /condo/i.test(community.property_type ?? '')
+
+  const communitySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ResidentialComplex',
+    name: community.canonical_name,
+    description: `${community.property_type || 'HOA'} community${community.unit_count ? ` with ${community.unit_count} units` : ''} in ${community.city}, FL.`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: community.street_address || '',
+      addressLocality: community.city,
+      addressRegion: 'FL',
+      postalCode: community.zip_code || '',
+      addressCountry: 'US',
+    },
+    url: communityUrl,
+    containedInPlace: {
+      '@type': 'City',
+      name: community.city,
+      containedInPlace: { '@type': 'AdministrativeArea', name: 'Palm Beach County' },
+    },
+    ...(community.unit_count ? { numberOfRooms: community.unit_count } : {}),
+    dateModified: community.data_freshness_date || new Date().toISOString(),
+  }
+
+  const datasetSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${community.canonical_name} HOA Profile`,
+    description: `Public HOA community data for ${community.canonical_name} in ${community.city}, Palm Beach County, Florida`,
+    url: communityUrl,
+    creator: { '@type': 'Organization', name: 'HOA Agent', url: 'https://www.hoa-agent.com' },
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+    dateModified: community.data_freshness_date || new Date().toISOString(),
+    variableMeasured: ['Monthly HOA fee', 'Litigation count', 'News reputation score', 'Unit count'],
+  }
+
+  const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'HOA Agent', item: 'https://www.hoa-agent.com' },
+      { '@type': 'ListItem', position: 2, name: community.city, item: `https://www.hoa-agent.com/city/${citySlug}` },
+      { '@type': 'ListItem', position: 3, name: community.canonical_name, item: communityUrl },
+    ],
+  }
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
       {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'HOA Agent',
-        item: 'https://www.hoa-agent.com',
+        '@type': 'Question',
+        name: `What is the monthly HOA fee at ${community.canonical_name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: community.monthly_fee_median
+            ? `The monthly HOA fee at ${community.canonical_name} is approximately $${community.monthly_fee_min}–$${community.monthly_fee_max} per month based on available data.`
+            : `The monthly HOA fee at ${community.canonical_name} has not yet been verified. Submit what you know to help other residents.`,
+        },
       },
       {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Palm Beach County',
-        item: 'https://www.hoa-agent.com/florida/palm-beach-county',
+        '@type': 'Question',
+        name: `Who manages ${community.canonical_name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: community.management_company
+            ? `${community.canonical_name} is managed by ${community.management_company}.`
+            : `The management company for ${community.canonical_name} is not yet on file.`,
+        },
       },
       {
-        '@type': 'ListItem',
-        position: 3,
-        name: community.city,
-        item: `https://www.hoa-agent.com/search?city=${encodedCity}`,
+        '@type': 'Question',
+        name: `How many units does ${community.canonical_name} have?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: community.unit_count
+            ? `${community.canonical_name} has ${community.unit_count} units.`
+            : `The unit count for ${community.canonical_name} is not confirmed.`,
+        },
       },
       {
-        '@type': 'ListItem',
-        position: 4,
-        name: community.canonical_name,
-        item: `https://www.hoa-agent.com/community/${community.slug}`,
+        '@type': 'Question',
+        name: `Are pets allowed at ${community.canonical_name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: community.pet_restriction || `Pet policy for ${community.canonical_name} has not been confirmed. Contact the management company for current rules.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are rentals allowed at ${community.canonical_name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: community.rental_approval || `Rental restrictions for ${community.canonical_name} have not been confirmed. Check with the association directly before purchasing as an investor.`,
+        },
       },
     ],
   }
 
+  const ratingSchema = liveReviewAvg && liveReviewCount > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'AggregateRating',
+    itemReviewed: { '@type': 'ResidentialComplex', name: community.canonical_name },
+    ratingValue: liveReviewAvg,
+    reviewCount: liveReviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  } : null
+
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Place",
-        "name": community.canonical_name,
-        "description": `${community.canonical_name} is a ${community.property_type || 'residential'} HOA community in ${community.city}, Florida.`,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": community.city,
-          "addressRegion": "FL",
-          "postalCode": community.zip_code || "",
-          "addressCountry": "US"
-        },
-        "url": `https://hoa-agent.com/community/${community.slug}`,
-        ...(liveReviewAvg && liveReviewCount > 0 ? {
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": liveReviewAvg,
-            "reviewCount": liveReviewCount,
-            "bestRating": 5,
-            "worstRating": 1
-          }
-        } : {}),
-        ...(community.management_company ? {
-          "amenityFeature": [{
-            "@type": "LocationFeatureSpecification",
-            "name": "Management Company",
-            "value": community.management_company
-          }]
-        } : {})
-      })}} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(communitySchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {ratingSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ratingSchema) }} />
+      )}
       <NavBar
         shareHref="/search"
         shareLabel="Share your association"
@@ -330,7 +387,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 <div style={{display:'inline-block',fontSize:'10px',padding:'2px 8px',borderRadius:'999px',backgroundColor:'#FAEEDA',color:'#854F0B',marginBottom:'6px',maxWidth:'100%'}}>Sub-association</div>
               )}
               <div style={{display:'flex',alignItems:'center',gap:'8px',flexWrap:'wrap',marginBottom:'6px'}}>
-                <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name}</h1>
+                <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name} — {community.city}, FL</h1>
                 {String(community.entity_status || '').toLowerCase() === 'active' && (
                   <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#1D9E75',fontWeight:600}}>
                     <span style={{width:'6px',height:'6px',backgroundColor:'#1D9E75',borderRadius:'999px'}}></span>

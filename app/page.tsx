@@ -78,9 +78,27 @@ export default async function Home() {
     },
   }
 
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HOA Agent',
+    legalName: 'HOA Agent LLC',
+    url: 'https://www.hoa-agent.com',
+    logo: 'https://www.hoa-agent.com/logo.png',
+    description: 'Florida HOA intelligence platform covering Palm Beach County HOA and condo communities',
+    foundingDate: '2026',
+    areaServed: { '@type': 'AdministrativeArea', name: 'Palm Beach County, Florida' },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'hello@hoa-agent.com',
+      contactType: 'customer service',
+    },
+  }
+
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 
       <NavBar

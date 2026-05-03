@@ -158,26 +158,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const city = CITIES[slug]
   if (!city) return { title: 'City Not Found — HOA Agent' }
+  const title = `${city.name} HOA Communities — Fees, Reviews & Litigation | HOA Agent Palm Beach County`
+  const description = `Browse HOA and condo communities in ${city.name}, Florida. Find litigation history, news reputation scores, monthly fees, and resident reviews. Free on HOA Agent.`
+  const canonical = `https://www.hoa-agent.com/city/${slug}`
   return {
-    title: city.name + ' HOA Communities | HOA Agent',
-    description:
-      'Browse HOA and condo communities in ' +
-      city.name +
-      ', FL. Find fees, management company, restrictions, litigation history, and resident reviews. Free on HOA Agent.',
+    title,
+    description,
+    alternates: { canonical },
     openGraph: {
-      title: city.name + ' HOA Communities | HOA Agent',
-      description:
-        'Browse HOA and condo communities in ' + city.name + ', Palm Beach County, FL.',
-      url: 'https://hoa-agent.com/city/' + slug,
+      title,
+      description,
+      url: canonical,
       siteName: 'HOA Agent',
       type: 'website',
-      images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+      images: [{ url: 'https://www.hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
     },
-    twitter: {
-      card: 'summary',
-      title: city.name + ' HOA Communities | HOA Agent',
-      description: 'Browse HOA and condo communities in ' + city.name + ', FL.',
-    },
+    twitter: { card: 'summary', title, description },
   }
 }
 
@@ -250,6 +246,23 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: `HOA Communities in ${city.name}, Florida`,
+        description: `Browse ${stats.total} HOA and condo communities in ${city.name}, Palm Beach County, FL`,
+        url: `https://www.hoa-agent.com/city/${slug}`,
+        numberOfItems: stats.total,
+      })}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'HOA Agent', item: 'https://www.hoa-agent.com' },
+          { '@type': 'ListItem', position: 2, name: 'Cities', item: 'https://www.hoa-agent.com/city' },
+          { '@type': 'ListItem', position: 3, name: city.name, item: `https://www.hoa-agent.com/city/${slug}` },
+        ],
+      })}} />
       <NavBar
         shareHref="/search"
         shareLabel="Find my HOA"
