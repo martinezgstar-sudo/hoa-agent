@@ -4,6 +4,104 @@ import NavBar from '@/app/components/NavBar'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+export const revalidate = 3600 // refresh hero image + news once per hour
+
+type WikiSummary = { thumbnail?: { source?: string }; description?: string; extract?: string }
+
+async function getCityImage(cityName: string): Promise<{ url: string; attribution: string } | null> {
+  try {
+    const url =
+      'https://en.wikipedia.org/api/rest_v1/page/summary/' +
+      encodeURIComponent(cityName + ', Florida')
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'HOA-Agent/1.0' },
+      next: { revalidate: 86400 }, // cache image URL for 24h
+    })
+    if (!res.ok) return null
+    const data: WikiSummary = await res.json()
+    if (data.thumbnail?.source) {
+      return { url: data.thumbnail.source, attribution: 'Wikipedia' }
+    }
+  } catch {
+    // network error, fall through to gradient
+  }
+  return null
+}
+
+type CityStats = {
+  total: number
+  condos: number
+  hoas: number
+  avg_fee: number | null
+  min_fee: number | null
+  max_fee: number | null
+  avg_score: number | null
+  with_litigation: number
+}
+
+async function getCityStats(cityName: string): Promise<CityStats> {
+  const { data } = await supabase
+    .from('communities')
+    .select('property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, news_reputation_score, litigation_count')
+    .eq('status', 'published')
+    .ilike('city', cityName)
+
+  const rows = data || []
+  const condos = rows.filter((r) => /condo/i.test(r.property_type ?? '')).length
+  const hoas = rows.length - condos
+  const fees: number[] = rows
+    .map((r) => r.monthly_fee_median ?? r.monthly_fee_min)
+    .filter((v): v is number => typeof v === 'number' && v > 0)
+  const scores: number[] = rows
+    .map((r) => r.news_reputation_score)
+    .filter((v): v is number => typeof v === 'number' && v > 0)
+  const minFees = rows.map((r) => r.monthly_fee_min).filter((v): v is number => typeof v === 'number' && v > 0)
+  const maxFees = rows.map((r) => r.monthly_fee_max).filter((v): v is number => typeof v === 'number' && v > 0)
+
+  return {
+    total: rows.length,
+    condos,
+    hoas,
+    avg_fee: fees.length >= 3 ? Math.round(fees.reduce((a, b) => a + b, 0) / fees.length) : null,
+    min_fee: minFees.length ? Math.min(...minFees) : null,
+    max_fee: maxFees.length ? Math.max(...maxFees) : null,
+    avg_score: scores.length >= 3
+      ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
+      : null,
+    with_litigation: rows.filter((r) => (r.litigation_count ?? 0) > 0).length,
+  }
+}
+
+type RecentArticle = { title: string; url: string; published_date: string | null; source: string | null }
+
+async function getCityPositiveNews(cityName: string): Promise<RecentArticle[]> {
+  // news_items linked to communities in this city, status=approved, no negative keywords
+  const { data: links } = await supabase
+    .from('community_news')
+    .select('news_item_id, communities!inner(city)')
+    .ilike('communities.city', cityName)
+    .limit(50)
+  const ids = Array.from(new Set((links || []).map((l) => (l as { news_item_id: string }).news_item_id))).slice(0, 30)
+  if (ids.length === 0) return []
+  const { data: items } = await supabase
+    .from('news_items')
+    .select('title, url, published_date, source')
+    .in('id', ids)
+    .eq('status', 'approved')
+    .order('published_date', { ascending: false, nullsFirst: false })
+    .limit(20)
+  const NEG = /(lawsuit|fraud|fine|violation|charges|arrested|embezzle|criminal|sued|stole|theft)/i
+  return (items || [])
+    .filter((it) => !NEG.test(it.title || ''))
+    .slice(0, 3)
+    .map((it) => ({
+      title: it.title,
+      url: it.url,
+      published_date: it.published_date,
+      source: it.source,
+    }))
+}
+
 const CITIES: Record<string, { name: string; blurb: string }> = {
   'west-palm-beach': {
     name: 'West Palm Beach',
@@ -143,6 +241,13 @@ export default async function CityPage({ params }: Props) {
     richness_score: richness(c as unknown as Record<string, unknown>),
   })).sort((a, b) => (b.richness_score - a.richness_score) || a.canonical_name.localeCompare(b.canonical_name))
 
+  // Parallel: hero image + stats + positive news
+  const [hero, stats, positiveNews] = await Promise.all([
+    getCityImage(city.name),
+    getCityStats(city.name),
+    getCityPositiveNews(city.name),
+  ])
+
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <NavBar
@@ -150,19 +255,83 @@ export default async function CityPage({ params }: Props) {
         shareLabel="Find my HOA"
       />
 
-      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '40px 20px' }}>
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>
+      {/* Full-width hero (Wikipedia thumbnail or navy gradient) */}
+      <div style={{
+        position: 'relative', width: '100%', height: '250px',
+        backgroundImage: hero
+          ? `linear-gradient(rgba(27,43,107,0.55), rgba(27,43,107,0.55)), url("${hero.url}")`
+          : 'linear-gradient(135deg, #1B2B6B 0%, #534AB7 100%)',
+        backgroundSize: 'cover', backgroundPosition: 'center',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <div style={{ textAlign: 'center', color: '#fff' }}>
+          <h1 style={{ fontSize: '40px', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+            {city.name}
+          </h1>
+          <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.9)', marginTop: '6px' }}>
+            Palm Beach County, Florida
+          </div>
+        </div>
+        {hero && (
+          <div style={{ position: 'absolute', bottom: '6px', right: '10px', fontSize: '10px', color: 'rgba(255,255,255,0.7)' }}>
+            Image: {hero.attribution}
+          </div>
+        )}
+      </div>
+
+      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '32px 20px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '20px' }}>
           <Link href="/city" style={{ color: '#1D9E75', textDecoration: 'none' }}>Cities</Link>
           {' › '}
           {city.name}
         </div>
 
-        <h1 style={{ fontSize: '32px', fontWeight: 700, color: '#1B2B6B', marginBottom: '12px', letterSpacing: '-0.02em' }}>
-          HOA Communities in {city.name}
-        </h1>
+        {/* Stats grid (live from Supabase) */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px', marginBottom: '28px' }}>
+          {[
+            { label: 'Total Communities', value: stats.total.toLocaleString() },
+            { label: 'HOA Communities', value: stats.hoas > 0 ? stats.hoas.toLocaleString() : 'N/A' },
+            { label: 'Condos', value: stats.condos > 0 ? stats.condos.toLocaleString() : 'N/A' },
+            { label: 'Avg Monthly Fee', value: stats.avg_fee ? `$${stats.avg_fee}` : 'N/A' },
+            { label: 'Fee Range', value: stats.min_fee && stats.max_fee ? `$${stats.min_fee}–$${stats.max_fee}` : 'N/A' },
+            { label: 'Avg Reputation', value: stats.avg_score ? `${stats.avg_score}/10` : 'N/A' },
+          ].map((s) => (
+            <div key={s.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px 12px', textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 700, color: '#1B2B6B', marginBottom: '2px' }}>{s.value}</div>
+              <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
 
-        <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.7, marginBottom: '32px', maxWidth: '640px' }}>
+        {/* Positive recent news (only if found) */}
+        {positiveNews.length > 0 && (
+          <div style={{ marginBottom: '28px', backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '18px 20px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+              Recent News in {city.name}
+            </div>
+            {positiveNews.map((a, i) => (
+              <a key={i} href={a.url} target="_blank" rel="noopener" style={{ display: 'block', textDecoration: 'none', padding: '8px 0', borderTop: i === 0 ? 'none' : '1px solid #f0f0f0' }}>
+                <div style={{ fontSize: '14px', color: '#1a1a1a', lineHeight: 1.4 }}>{a.title}</div>
+                <div style={{ fontSize: '11px', color: '#888', marginTop: '3px' }}>
+                  {a.source ?? 'News'}
+                  {a.published_date ? ` · ${new Date(a.published_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+
+        <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.7, marginBottom: '24px', maxWidth: '640px' }}>
           {city.blurb}
+        </p>
+
+        {/* Dynamic SEO paragraph */}
+        <p style={{ fontSize: '13px', color: '#666', lineHeight: 1.6, marginBottom: '32px', maxWidth: '640px' }}>
+          {city.name} is home to {stats.total} HOA and condo communities in Palm Beach County, Florida.
+          {stats.avg_fee && stats.min_fee && stats.max_fee && (
+            ` Monthly HOA fees in ${city.name} average $${stats.avg_fee}, ranging from $${stats.min_fee} to $${stats.max_fee}.`
+          )}
+          {' '}Use HOA Agent to research any community before buying or renting in {city.name}.
         </p>
 
         <div style={{ fontSize: '12px', color: '#888', marginBottom: '16px' }}>
