@@ -180,6 +180,35 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     .neq('slug', slug)
     .limit(4) : { data: [] }
 
+  // Similar-by-property-type for the "Similar Communities" section.
+  // Uses property_type match where possible. Picks 6 random matches.
+  let similarCommunities: Array<{ canonical_name: string; slug: string; city: string; monthly_fee_median: number | null; unit_count: number | null; news_reputation_score: number | null }> = []
+  let cityAvgFee: number | null = null
+  if (community.city) {
+    const ptFilter = community.property_type
+      ? supabase.from('communities')
+          .select('canonical_name, slug, city, monthly_fee_median, unit_count, news_reputation_score')
+          .ilike('city', community.city)
+          .ilike('property_type', `%${community.property_type}%`)
+          .neq('id', community.id).eq('status', 'published').limit(50)
+      : supabase.from('communities')
+          .select('canonical_name, slug, city, monthly_fee_median, unit_count, news_reputation_score')
+          .ilike('city', community.city)
+          .neq('id', community.id).eq('status', 'published').limit(50)
+    const { data: candidates } = await ptFilter
+    const shuffled = (candidates || []).sort(() => Math.random() - 0.5).slice(0, 6)
+    similarCommunities = shuffled
+
+    const { data: avgRow } = await supabase
+      .from('communities')
+      .select('monthly_fee_median')
+      .ilike('city', community.city)
+      .eq('status', 'published')
+      .not('monthly_fee_median', 'is', null)
+    const fees = (avgRow || []).map((r) => r.monthly_fee_median).filter((f): f is number => typeof f === 'number' && f > 0)
+    if (fees.length >= 3) cityAvgFee = Math.round(fees.reduce((a, b) => a + b, 0) / fees.length)
+  }
+
   const commentFormId = 'leave-review'
 
   // Resolve the effective parent id — prefer new parent_id, fall back to legacy master_hoa_id
@@ -663,6 +692,67 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         <NewsFeed communityId={community.id} communityName={community.canonical_name} />
         <LegalCases communityId={community.id} communityName={community.canonical_name} />
+
+        {/* About — auto-generated neighborhood context */}
+        <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginTop:'20px', marginBottom:'12px'}}>
+          <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'10px'}}>About {community.canonical_name}</h2>
+          <p style={{fontSize:'13px', color:'#555', lineHeight:1.7, margin:0}}>
+            {community.canonical_name} is a {community.property_type ? community.property_type.toLowerCase() : 'residential'} community
+            {community.unit_count ? ` with ${community.unit_count} units` : ''} located in {community.city}, Palm Beach County, Florida{community.zip_code ? ` (ZIP ${community.zip_code})` : ''}.
+            {community.incorporation_date && ` It was incorporated on ${new Date(community.incorporation_date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} under Florida ${isCondo ? 'Statute Chapter 718 (Condominium Act)' : 'Statute Chapter 720 (Homeowners Association Act)'}.`}
+            {cityAvgFee && community.monthly_fee_median ? ` The average monthly HOA fee in ${community.city} is approximately $${cityAvgFee}. ${community.canonical_name}'s fee is approximately $${community.monthly_fee_median} per month.` : ''}
+            {cityAvgFee && !community.monthly_fee_median ? ` The average monthly HOA fee in ${community.city} is approximately $${cityAvgFee}. ${community.canonical_name}'s fee has not yet been verified by residents.` : ''}
+            {community.management_company && ` The community is managed by ${community.management_company}.`}
+            {(community.litigation_count ?? 0) > 0 ? ` Public court records show ${community.litigation_count} legal case${community.litigation_count === 1 ? '' : 's'} associated with this community in the CourtListener database.` : ' No active legal cases were found in public court records for this community.'}
+            {' '}Residents and prospective buyers can submit verified information to help keep this profile accurate.
+          </p>
+        </div>
+
+        {/* Florida HOA Law context */}
+        <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginBottom:'12px'}}>
+          <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'10px'}}>Florida HOA Law</h2>
+          <p style={{fontSize:'13px', color:'#555', lineHeight:1.7, margin:0}}>
+            {isCondo ? (
+              <>
+                {community.canonical_name} is a condominium association governed by <strong>Florida Statute Chapter 718</strong>.
+                Florida condo law requires associations to maintain reserves for major repairs, conduct structural inspections (Milestone Inspections) for buildings three stories or taller, and provide owners with annual budget disclosures.
+                Following the 2021 Surfside collapse, Florida passed SB 4-D requiring condos to fund reserves based on structural integrity reports.{' '}
+                <a href="/florida-hoa-law" style={{color:'#1D9E75'}}>Read the full Chapter 718 explainer →</a>
+              </>
+            ) : (
+              <>
+                {community.canonical_name} is a homeowners association governed by <strong>Florida Statute Chapter 720</strong>.
+                Florida HOA law gives owners the right to inspect records, attend board meetings, and vote on major budget items.
+                HOAs must provide 48 hours notice for board meetings and 14 days notice for membership meetings. Special assessments over a certain threshold require a membership vote.{' '}
+                <a href="/florida-hoa-law" style={{color:'#1D9E75'}}>Read the full Chapter 720 explainer →</a>
+              </>
+            )}
+          </p>
+        </div>
+
+        {/* Similar Communities */}
+        {similarCommunities.length > 0 && (
+          <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginBottom:'12px'}}>
+            <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'12px'}}>Similar Communities in {community.city}</h2>
+            <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'10px'}}>
+              {similarCommunities.map((s) => (
+                <a key={s.slug} href={`/community/${s.slug}`} style={{textDecoration:'none', backgroundColor:'#f9f9f9', border:'1px solid #eee', borderRadius:'10px', padding:'12px 14px'}}>
+                  <div style={{fontSize:'13px', fontWeight:600, color:'#1a1a1a', lineHeight:1.3}}>{s.canonical_name}</div>
+                  <div style={{fontSize:'11px', color:'#888', marginTop:'4px'}}>
+                    {s.unit_count ? `${s.unit_count} units` : ''}
+                    {s.unit_count && s.monthly_fee_median ? ' · ' : ''}
+                    {s.monthly_fee_median ? `$${s.monthly_fee_median}/mo` : ''}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Last updated */}
+        <div style={{fontSize:'11px', color:'#aaa', textAlign:'center', padding:'10px 0'}}>
+          Profile last updated: {new Date(community.data_freshness_date || new Date()).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}
+        </div>
       </div>
 
       <FirstReviewToast
