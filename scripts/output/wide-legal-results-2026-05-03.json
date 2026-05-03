@@ -1,0 +1,483 @@
+{
+  "generated_at": "2026-05-03T08:41:50.920891",
+  "source_stats": {
+    "portals": {
+      "found": 0,
+      "skipped": true,
+      "passed": 0
+    },
+    "google_scholar": {
+      "found": 27,
+      "passed": 20
+    },
+    "justia": {
+      "found": 0,
+      "passed": 0
+    },
+    "duckduckgo": {
+      "found": 0,
+      "passed": 0
+    }
+  },
+  "cases": [
+    {
+      "title": "Isola Bella Homeowners Ass&#39;n v. Clement",
+      "url": "/scholar_case?case=480688306815288836&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 appellant. Scott R. Haft of Haft Law Group, PA, West Palm Beach, for appellees. 1133\nDamoorgian, J. Isola Bella Homeowners Association, Inc. (&quot;the\u00a0\u2026",
+      "citation": "328 So. 3d 1132\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2021 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "This is a Florida 4th District Court of Appeals case involving Isola Bella Homeowners Association with West Palm Beach legal representation, indicating likely Palm Beach County jurisdiction.",
+        "community_mentioned": "Isola Bella Homeowners Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "WATERSIDE AT BOYNTON HOMEOWNERS&#39;ASSOCIATION, INC. v. SOUTHERN HOMES OF PALM BEACH, LLC",
+      "url": "/scholar_case?case=8207347970172191850&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "Richard Sarafan and Maxine K. Streeter of Venable LLP, Miami, for appellees Southern Homes \nof Palm Beach, LLC, Southern Construction and Design, LLC, David Andrade, Alex Aguirre\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "HOA case in Palm Beach County involving potential construction/developer disputes based on parties named.",
+        "community_mentioned": "Waterside at Boynton Homeowners Association, Inc.",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Hall v. SAUSALITO PLACE HOMEOWNERS ASSOCIATION, INC.",
+      "url": "/scholar_case?case=13314533297064074169&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "ROBERT HALL, Appellant, v. SAUSALITO PLACE HOMEOWNERS ASSOCIATION, INC., and\nA&amp;N\u00a0\u2026 from the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; Howard K\u00a0\u2026",
+      "citation": "356 So. 3d 242\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a Palm Beach County case involving a resident dispute with Sausalito Place Homeowners Association that reached the appellate level.",
+        "community_mentioned": "Sausalito Place Homeowners Association",
+        "case_type": "other",
+        "severity": "high"
+      }
+    },
+    {
+      "title": "RIGOLI v. THE PRESERVE AT BAY HILL ESTATES HOMEOWNERS ASSOCIATION, INC.",
+      "url": "/scholar_case?case=14764651919316817944&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 of Fields &amp; Bachove, PLLC, Palm Beach Gardens, for appellee. PER CURIAM. In a case arising\nout of a dispute between homeowners and a homeowners&#39; association over alleged\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2026 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "Case involves homeowners disputing with HOA in Palm Beach County with legal representation from Palm Beach Gardens.",
+        "community_mentioned": "The Preserve at Bay Hill Estates",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "FIRSTSERVICE RESIDENTIAL FLORIDA, INC. v. VISION I HOMEOWNERS ASSOCIATION, INC.",
+      "url": "/scholar_case?case=7901822713164865920&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 M. Krusbe of Wilson Elser Moskowitz Edelman &amp; Dicker, LLP, West Palm Beach, and Kaylin\u00a0\u2026 of\nJ. Muir &amp; Associates, PA, Coral Gables, for appellee Vision I Homeowners Association, Inc\u00a0\u2026",
+      "citation": "407 So. 3d 438\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2025 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "This is a case involving a major property management company and an HOA with West Palm Beach legal representation, suggesting Palm Beach County jurisdiction.",
+        "community_mentioned": "Vision I Homeowners Association, Inc.",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "DIEUVIL v. CANYON ISLES HOMEOWNERS ASSOCIATION",
+      "url": "/scholar_case?case=1230768105774823044&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 Dieuvil and Frantz Duval, Appellants, v. CANYON ISLES HOMEOWNERS ASSOCIATION,\nAppellee\u00a0\u2026 from the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; Richard\u00a0\u2026",
+      "citation": "383 So. 3d 785\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2024 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a 2024 Florida appellate case involving residents versus Canyon Isles Homeowners Association in Palm Beach County Circuit Court.",
+        "community_mentioned": "Canyon Isles Homeowners Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "SHERBROOKE HOMEOWNERS ASSOCIATION, INC. v. Chan",
+      "url": "/scholar_case?case=1068313735797329940&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "SHERBROOKE HOMEOWNERS ASSOCIATION, INC., a Florida corporation not-for-profit,\nAppellant, v\u00a0\u2026 from the County Court for the Fifteenth Judicial Circuit, Palm Beach County; August\u00a0\u2026",
+      "citation": "342 So. 3d 229\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2022 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a Palm Beach County case involving Sherbrooke Homeowners Association with a resident dispute that reached the appellate level.",
+        "community_mentioned": "Sherbrooke Homeowners Association",
+        "case_type": "other",
+        "severity": "high"
+      }
+    },
+    {
+      "title": "LEE&#39;S CROSSING HOMEOWNERS ASSOCIATION, INC. v. Becker",
+      "url": "/scholar_case?case=17860421984160265623&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "LEE&#39;S CROSSING HOMEOWNERS ASSOCIATION, INC., Appellant, v. JOHN C. BECKER,\nAppellee\u00a0\u2026 from the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; Maxine\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2026 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "This is a Palm Beach County HOA case involving Lee's Crossing Homeowners Association against a resident named Becker.",
+        "community_mentioned": "Lee's Crossing Homeowners Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "DEBERNARDO v. VILLA NOVA HOMEOWNERS ASSOCIATION, INC.",
+      "url": "/scholar_case?case=6427895727246728907&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "Paul DEBERNARDO, Appellant, v. VILLA NOVA HOMEOWNERS ASSOCIATION, INC., Appellee.\nNo\u00a0\u2026 from the County Court for the Fifteenth Judicial Circuit, Palm Beach County; Marni\u00a0\u2026",
+      "citation": "315 So. 3d 50\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2021 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a direct appeal case involving a homeowner dispute with Villa Nova HOA in Palm Beach County.",
+        "community_mentioned": "Villa Nova Homeowners Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Curry v. WOODBERRY LAKES HOMEOWNERS ASSOCIATION, INC.",
+      "url": "/scholar_case?case=7308894764944048037&amp;q=homeowners+association+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "George Scott CURRY, Appellant, v. WOODBERRY LAKES HOMEOWNERS ASSOCIATION, INC.,\nAppellee\u00a0\u2026 the County Court for the Fifteenth Judicial Circuit, Palm Beach County; John\u00a0\u2026",
+      "citation": "360 So. 3d 717\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a Palm Beach County case involving a resident dispute with Woodberry Lakes Homeowners Association.",
+        "community_mentioned": "Woodberry Lakes Homeowners Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "BOCA VIEW CONDOMINIUM ASSOCIATION, INC. v. Lepselter",
+      "url": "/scholar_case?case=7270608240010111860&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "BOCA VIEW CONDOMINIUM ASSOCIATION, INC., Appellant, v. Eleanor LEPSELTER and Edward\nLepselter\u00a0\u2026 the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; John\u00a0\u2026",
+      "citation": "384 So. 3d 168\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2024 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "This is a condominium association case from Palm Beach County involving Boca View Condominium Association against unit owners, indicating a resident vs association dispute.",
+        "community_mentioned": "Boca View Condominium Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Georges v. AVANTI CONDOMINIUM ASSOCIATION",
+      "url": "/scholar_case?case=12415231142662195749&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 and Allegra P. Fung of Korte &amp; Associates, West Palm Beach, for Appellants\u00a0\u2026 them attorney&#39;s fees\nfollowing the voluntary dismissal of a condominium association&#39;s foreclosure action\u00a0\u2026",
+      "citation": "324 So. 3d 991\u00a0- Fla: Dist. Court of Appeals, 1st Dist., 2021 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "Condominium association foreclosure action with attorney's fees dispute involving West Palm Beach area.",
+        "community_mentioned": "AVANTI CONDOMINIUM ASSOCIATION",
+        "case_type": "foreclosure",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Josepher v. MARBELLA CONDOMINIUM ASSOCIATION, INC.",
+      "url": "/scholar_case?case=6000387247814572414&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 Jack L. Leone and Erik Weiss, Appellants, v. The MARBELLA CONDOMINIUM ASSOCIATION,\nINC., et\u00a0\u2026 from the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; James\u00a0\u2026",
+      "citation": "356 So. 3d 800\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2022 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "This is a condo association case from Palm Beach County's 4th District Court of Appeals involving residents versus the Marbella Condominium Association.",
+        "community_mentioned": "Marbella Condominium Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "DANIA BEACH BOAT CLUB CONDO. v. Forcier",
+      "url": "/scholar_case?case=8431030469388510319&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 100 Kuntz, J. Dania Beach Boat Club Condominium Association, Inc\u00a0\u2026 A pretrial stipulation\nis binding on the parties and the court. Palm Beach Polo Holdings, Inc\u00a0\u2026",
+      "citation": "290 So. 3d 99\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2020 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 2,
+        "reason": "This case involves Dania Beach Boat Club Condominium which is in Broward County, not Palm Beach County Florida.",
+        "community_mentioned": "Dania Beach Boat Club Condominium Association, Inc",
+        "case_type": "other",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "VILLAGES OF PALM BEACH LAKES PROPERTY OWNERS&#39;ASSOCIATION, INC. v. STERLING VILLAGES OF PALM BEACH LAKES CONDOMINIUM ASSOCIATION\u00a0\u2026",
+      "url": "/scholar_case?case=8122195910955772204&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "VILLAGES OF PALM BEACH LAKES PROPERTY OWNERS&#39; ASSOCIATION, INC., Appellant,\nv. THE STERLING VILLAGES OF PALM BEACH LAKES CONDOMINIUM ASSOCIATION\u00a0\u2026",
+      "citation": "322 So. 3d 66\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2021 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 9,
+        "reason": "Case involves two associations in Palm Beach Lakes area with property owners association as appellant against condominium association, indicating inter-association dispute.",
+        "community_mentioned": "Villages of Palm Beach Lakes",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Adam v. HIGHLAND HOUSE OF PALM BEACH CONDOMINIUM ASSOCIATION, INC.",
+      "url": "/scholar_case?case=6887960692700463120&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "Nichole J. Segal of Burlington &amp; Rockenbach, PA, West Palm Beach, and A. Max Zaretsky of \nZaretsky Law Group, West Palm Beach, for appellant\u00a0\u2026 Robert Rivas of Sachs Sax Caplan\u00a0\u2026",
+      "citation": "342 So. 3d 226\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2022 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "This is a legal case involving Highland House of Palm Beach Condominium Association in Palm Beach County with legal representation from West Palm Beach attorneys.",
+        "community_mentioned": "Highland House of Palm Beach Condominium Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Orfanos v. 45 OCEAN CONDOMINIUM ASS&#39;N",
+      "url": "/scholar_case?case=10150523348676169623&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 Losner v. Australian of Palm Beach Condominium Ass&#39;n, 139 So\u00a0\u2026 This court found error in awarding\nthe condominium association two special assessments in addition to quarterly\u00a0\u2026",
+      "citation": "368 So. 3d 995\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "Fourth District Court of Appeals case involving condominium association special assessment disputes with Palm Beach County connection through referenced case.",
+        "community_mentioned": "45 Ocean Condominium Association",
+        "case_type": "assessment",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Haver v. City of West Palm Beach, Inc.",
+      "url": "/scholar_case?case=17860110574327980961&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 to require the City officials to act in accordance with West Palm Beach Ordinance \u00a7 94\u00a0\u2026 under the\nseparation-of-powers doctrine set forth in Trianon Park Condominium Association v. City\u00a0\u2026",
+      "citation": "298 So. 3d 647\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2020 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 6,
+        "reason": "Case mentions Trianon Park Condominium Association in relation to separation-of-powers doctrine, indicating potential condo association legal precedent relevance.",
+        "community_mentioned": "Trianon Park Condominium Association",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "ICONBRICKELL CONDO. v. NEW MEDIA",
+      "url": "/scholar_case?case=11926281198833435881&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 Greenberg Traurig, PA, and Mark F. Bideau (West Palm Beach), Elliot H\u00a0\u2026 Senyar remains\nunencumbered by certain statutory provisions regulating condominium association assessments\u00a0\u2026",
+      "citation": "310 So. 3d 477\u00a0- Fla: Dist. Court of Appeals, 3rd Dist., 2020 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "Florida appellate case involving condominium association assessment regulations with West Palm Beach attorney involvement.",
+        "community_mentioned": "ICONBRICKELL CONDO",
+        "case_type": "assessment",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Wing Kei Ho v. FOUNTAINS OF PALM BEACH",
+      "url": "/scholar_case?case=4779678971744170269&amp;q=%22condominium+association%22+%22Palm+Beach%22&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 The appellee, Fountains of Palm Beach Condominium, No\u00a0\u2026 Appellee alleged that appellants had\nrented their unit without written approval of the condominium association\u00a0\u2026",
+      "citation": "309 So. 3d 237\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2020 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "Case involves a Palm Beach County condominium association dispute over rental approval requirements between unit owners and the association.",
+        "community_mentioned": "Fountains of Palm Beach Condominium",
+        "case_type": "other",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "QUEST SYSTEMS, LLC v. Far",
+      "url": "/scholar_case?case=8833854231161475618&amp;q=%22HOA%22+fraud+%22Palm+Beach%22+Florida&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 The HOA then assigned title to Bonafide Properties, LLC (Bonafide)\u00a0\u2026 of AHMO&#39;s foreclosure action\nas evidence of the alleged fraudulent scheme\u00a0\u2026 v. S. Bank of W. Palm Beach, 300 So\u00a0\u2026",
+      "citation": "356 So. 3d 300\u00a0- Fla: Dist. Court of Appeals, 2nd Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 2,
+        "reason": "Case involves HOA but is from 2nd District Court of Appeals (not Palm Beach County) and appears to be a complex commercial dispute rather than typical HOA/resident conflict.",
+        "community_mentioned": null,
+        "case_type": "fraud",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "QUEST SYSTEMS, LLC v. FAR",
+      "url": "/scholar_case?case=14077024225410820137&amp;q=%22HOA%22+fraud+%22Palm+Beach%22+Florida&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 The HOA then assigned title to Bonafide Properties, LLC (Bonafide)\u00a0\u2026 of AHMO&#39;s foreclosure action\nas evidence of the alleged fraudulent scheme\u00a0\u2026 v. S. Bank of W. Palm Beach, 300 So\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 2nd Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 3,
+        "reason": "Case involves an HOA but appears to be in 2nd District Court of Appeals (not Palm Beach County) and focuses on assignment/foreclosure issues rather than typical HOA disputes.",
+        "community_mentioned": null,
+        "case_type": "foreclosure",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "Neal v. GEICO GENERAL INS. CO.",
+      "url": "/scholar_case?case=8867093165080830508&amp;q=%22HOA%22+fraud+%22Palm+Beach%22+Florida&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; James\u00a0\u2026 over to the Florida\nHighway Patrol to investigate title fraud\u00a0\u2026 notice.&quot; Id.; see also Evergreen Lakes HOA, Inc\u00a0\u2026",
+      "citation": "358 So. 3d 749\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 2,
+        "reason": "This is an insurance case with GEICO that only mentions an HOA in passing reference, not a case involving HOA disputes.",
+        "community_mentioned": "Evergreen Lakes HOA, Inc",
+        "case_type": "other",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "Crossen v. Feeley",
+      "url": "/scholar_case?case=13341279576093357608&amp;q=%22HOA%22+fraud+%22Palm+Beach%22+Florida&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 withdrawn as counsel after filing brief), Palm Beach Gardens, for\u00a0\u2026 the husband jointly responsible\nfor the HOA fees, insurance\u00a0\u2026 agreement is the product of a fraud, misrepresentation or\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2026 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 7,
+        "reason": "Case involves HOA fees and potential fraud/misrepresentation claims in Palm Beach Gardens area.",
+        "community_mentioned": null,
+        "case_type": "fraud",
+        "severity": "medium"
+      }
+    },
+    {
+      "title": "Neal v. GEICO GENERAL INSURANCE COMPANY",
+      "url": "/scholar_case?case=2182370621002620793&amp;q=%22HOA%22+fraud+%22Palm+Beach%22+Florida&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 the Circuit Court for the Fifteenth Judicial Circuit, Palm Beach County; James\u00a0\u2026 over to the Florida\nHighway Patrol to investigate title fraud\u00a0\u2026 notice.&quot; Id.; see also Evergreen Lakes HOA, Inc\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2023 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 2,
+        "reason": "This is primarily an insurance case against GEICO with only incidental mention of Evergreen Lakes HOA.",
+        "community_mentioned": "Evergreen Lakes HOA, Inc",
+        "case_type": "other",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "GRAND HARBOR COMMUNITY ASSOCIATION, INC. v. GH VERO BEACH DEVELOPMENT, LLC",
+      "url": "/scholar_case?case=8669462709510729169&amp;q=%22community+association%22+%22Palm+Beach%22+board&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 of Cozen O&#39;Connor, West Palm Beach, and Herbert\u00a0\u2026 Appellant, Grand Harbor Community\nAssociation, Inc., a homeowner&#39;s\u00a0\u2026 and several individual Association Board members appointed\u00a0\u2026",
+      "citation": "Fla: Dist. Court of Appeals, 4th Dist., 2024 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": false,
+        "score": 3,
+        "reason": "This case involves Grand Harbor Community Association but appears to be in Vero Beach (Indian River County) rather than Palm Beach County, making it geographically irrelevant despite being an HOA dispute.",
+        "community_mentioned": "Grand Harbor Community Association",
+        "case_type": "other",
+        "severity": "low"
+      }
+    },
+    {
+      "title": "GRAND HARBOR CMTY. v. GH VERO BEACH DEV.",
+      "url": "/scholar_case?case=4427826802889682792&amp;q=%22community+association%22+%22Palm+Beach%22+board&amp;hl=en&amp;as_sdt=4,10&amp;as_ylo=2020",
+      "summary": "\u2026 of Cozen O&#39;Connor, West Palm Beach, and Herbert\u00a0\u2026 Appellant, Grand Harbor Community\nAssociation, Inc., a homeowner&#39;s\u00a0\u2026 and several individual Association Board members appointed\u00a0\u2026",
+      "citation": "395 So. 3d 168\u00a0- Fla: Dist. Court of Appeals, 4th Dist., 2024 - Google Scholar",
+      "source": "google_scholar",
+      "feed": "scholar.google.com",
+      "case_number": null,
+      "evaluation": {
+        "relevant": true,
+        "score": 8,
+        "reason": "HOA case from 4th District Court of Appeals (covers Palm Beach County) involving Grand Harbor Community Association with board members as parties.",
+        "community_mentioned": "Grand Harbor Community Association, Inc.",
+        "case_type": "board",
+        "severity": "medium"
+      }
+    }
+  ]
+}
