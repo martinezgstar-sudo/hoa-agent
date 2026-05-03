@@ -143,14 +143,12 @@ export default async function FeeReportPage() {
           </span>
         </div>
 
-        {/* Overall stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px', marginBottom: '48px' }}>
+        {/* FREE TIER — only headline stats and city count */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '32px' }}>
           {[
             { label: 'Communities analyzed', value: data.total.toLocaleString() },
+            { label: 'Cities covered', value: data.cityStats.length.toString() },
             { label: 'County-wide average', value: `$${data.overall.average}/mo` },
-            { label: 'County-wide median', value: `$${data.overall.median}/mo` },
-            { label: 'Lowest fee found', value: `$${data.overall.min}/mo` },
-            { label: 'Highest fee found', value: `$${data.overall.max}/mo` },
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
               <div style={{ fontSize: '22px', fontWeight: 700, color: '#1B2B6B', marginBottom: '4px' }}>{s.value}</div>
@@ -159,82 +157,89 @@ export default async function FeeReportPage() {
           ))}
         </div>
 
-        {/* Fee distribution */}
+        {/* FREE TIER — fee distribution buckets without counts/percentages */}
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '16px' }}>
           Fee distribution
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '10px', marginBottom: '48px' }}>
-          {Object.entries(data.buckets).map(([label, count]) => (
+          {Object.keys(data.buckets).map((label) => (
             <div key={label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 700, color: '#1a1a1a', marginBottom: '4px' }}>{pct(count)}%</div>
-              <div style={{ fontSize: '12px', color: '#1D9E75', fontWeight: 600, marginBottom: '2px' }}>{label}</div>
-              <div style={{ fontSize: '11px', color: '#aaa' }}>{count.toLocaleString()} communities</div>
+              <div style={{ fontSize: '11px', color: '#aaa', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Range</div>
+              <div style={{ fontSize: '14px', color: '#1B2B6B', fontWeight: 700 }}>{label}</div>
+              <div style={{ fontSize: '11px', color: '#bbb', marginTop: '6px', fontStyle: 'italic' }}>Unlock to see %</div>
             </div>
           ))}
         </div>
 
-        {/* By city table */}
+        {/* FREE TIER — teaser table: only first 3 cities */}
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '16px' }}>
-          Average fees by city
+          Average fees by city <span style={{ fontSize: '13px', fontWeight: 400, color: '#888' }}>(preview — top 3 cities)</span>
         </h2>
-        <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', overflow: 'hidden', marginBottom: '48px' }}>
+        <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
               <tr style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e5e5e5' }}>
-                {['City', 'Communities', 'Average/mo', 'Median/mo', 'Range'].map((h) => (
+                {['City', 'Communities', 'Average/mo'].map((h) => (
                   <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontWeight: 600, color: '#555', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {data.cityStats.slice(0, 20).map((row, i) => (
+              {data.cityStats.slice(0, 3).map((row, i) => (
                 <tr key={row.city} style={{ borderBottom: '1px solid #f0f0f0', backgroundColor: i % 2 === 0 ? '#fff' : '#fafafa' }}>
                   <td style={{ padding: '10px 16px', fontWeight: 500, color: '#1a1a1a' }}>
                     <Link href={`/city/${row.city.toLowerCase().replace(/ /g, '-')}`} style={{ color: '#1B2B6B', textDecoration: 'none' }}>{row.city}</Link>
                   </td>
                   <td style={{ padding: '10px 16px', color: '#666' }}>{row.count.toLocaleString()}</td>
                   <td style={{ padding: '10px 16px', color: '#1a1a1a', fontWeight: 500 }}>${row.average}</td>
-                  <td style={{ padding: '10px 16px', color: '#1a1a1a' }}>${row.median}</td>
-                  <td style={{ padding: '10px 16px', color: '#888' }}>${row.min}–${row.max}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* Blurred preview of remaining cities */}
+          <div style={{ position: 'relative' }}>
+            <div style={{ filter: 'blur(4px)', pointerEvents: 'none', userSelect: 'none', maxHeight: '180px', overflow: 'hidden' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                <tbody>
+                  {data.cityStats.slice(3, 12).map((row, i) => (
+                    <tr key={row.city} style={{ borderBottom: '1px solid #f0f0f0', backgroundColor: i % 2 === 0 ? '#fff' : '#fafafa' }}>
+                      <td style={{ padding: '10px 16px' }}>{row.city}</td>
+                      <td style={{ padding: '10px 16px' }}>{row.count.toLocaleString()}</td>
+                      <td style={{ padding: '10px 16px' }}>${row.average}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.95))' }} />
+          </div>
         </div>
 
-        {/* Highest and lowest */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '48px' }}>
-
-          <div>
-            <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#1B2B6B', marginBottom: '14px' }}>Lowest fee communities</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {data.lowest.map((r) => (
-                <div key={r.name} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '8px', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: '#1a1a1a' }}>{r.name}</div>
-                    <div style={{ fontSize: '11px', color: '#888' }}>{r.city}</div>
-                  </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#1D9E75' }}>${r.fee}/mo</div>
-                </div>
-              ))}
-            </div>
+        {/* PAYWALL CTA */}
+        <div style={{ backgroundColor: '#1B2B6B', color: '#fff', borderRadius: '14px', padding: '32px 28px', marginBottom: '48px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+            Premium Report
           </div>
-
-          <div>
-            <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#1B2B6B', marginBottom: '14px' }}>Highest fee communities</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {data.highest.map((r) => (
-                <div key={r.name} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '8px', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: '#1a1a1a' }}>{r.name}</div>
-                    <div style={{ fontSize: '11px', color: '#888' }}>{r.city}</div>
-                  </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#854F0B' }}>${r.fee}/mo</div>
-                </div>
-              ))}
-            </div>
+          <h2 style={{ fontSize: '26px', fontWeight: 700, color: '#fff', marginTop: 0, marginBottom: '8px', letterSpacing: '-0.01em' }}>
+            Unlock the Full 2026 Report
+          </h2>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.85)', marginBottom: '20px', lineHeight: 1.6 }}>
+            Get complete fee data for all {data.cityStats.length} cities and {data.total.toLocaleString()} communities in Palm Beach County. One-time $2.99 unlock.
+          </p>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px 0', fontSize: '14px', color: 'rgba(255,255,255,0.95)', lineHeight: 1.9 }}>
+            <li>✓ Fee ranges, median, and average for every city</li>
+            <li>✓ Individual community fee data — all {data.total.toLocaleString()} rows</li>
+            <li>✓ Sortable and filterable by city, fee, community name</li>
+            <li>✓ Highest and lowest fee communities revealed</li>
+            <li>✓ CSV download for your records</li>
+            <li>✓ Updated as new data is verified</li>
+          </ul>
+          <Link href="/pricing" style={{ display: 'inline-block', backgroundColor: '#1D9E75', color: '#fff', fontSize: '15px', fontWeight: 700, padding: '12px 24px', borderRadius: '10px', textDecoration: 'none' }}>
+            Unlock Full Report — $2.99
+          </Link>
+          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginTop: '10px' }}>
+            One-time payment. No subscription required.
           </div>
-
         </div>
 
         {/* Methodology */}
