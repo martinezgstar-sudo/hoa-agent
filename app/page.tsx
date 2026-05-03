@@ -58,8 +58,16 @@ export default async function Home() {
     if (typeof c.review_count === 'number' && (c.review_count as number) > 0) s += 1
     return s
   }
-  const featured = (featuredRaw ?? [])
-    .map((c: Record<string, unknown>) => ({ c, score: richness(c) }))
+  type FeaturedRow = {
+    id: string; slug: string; canonical_name: string; city: string;
+    monthly_fee_min: number | null; monthly_fee_max: number | null;
+    monthly_fee_median: number | null; management_company: string | null;
+    confidence_score: number | null; review_count: number | null; review_avg: number | null;
+    news_reputation_score: number | null; assessment_signal_count: number | null;
+    [k: string]: unknown
+  }
+  const featured: FeaturedRow[] = ((featuredRaw ?? []) as unknown as FeaturedRow[])
+    .map((c) => ({ c, score: richness(c as unknown as Record<string, unknown>) }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
     .map((x) => x.c)
@@ -176,10 +184,10 @@ export default async function Home() {
             <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px 20px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', cursor: 'pointer'}}>
               <div>
                 <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '3px'}}>{c.canonical_name}</div>
-                <div style={{fontSize: '12px', color: '#888', marginBottom: '8px'}}>{c.city} · {c.property_type}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
+                <div style={{fontSize: '12px', color: '#888', marginBottom: '8px'}}>{c.city} · {String(c.property_type ?? '')}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
                 <div style={{display: 'flex', gap: '6px'}}>
                   <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>Active entity</span>
-                  {c.assessment_signal_count > 0
+                  {(c.assessment_signal_count ?? 0) > 0
                     ? <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>{c.assessment_signal_count} assessment signals</span>
                     : <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#888'}}>No signals</span>
                   }
@@ -187,7 +195,9 @@ export default async function Home() {
               </div>
               <div style={{textAlign: 'right', flexShrink: 0, marginLeft: '16px'}}>
                 <div style={{fontSize: '14px', fontWeight: '500', color: '#1a1a1a'}}>
-                  {c.monthly_fee_min && parseFloat(c.monthly_fee_min) < 1500 ? '$' + Math.round(parseFloat(c.monthly_fee_min)) + (c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? '-$' + Math.round(parseFloat(c.monthly_fee_max)) : '') + '/mo' : c.monthly_fee_min ? 'Fee data available' : 'Fee unknown'}
+                  {c.monthly_fee_min && c.monthly_fee_min < 1500
+                    ? '$' + Math.round(c.monthly_fee_min) + (c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? '-$' + Math.round(c.monthly_fee_max) : '') + '/mo'
+                    : c.monthly_fee_min ? 'Fee data available' : 'Fee unknown'}
                 </div>
                 <div style={{fontSize: '11px', color: '#1D9E75', marginTop: '6px'}}>View profile →</div>
               </div>
