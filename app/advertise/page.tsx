@@ -1,132 +1,190 @@
-import NavBar from '@/app/components/NavBar'
-import type { Metadata } from 'next'
+import NavBar from "@/app/components/NavBar"
+import Link from "next/link"
+import type { Metadata } from "next"
+import { supabase } from "@/lib/supabase"
+import SponsoredCard from "@/app/components/SponsoredCard"
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Advertise | HOA Agent',
-  description: 'Reach homebuyers, renters, real estate agents, and property managers in Palm Beach County through HOA Agent advertising opportunities.',
+  title: "Advertise on HOA Agent — Reach Palm Beach County HOA Residents",
+  description:
+    "Reach 8,000+ HOA and condo communities in Palm Beach County. AI-built ads from your website. From $19.99/month.",
+  alternates: { canonical: "https://www.hoa-agent.com/advertise" },
   openGraph: {
-    title: 'Advertise | HOA Agent',
-    description: 'Advertising opportunities on HOA Agent — reach homebuyers, agents, and property managers in Palm Beach County.',
-    url: 'https://hoa-agent.com/advertise',
-    siteName: 'HOA Agent',
-    type: 'website',
-    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+    title: "Advertise on HOA Agent",
+    description: "Reach Palm Beach County HOA residents through targeted community-page advertising. From $19.99/month.",
+    url: "https://www.hoa-agent.com/advertise",
+    siteName: "HOA Agent",
+    type: "website",
+    images: [{ url: "https://www.hoa-agent.com/logo.png", width: 400, height: 400, alt: "HOA Agent" }],
   },
-  twitter: {
-    card: 'summary',
-    title: 'Advertise | HOA Agent',
-    description: 'Reach Palm Beach County homebuyers and real estate professionals through HOA Agent.',
-  },
+  twitter: { card: "summary", title: "Advertise on HOA Agent", description: "Reach Palm Beach County HOA residents." },
 }
 
-const AUDIENCE = [
-  {
-    segment: 'Homebuyers',
-    desc: 'Active buyers researching HOA communities before making an offer. High purchase intent.',
-  },
-  {
-    segment: 'Renters',
-    desc: 'Prospective residents looking into fees and restrictions before signing a lease.',
-  },
-  {
-    segment: 'Real estate agents',
-    desc: 'Licensed agents using HOA Agent for pre-listing research and buyer due diligence.',
-  },
-  {
-    segment: 'Property managers',
-    desc: 'Community and property management professionals researching local markets.',
-  },
+const PLANS = [
+  { name: "Starter", price: 19.99, badge: null, features: ["1 city of your choice", "1 active ad", "Basic analytics"] },
+  { name: "Growth", price: 69.99, badge: "Most Popular", features: ["Up to 5 cities", "Up to 3 rotating ads", "Full analytics"] },
+  { name: "County", price: 99.99, badge: null, features: ["All Palm Beach County cities", "Up to 5 rotating ads", "Priority placement"] },
 ]
 
-const PLACEMENTS = [
-  {
-    type: 'Sponsored community profiles',
-    desc: 'Feature your management company, services, or brand on community profile pages across Palm Beach County.',
-  },
-  {
-    type: 'Featured listings',
-    desc: 'Promote a community, development, or property at the top of city and search result pages.',
-  },
-  {
-    type: 'Banner placements',
-    desc: 'Display advertising on high-traffic community and search pages.',
-  },
-  {
-    type: 'City page sponsorships',
-    desc: 'Sponsor a city landing page (e.g., Boca Raton, Jupiter) and reach buyers focused on specific markets.',
-  },
+const CATEGORIES = [
+  { icon: "🧹", label: "Cleaning Services" },
+  { icon: "🌴", label: "Landscaping" },
+  { icon: "🏠", label: "Property Management" },
+  { icon: "⚖️", label: "Legal Services" },
+  { icon: "🛡️", label: "Insurance" },
+  { icon: "📦", label: "Moving Services" },
+  { icon: "🔧", label: "Home Services" },
+  { icon: "🔑", label: "Real Estate" },
 ]
 
-export default function AdvertisePage() {
+const FAQ = [
+  { q: "How long until my ad goes live?", a: "Once you sign up and complete your plan, your ad goes live within minutes. Our AI ad generator builds 4 ad options from your website in about 30 seconds." },
+  { q: "Can I change my ad after publishing?", a: "Yes. Edit your ads any time from the advertiser portal. You can pause, swap, or rotate ads at will." },
+  { q: "What cities can I target?", a: "Starter targets 1 city, Growth up to 5, County covers all 12 Palm Beach County cities (West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Lake Worth, Delray Beach, Boynton Beach, Royal Palm Beach, Wellington, Riviera Beach, North Palm Beach, Greenacres)." },
+  { q: "How does Claude create my ad?", a: "Enter your website URL. Claude visits the site, reads your content, and generates 4 ad options with different angles. You pick the one you like and tweak any field before publishing." },
+  { q: "Can I cancel anytime?", a: "Yes. Cancel from the billing tab in your portal. No long-term contracts." },
+]
+
+export default async function AdvertisePage() {
+  const { count } = await supabase
+    .from("communities")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "published")
+  const totalCommunities = count || 8000
+
+  const exampleAd = {
+    id: "example-morningstar",
+    company_name: "MorningStar Commercial & Residential Services",
+    tagline: "Professional cleaning for HOA communities",
+    phone: "561-567-4114",
+    cta_text: "Get a Free Quote",
+    cta_url: "https://morningstarpb.com",
+    category: "cleaning",
+    logo_url: null,
+  }
+
   return (
-    <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
-      <NavBar
-        shareHref="/search"
-        shareLabel="Find my HOA"
-      />
+    <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
+      <NavBar shareHref="/search" shareLabel="Find my HOA" />
 
-      <div style={{ maxWidth: '760px', margin: '0 auto', padding: '52px 24px 80px' }}>
-
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
-          Advertise
-        </div>
-
-        <h1 style={{ fontSize: '34px', fontWeight: 700, color: '#1B2B6B', lineHeight: 1.2, marginBottom: '18px', letterSpacing: '-0.02em' }}>
-          Reach Palm Beach County's<br />HOA Research Audience
-        </h1>
-
-        <p style={{ fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '52px', maxWidth: '600px' }}>
-          HOA Agent is where Palm Beach County buyers, renters, and real estate professionals
-          go to research communities. Put your brand in front of high-intent audiences
-          at the moment they're making housing decisions.
-        </p>
-
-        <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '20px' }}>
-          Who visits HOA Agent
-        </h2>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px', marginBottom: '52px' }}>
-          {AUDIENCE.map((a) => (
-            <div key={a.segment} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px' }}>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#1D9E75', marginBottom: '8px' }}>{a.segment}</div>
-              <div style={{ fontSize: '13px', color: '#555', lineHeight: 1.6 }}>{a.desc}</div>
-            </div>
-          ))}
-        </div>
-
-        <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '20px' }}>
-          Advertising opportunities
-        </h2>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '52px' }}>
-          {PLACEMENTS.map((p) => (
-            <div key={p.type} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#1D9E75', marginTop: '6px', flexShrink: 0 }} />
-              <div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1a1a', marginBottom: '6px' }}>{p.type}</div>
-                <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6 }}>{p.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ backgroundColor: '#1B2B6B', borderRadius: '16px', padding: '36px 32px', color: '#fff' }}>
-          <div style={{ fontSize: '22px', fontWeight: 700, marginBottom: '12px', letterSpacing: '-0.01em' }}>
-            Get in touch
-          </div>
-          <p style={{ fontSize: '14px', lineHeight: 1.8, marginBottom: '24px', color: 'rgba(255,255,255,0.8)', maxWidth: '480px' }}>
-            Tell us about your business and what audience you want to reach. We'll put together
-            options that fit your goals. No commitment required.
-          </p>
-          <a
-            href="mailto:advertise@hoa-agent.com"
-            style={{ fontSize: '14px', backgroundColor: '#1D9E75', color: '#fff', padding: '10px 24px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}
-          >
-            advertise@hoa-agent.com
-          </a>
-        </div>
-
+      <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "8px 24px", textAlign: "right", fontSize: "12px" }}>
+        <span style={{ color: "#888" }}>Already an advertiser? </span>
+        <Link href="/advertise/login" style={{ color: "#1D9E75", fontWeight: 600, textDecoration: "none" }}>Sign in →</Link>
       </div>
+
+      <section style={{ backgroundColor: "#fff", padding: "64px 24px 56px", textAlign: "center" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "16px" }}>
+          For Local Businesses
+        </div>
+        <h1 style={{ fontSize: "44px", fontWeight: 700, color: "#1B2B6B", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px", maxWidth: "680px", margin: "0 auto 16px" }}>
+          Reach Palm Beach County HOA Residents
+        </h1>
+        <p style={{ fontSize: "16px", color: "#555", lineHeight: 1.6, maxWidth: "560px", margin: "0 auto 32px" }}>
+          Your ad appears on the HOA community pages where homebuyers, renters, and residents are already researching. Targeted by city, low cost, AI-built from your website.
+        </p>
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
+            Start Free Trial →
+          </Link>
+          <Link href="#pricing" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#fff", color: "#1B2B6B", border: "2px solid #1B2B6B", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
+            See Pricing
+          </Link>
+        </div>
+        <div style={{ marginTop: "24px", fontSize: "13px", color: "#888" }}>
+          {totalCommunities.toLocaleString()}+ communities where your ad can appear
+        </div>
+      </section>
+
+      <section style={{ padding: "48px 24px", backgroundColor: "#f9f9f9" }}>
+        <div style={{ maxWidth: "560px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px", textAlign: "center" }}>
+            Example — How your ad appears on community pages
+          </div>
+          <SponsoredCard advertisers={[exampleAd]} />
+        </div>
+      </section>
+
+      <section style={{ padding: "56px 24px", backgroundColor: "#fff", borderTop: "1px solid #e5e5e5", borderBottom: "1px solid #e5e5e5" }}>
+        <div style={{ maxWidth: "880px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", marginBottom: "32px", textAlign: "center" }}>How it works</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px" }}>
+            {[
+              { num: 1, title: "Create your free account", desc: "Email + password. Takes a minute." },
+              { num: 2, title: "Enter your website", desc: "Claude reads your site and writes 4 ad options in 30 seconds." },
+              { num: 3, title: "Choose cities and plan", desc: "Pick a plan. Pick your target cities (or all of PBC)." },
+              { num: 4, title: "Your ad goes live", desc: "Ad appears on community pages within minutes." },
+            ].map((s) => (
+              <div key={s.num} style={{ padding: "20px", backgroundColor: "#f9f9f9", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
+                <div style={{ fontSize: "12px", color: "#1D9E75", fontWeight: 700, marginBottom: "6px" }}>STEP {s.num}</div>
+                <div style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a", marginBottom: "6px" }}>{s.title}</div>
+                <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.6 }}>{s.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" style={{ padding: "64px 24px" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: 700, color: "#1B2B6B", textAlign: "center", marginBottom: "10px" }}>Pricing</h2>
+          <p style={{ textAlign: "center", color: "#666", fontSize: "14px", marginBottom: "36px" }}>Simple monthly plans. Cancel anytime.</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
+            {PLANS.map((p) => (
+              <div key={p.name} style={{ position: "relative", backgroundColor: "#fff", borderRadius: "14px", padding: "28px 24px", border: p.badge ? "2px solid #1D9E75" : "1px solid #e5e5e5" }}>
+                {p.badge && (
+                  <div style={{ position: "absolute", top: "-12px", right: "20px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 12px", borderRadius: "12px" }}>{p.badge}</div>
+                )}
+                <div style={{ fontSize: "16px", fontWeight: 700, color: "#1B2B6B", marginBottom: "6px" }}>{p.name}</div>
+                <div style={{ fontSize: "30px", fontWeight: 700, color: "#1a1a1a", marginBottom: "16px" }}>
+                  ${p.price}<span style={{ fontSize: "13px", fontWeight: 400, color: "#888" }}>/month</span>
+                </div>
+                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px 0", fontSize: "13px", color: "#444", lineHeight: 1.9 }}>
+                  {p.features.map((f) => <li key={f}>✓ {f}</li>)}
+                </ul>
+                <Link href="/advertise/signup" style={{ display: "block", textAlign: "center", padding: "11px", backgroundColor: "#1B2B6B", color: "#fff", fontSize: "14px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>Get Started</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: "48px 24px", backgroundColor: "#fff", borderTop: "1px solid #e5e5e5" }}>
+        <div style={{ maxWidth: "880px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#1B2B6B", marginBottom: "24px", textAlign: "center" }}>Who advertises with us</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "12px" }}>
+            {CATEGORIES.map((c) => (
+              <div key={c.label} style={{ padding: "18px", textAlign: "center", backgroundColor: "#f9f9f9", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
+                <div style={{ fontSize: "28px", marginBottom: "6px" }}>{c.icon}</div>
+                <div style={{ fontSize: "12px", color: "#444", fontWeight: 500 }}>{c.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: "56px 24px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#1B2B6B", marginBottom: "20px" }}>Frequently asked questions</h2>
+          {FAQ.map((f, i) => (
+            <details key={i} style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "10px", padding: "14px 18px", marginBottom: "10px" }}>
+              <summary style={{ cursor: "pointer", fontWeight: 600, color: "#1a1a1a" }}>{f.q}</summary>
+              <p style={{ marginTop: "10px", color: "#555", lineHeight: 1.6, fontSize: "14px" }}>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ padding: "56px 24px", backgroundColor: "#1B2B6B", textAlign: "center", color: "#fff" }}>
+        <h2 style={{ fontSize: "26px", fontWeight: 700, marginBottom: "12px" }}>Ready to reach HOA residents?</h2>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.85)", marginBottom: "24px", maxWidth: "480px", margin: "0 auto 24px" }}>
+          {totalCommunities.toLocaleString()}+ communities. Targeted by city. AI-built from your website.
+        </p>
+        <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
+          Get Started →
+        </Link>
+      </section>
     </main>
   )
 }
