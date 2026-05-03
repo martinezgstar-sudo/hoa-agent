@@ -398,25 +398,40 @@ Do not add any form to the assessment signals section.
 
 CRITICAL:
 - Stripe $2.99 paywall wiring for news and legal pages
+- Stripe wiring for advertiser portal (placeholder built — see ADVERTISER PORTAL below)
 - Rotate Mapbox token (was shared in chat)
 - Rotate ADMIN_PASSWORD (appeared in chat)
 - Regenerate GitHub token (expires soon)
+- Apply migration: supabase/migrations/20260503_advertiser_system.sql
+  (creates advertisers, ad_analytics, advertiser_profiles, advertiser_ads,
+   ad_generation_sessions + RLS + seeds MorningStar)
+- Apply migration: supabase/migrations/20260430_community_research_log.sql
+  (audit trail table missing in production)
+
+COMPLETED THIS WEEK:
+- Search results page fix ✓ (commit 3286758)
+- City page enhancement: hero + stats + news ✓ (commit 0f32424)
+- SEO deep audit + 8,364-URL sitemap + LocalBusiness JSON-LD ✓ (88ae609)
+- Version 4 MorningStar SponsoredCard + ad_analytics ✓ (70fe0f0)
+- Advertiser portal built (signup/login/plan/portal/create + AI gen) ✓ (59a4bee)
+- Security audit ✓ (3f9f6f3) — admin/portal protected, robots.txt updated
+- /admin/news over-filter bug fix ✓ (b4d95d3) — pending now shows real items
+- 216 news articles + 20 legal cases inserted into Supabase ✓ (6c76473)
+- 11 communities scored — 5 HIGH RISK, 6 UNDER SCRUTINY ✓ (5e7f59e)
 
 FEATURES IN QUEUE:
-- Version 4 MorningStar ad + advertiser portal
-  with Stripe
-- Search results page fix (showing 0 results)
-- SEO deep audit and city page enhancement
+- Stripe integration for advertiser portal
+  (add STRIPE_SECRET_KEY etc. to Vercel env vars when ready;
+   /advertise/portal/checkout/[plan] is the swap-in point)
 - Map view with Mapbox community markers
 - Management company portal with Supabase auth
-- Palm Beach County HOA Fee Report 2026
+- Palm Beach County HOA Fee Report 2026 (more depth)
 - Crime data layer
 - Sales data layer CAMA matching fix
 
 DATA IN QUEUE:
-- Run wide net news search (fetch-news-wide.py)
-- Run wide net legal search (fetch-legal-wide.py)
-- Review and insert approved articles and cases
+- Review 7+ pending news_items in /admin/news
+- Review 40 Zillow-noise fee observations in /admin/pending (reject all)
 - Link unmatched articles: Joggers Run, Black Diamond,
   La Clara, Riverwalk, Atlantic Cloisters
 - Run python3 scripts/gmail-auth.py for outreach OAuth
@@ -426,6 +441,48 @@ DATA IN QUEUE:
 EXPANSION:
 - Broward County — use EXPANSION_PLAYBOOK.md
 - Miami-Dade County — use EXPANSION_PLAYBOOK.md
+
+---
+
+## ADVERTISER PORTAL
+
+Live URLs:
+  /advertise              public landing page
+  /advertise/signup       Supabase auth signup + advertiser_profiles row
+  /advertise/login        signInWithPassword
+  /advertise/forgot-password  resetPasswordForEmail
+  /advertise/portal       authed dashboard: My Ads / Analytics / Settings / Billing
+  /advertise/portal/plan  Starter $19.99 / Growth $69.99 / County $99.99
+  /advertise/portal/checkout/[plan]  Stripe placeholder (says "contact us")
+  /advertise/portal/create  AI ad generator UI
+  /admin/ads              admin advertiser management (page not built yet)
+
+API routes:
+  POST /api/advertise/generate-ads
+    Auth: Bearer <supabase access_token>
+    Rate limit: 10 sessions/advertiser/day (counts ad_generation_sessions)
+    Calls Claude Sonnet 4 → returns 4 Option JSON
+  POST /api/ads/track
+    Public, fire-and-forget impression/click tracking → ad_analytics
+
+Component:
+  app/components/SponsoredCard.tsx — Version 4 design (single container,
+  thin dividers, "Sponsored" label, initials circle, green CTA, mobile-stack)
+
+Plans:
+  Starter: $19.99/month — 1 city, 1 ad
+  Growth: $69.99/month — 5 cities, 3 rotating ads (Most Popular)
+  County: $99.99/month — all PBC cities, 5 ads, priority placement
+
+When Stripe is wired, add to Vercel env vars:
+  STRIPE_SECRET_KEY
+  STRIPE_WEBHOOK_SECRET
+  STRIPE_STARTER_PRICE_ID, STRIPE_GROWTH_PRICE_ID, STRIPE_COUNTY_PRICE_ID
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+
+Then replace /advertise/portal/checkout/[plan]/page.tsx with a real
+Stripe Checkout Session redirect, and add /api/advertise/checkout +
+/api/advertise/webhook routes.
 
 ---
 
