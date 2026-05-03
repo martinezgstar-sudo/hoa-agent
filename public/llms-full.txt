@@ -1,0 +1,36 @@
+# HOA Agent — Full Reference
+
+## About
+HOA Agent is a Florida HOA intelligence platform founded in 2026 and based in West Palm Beach, Florida. It was created after the founder's work truck was towed by an HOA rule buried in documents he never received. The platform makes HOA and condo community information publicly searchable so buyers, renters, and real estate agents can research before they commit.
+
+## Methodology
+HOA Agent aggregates publicly available information from multiple government and public sources. All data is attributed to its source. Fees shown are either verified by residents or estimated from public records. Estimated fees are clearly labeled. Litigation data comes from CourtListener which indexes federal and state court records. News reputation scores are calculated by AI matching news articles to communities and scoring sentiment and severity.
+
+## Frequently asked questions
+
+Q: Is HOA Agent free to use?
+A: Basic community search and profile viewing is free. Detailed reports, full litigation history, and full news archives require a one-time $2.99 unlock per community.
+
+Q: How often is the data updated?
+A: News data updates daily. Litigation data updates weekly. Community profile data updates as residents and managers submit corrections and as our automated research pipeline finds new information.
+
+Q: What counties does HOA Agent cover?
+A: Currently Palm Beach County, Florida with over 8,000 communities. Broward County and Miami-Dade County are planned for 2026.
+
+Q: Can I trust the litigation data?
+A: Litigation data comes directly from CourtListener which indexes public federal and state court records. HOA Agent displays this data as-is with links to original source documents.
+
+Q: How do I claim my community page?
+A: HOA representatives and managers can claim their community page at https://www.hoa-agent.com/claim/[slug]. Claiming is free and allows you to add accurate information and respond to resident reviews.
+
+Q: What is a news reputation score?
+A: HOA Agent's AI matches news articles to communities and scores the overall media coverage on a 1-10 scale. High Risk (1-3) means significant negative coverage. Excellent (10) means only positive coverage found.
+
+Q: Is HOA Agent affiliated with any HOA or management company?
+A: No. HOA Agent is an independent information platform with no affiliation to any HOA, condo association, or management company.
+
+## Palm Beach County HOA overview
+Palm Beach County has over 8,000 HOA and condo communities across 38 cities. Monthly fees range from under $100 for basic single-family HOAs to over $2,000 for luxury condo associations. The largest master-planned communities include PGA National, Abacoa, Ibis Golf and Country Club, Mirasol, and Olympia. The county is governed by Florida Statutes Chapters 718 (condos) and 720 (HOAs) with additional protections added after the 2021 Surfside condominium collapse.
+
+## Cities covered
+West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Lake Worth, Delray Beach, Boynton Beach, Royal Palm Beach, Wellington, Riviera Beach, North Palm Beach, Greenacres, Lantana, Palm Springs, Lake Park, Mangonia Park, Haverhill, Glen Ridge, Cloud Lake, Loxahatchee, The Acreage, Palm Beach, South Palm Beach, Manalapan, Lake Clarke Shores, Atlantis, Juno Beach, Tequesta, Jupiter Inlet Colony, Palm Beach Shores, Hypoluxo, Gulf Stream, Briny Breezes, Ocean Ridge, Highland Beach

@@ -1,0 +1,48 @@
+# HOA Agent
+> Free public database of HOA and condo community information for Palm Beach County, Florida. Lookup fees, restrictions, management companies, litigation history, news reputation, and resident reviews for over 8,000 communities.
+
+## Core pages
+- [Home](https://www.hoa-agent.com): Search and discover Palm Beach County HOA communities
+- [About](https://www.hoa-agent.com/about): What HOA Agent is and why it exists
+- [Search](https://www.hoa-agent.com/search): Find any HOA or condo by name, address, or city
+- [Cities](https://www.hoa-agent.com/city): Browse communities by city in Palm Beach County
+- [For Agents](https://www.hoa-agent.com/for-agents): Real estate professional resources
+- [Pricing](https://www.hoa-agent.com/pricing): Free tier and paid report details
+- [HOA Fee Report 2026](https://www.hoa-agent.com/reports/hoa-fee-report-2026): Palm Beach County HOA fee data and trends
+- [Guides](https://www.hoa-agent.com/guides): How-to guides on Florida HOAs and condos
+- [Florida HOA Law](https://www.hoa-agent.com/florida-hoa-law): Plain-English explainers of Chapters 718 and 720
+- [Methodology](https://www.hoa-agent.com/methodology): How we collect and verify data
+
+## What we cover
+For each HOA and condo community:
+- Monthly fee range (min, median, max)
+- Management company name and contact
+- Litigation history from CourtListener
+- News reputation score (1-10)
+- Special assessment signals
+- Resident reviews and comments
+- Florida entity status and registration data
+- Unit count and property type
+- Pet restrictions, rental restrictions, STR rules
+
+## Data sources
+- Florida Division of Corporations (Sunbiz)
+- Palm Beach County Property Appraiser (PBCPAO)
+- Palm Beach County Clerk of Courts
+- CourtListener federal and state legal databases
+- NewsAPI and Guardian API
+- Resident submissions (verified by admin)
+
+## Coverage
+- Palm Beach County, Florida (current — 8,000+ communities)
+- Broward and Miami-Dade counties (planned 2026)
+- All 67 Florida counties (planned 2027)
+
+## Key terms
+Special assessment: A one-time fee charged to HOA members for unexpected expenses like roof repairs, pool resurfacing, or building envelope work. Florida law requires advance notice and vote for most assessments.
+
+Master HOA: A top-level association governing an entire planned development. Sub-associations exist within it governing specific neighborhoods or buildings.
+
+News reputation score: HOA Agent scores each community 1-10 based on matched news coverage. 1-3 = High Risk, 4-5 = Under Scrutiny, 6-7 = Mixed, 8-9 = Good Standing, 10 = Excellent.
+
+Chapter 718 vs Chapter 720: Florida Statute Chapter 718 governs condominiums. Chapter 720 governs homeowners associations. They have different rules for assessments, board elections, reserves, and owner rights.
