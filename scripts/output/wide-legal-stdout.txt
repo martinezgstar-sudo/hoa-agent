@@ -1,0 +1,74 @@
+[08:40:13] Wide Legal Search — output dir: scripts/output
+[08:40:13] 
+=== Source 2: Google Scholar (FL state courts) ===
+[08:40:13]   Query: homeowners association "Palm Beach"
+[08:40:15]   Query: "condominium association" "Palm Beach"
+[08:40:17]   Query: "HOA" fraud "Palm Beach" Florida
+[08:40:21]   Query: "community association" "Palm Beach" board
+[08:40:23] 
+=== Source 3: Justia ===
+[08:40:23]   Query: homeowners+association+palm+beach
+[08:40:23]   Justia error: ERROR:HTTP Error 403: Forbidden
+[08:40:24]   Query: condominium+association+palm+beach
+[08:40:25]   Justia error: ERROR:HTTP Error 403: Forbidden
+[08:40:26]   Query: HOA+special+assessment+palm+beach
+[08:40:26]   Justia error: ERROR:HTTP Error 403: Forbidden
+[08:40:27] 
+=== Source 4: DuckDuckGo legal search ===
+[08:40:27]   DDG: "Palm Beach County" HOA lawsuit court case 2024 OR 2025 OR 2
+[08:40:28]   DDG: "Palm Beach" condominium association litigation ruling
+[08:40:29]   DDG: "Palm Beach" HOA fraud criminal charges
+[08:40:30]   DDG: "Palm Beach County" community association judgment
+[08:40:31]   DDG: "Palm Beach" HOA special assessment lawsuit filed
+[08:40:32]   DDG: "Palm Beach" condo association board recall court
+[08:40:32]   DDG: "Palm Beach" HOA lien foreclosure judgment 2025
+[08:40:33]   DDG: "Palm Beach" HOA embezzlement charges Florida
+[08:40:34]   DDG: "Palm Beach" condo association bulk buyer lawsuit
+[08:40:35]   DDG: "Palm Beach" HOA discrimination complaint Florida
+[08:40:36] 
+Collected 27 cases total (27 unique after dedup)
+[08:40:36] 
+=== AI evaluation phase (Claude) ===
+/Users/izzymartinez/Documents/hoa-agent/scripts/fetch-legal-wide.py:286: DeprecationWarning: The model 'claude-sonnet-4-20250514' is deprecated and will reach end-of-life on June 15th, 2026.
+Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+  resp = client.messages.create(
+/Users/izzymartinez/Documents/hoa-agent/scripts/fetch-legal-wide.py:286: DeprecationWarning: The model 'claude-sonnet-4-20250514' is deprecated and will reach end-of-life on June 15th, 2026.
+Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+  resp = client.messages.create(
+[08:41:01]   Scored 10/27
+[08:41:29]   Scored 20/27
+[08:41:50] 
+20 cases passed (relevant=true & score>=7)
+
+=== WIDE LITIGATION SEARCH RESULTS ===
+Source breakdown:
+  portals        :    0 cases found, 0 passed filter (SKIPPED)
+  google_scholar :   27 cases found, 20 passed filter
+  justia         :    0 cases found, 0 passed filter
+  duckduckgo     :    0 cases found, 0 passed filter
+
+Total found:    27
+After dedup:    27
+Passed filter:  20
+Discarded:      7
+
+Top 10 highest scoring cases:
+   1. [9] [other/high] Hall v. SAUSALITO PLACE HOMEOWNERS ASSOCIATION, INC.
+   2. [9] [other/medium] DIEUVIL v. CANYON ISLES HOMEOWNERS ASSOCIATION
+   3. [9] [other/high] SHERBROOKE HOMEOWNERS ASSOCIATION, INC. v. Chan
+   4. [9] [other/medium] DEBERNARDO v. VILLA NOVA HOMEOWNERS ASSOCIATION, INC.
+   5. [9] [other/medium] Curry v. WOODBERRY LAKES HOMEOWNERS ASSOCIATION, INC.
+   6. [9] [other/medium] BOCA VIEW CONDOMINIUM ASSOCIATION, INC. v. Lepselter
+   7. [9] [other/medium] VILLAGES OF PALM BEACH LAKES PROPERTY OWNERS&#39;ASSOCIATION, INC. v. STERLING V
+   8. [8] [other/medium] Isola Bella Homeowners Ass&#39;n v. Clement
+   9. [8] [other/medium] WATERSIDE AT BOYNTON HOMEOWNERS&#39;ASSOCIATION, INC. v. SOUTHERN HOMES OF PALM 
+  10. [8] [other/medium] RIGOLI v. THE PRESERVE AT BAY HILL ESTATES HOMEOWNERS ASSOCIATION, INC.
+
+High severity cases (2):
+  - Hall v. SAUSALITO PLACE HOMEOWNERS ASSOCIATION, INC.
+    /scholar_case?case=13314533297064074169&amp;q=homeowners+ass
+  - SHERBROOKE HOMEOWNERS ASSOCIATION, INC. v. Chan
+    /scholar_case?case=1068313735797329940&amp;q=homeowners+asso
+
+All cases:      scripts/output/wide-legal-results-2026-05-03.json
+Approved cases: scripts/output/wide-legal-approved-2026-05-03.json

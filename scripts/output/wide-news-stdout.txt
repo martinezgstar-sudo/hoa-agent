@@ -1,0 +1,153 @@
+[08:37:23] Wide News Search — output dir: scripts/output
+[08:37:23] 
+=== Source 1: Google News RSS ===
+[08:37:23]   Fetching google_news: https://news.google.com/rss/search?q=HOA+%22Palm+Beach+County%22&hl=en…
+[08:37:24]     → 30 kept (out of 84)
+[08:37:24]   Fetching google_news: https://news.google.com/rss/search?q=homeowners+association+%22Palm+Be…
+[08:37:25]     → 30 kept (out of 100)
+[08:37:26]   Fetching google_news: https://news.google.com/rss/search?q=condo+association+%22Palm+Beach%2…
+[08:37:27]     → 30 kept (out of 100)
+[08:37:27]   Fetching google_news: https://news.google.com/rss/search?q=HOA+lawsuit+%22Palm+Beach%22+Flor…
+[08:37:28]     → 30 kept (out of 52)
+[08:37:28]   Fetching google_news: https://news.google.com/rss/search?q=special+assessment+%22Palm+Beach+…
+[08:37:29]     → 30 kept (out of 53)
+[08:37:29]   Fetching google_news: https://news.google.com/rss/search?q=HOA+fraud+%22Palm+Beach%22&hl=en-…
+[08:37:30]     → 30 kept (out of 43)
+[08:37:30]   Fetching google_news: https://news.google.com/rss/search?q=condominium+%22Palm+Beach%22+disp…
+[08:37:32]     → 30 kept (out of 55)
+[08:37:33]   Fetching google_news: https://news.google.com/rss/search?q=HOA+%22West+Palm+Beach%22&hl=en-U…
+[08:37:33]     → 30 kept (out of 42)
+[08:37:34]   Fetching google_news: https://news.google.com/rss/search?q=HOA+Boca+Raton+Florida&hl=en-US&g…
+[08:37:34]     → 30 kept (out of 49)
+[08:37:35]   Fetching google_news: https://news.google.com/rss/search?q=HOA+Jupiter+Florida&hl=en-US&gl=U…
+[08:37:35]     → 30 kept (out of 45)
+[08:37:36] 
+=== Source 2: Local newspaper RSS (filtered for HOA/condo) ===
+[08:37:36]   Fetching local_news: https://www.palmbeachpost.com/arcio/rss/…
+[08:37:36]   ERR fetching https://www.palmbeachpost.com/arcio/rss/…: HTTP Error 403: Forbidden
+[08:37:36]   Fetching local_news: https://www.sun-sentinel.com/arcio/rss/…
+[08:37:36]   ERR fetching https://www.sun-sentinel.com/arcio/rss/…: HTTP Error 403: Forbidden
+[08:37:36]   Fetching local_news: https://www.tcpalm.com/arcio/rss/…
+[08:37:37]   ERR fetching https://www.tcpalm.com/arcio/rss/…: HTTP Error 403: Forbidden
+[08:37:37]   Fetching local_news: https://www.miamiherald.com/news/local/community/feed…
+[08:37:49]   ERR fetching https://www.miamiherald.com/news/local/community/feed…: The read operation timed out
+[08:37:49]   Fetching local_news: https://www.wptv.com/news/rss…
+[08:37:49]   ERR fetching https://www.wptv.com/news/rss…: HTTP Error 404: Not Found
+[08:37:49]   Fetching local_news: https://www.wpbf.com/rss…
+[08:37:50]   Fetching local_news: https://www.wflx.com/rss…
+[08:37:51]   ERR fetching https://www.wflx.com/rss…: HTTP Error 404: Not Found
+[08:37:51] 
+=== Source 3: Reddit RSS ===
+[08:37:51]   Fetching reddit: https://www.reddit.com/r/HOA/search.rss?q=palm+beach&sort=new…
+[08:37:51]     → 25 kept (out of 25)
+[08:37:52]   Fetching reddit: https://www.reddit.com/r/florida/search.rss?q=HOA+palm+beach&sort=new…
+[08:37:53]     → 25 kept (out of 25)
+[08:37:53]   Fetching reddit: https://www.reddit.com/r/palmbeach/new.rss…
+[08:37:54]     → 25 kept (out of 25)
+[08:37:54]   Fetching reddit: https://www.reddit.com/r/boca/.rss…
+[08:37:54]   ERR fetching https://www.reddit.com/r/boca/.rss…: HTTP Error 404: Not Found
+[08:37:54]   Fetching reddit: https://www.reddit.com/r/WestPalmBeach/.rss…
+[08:37:55]     → 25 kept (out of 25)
+[08:37:55] 
+=== Source 4: FL state government bills RSS ===
+[08:37:55]   Fetching legislative: https://www.myfloridahouse.gov/rss/bills.aspx…
+[08:37:58]   Fetching legislative: https://flsenate.gov/rss/bills.rss…
+[08:37:58]   ERR fetching https://flsenate.gov/rss/bills.rss…: HTTP Error 404: NotFound
+[08:37:58] 
+=== Source 5: FL Federal Court RSS ===
+[08:37:58]   Fetching court_rss: https://www.flsd.uscourts.gov/rss.xml…
+[08:37:58]     → 0 kept (out of 10)
+[08:37:59]   Fetching court_rss: https://www.flmd.uscourts.gov/rss.xml…
+[08:37:59]   Fetching court_rss: https://www.flnd.uscourts.gov/rss.xml…
+[08:38:00]     → 0 kept (out of 3)
+[08:38:00] 
+=== Source 6: DuckDuckGo news search ===
+[08:38:00]   DDG: HOA "Palm Beach County" news 2026
+[08:38:02]   DDG: homeowners association "Palm Beach" lawsuit 2026
+[08:38:03]   DDG: condo association "Palm Beach" special assessment 2026
+[08:38:04]   DDG: HOA fraud "Palm Beach" Florida 2026
+[08:38:05]   DDG: HOA board recall "Palm Beach" 2026
+[08:38:06]   DDG: community association "Palm Beach" 2026
+[08:38:07] 
+Collected 400 articles total (329 unique after dedup)
+[08:38:07] 
+=== AI evaluation phase (Claude) ===
+/Users/izzymartinez/Documents/hoa-agent/scripts/fetch-news-wide.py:222: DeprecationWarning: The model 'claude-sonnet-4-20250514' is deprecated and will reach end-of-life on June 15th, 2026.
+Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+  resp = client.messages.create(
+/Users/izzymartinez/Documents/hoa-agent/scripts/fetch-news-wide.py:222: DeprecationWarning: The model 'claude-sonnet-4-20250514' is deprecated and will reach end-of-life on June 15th, 2026.
+Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+  resp = client.messages.create(
+[08:38:29]   Scored 10/329
+[08:38:53]   Scored 20/329
+[08:39:18]   Scored 30/329
+[08:39:43]   Scored 40/329
+[08:40:08]   Scored 50/329
+[08:40:33]   Scored 60/329
+[08:40:58]   Scored 70/329
+[08:41:25]   Scored 80/329
+[08:41:50]   Scored 90/329
+[08:42:16]   Scored 100/329
+[08:42:41]   Scored 110/329
+[08:43:06]   Scored 120/329
+[08:43:31]   Scored 130/329
+[08:43:56]   Scored 140/329
+[08:44:20]   Scored 150/329
+[08:44:45]   Scored 160/329
+[08:45:09]   Scored 170/329
+[08:45:33]   Scored 180/329
+[08:45:57]   Scored 190/329
+[08:46:22]   Scored 200/329
+[08:46:48]   Scored 210/329
+[08:47:16]   Scored 220/329
+[08:47:43]   Scored 230/329
+[08:48:09]   Scored 240/329
+[08:48:34]   Scored 250/329
+[08:48:59]   Scored 260/329
+[08:49:22]   Scored 270/329
+[08:49:46]   Scored 280/329
+[08:50:11]   Scored 290/329
+[08:50:35]   Scored 300/329
+[08:50:59]   Scored 310/329
+[08:51:23]   Scored 320/329
+[08:51:46] 
+223 articles passed (relevant=true & score>=6)
+
+=== WIDE NEWS SEARCH RESULTS ===
+Source breakdown:
+  google_news    :  300 articles found, 221 passed filter
+  local_news     :    0 articles found, 0 passed filter
+  reddit         :  100 articles found, 2 passed filter
+  legislative    :    0 articles found, 0 passed filter
+  court_rss      :    0 articles found, 0 passed filter
+  duckduckgo     :    0 articles found, 0 passed filter
+
+Total found:    400
+After dedup:    329
+Passed filter:  223
+Discarded:      106
+
+Top 10 highest scoring articles:
+   1. [10] Here’s what HOAs in Palm Beach County can’t do to you anymore as of Monday, July
+        google_news — https://news.google.com/rss/articles/CBMiwgFBVV95cUxQejVCanp
+   2. [10] New Florida HOA law: 8 things HOAs may no longer do to Palm Beach County homeown
+        google_news — https://news.google.com/rss/articles/CBMiyAFBVV95cUxNRnBhaGc
+   3. [10] Florida's condo crisis: In 3 Palm Beach County communities, big issues = high as
+        google_news — https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTzdtQjl
+   4. [9] Rising HOA fees strain homeowners’ budgets across Palm Beach County, Treasure Co
+        google_news — https://news.google.com/rss/articles/CBMitAFBVV95cUxQT045YlV
+   5. [9] Pickleball noise sparks lawsuit in tony Boca Raton community - The Palm Beach Po
+        google_news — https://news.google.com/rss/articles/CBMi2wFBVV95cUxNYURSVER
+   6. [9] 'Failed experiment': South Florida lawmaker floats statewide HOA ban - WPTV
+        google_news — https://news.google.com/rss/articles/CBMirAFBVV95cUxOQTNVTlk
+   7. [9] 'It's time to pull the plug': Residents scramble as HOA files for bankruptcy - W
+        google_news — https://news.google.com/rss/articles/CBMi2wFBVV95cUxQaUQ1Zlp
+   8. [9] Can our homeowners association dictate where residents can and cannot walk their
+        google_news — https://news.google.com/rss/articles/CBMi0AFBVV95cUxPM0s3anN
+   9. [9] HOA won't let owner shutter window while away during hurricane season - can they
+        google_news — https://news.google.com/rss/articles/CBMi1AFBVV95cUxOV0kzdTY
+  10. [9] Is your HOA president getting paid? It might be illegal - The Palm Beach Post
+        google_news — https://news.google.com/rss/articles/CBMizwFBVV95cUxNUWFuX0Z
+
+All articles:      scripts/output/wide-news-results-2026-05-03.json
+Approved articles: scripts/output/wide-news-approved-2026-05-03.json
