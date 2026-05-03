@@ -154,21 +154,32 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
 
-  // Sponsored ads — fetch advertisers targeting this community's city. Falls
-  // back to [] silently if the table doesn't exist yet (table needs migration
-  // 20260503_advertiser_system.sql in production).
+  // Sponsored ads — fetch advertisers targeting this community's city.
+  // Uses the service-role client (server component only — key never reaches
+  // the browser) so RLS doesn't hide active campaigns. Until the public
+  // anon-read policy in migration 20260503_advertiser_system.sql is applied
+  // in production, the public anon client returns 0 rows from `advertisers`.
+  // Service-role bypasses RLS and works either way.
   let pageAdvertisers: Array<{ id: string; company_name: string; tagline: string|null; phone: string|null; cta_text: string|null; cta_url: string|null; category: string|null; logo_url: string|null }> = []
-  try {
-    const { data: ads } = await supabase
-      .from('advertisers')
-      .select('id, company_name, tagline, phone, cta_text, cta_url, category, logo_url, plan, target_cities, target_counties, status')
-      .eq('status', 'active')
-      .contains('target_cities', [community.city])
-      .order('plan', { ascending: false })
-      .limit(3)
-    if (ads) pageAdvertisers = ads
-  } catch {
-    // Table missing — gracefully no ads
+  if (community.city) {
+    try {
+      const { createClient } = await import('@supabase/supabase-js')
+      const supaUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+      const supaSvc = process.env.SUPABASE_SERVICE_ROLE_KEY
+      if (supaUrl && supaSvc) {
+        const adminSb = createClient(supaUrl, supaSvc, { auth: { persistSession: false } })
+        const { data: ads } = await adminSb
+          .from('advertisers')
+          .select('id, company_name, tagline, phone, cta_text, cta_url, category, logo_url, plan, target_cities, target_counties, status')
+          .eq('status', 'active')
+          .contains('target_cities', [community.city])
+          .order('plan', { ascending: false })
+          .limit(3)
+        if (ads) pageAdvertisers = ads
+      }
+    } catch {
+      // Table missing or env unset — gracefully no ads
+    }
   }
 
   const cityForSearch = community.city_verified ? community.city : null

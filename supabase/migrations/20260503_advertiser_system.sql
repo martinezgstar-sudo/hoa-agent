@@ -36,6 +36,21 @@ create table if not exists advertisers (
 create index if not exists idx_advertisers_status on advertisers(status);
 create index if not exists idx_advertisers_target_cities on advertisers using gin(target_cities);
 
+-- Public read for active advertisers — needed so anon-key client on
+-- community pages can fetch which ads to show. Inactive/draft rows stay
+-- private (admin uses service role).
+alter table advertisers enable row level security;
+
+drop policy if exists "anon_read_active_advertisers" on advertisers;
+create policy "anon_read_active_advertisers" on advertisers
+  for select to anon
+  using (status = 'active');
+
+drop policy if exists "service_role_full_advertisers" on advertisers;
+create policy "service_role_full_advertisers" on advertisers
+  for all to service_role
+  using (true) with check (true);
+
 -- ── 2. ad_analytics (public-write tracking) ─────────────────────────────────
 create table if not exists ad_analytics (
   id uuid default gen_random_uuid() primary key,
