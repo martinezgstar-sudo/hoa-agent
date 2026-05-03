@@ -57,7 +57,7 @@ export default function SiteFooter() {
           <Link style={linkStyle} href="/terms">Terms of Service</Link>
           <Link style={linkStyle} href="/privacy">Privacy Policy</Link>
           <Link style={linkStyle} href="/corrections">Corrections</Link>
-          <a style={linkStyle} href="mailto:hello@hoa-agent.com">hello@hoa-agent.com</a>
+          <a href="/contact">contact us</a>
         </div>
       </div>
 

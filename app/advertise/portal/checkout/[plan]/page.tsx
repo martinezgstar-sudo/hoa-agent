@@ -58,7 +58,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
             }}>
               Continue to Portal →
             </Link>
-            <Link href="mailto:hello@hoa-agent.com" style={{
+            <Link href="/contact" style={{
               padding: "11px 20px", backgroundColor: "#fff", color: "#1B2B6B",
               border: "1px solid #1B2B6B", borderRadius: "10px",
               textDecoration: "none", fontSize: "14px", fontWeight: 600,

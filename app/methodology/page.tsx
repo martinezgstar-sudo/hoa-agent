@@ -114,7 +114,7 @@ export default function Page() {
 
       <h2 id="corrections">Corrections</h2>
       <p>
-        See our <a href="/corrections">Corrections</a> page or email <a href="mailto:hello@hoa-agent.com">hello@hoa-agent.com</a> if you find an error. We acknowledge corrections within 7 days.
+        See our <a href="/corrections">Corrections</a> page or email <a href="/contact">contact us</a> if you find an error. We acknowledge corrections within 7 days.
       </p>
     </ArticleLayout>
   )

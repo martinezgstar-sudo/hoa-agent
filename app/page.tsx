@@ -116,7 +116,7 @@ export default async function Home() {
     areaServed: { '@type': 'AdministrativeArea', name: 'Palm Beach County, Florida' },
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'hello@hoa-agent.com',
+      url: 'https://www.hoa-agent.com/contact',
       contactType: 'customer service',
     },
   }

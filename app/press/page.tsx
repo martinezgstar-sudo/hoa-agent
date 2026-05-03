@@ -87,12 +87,7 @@ export default function PressPage() {
             For media requests, interview opportunities, data inquiries, or story tips,
             please reach out directly.
           </p>
-          <a
-            href="mailto:press@hoa-agent.com"
-            style={{ fontSize: '15px', fontWeight: 600, color: '#1D9E75', textDecoration: 'none' }}
-          >
-            press@hoa-agent.com
-          </a>
+          <a href="/press">press contact form</a>
         </div>
 
         <div style={{ borderLeft: '3px solid #1D9E75', paddingLeft: '20px', marginBottom: '40px' }}>

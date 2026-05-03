@@ -47,7 +47,7 @@ export default function Page() {
 
       <h2>Corrections process</h2>
       <p>
-        Corrections received via <a href="mailto:hello@hoa-agent.com">hello@hoa-agent.com</a> or our <a href="/corrections">corrections page</a> are reviewed within 7 days. When we make a material correction, we update the underlying field and (when significant) note the correction in our internal audit trail.
+        Corrections received via <a href="/contact">contact us</a> or our <a href="/corrections">corrections page</a> are reviewed within 7 days. When we make a material correction, we update the underlying field and (when significant) note the correction in our internal audit trail.
       </p>
 
       <h2>How resident submissions are verified</h2>

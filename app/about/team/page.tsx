@@ -39,8 +39,8 @@ export default function Page() {
 
       <h2>Contact</h2>
       <p>
-        Editorial: <a href="mailto:hello@hoa-agent.com">hello@hoa-agent.com</a><br/>
-        Press: <a href="mailto:press@hoa-agent.com">press@hoa-agent.com</a><br/>
+        Editorial: <a href="/contact">contact us</a><br/>
+        Press: <a href="/press">press contact form</a><br/>
         Corrections: <a href="/corrections">/corrections</a>
       </p>
       <p>

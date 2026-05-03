@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import ArticleLayout from "@/app/components/ArticleLayout"
+import ContactForm from "@/app/components/ContactForm"
 
 const SLUG = "/corrections"
 const TITLE = "Corrections — HOA Agent"
@@ -20,14 +21,17 @@ export default function Page() {
     >
       <h2>How to report an error</h2>
       <p>
-        Send corrections to <a href="mailto:hello@hoa-agent.com">hello@hoa-agent.com</a> with:
+        Use the form below. Include the community name, the field that is wrong,
+        the correct value, and a source we can verify (estoppel, board document,
+        or government record link).
       </p>
-      <ul>
-        <li>The community name and URL</li>
-        <li>The specific field that is incorrect</li>
-        <li>The correct value</li>
-        <li>A source we can verify (estoppel, board document, government record link)</li>
-      </ul>
+      <div style={{ marginTop: "16px", marginBottom: "24px" }}>
+        <ContactForm
+          subject="Correction Request"
+          fields="correction"
+          successMessage="Thank you. We acknowledge all corrections within 7 days."
+        />
+      </div>
 
       <h2>Response time</h2>
       <p>

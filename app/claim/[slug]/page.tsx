@@ -190,7 +190,7 @@ export default function ClaimPage({ params }: { params: Promise<{ slug: string }
 
           {status === 'error' && (
             <div style={{ fontSize: '13px', color: '#E24B4A', padding: '10px 14px', backgroundColor: '#FEF2F2', borderRadius: '8px' }}>
-              Something went wrong. Please try again or email us at hello@hoa-agent.com.
+              Something went wrong. Please try again or use <a href="/contact" style={{color:'#E24B4A',textDecoration:'underline'}}>our contact form</a>.
             </div>
           )}
 

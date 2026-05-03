@@ -200,7 +200,7 @@ export default function PortalDashboardPage() {
               <div><strong style={{ color: "#666" }}>Target cities:</strong> {(profile.target_cities || []).join(", ") || "—"}</div>
             </div>
             <div style={{ fontSize: "12px", color: "#888", marginTop: "12px" }}>
-              Editable settings coming soon. Email <a href="mailto:hello@hoa-agent.com" style={{ color: "#1D9E75" }}>hello@hoa-agent.com</a> to make changes for now.
+              Editable settings coming soon. Email <a href="/contact">contact us</a> to make changes for now.
             </div>
           </div>
         )}
@@ -216,7 +216,7 @@ export default function PortalDashboardPage() {
                 Status: <span style={{ fontWeight: 600 }}>{profile.plan_status || "pending"}</span>
               </div>
               <div style={{ marginTop: "16px", fontSize: "12px", color: "#888" }}>
-                Full billing management coming soon. Email <a href="mailto:hello@hoa-agent.com" style={{ color: "#1D9E75" }}>hello@hoa-agent.com</a> for billing questions.
+                Full billing management coming soon. Email <a href="/contact">contact us</a> for billing questions.
               </div>
             </div>
           </div>

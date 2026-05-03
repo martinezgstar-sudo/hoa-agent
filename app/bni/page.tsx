@@ -82,12 +82,7 @@ export default function BniPage() {
 
         <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '28px', textAlign: 'center' }}>
           <div style={{ fontSize: '13px', color: '#888', marginBottom: '8px' }}>Questions or referrals?</div>
-          <a
-            href="mailto:hello@hoa-agent.com"
-            style={{ fontSize: '14px', fontWeight: 600, color: '#1D9E75', textDecoration: 'none' }}
-          >
-            hello@hoa-agent.com
-          </a>
+          <a href="/contact">contact us</a>
         </div>
 
       </div>
