@@ -102,14 +102,31 @@ export async function POST(req: NextRequest) {
 
   // ── approve fee observation ─────────────────────────────────────────────
   if (action === "approve_fee") {
-    const { id, community_id, fee_rounded_min, fee_rounded_max, fee_rounded_median } = body
+    const {
+      id, community_id,
+      fee_rounded_min, fee_rounded_max, fee_rounded_median,
+      // Admin-edited override values from the editable inputs in the UI.
+      // Numbers are honored as-is; null/undefined falls back to the
+      // original observation's rounded value.
+      fee_min_override, fee_max_override, fee_median_override,
+    } = body
+
+    const pickFee = (override: unknown, original: unknown): number | null => {
+      if (typeof override === "number" && isFinite(override)) return override
+      if (typeof original === "number" && isFinite(original)) return original
+      return null
+    }
+
+    const finalMin    = pickFee(fee_min_override,    fee_rounded_min)
+    const finalMedian = pickFee(fee_median_override, fee_rounded_median)
+    const finalMax    = pickFee(fee_max_override,    fee_rounded_max)
 
     const { error: updateErr } = await sb
       .from("communities")
       .update({
-        monthly_fee_min:    fee_rounded_min    ?? null,
-        monthly_fee_max:    fee_rounded_max    ?? null,
-        monthly_fee_median: fee_rounded_median ?? null,
+        monthly_fee_min:    finalMin,
+        monthly_fee_max:    finalMax,
+        monthly_fee_median: finalMedian,
       })
       .eq("id", community_id)
       .is("monthly_fee_min", null) // never overwrite existing
@@ -122,7 +139,10 @@ export async function POST(req: NextRequest) {
       status: "approved"
     }).eq("id", id)
 
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({
+      ok: true,
+      applied: { monthly_fee_min: finalMin, monthly_fee_median: finalMedian, monthly_fee_max: finalMax },
+    })
   }
 
   // ── reject (community_data or fee_observations) ─────────────────────────

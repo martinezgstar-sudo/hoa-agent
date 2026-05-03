@@ -222,11 +222,15 @@ function PendingDataTab() {
 
 // ── Tab 2: Pending Fee Observations ──────────────────────────────────────────
 
+type FeeOverrides = { min: string; median: string; max: string }
+
 function PendingFeesTab() {
   const [rows, setRows]         = useState<PendingFeeRow[]>([])
   const [loading, setLoading]   = useState(false)
   const [msg, setMsg]           = useState("")
   const [filterStatus, setFilterStatus] = useState("pending")
+  // Per-row admin-edited values. Keyed by row id.
+  const [overrides, setOverrides] = useState<Record<string, FeeOverrides>>({})
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -234,7 +238,18 @@ function PendingFeesTab() {
       headers: { "x-admin-password": ADMIN_PASSWORD }
     })
     const json = await res.json()
-    setRows(json.rows || [])
+    const newRows: PendingFeeRow[] = json.rows || []
+    setRows(newRows)
+    // Pre-fill overrides with the rounded values returned from the server
+    const seeded: Record<string, FeeOverrides> = {}
+    for (const r of newRows) {
+      seeded[r.id] = {
+        min:    r.fee_rounded_min    != null ? String(r.fee_rounded_min)    : "",
+        median: r.fee_rounded_median != null ? String(r.fee_rounded_median) : "",
+        max:    r.fee_rounded_max    != null ? String(r.fee_rounded_max)    : "",
+      }
+    }
+    setOverrides(seeded)
     setLoading(false)
   }, [filterStatus])
 
@@ -246,16 +261,41 @@ function PendingFeesTab() {
     return acc
   }, {} as Record<string, number>)
 
+  function setOverrideField(id: string, field: keyof FeeOverrides, value: string) {
+    setOverrides(prev => ({
+      ...prev,
+      [id]: { ...(prev[id] ?? { min: "", median: "", max: "" }), [field]: value },
+    }))
+  }
+
+  function parseOverride(s: string | undefined): number | null {
+    if (s === undefined) return null
+    const t = s.trim()
+    if (!t) return null
+    const v = parseFloat(t)
+    return isNaN(v) ? null : v
+  }
+
   async function approveFee(row: PendingFeeRow) {
+    const ov = overrides[row.id] ?? { min: "", median: "", max: "" }
+    const min    = parseOverride(ov.min)
+    const median = parseOverride(ov.median)
+    const max    = parseOverride(ov.max)
+
     const res = await fetch("/api/admin/pending", {
       method: "POST",
       headers: { "x-admin-password": ADMIN_PASSWORD, "Content-Type": "application/json" },
       body: JSON.stringify({
         action: "approve_fee", id: row.id,
         community_id: row.community_id,
-        fee_rounded_min: row.fee_rounded_min,
-        fee_rounded_max: row.fee_rounded_max,
+        // Defaults from the original observation
+        fee_rounded_min:    row.fee_rounded_min,
+        fee_rounded_max:    row.fee_rounded_max,
         fee_rounded_median: row.fee_rounded_median,
+        // Admin-edited overrides (used by the API when present)
+        fee_min_override:    min,
+        fee_median_override: median,
+        fee_max_override:    max,
       })
     })
     const json = await res.json()
@@ -304,60 +344,133 @@ function PendingFeesTab() {
       )}
 
       {!loading && rows.length > 0 && (
-        <div style={{overflowX:"auto"}}>
-          <table style={tableStyle}>
-            <thead>
-              <tr style={{backgroundColor:"#f9f9f9"}}>
-                {["Community","Exact fee","Rounded min","Rounded max","Median","Source","Type","Date","# Obs","Status","Actions"]
-                  .map(h => <th key={h} style={thStyle}>{h}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map(row => (
-                <tr key={row.id} style={{borderBottom:"1px solid #f0f0f0"}}>
-                  <td style={tdStyle}>
-                    <div style={{fontWeight:600,fontSize:"12px"}}>{row.communities?.canonical_name || row.community_id.slice(0,8)}</div>
-                    {row.communities?.slug && (
-                      <a href={`/community/${row.communities.slug}`} target="_blank"
-                        style={{fontSize:"11px",color:"#888",textDecoration:"none"}}>view ↗</a>
+        <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+          {rows.map(row => {
+            const ov = overrides[row.id] ?? { min: "", median: "", max: "" }
+            return (
+              <div key={row.id}
+                style={{
+                  backgroundColor:"#fff",
+                  border:"1px solid #e5e5e5",
+                  borderRadius:"10px",
+                  padding:"16px 18px",
+                  display:"grid",
+                  gridTemplateColumns:"minmax(200px, 1fr) minmax(360px, 1.2fr) auto",
+                  gap:"18px",
+                  alignItems:"start",
+                }}>
+                {/* Community + meta column */}
+                <div>
+                  <div style={{fontWeight:600,fontSize:"13px",color:"#1a1a1a",marginBottom:"4px"}}>
+                    {row.communities?.canonical_name || row.community_id.slice(0,8)}
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"6px",alignItems:"center",marginBottom:"8px"}}>
+                    {row.source_type ? badge(row.source_type,"orange") : null}
+                    {badge(row.status, row.status==="approved"?"green":row.status==="rejected"?"red":"orange")}
+                    {countByCommunity[row.community_id] > 1 && (
+                      <span style={{fontSize:"11px",color:"#1D9E75",fontWeight:600}}>
+                        {countByCommunity[row.community_id]} obs for this community
+                      </span>
                     )}
-                  </td>
-                  <td style={tdStyle}><strong>{fmt(row.fee_amount)}</strong></td>
-                  <td style={tdStyle}>{fmt(row.fee_rounded_min)}</td>
-                  <td style={tdStyle}>{fmt(row.fee_rounded_max)}</td>
-                  <td style={tdStyle}>{fmt(row.fee_rounded_median)}</td>
-                  <td style={tdStyle}>
-                    {row.source_url ? (
-                      <a href={row.source_url} target="_blank"
-                        style={{fontSize:"11px",color:"#1B2B6B",textDecoration:"none"}}>link ↗</a>
-                    ) : "—"}
-                  </td>
-                  <td style={tdStyle}>{row.source_type ? badge(row.source_type,"orange") : "—"}</td>
-                  <td style={tdStyle}>{row.listing_date ? row.listing_date.slice(0,10) : "—"}</td>
-                  <td style={{...tdStyle,textAlign:"center" as any}}>
-                    <span style={{fontWeight:700,color: countByCommunity[row.community_id] > 1 ? "#1D9E75" : "#888"}}>
-                      {countByCommunity[row.community_id]}
-                    </span>
-                  </td>
-                  <td style={tdStyle}>{badge(row.status, row.status==="approved"?"green":row.status==="rejected"?"red":"orange")}</td>
-                  <td style={tdStyle}>
-                    {row.status === "pending" && (
-                      <div style={{display:"flex",gap:"6px"}}>
-                        <button onClick={() => approveFee(row)}
-                          style={{...btnSmall, backgroundColor:"#1D9E75",color:"#fff"}}
-                          title="Set monthly_fee_min/max/median on community">✓</button>
-                        <button onClick={() => rejectFee(row.id)}
-                          style={{...btnSmall, backgroundColor:"#f5f5f5",color:"#c0392b"}}>✗</button>
-                      </div>
+                  </div>
+                  {row.communities?.slug && (
+                    <a href={`/community/${row.communities.slug}`} target="_blank"
+                      style={{fontSize:"11px",color:"#888",textDecoration:"none"}}>view community ↗</a>
+                  )}
+                </div>
+
+                {/* Found + editable overrides column */}
+                <div>
+                  <div style={{
+                    fontSize:"12px",color:"#888",marginBottom:"8px",
+                    fontStyle:"italic",
+                  }}>
+                    Found: <strong style={{color:"#666"}}>{fmt(row.fee_amount)}</strong> from{" "}
+                    <strong style={{color:"#666"}}>{row.source_type || "unknown"}</strong>
+                    {row.source_url && (
+                      <>
+                        {" — "}
+                        <a href={row.source_url} target="_blank"
+                          style={{color:"#888",textDecoration:"underline"}}>source ↗</a>
+                      </>
                     )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div style={{fontSize:"12px",color:"#888",marginTop:"12px"}}>{rows.length} observation{rows.length!==1?"s":""}</div>
+                    {row.listing_date && (
+                      <span style={{marginLeft:"8px"}}>· listed {row.listing_date.slice(0,10)}</span>
+                    )}
+                  </div>
+                  <label style={{
+                    display:"block",fontSize:"11px",fontWeight:600,
+                    color:"#1B2B6B",marginBottom:"6px",
+                    textTransform:"uppercase" as const,letterSpacing:"0.04em",
+                  }}>
+                    Your verified amount:
+                  </label>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
+                    <FeeInput label="Min"    value={ov.min}    onChange={v => setOverrideField(row.id,"min",v)}    disabled={row.status !== "pending"}/>
+                    <FeeInput label="Median" value={ov.median} onChange={v => setOverrideField(row.id,"median",v)} disabled={row.status !== "pending"}/>
+                    <FeeInput label="Max"    value={ov.max}    onChange={v => setOverrideField(row.id,"max",v)}    disabled={row.status !== "pending"}/>
+                  </div>
+                  <div style={{fontSize:"11px",color:"#999",marginTop:"6px"}}>
+                    Round to nearest $25. Enter your independently verified amount.
+                  </div>
+                </div>
+
+                {/* Actions column */}
+                <div style={{display:"flex",flexDirection:"column",gap:"6px",alignItems:"flex-end"}}>
+                  {row.status === "pending" && (
+                    <>
+                      <button onClick={() => approveFee(row)}
+                        style={{...btnStyle, backgroundColor:"#1D9E75",color:"#fff",minWidth:"100px"}}
+                        title="Apply your verified values to monthly_fee_min/median/max">
+                        ✓ Approve
+                      </button>
+                      <button onClick={() => rejectFee(row.id)}
+                        style={{...btnStyle, backgroundColor:"#f5f5f5",color:"#c0392b",minWidth:"100px"}}>
+                        ✗ Reject
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )
+          })}
+          <div style={{fontSize:"12px",color:"#888",marginTop:"4px"}}>{rows.length} observation{rows.length!==1?"s":""}</div>
         </div>
       )}
+    </div>
+  )
+}
+
+function FeeInput({ label, value, onChange, disabled }: { label: string; value: string; onChange: (v: string) => void; disabled?: boolean }) {
+  return (
+    <div>
+      <div style={{fontSize:"10px",color:"#888",marginBottom:"3px",fontWeight:600}}>{label}</div>
+      <div style={{position:"relative"}}>
+        <span style={{
+          position:"absolute",left:"8px",top:"50%",transform:"translateY(-50%)",
+          color:"#888",fontSize:"12px",pointerEvents:"none",
+        }}>$</span>
+        <input
+          type="number"
+          inputMode="numeric"
+          step="25"
+          min="0"
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          disabled={disabled}
+          style={{
+            width:"100%",
+            padding:"6px 8px 6px 18px",
+            borderRadius:"6px",
+            border:"1px solid #d0d0d0",
+            fontSize:"13px",
+            outline:"none",
+            boxSizing:"border-box",
+            backgroundColor: disabled ? "#f5f5f5" : "#fff",
+            fontFamily:"inherit",
+          }}
+        />
+      </div>
     </div>
   )
 }
