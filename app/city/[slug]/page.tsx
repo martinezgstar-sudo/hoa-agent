@@ -94,11 +94,12 @@ export default async function CityPage({ params }: Props) {
 
   // Try exact ilike first; if zero results (e.g. city stored with different
   // formatting), fall back to a wildcard match anchored to the city name.
+  const SELECT_COLS =
+    'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url, news_reputation_score, news_reputation_label, litigation_count'
+
   let { data: communities } = await supabase
     .from('communities')
-    .select(
-      'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url'
-    )
+    .select(SELECT_COLS)
     .eq('status', 'published')
     .ilike('city', city.name)
     .order('canonical_name', { ascending: true })
@@ -106,16 +107,41 @@ export default async function CityPage({ params }: Props) {
   if (!communities || communities.length === 0) {
     const fallback = await supabase
       .from('communities')
-      .select(
-        'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url'
-      )
+      .select(SELECT_COLS)
       .eq('status', 'published')
       .ilike('city', '%' + city.name + '%')
       .order('canonical_name', { ascending: true })
     communities = fallback.data ?? null
   }
 
-  const list = communities || []
+  // Richness sort — data-rich communities first
+  function richness(c: Record<string, unknown>): number {
+    let s = 0
+    if (c.management_company) s += 15
+    if (c.monthly_fee_median) s += 20
+    if (c.unit_count) s += 10
+    if (c.amenities) s += 10
+    if (c.website_url) s += 10
+    if (c.news_reputation_score) s += 15
+    if (c.litigation_count !== null && c.litigation_count !== undefined) s += 5
+    if (typeof c.review_count === 'number' && (c.review_count as number) > 0) s += 10
+    if (c.review_avg) s += 5
+    return s
+  }
+
+  type Row = {
+    id: string; slug: string; canonical_name: string; city: string | null;
+    property_type: string | null; monthly_fee_min: number | null; monthly_fee_max: number | null;
+    monthly_fee_median: number | null; unit_count: number | null;
+    management_company: string | null; review_avg: number | null; review_count: number | null;
+    amenities: string | null; website_url: string | null;
+    news_reputation_score: number | null; news_reputation_label: string | null;
+    litigation_count: number | null; richness_score: number;
+  }
+  const list: Row[] = (communities || []).map((c) => ({
+    ...(c as unknown as Row),
+    richness_score: richness(c as unknown as Record<string, unknown>),
+  })).sort((a, b) => (b.richness_score - a.richness_score) || a.canonical_name.localeCompare(b.canonical_name))
 
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
@@ -157,9 +183,17 @@ export default async function CityPage({ params }: Props) {
               >
                 <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
                   <div>
-                    <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1a1a' }}>{c.canonical_name}</div>
+                    <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1a1a', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      {c.richness_score >= 50 && (
+                        <span title="Data-rich profile" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#1D9E75' }} />
+                      )}
+                      {c.canonical_name}
+                    </div>
                     <div style={{ fontSize: '12px', color: '#888', marginTop: '3px' }}>
                       {[c.property_type, c.management_company].filter(Boolean).join(' · ')}
+                      {c.richness_score === 0 && (
+                        <span style={{ marginLeft: '6px', fontSize: '11px', color: '#bbb', fontStyle: 'italic' }}>· Limited information available</span>
+                      )}
                     </div>
                   </div>
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>

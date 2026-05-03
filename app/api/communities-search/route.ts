@@ -9,9 +9,27 @@ import { supabase } from '@/lib/supabase'
 const SELECT_COLUMNS = [
   'id', 'canonical_name', 'slug', 'city', 'city_verified', 'zip_code',
   'unit_count', 'property_type', 'monthly_fee_min', 'monthly_fee_max',
+  'monthly_fee_median',
   'confidence_score', 'review_count', 'review_avg', 'assessment_signal_count',
-  'management_company', 'pet_restriction', 'is_sub_hoa', 'master_hoa_id',
+  'management_company', 'pet_restriction', 'amenities', 'website_url',
+  'news_reputation_score', 'news_reputation_label', 'litigation_count',
+  'is_sub_hoa', 'master_hoa_id',
 ].join(', ')
+
+/** 0–100 score reflecting how data-rich a community profile is. */
+function richnessScore(c: Record<string, unknown>): number {
+  let s = 0
+  if (c.management_company) s += 15
+  if (c.monthly_fee_median) s += 20
+  if (c.unit_count) s += 10
+  if (c.amenities) s += 10
+  if (c.website_url) s += 10
+  if (c.news_reputation_score) s += 15
+  if (c.litigation_count !== null && c.litigation_count !== undefined) s += 5
+  if (typeof c.review_count === 'number' && c.review_count > 0) s += 10
+  if (c.review_avg) s += 5
+  return s
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -90,5 +108,16 @@ export async function GET(request: NextRequest) {
     console.error('[api/communities-search]', { q, error: error.message })
     return NextResponse.json({ communities: [], error: error.message }, { status: 200 })
   }
-  return NextResponse.json({ communities: communities || [] })
+  // Annotate each row with a richness_score; if the user didn't specifically
+  // pick A-Z order, sort richest-first so data-complete profiles appear first.
+  type Row = Record<string, unknown> & { richness_score: number; unit_count?: number | null }
+  const raw = (communities ?? []) as unknown as Record<string, unknown>[]
+  const rows: Row[] = raw.map((c) => ({
+    ...c,
+    richness_score: richnessScore(c),
+  }))
+  if (sort !== 'az') {
+    rows.sort((a, b) => (b.richness_score - a.richness_score) || ((b.unit_count ?? 0) - (a.unit_count ?? 0)))
+  }
+  return NextResponse.json({ communities: rows })
 }
