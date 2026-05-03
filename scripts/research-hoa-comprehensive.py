@@ -47,6 +47,13 @@ SUPABASE_ANON  = os.environ.get("NEXT_PUBLIC_SUPABASE_ANON_KEY", "")
 SUPABASE_SVC   = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 NEWS_API_KEY   = os.environ.get("NEWS_API_KEY", "")
 
+# Fee sources we no longer fetch from. Existing observations in
+# pending_fee_observations are preserved (admin can still review/reject
+# them); only NEW fetches are blocked.
+#   zillow → returns the fee-range filter slider values ($100, $200, $300,
+#            $400, $500) as if they were real fees, polluting the queue.
+SKIP_FEE_SOURCES = {"zillow", "zillow.com"}
+
 # Auto-approvable field set
 AUTO_APPROVE_FIELDS = {
     "entity_status", "state_entity_number", "registered_agent",
@@ -104,6 +111,20 @@ def round_fee(amount: float, direction: str = "nearest") -> float:
         return math.ceil(amount / 25) * 25
     # nearest
     return round(amount / 25) * 25
+
+
+def is_slider_noise(fee_list) -> bool:
+    """Detect Zillow-style fee-range filter slider values.
+
+    Returns True when 3+ fees from the same source are all exact $100
+    multiples and there are at least 3 of them — the signature of UI
+    range-slider stops ($100/$200/$300/$400/$500), not real HOA fees.
+    """
+    fees = [float(f) for f in fee_list if f is not None]
+    if len(fees) < 3:
+        return False
+    multiples_of_100 = [f for f in fees if f % 100 == 0]
+    return len(multiples_of_100) >= 3 and len(multiples_of_100) == len(fees)
 
 
 def supabase_get(path: str, params: Optional[dict] = None) -> dict:
@@ -214,7 +235,13 @@ class CommunityFindings:
         })
 
     def add_fee_obs(self, amount: float, source_url: str, source_type: str, listing_date: Optional[str] = None):
-        """Record a fee observation (always goes to pending_fee_observations)."""
+        """Record a fee observation (always goes to pending_fee_observations).
+
+        Skips sources listed in SKIP_FEE_SOURCES (currently: zillow). Existing
+        rows in the DB are untouched — only new fetches are gated.
+        """
+        if source_type and source_type.lower() in SKIP_FEE_SOURCES:
+            return
         self.fee_obs.append({
             "fee_amount": amount,
             "fee_rounded_min":    round_fee(amount, "down"),
@@ -224,6 +251,29 @@ class CommunityFindings:
             "source_type": source_type,
             "listing_date": listing_date,
         })
+
+    def filter_slider_noise(self) -> int:
+        """Drop slider-noise fee observations (per source).
+
+        Returns count of removed observations.
+        """
+        if not self.fee_obs:
+            return 0
+        # Group fees by source_type
+        by_source: dict[str, list] = {}
+        for obs in self.fee_obs:
+            by_source.setdefault(obs["source_type"], []).append(obs)
+        kept: list[dict] = []
+        removed = 0
+        for src, group in by_source.items():
+            amounts = [g["fee_amount"] for g in group]
+            if is_slider_noise(amounts):
+                removed += len(group)
+                self.note(f"Slider noise filtered: {len(group)} obs from {src}")
+            else:
+                kept.extend(group)
+        self.fee_obs = kept
+        return removed
 
     def log_source(self, description: str):
         self.sources_checked.append(description)
@@ -591,11 +641,14 @@ def run_ddg_searches(f: CommunityFindings) -> None:
             combined = f"{title} {snippet}"
             extracted = extract_from_text(combined)
 
-            # Handle fees separately — always to fee observations
+            # Handle fees separately — always to fee observations.
+            # Zillow disabled (slider noise); add_fee_obs() drops it silently.
             for fee_val in extracted.get("fees", []):
-                src_type = "zillow" if "zillow" in url.lower() else \
-                           "realtor" if "realtor" in url.lower() else \
-                           "trulia" if "trulia" in url.lower() else "web_search"
+                src_type = "realtor" if "realtor" in url.lower() else \
+                           "trulia" if "trulia" in url.lower() else \
+                           "redfin" if "redfin" in url.lower() else \
+                           "homes_com" if "homes.com" in url.lower() else \
+                           "web_search"
                 f.add_fee_obs(fee_val, url, src_type)
 
             # Other extracted data — to pending (admin review)
@@ -638,40 +691,59 @@ def run_ddg_searches(f: CommunityFindings) -> None:
         time.sleep(0.5)
 
 
-# ── TIER 4 — Listing sites (fee observations only) ───────────────────────────
+# ── TIER 4 — Fee databases & directories (fee observations only) ────────────
+
+# Sites we ask DDG to restrict to. Each query returns up to 6 results.
+# All extracted fees go to pending_fee_observations (never auto-approved).
+FEE_SITE_QUERIES: list[tuple[str, str]] = [
+    # Source A — HOA fee databases
+    ("livingin.com",         "site:livingin.com"),
+    ("niche.com",            "site:niche.com"),
+    ("bestplaces.net",       "site:bestplaces.net"),
+    ("neighborhoodscout",    "site:neighborhoodscout.com"),
+    # Source B — Real estate sites that publish HOA fee fields
+    ("redfin.com",           "site:redfin.com"),
+    ("homes.com",            "site:homes.com"),
+    ("trulia.com",           "site:trulia.com"),
+    # Source C — Florida-specific HOA directories
+    ("floridahoa.org",       "site:floridahoa.org"),
+    ("hoamanagement.com",    "site:hoamanagement.com"),
+]
+
 
 def search_listing_sites(f: CommunityFindings) -> None:
+    """Search HOA fee databases + real estate sites for fee mentions.
+
+    Replaces the old Zillow/Realtor scrape. Each source is queried via DDG
+    with a site: filter, then results' titles+snippets are run through
+    extract_from_text() (which requires HOA-context words near the dollar
+    amount). All matches go to pending_fee_observations for admin review.
+
+    After all sources are checked, slider-noise filter runs once to drop
+    any source whose fees look like UI range-slider stops.
     """
-    Search Zillow and Realtor for fee mentions.
-    ALL data goes to pending_fee_observations — never auto-approved.
-    """
-    name_slug = re.sub(r"[^a-z0-9]+", "-", f.name.lower()).strip("-")
-    city_slug = re.sub(r"[^a-z0-9]+", "-", (f.city or "florida").lower()).strip("-")
+    for src_name, site_filter in FEE_SITE_QUERIES:
+        if src_name in SKIP_FEE_SOURCES:
+            continue
+        query = f'"{f.name}" HOA fee monthly {site_filter}'
+        results = ddg_search(query, max_results=4)
+        f.log_source(f"Fee DDG ({src_name}): {len(results)} results")
+        if not results:
+            time.sleep(0.4)
+            continue
+        for url, title, snippet in results:
+            combined = f"{title} {snippet}"
+            extracted = extract_from_text(combined)
+            for fee_val in extracted.get("fees", []):
+                # Only count fees in plausible HOA range
+                if 50 <= fee_val <= 2500:
+                    f.add_fee_obs(fee_val, url, src_name)
+        time.sleep(0.5)
 
-    # Zillow search page (HTML, public)
-    zillow_url = f"https://www.zillow.com/homes/{urllib.parse.quote(f.name + ' ' + (f.city or ''))}_rb/"
-    zillow_html = fetch(zillow_url, timeout=12)
-    f.log_source(f"Zillow: {zillow_url[:70]}")
-
-    if not zillow_html.startswith("ERROR"):
-        page_text = text_from_html(zillow_html)
-        for fee_val in extract_from_text(page_text).get("fees", []):
-            f.add_fee_obs(fee_val, zillow_url, "zillow")
-
-    # Realtor.com
-    realtor_url = f"https://www.realtor.com/realestateandhomes-search/{city_slug}_FL"
-    realtor_html = fetch(realtor_url, timeout=12)
-    f.log_source(f"Realtor.com: {realtor_url[:70]}")
-
-    if not realtor_html.startswith("ERROR"):
-        # Only parse sections mentioning our community name
-        idx = realtor_html.upper().find(f.name[:20].upper())
-        if idx >= 0:
-            excerpt = text_from_html(realtor_html[max(0, idx-50):idx+800])
-            for fee_val in extract_from_text(excerpt).get("fees", []):
-                f.add_fee_obs(fee_val, realtor_url, "realtor")
-
-    time.sleep(0.5)
+    # Run slider-noise detector across what was collected this round.
+    removed = f.filter_slider_noise()
+    if removed > 0:
+        log(f"  [Tier 4] dropped {removed} slider-noise fee observations")
 
 
 # ── TIER 5 — Browser sources (Playwright) ────────────────────────────────────
