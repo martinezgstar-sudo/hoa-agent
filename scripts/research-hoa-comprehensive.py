@@ -58,6 +58,7 @@ SKIP_FEE_SOURCES = {"zillow", "zillow.com"}
 AUTO_APPROVE_FIELDS = {
     "entity_status", "state_entity_number", "registered_agent",
     "incorporation_date", "unit_count", "gated", "age_restricted",
+    "is_gated", "is_55_plus", "is_age_restricted",
     "street_address", "zip_code",
 }
 
@@ -489,6 +490,124 @@ def search_newsapi(f: CommunityFindings) -> None:
             f.note(f"NewsAPI: {art.get('title','')} — {art.get('url','')[:60]}")
     except Exception:
         pass
+
+
+# ── GATED / 55+ DETECTION ─────────────────────────────────────────────────────
+# Auto-approvable booleans. Only update if currently false. Never set true→false.
+# Source priority: amenities text → name pattern (handled in SQL) → DDG (≥2 hits).
+
+GATED_AMENITIES_TERMS = [
+    "gated", "guard gate", "security gate", "controlled access",
+    "guardhouse", "guard house", "gatehouse",
+]
+PLUS55_AMENITIES_TERMS = [
+    "55+", "55 plus", "age 55", "55 and older", "55 or older",
+    "age restricted", "age-restricted", "active adult",
+    "adult community", "hopa", "62+",
+]
+GATED_WEB_TERMS = [
+    "gated community", "gated entrance", "guard gate",
+    "security gate", "controlled access", "guardhouse",
+    "guard house", "gatehouse",
+]
+PLUS55_WEB_TERMS = [
+    "55+", "55 and older", "55 or older", "age 55",
+    "age-restricted", "age restricted", "active adult",
+    "adult community", "hopa", "62+",
+]
+
+
+def detect_gated_55plus(f: "CommunityFindings", dry_run: bool) -> None:
+    """Detect gated/55+ status from amenities first, then DDG (need ≥2 hits).
+    Auto-updates is_gated / is_55_plus / is_age_restricted directly on
+    communities — only if currently false. Never reverses true→false."""
+    cid       = f.community_id
+    name      = f.name
+    city      = f.city or "Florida"
+    cur_gated = bool(f.community.get("is_gated"))
+    cur_55    = bool(f.community.get("is_55_plus"))
+    amenities = (f.community.get("amenities") or "").lower()
+
+    set_gated = False
+    set_55    = False
+
+    # Step 1 — amenities text scan (free / no API)
+    if not cur_gated and amenities:
+        for t in GATED_AMENITIES_TERMS:
+            if t in amenities:
+                set_gated = True
+                f.note(f"is_gated=true via amenities ('{t}')")
+                break
+    if not cur_55 and amenities:
+        for t in PLUS55_AMENITIES_TERMS:
+            if t in amenities:
+                set_55 = True
+                f.note(f"is_55_plus=true via amenities ('{t}')")
+                break
+
+    # Step 2 — web sweep only if still missing flag
+    if (not cur_gated and not set_gated) or (not cur_55 and not set_55):
+        queries = [
+            f'"{name}" gated community {city} Florida',
+            f'"{name}" 55+ age restricted {city} Florida',
+            f'"{name}" active adult community {city} FL',
+            f'"{name}" guard gate {city}',
+            f'"{name}" adult living {city} Florida',
+        ]
+        g_hits = 0
+        p_hits = 0
+        for q in queries:
+            results = ddg_search(q, max_results=4)
+            blob = " ".join((t + " " + s) for _u, t, s in results).lower()
+            if not blob:
+                time.sleep(0.4)
+                continue
+            for t in GATED_WEB_TERMS:
+                if t in blob:
+                    g_hits += 1
+                    break
+            for t in PLUS55_WEB_TERMS:
+                if t in blob:
+                    p_hits += 1
+                    break
+            time.sleep(0.4)
+
+        if not cur_gated and not set_gated and g_hits >= 2:
+            set_gated = True
+            f.note(f"is_gated=true via DDG ({g_hits} confirming queries)")
+        if not cur_55 and not set_55 and p_hits >= 2:
+            set_55 = True
+            f.note(f"is_55_plus=true via DDG ({p_hits} confirming queries)")
+
+    # Step 3 — apply (auto-approve, never overwrite true→false)
+    payload: dict = {}
+    if set_gated:
+        payload["is_gated"] = True
+    if set_55:
+        payload["is_55_plus"] = True
+        payload["is_age_restricted"] = True
+    if payload and not dry_run and SUPABASE_SVC and SUPABASE_SVC != "your_service_role_key_here":
+        payload["updated_at"] = "now()"
+        # Build a filter that only matches rows where the booleans are still false
+        bool_filters = []
+        if set_gated: bool_filters.append("is_gated=eq.false")
+        if set_55:    bool_filters.append("is_55_plus=eq.false")
+        qs = "&".join([f"id=eq.{cid}", "status=eq.published"] + bool_filters)
+        try:
+            req = urllib.request.Request(
+                f"{SUPABASE_URL}/rest/v1/communities?{qs}",
+                data=json.dumps(payload).encode(),
+                method="PATCH",
+                headers={
+                    "apikey": SUPABASE_SVC,
+                    "Authorization": f"Bearer {SUPABASE_SVC}",
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal",
+                },
+            )
+            urllib.request.urlopen(req, timeout=15).read()
+        except Exception as e:
+            f.note(f"detect_gated_55plus PATCH error: {e}")
 
 
 # ── TIER 3 — DuckDuckGo web search ────────────────────────────────────────────
@@ -939,6 +1058,8 @@ def research_community(community: dict, dry_run: bool) -> dict:
     # ── Tier 3 ────────────────────────────────────────────────────────────
     log("  [Tier 3] DuckDuckGo searches…")
     run_ddg_searches(f)
+    log("  [Tier 3b] Gated / 55+ detection (amenities → web)…")
+    detect_gated_55plus(f, dry_run)
 
     # ── Tier 4 ────────────────────────────────────────────────────────────
     log("  [Tier 4] Listing sites (fee obs only)…")

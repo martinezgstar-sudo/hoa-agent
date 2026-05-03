@@ -26,6 +26,9 @@ type Community = {
   review_avg: number | null
   review_count: number | null
   website_url: string | null
+  is_55_plus?: boolean | null
+  is_gated?: boolean | null
+  is_age_restricted?: boolean | null
 }
 
 type Suggestion = { type: string; label: string; slug?: string }
@@ -191,6 +194,15 @@ function ComparePageInner() {
                   { label: "Management Company", get: (c: Community) => c.management_company || NA },
                   { label: "News Reputation", get: repScore },
                   { label: "Litigation Count", get: litCell },
+                  { label: "Age Restricted", get: (c: Community) => (
+                    c.is_55_plus ? <span style={{ color: "#92400E", fontWeight: 600 }}>Yes — 55+ Community</span>
+                    : c.is_age_restricted ? <span style={{ color: "#6B21A8", fontWeight: 600 }}>Yes</span>
+                    : <span style={{ color: "#1D9E75" }}>No</span>
+                  ) },
+                  { label: "Gated", get: (c: Community) => (
+                    c.is_gated ? <span style={{ color: "#1E40AF", fontWeight: 600 }}>Yes</span>
+                    : <span style={{ color: "#1D9E75" }}>No</span>
+                  ) },
                   { label: "Pet Policy", get: (c: Community) => c.pet_restriction || NA },
                   { label: "Rental Restrictions", get: (c: Community) => c.rental_approval || NA },
                   { label: "STR Restrictions", get: (c: Community) => c.str_restriction || NA },

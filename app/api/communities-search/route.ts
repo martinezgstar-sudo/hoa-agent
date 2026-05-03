@@ -14,6 +14,7 @@ const SELECT_COLUMNS = [
   'management_company', 'pet_restriction', 'amenities', 'website_url',
   'news_reputation_score', 'news_reputation_label', 'litigation_count',
   'is_sub_hoa', 'master_hoa_id',
+  'is_55_plus', 'is_gated', 'is_age_restricted',
 ].join(', ')
 
 /** 0–100 score reflecting how data-rich a community profile is. */

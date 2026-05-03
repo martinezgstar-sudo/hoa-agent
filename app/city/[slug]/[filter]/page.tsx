@@ -25,6 +25,7 @@ type FilterClause =
   | { op: 'gte'; col: string; val: number }
   | { op: 'lte'; col: string; val: number }
   | { op: 'gt'; col: string; val: number }
+  | { op: 'eq_bool'; col: string; val: boolean }
 
 type FilterDef = { label: string; intro: string; clauses: FilterClause[] }
 
@@ -83,6 +84,18 @@ const FILTERS: Record<string, FilterDef> = {
       "Communities with a news reputation score of 8 or higher. These are communities where matched news coverage is positive or neutral with no significant red flags.",
     clauses: [{ op: 'gte', col: 'news_reputation_score', val: 8 }],
   },
+  "55-plus": {
+    label: "55+",
+    intro:
+      "Age-restricted communities for adults 55 and older. These communities operate under the federal Housing for Older Persons Act (HOPA) and offer resort-style amenities and maintenance-free living in Palm Beach County, Florida.",
+    clauses: [{ op: 'eq_bool', col: 'is_55_plus', val: true }],
+  },
+  "gated": {
+    label: "Gated",
+    intro:
+      "Gated HOA and condo communities offering controlled access and enhanced security. Many gated communities in Palm Beach County include guard houses, key-card entry, or roving patrols funded through the monthly assessment.",
+    clauses: [{ op: 'eq_bool', col: 'is_gated', val: true }],
+  },
 }
 
 interface Props {
@@ -94,7 +107,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = CITIES[slug]
   const f = FILTERS[filter]
   if (!city || !f) return { title: "Not Found — HOA Agent" }
-  const title = `${f.label} HOA Communities in ${city}, FL | HOA Agent`
+  const title = filter === '55-plus'
+    ? `55+ HOA Communities in ${city} | HOA Agent`
+    : filter === 'gated'
+    ? `Gated HOA Communities in ${city} | HOA Agent`
+    : `${f.label} HOA Communities in ${city}, FL | HOA Agent`
   const description = `${f.label.toLowerCase()} HOA and condo communities in ${city}, Palm Beach County, Florida. ${f.intro.slice(0, 100)}…`
   const canonical = `https://www.hoa-agent.com/city/${slug}/${filter}`
   return {
@@ -148,6 +165,7 @@ export default async function CityFilterPage({ params }: Props) {
     else if (cl.op === 'gte') q = q.gte(cl.col, cl.val)
     else if (cl.op === 'lte') q = q.lte(cl.col, cl.val)
     else if (cl.op === 'gt') q = q.gt(cl.col, cl.val)
+    else if (cl.op === 'eq_bool') q = q.eq(cl.col, cl.val)
   }
   const { data } = await q
   type Row = Record<string, unknown> & { richness_score: number }

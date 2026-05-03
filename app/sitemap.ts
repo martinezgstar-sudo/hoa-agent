@@ -21,10 +21,11 @@ const FILTERS = [
   'low-hoa-fees', 'condos', 'single-family', 'no-rental-approval', 'master-hoa',
 ]
 
-// Filter sub-pages for /city/[slug]/[filter] (8 filters × 9 city slugs = 72)
+// Filter sub-pages for /city/[slug]/[filter] (10 filters × 9 city slugs = 90)
 const CITY_FILTERS = [
   'condos', 'single-family', 'townhomes', 'pet-friendly',
   'affordable', 'high-fee', 'with-litigation', 'good-standing',
+  '55-plus', 'gated',
 ]
 
 const GUIDE_SLUGS = [

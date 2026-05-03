@@ -807,6 +807,8 @@ export default function SearchPage() {
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
                       {c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>}
                       {(c.parent_id || c.is_sub_hoa) && !c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>}
+                      {c.is_55_plus && <span style={{fontSize:"10px",padding:"2px 7px",borderRadius:"999px",backgroundColor:"#FEF3C7",color:"#92400E",border:"1px solid #FDE68A",fontWeight:600}}>55+</span>}
+                      {c.is_gated && <span style={{fontSize:"10px",padding:"2px 7px",borderRadius:"999px",backgroundColor:"#DBEAFE",color:"#1E40AF",border:"1px solid #BFDBFE",fontWeight:600}}>Gated</span>}
                       <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#E1F5EE",color:"#1B2B6B"}}>Active entity</span>
                       {c.review_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#f0f0f0",color:"#555"}}>{"★".repeat(Math.round(c.review_avg || 0))} {c.review_count} reviews</span>}
                       {c.assessment_signal_count > 0 && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>{c.assessment_signal_count} signals</span>}

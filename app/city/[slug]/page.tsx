@@ -37,12 +37,14 @@ type CityStats = {
   max_fee: number | null
   avg_score: number | null
   with_litigation: number
+  gated: number
+  plus55: number
 }
 
 async function getCityStats(cityName: string): Promise<CityStats> {
   const { data } = await supabase
     .from('communities')
-    .select('property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, news_reputation_score, litigation_count')
+    .select('property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, news_reputation_score, litigation_count, is_gated, is_55_plus')
     .eq('status', 'published')
     .ilike('city', cityName)
 
@@ -69,6 +71,8 @@ async function getCityStats(cityName: string): Promise<CityStats> {
       ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
       : null,
     with_litigation: rows.filter((r) => (r.litigation_count ?? 0) > 0).length,
+    gated: rows.filter((r) => (r as { is_gated?: boolean }).is_gated === true).length,
+    plus55: rows.filter((r) => (r as { is_55_plus?: boolean }).is_55_plus === true).length,
   }
 }
 
@@ -359,6 +363,8 @@ export default async function CityPage({ params }: Props) {
             { key: 'high-fee', label: 'Premium' },
             { key: 'with-litigation', label: 'With Litigation' },
             { key: 'good-standing', label: 'Good Standing' },
+            ...(stats.plus55 > 0 ? [{ key: '55-plus', label: `55+ Communities (${stats.plus55})` }] : []),
+            ...(stats.gated > 0 ? [{ key: 'gated', label: `Gated Communities (${stats.gated})` }] : []),
           ].map((f) => (
             <Link
               key={f.label}

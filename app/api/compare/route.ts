@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
   const { data, error } = await sb
     .from("communities")
     .select(
-      "canonical_name, slug, city, property_type, unit_count, monthly_fee_min, monthly_fee_max, monthly_fee_median, management_company, news_reputation_score, news_reputation_label, litigation_count, pet_restriction, rental_approval, str_restriction, vehicle_restriction, amenities, review_avg, review_count, website_url, is_sub_hoa, master_hoa_id"
+      "canonical_name, slug, city, property_type, unit_count, monthly_fee_min, monthly_fee_max, monthly_fee_median, management_company, news_reputation_score, news_reputation_label, litigation_count, pet_restriction, rental_approval, str_restriction, vehicle_restriction, amenities, review_avg, review_count, website_url, is_sub_hoa, master_hoa_id, is_55_plus, is_gated, is_age_restricted"
     )
     .in("slug", slugs)
     .eq("status", "published")

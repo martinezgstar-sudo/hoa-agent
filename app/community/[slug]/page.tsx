@@ -86,6 +86,10 @@ interface Community {
   // legacy columns kept for backward compatibility
   is_sub_hoa?: boolean
   master_hoa_id?: string | null
+  // gated / age-restricted flags
+  is_55_plus?: boolean
+  is_gated?: boolean
+  is_age_restricted?: boolean
 }
 
 async function getCommunity(slug: string) {
@@ -360,6 +364,22 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           text: community.rental_approval || `Rental restrictions for ${community.canonical_name} have not been confirmed. Check with the association directly before purchasing as an investor.`,
         },
       },
+      ...(community.is_55_plus ? [{
+        '@type': 'Question',
+        name: `Is ${community.canonical_name} a 55+ community?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, ${community.canonical_name} is an age-restricted 55+ community in ${community.city}, Florida. At least 80% of occupied units must be occupied by at least one person 55 or older under the Housing for Older Persons Act (HOPA).`,
+        },
+      }] : []),
+      ...(community.is_gated ? [{
+        '@type': 'Question',
+        name: `Is ${community.canonical_name} a gated community?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, ${community.canonical_name} is a gated community with controlled access in ${community.city}, Florida.`,
+        },
+      }] : []),
     ],
   }
 
@@ -448,6 +468,9 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 {community.unit_count && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#555'}}>{community.unit_count} units</span>}
                 {(community.is_master || subCommunities.length > 0) && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#1B2B6B', color: '#fff'}}>Master HOA</span>}
                 {isSub && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>Sub-community</span>}
+                {community.is_55_plus && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '999px', backgroundColor: '#FEF3C7', color: '#92400E', border: '1px solid #FDE68A', fontWeight: 600}}>55+ Community</span>}
+                {community.is_gated && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '999px', backgroundColor: '#DBEAFE', color: '#1E40AF', border: '1px solid #BFDBFE', fontWeight: 600}}>Gated</span>}
+                {community.is_age_restricted && !community.is_55_plus && <span style={{fontSize: '11px', padding: '3px 8px', borderRadius: '999px', backgroundColor: '#F3E8FF', color: '#6B21A8', border: '1px solid #E9D5FF', fontWeight: 600}}>Age Restricted</span>}
               </div>
             </div>
             <div style={{textAlign: 'right', minWidth: '130px', width:'100%', maxWidth:'220px'}}>
@@ -719,6 +742,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             {cityAvgFee && community.monthly_fee_median ? ` The average monthly HOA fee in ${community.city} is approximately $${cityAvgFee}. ${community.canonical_name}'s fee is approximately $${community.monthly_fee_median} per month.` : ''}
             {cityAvgFee && !community.monthly_fee_median ? ` The average monthly HOA fee in ${community.city} is approximately $${cityAvgFee}. ${community.canonical_name}'s fee has not yet been verified by residents.` : ''}
             {community.management_company && ` The community is managed by ${community.management_company}.`}
+            {community.is_55_plus && ` ${community.canonical_name} is an age-restricted community for adults 55 and older, governed by the Housing for Older Persons Act (HOPA).`}
+            {community.is_gated && ` ${community.canonical_name} is a gated community with controlled access.`}
             {(community.litigation_count ?? 0) > 0 ? ` Public court records show ${community.litigation_count} legal case${community.litigation_count === 1 ? '' : 's'} associated with this community in the CourtListener database.` : ' No active legal cases were found in public court records for this community.'}
             {' '}Residents and prospective buyers can submit verified information to help keep this profile accurate.
           </p>
