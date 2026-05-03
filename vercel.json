@@ -35,6 +35,10 @@
     {
       "path": "/api/cron/research",
       "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/facebook-search",
+      "schedule": "0 14 * * 0"
     }
   ]
 }

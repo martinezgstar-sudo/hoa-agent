@@ -1,0 +1,27 @@
+=== FACEBOOK PUBLIC POST SEARCH REPORT ===
+Date: 2026-05-03
+Method: DuckDuckGo site:facebook.com searches
+
+SEARCH SUMMARY:
+  Total queries run:          38
+  Total results found:        0
+  After deduplication:        0
+  Relevant and useful:        0
+  Matched to database:        0
+  Unmatched (no community):   0
+
+TOP TOPICS FOUND:
+  assessment    : 0
+  fees          : 0
+  board         : 0
+  lawsuit       : 0
+  fraud         : 0
+  general       : 0
+  other         : 0
+
+MATCHED COMMUNITIES:
+
+PENDING QUEUE ITEMS ADDED: 0
+Go to https://www.hoa-agent.com/admin/pending to review.
+
+UNMATCHED MENTIONS (candidates to add to DB):

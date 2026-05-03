@@ -1,0 +1,81 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+FB-DDG search · 38 queries · 1s delay
+
+  [1/38]  0 hits · site:facebook.com "HOA" "Palm Beach County" assessment
+  [2/38]  0 hits · site:facebook.com "homeowners association" "Palm Beach" complaint
+  [3/38]  0 hits · site:facebook.com "HOA" "West Palm Beach" board
+  [4/38]  0 hits · site:facebook.com "condo association" "Palm Beach" fees
+  [5/38]  0 hits · site:facebook.com "HOA" "Delray Beach" lawsuit
+  [6/38]  0 hits · site:facebook.com "HOA" "Boynton Beach" special assessment
+  [7/38]  0 hits · site:facebook.com "HOA" "Jupiter" Florida complaint
+  [8/38]  0 hits · site:facebook.com "HOA" "Boca Raton" board dispute
+  [9/38]  0 hits · site:facebook.com "HOA" "Wellington" Florida fees
+  [10/38]  0 hits · site:facebook.com "HOA" "Lake Worth" Florida assessment
+  [11/38]  0 hits · site:facebook.com "Huntington Pointe" HOA
+  [12/38]  0 hits · site:facebook.com "Golden Lakes Village" HOA
+  [13/38]  0 hits · site:facebook.com "Palm Isles" HOA
+  [14/38]  0 hits · site:facebook.com "Century Village" HOA
+  [15/38]  0 hits · site:facebook.com "Kings Point Delray" HOA
+  [16/38]  0 hits · site:facebook.com "Valencia Falls" HOA
+  [17/38]  0 hits · site:facebook.com "Valencia Shores" HOA
+  [18/38]  0 hits · site:facebook.com "Fountains of Palm Beach" HOA
+  [19/38]  0 hits · site:facebook.com "BallenIsles" HOA
+  [20/38]  0 hits · site:facebook.com "PGA National" HOA
+  [21/38]  0 hits · site:facebook.com "Abacoa" HOA
+  [22/38]  0 hits · site:facebook.com "Ibis Golf" HOA
+  [23/38]  0 hits · site:facebook.com "Mirasol" HOA
+  [24/38]  0 hits · site:facebook.com "Olympia Wellington" HOA
+  [25/38]  0 hits · site:facebook.com "Seven Bridges" HOA
+  [26/38]  0 hits · site:facebook.com "Lotus Boca" HOA
+  [27/38]  0 hits · site:facebook.com "Covered Bridge Lake Worth" HOA
+  [28/38]  0 hits · site:facebook.com "High Point Delray" HOA
+  [29/38]  0 hits · site:facebook.com "special assessment" "Palm Beach" HOA 2025
+  [30/38]  0 hits · site:facebook.com "special assessment" "Palm Beach" HOA 2026
+  [31/38]  0 hits · site:facebook.com "HOA board" "Palm Beach" recall 2025
+  [32/38]  0 hits · site:facebook.com "HOA board" "Palm Beach" recall 2026
+  [33/38]  0 hits · site:facebook.com "HOA fraud" "Palm Beach" Florida
+  [34/38]  0 hits · site:facebook.com "HOA lawsuit" "Palm Beach" Florida 2025
+  [35/38]  0 hits · site:facebook.com "HOA lawsuit" "Palm Beach" Florida 2026
+  [36/38]  0 hits · site:facebook.com "condo assessment" "Palm Beach" 2026
+  [37/38]  0 hits · site:facebook.com "HOA fees increase" "Palm Beach"
+  [38/38]  0 hits · site:facebook.com "HOA management" "Palm Beach" fired
+
+  total raw: 0 · after dedupe: 0
+
+=== Claude AI filter on 0 unique results ===
+  relevant+useful: 0/0
+
+=== Fuzzy-match to DB ===
+  loaded 8027 published communities
+  matched: 0 · unmatched: 0
+
+=== Insert to pending_community_data ===
+
+Method: DuckDuckGo site:facebook.com searches
+
+SEARCH SUMMARY:
+  Total queries run:          38
+  Total results found:        0
+  After deduplication:        0
+  Relevant and useful:        0
+  Matched to database:        0
+  Unmatched (no community):   0
+
+TOP TOPICS FOUND:
+  assessment    : 0
+  fees          : 0
+  board         : 0
+  lawsuit       : 0
+  fraud         : 0
+  general       : 0
+  other         : 0
+
+MATCHED COMMUNITIES:
+
+PENDING QUEUE ITEMS ADDED: 0
+Go to https://www.hoa-agent.com/admin/pending to review.
+
+UNMATCHED MENTIONS (candidates to add to DB):
+
+Report saved: scripts/output/facebook-search-report-2026-05-03.txt
