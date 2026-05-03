@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/pitch', '/api/'],
+        disallow: ['/admin/', '/pitch', '/api/', '/advertise/portal/', '/api/advertise/'],
       },
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: ['/admin/', '/pitch', '/api/'],
+        disallow: ['/admin/', '/pitch', '/api/', '/advertise/portal/', '/api/advertise/'],
       },
       // Block aggressive bots from /claim/* (causing 500s on the form route)
       { userAgent: 'MJ12bot',    disallow: ['/claim/', '/api/claim/'] },
