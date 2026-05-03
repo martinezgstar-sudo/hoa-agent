@@ -1,0 +1,133 @@
+SEO Audit — http://localhost:3000
+Date: 2026-05-03
+======================================================================
+
+PAGE: /
+  Score: 85/100
+  Title: "HOA Agent — Know the HOA Before You Commit" (42 chars)
+  Desc length: 151, h1: 1, h2: 0, JSON-LD: 2
+  OG: title=True desc=True image=True, canonical=no
+  Words: 624, internal links: 23, location hits: 17, target keyword hits: 0
+  Issues:
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - target keyword "Palm Beach County HOA" appears 0x (target >=3)
+
+PAGE: /search
+  Score: 65/100
+  Title: "Search HOA Communities | Palm Beach County | HOA Agent" (54 chars)
+  Desc length: 113, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 122, internal links: 11, location hits: 8, target keyword hits: 2
+  Issues:
+    - desc length 113 (target 140-170)
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - word count 122 (target >=300)
+    - target keyword "search HOA communities" appears 2x (target >=3)
+
+PAGE: /city
+  Score: 70/100
+  Title: "HOA Communities by City | Palm Beach County | HOA Agent" (55 chars)
+  Desc length: 174, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 203, internal links: 20, location hits: 11, target keyword hits: 2
+  Issues:
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - word count 203 (target >=300)
+    - target keyword "HOA communities by city" appears 2x (target >=3)
+
+PAGE: /city/west-palm-beach
+  Score: 75/100
+  Title: "West Palm Beach HOA Communities | HOA Agent" (43 chars)
+  Desc length: 162, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 9448, internal links: 990, location hits: 103, target keyword hits: 2
+  Issues:
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - target keyword "West Palm Beach HOA" appears 2x (target >=3)
+
+PAGE: /city/boca-raton
+  Score: 70/100
+  Title: "Boca Raton HOA Communities | HOA Agent" (38 chars)
+  Desc length: 157, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 9648, internal links: 1011, location hits: 373, target keyword hits: 2
+  Issues:
+    - title length 38 (target 50-60)
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - target keyword "Boca Raton HOA" appears 2x (target >=3)
+
+PAGE: /city/jupiter
+  Score: 70/100
+  Title: "Jupiter HOA Communities | HOA Agent" (35 chars)
+  Desc length: 154, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 7752, internal links: 730, location hits: 223, target keyword hits: 2
+  Issues:
+    - title length 35 (target 50-60)
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - target keyword "Jupiter HOA" appears 2x (target >=3)
+
+PAGE: /about
+  Score: 75/100
+  Title: "About HOA Agent | Florida HOA Intelligence Platform" (51 chars)
+  Desc length: 165, h1: 1, h2: 1, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 374, internal links: 11, location hits: 6, target keyword hits: 1
+  Issues:
+    - h2 count = 1 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - target keyword "HOA intelligence platform" appears 1x (target >=3)
+
+PAGE: /for-agents
+  Score: 70/100
+  Title: "For Real Estate Agents | HOA Agent" (34 chars)
+  Desc length: 150, h1: 1, h2: 2, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 356, internal links: 11, location hits: 2, target keyword hits: 0
+  Issues:
+    - title length 34 (target 50-60)
+    - missing canonical
+    - no JSON-LD schema
+    - location mentions 2 (target >=3)
+    - target keyword "HOA data real estate agents" appears 0x (target >=3)
+
+PAGE: /pricing
+  Score: 60/100
+  Title: "Pricing | HOA Agent" (19 chars)
+  Desc length: 137, h1: 1, h2: 0, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 118, internal links: 9, location hits: 1, target keyword hits: 0
+  Issues:
+    - title length 19 (target 50-60)
+    - h2 count = 0 (target >=2)
+    - missing canonical
+    - no JSON-LD schema
+    - word count 118 (target >=300)
+    - location mentions 1 (target >=3)
+    - target keyword "HOA Agent pricing" appears 0x (target >=3)
+
+PAGE: /reports/hoa-fee-report-2026
+  Score: 80/100
+  Title: "Palm Beach County HOA Fee Report 2026 | HOA Agent" (49 chars)
+  Desc length: 139, h1: 1, h2: 4, JSON-LD: 0
+  OG: title=True desc=True image=True, canonical=no
+  Words: 396, internal links: 20, location hits: 24, target keyword hits: 2
+  Issues:
+    - missing canonical
+    - no JSON-LD schema
+    - target keyword "Palm Beach County HOA fee" appears 2x (target >=3)
+
+======================================================================
+AVERAGE SCORE: 72/100

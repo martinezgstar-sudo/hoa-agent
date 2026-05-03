@@ -48,8 +48,40 @@ export default async function Home() {
 
   const totalCommunities = count || 0
 
+  // LocalBusiness JSON-LD for richer SERP appearance
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    'name': 'HOA Agent',
+    'description': 'Palm Beach County HOA intelligence platform serving homebuyers, renters, and real estate agents.',
+    'url': 'https://www.hoa-agent.com',
+    'logo': 'https://www.hoa-agent.com/logo.png',
+    'image': 'https://www.hoa-agent.com/logo.png',
+    'areaServed': {
+      '@type': 'AdministrativeArea',
+      'name': 'Palm Beach County',
+      'containedInPlace': { '@type': 'State', 'name': 'Florida' },
+    },
+    'serviceType': 'HOA Community Research',
+    'priceRange': 'Free with paid premium reports',
+  }
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'HOA Agent',
+    'url': 'https://www.hoa-agent.com',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': 'https://www.hoa-agent.com/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  }
+
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 
       <NavBar
         shareHref="/search"
