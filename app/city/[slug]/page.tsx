@@ -347,6 +347,33 @@ export default async function CityPage({ params }: Props) {
           {' '}Use HOA Agent to research any community before buying or renting in {city.name}.
         </p>
 
+        {/* Filter chips → sub-pages */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+          {[
+            { key: '', label: 'All' },
+            { key: 'condos', label: 'Condos' },
+            { key: 'single-family', label: 'Single-Family' },
+            { key: 'townhomes', label: 'Townhomes' },
+            { key: 'pet-friendly', label: 'Pet-Friendly' },
+            { key: 'affordable', label: 'Affordable' },
+            { key: 'high-fee', label: 'Premium' },
+            { key: 'with-litigation', label: 'With Litigation' },
+            { key: 'good-standing', label: 'Good Standing' },
+          ].map((f) => (
+            <Link
+              key={f.label}
+              href={f.key ? `/city/${slug}/${f.key}` : `/city/${slug}`}
+              style={{
+                padding: '5px 12px', borderRadius: '20px',
+                border: '1px solid ' + (f.key === '' ? '#1B2B6B' : '#e0e0e0'),
+                backgroundColor: f.key === '' ? '#1B2B6B' : '#fff',
+                color: f.key === '' ? '#fff' : '#555',
+                fontSize: '12px', textDecoration: 'none', fontWeight: f.key === '' ? 600 : 400,
+              }}
+            >{f.label}</Link>
+          ))}
+        </div>
+
         <div style={{ fontSize: '12px', color: '#888', marginBottom: '16px' }}>
           {list.length} {list.length === 1 ? 'community' : 'communities'} found in {city.name}
         </div>
