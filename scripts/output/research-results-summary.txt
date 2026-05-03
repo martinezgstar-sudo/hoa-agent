@@ -1,0 +1,64 @@
+Live Research Run Results — 2026-05-03 07:14
+============================================================
+
+Run window: 22:17 → 23:13 (56 minutes)
+Batch: 10 thinnest published communities
+
+=== Supabase totals (live) ===
+  pending_community_data  (status=pending): 0
+  pending_fee_observations (status=pending): 40
+
+=== Auto-approved fields written to communities table ===
+(from script log — 2 of 10 communities had Sunbiz matches)
+  111 First Delray Condo:    state_entity_number, entity_status,
+                              registered_agent, street_address
+  115 South Olive Property:  state_entity_number, entity_status
+  Other 8:                   no Sunbiz match (LLC names without
+                              dictionary-word entity names)
+
+  Total AUTO-APPROVE [OK] writes: 6
+  Total FEE OBS    [OK] writes: 40
+  Total PENDING    [OK] writes: 0
+
+=== Sample verification — 111 First Delray (post-write state) ===
+[
+  {
+    "canonical_name": "111 FIRST DELRAY CONDO",
+    "state_entity_number": "N190000076761",
+    "entity_status": "ACTIVE",
+    "registered_agent": null,
+    "street_address": "999 W Yamato Rd"
+  }
+]
+
+=== First 20 pending fee observations for review ===
+(go to https://www.hoa-agent.com/admin/pending → Fee Observations tab)
+
+ 1. 1177 MODERNE CONDO                                  $ 500.0  rounded=$ 500  [zillow]
+ 2. 1177 MODERNE CONDO                                  $ 400.0  rounded=$ 400  [zillow]
+ 3. 1177 MODERNE CONDO                                  $ 300.0  rounded=$ 300  [zillow]
+ 4. 1177 MODERNE CONDO                                  $ 200.0  rounded=$ 200  [zillow]
+ 5. 1177 MODERNE CONDO                                  $ 100.0  rounded=$ 100  [zillow]
+ 6. 115 South Olive Property Owner, Llc                 $ 500.0  rounded=$ 500  [zillow]
+ 7. 115 South Olive Property Owner, Llc                 $ 400.0  rounded=$ 400  [zillow]
+ 8. 115 South Olive Property Owner, Llc                 $ 300.0  rounded=$ 300  [zillow]
+ 9. 115 South Olive Property Owner, Llc                 $ 200.0  rounded=$ 200  [zillow]
+10. 115 South Olive Property Owner, Llc                 $ 100.0  rounded=$ 100  [zillow]
+11. 111 FIRST DELRAY CONDO                              $ 500.0  rounded=$ 500  [zillow]
+12. 111 FIRST DELRAY CONDO                              $ 400.0  rounded=$ 400  [zillow]
+13. 111 FIRST DELRAY CONDO                              $ 300.0  rounded=$ 300  [zillow]
+14. 111 FIRST DELRAY CONDO                              $ 200.0  rounded=$ 200  [zillow]
+15. 111 FIRST DELRAY CONDO                              $ 100.0  rounded=$ 100  [zillow]
+16. 1097 Jupiter Park Property Owner, Llc               $ 500.0  rounded=$ 500  [zillow]
+17. 1097 Jupiter Park Property Owner, Llc               $ 400.0  rounded=$ 400  [zillow]
+18. 1097 Jupiter Park Property Owner, Llc               $ 300.0  rounded=$ 300  [zillow]
+19. 1097 Jupiter Park Property Owner, Llc               $ 200.0  rounded=$ 200  [zillow]
+20. 1097 Jupiter Park Property Owner, Llc               $ 100.0  rounded=$ 100  [zillow]
+
+=== Notes ===
+- All 40 fee obs are from Zillow at $100/$200/$300/$400/$500 — these are
+  the Zillow fee-range filter slider values, NOT real HOA fees. Admin
+  should reject all of them in the pending UI.
+- community_research_log writes silently failed (table missing in prod).
+  Run supabase/migrations/20260430_community_research_log.sql in the
+  SQL Editor to enable the audit trail for future runs.

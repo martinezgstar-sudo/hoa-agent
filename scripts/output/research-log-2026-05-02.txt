@@ -1,0 +1,118 @@
+HOA Research Run — 2026-05-02 22:17
+Mode: LIVE
+Communities: 10
+============================================================
+
+=== 10 Palms North Townhomes Homeowners' Association, Inc. ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: LaCie drive not available — skipping Sunbiz local search; CourtListener: no cases found
+
+=== 10 Palms South Townhomes Homeowners' Association, Inc. ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: LaCie drive not available — skipping Sunbiz local search; CourtListener: no cases found
+
+=== 101 SE 7TH AVENUE ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 18
+  Notes: LaCie drive not available — skipping Sunbiz local search; CourtListener: no cases found
+
+=== 1016 CLARE AVENUE COMMERCIAL CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 18
+  Notes: PBCPAO: 5 parcels found → unit_count=5; CourtListener: no cases found
+
+=== 1031 Crown Property Owner, Llc ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: CourtListener: no cases found
+
+=== 1095 Jupiter Park Property Owner, Llc ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: CourtListener: no cases found
+
+=== 1097 Jupiter Park Property Owner, Llc ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: CourtListener: no cases found
+
+=== 111 FIRST DELRAY CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N190000076761'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '999 W Yamato Rd'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33431'  [sunbiz_local]  [OK]
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=5
+  Sources checked: 18
+  Notes: Sunbiz: 11 FIRST DELRAY CONDOMINIUM ASSOCIATION, INC. | doc=N190000076761 | status=ACTIVE | ra=None; PBCPAO: 68 parcels found → unit_count=68; CourtListener: no cases found
+
+=== 115 South Olive Property Owner, Llc ===
+  AUTO-APPROVE  state_entity_number = 'L230002780581'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=5
+  Sources checked: 19
+  Notes: Sunbiz: 15 SOUTH OLIVE PROPERTY OWNER, LLC | doc=L230002780581 | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== 1177 MODERNE CONDO ===
+  FEE OBS       $100.0  (rnd $100)  [zillow]  [OK]
+  FEE OBS       $200.0  (rnd $200)  [zillow]  [OK]
+  FEE OBS       $300.0  (rnd $300)  [zillow]  [OK]
+  FEE OBS       $400.0  (rnd $400)  [zillow]  [OK]
+  FEE OBS       $500.0  (rnd $500)  [zillow]  [OK]
+
+  TOTALS: auto=0 | pending=0 | fee_obs=5
+  Sources checked: 18
+  Notes: PBCPAO: 16 parcels found → unit_count=16; CourtListener: no cases found
+
+============================================================
+GRAND TOTALS
+  Communities researched : 10
+  Auto-approved          : 6
+  Queued for admin review: 0
+  Fee observations       : 40
+============================================================
