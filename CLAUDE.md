@@ -26,6 +26,44 @@ Last updated: May 2026
   Broward and Miami-Dade in 2026)
 - Admin dashboard: https://www.hoa-agent.com/admin
 
+## Contact routing (May 2026)
+- ALL contact forms POST to /api/contact which sends via Resend to
+  `fieldlogisticsfl@gmail.com`. No `hello@hoa-agent.com` exists.
+- Public contact page at /contact (full-fields form)
+- /corrections inlines ContactForm fields='correction'
+- /press inlines a press contact form (kept existing layout)
+- Footer 'contact us' → /contact (no mailto:)
+- ContactForm component (app/components/ContactForm.tsx) is reusable
+  with 4 layouts: simple, full, correction, press
+
+## New pages this session
+- /compare — community comparison tool (up to 4, side-by-side table)
+- /contact — general contact form
+- /api/compare — comparison data API
+- /api/contact — contact form Resend handler
+- (claim flow already in place from prior session)
+
+## Fee report paywall
+- /reports/hoa-fee-report-2026 free tier shows: 3 stat cards
+  (total/cities/avg), distribution bucket labels (no counts),
+  top 3 cities only with blurred preview of remaining
+- Paywall CTA: navy card with 6 checkmarked benefits, $2.99 unlock,
+  links to /pricing
+- DO NOT show: median/min/max overall, full city table, highest/lowest
+  community lists, or CSV download in free tier
+
+## Homepage featured-communities rule
+- ONLY show communities with at least one of: management_company,
+  monthly_fee_median, news_reputation_score, or review_count > 0
+- Re-rank top 20 by data-completeness score, return top 3
+- Never show empty placeholder rows ('Fee unknown · No reviews')
+
+## Comparison feature
+- /compare?communities=slug1,slug2,slug3,slug4 (max 4)
+- Each community page header has '+ Compare' chip
+- Wrapped in <Suspense> per Next 15 useSearchParams requirement
+- API at /api/compare?slugs=… returns ordered by URL slug order
+
 ## Status values in use
 - `published`: live on site (8,027)
 - `removed`: commercial property or invalid (257)
