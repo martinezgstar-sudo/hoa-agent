@@ -104,7 +104,7 @@ export default function ForAgentsPage() {
 
         <div style={{ backgroundColor: '#1B2B6B', borderRadius: '16px', padding: '36px 32px', color: '#fff', marginBottom: '40px' }}>
           <div style={{ fontSize: '22px', fontWeight: 700, marginBottom: '12px', letterSpacing: '-0.01em' }}>
-            7,000+ communities. Free.
+            8,000+ communities. Free.
           </div>
           <p style={{ fontSize: '14px', lineHeight: 1.8, marginBottom: '24px', color: 'rgba(255,255,255,0.8)', maxWidth: '500px' }}>
             Search any Palm Beach County HOA or condo community. No login, no subscription,

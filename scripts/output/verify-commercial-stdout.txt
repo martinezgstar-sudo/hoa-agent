@@ -1,0 +1,31 @@
+Scoring 339 candidates with Claude…
+  Scored 20/339  (commercial=17 residential=0 review=3)
+  Scored 40/339  (commercial=37 residential=0 review=3)
+  Scored 60/339  (commercial=53 residential=0 review=7)
+  Scored 80/339  (commercial=64 residential=0 review=16)
+  Scored 100/339  (commercial=78 residential=0 review=22)
+  Scored 120/339  (commercial=94 residential=0 review=26)
+  Scored 140/339  (commercial=112 residential=0 review=28)
+  Scored 160/339  (commercial=125 residential=0 review=35)
+  Scored 180/339  (commercial=140 residential=1 review=39)
+  Scored 200/339  (commercial=157 residential=1 review=42)
+  Scored 220/339  (commercial=173 residential=1 review=46)
+  Scored 240/339  (commercial=189 residential=1 review=50)
+  Scored 260/339  (commercial=205 residential=1 review=54)
+  Scored 280/339  (commercial=220 residential=2 review=58)
+  Scored 300/339  (commercial=235 residential=3 review=62)
+  Scored 320/339  (commercial=249 residential=6 review=65)
+
+Confirmed commercial (>=0.90): 257
+Confirmed residential (>=0.90): 13
+Manual review needed: 69
+
+Sample confirmed commercial:
+  [0.90] 1031 Crown Property Owner, Llc — The property type is explicitly listed as 'Commercial' and t
+  [0.90] 1095 Jupiter Park Property Owner, Llc — The property type is explicitly filed as 'Commercial' and th
+  [0.90] 1097 Jupiter Park Property Owner, Llc — The property type is explicitly listed as 'Commercial' and t
+  [0.90] 115 South Olive Property Owner, Llc — The property type is explicitly listed as 'Commercial' and t
+  [0.90] 127 Summerfield Property Owner, Llc — The property type is explicitly filed as 'Commercial' and th
+  [0.90] 128 Triple Diamond Property Owner, Llc — The property type is explicitly filed as 'Commercial' and th
+  [0.90] 130 N 2Nd Property Owner, Llc — The property type is explicitly listed as 'Commercial' and t
+  [0.90] 131 Atlantic Ave Property Owner, Llc — The property type is explicitly listed as 'Commercial' and t

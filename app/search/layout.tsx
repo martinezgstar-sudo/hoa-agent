@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Search HOA Communities | Palm Beach County | HOA Agent',
-  description: 'Search 7,000+ HOA and condo communities in Palm Beach County, FL. Filter by city, fee range, property type. Free.',
+  description: 'Search 8,000+ HOA and condo communities in Palm Beach County, FL. Filter by city, fee range, property type. Free.',
   openGraph: {
     title: 'Search HOA Communities | Palm Beach County | HOA Agent',
-    description: 'Search 7,000+ Palm Beach County HOA communities. Find fees, restrictions, management company and reviews.',
+    description: 'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company and reviews.',
     url: 'https://hoa-agent.com/search',
     siteName: 'HOA Agent',
     type: 'website',

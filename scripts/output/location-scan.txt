@@ -1,0 +1,30 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Fetching all published communities…
+Loaded 8291 communities
+
+Total verified: 8291
+City corrections (ZIP confirms different city): 1208
+Wrong/non-PBC ZIP: 19
+No ZIP code: 92
+Name-implies-city mismatch: 217
+
+Sample ZIP corrections:
+  10080 COMMERCIAL CONDO *(***)=*(***)               'Royal Palm Beach' → 'West Palm Beach' (ZIP 33411)
+  1100 CABANA CONDO***                               'Riviera Beach' → 'West Palm Beach' (ZIP 33404)
+  111 FIRST DELRAY CONDO                             'Delray Beach' → 'Boca Raton' (ZIP 33431)
+  177 179 MAIN STREET CONDO ***                      'Palm Beach' → 'Jupiter' (ZIP 33458)
+  1820 WEST TENTH CONDO*                             'Riviera Beach' → 'West Palm Beach' (ZIP 33404)
+  1880 10TH CONDO                                    'Riviera Beach' → 'West Palm Beach' (ZIP 33404)
+  2560 SOUTH OCEAN BOULEVARD CONDOMINIUM***          'Palm Beach' → 'Boca Raton' (ZIP 33432)
+  2700 NORTH OCEAN CONDO                             'Riviera Beach' → 'West Palm Beach' (ZIP 33404)
+
+Sample wrong-ZIP:
+  Bermuda Cay Condominium                            ZIP 02909 (outside_florida)
+  Buena Vida Homeowners Association, Inc.            ZIP 33447 (florida_outside_pbc)
+  Enclave At Crown Park Condominium                  ZIP 32765 (outside_florida)
+  Green Terrace Phase I                              ZIP 22202 (outside_florida)
+  Jupiter Palm Beach Motor Coach Resort Co           ZIP 57032 (outside_florida)
+  LAKE DRIVE APTS INC                                ZIP 33447 (florida_outside_pbc)
+  LAS CASITAS PL 3                                   ZIP 33447 (florida_outside_pbc)
+  LAS CASITAS PL 4                                   ZIP 33447 (florida_outside_pbc)

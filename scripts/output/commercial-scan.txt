@@ -1,0 +1,27 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Fetching all published communities…
+Loaded 8291 communities
+
+Total scanned: 8291
+Commercial candidates (auto-flag): 145
+Unclear (mixed signals): 194
+
+Sample commercial candidates:
+  1031 Crown Property Owner, Llc                           Commercial       hits=['property_type:Commercial']
+  1095 Jupiter Park Property Owner, Llc                    Commercial       hits=['property_type:Commercial']
+  1097 Jupiter Park Property Owner, Llc                    Commercial       hits=['property_type:Commercial']
+  115 South Olive Property Owner, Llc                      Commercial       hits=['property_type:Commercial']
+  127 Summerfield Property Owner, Llc                      Commercial       hits=['property_type:Commercial']
+  128 Triple Diamond Property Owner, Llc                   Commercial       hits=['property_type:Commercial']
+  130 N 2Nd Property Owner, Llc                            Commercial       hits=['property_type:Commercial']
+  131 Atlantic Ave Property Owner, Llc                     Commercial       hits=['property_type:Commercial']
+  1330 Indiantown Property Owner, Llc                      Commercial       hits=['property_type:Commercial']
+  1447 Rail Head Property Owner, Llc                       Commercial       hits=['property_type:Commercial']
+
+Sample unclear:
+  10080 COMMERCIAL CONDO *(***)=*(***)                     hits=['COMMERCIAL', '+RESIDENTIAL_TERMS:CONDO']
+  1016 CLARE AVENUE COMMERCIAL CONDO                       hits=['COMMERCIAL', '+RESIDENTIAL_TERMS:CONDO']
+  1401 Village Green Property Owner, Llc                   hits=['property_type:Commercial', '+RESIDENTIAL_TERMS']
+  1662 OFFICE CONDO *                                      hits=['property_type:Commercial', '+RESIDENTIAL_TERMS']
+  2720 Center Place Property Owner, Llc                    hits=['property_type:Commercial', '+RESIDENTIAL_TERMS']

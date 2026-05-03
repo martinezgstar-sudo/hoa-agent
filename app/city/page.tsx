@@ -70,7 +70,7 @@ export default async function CityIndexPage() {
         </h1>
 
         <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.7, marginBottom: '36px', maxWidth: '600px' }}>
-          Palm Beach County has over 7,000 HOA and condo communities spread across dozens of cities. Each city
+          Palm Beach County has over 8,000 HOA and condo communities spread across dozens of cities. Each city
           has its own mix of property types, fee ranges, and governance styles. Start with your target city to
           narrow your search.
         </p>

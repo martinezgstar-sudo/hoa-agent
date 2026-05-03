@@ -68,7 +68,7 @@ export default function AboutPage() {
           What HOA Agent does
         </h2>
         <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.8, marginBottom: '28px' }}>
-          We aggregate structured data on over 7,000 HOA and condo communities across Palm Beach
+          We aggregate structured data on over 8,000 HOA and condo communities across Palm Beach
           County. For each community you can find:
         </p>
 
@@ -108,7 +108,7 @@ export default function AboutPage() {
             Start your HOA research
           </div>
           <p style={{ fontSize: '14px', color: '#666', marginBottom: '20px' }}>
-            Search over 7,000 Palm Beach County communities — free, no account required.
+            Search over 8,000 Palm Beach County communities — free, no account required.
           </p>
           <Link href="/search" style={{ fontSize: '14px', backgroundColor: '#1B2B6B', color: '#fff', padding: '10px 28px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block' }}>
             Search communities

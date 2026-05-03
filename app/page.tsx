@@ -16,10 +16,10 @@ const GuideForm = dynamic(() => import('@/app/components/GuideForm'))
 export const metadata: Metadata = {
   title: 'HOA Agent — Know the HOA Before You Commit',
   description:
-    'Search 7,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+    'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
   openGraph: {
     title: 'HOA Agent — Know the HOA Before You Commit',
-    description: 'Search 7,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews — free.',
+    description: 'Search 8,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews — free.',
     url: 'https://hoa-agent.com',
     siteName: 'HOA Agent',
     type: 'website',
@@ -128,7 +128,7 @@ export default async function Home() {
       </section>
 
       <section style={{backgroundColor: '#f5f5f5', padding: '16px 32px', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', borderBottom: '1px solid #e5e5e5'}}>
-        {['7,000+ communities tracked', 'Source-attributed data', 'Public records verified', 'Updated weekly'].map((item) => (
+        {['8,000+ communities tracked', 'Source-attributed data', 'Public records verified', 'Updated weekly'].map((item) => (
           <div key={item} style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#555'}}>
             <div style={{width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
             {item}
@@ -139,7 +139,7 @@ export default async function Home() {
       <section style={{padding: '24px 16px', maxWidth: '680px', margin: '0 auto'}}>
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px'}}>
           {[
-            {num: '7,000+', label: 'Communities tracked'},
+            {num: totalCommunities ? totalCommunities.toLocaleString() + '+' : '8,000+', label: 'Communities tracked'},
             {num: 'Resident powered', label: 'Real data from real neighbors'},
             {num: 'Free forever', label: 'Basic community profiles'},
           ].map((stat) => (
@@ -222,7 +222,7 @@ export default async function Home() {
             },
             {
               q: 'What counties does HOA Agent cover?',
-              a: 'HOA Agent currently covers Palm Beach County, Florida — over 7,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
+              a: 'HOA Agent currently covers Palm Beach County, Florida — over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
             },
             {
               q: 'Can I trust the litigation data?',
@@ -287,7 +287,7 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "What counties does HOA Agent cover?",
-              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent currently covers Palm Beach County, Florida — over 7,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned." }
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent currently covers Palm Beach County, Florida — over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned." }
             },
             {
               "@type": "Question",

@@ -67,7 +67,7 @@ export default function BniPage() {
 
         <div style={{ backgroundColor: '#1B2B6B', borderRadius: '16px', padding: '32px', color: '#fff', marginBottom: '40px', textAlign: 'center' }}>
           <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '10px' }}>
-            7,000+ communities. Completely free.
+            8,000+ communities. Completely free.
           </div>
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)', marginBottom: '24px', lineHeight: 1.7 }}>
             Start with any Palm Beach County community — no login required.

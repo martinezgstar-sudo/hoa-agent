@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Average and median HOA fees by city across Palm Beach County in 2026. Fee distributions, highest and lowest communities, and data analysis.',
   openGraph: {
     title: 'Palm Beach County HOA Fee Report 2026',
-    description: 'HOA fee data for 7,000+ communities in Palm Beach County. Average fees by city, distribution analysis, and highest/lowest communities.',
+    description: 'HOA fee data for 8,000+ communities in Palm Beach County. Average fees by city, distribution analysis, and highest/lowest communities.',
     url: 'https://hoa-agent.com/reports/hoa-fee-report-2026',
     siteName: 'HOA Agent',
     type: 'website',

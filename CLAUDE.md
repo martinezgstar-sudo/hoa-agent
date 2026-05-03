@@ -19,10 +19,36 @@ Last updated: May 2026
 - MorningStar is the first advertiser on HOA Agent
 
 ## Current Stats
-- 8,292 published communities in Palm Beach County
+- 8,027 published communities in Palm Beach County
+  (after May 2026 location-verify session: -257 commercial → status=removed,
+   -7 outside-FL → status=needs_review, +1,208 city corrections applied)
 - Coverage: Palm Beach County only (expanding to
   Broward and Miami-Dade in 2026)
 - Admin dashboard: https://www.hoa-agent.com/admin
+
+## Status values in use
+- `published`: live on site (8,027)
+- `removed`: commercial property or invalid (257)
+- `needs_review`: outside PBC or location unclear (7)
+- `draft`: not yet published (0)
+- `duplicate`: dedupe target (0)
+
+## Location verification rules (May 2026)
+- pbc_zips dict (in scripts/verify-locations.py + scripts/apply-city-corrections.py)
+  maps 334xx/335xx ZIPs → correct PBC city
+- city_verified = true means ZIP confirmed
+- All published rows have county = 'Palm Beach' (already clean)
+- 11 in-FL-but-outside-PBC kept as published — see
+  scripts/output/outside-pbc-2026-05-03.csv for manual decision
+
+## Commercial removal rules
+- NEVER DELETE — set status = 'removed'
+- AI confidence >= 0.90 required to auto-remove
+- Manual review records saved to scripts/output/manual-review-commercial.json
+- Re-run pipeline:
+    python3 scripts/identify-commercial.py
+    python3 scripts/verify-commercial-ai.py
+    python3 scripts/remove-commercial.py
 
 ---
 

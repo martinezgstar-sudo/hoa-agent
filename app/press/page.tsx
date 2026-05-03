@@ -57,7 +57,7 @@ export default function PressPage() {
             },
             {
               label: 'Coverage',
-              value: 'Palm Beach County, Florida — 7,000+ HOA and condo communities',
+              value: 'Palm Beach County, Florida — 8,000+ HOA and condo communities',
             },
             {
               label: 'Mission',

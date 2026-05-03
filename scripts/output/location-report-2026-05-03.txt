@@ -1,0 +1,52 @@
+=== HOA AGENT LOCATION VERIFICATION REPORT ===
+Date: 2026-05-03 15:29
+
+=== DATABASE STATUS ===
+  published                          : 8027
+  removed (commercial)               : 257
+  needs_review (outside FL)          : 7
+  published + city is null           : 0
+  published + city_verified=true     : 2948
+  published + county is null         : 0
+
+=== TOP 20 CITIES (published) ===
+  Boca Raton                     1613
+  West Palm Beach                1342
+  Lake Worth                     1231
+  Delray Beach                   868
+  Boynton Beach                  815
+  Jupiter                        764
+  Palm Beach Gardens             518
+  Wellington                     270
+  North Palm Beach               253
+  Palm Beach                     200
+  Loxahatchee                    45
+  Gulf Stream                    20
+  Lake Worth Beach               18
+  W Palm Beach                   10
+  W. Palm Beach                  10
+  Belle Glade                    10
+  Port St. Lucie                 7
+  West Palm Bch                  6
+  Pahokee                        5
+  Lake Clarke Shores             3
+
+=== SAMPLE REMOVED COMMERCIAL ===
+  Benoist Farms Industrial Park North Property Owners Associat (W. Palm Beach)
+  Bink'S Commercial Centre Property Owner'S Association, Inc.  (Lake Worth)
+  GREENWAY PROFESSIONAL CENTER III CONDOMINIUM*                (Jupiter)
+  Kissimmee Business Park Property Owners Association, Inc.    (Palm Beach)
+  Port Salerno Industrial Park Property Owner'S Association, I (West Palm Beach)
+  GREENWICH COMMERCIAL CONDO                                   (Jupiter)
+  Northpoint Property Owner, Llc                               (Delray Beach)
+  Palm Beach Business Park Property Owners Association, Inc.   (Palm Beach Gardens)
+  Palms West Industrial Property Owners Association, Inc.      (West Palm Beach)
+  SUMMIT PINES OFFICE-WAREHOUSE CONDOMINIUM*                   (West Palm Beach)
+
+=== SESSION CHANGES ===
+  City corrections applied:    1,208
+  Commercial removed:            257
+  Outside-FL → needs_review:       7
+  In-FL outside PBC (CSV):        11
+  Null county filled:              0 (already clean)
+  Null city filled via ZIP:        0 (already clean)
