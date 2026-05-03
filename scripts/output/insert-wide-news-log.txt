@@ -1,0 +1,32 @@
+Loaded 223 articles from wide-news-approved-2026-05-03.json
+Score >= 7: 216
+  Progress: 25/216
+  Progress: 50/216
+  Progress: 75/216
+  Progress: 100/216
+  Progress: 125/216
+  Progress: 150/216
+  Progress: 175/216
+  Progress: 200/216
+
+=== INSERT RESULTS ===
+  inserted_approved        : 200
+  inserted_pending         : 16
+  skipped_duplicate        : 0
+  skipped_invalid          : 0
+  errors                   : 0
+
+First inserted articles:
+  [8] Clash over e-bikes in luxury Boca community leads to man's arrest - The Palm Bea (approved)
+  [8] Ex-HOA property manager arrested in Martin County after alleged six-figure embez (approved)
+  [9] Rising HOA fees strain homeowners’ budgets across Palm Beach County, Treasure Co (approved)
+  [8] Florida property manager on the run accused of HOA embezzlement for trips, plast (approved)
+  [8] New poll shows property owners want to see reform of HOA's. They don't want them (approved)
+  [8] South Florida realtors emphasize importance of researching homeowners associatio (approved)
+  [8] 'Not in a good way': Boynton Beach codes feel like HOA rules, residents say - WP (approved)
+  [9] Pickleball noise sparks lawsuit in tony Boca Raton community - The Palm Beach Po (approved)
+  [8] 'Buyer beware': Local homeowners mull pros and cons of abolishing HOAs - WPTV (approved)
+  [8] Baywinds HOA wins fight to remove flashing yellow arrow after crash - The Palm B (approved)
+
+To run AI community matching, run:
+  python3 scripts/enrich-news-reputation.py

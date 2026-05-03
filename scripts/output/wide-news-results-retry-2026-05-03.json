@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-05-03T09:25:23.348947",
+  "source_stats": {
+    "local_news": {
+      "found": 0,
+      "passed": 0
+    },
+    "legislative": {
+      "found": 0,
+      "passed": 0
+    },
+    "court_rss": {
+      "found": 0,
+      "passed": 0
+    },
+    "duckduckgo": {
+      "found": 0,
+      "passed": 0
+    }
+  },
+  "articles": []
+}

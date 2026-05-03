@@ -244,56 +244,73 @@ def main():
     parser.add_argument("--limit-per-source", type=int, default=30)
     parser.add_argument("--no-ai", action="store_true", help="Skip Claude scoring (raw collection only)")
     parser.add_argument("--output-dir", default="scripts/output")
+    parser.add_argument("--sources-only", default="",
+                        help="Comma-separated subset to run (google_news, local_news, reddit, legislative, court_rss, duckduckgo)")
+    parser.add_argument("--ddg-delay", type=float, default=0.6,
+                        help="Seconds between DDG queries (raise to 5+ to avoid rate limits)")
+    parser.add_argument("--output-suffix", default="",
+                        help="Append to output filename, e.g. '-retry'")
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     today = date.today().isoformat()
 
+    only = {s.strip() for s in args.sources_only.split(",") if s.strip()}
+    def want(src: str) -> bool:
+        return not only or src in only
+
     log(f"Wide News Search — output dir: {out_dir}")
+    if only:
+        log(f"  Sources filter: {sorted(only)}")
+        log(f"  DDG delay: {args.ddg_delay}s")
 
     # ── Collection phase ────────────────────────────────────────────────────
     all_articles: list[dict] = []
     source_stats: dict[str, dict[str, int]] = {}
 
-    log("\n=== Source 1: Google News RSS ===")
-    a = collect_feeds(GOOGLE_NEWS_FEEDS, "google_news", limit_per_source=args.limit_per_source)
-    source_stats["google_news"] = {"found": len(a)}
-    all_articles.extend(a)
+    if want("google_news"):
+        log("\n=== Source 1: Google News RSS ===")
+        a = collect_feeds(GOOGLE_NEWS_FEEDS, "google_news", limit_per_source=args.limit_per_source)
+        source_stats["google_news"] = {"found": len(a)}
+        all_articles.extend(a)
 
-    log("\n=== Source 2: Local newspaper RSS (filtered for HOA/condo) ===")
-    a = collect_feeds(LOCAL_NEWSPAPER_FEEDS, "local_news", filter_re=HOA_KEYWORDS,
-                      limit_per_source=args.limit_per_source)
-    source_stats["local_news"] = {"found": len(a)}
-    all_articles.extend(a)
+    if want("local_news"):
+        log("\n=== Source 2: Local newspaper RSS (filtered for HOA/condo) ===")
+        a = collect_feeds(LOCAL_NEWSPAPER_FEEDS, "local_news", filter_re=HOA_KEYWORDS,
+                          limit_per_source=args.limit_per_source)
+        source_stats["local_news"] = {"found": len(a)}
+        all_articles.extend(a)
 
-    log("\n=== Source 3: Reddit RSS ===")
-    a = collect_feeds(REDDIT_FEEDS, "reddit", limit_per_source=args.limit_per_source)
-    # Reddit isn't filtered up-front because subreddit-specific feeds are
-    # already on-topic; the AI will downscore non-HOA posts.
-    source_stats["reddit"] = {"found": len(a)}
-    all_articles.extend(a)
+    if want("reddit"):
+        log("\n=== Source 3: Reddit RSS ===")
+        a = collect_feeds(REDDIT_FEEDS, "reddit", limit_per_source=args.limit_per_source)
+        source_stats["reddit"] = {"found": len(a)}
+        all_articles.extend(a)
 
-    log("\n=== Source 4: FL state government bills RSS ===")
-    a = collect_feeds(STATE_FEEDS, "legislative", filter_re=HOA_KEYWORDS,
-                      limit_per_source=args.limit_per_source)
-    source_stats["legislative"] = {"found": len(a)}
-    all_articles.extend(a)
+    if want("legislative"):
+        log("\n=== Source 4: FL state government bills RSS ===")
+        a = collect_feeds(STATE_FEEDS, "legislative", filter_re=HOA_KEYWORDS,
+                          limit_per_source=args.limit_per_source)
+        source_stats["legislative"] = {"found": len(a)}
+        all_articles.extend(a)
 
-    log("\n=== Source 5: FL Federal Court RSS ===")
-    a = collect_feeds(COURT_FEEDS, "court_rss", filter_re=HOA_KEYWORDS,
-                      limit_per_source=args.limit_per_source)
-    source_stats["court_rss"] = {"found": len(a)}
-    all_articles.extend(a)
+    if want("court_rss"):
+        log("\n=== Source 5: FL Federal Court RSS ===")
+        a = collect_feeds(COURT_FEEDS, "court_rss", filter_re=HOA_KEYWORDS,
+                          limit_per_source=args.limit_per_source)
+        source_stats["court_rss"] = {"found": len(a)}
+        all_articles.extend(a)
 
-    log("\n=== Source 6: DuckDuckGo news search ===")
-    ddg_articles: list[dict] = []
-    for q in DDG_QUERIES:
-        log(f"  DDG: {q}")
-        ddg_articles.extend(ddg_search(q, max_results=6))
-        time.sleep(0.6)
-    source_stats["duckduckgo"] = {"found": len(ddg_articles)}
-    all_articles.extend(ddg_articles)
+    if want("duckduckgo"):
+        log("\n=== Source 6: DuckDuckGo news search ===")
+        ddg_articles: list[dict] = []
+        for q in DDG_QUERIES:
+            log(f"  DDG: {q}")
+            ddg_articles.extend(ddg_search(q, max_results=6))
+            time.sleep(args.ddg_delay)
+        source_stats["duckduckgo"] = {"found": len(ddg_articles)}
+        all_articles.extend(ddg_articles)
 
     # ── Deduplicate by URL ──────────────────────────────────────────────────
     seen_urls: set[str] = set()
@@ -330,8 +347,9 @@ def main():
         log(f"\n{len(approved)} articles passed (relevant=true & score>=6)")
 
     # ── Save outputs ────────────────────────────────────────────────────────
-    all_path = out_dir / f"wide-news-results-{today}.json"
-    approved_path = out_dir / f"wide-news-approved-{today}.json"
+    suffix = args.output_suffix
+    all_path = out_dir / f"wide-news-results{suffix}-{today}.json"
+    approved_path = out_dir / f"wide-news-approved{suffix}-{today}.json"
 
     all_path.write_text(json.dumps({
         "generated_at": datetime.now().isoformat(),

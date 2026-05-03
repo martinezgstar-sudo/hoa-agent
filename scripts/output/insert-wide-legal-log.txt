@@ -1,0 +1,18 @@
+Loaded 20 cases from wide-legal-approved-2026-05-03.json
+High severity cases: 2
+  - Hall v. SAUSALITO PLACE HOMEOWNERS ASSOCIATION, INC.
+  - SHERBROOKE HOMEOWNERS ASSOCIATION, INC. v. Chan
+
+=== Inserting 20 cases ===
+
+=== High-severity community linking ===
+  MATCH: "sausalito" → Sausalito Place (sausalito-place-boynton)
+  MATCH: "sherbrooke" → Lakes Of Sherbrooke (lakes-of-sherbrooke)
+
+=== INSERT RESULTS ===
+  inserted                 : 20
+  skipped_duplicate        : 0
+  skipped_invalid          : 0
+  errors                   : 0
+  community_links          : 2
+  litigation_bumps         : 2

@@ -1,0 +1,61 @@
+[09:24:32] Wide News Search — output dir: scripts/output
+[09:24:32]   Sources filter: ['court_rss', 'duckduckgo', 'legislative', 'local_news']
+[09:24:32]   DDG delay: 5.0s
+[09:24:32] 
+=== Source 2: Local newspaper RSS (filtered for HOA/condo) ===
+[09:24:32]   Fetching local_news: https://www.palmbeachpost.com/arcio/rss/…
+[09:24:32]   ERR fetching https://www.palmbeachpost.com/arcio/rss/…: HTTP Error 403: Forbidden
+[09:24:32]   Fetching local_news: https://www.sun-sentinel.com/arcio/rss/…
+[09:24:32]   ERR fetching https://www.sun-sentinel.com/arcio/rss/…: HTTP Error 403: Forbidden
+[09:24:32]   Fetching local_news: https://www.tcpalm.com/arcio/rss/…
+[09:24:32]   ERR fetching https://www.tcpalm.com/arcio/rss/…: HTTP Error 403: Forbidden
+[09:24:32]   Fetching local_news: https://www.miamiherald.com/news/local/community/feed…
+[09:24:44]   ERR fetching https://www.miamiherald.com/news/local/community/feed…: The read operation timed out
+[09:24:44]   Fetching local_news: https://www.wptv.com/news/rss…
+[09:24:45]   ERR fetching https://www.wptv.com/news/rss…: HTTP Error 404: Not Found
+[09:24:45]   Fetching local_news: https://www.wpbf.com/rss…
+[09:24:46]   Fetching local_news: https://www.wflx.com/rss…
+[09:24:47]   ERR fetching https://www.wflx.com/rss…: HTTP Error 404: Not Found
+[09:24:47] 
+=== Source 4: FL state government bills RSS ===
+[09:24:47]   Fetching legislative: https://www.myfloridahouse.gov/rss/bills.aspx…
+[09:24:48]   Fetching legislative: https://flsenate.gov/rss/bills.rss…
+[09:24:49]   ERR fetching https://flsenate.gov/rss/bills.rss…: HTTP Error 404: NotFound
+[09:24:49] 
+=== Source 5: FL Federal Court RSS ===
+[09:24:49]   Fetching court_rss: https://www.flsd.uscourts.gov/rss.xml…
+[09:24:49]     → 0 kept (out of 10)
+[09:24:50]   Fetching court_rss: https://www.flmd.uscourts.gov/rss.xml…
+[09:24:50]   Fetching court_rss: https://www.flnd.uscourts.gov/rss.xml…
+[09:24:50]     → 0 kept (out of 3)
+[09:24:51] 
+=== Source 6: DuckDuckGo news search ===
+[09:24:51]   DDG: HOA "Palm Beach County" news 2026
+[09:24:56]   DDG: homeowners association "Palm Beach" lawsuit 2026
+[09:25:01]   DDG: condo association "Palm Beach" special assessment 2026
+[09:25:07]   DDG: HOA fraud "Palm Beach" Florida 2026
+[09:25:12]   DDG: HOA board recall "Palm Beach" 2026
+[09:25:17]   DDG: community association "Palm Beach" 2026
+[09:25:23] 
+Collected 0 articles total (0 unique after dedup)
+[09:25:23] 
+=== AI evaluation phase (Claude) ===
+[09:25:23] 
+0 articles passed (relevant=true & score>=6)
+
+=== WIDE NEWS SEARCH RESULTS ===
+Source breakdown:
+  local_news     :    0 articles found, 0 passed filter
+  legislative    :    0 articles found, 0 passed filter
+  court_rss      :    0 articles found, 0 passed filter
+  duckduckgo     :    0 articles found, 0 passed filter
+
+Total found:    0
+After dedup:    0
+Passed filter:  0
+Discarded:      0
+
+Top 10 highest scoring articles:
+
+All articles:      scripts/output/wide-news-results-retry-2026-05-03.json
+Approved articles: scripts/output/wide-news-approved-retry-2026-05-03.json
