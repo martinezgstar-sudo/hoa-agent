@@ -21,6 +21,20 @@ const FILTERS = [
   'low-hoa-fees', 'condos', 'single-family', 'no-rental-approval', 'master-hoa',
 ]
 
+// Filter sub-pages for /city/[slug]/[filter] (8 filters × 9 city slugs = 72)
+const CITY_FILTERS = [
+  'condos', 'single-family', 'townhomes', 'pet-friendly',
+  'affordable', 'high-fee', 'with-litigation', 'good-standing',
+]
+
+const GUIDE_SLUGS = [
+  'how-to-read-hoa-documents',
+  'what-is-a-special-assessment',
+  'florida-hoa-vs-condo-association',
+  'how-to-evaluate-hoa-before-buying',
+  'palm-beach-county-hoa-fees',
+]
+
 const COUNTIES = ['palm-beach-county']
 
 const SITE = 'https://www.hoa-agent.com'
@@ -88,6 +102,57 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   )
 
+  // City × filter sub-pages
+  const cityFilterUrls = CITY_SLUGS.flatMap((slug) =>
+    CITY_FILTERS.map((f) => ({
+      url: `${SITE}/city/${slug}/${f}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+  )
+
+  // Guides + content hubs
+  const guideUrls = GUIDE_SLUGS.map((s) => ({
+    url: `${SITE}/guides/${s}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
+  // Management directory (top-level only — per-company pages added by
+  // a separate fetch below)
+  const managementIndexUrls = [
+    { url: `${SITE}/management`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+  ]
+
+  // Per-management-company sitemap entries — fetch all distinct management_company
+  // values across published communities, slugify them.
+  const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80)
+  const mgmtSlugs = new Set<string>()
+  let mgmtOffset = 0
+  for (let i = 0; i < 5; i++) {
+    const { data } = await supabase
+      .from('communities')
+      .select('management_company')
+      .eq('status', 'published')
+      .not('management_company', 'is', null)
+      .range(mgmtOffset, mgmtOffset + 999)
+    if (!data || data.length === 0) break
+    for (const r of data) {
+      const s = slugify((r.management_company ?? '') as string)
+      if (s) mgmtSlugs.add(s)
+    }
+    if (data.length < 1000) break
+    mgmtOffset += 1000
+  }
+  const managementUrls = Array.from(mgmtSlugs).map((s) => ({
+    url: `${SITE}/management/${s}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
   return [
     { url: SITE,                                lastModified: now, changeFrequency: 'daily' as const,   priority: 1.0 },
     { url: `${SITE}/search`,                    lastModified: now, changeFrequency: 'daily' as const,   priority: 0.9 },
@@ -95,13 +160,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/reports`,                   lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${SITE}/reports/hoa-fee-report-2026`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${SITE}/about`,                     lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${SITE}/about/team`,                lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${SITE}/for-agents`,                lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${SITE}/pricing`,                   lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
     { url: `${SITE}/press`,                     lastModified: now, changeFrequency: 'monthly' as const, priority: 0.4 },
     { url: `${SITE}/advertise`,                 lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${SITE}/terms`,                     lastModified: now, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${SITE}/privacy`,                   lastModified: now, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${SITE}/guides`,                    lastModified: now, changeFrequency: 'weekly' as const,  priority: 0.85 },
+    { url: `${SITE}/florida-hoa-law`,           lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${SITE}/methodology`,               lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${SITE}/editorial-standards`,       lastModified: now, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${SITE}/corrections`,               lastModified: now, changeFrequency: 'monthly' as const, priority: 0.4 },
+    ...guideUrls,
+    ...managementIndexUrls,
+    ...managementUrls,
     ...cityUrls,
+    ...cityFilterUrls,
     ...legacyCityUrls,
     ...filterUrls,
     ...communityUrls,

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     description: 'Know the HOA before you commit.',
     images: ['https://hoa-agent.com/logo.png'],
   },
-  metadataBase: new URL('https://hoa-agent.com'),
+  metadataBase: new URL('https://www.hoa-agent.com'),
 };
 
 export default function RootLayout({
@@ -60,7 +61,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://events.mapbox.com" />
         <link rel="dns-prefetch" href="https://api.mapbox.com" />
       </head>
-      <body className="min-h-full flex flex-col">{children}<Analytics /></body>
+      <body className="min-h-full flex flex-col">{children}<SiteFooter /><Analytics /></body>
     </html>
   );
 }
