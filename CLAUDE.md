@@ -22,6 +22,8 @@ Last updated: May 2026
 - 8,027 published communities in Palm Beach County
   (after May 2026 location-verify session: -257 commercial → status=removed,
    -7 outside-FL → status=needs_review, +1,208 city corrections applied)
+- 173 confirmed 55+ communities · 855 confirmed gated · 10 both
+  (post amenities-text sweep May 3 2026; +11 gated from amenities scan)
 - Coverage: Palm Beach County only (expanding to
   Broward and Miami-Dade in 2026)
 - Admin dashboard: https://www.hoa-agent.com/admin
@@ -398,6 +400,43 @@ Pricing tiers:
 
 Analytics: ad_analytics table tracks impressions
 and clicks. Fire and forget — never blocking.
+
+---
+
+## 55+ and Gated Communities (May 2026)
+New boolean columns on communities table:
+- is_55_plus: true for age-restricted 55+ communities
+- is_gated: true for gated communities
+- is_age_restricted: true for any age restriction (auto-set true when is_55_plus=true)
+
+Current counts (post-sweep, May 3 2026):
+- Confirmed 55+: 173 (top: Delray 54, Lake Worth 51, WPB 31)
+- Confirmed gated: 855 (top: Boca 165, WPB 144, Lake Worth 129)
+- Both 55+ and gated: 10
+- is_age_restricted: 173
+
+Detection sources in priority order:
+1. amenities field text (fastest — no API call)
+2. Name pattern matching (SQL)
+3. DuckDuckGo web search (research script — needs ≥2 confirming queries)
+
+Rules:
+- Auto-approvable — write directly to communities, no pending queue
+- Only update if currently false (PATCH includes `is_gated=eq.false`)
+- NEVER set true back to false
+- When setting is_55_plus=true also set is_age_restricted=true
+
+New filter pages:
+- /city/[slug]/55-plus  (e.g. /city/delray-beach/55-plus)
+- /city/[slug]/gated    (e.g. /city/boca-raton/gated)
+
+Badges on community + search pages:
+- Amber pill (#FEF3C7 / #92400E) for 55+
+- Blue pill (#DBEAFE / #1E40AF) for gated
+- Purple pill (#F3E8FF / #6B21A8) for age-restricted (not 55+)
+
+Sweep script: scripts/sweep-gated-55plus.py
+Per-community detection in research script: detect_gated_55plus() — Tier 3b.
 
 ---
 
