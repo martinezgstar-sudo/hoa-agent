@@ -1,0 +1,18 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+FB v2 · 10 queries · 1.0s delay
+
+  [ 1/10]  0 hits · "Palm Beach County" HOA site:facebook.com
+  [ 2/10]  0 hits · "West Palm Beach" HOA assessment site:facebook.com
+  [ 3/10]  0 hits · "Delray Beach" HOA site:facebook.com
+  [ 4/10]  0 hits · "Boca Raton" HOA site:facebook.com
+  [ 5/10]  0 hits · "Wellington" HOA site:facebook.com
+  [ 6/10]  0 hits · "Jupiter" HOA site:facebook.com
+  [ 7/10]  0 hits · "Boynton Beach" HOA site:facebook.com
+  [ 8/10]  0 hits · Palm Beach County HOA lawsuit 2026
+  [ 9/10]  0 hits · Palm Beach County special assessment 2026
+  [10/10]  0 hits · Palm Beach HOA board recall
+
+  raw: 0 · dedupe: 0
+
+No results. Exiting.
