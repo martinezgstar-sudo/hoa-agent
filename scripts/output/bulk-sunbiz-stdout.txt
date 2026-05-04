@@ -1,0 +1,73 @@
+/Users/izzymartinez/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[12:12:56] Loading communities…
+[12:13:05] 8027 communities loaded
+[12:13:05] Building inverted index…
+[12:13:05] index: 2371 keys, 16839 postings, 6549 indexable communities
+[12:13:05] streaming 10 files…
+[12:14:12] cordata0.txt (1.82GB): 1,260,599 lines · 66s · matches so far: 571
+[12:15:30] cordata1.txt (1.82GB): 1,260,934 lines · 78s · matches so far: 828
+[12:17:10] cordata2.txt (1.82GB): 1,260,856 lines · 99s · matches so far: 1029
+[12:18:47] cordata3.txt (1.82GB): 1,260,838 lines · 98s · matches so far: 1162
+[12:20:27] cordata4.txt (1.82GB): 1,260,858 lines · 100s · matches so far: 1279
+[12:22:05] cordata5.txt (1.82GB): 1,260,681 lines · 97s · matches so far: 1386
+[12:23:42] cordata6.txt (1.82GB): 1,260,673 lines · 97s · matches so far: 1455
+[12:25:18] cordata7.txt (1.82GB): 1,260,711 lines · 96s · matches so far: 1543
+[12:26:56] cordata8.txt (1.82GB): 1,260,671 lines · 97s · matches so far: 1615
+[12:28:32] cordata9.txt (1.82GB): 1,260,637 lines · 96s · matches so far: 1680
+[12:28:32] streamed 12,607,458 total lines · examined 3,531,918 candidate pairs · 1680 matches found
+[12:28:33] matches → scripts/output/bulk-sunbiz-matches.json
+[12:28:33] PATCH-ing communities (null-only)…
+[13:03:47] field updates: {'state_entity_number': 1560, 'entity_status': 1556, 'registered_agent': 366, 'incorporation_date': 1207, 'street_address': 1181, 'zip_code': 29} (total writes: 5899)
+=== BULK SUNBIZ MATCH REPORT ===
+Date: 2026-05-04 13:03:47
+Source: /Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
+Files scanned:        10
+Total lines streamed: 12,607,458
+Candidate pairs:      3,531,918
+Communities loaded:   8027
+Indexable comms:      6549
+Communities matched:  1680
+Total field writes:   5899
+
+Field updates:
+  state_entity_number     : 1560
+  entity_status           : 1556
+  incorporation_date      : 1207
+  street_address          : 1181
+  registered_agent        : 366
+  zip_code                : 29
+
+Top 30 highest-scoring matches:
+  0.99  The Traditions On Fiddler'S Pond At Mount Dora Property Owne ← HE TRADITIONS ON FIDDLER'S POND AT MOUNT DORA PROP [N06000011052T]
+  0.99  The Shops Of San Marco Professional Offices Property Owners' ← HE SHOPS OF SAN MARCO PROFESSIONAL OFFICES PROPERT [N03000005303T]
+  0.99  Farrell Estates Wellington Neighborhood Association, Inc., A ← ARRELL ESTATES WELLINGTON NEIGHBORHOOD ASSOCIATION [N24000007946F]
+  0.99  Limestone Creek (South) Restoration Property Owners Associat ← IMESTONE CREEK (SOUTH) RESTORATION PROPERTY OWNERS [N05000011904L]
+  0.99  Indiantown Commerce & Technology Park Property Owners' Assoc ← NDIANTOWN COMMERCE & TECHNOLOGY PARK PROPERTY OWNE [N07000004944I]
+  0.99  North End Home Owners Protective And Environmental Associati ← ORTH END HOME OWNERS PROTECTIVE AND ENVIRONMENTAL  [733270      N]
+  0.99  Lakeside Of The Palm Beaches Mobile Home Park Homeowners Ass ← AKESIDE OF THE PALM BEACHES MOBILE HOME PARK HOMEO [N06975      L]
+  0.99  Village F - Village Center Multi-Family Property Owners Asso ← ILLAGE F - VILLAGE CENTER MULTI-FAMILY PROPERTY OW [N17000007450V]
+  0.99  Watersedge At The Lakes Of Delray Iii Property Owners Associ ← ATERSEDGE AT THE LAKES OF DELRAY III PROPERTY OWNE [N28351      W]
+  0.99  Watersedge At The Lakes Of Delray Ii Property Owners Associa ← ATERSEDGE AT THE LAKES OF DELRAY II PROPERTY OWNER [N20712      W]
+  0.99  Watersedge At The Lakes Of Delray Iv Property Owners Associa ← ATERSEDGE AT THE LAKES OF DELRAY IV PROPERTY OWNER [N93000004333W]
+  0.99  Casseekey Island At Jonathan'S Landing Homeowners' Associati ← ASSEEKEY ISLAND AT JONATHAN'S LANDING HOMEOWNERS'  [N27372      C]
+  0.99  Waterford Courtyards At Crystal Lake North Homeowners Associ ← ATERFORD COURTYARDS AT CRYSTAL LAKE NORTH HOMEOWNE [N13990      W]
+  0.99  Carriage Brooke At Wellington'S Edge Property Owners' Associ ← ARRIAGE BROOKE AT WELLINGTON'S EDGE PROPERTY OWNER [N96000001530C]
+  0.99  Harbour Point Villas Of Palm Beach County Homeowners Associa ← ARBOUR POINT VILLAS OF PALM BEACH COUNTY HOMEOWNER [N95000000388H]
+  0.99  Seminole Gardens At Woodbine Parcel "F" Homeowners' Sub-Asso ← EMINOLE GARDENS AT WOODBINE PARCEL "F" HOMEOWNERS' [N02000005761S]
+  0.99  Stamford At The Villages Of Palm Beach Lakes Homeowners Asso ← TAMFORD AT THE VILLAGES OF PALM BEACH LAKES HOMEOW [N29061      S]
+  0.99  Island At The Villages Of Palm Beach Lakes Homeowners Associ ← SLAND AT THE VILLAGES OF PALM BEACH LAKES HOMEOWNE [N18983      I]
+  0.99  Jupiter Medical And Technology Park Property Owners' Associa ← UPITER MEDICAL AND TECHNOLOGY PARK PROPERTY OWNERS [N21000012119J]
+  0.99  The Gold Coast Chapter Of The Community Associations Institu ← HE GOLD COAST CHAPTER OF THE COMMUNITY ASSOCIATION [761393      T]
+  0.99  Harbour Landing Of Lakes At Boca Raton Homeowner'S Associati ← ARBOUR LANDING OF LAKES AT BOCA RATON HOMEOWNER'S  [N11018      H]
+  0.99  The Association Of Concerned Homeowners Of Jupiter Ocean & R ← HE ASSOCIATION OF CONCERNED HOMEOWNERS OF JUPITER  [561221      T]
+  0.99  Village On The Greens At Winston Trails Homeowners Associati ← ILLAGE ON THE GREENS AT WINSTON TRAILS HOMEOWNERS  [N93000000675V]
+  0.99  Heritage Landings At Gulfstream Villas Homeowners' Associati ← ERITAGE LANDINGS AT GULFSTREAM VILLAS HOMEOWNERS'  [N13000000122H]
+  0.99  P.G.A. Resort Community Plat Of Glenwood Homeowners Associat ← .G.A. RESORT COMMUNITY PLAT OF GLENWOOD HOMEOWNERS [750782      P]
+  0.99  Village Center At Royal Palm Beach Property Owners Associati ← ILLAGE CENTER AT ROYAL PALM BEACH PROPERTY OWNERS  [N06000010006V]
+  0.99  The Hamptons Of Woodfield Country Club Homeowners' Associati ← HE HAMPTONS OF WOODFIELD COUNTRY CLUB HOMEOWNERS'  [N17792      T]
+  0.99  Donald Ross Village Commercial/Mixed Use Property Owners Ass ← ONALD ROSS VILLAGE COMMERCIAL/MIXED USE PROPERTY O [N03000009048D]
+  0.99  Moultrie Bluff Planned Unit Development Homeowners' Associat ← OULTRIE BLUFF PLANNED UNIT DEVELOPMENT HOMEOWNERS' [N14000006222M]
+  0.99  Twin Creeks Recreational Lake Facility Property Owners' Asso ← WIN CREEKS RECREATIONAL LAKE FACILITY PROPERTY OWN [N16000004913T]
+
+Report: scripts/output/bulk-sunbiz-match.txt
