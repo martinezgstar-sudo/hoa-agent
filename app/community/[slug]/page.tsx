@@ -80,8 +80,7 @@ interface Community {
   news_reputation_updated_at: string | null
   city_verified?: boolean
   website_url?: string
-  // master/sub HOA columns (new canonical names)
-  parent_id?: string | null
+  // master/sub HOA columns
   is_master?: boolean
   // legacy columns kept for backward compatibility
   is_sub_hoa?: boolean
@@ -226,8 +225,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   const commentFormId = 'leave-review'
 
-  // Resolve the effective parent id — prefer new parent_id, fall back to legacy master_hoa_id
-  const effectiveParentId = community.parent_id ?? community.master_hoa_id ?? null
+  // Resolve the effective parent id (production schema uses master_hoa_id)
+  const effectiveParentId = community.master_hoa_id ?? null
   const isSub = !!(community.is_sub_hoa || effectiveParentId)
 
   // Master HOA data (shown on sub-community pages)
@@ -241,28 +240,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     masterHoa = data
   }
 
-  // Sub-communities (shown on master pages)
-  // Query by parent_id first, fall back to master_hoa_id for legacy records
-  const subByParent = await supabase
-    .from('communities')
-    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count,status')
-    .eq('parent_id', community.id)
-    .order('canonical_name', { ascending: true })
-
-  const subByLegacy = await supabase
+  // Sub-communities (shown on master pages) — published only
+  const subQuery = await supabase
     .from('communities')
     .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count,status')
     .eq('master_hoa_id', community.id)
+    .eq('status', 'published')
     .order('canonical_name', { ascending: true })
 
-  // Merge, deduplicate by id, include both draft and published so master page
-  // always shows complete picture (draft subs show a status badge)
-  const subMap = new Map<string, any>()
-  for (const s of [...(subByParent.data ?? []), ...(subByLegacy.data ?? [])]) {
-    subMap.set(s.id, s)
-  }
-  const subCommunities = Array.from(subMap.values())
-    .sort((a, b) => a.canonical_name.localeCompare(b.canonical_name))
+  const subCommunities = (subQuery.data ?? [])
 
   // ── Schema.org JSON-LD bundle ──────────────────────────────────────────
   const citySlug = (community.city || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')

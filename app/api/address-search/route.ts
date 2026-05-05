@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
   const ilikePattern = encodeURIComponent(`*${q}*`)
   const res = await fetch(
-    `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city,is_55_plus,is_gated&canonical_name=ilike.${ilikePattern}&limit=6`,
+    `${supabaseUrl}/rest/v1/communities?select=canonical_name,slug,city,is_55_plus,is_gated&canonical_name=ilike.${ilikePattern}&status=eq.published&limit=6`,
     { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` } },
   )
   const data = await res.json()

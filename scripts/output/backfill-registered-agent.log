@@ -1,0 +1,19 @@
+[00:12:45] Loading targets…
+[00:12:47]   2259 candidate communities (entity_status set, agent null)
+[00:12:47]   unique state_entity_number keys: 1972
+[00:12:47] streaming 10 cordata files…
+[00:14:52]   cordata0.txt (1.82GB): 1,260,599 lines · 125s · matches: 10
+[00:17:04]   cordata1.txt (1.82GB): 1,260,934 lines · 132s · matches: 19
+[00:19:04]   cordata2.txt (1.82GB): 1,260,856 lines · 120s · matches: 27
+[00:21:02]   cordata3.txt (1.82GB): 1,260,838 lines · 118s · matches: 37
+[00:23:36]   cordata4.txt (1.82GB): 1,260,858 lines · 154s · matches: 44
+[00:25:45]   cordata5.txt (1.82GB): 1,260,681 lines · 129s · matches: 49
+[00:28:15]   cordata6.txt (1.82GB): 1,260,673 lines · 150s · matches: 53
+[00:30:26]   cordata7.txt (1.82GB): 1,260,711 lines · 131s · matches: 60
+[00:32:36]   cordata8.txt (1.82GB): 1,260,671 lines · 130s · matches: 67
+[00:34:45]   cordata9.txt (1.82GB): 1,260,637 lines · 128s · matches: 78
+[00:34:45] streamed 12,607,458 total lines · matched: 78 / 1972
+[00:34:45] PATCH-ing communities (registered_agent=is.null filter)…
+[00:35:00]   progress 78/78: written=78 failed=0
+[00:35:00] skipped (no cordata match): 2179 → scripts/output/agent-extract-skipped-2026-05-05.txt
+[00:35:00] DONE. summary: {'candidates': 2259, 'unique_keys': 1972, 'matched_in_cordata': 78, 'patched': 78, 'patch_failed': 0, 'skipped': 2179, 'lines_streamed': 12607458}

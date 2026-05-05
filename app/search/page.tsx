@@ -713,7 +713,7 @@ export default function SearchPage() {
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none",display:"block",marginBottom:"10px"}}>
                 <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
                   <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{c.canonical_name}</div>
-                  <div style={{fontSize:"13px",color:"#888",marginBottom: (c.is_master || c.parent_id || c.is_sub_hoa) ? "6px" : "0"}}>
+                  <div style={{fontSize:"13px",color:"#888",marginBottom: (c.is_master || c.master_hoa_id || c.is_sub_hoa) ? "6px" : "0"}}>
                     {c.city}
                     {c.unit_count != null ? ` · ${c.unit_count} units` : ""}
                     {c.property_type ? ` · ${c.property_type}` : ""}
@@ -721,7 +721,7 @@ export default function SearchPage() {
                   {c.is_master && (
                     <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>
                   )}
-                  {(c.parent_id || c.is_sub_hoa) && !c.is_master && (
+                  {(c.master_hoa_id || c.is_sub_hoa) && !c.is_master && (
                     <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>
                   )}
                 </div>
@@ -806,7 +806,7 @@ export default function SearchPage() {
                     <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
                       {c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>}
-                      {(c.parent_id || c.is_sub_hoa) && !c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>}
+                      {(c.master_hoa_id || c.is_sub_hoa) && !c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>}
                       {c.is_55_plus && <span style={{fontSize:"10px",padding:"2px 7px",borderRadius:"999px",backgroundColor:"#FEF3C7",color:"#92400E",border:"1px solid #FDE68A",fontWeight:600}}>55+</span>}
                       {c.is_gated && <span style={{fontSize:"10px",padding:"2px 7px",borderRadius:"999px",backgroundColor:"#DBEAFE",color:"#1E40AF",border:"1px solid #BFDBFE",fontWeight:600}}>Gated</span>}
                       <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#E1F5EE",color:"#1B2B6B"}}>Active entity</span>

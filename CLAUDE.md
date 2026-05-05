@@ -19,14 +19,29 @@ Last updated: May 2026
 - MorningStar is the first advertiser on HOA Agent
 
 ## Current Stats
-- 8,027 published communities in Palm Beach County
-  (after May 2026 location-verify session: -257 commercial → status=removed,
-   -7 outside-FL → status=needs_review, +1,208 city corrections applied)
+- 8,026 published communities in Palm Beach County
+  (after May 2026 location-verify + dedupe sessions: -258 commercial/mgmt
+   → status=removed, -7 outside-FL → status=needs_review, -2 Briar Bay
+   duplicates → status=duplicate, +1,208 city corrections applied)
 - 173 confirmed 55+ communities · 855 confirmed gated · 10 both
   (post amenities-text sweep May 3 2026; +11 gated from amenities scan)
 - Coverage: Palm Beach County only (expanding to
   Broward and Miami-Dade in 2026)
 - Admin dashboard: https://www.hoa-agent.com/admin
+
+## Data Completeness Baseline (May 5, 2026)
+Snapshot taken at start of HOA Agent 7 session, BEFORE the registered_agent
+backfill / Briar Bay Master Sunbiz writes:
+- ZIP code:           98.9%
+- Unit count:         60.7%
+- Entity status:      34.1%
+- Street address:     29.2%
+- Registered agent:    5.1%
+- Management company:  5.0%
+- Amenities:           1.6%
+- Monthly fees:        1.3%
+- Website URL:         0.6%
+Target before Broward expansion: 85% on all fields.
 
 ## Contact routing (May 2026)
 - ALL contact forms POST to /api/contact which sends via Resend to
@@ -151,11 +166,15 @@ STATS:
 - assessment_signal_count — number of signals
 - fee_observation_count — number of fee observations
 
-MASTER/SUB HOA:
-- is_master — boolean, true if master community
-- parent_id — uuid reference to master community
-- master_hoa_id — legacy field, use parent_id instead
-- is_sub_hoa — legacy field
+MASTER/SUB HOA (production schema — these are the live columns):
+- master_hoa_id — uuid reference to master community
+- is_sub_hoa     — boolean, true if this community is a sub-association
+A master community is identified by other rows pointing to it via
+master_hoa_id, not by a flag on itself.
+
+LEGACY (planned migration, NOT in production yet — do not query these):
+- is_master / parent_id are aspirational column names from a draft migration
+  that has NOT shipped. Production code MUST use master_hoa_id + is_sub_hoa.
 
 COLUMNS THAT DO NOT EXIST — never use these:
 - monthly_fee (does not exist)
@@ -549,15 +568,47 @@ for [County Name] County, Florida.
 
 15. Duplicate prevention before INSERT:
     Before inserting a new community, always run a fuzzy-match check
-    against existing canonical_name, master_hoa_id, and ZIP. Normalize
-    names by lowercasing, removing punctuation, and stripping Inc, LLC,
-    Incorporated, Association, HOA, Property Owners suffixes before
-    comparison. If a fuzzy match exists within the same master_hoa_id
-    or within the same ZIP code, UPDATE the existing record instead of
-    inserting. Never insert a duplicate community.
+    using scripts/lib/dedupe-check.py against existing canonical_name,
+    master_hoa_id, and ZIP. Normalize names by lowercasing, removing
+    punctuation, and stripping Inc, LLC, Incorporated, Association, HOA,
+    Property Owners, Homeowners suffixes before comparison. If a fuzzy
+    match exists within the same master_hoa_id or within the same ZIP
+    code, UPDATE the existing record instead of inserting. Never insert
+    a duplicate community.
     Helper: scripts/lib/dedupe-check.py exports check_for_duplicate(
     supabase_client, canonical_name, master_hoa_id, zip_code) → existing
     id or None.
+
+16. Master HOA link evidence requirement:
+    When linking sub-communities to master HOAs, require TWO independent
+    signals before setting master_hoa_id automatically. Acceptable
+    signals: matching registered_agent on Sunbiz, matching street address
+    range, explicit mention in Sunbiz related entities, or explicit
+    mention on master HOA website. ZIP code alone is NOT sufficient.
+    Name similarity alone is NOT sufficient. ZIP plus name similarity
+    together is NOT sufficient. If only one signal is present, queue
+    for admin review instead of auto-linking.
+
+17. Never auto-unlink master_hoa_id:
+    Never automatically unlink master_hoa_id assignments without owner
+    confirmation. Owner has direct knowledge of community boundaries that
+    no public data source captures. When in doubt, queue for admin review
+    instead of unlinking. The cost of a missing master link is small
+    (one query fix). The cost of a wrong unlink is hidden until someone
+    notices the count is off.
+
+18. Verification required in reports:
+    Final reports must include verification SELECT results for every
+    UPDATE or INSERT statement claimed to have run. A task is not
+    complete until the database state is confirmed via SELECT showing
+    the expected post-state. Reports without verification queries are
+    incomplete and must be re-run.
+
+19. Public community queries MUST filter by status='published':
+    Every public-facing Supabase query that returns community lists or
+    sub-community lists MUST chain .eq('status', 'published'). Records
+    with status in {duplicate, removed, draft, needs_review} must never
+    leak onto live pages. Admin routes at /admin/* are exempt.
 
 ---
 
