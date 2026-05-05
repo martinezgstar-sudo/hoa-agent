@@ -547,6 +547,18 @@ for [County Name] County, Florida.
     - Listing-site fees never auto-approve, always go to pending review
     - Slider noise filter: drop any source with 3+ exact-$100 multiples
 
+15. Duplicate prevention before INSERT:
+    Before inserting a new community, always run a fuzzy-match check
+    against existing canonical_name, master_hoa_id, and ZIP. Normalize
+    names by lowercasing, removing punctuation, and stripping Inc, LLC,
+    Incorporated, Association, HOA, Property Owners suffixes before
+    comparison. If a fuzzy match exists within the same master_hoa_id
+    or within the same ZIP code, UPDATE the existing record instead of
+    inserting. Never insert a duplicate community.
+    Helper: scripts/lib/dedupe-check.py exports check_for_duplicate(
+    supabase_client, canonical_name, master_hoa_id, zip_code) → existing
+    id or None.
+
 ---
 
 ## Key Git Recovery Commits
@@ -639,6 +651,15 @@ DATA IN QUEUE:
 - Run python3 scripts/gmail-auth.py for outreach OAuth
 - Run build-outreach-list.py once auth complete
 - Continue nightly research batches
+
+CLAUDE CODE READY TO RUN:
+- Fix duplicate Briar Bay subs: mark records 4a328dd5-9e9c-4ce8-864e-5414b028a413
+  and e3d4bc97-df76-4cfe-bc27-e8888c5ab47d as status=duplicate. Update originals
+  21350603-8c49-4f6a-94d3-3a5801003a88 and dec9d8c1-dd29-4b46-b3e5-8376f68c798e
+  to city=West Palm Beach, zip_code=33411, city_verified=true. Verify originals
+  have Sunbiz data before making changes.  [DONE 2026-05-05]
+- Remove c01ae041-2fc2-43a0-bcf0-4703fc3e9487 (Associated Property Management) —
+  this is a management company, not a community. Set status=removed.  [DONE 2026-05-05]
 
 EXPANSION:
 - Broward County — use EXPANSION_PLAYBOOK.md
