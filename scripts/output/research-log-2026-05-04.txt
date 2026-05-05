@@ -1,0 +1,760 @@
+HOA Research Run — 2026-05-04 09:52
+Mode: LIVE
+Communities: 100
+============================================================
+
+=== 10 Palms North Townhomes Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N230000011641'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2023-02-03'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '927 WITHERSPOON LANE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33483'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: 0 PALMS NORTH TOWNHOMES HOMEOWNERS' ASSOCIATION, INC. | doc=N230000011641 | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== 10 Palms South Townhomes Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N230000011631'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: 0 PALMS SOUTH TOWNHOMES HOMEOWNERS' ASSOCIATION, INC. | doc=N230000011631 | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== 101 SE 7TH AVENUE ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== 111 FIRST DELRAY CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N190000076761'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '999 W Yamato Rd'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33431'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 11 FIRST DELRAY CONDOMINIUM ASSOCIATION, INC. | doc=N190000076761 | status=ACTIVE | ra=None; PBCPAO: 68 parcels found → unit_count=68; CourtListener: no cases found
+
+=== 1177 MODERNE CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 16 parcels found → unit_count=16; CourtListener: no cases found
+
+=== 1236 GEORGE BUSH BLVD ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 6 parcels found → unit_count=6; CourtListener: no cases found
+
+=== 1450 Treeland Property Owner, Llc ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 150 Oceanside Homeowner'S Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N21000012885T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: HE CUPOLA AT OCEANSIDE HOMEOWNERS ASSOCIATION, INC. | doc=N21000012885T | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== 1515 FLAGLER CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 83 parcels found → unit_count=83; CourtListener: no cases found
+
+=== 1625 SOUTH OCEAN CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 13 parcels found → unit_count=13; CourtListener: no cases found
+
+=== 1880 10TH CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 8 parcels found → unit_count=8; CourtListener: no cases found
+
+=== 200 EAST PALMETTO PARK CONDO ===
+  AUTO-APPROVE  state_entity_number = 'L140001723912'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '888 SOUTH ANDREWS AVENUE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33316'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 00 EAST PALMETTO PARK LLC | doc=L140001723912 | status=INACTIVE | ra=None; PBCPAO: 119 parcels found → unit_count=119; CourtListener: no cases found
+
+=== 2100 COND AT SLOANS CURVE ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 141 parcels found → unit_count=141; CourtListener: no cases found
+
+=== 215 Macfarlane Homeowner'S Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N180000073222'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '213 MACFARLANE DRIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33483'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  unit_count = '3'  [pbcpao_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 15 MACFARLANE HOMEOWNER'S ASSOCIATION, INC. | doc=N180000073222 | status=ACTIVE | ra=None; PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== 215 MACFARLANE PLAT ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== 2330 North Ocean Boulevard Property Owners Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 236 FIFTH AVENUE CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N010000065417'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2001-09-14'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '2685 HORSESHOE DR'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '34104'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 80 FIFTH AVENUE SOUTH CONDOMINIUM ASSOCIATION, INC. | doc=N010000065417 | status=ACTIVE | ra=None; PBCPAO: 32 parcels found → unit_count=32; CourtListener: no cases found
+
+=== 2500 BOCA CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 85 parcels found → unit_count=85; CourtListener: no cases found
+
+=== 259 WORTH AVENUE CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N200000133402'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '1200 SOUTH PINE ISLAND ROAD'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33324'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'ORPORATION SYSTEM'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 59 WORTH AVENUE CONDOMINIUM ASSOCIATION, INC. | doc=N200000133402 | status=ACTIVE | ra=ORPORATION SYSTEM; PBCPAO: 2 parcels found → unit_count=2; CourtListener: no cases found
+
+=== 2700 NORTH OCEAN CONDO ===
+  AUTO-APPROVE  state_entity_number = 'L240002658062'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 206B, 2700 NORTH OCEAN DR., LLC | doc=L240002658062 | status=ACTIVE | ra=None; PBCPAO: 241 parcels found → unit_count=241; CourtListener: no cases found
+
+=== 2701 PGA BOULEVARD CONDOMINIUM ===
+  AUTO-APPROVE  state_entity_number = 'L17000095987M'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '13361 PONDEROSA WAY'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33907'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: ASTIQUE I 12701 MASTIQUE BEACH BOULEVARD UNIT 1604 LLC | doc=L17000095987M | status=INACTIVE | ra=None; PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== 2774 SOUTH OCEAN INC ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 94 parcels found → unit_count=94; CourtListener: no cases found
+
+=== 2979 PGA CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 3 parcels found → unit_count=3; CourtListener error: ERROR:The read operation timed out
+
+=== 2Nd Chance Home Ownership, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'P090000305792'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: ND CHANCE HOME OWNERSHIP, INC. | doc=P090000305792 | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== 3 Bz Hoagies Llc ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 3200 SOUTH OCEAN A SEAGATE CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 19 parcels found → unit_count=19; CourtListener: no cases found
+
+=== 327 ROYAL PALM CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N08000001951T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '160 ROYAL PALM WAY'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33480'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE PALM HOUSE ROYAL A, CONDOMINIUM ASSOCIATION, INC. | doc=N08000001951T | status=INACTIVE | ra=None; PBCPAO: 24 parcels found → unit_count=24; CourtListener: no cases found
+
+=== 342 TONEY PENNA CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N120000023253'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '342 Toney Penna Drive'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33458'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 42 TONEY PENNA CONDOMINIUM OWNERS ASSOCIATION, INC. | doc=N120000023253 | status=ACTIVE | ra=None; PBCPAO: 6 parcels found → unit_count=6; CourtListener: no cases found
+
+=== 3550 SOUTH OCEAN CONDO ===
+  AUTO-APPROVE  state_entity_number = 'L21000529929I'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '3550 South Ocean Blvd'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33480'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'AMBRCIMPERIAL REALTY PROPERTY GROUP, LLC'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: RPG 3550 SOUTH OCEAN, LLC | doc=L21000529929I | status=ACTIVE | ra=AMBRCIMPERIAL REALTY PROPERTY GROUP, LLC; PBCPAO: 30 parcels found → unit_count=30; CourtListener: no cases found
+
+=== 3621 SOUTH OCEAN VILLAS CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 6 parcels found → unit_count=6; CourtListener: no cases found
+
+=== 36Th Street Master Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 38 South Homeowner'S Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N95000006050S'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1995-12-18'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=3 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: WEETWATER CREEK SOUTH HOMEOWNERS  ASSOCIATION, INC. | doc=N95000006050S | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== 3900 Business Center Property Owners' Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 3Rd Base Steak And Hoagies Llc ===
+  AUTO-APPROVE  state_entity_number = 'L220004619403'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '401 N ROSEMARY AVENUE                                                               WEST'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33401'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'REGISTERED AGENTS INC'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: RD BASE STEAK AND HOAGIES LLC | doc=L220004619403 | status=INACTIVE | ra=REGISTERED AGENTS INC; CourtListener: no cases found
+
+=== 4001 NORTH OCEAN CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N14000006032T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '4227 Northlake Blvd'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33410'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE VILLAS AT 4001 NORTH OCEAN CONDOMINIUM ASSOCIATION, INC. | doc=N14000006032T | status=ACTIVE | ra=None; PBCPAO: 38 parcels found → unit_count=38; CourtListener: no cases found
+
+=== 434 21ST STREET CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N210000060974'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'ST STREET LLC'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=3 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 34 21ST STREET CONDOMINIUM ASSOCIATION, INC. | doc=N210000060974 | status=ACTIVE | ra=ST STREET LLC; PBCPAO: 2 parcels found → unit_count=2; CourtListener: no cases found
+
+=== 45 Ocean Condo ===
+  AUTO-APPROVE  state_entity_number = 'M99000001150G'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1999-07-19'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '1201 HAYS STREET'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '32301'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'OMPANY'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=6 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: ROVE OCEAN CONDO LLC | doc=M99000001150G | status=INACTIVE | ra=OMPANY; PBCPAO: 160 parcels found → unit_count=160; CourtListener: no cases found
+
+=== 45 OCEAN CONDOMINIUM ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== 4513 SOUTH OCEAN CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 2 parcels found → unit_count=2; CourtListener: no cases found
+
+=== 5000 NORTH OCEAN CONDO ===
+  AUTO-APPROVE  state_entity_number = 'L200000121071'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '1201 HAYS STREET'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '32301'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'OMPANY'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: 203 5000 NORTH OCEAN LLC | doc=L200000121071 | status=ACTIVE | ra=OMPANY; PBCPAO: 48 parcels found → unit_count=48; CourtListener: no cases found
+
+=== 5050 Ocean Drive Homeowners' Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 610 CLEMATIS CONDOMINIUM ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 249 parcels found → unit_count=249; CourtListener: no cases found
+
+=== 621-631 LAKE STREET CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N06000004583T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '372 LENELL ROAD'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33931'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE LAKESHORE AT MAIN STREET CONDOMINIUM ASSOCIATION, INC. | doc=N06000004583T | status=INACTIVE | ra=None; PBCPAO: 2 parcels found → unit_count=2; CourtListener: no cases found
+
+=== 661 Ne 19Th Avenue Homeowner'S Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N150000061776'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '751 Park of Commerce Drive'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33487'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: 61/665 19TH AVENUE TOWNHOUSES HOMEOWNERS' ASSOCIATION, INC. | doc=N150000061776 | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== 661/665 19Th Avenue Townhouses Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N150000061776'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '751 Park of Commerce Drive'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33487'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: 61/665 19TH AVENUE TOWNHOUSES HOMEOWNERS' ASSOCIATION, INC. | doc=N150000061776 | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== 7 ON 7 PLAT ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 7 parcels found → unit_count=7; CourtListener: no cases found
+
+=== 700 Ocean Drive Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'L250004048904'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '305 FERNANDINA ST'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '34949'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=4 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: 01 S. OCEAN DRIVE, LLC | doc=L250004048904 | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== 750 OCEAN CONDOMINIUM ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 30 parcels found → unit_count=30; CourtListener: no cases found
+
+=== 8000 Arlington Property Owners Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== 816 PROSPERITY CONDOMINIUM ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 6 parcels found → unit_count=6; CourtListener: no cases found
+
+=== A Place In The Woods Property Owners Association Inc ===
+  AUTO-APPROVE  state_entity_number = 'N41430      P'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1990-12-27'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=3 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: ARK PLACE AT MEADOW WOODS HOMEOWNERS' ASSOCIATION, INC. | doc=N41430      P | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== A Place In The Woods Property Owners Associationinc. ===
+  AUTO-APPROVE  state_entity_number = '745245      A'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1978-12-13'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '9012 GREEN MEADOWS WAY'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33418'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: PLACE IN THE WOODS PROPERTY OWNERS ASSOCIATIONINC. | doc=745245      A | status=INACTIVE | ra=None; CourtListener: no cases found
+
+=== Abacoa Plaza Property Owners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'A01000001452S'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2001-10-25'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '400                                                West'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33401'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: C-ABACOA PLAZA ASSOCIATES, LLLP | doc=A01000001452S | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== Abacoa Property Owners' Assembly, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== Abacoa Town Center ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 301 parcels found → unit_count=301; CourtListener: no cases found
+
+=== Abacoa Workplace Master Property Owners' Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== Abbey Park Gardens I ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 192 parcels found → unit_count=192; CourtListener: no cases found
+
+=== ABBEY PARK GARDENS I CONDOMINIUM ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 192 parcels found → unit_count=192; CourtListener: no cases found
+
+=== ABBEY PARK PLAT NO 1 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 77 parcels found → unit_count=77; CourtListener: no cases found
+
+=== ABBEY PARK PLAT NO. 4 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 77 parcels found → unit_count=77; CourtListener: no cases found
+
+=== Abbey Park Townhouse Properties Homeowner'S Assoc. Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== Abbington Homeowners' Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== ABERDEEN ARMS CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 115 parcels found → unit_count=115; CourtListener: no cases found
+
+=== Aberdeen Arms Condominium Th Pt Of Sly ===
+  AUTO-APPROVE  state_entity_number = 'L08000113168P'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2008-12-10'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '90 FORT WADE ROAD'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '32081'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: ICALATA FARMS REGISTERED ABERDEEN ANGUS, LLC | doc=L08000113168P | status=INACTIVE | ra=None; PBCPAO: 115 parcels found → unit_count=115; CourtListener: no cases found
+
+=== ABERDEEN PL 004 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== ABERDEEN PL 012 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== ABERDEEN PL 014 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== ABERDEEN PL 15 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 99 parcels found → unit_count=99; CourtListener: no cases found
+
+=== ABERDEEN PL 17 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 76 parcels found → unit_count=76; CourtListener: no cases found
+
+=== ABERDEEN PL 18 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 73 parcels found → unit_count=73; CourtListener: no cases found
+
+=== ABERDEEN PL 22 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 136 parcels found → unit_count=136; CourtListener: no cases found
+
+=== ABERDEEN PL 7 ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 64 parcels found → unit_count=64; CourtListener: no cases found
+
+=== Aberdeen Property Owners Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== ACACIA GARDENS ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 21 parcels found → unit_count=21; CourtListener: no cases found
+
+=== ACACIA HOUSE CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 3 parcels found → unit_count=3; CourtListener: no cases found
+
+=== ACREHOME PARK IN ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 66 parcels found → unit_count=66; CourtListener: no cases found
+
+=== ACREHOME PARK SECOND ADD IN ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 405 parcels found → unit_count=405; CourtListener: no cases found
+
+=== Adams House Homeowners' Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'L23000492033T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: EAM ADAMS BUYS HOUSES LLC | doc=L23000492033T | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== ADDISON AT SINGER ISLAND CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N16000007450T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE ADDISON AT SINGER ISLAND CONDOMINIUM ASSOCIATION, INC. | doc=N16000007450T | status=ACTIVE | ra=None; PBCPAO: 5 parcels found → unit_count=5; CourtListener: no cases found
+
+=== Addison Estates Homeowners Association, Inc. ===
+  AUTO-APPROVE  unit_count = '17'  [pbcpao_local]  [OK]
+
+  TOTALS: auto=1 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 17 parcels found → unit_count=17; CourtListener: no cases found
+
+=== ADDISON LAKES ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 44 parcels found → unit_count=44; CourtListener: no cases found
+
+=== ADDISON ON THE OCEAN IN BOCA RATON CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 170 parcels found → unit_count=170; CourtListener: no cases found
+
+=== ADDISON PARK ===
+  AUTO-APPROVE  state_entity_number = 'L22000335843S'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: O V ADDISON PARK CO-INVEST, LLC | doc=L22000335843S | status=ACTIVE | ra=None; PBCPAO: 58 parcels found → unit_count=58; CourtListener: no cases found
+
+=== Addison Park Of Boca Raton Homeowners Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== ADDISON PLACE ===
+  AUTO-APPROVE  state_entity_number = 'M20000001361C'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2020-02-03'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '1200 SOUTH PINE ISLAND ROAD'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33324'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'ORPORATION SYSTEM'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=6 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: L SHOPPES AT ADDISON PLACE FL LLC | doc=M20000001361C | status=ACTIVE | ra=ORPORATION SYSTEM; PBCPAO: 91 parcels found → unit_count=91; CourtListener: no cases found
+
+=== Addison Reserve Master Property Owners Association, Inc. ===
+  AUTO-APPROVE  unit_count = '797'  [pbcpao_local]  [OK]
+
+  TOTALS: auto=1 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 797 parcels found → unit_count=797; CourtListener: no cases found
+
+=== Addison Reserve Par ===
+  AUTO-APPROVE  state_entity_number = 'M21000015230M'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'INACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '1200 SOUTH PINE ISLAND ROAD'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33324'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  registered_agent = 'MGR CMELBOURNE ADDISON PRESERVE MANAGER LLC'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: ELBOURNE ADDISON PRESERVE OWNER LLC | doc=M21000015230M | status=INACTIVE | ra=MGR CMELBOURNE ADDISON PRESERVE MANAGER LLC; PBCPAO: 797 parcels found → unit_count=797; CourtListener: no cases found
+
+=== Addison Reserve Pars 4 & ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 797 parcels found → unit_count=797; CourtListener: no cases found
+
+=== Addison Reserve Pars 7 & ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 797 parcels found → unit_count=797; CourtListener: no cases found
+
+=== Addison Trace Community Association, Inc. ===
+  AUTO-APPROVE  unit_count = '22'  [pbcpao_local]  [OK]
+
+  TOTALS: auto=1 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 22 parcels found → unit_count=22; CourtListener: no cases found
+
+=== Addison Trace Homeowners' Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== ADELPHA AT INDIAN SPRINGS ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== ADMIRAL APTS CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 10 parcels found → unit_count=10; CourtListener: no cases found
+
+=== ADMIRAL AT JUPITER YACHT CLUB CONDO ===
+  AUTO-APPROVE  state_entity_number = 'N03000009844T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '2003-11-12'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '4440 PGA Blvd'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '33410'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE ADMIRAL AT JUPITER YACHT CLUB CONDOMINIUM ASSOCIATION, INC. | doc=N03000009844T | status=ACTIVE | ra=None; PBCPAO: 23 parcels found → unit_count=23; CourtListener: no cases found
+
+=== Admiral'S Cove Master Property Owners Association, Inc. ===
+  AUTO-APPROVE  state_entity_number = 'N50904      T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1992-09-18'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=3 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: HE GOLF VILLAGE AT ADMIRALS COVE MASTER PROPERTY OWNERS ASSOCIATION, INC. | doc=N50904      T | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== Admiral'S Cove Single Family Homeowners Association, Inc. ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: CourtListener: no cases found
+
+=== ADMIRALS WALK TOWER A CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: PBCPAO: 67 parcels found → unit_count=67; CourtListener: no cases found
+
+=== AEGEAN CONDO ===
+  AUTO-APPROVE  state_entity_number = '734530      T'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  incorporation_date = '1975-12-08'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  street_address = '348 SW MIRACLE STRIP PARKWAY'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  zip_code = '32548'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=5 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: Sunbiz: HE AEGEAN CONDOMINIUM ASSOCIATION, INC. | doc=734530      T | status=ACTIVE | ra=None; CourtListener: no cases found
+
+=== AINSLIE A THRU D CONDO ===
+
+  TOTALS: auto=0 | pending=0 | fee_obs=0
+  Sources checked: 25
+  Notes: CourtListener: no cases found
+
+=== Akers Away Homeowners' Association Inc. ===
+  AUTO-APPROVE  state_entity_number = 'L24000418072H'  [sunbiz_local]  [OK]
+  AUTO-APPROVE  entity_status = 'ACTIVE'  [sunbiz_local]  [OK]
+
+  TOTALS: auto=2 | pending=0 | fee_obs=0
+  Sources checked: 26
+  Notes: Sunbiz: OME AWAY CARETAKERS LLC | doc=L24000418072H | status=ACTIVE | ra=None; CourtListener: no cases found
+
+============================================================
+GRAND TOTALS
+  Communities researched : 100
+  Auto-approved          : 148
+  Queued for admin review: 0
+  Fee observations       : 0
+============================================================

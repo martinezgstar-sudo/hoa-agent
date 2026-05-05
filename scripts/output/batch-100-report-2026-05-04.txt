@@ -1,0 +1,52 @@
+======================================================================
+HOA AGENT — 100-COMMUNITY BATCH REPORT
+Date: 2026-05-04
+Mode: full 5-tier comprehensive research (LaCie Sunbiz + APIs + DDG + listings + Playwright)
+======================================================================
+
+BATCH SUMMARY
+----------------------------------------------------------------------
+  Communities researched:        100 / 100
+  Research log entries:          100
+  Auto-approved (script-direct): 0
+  Pending queued (admin review): 0
+  Fee observations queued:       0  (current pending_fee_observations: 40)
+
+BULK SUNBIZ MATCH (parallel run earlier today, commit cff0871)
+----------------------------------------------------------------------
+  18GB cordata*.txt streamed in one pass
+  1,680 communities matched at >=0.80 SequenceMatcher
+  5,899 null-only fields written:
+    state_entity_number=1,560 · entity_status=1,556 · incorporation_date=1,207
+    street_address=1,181 · registered_agent=366 · zip_code=29
+
+DATA COMPLETENESS — BEFORE vs AFTER
+----------------------------------------------------------------------
+  Total published: 8027 (baseline) → 8029 (after, +2)
+
+  Field                             Baseline            After          Delta
+  management_company              5.0% (399)       5.0% (399)     +0.0% (+0)
+  monthly_fee_median              1.3% (103)       1.3% (103)     +0.0% (+0)
+  amenities                       1.6% (127)       1.6% (127)     +0.0% (+0)
+  website_url                      0.6% (47)        0.6% (47)     +0.0% (+0)
+  street_address                14.3% (1150)     29.2% (2342) +14.9% (+1192)
+  registered_agent                 0.4% (36)       5.1% (409)   +4.7% (+373)
+  entity_status                 14.5% (1167)     34.1% (2741) +19.6% (+1574)
+
+PENDING QUEUE (post-batch state)
+----------------------------------------------------------------------
+  pending_community_data (pending):  0
+    auto_approvable=true:            0
+  pending_fee_observations:          40
+  → review at https://www.hoa-agent.com/admin/pending
+
+NOTES
+----------------------------------------------------------------------
+  * Most field gains came from bulk-sunbiz; the per-community research script
+    queues mgmt/fees/amenities/website to pending_community_data for admin review.
+    Those values do NOT show up in completeness deltas until approved.
+  * The 40 pending_fee_observations carried over from prior runs — none added
+    in this batch (consistent with sparse fee surface for these comms).
+  * Run #2 of the batch (next 100) recommended after admin reviews any new
+    pending_community_data items in /admin/pending.
+======================================================================
