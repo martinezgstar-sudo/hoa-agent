@@ -12,12 +12,28 @@ type CommunityMatch = {
   match_reason: string
   status: 'pending' | 'approved' | 'rejected'
   admin_notes?: string | null
+  link_source?: 'auto' | 'manual' | string | null
+  linked_by?: string | null
+  linked_at?: string | null
   communities?: {
     id: string
     canonical_name: string
     slug: string
+    city?: string | null
   } | null
 }
+
+type CommunityLite = {
+  id: string
+  canonical_name: string
+  slug: string
+  city: string | null
+  zip_code: string | null
+  master_hoa_id: string | null
+}
+
+type CityFilter = { name: string; count: number }
+type MasterFilter = { id: string; canonical_name: string; sub_count: number; city?: string | null }
 
 type NewsItem = {
   id: string
@@ -63,6 +79,20 @@ export default function NewsAdminPage() {
   const [loading, setLoading] = useState(false)
   const [busyId, setBusyId] = useState<string>('')
   const [error, setError] = useState('')
+  const [cities, setCities] = useState<CityFilter[]>([])
+  const [masters, setMasters] = useState<MasterFilter[]>([])
+
+  useEffect(() => {
+    if (!authed) return
+    // Load filters once
+    fetch('/api/admin/communities/filters', { headers: { 'x-admin-password': ADMIN_PASSWORD } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (Array.isArray(d.cities)) setCities(d.cities)
+        if (Array.isArray(d.masters)) setMasters(d.masters)
+      })
+      .catch(() => {})
+  }, [authed])
 
   const tabs = useMemo(
     () => [
@@ -129,6 +159,9 @@ export default function NewsAdminPage() {
   async function approveAllMatches(item: NewsItem) {
     setBusyId(item.id)
     try {
+      // Approve every still-pending community_news row regardless of source
+      // (auto matches from the AI extractor and manual links added by admin
+      // both flow through the same approval workflow).
       const pendingMatches = (item.community_news || []).filter((m) => m.status === 'pending')
       for (const m of pendingMatches) {
         await patchStatus(
@@ -136,7 +169,9 @@ export default function NewsAdminPage() {
             type: 'community_news',
             id: m.id,
             status: 'approved',
-            admin_notes: 'Approved via bulk action',
+            admin_notes: m.link_source === 'manual'
+              ? 'Approved with article (manual link)'
+              : 'Approved via bulk action',
           },
           true,
         )
@@ -145,11 +180,39 @@ export default function NewsAdminPage() {
         type: 'news_item',
         id: item.id,
         status: 'approved',
-        admin_notes: 'Approved all matches',
+        admin_notes: `Approved · ${pendingMatches.length} community link${pendingMatches.length === 1 ? '' : 's'} approved`,
       })
     } finally {
       setBusyId('')
     }
+  }
+
+  async function linkCommunities(itemId: string, payload: Record<string, unknown>) {
+    const res = await fetch(`/api/admin/news/${itemId}/link-communities`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': ADMIN_PASSWORD,
+      },
+      body: JSON.stringify(payload),
+    })
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.error || 'Link failed')
+    return data
+  }
+
+  async function unlinkCommunityNews(itemId: string, communityNewsId: string) {
+    const res = await fetch(`/api/admin/news/${itemId}/link-communities`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': ADMIN_PASSWORD,
+      },
+      body: JSON.stringify({ community_news_ids: [communityNewsId] }),
+    })
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.error || 'Unlink failed')
+    return data
   }
 
   async function rejectEntireArticle(item: NewsItem) {
@@ -585,6 +648,16 @@ export default function NewsAdminPage() {
                   ))}
                 </div>
 
+                {tab === 'pending' && (
+                  <ManualLinker
+                    newsItemId={item.id}
+                    cities={cities}
+                    masters={masters}
+                    existing={item.community_news || []}
+                    onChanged={() => load(tab)}
+                  />
+                )}
+
                 <div style={{ marginTop: '14px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {tab === 'pending' && (
                     <>
@@ -676,5 +749,350 @@ export default function NewsAdminPage() {
           })}
       </div>
     </main>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ManualLinker — inline component used per news article
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ManualLinker(props: {
+  newsItemId: string
+  cities: CityFilter[]
+  masters: MasterFilter[]
+  existing: CommunityMatch[]
+  onChanged: () => void
+}) {
+  const { newsItemId, cities, masters, existing, onChanged } = props
+  const [city, setCity] = useState<string>('')
+  const [masterId, setMasterId] = useState<string>('')
+  const [q, setQ] = useState<string>('')
+  const [results, setResults] = useState<CommunityLite[]>([])
+  const [picked, setPicked] = useState<CommunityLite[]>([])
+  const [busy, setBusy] = useState(false)
+  const [msg, setMsg] = useState<string>('')
+
+  const existingIds = new Set((existing || []).map((m) => m.community_id))
+
+  // Throttled type-ahead
+  useEffect(() => {
+    const ctrl = new AbortController()
+    const t = setTimeout(async () => {
+      // Don't search unless one of: q (>=2 chars), city, or masterId
+      if (!q && !city && !masterId) {
+        setResults([])
+        return
+      }
+      if (q && q.length < 2 && !city && !masterId) {
+        setResults([])
+        return
+      }
+      try {
+        const params = new URLSearchParams()
+        if (q) params.set('q', q)
+        if (city) params.set('city', city)
+        if (masterId) params.set('master_hoa_id', masterId)
+        params.set('limit', '20')
+        const r = await fetch('/api/admin/communities/search?' + params.toString(), {
+          headers: { 'x-admin-password': ADMIN_PASSWORD },
+          signal: ctrl.signal,
+        })
+        const data = await r.json()
+        setResults((data.communities || []) as CommunityLite[])
+      } catch {
+        // swallow
+      }
+    }, 220)
+    return () => {
+      clearTimeout(t)
+      ctrl.abort()
+    }
+  }, [q, city, masterId])
+
+  function add(c: CommunityLite) {
+    if (existingIds.has(c.id)) return
+    if (picked.find((p) => p.id === c.id)) return
+    setPicked([...picked, c])
+  }
+  function remove(id: string) {
+    setPicked(picked.filter((p) => p.id !== id))
+  }
+
+  async function saveLinks() {
+    if (picked.length === 0) return
+    setBusy(true)
+    setMsg('')
+    try {
+      const res = await fetch(`/api/admin/news/${newsItemId}/link-communities`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-password': ADMIN_PASSWORD },
+        body: JSON.stringify({
+          community_ids: picked.map((p) => p.id),
+          status: 'pending',
+          linked_by: 'admin',
+          match_reason: 'Manually linked by admin',
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Link failed')
+      setMsg(`Linked ${data.inserted} (skipped ${data.skipped} already linked)`)
+      setPicked([])
+      onChanged()
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : 'Link failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function bulkLinkCity() {
+    if (!city) return
+    const cnt = cities.find((c) => c.name === city)?.count ?? 0
+    const ok = window.confirm(
+      `Link this article to ALL ${cnt} published communities in ${city}? This is hard to undo.`,
+    )
+    if (!ok) return
+    setBusy(true)
+    setMsg('')
+    try {
+      const res = await fetch(`/api/admin/news/${newsItemId}/link-communities`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-password': ADMIN_PASSWORD },
+        body: JSON.stringify({ city, status: 'pending', linked_by: 'admin', match_reason: `Bulk-linked: all in ${city}` }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Bulk link failed')
+      setMsg(`Bulk linked ${data.inserted} (skipped ${data.skipped} already linked)`)
+      onChanged()
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : 'Bulk link failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function unlinkRow(community_news_id: string) {
+    if (!window.confirm('Unlink this manual community? Auto-matched links cannot be unlinked here.')) return
+    setBusy(true)
+    setMsg('')
+    try {
+      const res = await fetch(`/api/admin/news/${newsItemId}/link-communities`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'x-admin-password': ADMIN_PASSWORD },
+        body: JSON.stringify({ community_news_ids: [community_news_id] }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Unlink failed')
+      setMsg(`Unlinked ${data.deleted}`)
+      onChanged()
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : 'Unlink failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const manualExisting = (existing || []).filter((m) => m.link_source === 'manual')
+
+  return (
+    <div
+      style={{
+        marginTop: '16px',
+        padding: '14px 16px',
+        backgroundColor: '#FAFBFD',
+        border: '1px dashed #c8d3e6',
+        borderRadius: '10px',
+      }}
+    >
+      <div style={{ fontSize: '12px', fontWeight: 700, color: '#1B2B6B', marginBottom: '10px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+        Manually link communities
+      </div>
+
+      {/* Already-linked manual chips */}
+      {manualExisting.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+          {manualExisting.map((m) => (
+            <span
+              key={m.id}
+              style={{
+                fontSize: '11px',
+                padding: '4px 8px 4px 10px',
+                borderRadius: '999px',
+                backgroundColor: '#E1F5EE',
+                color: '#155A3F',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                border: '1px solid #c1ddd0',
+              }}
+            >
+              {m.communities?.canonical_name || 'Unknown'}
+              {m.communities?.city ? <span style={{ opacity: 0.7 }}>· {m.communities.city}</span> : null}
+              <button
+                type="button"
+                onClick={() => unlinkRow(m.id)}
+                disabled={busy}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#155A3F',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  padding: 0,
+                  lineHeight: 1,
+                }}
+                title="Unlink"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Filter row */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '10px' }}>
+        <select
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          style={{ fontSize: '12px', padding: '6px 8px', borderRadius: '6px', border: '1px solid #d8dde7' }}
+        >
+          <option value="">All cities</option>
+          {cities.map((c) => (
+            <option key={c.name} value={c.name}>
+              {c.name} ({c.count})
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={masterId}
+          onChange={(e) => setMasterId(e.target.value)}
+          style={{ fontSize: '12px', padding: '6px 8px', borderRadius: '6px', border: '1px solid #d8dde7', maxWidth: '260px' }}
+        >
+          <option value="">No master HOA filter</option>
+          {masters.slice(0, 40).map((m) => (
+            <option key={m.id} value={m.id}>
+              {m.canonical_name} ({m.sub_count})
+            </option>
+          ))}
+        </select>
+
+        <input
+          type="text"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Type to search by name…"
+          style={{
+            flex: '1 1 200px',
+            fontSize: '12px',
+            padding: '6px 10px',
+            borderRadius: '6px',
+            border: '1px solid #d8dde7',
+            minWidth: '160px',
+          }}
+        />
+
+        <button
+          type="button"
+          onClick={bulkLinkCity}
+          disabled={!city || busy}
+          title={city ? `Link ALL communities in ${city}` : 'Select a city first'}
+          style={{
+            fontSize: '12px',
+            padding: '6px 10px',
+            borderRadius: '6px',
+            border: '1px solid #1B2B6B',
+            backgroundColor: city && !busy ? '#1B2B6B' : '#bbb',
+            color: '#fff',
+            cursor: city && !busy ? 'pointer' : 'not-allowed',
+            fontWeight: 600,
+          }}
+        >
+          Link to all in city
+        </button>
+      </div>
+
+      {/* Type-ahead results */}
+      {results.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+          {results.map((c) => {
+            const already = existingIds.has(c.id) || !!picked.find((p) => p.id === c.id)
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => add(c)}
+                disabled={already}
+                style={{
+                  fontSize: '11px',
+                  padding: '5px 10px',
+                  borderRadius: '999px',
+                  border: '1px solid #c8d3e6',
+                  backgroundColor: already ? '#eef0f5' : '#fff',
+                  color: already ? '#999' : '#1B2B6B',
+                  cursor: already ? 'default' : 'pointer',
+                }}
+                title={already ? 'Already linked' : 'Add to selection'}
+              >
+                {c.canonical_name}
+                {c.city ? <span style={{ opacity: 0.6 }}> · {c.city}</span> : null}
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Picked chips (pending save) */}
+      {picked.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+          {picked.map((c) => (
+            <span
+              key={c.id}
+              style={{
+                fontSize: '11px',
+                padding: '4px 8px 4px 10px',
+                borderRadius: '999px',
+                backgroundColor: '#1B2B6B',
+                color: '#fff',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {c.canonical_name}
+              <button
+                type="button"
+                onClick={() => remove(c.id)}
+                style={{ border: 'none', background: 'transparent', color: '#fff', cursor: 'pointer', fontSize: '13px', padding: 0, lineHeight: 1 }}
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={saveLinks}
+          disabled={busy || picked.length === 0}
+          style={{
+            fontSize: '12px',
+            padding: '7px 14px',
+            borderRadius: '7px',
+            border: 'none',
+            backgroundColor: picked.length > 0 && !busy ? '#1D9E75' : '#bbb',
+            color: '#fff',
+            cursor: picked.length > 0 && !busy ? 'pointer' : 'not-allowed',
+            fontWeight: 700,
+          }}
+        >
+          Save links{picked.length > 0 ? ` (${picked.length})` : ''}
+        </button>
+        {msg && <span style={{ fontSize: '11px', color: '#555' }}>{msg}</span>}
+      </div>
+    </div>
   )
 }

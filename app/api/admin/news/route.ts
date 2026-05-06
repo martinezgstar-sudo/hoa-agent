@@ -38,10 +38,14 @@ async function fetchByStatus(status: string) {
         match_reason,
         status,
         admin_notes,
+        link_source,
+        linked_by,
+        linked_at,
         communities (
           id,
           canonical_name,
-          slug
+          slug,
+          city
         )
       )
     `,
