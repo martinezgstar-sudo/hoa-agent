@@ -34,10 +34,10 @@ export default function PricingPage() {
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px',maxWidth:'800px',margin:'0 auto'}}>
           {[
             {price:'Free',label:'Basic Access',color:'#f9f9f9',border:'#e5e5e5',items:['Community profiles','Fee ranges','Entity status','Address search','Up to 10 reviews','City filters'],cta:'Search now',href:'/search',ctaStyle:{backgroundColor:'#fff',color:'#1B2B6B',border:'1px solid #1B2B6B'}},
-            {price:'.99',label:'Reviews Unlock',color:'#EEF2FF',border:'#1B2B6B',items:['All resident reviews','Per community','One-time purchase','Instant access','No subscription','Email confirmation'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1B2B6B',color:'#fff',border:'none'}},
-            {price:'',label:'Full Report',color:'#E1F5EE',border:'#1D9E75',items:['Complete fee trend PDF','Full source trail','All assessment signals','Restriction detail','Management history','Downloadable PDF'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1D9E75',color:'#fff',border:'none'}},
+            {price:'$2.99',label:'Reviews Unlock',color:'#EEF2FF',border:'#1B2B6B',items:['All resident reviews','Per community','One-time purchase','Instant access','No subscription','Email confirmation'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1B2B6B',color:'#fff',border:'none'}},
+            {price:'TBD',label:'Full Report',color:'#E1F5EE',border:'#1D9E75',items:['Complete fee trend PDF','Full source trail','All assessment signals','Restriction detail','Management history','Downloadable PDF'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1D9E75',color:'#fff',border:'none'}},
           ].map(t => (
-            <div key={t.price} style={{backgroundColor:t.color,border:'2px solid '+t.border,borderRadius:'16px',padding:'28px 24px',textAlign:'left'}}>
+            <div key={t.label} style={{backgroundColor:t.color,border:'2px solid '+t.border,borderRadius:'16px',padding:'28px 24px',textAlign:'left'}}>
               <div style={{fontSize:'36px',fontWeight:'700',color:'#1a1a1a',marginBottom:'4px'}}>{t.price}</div>
               <div style={{fontSize:'14px',fontWeight:'600',color:'#555',marginBottom:'20px'}}>{t.label}</div>
               <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'24px'}}>
