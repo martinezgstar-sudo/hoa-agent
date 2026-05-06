@@ -3,13 +3,14 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Pricing | HOA Agent',
   description: 'HOA Agent is free for homeowners. See what\'s included at every tier — free community profiles, resident reviews, fee data, and more.',
+  alternates: { canonical: 'https://www.hoa-agent.com/pricing' },
   openGraph: {
     title: 'Pricing | HOA Agent',
     description: 'HOA Agent is free for homeowners. Browse fees, restrictions, litigation history and reviews at no cost.',
-    url: 'https://hoa-agent.com/pricing',
+    url: 'https://www.hoa-agent.com/pricing',
     siteName: 'HOA Agent',
     type: 'website',
-    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+    images: [{ url: 'https://www.hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
   },
   twitter: { card: 'summary', title: 'Pricing | HOA Agent', description: 'Free HOA community intelligence for Palm Beach County.' },
 }
@@ -28,7 +29,7 @@ export default function PricingPage() {
       </nav>
       <section style={{padding:'80px 32px 64px',textAlign:'center',maxWidth:'800px',margin:'0 auto'}}>
         <div style={{fontSize:'11px',fontWeight:'600',color:'#1D9E75',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'16px'}}>Simple pricing</div>
-        <h1 style={{fontSize:'40px',fontWeight:'600',color:'#1a1a1a',lineHeight:'1.2',marginBottom:'16px'}}>Know the HOA before you commit</h1>
+        <h1 style={{fontSize:'40px',fontWeight:'600',color:'#1a1a1a',lineHeight:'1.2',marginBottom:'16px'}}>Pricing — Free for Homeowners</h1>
         <p style={{fontSize:'16px',color:'#666',marginBottom:'56px',maxWidth:'480px',margin:'0 auto 56px',lineHeight:'1.6'}}>Start free. Pay only when you need deeper data.</p>
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px',maxWidth:'800px',margin:'0 auto'}}>
           {[

@@ -243,12 +243,38 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   // Sub-communities (shown on master pages) — published only
   const subQuery = await supabase
     .from('communities')
-    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,property_type,unit_count,status')
+    .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,monthly_fee_median,property_type,unit_count,status')
     .eq('master_hoa_id', community.id)
     .eq('status', 'published')
     .order('canonical_name', { ascending: true })
 
   const subCommunities = (subQuery.data ?? [])
+
+  // ── Master fee aggregation (display-only, no DB write) ──────────────────
+  // When this row has subs but its own fee fields are empty, calculate the
+  // median over sub-communities with a fee value. Show as a fallback chip.
+  function median(nums: number[]): number | null {
+    const a = nums.filter((n) => typeof n === 'number' && n > 0).sort((x, y) => x - y)
+    if (a.length === 0) return null
+    const mid = Math.floor(a.length / 2)
+    return a.length % 2 ? a[mid] : Math.round((a[mid - 1] + a[mid]) / 2)
+  }
+  let aggregatedFee: { count: number; min: number | null; max: number | null; median: number | null } | null = null
+  const masterHasOwnFee = !!(community.monthly_fee_min || community.monthly_fee_median || community.monthly_fee_max)
+  if (subCommunities.length > 0 && !masterHasOwnFee) {
+    const minFees = subCommunities.map((s) => s.monthly_fee_min as number).filter((v) => v && v > 0)
+    const maxFees = subCommunities.map((s) => s.monthly_fee_max as number).filter((v) => v && v > 0)
+    const medFees = subCommunities.map((s) => s.monthly_fee_median as number).filter((v) => v && v > 0)
+    const haveAny = minFees.length + maxFees.length + medFees.length > 0
+    if (haveAny) {
+      aggregatedFee = {
+        count: medFees.length || minFees.length || maxFees.length,
+        min: median(minFees),
+        max: median(maxFees),
+        median: median(medFees),
+      }
+    }
+  }
 
   // ── Schema.org JSON-LD bundle ──────────────────────────────────────────
   const citySlug = (community.city || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
@@ -511,6 +537,17 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             </div>
           </div>
           <div style={{fontSize: '11px', color: '#aaa'}}>Based on resident submissions and public records. Not a guaranteed fee. Always verify with the association directly.</div>
+          {aggregatedFee && (aggregatedFee.median || aggregatedFee.min || aggregatedFee.max) && (
+            <div style={{marginTop:'10px', padding:'10px 12px', backgroundColor:'#FAEEDA', border:'1px solid #EFD9A6', borderRadius:'8px', fontSize:'12px', color:'#633806', lineHeight:1.5}}>
+              <strong>Aggregated from {aggregatedFee.count} sub-{aggregatedFee.count === 1 ? 'community' : 'communities'}:</strong>{' '}
+              {aggregatedFee.min && aggregatedFee.max
+                ? `$${aggregatedFee.min} – $${aggregatedFee.max}/mo`
+                : aggregatedFee.median
+                  ? `$${aggregatedFee.median}/mo (median)`
+                  : null}
+              <span style={{color:'#888', marginLeft:'8px'}}>· master HOA has no own fee on file</span>
+            </div>
+          )}
         </div>
 
         {/* Sponsored card (only shows if advertisers configured for this city) */}
@@ -735,26 +772,16 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </p>
         </div>
 
-        {/* Florida HOA Law context */}
-        <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginBottom:'12px'}}>
-          <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'10px'}}>Florida HOA Law</h2>
-          <p style={{fontSize:'13px', color:'#555', lineHeight:1.7, margin:0}}>
-            {isCondo ? (
-              <>
-                {community.canonical_name} is a condominium association governed by <strong>Florida Statute Chapter 718</strong>.
-                Florida condo law requires associations to maintain reserves for major repairs, conduct structural inspections (Milestone Inspections) for buildings three stories or taller, and provide owners with annual budget disclosures.
-                Following the 2021 Surfside collapse, Florida passed SB 4-D requiring condos to fund reserves based on structural integrity reports.{' '}
-                <a href="/florida-hoa-law" style={{color:'#1D9E75'}}>Read the full Chapter 718 explainer →</a>
-              </>
-            ) : (
-              <>
-                {community.canonical_name} is a homeowners association governed by <strong>Florida Statute Chapter 720</strong>.
-                Florida HOA law gives owners the right to inspect records, attend board meetings, and vote on major budget items.
-                HOAs must provide 48 hours notice for board meetings and 14 days notice for membership meetings. Special assessments over a certain threshold require a membership vote.{' '}
-                <a href="/florida-hoa-law" style={{color:'#1D9E75'}}>Read the full Chapter 720 explainer →</a>
-              </>
-            )}
-          </p>
+        {/* Florida HOA Law — short pointer (full text moved to /florida-hoa-law) */}
+        <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'14px 18px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center', gap:'12px', flexWrap:'wrap'}}>
+          <div style={{fontSize:'13px', color:'#555', lineHeight:1.5}}>
+            Governed by{' '}
+            <strong>Florida Statute {isCondo ? 'Chapter 718 (Condominium Act)' : 'Chapter 720 (HOA Act)'}</strong>
+            {isCondo ? ' · subject to SB 4-D milestone inspections.' : ' · 48-hour board-meeting notice; assessment vote thresholds apply.'}
+          </div>
+          <a href="/florida-hoa-law" style={{fontSize:'12px', color:'#1D9E75', fontWeight:600, textDecoration:'none', whiteSpace:'nowrap'}}>
+            Read the full guide →
+          </a>
         </div>
 
         {/* Similar Communities */}

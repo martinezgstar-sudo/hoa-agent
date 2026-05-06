@@ -61,7 +61,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://events.mapbox.com" />
         <link rel="dns-prefetch" href="https://api.mapbox.com" />
       </head>
-      <body className="min-h-full flex flex-col">{children}<SiteFooter /><Analytics /></body>
+      <body className="min-h-full flex flex-col">
+        <a href="#main-content" className="skip-to-content">Skip to content</a>
+        <div id="main-content">{children}</div>
+        <SiteFooter />
+        <Analytics />
+      </body>
     </html>
   );
 }

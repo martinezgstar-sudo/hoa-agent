@@ -39,8 +39,32 @@ export default async function ManagementIndexPage() {
     .filter((c) => c.slug)
     .sort((a, b) => b.count - a.count)
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "HOA Agent", item: "https://www.hoa-agent.com" },
+      { "@type": "ListItem", position: 2, name: "Management Companies", item: "https://www.hoa-agent.com/management" },
+    ],
+  }
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "HOA & Condo Management Companies — Palm Beach County",
+    description: `${companies.length} management companies serving Palm Beach County HOA and condo associations`,
+    numberOfItems: companies.length,
+    itemListElement: companies.slice(0, 50).map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://www.hoa-agent.com/management/${c.slug}`,
+      name: c.name,
+    })),
+  }
+
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "48px 20px 60px" }}>
         <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>

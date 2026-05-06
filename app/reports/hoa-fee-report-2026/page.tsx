@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Palm Beach County HOA Fee Report 2026 | HOA Agent',
   description: 'Average and median HOA fees by city across Palm Beach County in 2026. Fee distributions, highest and lowest communities, and data analysis.',
+  alternates: { canonical: 'https://www.hoa-agent.com/reports/hoa-fee-report-2026' },
   openGraph: {
     title: 'Palm Beach County HOA Fee Report 2026',
     description: 'HOA fee data for 8,000+ communities in Palm Beach County. Average fees by city, distribution analysis, and highest/lowest communities.',

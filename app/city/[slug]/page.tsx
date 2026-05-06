@@ -156,7 +156,10 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
 
 interface Props {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ p?: string }>
 }
+
+const PAGE_SIZE = 50
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -185,8 +188,10 @@ export async function generateStaticParams() {
   return Object.keys(CITIES).map((slug) => ({ slug }))
 }
 
-export default async function CityPage({ params }: Props) {
+export default async function CityPage({ params, searchParams }: Props) {
   const { slug } = await params
+  const { p: pageParam } = await searchParams
+  const pageNum = Math.max(1, parseInt(pageParam || '1', 10) || 1)
   const city = CITIES[slug]
   if (!city) notFound()
 
@@ -236,10 +241,16 @@ export default async function CityPage({ params }: Props) {
     news_reputation_score: number | null; news_reputation_label: string | null;
     litigation_count: number | null; richness_score: number;
   }
-  const list: Row[] = (communities || []).map((c) => ({
+  const allList: Row[] = (communities || []).map((c) => ({
     ...(c as unknown as Row),
     richness_score: richness(c as unknown as Record<string, unknown>),
   })).sort((a, b) => (b.richness_score - a.richness_score) || a.canonical_name.localeCompare(b.canonical_name))
+
+  // Paginate at PAGE_SIZE per page; ranks data-rich rows first
+  const totalPages = Math.max(1, Math.ceil(allList.length / PAGE_SIZE))
+  const safePage = Math.min(pageNum, totalPages)
+  const startIdx = (safePage - 1) * PAGE_SIZE
+  const list: Row[] = allList.slice(startIdx, startIdx + PAGE_SIZE)
 
   // Parallel: hero image + stats + positive news
   const [hero, stats, positiveNews] = await Promise.all([
@@ -381,7 +392,7 @@ export default async function CityPage({ params }: Props) {
         </div>
 
         <div style={{ fontSize: '12px', color: '#888', marginBottom: '16px' }}>
-          {list.length} {list.length === 1 ? 'community' : 'communities'} found in {city.name}
+          Showing {list.length === 0 ? 0 : startIdx + 1}–{startIdx + list.length} of {allList.length} communities in {city.name}{totalPages > 1 ? ` · page ${safePage} of ${totalPages}` : ''}
         </div>
 
         {list.length === 0 ? (
@@ -424,6 +435,24 @@ export default async function CityPage({ params }: Props) {
                 </div>
               </Link>
             ))}
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            {safePage > 1 && (
+              <Link href={`/city/${slug}${safePage - 1 > 1 ? `?p=${safePage - 1}` : ''}`}
+                style={{ padding: '8px 14px', borderRadius: '8px', border: '1px solid #1B2B6B', color: '#1B2B6B', backgroundColor: '#fff', textDecoration: 'none', fontSize: '13px', fontWeight: 600 }}>
+                ← Prev
+              </Link>
+            )}
+            <span style={{ fontSize: '13px', color: '#555' }}>Page {safePage} of {totalPages}</span>
+            {safePage < totalPages && (
+              <Link href={`/city/${slug}?p=${safePage + 1}`}
+                style={{ padding: '8px 14px', borderRadius: '8px', backgroundColor: '#1B2B6B', color: '#fff', textDecoration: 'none', fontSize: '13px', fontWeight: 600 }}>
+                Next →
+              </Link>
+            )}
           </div>
         )}
 

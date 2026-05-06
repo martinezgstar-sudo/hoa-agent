@@ -67,6 +67,23 @@ export default async function AdvertisePage() {
 
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "HOA Agent Advertising",
+        provider: { "@type": "Organization", name: "HOA Agent", url: "https://www.hoa-agent.com" },
+        areaServed: { "@type": "AdministrativeArea", name: "Palm Beach County, Florida" },
+        serviceType: "Local advertising for HOA-adjacent businesses",
+        url: "https://www.hoa-agent.com/advertise",
+      }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "HOA Agent", item: "https://www.hoa-agent.com" },
+          { "@type": "ListItem", position: 2, name: "Advertise", item: "https://www.hoa-agent.com/advertise" },
+        ],
+      }) }} />
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
 
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "8px 24px", textAlign: "right", fontSize: "12px" }}>

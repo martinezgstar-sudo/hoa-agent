@@ -17,19 +17,20 @@ export const metadata: Metadata = {
   title: 'HOA Agent — Know the HOA Before You Commit',
   description:
     'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+  alternates: { canonical: 'https://www.hoa-agent.com/' },
   openGraph: {
     title: 'HOA Agent — Know the HOA Before You Commit',
     description: 'Search 8,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews — free.',
-    url: 'https://hoa-agent.com',
+    url: 'https://www.hoa-agent.com/',
     siteName: 'HOA Agent',
     type: 'website',
-    images: [{ url: 'https://hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
+    images: [{ url: 'https://www.hoa-agent.com/logo.png', width: 400, height: 400, alt: 'HOA Agent' }],
   },
   twitter: {
     card: 'summary',
     title: 'HOA Agent — Know the HOA Before You Commit',
     description: 'Search Palm Beach County HOA communities. Fees, restrictions, litigation history, and reviews — free.',
-    images: ['https://hoa-agent.com/logo.png'],
+    images: ['https://www.hoa-agent.com/logo.png'],
   },
 }
 

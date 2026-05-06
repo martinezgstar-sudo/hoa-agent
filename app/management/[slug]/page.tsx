@@ -14,7 +14,14 @@ function slugify(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80)
 }
 
+// Hard block: explicit junk slugs that should always 404, even if a stale
+// row briefly slips back in with a placeholder management_company value.
+const JUNK_SLUGS = new Set([
+  "unknown", "n-a", "none", "null", "self-managed",
+])
+
 async function fetchCompanyAndCommunities(slug: string): Promise<{ name: string; communities: Array<Record<string, unknown>> } | null> {
+  if (JUNK_SLUGS.has(slug) || slug.startsWith("self-managed")) return null
   // Lookup matches every published row whose slugified management_company == slug
   const all: Array<Record<string, unknown>> = []
   const PAGE = 1000
