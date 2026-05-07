@@ -33,7 +33,26 @@ type Community = {
 
 type Suggestion = { type: string; label: string; slug?: string }
 
-const NA = <span style={{ color: "#bbb", fontStyle: "italic" }}>—</span>
+const MAX_COMPARE = 3
+const COMPARE_COOKIE = "hoa_compare_slugs"
+const NA = <span style={{ color: "#bbb", fontStyle: "italic" }}>Not available</span>
+
+function readCompareCookie(): string[] {
+  if (typeof document === "undefined") return []
+  const m = document.cookie.match(new RegExp("(?:^|; )" + COMPARE_COOKIE + "=([^;]*)"))
+  if (!m) return []
+  return decodeURIComponent(m[1]).split(",").map((s) => s.trim()).filter(Boolean)
+}
+
+function writeCompareCookie(slugs: string[]) {
+  if (typeof document === "undefined") return
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()
+  const value = slugs.length === 0 ? "" : encodeURIComponent(slugs.join(","))
+  document.cookie = `${COMPARE_COOKIE}=${value}; expires=${expires}; path=/; SameSite=Lax`
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("hoa-compare-changed", { detail: slugs }))
+  }
+}
 
 function fmtFee(c: Community): React.ReactNode {
   if (c.monthly_fee_min && c.monthly_fee_max) return `$${c.monthly_fee_min}–$${c.monthly_fee_max}/mo`
@@ -71,7 +90,20 @@ export default function ComparePageWrapper() {
 function ComparePageInner() {
   const router = useRouter()
   const params = useSearchParams()
-  const initialSlugs = (params.get("communities") || "").split(",").map((s) => s.trim()).filter(Boolean)
+  // Accept both `?communities=slug1,slug2` (legacy) and `?ids=slug1,slug2` (per spec).
+  // The query param is the source of truth on first paint; otherwise hydrate from
+  // the comparison cookie set by CompareButton clicks across the rest of the site.
+  const fromUrl =
+    (params.get("communities") || params.get("ids") || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean)
+  const initialSlugs =
+    fromUrl.length > 0
+      ? fromUrl.slice(0, MAX_COMPARE)
+      : typeof document !== "undefined"
+        ? readCompareCookie().slice(0, MAX_COMPARE)
+        : []
   const [slugs, setSlugs] = useState<string[]>(initialSlugs)
   const [communities, setCommunities] = useState<Community[]>([])
   const [searchQ, setSearchQ] = useState("")
@@ -102,19 +134,21 @@ function ComparePageInner() {
   }, [searchQ])
 
   function addCommunity(slug: string) {
-    if (slugs.length >= 4) return
+    if (slugs.length >= MAX_COMPARE) return
     if (slugs.includes(slug)) return
     const next = [...slugs, slug]
     setSlugs(next)
     setSearchQ("")
     setSuggestions([])
-    router.replace("/compare?communities=" + next.join(","))
+    writeCompareCookie(next)
+    router.replace("/compare?ids=" + next.join(","))
   }
 
   function removeCommunity(slug: string) {
     const next = slugs.filter((s) => s !== slug)
     setSlugs(next)
-    router.replace(next.length ? "/compare?communities=" + next.join(",") : "/compare")
+    writeCompareCookie(next)
+    router.replace(next.length ? "/compare?ids=" + next.join(",") : "/compare")
   }
 
   return (
@@ -128,7 +162,7 @@ function ComparePageInner() {
           Compare HOA Communities
         </h1>
         <p style={{ fontSize: "14px", color: "#666", marginBottom: "24px" }}>
-          Select up to 4 communities to compare side by side.
+          Select up to {MAX_COMPARE} communities to compare side by side.
         </p>
 
         {/* Selector */}
@@ -136,8 +170,8 @@ function ComparePageInner() {
           <input
             value={searchQ}
             onChange={(e) => setSearchQ(e.target.value)}
-            placeholder={slugs.length >= 4 ? "Maximum 4 communities" : "Search for a community to add…"}
-            disabled={slugs.length >= 4}
+            placeholder={slugs.length >= MAX_COMPARE ? `Maximum ${MAX_COMPARE} communities` : "Search for a community to add…"}
+            disabled={slugs.length >= MAX_COMPARE}
             style={{ width: "100%", padding: "11px 14px", fontSize: "14px", border: "1px solid #d0d0d0", borderRadius: "10px", outline: "none", boxSizing: "border-box", fontFamily: "inherit" }}
           />
           {suggestions.length > 0 && (

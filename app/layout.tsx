@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/app/components/SiteFooter";
+import CompareBar from "@/app/components/CompareBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +65,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <div id="main-content">{children}</div>
+        <CompareBar />
         <SiteFooter />
         <Analytics />
       </body>

@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import NavBar from "@/app/components/NavBar"
+import CompareButton from "@/app/components/CompareButton"
 
 const SearchBox = dynamic(
   () => import("@mapbox/search-js-react").then((m) => m.SearchBox),
@@ -820,6 +821,9 @@ export default function SearchPage() {
                     <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a"}}>{c.monthly_fee_min && c.monthly_fee_max ? "$" + c.monthly_fee_min + "-$" + c.monthly_fee_max + "/mo" : "Fee unknown"}</div>
                     {(() => { const conf = getConfidenceLabel(c.confidence_score); return <div style={{display:"inline-block",padding:"2px 10px",borderRadius:"20px",backgroundColor:conf.bg,color:conf.color,fontSize:"11px",fontWeight:"600"}}>{conf.stars} {conf.label}</div> })()}
                     <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>View profile →</div>
+                    <div style={{marginTop:"6px"}}>
+                      <CompareButton slug={c.slug} variant="compact" />
+                    </div>
                   </div>
                 </div>
               </a>

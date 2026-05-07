@@ -5,6 +5,7 @@ import ReportModal from '@/app/components/ReportModal'
 import RestrictionModal from '@/app/components/RestrictionModal'
 import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 import FirstReviewToast from '@/app/components/FirstReviewToast'
+import CompareButton from '@/app/components/CompareButton'
 import NavBar from '@/app/components/NavBar'
 import NewsFeed from '@/app/components/NewsFeed'
 import LegalCases from '@/app/components/LegalCases'
@@ -460,11 +461,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               )}
               <div style={{display:'flex',alignItems:'center',gap:'8px',flexWrap:'wrap',marginBottom:'6px'}}>
                 <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name} — {community.city}, FL</h1>
-                <a
-                  href={`/compare?communities=${community.slug}`}
-                  style={{fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#fff',color:'#1B2B6B',border:'1px solid #1B2B6B',textDecoration:'none',fontWeight:600,whiteSpace:'nowrap'}}
-                  title="Compare with other communities"
-                >+ Compare</a>
+                <CompareButton slug={community.slug} variant="compact" />
                 {String(community.entity_status || '').toLowerCase() === 'active' && (
                   <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#1D9E75',fontWeight:600}}>
                     <span style={{width:'6px',height:'6px',backgroundColor:'#1D9E75',borderRadius:'999px'}}></span>
