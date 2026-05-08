@@ -433,7 +433,7 @@ function FieldSuggestionsTab() {
   async function load() {
     setLoading(true)
     const res = await fetch(
-      SUPABASE_URL + "/rest/v1/community_suggestions?status=eq.pending&select=*,communities(canonical_name,slug)&order=created_at.desc",
+      SUPABASE_URL + "/rest/v1/pending_community_data?status=eq.pending&select=*,communities(canonical_name,slug)&order=created_at.desc",
       { headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY } }
     )
     const data = await res.json()
@@ -444,30 +444,38 @@ function FieldSuggestionsTab() {
   useEffect(() => { load() }, [])
 
   async function approve(s: any) {
+    const fieldName = s.field_name || s.field
+    const proposed = s.proposed_value || s.suggested_value
     const fieldMap: Record<string, string> = {
       str_restriction: "str_restriction",
       pet_restriction: "pet_restriction",
       vehicle_restriction: "vehicle_restriction",
       rental_approval: "rental_approval",
       management_company: "management_company",
+      website_url: "website_url",
+      amenities: "amenities",
+    }
+    if (!fieldName || !fieldMap[fieldName]) {
+      setMessage("Cannot apply: unsupported field " + fieldName)
+      return
     }
     await fetch(
       SUPABASE_URL + "/rest/v1/communities?id=eq." + s.community_id,
       { method: "PATCH", headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
-        body: JSON.stringify({ [fieldMap[s.field]]: s.suggested_value }) }
+        body: JSON.stringify({ [fieldMap[fieldName]]: proposed }) }
     )
     await fetch(
-      SUPABASE_URL + "/rest/v1/community_suggestions?id=eq." + s.id,
+      SUPABASE_URL + "/rest/v1/pending_community_data?id=eq." + s.id,
       { method: "PATCH", headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
         body: JSON.stringify({ status: "approved", reviewed_at: new Date().toISOString() }) }
     )
-    setMessage("Approved: " + fieldLabels[s.field] + " for " + s.communities?.canonical_name)
+    setMessage("Approved: " + (fieldLabels[fieldName] || fieldName) + " for " + (s.communities?.canonical_name || s.community_id))
     load()
   }
 
   async function reject(s: any) {
     await fetch(
-      SUPABASE_URL + "/rest/v1/community_suggestions?id=eq." + s.id,
+      SUPABASE_URL + "/rest/v1/pending_community_data?id=eq." + s.id,
       { method: "PATCH", headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
         body: JSON.stringify({ status: "rejected", reviewed_at: new Date().toISOString() }) }
     )
@@ -487,9 +495,9 @@ function FieldSuggestionsTab() {
         <div key={s.id} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px",marginBottom:"12px"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"12px"}}>
             <div>
-              <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"4px"}}>{fieldLabels[s.field] || s.field}</div>
+              <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"4px"}}>{fieldLabels[s.field_name || s.field] || s.field_name || s.field}</div>
               <div style={{fontSize:"14px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{s.communities?.canonical_name}</div>
-              <div style={{fontSize:"15px",fontWeight:"500",color:"#1B2B6B",backgroundColor:"#E1F5EE",padding:"5px 12px",borderRadius:"6px",display:"inline-block"}}>{s.suggested_value}</div>
+              <div style={{fontSize:"15px",fontWeight:"500",color:"#1B2B6B",backgroundColor:"#E1F5EE",padding:"5px 12px",borderRadius:"6px",display:"inline-block"}}>{s.proposed_value || s.suggested_value}</div>
               {s.details && <div style={{fontSize:"12px",color:"#666",marginTop:"8px"}}>Details: {s.details}</div>}
             </div>
             <div style={{fontSize:"11px",color:"#aaa"}}>{new Date(s.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</div>

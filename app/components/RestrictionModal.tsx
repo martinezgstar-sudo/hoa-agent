@@ -38,117 +38,166 @@ const FIELD_CONFIG = {
   },
 }
 
-export default function RestrictionModal({ communityId, field, communityName }: Props) {
+export default function RestrictionModal({ communityId, field, communityName: _communityName }: Props) {
   const [open, setOpen] = useState(false)
   const [answer, setAnswer] = useState("")
   const [details, setDetails] = useState("")
-  const [status, setStatus] = useState<"idle"|"submitting"|"success"|"error">("idle")
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [errorMsg, setErrorMsg] = useState<string>("")
 
   const config = FIELD_CONFIG[field]
 
   async function handleSubmit() {
     if (!answer) return
     setStatus("submitting")
-
-    const res = await fetch("/api/suggestions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        community_id: communityId,
-        field,
-        suggested_value: answer,
-        deils: details || null,
-      }),
-    })
-
-    if (res.ok) {
-      setStatus("success")   } else {
+    setErrorMsg("")
+    try {
+      const res = await fetch("/api/community-suggestions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          community_id: communityId,
+          field_name: field,
+          proposed_value: answer,
+          details: details || null,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok) {
+        setStatus("success")
+      } else {
+        setStatus("error")
+        setErrorMsg(data?.error || "Submission failed. Please try again.")
+      }
+    } catch (err) {
       setStatus("error")
+      setErrorMsg(err instanceof Error ? err.message : "Network error. Please try again.")
     }
   }
 
   if (!open) {
     return (
       <button
+        type="button"
         onClick={() => setOpen(true)}
-        style={{fontSize:"11px",color:"#1D9E75",border:"1px solid #1D9E75",borderRadius:"20px",padding:"2px 9px",backgroundColor:"#fff",cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>
+        style={{ fontSize: "11px", color: "#1D9E75", border: "1px solid #1D9E75", borderRadius: "20px", padding: "2px 9px", backgroundColor: "#fff", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 }}
+      >
         + Add
       </button>
     )
   }
+
+  // Stable id prefix so all <input>/<textarea> get unique id+name attributes
+  const idPrefix = `restriction-${field}-${communityId.slice(0, 8)}`
 
   return (
     <>
       {/* Overlay */}
       <div
         onClick={() => setOpen(false)}
-        style={{position:"fixed",inset:0,backgroundColor:"rgba(0,0,0,0.4)",zIndex:999}}
+        style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.4)", zIndex: 999 }}
       />
 
       {/* Modal */}
-      <div style={{position:"fixed",top:"50%",left:"50%",transform:"translate(-50%,-50%)",backgroundColor:"#fff",borderRadius:"16px",padding:"28px 24px",width:"min(440px, 90vw)",zIndex:1000,boxShadow:"0 20px 60px rgba(0,0,0,0.15)"}}>
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%,-50%)", backgroundColor: "#fff", borderRadius: "16px", padding: "28px 24px", width: "min(440px, 90vw)", zIndex: 1000, boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
 
         {status === "success" ? (
-          <div style={{textAlign:"center",padding:"16px 0"}}>
-            <div style={{fontSize:"36px",marginBottom:"12px"}}>✓</div>
-            <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
-            <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>Your submission will be reviewed and added to this profile within 24 hours.</div>
-            <button onClick={() => { setOpen(false); setStatus("idle"); setAnswer(""); setDetails("") }}
-              style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
+          <div style={{ textAlign: "center", padding: "16px 0" }}>
+            <div style={{ fontSize: "36px", marginBottom: "12px" }}>✓</div>
+            <div style={{ fontSize: "15px", fontWeight: "600", color: "#1B2B6B", marginBottom: "8px" }}>Thank you!</div>
+            <div style={{ fontSize: "13px", color: "#888", marginBottom: "20px", lineHeight: "1.6" }}>Your submission will be reviewed and added to this profile within 24 hours.</div>
+            <button
+              type="button"
+              onClick={() => { setOpen(false); setStatus("idle"); setAnswer(""); setDetails(""); setErrorMsg("") }}
+              style={{ padding: "10px 24px", borderRadius: "8px", backgroundColor: "#1B2B6B", color: "#fff", border: "none", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
+            >
               Close
             </button>
           </div>
         ) : (
-          <>
-            <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Add restriction info</div>
-            <div style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"6px",lineHeight:"1.4"}}>{config.question}</div>
-            <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>{config.subtext}</div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSubmit()
+            }}
+          >
+            <div style={{ fontSize: "11px", fontWeight: "600", color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>Add restriction info</div>
+            <div id={`${idPrefix}-question`} style={{ fontSize: "16px", fontWeight: "600", color: "#1a1a1a", marginBottom: "6px", lineHeight: "1.4" }}>{config.question}</div>
+            <div style={{ fontSize: "12px", color: "#888", marginBottom: "20px" }}>{config.subtext}</div>
 
-            <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"20px"}}>
+            <fieldset
+              style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "20px", border: "none", padding: 0, margin: "0 0 20px" }}
+              aria-labelledby={`${idPrefix}-question`}
+            >
+              <legend style={{ position: "absolute", left: "-9999px" }}>{config.question}</legend>
               {[
                 { val: "yes", label: config.yes },
                 { val: "no", label: config.no },
                 { val: "unsure", label: config.unsure },
-              ].map(opt => (
-                <button key={opt.val} type="button" onClick={() => setAnswer(opt.val)}
-                  style={{padding:"12px 16px",borderRadius:"10px",border:"2px solid " + (answer===opt.val?"#1B2B6B":"#e5e5e5"),backgroundColor:answer===opt.val?"#1B2B6B":"#fff",color:answer===opt.val?"#fff":"#333",cursor:"pointer",fontSize:"13px",fontWeight:answer===opt.val?"600":"400",textAlign:"left",transition:"all 0.15s"}}>
+              ].map((opt) => (
+                <label
+                  key={opt.val}
+                  htmlFor={`${idPrefix}-${opt.val}`}
+                  style={{ padding: "12px 16px", borderRadius: "10px", border: "2px solid " + (answer === opt.val ? "#1B2B6B" : "#e5e5e5"), backgroundColor: answer === opt.val ? "#1B2B6B" : "#fff", color: answer === opt.val ? "#fff" : "#333", cursor: "pointer", fontSize: "13px", fontWeight: answer === opt.val ? "600" : "400", textAlign: "left", transition: "all 0.15s", display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <input
+                    type="radio"
+                    id={`${idPrefix}-${opt.val}`}
+                    name={`${idPrefix}-answer`}
+                    value={opt.val}
+                    checked={answer === opt.val}
+                    onChange={() => setAnswer(opt.val)}
+                    style={{ position: "absolute", left: "-9999px" }}
+                  />
                   {opt.label}
-                </button>
+                </label>
               ))}
-            </div>
+            </fieldset>
 
             {answer && (
-              <div style={{marginBottom:"16px"}}>
-                <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Any details to add? (optional)</div>
+              <div style={{ marginBottom: "16px" }}>
+                <label htmlFor={`${idPrefix}-details`} style={{ display: "block", fontSize: "12px", color: "#555", marginBottom: "6px" }}>
+                  Any details to add? (optional)
+                </label>
                 <textarea
+                  id={`${idPrefix}-details`}
+                  name={`${idPrefix}-details`}
                   value={details}
-                  onChange={e => setDetails(e.target.value)}
+                  onChange={(e) => setDetails(e.target.value)}
                   placeholder="e.g. No pets over 25 lbs, breed restrictions apply..."
                   rows={3}
-                  style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",resize:"vertical",outline:"none",boxSizing:"border-box",fontFamily:"system-ui,sans-serif"}}
+                  style={{ width: "100%", border: "1.5px solid #e5e5e5", borderRadius: "8px", padding: "10px 12px", fontSize: "13px", resize: "vertical", outline: "none", boxSizing: "border-box", fontFamily: "system-ui,sans-serif" }}
                 />
               </div>
             )}
 
-            <div style={{backgroundColor:"#FEF9EC",border:"1px solid #EF9F27",borderRadius:"8px",padding:"10px 14px",marginBottom:"16px",fontSize:"11px",color:"#854F0B",lineHeight:"1.6"}}>
+            <div style={{ backgroundColor: "#FEF9EC", border: "1px solid #EF9F27", borderRadius: "8px", padding: "10px 14px", marginBottom: "16px", fontSize: "11px", color: "#854F0B", lineHeight: "1.6" }}>
               Only current or former residents of this community should submit restriction info. Submissions are reviewed before publishing.
             </div>
 
             {status === "error" && (
-              <div style={{fontSize:"12px",color:"#E24B4A",marginBottom:"12px"}}>Something went wrong. Please try again.</div>
+              <div style={{ fontSize: "12px", color: "#E24B4A", marginBottom: "12px" }}>
+                {errorMsg || "Something went wrong. Please try again."}
+              </div>
             )}
 
-            <div style={{display:"flex",gap:"8px"}}>
-              <button type="button" onClick={() => setOpen(false)}
-                style={{flex:1,padding:"11px",borderRadius:"8px",backgroundColor:"#fff",color:"#555",border:"1.5px solid #e5e5e5",cursor:"pointer",fontSize:"13px",fontWeight:"500"}}>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                style={{ flex: 1, padding: "11px", borderRadius: "8px", backgroundColor: "#fff", color: "#555", border: "1.5px solid #e5e5e5", cursor: "pointer", fontSize: "13px", fontWeight: "500" }}
+              >
                 Cancel
               </button>
-              <button type="button" onClick={handleSubmit} disabled={!answer || status==="submitting"}
-                style={{flex:2,padding:"11px",borderRadius:"8px",backgroundColor:answer?"#1D9E75":"#ccc",color:"#fff",border:"none",cursor:answer?"pointer":"not-allowed",fontSize:"13px",fontWeight:"600"}}>
-                {status==="submitting" ? "Submitting..." : "Submit"}
+              <button
+                type="submit"
+                disabled={!answer || status === "submitting"}
+                style={{ flex: 2, padding: "11px", borderRadius: "8px", backgroundColor: answer ? "#1D9E75" : "#ccc", color: "#fff", border: "none", cursor: answer ? "pointer" : "not-allowed", fontSize: "13px", fontWeight: "600" }}
+              >
+                {status === "submitting" ? "Submitting..." : "Submit"}
               </button>
             </div>
-          </>
+          </form>
         )}
       </div>
     </>
