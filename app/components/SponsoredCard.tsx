@@ -16,7 +16,27 @@ export type Advertiser = {
 interface SponsoredCardProps {
   advertisers: Advertiser[]
   communitySlug?: string
+  communityId?: string
   city?: string
+  zipCode?: string
+}
+
+/** Per-tab session id for de-duping events from the same visitor. */
+function getSessionId(): string | null {
+  if (typeof window === "undefined") return null
+  try {
+    const KEY = "hoa_ad_session_id"
+    let v = sessionStorage.getItem(KEY)
+    if (!v) {
+      v = (typeof crypto !== "undefined" && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : Math.random().toString(36).slice(2) + Date.now().toString(36)
+      sessionStorage.setItem(KEY, v)
+    }
+    return v
+  } catch {
+    return null
+  }
 }
 
 // Category → initials-circle background color
@@ -37,17 +57,25 @@ function initials(name: string): string {
 }
 
 /** Fire-and-forget analytics POST. Never throws. Never blocks. */
-function track(event_type: "impression" | "click", a: Advertiser, communitySlug?: string, city?: string) {
+function track(
+  event_type: "impression" | "click" | "cta_click" | "phone_click" | "website_click",
+  a: Advertiser,
+  ctx: { communitySlug?: string; communityId?: string; city?: string; zipCode?: string; inViewportMs?: number },
+) {
   try {
     fetch("/api/ads/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       keepalive: true,
       body: JSON.stringify({
-        advertiser_id: a.id,
+        ad_id: a.id,
         event_type,
-        community_slug: communitySlug ?? null,
-        city: city ?? null,
+        community_slug: ctx.communitySlug ?? null,
+        community_id: ctx.communityId ?? null,
+        city: ctx.city ?? null,
+        zip_code: ctx.zipCode ?? null,
+        in_viewport_ms: ctx.inViewportMs ?? null,
+        session_id: getSessionId(),
       }),
     }).catch(() => {})
   } catch {
@@ -55,24 +83,72 @@ function track(event_type: "impression" | "click", a: Advertiser, communitySlug?
   }
 }
 
-export default function SponsoredCard({ advertisers, communitySlug, city }: SponsoredCardProps) {
+export default function SponsoredCard({ advertisers, communitySlug, communityId, city, zipCode }: SponsoredCardProps) {
   const firedRef = useRef<Set<string>>(new Set())
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Fire one impression per advertiser per mount
+  /**
+   * Impression tracking: only fire when the card has been continuously in
+   * the viewport for >= 1 second (per spec). Uses IntersectionObserver +
+   * a per-advertiser timer that resets on exit. Fires once per mount per
+   * advertiser per page (firedRef gates duplicates).
+   */
   useEffect(() => {
-    for (const a of advertisers) {
-      const key = a.id + ":" + (communitySlug ?? city ?? "")
-      if (!firedRef.current.has(key)) {
-        firedRef.current.add(key)
-        track("impression", a, communitySlug, city)
+    if (!advertisers || advertisers.length === 0) return
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      // Fallback: fire immediately
+      for (const a of advertisers) {
+        const key = `${a.id}:${communitySlug ?? city ?? ""}`
+        if (!firedRef.current.has(key)) {
+          firedRef.current.add(key)
+          track("impression", a, { communitySlug, communityId, city, zipCode })
+        }
       }
+      return
     }
-  }, [advertisers, communitySlug, city])
+
+    let enteredAt: number | null = null
+    let timer: ReturnType<typeof setTimeout> | null = null
+    const node = containerRef.current
+    if (!node) return
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            if (enteredAt === null) {
+              enteredAt = Date.now()
+              timer = setTimeout(() => {
+                const inMs = enteredAt ? Date.now() - enteredAt : 1000
+                for (const a of advertisers) {
+                  const key = `${a.id}:${communitySlug ?? city ?? ""}`
+                  if (!firedRef.current.has(key)) {
+                    firedRef.current.add(key)
+                    track("impression", a, { communitySlug, communityId, city, zipCode, inViewportMs: inMs })
+                  }
+                }
+              }, 1000)
+            }
+          } else {
+            if (timer) { clearTimeout(timer); timer = null }
+            enteredAt = null
+          }
+        }
+      },
+      { threshold: [0, 0.5, 1] },
+    )
+    obs.observe(node)
+    return () => {
+      if (timer) clearTimeout(timer)
+      obs.disconnect()
+    }
+  }, [advertisers, communitySlug, communityId, city, zipCode])
 
   if (!advertisers || advertisers.length === 0) return null
 
   return (
     <div
+      ref={containerRef}
       style={{
         backgroundColor: "#fff",
         border: "0.5px solid #e0e0e0",
@@ -178,6 +254,7 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
                 <div style={{ fontSize: "14px", marginTop: "6px" }}>
                   <a
                     href={`tel:${ad.phone.replace(/[^0-9+]/g, "")}`}
+                    onClick={() => track("phone_click", ad, { communitySlug, communityId, city, zipCode })}
                     style={{ color: "#1D9E75", textDecoration: "none", fontWeight: 500 }}
                   >
                     {ad.phone}
@@ -192,7 +269,12 @@ export default function SponsoredCard({ advertisers, communitySlug, city }: Spon
                 href={ctaHref}
                 target="_blank"
                 rel="noopener sponsored"
-                onClick={() => track("click", ad, communitySlug, city)}
+                onClick={() => {
+                  // Generic click event + the more specific website/cta event
+                  track("click", ad, { communitySlug, communityId, city, zipCode })
+                  const isHttp = /^https?:\/\//i.test(ctaHref)
+                  track(isHttp ? "website_click" : "cta_click", ad, { communitySlug, communityId, city, zipCode })
+                }}
                 data-sponsored-cta
                 style={{
                   display: "inline-block",

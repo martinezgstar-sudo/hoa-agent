@@ -182,9 +182,15 @@ export default function PortalDashboardPage() {
                 <div style={{ fontSize: "11px", color: "#888", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Click-through rate</div>
               </div>
             </div>
-            <div style={{ fontSize: "12px", color: "#888" }}>
-              Per-day breakdowns and per-city analytics coming soon.
+            <div style={{ fontSize: "12px", color: "#888", marginBottom: "16px" }}>
+              Per-day breakdowns and per-city analytics available on the full Analytics page.
             </div>
+            <a
+              href="/advertise/portal/analytics"
+              style={{ display: "inline-block", padding: "10px 16px", backgroundColor: "#1B2B6B", color: "#fff", borderRadius: "8px", textDecoration: "none", fontSize: "13px", fontWeight: 600 }}
+            >
+              View full analytics →
+            </a>
           </div>
         )}
 

@@ -9,11 +9,11 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "Advertise on HOA Agent — Reach Palm Beach County HOA Residents",
   description:
-    "Reach 8,000+ HOA and condo communities in Palm Beach County. AI-built ads from your website. From $19.99/month.",
+    "Reach 8,000+ HOA and condo communities in Palm Beach County. AI-built ads from your website. From $9.99/month.",
   alternates: { canonical: "https://www.hoa-agent.com/advertise" },
   openGraph: {
     title: "Advertise on HOA Agent",
-    description: "Reach Palm Beach County HOA residents through targeted community-page advertising. From $19.99/month.",
+    description: "Reach Palm Beach County HOA residents through targeted community-page advertising. From $9.99/month.",
     url: "https://www.hoa-agent.com/advertise",
     siteName: "HOA Agent",
     type: "website",
@@ -23,9 +23,39 @@ export const metadata: Metadata = {
 }
 
 const PLANS = [
-  { name: "Starter", price: 19.99, badge: null, features: ["1 city of your choice", "1 active ad", "Basic analytics"] },
-  { name: "Growth", price: 69.99, badge: "Most Popular", features: ["Up to 5 cities", "Up to 3 rotating ads", "Full analytics"] },
-  { name: "County", price: 99.99, badge: null, features: ["All Palm Beach County cities", "Up to 5 rotating ads", "Priority placement"] },
+  {
+    name: "Starter",
+    price: 9.99,
+    badge: null,
+    features: [
+      "1 ZIP code of your choice",
+      "1 ad creative",
+      "Exclusive in your category for that ZIP",
+      "Basic analytics",
+    ],
+  },
+  {
+    name: "Growth",
+    price: 29.99,
+    badge: "Most Popular",
+    features: [
+      "Up to 5 ZIP codes",
+      "3 ad creatives rotating",
+      "Exclusive in your category in each ZIP",
+      "Full analytics",
+    ],
+  },
+  {
+    name: "County",
+    price: 89.99,
+    badge: null,
+    features: [
+      "All Palm Beach County ZIPs included",
+      "5 ad creatives rotating",
+      "Exclusive countywide in your category",
+      "Priority placement above Starter & Growth",
+    ],
+  },
 ]
 
 const CATEGORIES = [
@@ -42,7 +72,7 @@ const CATEGORIES = [
 const FAQ = [
   { q: "How long until my ad goes live?", a: "Once you sign up and complete your plan, your ad goes live within minutes. Our AI ad generator builds 4 ad options from your website in about 30 seconds." },
   { q: "Can I change my ad after publishing?", a: "Yes. Edit your ads any time from the advertiser portal. You can pause, swap, or rotate ads at will." },
-  { q: "What cities can I target?", a: "Starter targets 1 city, Growth up to 5, County covers all 12 Palm Beach County cities (West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Lake Worth, Delray Beach, Boynton Beach, Royal Palm Beach, Wellington, Riviera Beach, North Palm Beach, Greenacres)." },
+  { q: "What ZIP codes can I target?", a: "Starter targets 1 ZIP, Growth up to 5 ZIPs, County covers every Palm Beach County ZIP. Each tier guarantees category exclusivity within the selected ZIPs — no two advertisers in the same category will appear in the same ZIP." },
   { q: "How does Claude create my ad?", a: "Enter your website URL. Claude visits the site, reads your content, and generates 4 ad options with different angles. You pick the one you like and tweak any field before publishing." },
   { q: "Can I cancel anytime?", a: "Yes. Cancel from the billing tab in your portal. No long-term contracts." },
 ]
@@ -154,8 +184,11 @@ export default async function AdvertisePage() {
                   <div style={{ position: "absolute", top: "-12px", right: "20px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 12px", borderRadius: "12px" }}>{p.badge}</div>
                 )}
                 <div style={{ fontSize: "16px", fontWeight: 700, color: "#1B2B6B", marginBottom: "6px" }}>{p.name}</div>
-                <div style={{ fontSize: "30px", fontWeight: 700, color: "#1a1a1a", marginBottom: "16px" }}>
+                <div style={{ fontSize: "30px", fontWeight: 700, color: "#1a1a1a", marginBottom: "4px" }}>
                   ${p.price}<span style={{ fontSize: "13px", fontWeight: 400, color: "#888" }}>/month</span>
+                </div>
+                <div style={{ fontSize: "11px", color: "#1D9E75", fontWeight: 600, marginBottom: "16px", letterSpacing: "0.02em" }}>
+                  ✓ Category exclusivity guaranteed
                 </div>
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px 0", fontSize: "13px", color: "#444", lineHeight: 1.9 }}>
                   {p.features.map((f) => <li key={f}>✓ {f}</li>)}

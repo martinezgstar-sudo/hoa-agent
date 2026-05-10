@@ -550,6 +550,7 @@ export default function AdminPage() {
     {key:"field_updates",label:"Field Updates"},
     {key:"research",label:"Research"},
     {key:"news",label:"News",href:"/admin/news"},
+    {key:"ads",label:"Advertiser Signups ›",href:"/admin/ads"},
     {key:"pending",label:"Pending ›",href:"/admin/pending"},
   ]
 
