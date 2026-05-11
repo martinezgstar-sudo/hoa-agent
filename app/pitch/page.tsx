@@ -111,7 +111,7 @@ export default function PitchPage() {
       <section style={{padding:"64px 48px 80px",maxWidth:"900px",margin:"0 auto",textAlign:"center",borderTop:"1px solid rgba(255,255,255,0.08)"}}>
         <h2 style={{fontSize:"36px",fontWeight:"700",marginBottom:"16px"}}>Let us build this together</h2>
         <p style={{fontSize:"16px",color:"rgba(255,255,255,0.5)",marginBottom:"32px"}}>Reach out to start a conversation.</p>
-        <a href="mailto:fieldlogisticsfl@gmail.com" style={{display:"inline-block",padding:"16px 40px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"15px",fontWeight:"600"}}>fieldlogisticsfl@gmail.com</a>
+        <a href="mailto:info@hoa-agent.com" style={{display:"inline-block",padding:"16px 40px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"15px",fontWeight:"600"}}>info@hoa-agent.com</a>
         <div style={{fontSize:"13px",color:"rgba(255,255,255,0.3)",marginTop:"16px"}}>Ismael Martinez · London Foster Realty · HOA Agent LLC</div>
       </section>
       <footer style={{borderTop:"1px solid rgba(255,255,255,0.08)",padding:"24px 48px",textAlign:"center",fontSize:"12px",color:"rgba(255,255,255,0.3)"}}>

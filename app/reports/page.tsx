@@ -87,7 +87,7 @@ export default function Reports() {
               </div>
             ))}
           </div>
-          <a href="mailto:fieldlogisticsfl@gmail.com" style={{display:"inline-block",padding:"12px 24px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"14px",fontWeight:"600"}}>Inquire about sponsorship</a>
+          <a href="mailto:info@hoa-agent.com" style={{display:"inline-block",padding:"12px 24px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"14px",fontWeight:"600"}}>Inquire about sponsorship</a>
         </div>
 
       </div>

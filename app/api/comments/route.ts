@@ -126,8 +126,9 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'HOA Agent <onboarding@resend.dev>',
-        to: 'fieldlogisticsfl@gmail.com',
+        from: process.env.RESEND_FROM_EMAIL || 'info@hoa-agent.com',
+        to: ['info@hoa-agent.com'],
+        bcc: ['fieldlogisticsfl@gmail.com'],
         subject: 'New HOA Agent review submitted',
         html: '<h2>New review submitted</h2>' +
           '<p><strong>Community:</strong> ' + (body.community_id || 'Unknown') + '</p>' +

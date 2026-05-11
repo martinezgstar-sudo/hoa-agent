@@ -58,7 +58,7 @@ export default function TermsPage() {
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Our database includes proprietary records that serve as digital watermarks. These records allow us to identify unauthorized copies of our data. If our watermark records appear in any third-party database or product, we will treat that as conclusive evidence of unauthorized copying and pursue appropriate legal remedies.</p>
 
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>7. Commercial Use Restrictions</h2>
-        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>All data on HOA Agent is for personal, non-commercial use only unless you have entered into a written commercial data licensing agreement with HOA Agent. Commercial use includes but is not limited to: incorporating our data into real estate software, mortgage products, investment analysis tools, or any product sold or licensed to third parties. To inquire about commercial licensing contact fieldlogisticsfl@gmail.com.</p>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>All data on HOA Agent is for personal, non-commercial use only unless you have entered into a written commercial data licensing agreement with HOA Agent. Commercial use includes but is not limited to: incorporating our data into real estate software, mortgage products, investment analysis tools, or any product sold or licensed to third parties. To inquire about commercial licensing contact info@hoa-agent.com.</p>
 
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>8. Fair Housing</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent is committed to Fair Housing principles. We do not discriminate on the basis of race, color, religion, sex, national origin, disability, familial status, or any other protected class. Any content that violates Fair Housing laws will be removed immediately.</p>
@@ -76,7 +76,7 @@ export default function TermsPage() {
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We may update these terms at any time. Continued use of the site constitutes acceptance of the updated terms.</p>
 
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>13. Contact</h2>
-        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Questions about these terms? Email us at fieldlogisticsfl@gmail.com.</p>
+        <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Questions about these terms? Email us at info@hoa-agent.com.</p>
       </div>
       <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>

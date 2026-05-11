@@ -85,8 +85,9 @@ export async function GET() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      from: 'HOA Agent <onboarding@resend.dev>',
-      to: 'fieldlogisticsfl@gmail.com',
+      from: process.env.RESEND_FROM_EMAIL || 'info@hoa-agent.com',
+      to: ['info@hoa-agent.com'],
+      bcc: ['fieldlogisticsfl@gmail.com'],
       subject: 'HOA Agent Daily Report - ' + date,
       html
     })

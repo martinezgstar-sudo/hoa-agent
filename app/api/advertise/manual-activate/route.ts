@@ -70,8 +70,9 @@ export async function POST(req: NextRequest) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "HOA Agent <noreply@hoa-agent.com>",
-          to: ["fieldlogisticsfl@gmail.com"],
+          from: process.env.RESEND_FROM_EMAIL || "info@hoa-agent.com",
+          to: ["info@hoa-agent.com"],
+          bcc: ["fieldlogisticsfl@gmail.com"],
           subject: `New advertiser signup (${plan}) — ${prof.company_name || prof.email || prof.id}`,
           html: summaryHtml,
         }),

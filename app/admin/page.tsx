@@ -549,6 +549,7 @@ export default function AdminPage() {
     {key:"suggestions",label:"Suggestions"},
     {key:"field_updates",label:"Field Updates"},
     {key:"research",label:"Research"},
+    {key:"leads",label:"Leads"},
     {key:"news",label:"News",href:"/admin/news"},
     {key:"ads",label:"Advertiser Signups ›",href:"/admin/ads"},
     {key:"pending",label:"Pending ›",href:"/admin/pending"},
@@ -587,8 +588,169 @@ export default function AdminPage() {
         {tab === "suggestions" && <SuggestionsTab/>}
         {tab === "field_updates" && <FieldSuggestionsTab/>}
         {tab === "research" && <ResearchTab/>}
+        {tab === "leads" && <LeadsTab/>}
       </div>
     </main>
+  )
+}
+
+// ── Leads Tab (one-time legacy backfill) ─────────────────────────────────────
+
+function LeadsTab() {
+  type BackfillResult = {
+    ok: boolean
+    dry_run?: boolean
+    count_sent: number
+    count_skipped: number
+    count_failed: number
+    recipients: string[]
+    failed: Array<{ email: string; error: string }>
+    total_eligible: number
+  }
+  const [busy, setBusy] = useState(false)
+  const [done, setDone] = useState(false)
+  const [result, setResult] = useState<BackfillResult | null>(null)
+  const [preview, setPreview] = useState<BackfillResult | null>(null)
+  const [error, setError] = useState<string>("")
+
+  async function preflight() {
+    setError("")
+    setBusy(true)
+    try {
+      const res = await fetch("/api/admin/backfill-leads?dry_run=1", {
+        method: "POST",
+        headers: { "x-admin-password": ADMIN_PASSWORD },
+      })
+      const data = (await res.json()) as BackfillResult & { error?: string }
+      if (!res.ok) throw new Error(data.error || "Preflight failed")
+      setPreview(data)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Preflight failed")
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function runBackfill() {
+    if (busy || done) return
+    const n = preview?.recipients?.length ?? 0
+    if (!confirm(`This will email ${n} legacy lead${n === 1 ? "" : "s"}. Continue?`)) return
+    setBusy(true)
+    setError("")
+    try {
+      const res = await fetch("/api/admin/backfill-leads", {
+        method: "POST",
+        headers: { "x-admin-password": ADMIN_PASSWORD },
+      })
+      const data = (await res.json()) as BackfillResult & { error?: string }
+      if (!res.ok) throw new Error(data.error || "Backfill failed")
+      setResult(data)
+      setDone(true)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Backfill failed")
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div>
+      <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a1a", marginBottom: "8px" }}>
+        Lead backfill
+      </h2>
+      <p style={{ fontSize: "13px", color: "#666", marginBottom: "20px", lineHeight: 1.6 }}>
+        One-time follow-up email to report-request leads created <strong>before 2026-05-01</strong> that
+        never received a reply. Skips Izzy test addresses and any row that already has{" "}
+        <code style={{ fontSize: "12px", backgroundColor: "#f0f0f0", padding: "1px 4px", borderRadius: "4px" }}>backfill_sent_at</code> set.
+      </p>
+
+      <div style={{ display: "flex", gap: "8px", marginBottom: "16px", flexWrap: "wrap" }}>
+        <button
+          type="button"
+          onClick={preflight}
+          disabled={busy}
+          style={{
+            padding: "8px 14px",
+            fontSize: "13px",
+            fontWeight: 600,
+            backgroundColor: "#fff",
+            color: "#1B2B6B",
+            border: "1.5px solid #1B2B6B",
+            borderRadius: "8px",
+            cursor: busy ? "default" : "pointer",
+          }}
+        >
+          {busy && !preview ? "Checking…" : "Preview eligible leads"}
+        </button>
+        <button
+          type="button"
+          onClick={runBackfill}
+          disabled={busy || done || !preview}
+          style={{
+            padding: "9px 16px",
+            fontSize: "13px",
+            fontWeight: 700,
+            backgroundColor: busy || done || !preview ? "#bbb" : "#1D9E75",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: busy || done || !preview ? "not-allowed" : "pointer",
+          }}
+        >
+          {done ? "Sent ✓" : busy ? "Sending…" : "Send Backfill Emails to Legacy Leads"}
+        </button>
+      </div>
+
+      {error && (
+        <div style={{ padding: "10px 12px", backgroundColor: "#FEE9E9", border: "1px solid #E24B4A", borderRadius: "8px", color: "#A32D2D", fontSize: "13px", marginBottom: "12px" }}>
+          {error}
+        </div>
+      )}
+
+      {preview && !result && (
+        <div style={{ padding: "14px 16px", backgroundColor: "#FAEEDA", border: "1px solid #EF9F27", borderRadius: "8px", marginBottom: "12px" }}>
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "#854F0B", marginBottom: "8px" }}>
+            Preview · {preview.recipients.length} email{preview.recipients.length === 1 ? "" : "s"} would be sent
+          </div>
+          <div style={{ fontSize: "12px", color: "#633806", lineHeight: 1.7 }}>
+            {preview.recipients.length === 0 ? (
+              <em>(none eligible)</em>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: "18px" }}>
+                {preview.recipients.map((e) => (<li key={e}>{e}</li>))}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
+
+      {result && (
+        <div style={{ padding: "14px 16px", backgroundColor: "#E1F5EE", border: "1px solid #1D9E75", borderRadius: "8px" }}>
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "#155A3F", marginBottom: "8px" }}>
+            Backfill complete
+          </div>
+          <div style={{ fontSize: "12px", color: "#155A3F", marginBottom: "8px" }}>
+            sent: <strong>{result.count_sent}</strong> · skipped: <strong>{result.count_skipped}</strong> · failed: <strong>{result.count_failed}</strong>
+          </div>
+          {result.recipients.length > 0 && (
+            <>
+              <div style={{ fontSize: "12px", fontWeight: 600, color: "#155A3F", marginBottom: "4px" }}>Recipients:</div>
+              <ul style={{ margin: 0, paddingLeft: "18px", fontSize: "12px", color: "#155A3F", lineHeight: 1.7 }}>
+                {result.recipients.map((e) => (<li key={e}>{e}</li>))}
+              </ul>
+            </>
+          )}
+          {result.failed.length > 0 && (
+            <>
+              <div style={{ fontSize: "12px", fontWeight: 600, color: "#A32D2D", marginTop: "10px", marginBottom: "4px" }}>Failed:</div>
+              <ul style={{ margin: 0, paddingLeft: "18px", fontSize: "12px", color: "#A32D2D", lineHeight: 1.7 }}>
+                {result.failed.map((f) => (<li key={f.email}>{f.email} — {f.error}</li>))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 

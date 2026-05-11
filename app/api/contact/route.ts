@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
 
-const CONTACT_EMAIL = "fieldlogisticsfl@gmail.com"
+const CONTACT_EMAIL = "info@hoa-agent.com"
+const CONTACT_BCC = "fieldlogisticsfl@gmail.com"
 
 /**
  * POST /api/contact
  * Body: { subject, fields, name, email, ...formFields }
- * Sends an email via Resend to fieldlogisticsfl@gmail.com.
- * Always returns { success: true } on the user-visible side; logs server errors.
+ * Sends an email via Resend to info@hoa-agent.com with fieldlogisticsfl
+ * BCC'd as backup. Always returns { success: true } on the user-visible
+ * side; logs server errors.
  */
 export async function POST(req: NextRequest) {
   try {
@@ -51,8 +53,9 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "HOA Agent <noreply@hoa-agent.com>",
-        to: CONTACT_EMAIL,
+        from: process.env.RESEND_FROM_EMAIL || "info@hoa-agent.com",
+        to: [CONTACT_EMAIL],
+        bcc: [CONTACT_BCC],
         reply_to: email,
         subject: subjectLine,
         text: lines.join("\n"),
