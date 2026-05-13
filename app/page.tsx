@@ -75,58 +75,41 @@ export default async function Home() {
 
   const totalCommunities = count || 0
 
-  // LocalBusiness JSON-LD for richer SERP appearance
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    'name': 'HOA Agent',
-    'description': 'Palm Beach County HOA intelligence platform serving homebuyers, renters, and real estate agents.',
-    'url': 'https://www.hoa-agent.com',
-    'logo': 'https://www.hoa-agent.com/logo.png',
-    'image': 'https://www.hoa-agent.com/logo.png',
-    'areaServed': {
-      '@type': 'AdministrativeArea',
-      'name': 'Palm Beach County',
-      'containedInPlace': { '@type': 'State', 'name': 'Florida' },
+  // JSON-LD bundle via shared helper — single @graph block for cleanliness.
+  const { buildWebSiteSchema, buildHoaAgentOrgSchema, jsonLdGraph } = await import('@/app/lib/seo/json-ld')
+  const homepageGraphHtml = jsonLdGraph([
+    buildWebSiteSchema(),
+    buildHoaAgentOrgSchema(),
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.hoa-agent.com#webpage',
+      url: 'https://www.hoa-agent.com',
+      name: 'HOA Agent — Know the HOA Before You Commit',
+      description:
+        'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+      isPartOf: { '@id': 'https://www.hoa-agent.com' },
+      mainEntity: { '@id': 'https://www.hoa-agent.com#org' },
     },
-    'serviceType': 'HOA Community Research',
-    'priceRange': 'Free with paid premium reports',
-  }
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': 'HOA Agent',
-    'url': 'https://www.hoa-agent.com',
-    'potentialAction': {
-      '@type': 'SearchAction',
-      'target': 'https://www.hoa-agent.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
+    {
+      '@type': 'LocalBusiness',
+      name: 'HOA Agent',
+      description: 'Palm Beach County HOA intelligence platform serving homebuyers, renters, and real estate agents.',
+      url: 'https://www.hoa-agent.com',
+      logo: 'https://www.hoa-agent.com/logo.png',
+      image: 'https://www.hoa-agent.com/logo.png',
+      areaServed: {
+        '@type': 'AdministrativeArea',
+        name: 'Palm Beach County',
+        containedInPlace: { '@type': 'State', name: 'Florida' },
+      },
+      serviceType: 'HOA Community Research',
+      priceRange: 'Free with paid premium reports',
     },
-  }
-
-  const orgSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'HOA Agent',
-    legalName: 'HOA Agent LLC',
-    url: 'https://www.hoa-agent.com',
-    logo: 'https://www.hoa-agent.com/logo.png',
-    description: 'Florida HOA intelligence platform covering Palm Beach County HOA and condo communities',
-    foundingDate: '2026',
-    areaServed: { '@type': 'AdministrativeArea', name: 'Palm Beach County, Florida' },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      url: 'https://www.hoa-agent.com/contact',
-      contactType: 'customer service',
-    },
-  }
+  ])
 
   return (
     <main style={{fontFamily: 'system-ui, sans-serif', margin: 0, padding: 0, backgroundColor: '#f9f9f9'}}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: homepageGraphHtml }} />
 
       <NavBar
         shareHref="/search"
