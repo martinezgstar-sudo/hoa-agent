@@ -355,7 +355,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     buildOrganizationSchema(community as Parameters<typeof buildOrganizationSchema>[0]),
     datasetSchema,
     buildFAQPageSchema(faqs),
-    buildAggregateRatingSchema(liveReviewAvg, liveReviewCount, community.canonical_name),
+    buildAggregateRatingSchema(liveReviewAvg, liveReviewCount, community.canonical_name, community as Parameters<typeof buildAggregateRatingSchema>[3]),
   ].filter(Boolean)
   const ldGraphHtml = jsonLdGraph(graphItems)
 

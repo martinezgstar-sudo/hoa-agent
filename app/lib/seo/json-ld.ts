@@ -277,14 +277,28 @@ export function buildFAQPageSchema(faqs: FAQItem[]) {
   }
 }
 
-export function buildAggregateRatingSchema(avg: number | null | undefined, count: number | null | undefined, itemName?: string) {
+export function buildAggregateRatingSchema(
+  avg: number | null | undefined,
+  count: number | null | undefined,
+  itemName?: string,
+  community?: CommunityLike,
+) {
   const n = Number(count) || 0
   if (n < 1) return undefined
   const a = Number(avg)
   if (!isFinite(a) || a <= 0) return undefined
+  // itemReviewed must be a LocalBusiness for Google Rich Results compliance.
+  // Place is rejected with "invalid object type for field 'itemReviewed'".
+  const itemReviewed = itemName
+    ? {
+        "@type": "LocalBusiness",
+        name: itemName,
+        address: community ? buildAddress(community) : undefined,
+      }
+    : undefined
   return {
     "@type": "AggregateRating",
-    itemReviewed: itemName ? { "@type": "Place", name: itemName } : undefined,
+    itemReviewed,
     ratingValue: Math.round(a * 10) / 10,
     reviewCount: n,
     bestRating: 5,

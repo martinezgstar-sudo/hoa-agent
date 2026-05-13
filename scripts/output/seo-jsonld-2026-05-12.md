@@ -132,3 +132,54 @@ Single `<nav aria-label="Breadcrumb">` row above the existing header:
 - Management pages already emit LocalBusiness + BreadcrumbList; left unchanged per spec.
 - 60 communities are missing `zip_code` — their `address` block omits `postalCode` and renders fine. Google does not penalize missing optional fields.
 - Only 1,084 communities have `legal_name` (~13.5%) — the Organization schema only emits when legal_name OR state_entity_number OR entity_status=Active is set, so ~86% of pages will simply not have an Organization schema, which is the correct decision (don't invent corporations).
+
+---
+
+## Follow-up fix — 2026-05-12 (later same day)
+
+**Error reported by Google Rich Results Test on `/community/briar-bay-community-association-inc`:**
+> "Review snippets — invalid object type for field `itemReviewed`"
+
+**Cause:** `buildAggregateRatingSchema` set `itemReviewed: { "@type": "Place", name: … }`. Google's Review-Snippet rich-result requirements only accept a narrow set of `itemReviewed` types — `LocalBusiness`, `Product`, `Movie`, `Book`, etc. `Place` is valid Schema.org but rejected for review snippets specifically.
+
+**Fix:** changed `itemReviewed.@type` from `Place` to `LocalBusiness` and added the community's address to the nested object so the review snippet is anchored to a real geographic entity.
+
+**Before:**
+```json
+"itemReviewed": { "@type": "Place", "name": "Briar Bay Community Association, Inc." }
+```
+
+**After:**
+```json
+"itemReviewed": {
+  "@type": "LocalBusiness",
+  "name": "Briar Bay Community Association, Inc.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3400 Celebration Boulevard",
+    "addressLocality": "West Palm Beach",
+    "addressRegion": "FL",
+    "postalCode": "33411",
+    "addressCountry": "US"
+  }
+}
+```
+
+**Files modified:**
+- `app/lib/seo/json-ld.ts` — `buildAggregateRatingSchema` now accepts an optional `community?: CommunityLike` 4th arg; emits `LocalBusiness` with address (still routed through `stripNulls`, so address fields gracefully omit when missing).
+- `app/community/[slug]/page.tsx` — call site passes the community object so the address rides along.
+
+**Verification (locally before deploy):**
+```
+$ npx tsx -e 'AggregateRating { itemReviewed: LocalBusiness + PostalAddress, ratingValue: 4.5, reviewCount: 2, ... }'
+```
+Confirmed `@type: LocalBusiness` and full PostalAddress emitted.
+
+**Build:** `npx tsc --noEmit` exit 0 · `npm run build` exit 0.
+
+**Test plan:**
+1. Wait for Vercel auto-deploy to finish.
+2. Open [Google Rich Results Test](https://search.google.com/test/rich-results).
+3. Paste `https://www.hoa-agent.com/community/briar-bay-community-association-inc`.
+4. Expect **0 errors** on Review snippets. Other detected items (BreadcrumbList, Place, Organization, Dataset, FAQPage) should remain green as before.
+5. Spot-check another community with reviews (`/community/abacoa-property-owners-assembly-inc` or any row where `review_count >= 1`).
