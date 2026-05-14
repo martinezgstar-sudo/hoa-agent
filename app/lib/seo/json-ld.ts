@@ -328,42 +328,114 @@ export function buildReviewSchema(r: ReviewLike) {
   }
 }
 
-/** Trim a string to maxLen at the last word boundary, no trailing punctuation. */
+/**
+ * Trim a string to <= maxLen. Prefer ending at the last complete
+ * sentence (`.` `!` `?`) that fits; otherwise fall back to the last
+ * complete word boundary. Never truncates mid-word, never leaves
+ * trailing punctuation hanging, appends "..." when truncation happens.
+ */
 export function truncate(s: string, maxLen: number): string {
   if (!s || s.length <= maxLen) return s
-  const cut = s.slice(0, maxLen)
+
+  // Cap of maxLen-3 leaves room for the trailing "..." indicator.
+  const cap = maxLen - 3
+  const cut = s.slice(0, cap)
+
+  // Prefer the last complete sentence inside the cap.
+  const sentenceMatch = /[.!?](?=\s|$)/g
+  let lastSentenceEnd = -1
+  let m: RegExpExecArray | null
+  while ((m = sentenceMatch.exec(cut)) !== null) lastSentenceEnd = m.index
+  if (lastSentenceEnd >= 0) {
+    return cut.slice(0, lastSentenceEnd + 1).trimEnd()
+  }
+
+  // Otherwise fall back to last complete word boundary.
   const lastSpace = cut.lastIndexOf(" ")
-  const safe = (lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\.,;:\-—\s]+$/, "")
-  return safe
+  const slice = lastSpace > 0 ? cut.slice(0, lastSpace) : cut
+  const safe = slice.replace(/[\s\.,;:\-—]+$/, "")
+  return safe + "..."
+}
+
+/** Append "community" to a free-text property_type unless it already
+ * ends in a community-like noun. Lower-cased throughout for
+ * Google-style meta descriptions. Conservative whitelist — we'd rather
+ * say "estates community" (slightly redundant) than "is a estates"
+ * (bad grammar). */
+function normalizePropertyType(raw: string | null | undefined): string {
+  const t = (raw || "").trim().toLowerCase()
+  if (!t) return "community"
+  const SUFFIX_OK = /(community|complex|association|hoa)\.?$/i
+  if (SUFFIX_OK.test(t)) return t
+  return `${t} community`
 }
 
 /**
  * Generate a richer meta description per community. Caps at 158 chars
  * (Google trims ~160). Uses only fields that exist on the row; never
  * outputs "null" or "undefined" string fragments.
+ *
+ * Bug fixes 2026-05-12:
+ *  - When min === max, write "Monthly HOA fee is $X/mo" (singular).
+ *  - Append "community" to free-text property_type ("single family"
+ *    → "single family community").
+ *  - Truncation now stops at last complete sentence or word, never
+ *    mid-word, and appends "..." when truncated.
  */
 export function buildCommunityMetaDescription(c: CommunityLike): string {
   const name = c.canonical_name || "This community"
-  const propertyType = (c.property_type || "").trim().toLowerCase() || "community"
+  const propertyType = normalizePropertyType(c.property_type)
   const city = c.city || "Palm Beach County"
   const zip = c.zip_code ? ` ${c.zip_code}` : ""
-  const parts: string[] = []
-  parts.push(`${name} is a ${propertyType} in ${city}, Florida${zip}.`)
-  const min = Number(c.monthly_fee_min) || 0
-  const max = Number(c.monthly_fee_max) || 0
+
+  // Core sentences in priority order — the closer is optional so it
+  // doesn't crowd out real data on long names.
+  const core: string[] = []
+  core.push(`${name} is a ${propertyType} in ${city}, Florida${zip}.`)
+
+  const min = Math.round(Number(c.monthly_fee_min) || 0)
+  const max = Math.round(Number(c.monthly_fee_max) || 0)
   if (min > 0 && max > 0) {
-    parts.push(`Monthly HOA fees range from $${Math.round(min)} to $${Math.round(max)}.`)
+    if (min === max) {
+      core.push(`Monthly HOA fee is $${min}/mo.`)
+    } else {
+      core.push(`Monthly HOA fees range from $${min} to $${max}.`)
+    }
+  } else if (min > 0) {
+    core.push(`Monthly HOA fee is $${min}/mo.`)
+  } else if (max > 0) {
+    core.push(`Monthly HOA fee is $${max}/mo.`)
   } else if (c.monthly_fee_median && c.monthly_fee_median > 0) {
-    parts.push(`Median HOA fee about $${Math.round(c.monthly_fee_median)}/mo.`)
+    core.push(`Median HOA fee about $${Math.round(c.monthly_fee_median)}/mo.`)
   }
+
   if (c.management_company && c.management_company.trim()) {
-    parts.push(`Managed by ${c.management_company}.`)
+    core.push(`Managed by ${c.management_company.trim()}.`)
   }
   if (typeof c.litigation_count === "number" && c.litigation_count > 0) {
-    parts.push(`Public litigation history available.`)
+    core.push(`Public litigation history available.`)
   }
-  parts.push(`View fees, restrictions, reviews on HOA Agent.`)
-  let out = parts.join(" ")
-  if (out.length > 158) out = truncate(out, 158)
-  return out
+
+  const CLOSER = "View fees, restrictions, reviews on HOA Agent."
+
+  const withCloser = `${core.join(" ")} ${CLOSER}`
+  // 175 chars: fits the natural "name + propertyType + city + fee + mgmt"
+  // assembly Izzy spec'd for Liberty Bay (171 chars). Still well within
+  // Google's desktop SERP trim (~300) and at most ~20 chars over mobile.
+  const CAP = 175
+  if (withCloser.length <= CAP) return withCloser
+
+  // Closer overflows — try core alone before any truncation
+  const coreOnly = core.join(" ")
+  if (coreOnly.length <= CAP) return coreOnly
+
+  // Core itself overflows — peel core sentences from the end (least
+  // important first) until it fits. We never truncate mid-content.
+  for (let n = core.length - 1; n >= 1; n--) {
+    const slim = core.slice(0, n).join(" ")
+    if (slim.length <= CAP) return slim
+  }
+  // Even just the first sentence is > CAP — fall back to word-boundary
+  // truncate of the first sentence with ellipsis.
+  return truncate(core[0], CAP)
 }
