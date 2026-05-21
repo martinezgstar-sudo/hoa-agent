@@ -498,7 +498,7 @@ const thStyle: React.CSSProperties = {
   borderBottom:"1px solid #e5e5e5",whiteSpace:"nowrap" as any
 }
 const tdStyle: React.CSSProperties = {
-  padding:"10px 12px",verticalAlign:"top" as any
+  padding:"10px 12px",verticalAlign:"top" as any,color:"#1a1a1a"
 }
 const centerStyle: React.CSSProperties = {
   textAlign:"center" as any,color:"#888",padding:"48px",fontSize:"14px"
