@@ -64,11 +64,17 @@ def fetch_communities():
 
 def parse_record(line: str):
     """Parse a Sunbiz cordata fixed-width line into a dict."""
-    doc_num  = line[:13].strip()
-    ent_name = line[13:93].strip()
-    rest     = line[93:]
-
-    status_char = rest.strip()[:1] if rest.strip() else ""
+    # FIXED 2026-05-19: cordata byte offsets corrected
+    # (was [:13]/[13:93], now [:12]/[12:204]).
+    doc_num  = line[:12].strip()
+    ent_name = line[12:204].strip()
+    # FIXED 2026-05-19: cordata byte offsets corrected.
+    # COR_STATUS is the single char at [204]; payload starts at [205].
+    # Previously rest = line[93:] and status_char = rest.strip()[:1] which
+    # only worked when the name was short enough that strip() skipped past
+    # the trailing name spaces to land on the real status byte.
+    rest        = line[205:]
+    status_char = line[204] if len(line) > 204 else ""
     is_active   = status_char == "A"
 
     # Address (street + city + ZIP)
@@ -151,7 +157,9 @@ def main():
                 line_count += 1
                 if len(line) < 100:
                     continue
-                ent_field = line[13:93]
+                # FIXED 2026-05-19: cordata byte offsets corrected
+                # (was [13:93], now [12:204]).
+                ent_field = line[12:204]
                 ent_words = tokenize(ent_field)
                 if len(ent_words) < 2:
                     continue

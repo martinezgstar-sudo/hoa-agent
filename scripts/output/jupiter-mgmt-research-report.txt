@@ -1,0 +1,26 @@
+=== JUPITER MGMT_COMPANY RESEARCH-ONLY TOOLKIT REPORT ===
+Date:                    2026-05-21 00:24:53
+Snapshot:                /Users/izzymartinez/Agents/hoa-agent/logs/snapshots/jupiter-mgmt-all-pre-2026-05-21T03-49-52Z.json
+Target communities:      577 (Jupiter published, management_company IS NULL)
+  with state_entity_number: 202
+  is_sub_hoa:               29
+  with website_url:         1
+
+Per-source mgmt_company candidate hits:
+  sunbiz_registered_agent (strong, assoc-class entity): 32
+  sunbiz_registered_agent (weak, holding/other entity): 2
+  master_hoa carry (sub-HOA inherits master's mgmt):    6
+  web_search (sampled 120, mgmt-co keyword hit): 0
+  community_website body match:                         0
+  listing_site:                                          0 (not_attempted)
+  pbcpao:                                                0 (not_attempted)
+
+Two-signal candidates (≥ 2 independent sources agreeing): 0
+Single-source candidates (admin review required):         65
+
+Outputs:
+  scripts/output/jupiter-mgmt-evidence.csv            (one row per community × source, 3462 rows)
+  scripts/output/jupiter-mgmt-two-signal.csv              (two-signal-qualified candidates)
+  scripts/output/jupiter-mgmt-single-source.csv            (single-source candidates for admin review)
+
+NO writes to communities or pending_community_data — research-only.

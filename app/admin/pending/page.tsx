@@ -187,7 +187,7 @@ function PendingDataTab() {
                         style={{fontSize:"11px",color:"#888",textDecoration:"none"}}>view ↗</a>
                     )}
                   </td>
-                  <td style={tdStyle}><code style={{fontSize:"11px",background:"#f5f5f5",padding:"2px 6px",borderRadius:"4px"}}>{row.field_name}</code></td>
+                  <td style={tdStyle}><code style={{fontSize:"11px",background:"#E8EDF2",color:"#1B2B6B",fontWeight:600,padding:"2px 6px",borderRadius:"4px"}}>{row.field_name}</code></td>
                   <td style={{...tdStyle, maxWidth:"200px", wordBreak:"break-word" as any}}>{row.proposed_value}</td>
                   <td style={tdStyle}>
                     {row.source_url ? (

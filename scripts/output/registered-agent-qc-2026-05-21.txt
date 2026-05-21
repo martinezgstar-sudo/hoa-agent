@@ -1,0 +1,144 @@
+==============================================================================
+REGISTERED_AGENT QC REPORT — 2026-05-21
+==============================================================================
+Generated:  2026-05-21T04:07:09.818630+00:00
+Trigger:    registered_agent fill rate 5.1% → 7.01% (recent backfill)
+Memory:     sunbiz_parser_offset.md — past writes by bulk-sunbiz-match.py
+            may be corrupted at state_entity_number ([:13] vs [:12])
+            and legal_name ([13:93] vs [12:204]).
+
+-- POOL & SAMPLE --------------------------------------------------------
+Pool (registered_agent set, updated in last 30 days): 580 rows
+Sample size: 50 (seed=20260521)
+Verifiable (had usable state_entity_number):         50
+Unverifiable (missing / corrupted doc):              0
+
+-- RESULTS --------------------------------------------------------------
+Matches (normalized stored == normalized extracted):  39
+Mismatches:                                           0
+Doc not found in cordata:                             3
+Cordata line found but parser yielded no agent:       7
+
+mismatch_rate (verifiable only): 0.00%
+suspect_rate (verifiable mismatches + unverifiable): 20.00%
+threshold for Admiral queue: 2%
+
+DECISION: mismatch_rate 0.00% <= 2% — backfill quality acceptable. 10 suspects still listed for awareness; no review queue triggered.
+NO AUTO-REVERTS PERFORMED (per Admiral directive).
+
+-- SUSPECT ROWS ---------------------------------------------------------
+  10e66a4b-6529-43ea-b618-b88907419ce5  doc=UNKNOWN  [no_cordata_match]
+    name:      Pine Tree Village
+    stored:    'Unknown'
+    extracted: None
+    norm cmp:  stored='UNKNOWN'  extracted=None
+  b1eb8ded-79d7-484b-a29d-58cf17abd557  doc=N17000012791  [could_not_extract_from_cordata]
+    name:      Villamar At Toscana Isles Homeowners Association, Inc.
+    stored:    'BOGEN LAW GROUP, PA'
+    extracted: None
+    norm cmp:  stored='BOGEN LAW GROUP PA'  extracted=None
+  88c19952-60eb-4f23-9cd0-ec3c97687126  doc=800170  [could_not_extract_from_cordata]
+    name:      The Acreage HOA
+    stored:    'Unknown'
+    extracted: None
+    norm cmp:  stored='UNKNOWN'  extracted=None
+  cf048a8b-8c9d-4c8b-908b-801cf03fec96  doc=7280  [no_cordata_match]
+    name:      Greenway Village South D
+    stored:    'FL                                       GPS FINANCIAL GROUP'
+    extracted: None
+    norm cmp:  stored='FL GPS FINANCIAL GROUP'  extracted=None
+  f7d1f83a-a019-4c54-b3b9-17c2ace7e58c  doc=N16000001009  [could_not_extract_from_cordata]
+    name:      Island Residents Association, Inc.
+    stored:    'S. ASHLEY DRIVE                       TAMPA'
+    extracted: None
+    norm cmp:  stored='S ASHLEY DRIVE TAMPA'  extracted=None
+  c9a1e654-14b3-49a0-a5b7-4666026f33e0  doc=N95000004534  [could_not_extract_from_cordata]
+    name:      The Grove At Boynton Beach Community Association, Inc.
+    stored:    'WASSERSTEIN, P.A.'
+    extracted: None
+    norm cmp:  stored='WASSERSTEIN P A'  extracted=None
+  32921d97-c0b5-4ad0-8115-04aa27b7bb81  doc=N96000002930  [could_not_extract_from_cordata]
+    name:      Las Brisas At Coral Bay Village Association, Inc.
+    stored:    'VALANCY & REED, P.A.'
+    extracted: None
+    norm cmp:  stored='VALANCY & REED P A'  extracted=None
+  7b9edba1-c97e-4051-8f90-6154971ecc6c  doc=1708  [no_cordata_match]
+    name:      Coquina Cove
+    stored:    'HARVEST HOLDINGS LLC'
+    extracted: None
+    norm cmp:  stored='HARVEST HOLDINGS'  extracted=None
+  f0345f33-3cbd-4a75-a903-ac978e971b2b  doc=N94000005711  [could_not_extract_from_cordata]
+    name:      Soundings Homeowners' Association At River Bridge, Inc.
+    stored:    'DICKER, KRIVOK & STOLOFF, P.A.'
+    extracted: None
+    norm cmp:  stored='DICKER KRIVOK & STOLOFF P A'  extracted=None
+  c9bd7482-7300-4cff-8574-66c254bfc265  doc=N16000007399  [could_not_extract_from_cordata]
+    name:      Homes At Pioneer Royale Homeowners Association, Inc.
+    stored:    'WALLACE             STEVEN        EESQ'
+    extracted: None
+    norm cmp:  stored='WALLACE STEVEN EESQ'  extracted=None
+
+-- ALL SAMPLE ROWS (compact) --------------------------------------------
+  [X] 10e66a4b  no_cordata_match                stored=Unknown                                  extracted=
+  [.] c9841cfd  match                           stored=O CREST MANAGEMENT GROUP                 extracted=O CREST MANAGEMENT GROUP
+  [.] 130ab55d  match                           stored=KELLEY KAPLAN & ELLER, PLLC              extracted=KELLEY KAPLAN & ELLER, PLLC
+  [.] e536a4ef  match                           stored=SUNRISE PROPERTY & ESTATE MANAGEMENT, LL extracted=SUNRISE PROPERTY & ESTATE MANAGEMENT, LL
+  [X] b1eb8ded  could_not_extract_from_cordata  stored=BOGEN LAW GROUP, PA                      extracted=
+  [.] 0c3934d7  match                           stored=O GRS COMMUNITY MANAGEMENT               extracted=O GRS COMMUNITY MANAGEMENT
+  [.] e40e5fcf  match                           stored=O CMC MANAGEMENT                         extracted=O CMC MANAGEMENT CONSULTANTS
+  [.] b5a58ca9  match                           stored=O CAMPBELL PROPERTY MANAGEMENT           extracted=O CAMPBELL PROPERTY MANAGEMENT
+  [X] 88c19952  could_not_extract_from_cordata  stored=Unknown                                  extracted=
+  [X] cf048a8b  no_cordata_match                stored=FL                                       extracted=
+  [.] 42a6d672  match                           stored=O ASSOCIATED PROPERTY  MANAGEMENT        extracted=O ASSOCIATED PROPERTY  MANAGEMENT
+  [.] 556d2faa  match                           stored=O GRS COMMUNITY MANAGEMENT               extracted=O GRS COMMUNITY MANAGEMENT
+  [.] 9d45411f  match                           stored=SJW LAW GROUP PLLC                       extracted=SJW LAW GROUP PLLC
+  [.] 8199280f  match                           stored=ONYX AND EAST, LLC                       extracted=ONYX AND EAST, LLC
+  [.] bd41e5fa  match                           stored=O REALTIME PROPERTY MANAGEMENT           extracted=O REALTIME PROPERTY MANAGEMENT
+  [X] f7d1f83a  could_not_extract_from_cordata  stored=S. ASHLEY DRIVE                       TA extracted=
+  [.] a4871a91  match                           stored=O CAPITAL REALTY                         extracted=O CAPITAL REALTY
+  [.] 02a78ea6  match                           stored=O BLOCK MANAGEMENT AND CONSULTING, LLC   extracted=O BLOCK MANAGEMENT AND CONSULTING, LLC
+  [.] 9c6fb943  match                           stored=O GRS MANAGEMENT ASSOCIATES, INC         extracted=O GRS MANAGEMENT ASSOCIATES, INC
+  [.] be38c2a1  match                           stored=O CAMPBELL PROPERTY MANAGEMENT           extracted=O CAMPBELL PROPERTY MANAGEMENT
+  [.] 20ef9889  match                           stored=OMPANY                                   extracted=OMPANY
+  [.] b36121f0  match                           stored=O MCGILL PROPERTY GROUP, LLC             extracted=O MCGILL PROPERTY GROUP, LLC
+  [.] d7e01531  match                           stored=POINTE MANAGEMENT                        extracted=POINTE MANAGEMENT
+  [.] 4127ab68  match                           stored=O ALLIED PROPERTY MANAGEMENT GROUP, INC  extracted=O ALLIED PROPERTY MANAGEMENT GROUP, INC
+  [X] c9a1e654  could_not_extract_from_cordata  stored=WASSERSTEIN, P.A.                        extracted=
+  [.] 2041b76e  match                           stored=O CAMPBELL PROPERTY MANAGEMENT           extracted=O CAMPBELL PROPERTY MANAGEMENT
+  [.] bbb95bb2  match                           stored=O CAMPBELL PROPERTY MANAGEMENT           extracted=O CAMPBELL PROPERTY MANAGEMENT
+  [.] af3869ac  match                           stored=O CMC MANAGEMENT                         extracted=O CMC MANAGEMENT
+  [.] 4269394b  match                           stored=O CAMPBELL PROPERTY MANAGEMENT           extracted=O CAMPBELL PROPERTY MANAGEMENT
+  [X] 32921d97  could_not_extract_from_cordata  stored=VALANCY & REED, P.A.                     extracted=
+  [.] d5801998  match                           stored=O SUNCOAST MANAGEMENT LLC                extracted=O SUNCOAST MANAGEMENT LLC
+  [.] f4841c6a  match                           stored=O OXFORD ASSOCIATION MANAGEMENT          extracted=O OXFORD ASSOCIATION MANAGEMENT
+  [.] 45286561  match                           stored=O SUNRISE PROPERTY                       extracted=O SUNRISE PROPERTY
+  [.] e0a1982e  match                           stored=O CMC MANAGEMENT                         extracted=O CMC MANAGEMENT
+  [X] 7b9edba1  no_cordata_match                stored=HARVEST HOLDINGS LLC                     extracted=
+  [.] d0a67244  match                           stored=GULF COAST AGENTS LLC                    extracted=GULF COAST AGENTS LLC
+  [X] f0345f33  could_not_extract_from_cordata  stored=DICKER, KRIVOK & STOLOFF, P.A.           extracted=
+  [.] 0307bb3a  match                           stored=ASSOCIATED CORPORATE SERVICES            extracted=ASSOCIATED CORPORATE SERVICES
+  [.] ba6586c0  match                           stored=O DAVENPORT PROPERTY MANAGEMENT          extracted=O DAVENPORT PROPERTY MANAGEMENT
+  [.] 98316fb6  match                           stored=O SEACREST SERVICES INC                  extracted=O SEACREST SERVICES INC
+  [X] c9bd7482  could_not_extract_from_cordata  stored=WALLACE             STEVEN        EESQ   extracted=
+  [.] b095795e  match                           stored=O CMD MANAGEMENT                         extracted=O CMD MANAGEMENT
+  [.] bdb66c15  match                           stored=O GRS COMMUNITY MANAGEMENT               extracted=O GRS COMMUNITY MANAGEMENT
+  [.] f45f5c0b  match                           stored=STEVENSON HOLDING CO. LLC                extracted=STEVENSON HOLDING CO. LLC
+  [.] 2434ba0c  match                           stored=O DAVENPORT PROPERTY                     extracted=O DAVENPORT PROPERTY
+  [.] da2563c5  match                           stored=O GRS COMMUNITY MANAGEMENT               extracted=O GRS COMMUNITY MANAGEMENT
+  [.] 9f40fc40  match                           stored=O JACKSON MANAGEMENT GROUP, LLC          extracted=O JACKSON MANAGEMENT GROUP, LLC
+  [.] a9817774  match                           stored=PLLC                       CKONYK & LEMM extracted=PLLC                       CKONYK & LEMM
+  [.] a7e47947  match                           stored=HRISTOPHER   J                           extracted=HRISTOPHER   J
+
+-- SUSPECT ID LIST (one per line) ---------------------------------------
+10e66a4b-6529-43ea-b618-b88907419ce5
+b1eb8ded-79d7-484b-a29d-58cf17abd557
+88c19952-60eb-4f23-9cd0-ec3c97687126
+cf048a8b-8c9d-4c8b-908b-801cf03fec96
+f7d1f83a-a019-4c54-b3b9-17c2ace7e58c
+c9a1e654-14b3-49a0-a5b7-4666026f33e0
+32921d97-c0b5-4ad0-8115-04aa27b7bb81
+7b9edba1-c97e-4051-8f90-6154971ecc6c
+f0345f33-3cbd-4a75-a903-ac978e971b2b
+c9bd7482-7300-4cff-8574-66c254bfc265
+
+-- END ------------------------------------------------------------------

@@ -1,0 +1,78 @@
+=== WEST PALM BEACH MGMT_COMPANY 5-SOURCE RESEARCH REPORT ===
+Date:                2026-05-21 01:33:13
+Snapshot:            /Users/izzymartinez/Agents/hoa-agent/logs/snapshots/wpb-mgmt-pre-2026-05-21T00-16-57.json
+Cordata source:      /Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
+Target communities:  1339 (WPB published, management_company IS NULL)
+  with state_entity_number: 524
+  is_sub_hoa:               43
+  with website_url:         0
+  with master_hoa_id:       43
+
+DB WRITES THIS PASS:  ZERO (research-only; apply step is a
+                     separate proposal pending Admiral CSV approval)
+
+Source caps:
+  WEB_SEARCH_CAP    = 200
+  DBPR_LOOKUP_CAP   = 200
+  LISTING_LOOKUP_CAP= 200
+  DDG_BLOCK_AFTER_FAILS = 5  DDG_TIMEOUT = 12s
+
+DDG runtime state:  blocked=True  last_error=timeout/network: ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='html.duckduckgo.com', port=443) at 0x10a795130>, 'Connection to html.duckduckgo.com timed out. (connect timeout=12)'))"))
+
+Per-source candidate distribution:
+  sunbiz_cordata        strong=  52  weak=   7  info=  45  no_match=1235  not_attempted=   0  any_candidate= 104
+  web_search            strong=   0  weak=   0  info=   0  no_match=   4  not_attempted=1335  any_candidate=   0
+  dbpr_lookup           strong=   0  weak=   0  info=   0  no_match=   0  not_attempted=1339  any_candidate=   0
+  community_website     strong=   0  weak=   0  info=   0  no_match=1339  not_attempted=   0  any_candidate=   0
+  listing_site          strong=   0  weak=   0  info=   0  no_match=   0  not_attempted=1339  any_candidate=   0
+
+Sunbiz cordata matches:           750 (72 doc-num, 678 name-fuzzy)
+Two-signal candidates (>=2 src):  0    (admin-reviewable as a batch)
+Single-source candidates:          104   (require explicit per-row approval)
+
+Top 50 two-signal candidates by source_count then name:
+  (none)
+
+Sample single-source candidates (first 30 by name, alphabetical):
+  [1 src ] 2700 NORTH OCEAN CONDO                                  -> MGRMCKOLTER TOWER DIVISION LLC  (sunbiz_cordata)
+  [1 src ] 3Rd Base Steak And Hoagies LLC                          -> REGISTERED AGENTS INC  (sunbiz_cordata)
+  [1 src ] 400 Clematis Condo                                      -> REICHEL REALTY  (sunbiz_cordata)
+  [1 src ] Arlington Place Wpb                                     -> MBR CTWW INVESTMENT TRUST  (sunbiz_cordata)
+  [1 src ] BRECKENRIDGE A COND                                     -> MGRMCBRECKENRIDGE I INVESTOR LLC  (sunbiz_cordata)
+  [1 src ] Barkley Master Association, Inc.                        -> SJW LAW GROUP, PLLC  (sunbiz_cordata)
+  [1 src ] Bel Air Estates Associates, Inc.                        -> DOMP           CENTRUST  (sunbiz_cordata)
+  [1 src ] Bermuda Village Homeowners Association, Inc.            -> DOMNP          ALLIED PROPERTY MANAGEMENT  (sunbiz_cordata)
+  [1 src ] Boca Golf And Tennis Club Property Owners Association,  -> DOMNP          GRANDE PROPERTY SERVICES  (sunbiz_cordata)
+  [1 src ] Boca Heights Property Owners Association, Inc.          -> O ALLIED PROPERTY MANAGEMENT GRP, INC  (sunbiz_cordata)
+  [1 src ] Breezewood Homeowners Association, Inc.                 -> O ALLIED PROPERTY MANAGEMENT  (sunbiz_cordata)
+  [1 src ] CASA DEL SOL                                            -> TERRIER PROPERTIES, LLC  (sunbiz_cordata)
+  [1 src ] CITYPLACE SOUTH TOWER CONDO                             -> MGRMCCITY PLACE SOUTH TOWER PARTNERS  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 14 CONDOMINIUM                    -> DOMNP          CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 15 CONDOMINIUM                    -> DOMNP           CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 16 CONDOMINIUM                    -> DOMNP           CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 18 CONDOMINIUM                    -> DOMNP           CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 19 CONDOMINIUM                    -> DOMNP           CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 20 CONDOMINIUM                    -> DOMNP           CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] CRESTHAVEN VILLAS NO. 21 CONDOMINIUM                    -> DOMNP          CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] Casa Royale Homeowners Association, Inc.                -> O ASSOCIATED PROPERTY MANAGEMENT  (sunbiz_cordata)
+  [1 src ] Central Park Condo                                      -> MGR CHI HOSPITALITY GROUP LLC  (sunbiz_cordata)
+  [1 src ] Chateau Wood Homeowners' Association, Inc.              -> O ALLIED PROPERTY MANAGEMENT GROUP, INC  (sunbiz_cordata)
+  [1 src ] Clubhouse Estates At Breakers West Homeowners Associati -> O GRS MANAGEMENT ASSOCIATES, INC  (sunbiz_cordata)
+  [1 src ] Country Club Village Homeowners Association, Inc.       -> ST. JOHN ROSSIN PODESTA & BURR, PLLC  (sunbiz_cordata)
+  [1 src ] Courtyards At Boca Homeowners Association, Inc.         -> O ALLIED PROPERTY MANAGEMENT GROUP, INC  (sunbiz_cordata)
+  [1 src ] Cresthaven-Ashley Master Association, Inc.              -> DOMNP          CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] Crosley Master Association, Inc.                        -> DOMNP          CROSLEY MASTER ASSOCIATION  (sunbiz_cordata)
+  [1 src ] Cypress Key Town Centre Master Property Owners Associat -> SENTRY MANAGEMENT INC  (sunbiz_cordata)
+  [1 src ] Cypress Lakes Homeowners Association No. 12, Inc.       -> KONYK & LEMME PLLC  (sunbiz_cordata)
+
+Outputs:
+  scripts/output/wpb-mgmt-evidence.csv        (6695 rows, one per community x source)
+  scripts/output/wpb-mgmt-two-signal.csv          (>=2 independent sources, Admiral batch-approve target)
+  scripts/output/wpb-mgmt-single-source.csv      (1 source, explicit per-row approval required)
+  scripts/output/wpb-mgmt-matches.json         (raw Sunbiz cordata match payload)
+
+Next step: Admiral reviews wpb-mgmt-two-signal.csv and signs off
+(or selectively approves rows). A separate wpb-mgmt-apply.py proposal
+will write approved rows to communities.management_company directly
+(null-only PATCH) and queue the rest to pending_community_data with
+source_type='wpb-mgmt-two-signal' and auto_approvable=false.

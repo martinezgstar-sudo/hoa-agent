@@ -1,0 +1,172 @@
+==============================================================================
+MISSION-GOAL REGISTERED_AGENT CLEANUP — 2026-05-21
+==============================================================================
+Generated:  2026-05-21T04:49:35.366143+00:00
+Mode:       APPLY
+Input pool: 580 rows (registered_agent set, updated last 30 days)
+
+-- CLASSIFICATION (stored values) ---------------------------------------
+  good                : 346
+  o_prefix            : 193
+  c_stripped          : 20
+  addr_residue        : 11
+  unknown_literal     : 10
+
+-- ACTIONS ---------------------------------------------------------------
+  keep      : 346
+  update    : 194
+  null      : 40
+
+-- WRITE RESULTS ---------------------------------------------------------
+  updated   : 194
+  nulled    : 40
+  kept      : 346
+  failed    : 0
+
+-- DETAILS BY CLASS -----------------------------------------------------
+
+# o_prefix (193 rows)
+  49c28cd5 doc=3000010712   [update] stored='O CAMPBELL PROPERTY MANAGEMENT'          
+           → new='CAMPBELL PROPERTY MANAGEMENT'   (extracted='')
+  0a69b8a9 doc=N05000010350 [update] stored='O GRS COMMUNITY MANAGEMENT'              
+           → new='GRS COMMUNITY MANAGEMENT'   (extracted='GRS COMMUNITY MANAGEMENT')
+  9b460691 doc=N06000010430 [update] stored='O CAPITAL REALTY'                        
+           → new='CAPITAL REALTY'   (extracted='CAPITAL REALTY')
+  1869255d doc=755118       [update] stored='O COASTAL PROPERTY MANAGEMENT'           
+           → new='COASTAL PROPERTY MANAGEMENT'   (extracted='')
+  ca8f2282 doc=N08000001169 [update] stored='O NEWELL PROPERTY MANAGEMENT LLC'        
+           → new='NEWELL PROPERTY MANAGEMENT LLC'   (extracted='')
+  02a78ea6 doc=N02716       [update] stored='O BLOCK MANAGEMENT AND CONSULTING, LLC'  
+           → new='BLOCK MANAGEMENT AND CONSULTING, LLC'   (extracted='BLOCK MANAGEMENT AND CONSULTING, LLC')
+  0ab570d7 doc=N21000010805 [update] stored='O CAMPBELL PROPERTY MANAGEMENT'          
+           → new='CAMPBELL PROPERTY MANAGEMENT'   (extracted='CAMPBELL PROPERTY MANAGEMENT')
+  c3b7f666 doc=N22000012058 [update] stored='O PULTE HOME COMPANY, LLC'               
+           → new='PULTE HOME COMPANY, LLC'   (extracted='PULTE HOME COMPANY, LLC')
+  e90e791e doc=N98000006755 [update] stored='O INDIAN SPRING MASTER ASSOCIATION'      
+           → new='INDIAN SPRING MASTER ASSOCIATION'   (extracted='INDIAN SPRING MASTER ASSOCIATION')
+  e01ecd6d doc=N06000012176 [update] stored='O CAMPBELL PROPERTY MANAGEMENT'          
+           → new='CAMPBELL PROPERTY MANAGEMENT'   (extracted='CAMPBELL PROPERTY MANAGEMENT')
+  c629f1bd doc=A04000001691 [update] stored='O THE RELATED GROUP'                     
+           → new='THE RELATED GROUP'   (extracted='THE RELATED GROUP')
+  ec695e17 doc=N30709       [update] stored='O FLORIDA SKYLINE MANAGEMENT'            
+           → new='FLORIDA SKYLINE MANAGEMENT'   (extracted='FLORIDA SKYLINE MANAGEMENT')
+  550b7a89 doc=N00000008398 [update] stored='O RESORT MANAGEMENT'                     
+           → new='RESORT MANAGEMENT'   (extracted='RESORT MANAGEMENT')
+  1b2740c7 doc=N02000001147 [update] stored='O MAY MANAGEMENT'                        
+           → new='MAY MANAGEMENT'   (extracted='MAY MANAGEMENT')
+  5f043327 doc=N21700       [update] stored='O CREST MANAGEMENT'                      
+           → new='CREST MANAGEMENT'   (extracted='CREST MANAGEMENT')
+  161f7261 doc=N05000004365 [update] stored='O CMC MANAGEMENT'                        
+           → new='CMC MANAGEMENT'   (extracted='CMC MANAGEMENT')
+  24df4fba doc=749684       [update] stored='O THE LIST COMPANIES, INC'               
+           → new='THE LIST COMPANIES, INC'   (extracted='THE LIST COMPANIES, INC')
+  be97771b doc=5057         [update] stored='O OCEAN BREEZE COMMUNITY MGMT., LLC'     
+           → new='OCEAN BREEZE COMMUNITY MGMT., LLC'   (extracted='')
+  db851b12 doc=N95000001782 [update] stored='O GRS COMMUNITY MANAGEMENT'              
+           → new='GRS COMMUNITY MANAGEMENT'   (extracted='GRS COMMUNITY MANAGEMENT')
+  c7a7bb80 doc=703794       [update] stored='O GRS COMMUNITY MANAGEMENT'              
+           → new='GRS COMMUNITY MANAGEMENT'   (extracted='GRS COMMUNITY MANAGEMENT')
+  11dfcef0 doc=710957       [update] stored='O GRANT PROPERTY MANAGEMENT'             
+           → new='GRANT PROPERTY MANAGEMENT'   (extracted='GRANT PROPERTY MANAGEMENT')
+  abb0cafe doc=738529       [update] stored='O CAMPBELL PROPERTY MANAGEMENT'          
+           → new='CAMPBELL PROPERTY MANAGEMENT'   (extracted='CAMPBELL PROPERTY MANAGEMENT')
+  944ae2d7 doc=763217       [update] stored='O GRANT PROPERTY MANAGEMENT'             
+           → new='GRANT PROPERTY MANAGEMENT'   (extracted='GRANT PROPERTY MANAGEMENT')
+  54b76d69 doc=N31584       [update] stored='O GRS COMMUNITY MANAGEMENT'              
+           → new='GRS COMMUNITY MANAGEMENT'   (extracted='GRS COMMUNITY MANAGEMENT')
+  b095795e doc=768575       [update] stored='O CMD MANAGEMENT'                        
+           → new='CMD MANAGEMENT'   (extracted='CMD MANAGEMENT')
+  9f2779cb doc=N00000004055 [update] stored='O JACKSON MANAGEMENT GROUP, LLC'         
+           → new='JACKSON MANAGEMENT GROUP, LLC'   (extracted='JACKSON MANAGEMENT GROUP, LLC')
+  a914e66c doc=N38183       [update] stored='O GRS COMMUNITY MANAGEMENT'              
+           → new='GRS COMMUNITY MANAGEMENT'   (extracted='GRS COMMUNITY MANAGEMENT')
+  298e49eb doc=750571       [update] stored='O  CMC PROPERTY MANAGEMENT'              
+           → new='CMC PROPERTY MANAGEMENT'   (extracted='CMC PROPERTY MANAGEMENT')
+  e02b3635 doc=755991       [update] stored='O CMC MANAGEMENT'                        
+           → new='CMC MANAGEMENT'   (extracted='CMC MANAGEMENT')
+  bdf23c0d doc=N05577       [update] stored='O GRS MANAGEMENT'                        
+           → new='GRS MANAGEMENT'   (extracted='GRS MANAGEMENT')
+  …and 163 more
+
+# unknown_literal (10 rows)
+  548ee012 doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  8597633f doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  3c826c76 doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  8cfac2f8 doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  bc21515a doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  10e66a4b doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  a99e4b57 doc=768978       [null  ] stored='Unknown'                                 
+  88c19952 doc=800170       [null  ] stored='Unknown'                                 
+  2a73e09d doc=UNKNOWN      [null  ] stored='Unknown'                                 
+  f01fff91 doc=UNKNOWN      [null  ] stored='Unknown'                                 
+
+# addr_residue (11 rows)
+  b08109f2 doc=N25000005864 [null  ] stored='N        FL                             '
+  2cc57263 doc=N26000000174 [null  ] stored='N        FL                             '
+  c94e99bb doc=N25000002385 [null  ] stored='FL                                      '
+  3b8cf189 doc=N25000014417 [null  ] stored='N        FL                             '
+  f7d1f83a doc=N16000001009 [null  ] stored='S. ASHLEY DRIVE                       TA'
+  53539f14 doc=N25000014968 [null  ] stored='N        FL                             '
+  b06d8212 doc=713981       [null  ] stored='S OCEAN BLVD                         MAN'
+  e5087fae doc=1000008605   [null  ] stored='N        FL                             '
+  cf048a8b doc=7280         [null  ] stored='FL                                      '
+  44e53eba doc=9316         [null  ] stored='FL         G   COLD PORT COVE DEV L.,INC'
+  53e01a5d doc=L26000076410 [null  ] stored='FL                                      '
+
+# c_stripped (20 rows)
+  05df4c35 doc=L12000084230 [null  ] stored='ARYE'                                    
+  21eddebb doc=N06000011179 [null  ] stored='HRISTOPHER'                              
+  17f92185 doc=N96000001449 [null  ] stored='OMPANY'                                  
+  7590e2ae doc=N04389       [null  ] stored='MDF'                                     
+  5e712136 doc=N25000014669 [null  ] stored='HRIS'                                    
+  e97b00dd doc=N32848       [null  ] stored='OMPANY'                                  
+  69f9085c doc=N24000003157 [null  ] stored='ESQ.'                                    
+  76dab7e3 doc=N08000004075 [null  ] stored='PA'                                      
+  51bc1758 doc=N25000003014 [null  ] stored='HRIS'                                    
+  5b44dca6 doc=719123       [null  ] stored='PA PA'                                   
+  6f68dc55 doc=N24000011183 [null  ] stored='HRISTOPHER'                              
+  455f9ca4 doc=713063       [null  ] stored='HRIS'                                    
+  a1dd1ff8 doc=N94000001223 [null  ] stored='OMPANY'                                  
+  20ef9889 doc=M01000001482 [null  ] stored='OMPANY'                                  
+  9c526744 doc=265671       [null  ] stored='ATHY'                                    
+  86ee6c4e doc=N23000011971 [null  ] stored='HRIS'                                    
+  e59609c1 doc=M18000002371 [null  ] stored='OMPANY'                                  
+  50216094 doc=N18000011350 [null  ] stored='OMPANY'                                  
+  d15d8e31 doc=L20000012107 [null  ] stored='OMPANY'                                  
+  89261708 doc=M99000001150 [update] stored='OMPANY'                                  
+           → new='CGROVE OCEAN LLC'   (extracted='CGROVE OCEAN LLC')
+
+# good (346 rows)
+  b4c4725e doc=             [keep  ] stored='Joseph L. Hanson'                        
+  e9d66d5f doc=N05000008984 [keep  ] stored='SUNRISE PROPERTY & ESTATE MANAGEMENT LLC'
+  26c4c52a doc=N94000001702 [keep  ] stored='THE MELROSE MANAGEMENT GROUP'            
+  4238b873 doc=N06000007621 [keep  ] stored='PROPERTY MANAGEMENT'                     
+  b010607e doc=N33678       [keep  ] stored='LANG MANAGEMENT CO INC'                  
+  8168af24 doc=N03000001770 [keep  ] stored='HAAG MANAGEMENT & REALTY'                
+  1a2a1c62 doc=N96000003682 [keep  ] stored='NEIGHBORHOOD PROPERTY'                   
+  af604dbf doc=N24000004882 [keep  ] stored='RYAN, ESQ.              TAMPA'           
+  d236f497 doc=N00000003547 [keep  ] stored='WASSERSTEIN, P.A.'                       
+  73603094 doc=N19000002769 [keep  ] stored='PARADIGM COMMUNITY ASSOC. MANAGEMENT'    
+  a96be1fc doc=N96000001104 [keep  ] stored='NEWELL PROPERTY MANAGEMENT SERVICES LLC' 
+  160fb3c8 doc=N04505       [keep  ] stored='FIELDS & BACHOVE, PLLC'                  
+  39200d80 doc=N08000006087 [keep  ] stored='JONES FOSTER SERVICE, LLC'               
+  cc0a086b doc=N01279       [keep  ] stored='FIELDS & BACHOVE PLLC'                   
+  26c9bd71 doc=N23000010561 [keep  ] stored='ASSOCIATED CORPORATE SERVICES, LLC'      
+  18e39f28 doc=N16000000260 [keep  ] stored='NYK               CHELLE         ESQ    '
+  b69af354 doc=749569       [keep  ] stored='DOMNP          MMI OF THE PALM BEACHES I'
+  b2648b28 doc=N22000000152 [keep  ] stored='JONES FOSTER SERVICE, LLC'               
+  d54b15a1 doc=N07000002944 [keep  ] stored='CAARON GROUP REALTY LLC'                 
+  68c85008 doc=752033       [keep  ] stored='FIELDS & BACHOVE, PLLC'                  
+  d994c4d4 doc=N02000003520 [keep  ] stored='SEA BREEZE COMMUNITY MANAGEMENT'         
+  a2f93a38 doc=N16000004644 [keep  ] stored='PARADIGM COMMUNITY ASSOC. MANAGEMENT'    
+  8c3bd57f doc=N07000005762 [keep  ] stored='NRAI SERVICES, INC'                      
+  6176485a doc=N17000004977 [keep  ] stored='SKRLD, INC'                              
+  7a9fb619 doc=N95000003160 [keep  ] stored='FIELDS & BACHOVE, PLLC'                  
+  98f3136c doc=N29906       [keep  ] stored='FIELDS & BACHOVE, PLLC'                  
+  65cd8b65 doc=N35660       [keep  ] stored='FIELDS & BACHOVE, PLLC'                  
+  66388fae doc=N08000008360 [keep  ] stored='E&J PROPERTIES, LLC'                     
+  605c2f40 doc=N13000000757 [keep  ] stored='SKRLD, INC'                              
+  e438f31e doc=N01000003276 [keep  ] stored='Becker & Poliakoff'                      
+  …and 316 more
+
+-- END ------------------------------------------------------------------

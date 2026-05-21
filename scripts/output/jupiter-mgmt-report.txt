@@ -1,0 +1,49 @@
+=== JUPITER MGMT_COMPANY BACKFILL REPORT ===
+Date: 2026-05-20 06:34:17
+Source: /Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
+Target communities:   25
+Lines streamed:       12,607,458
+Candidate pairs:      358,903
+Sunbiz matches:       6
+Auto-approved (assoc):1
+Queued for review:    5
+No match:             19
+
+Direct field updates to communities:
+  state_entity_number     : 1
+  entity_status           : 1
+  incorporation_date      : 1
+  street_address          : 1
+  management_company writes: 0
+  pending_community_data rows inserted: 9
+
+AUTO-APPROVED (Association/HOA/Condominium matches):
+  0.79  St Andrews Palm Beach Condominium V                     ← ST. ANDREWS PALM BEACH CONDOMINIUM V ASSOCIATION,  [N06000006988]
+
+QUEUED FOR REVIEW (LLC/holding/other matches):
+  0.82  OSCEOLA WOODS THS                                       ← OSCEOLA WOODS LLC [L09000037105]
+  0.81  BELLA VISTA THS                                         ← BELLA VISTA, LTD. [A09215]
+  0.81  JUPITER LAKES VILLAS I-II CONDO                         ← JUPITER LAKES VILLAS, INC. [593858]
+  0.79  CAMBRIDGE AT ABACOA                                     ← CAMBRIDGE REALTY CO [129492]
+  0.79  PINECREST CONDO                                         ← PINECREST LLC [L24000381258]
+
+NO MATCH:
+  -     Admirals Cove HOA
+  -     Village At Abacoa Condo
+  -     RIVER
+  -     SOMERSET AT ABACOA CONDO
+  -     Lighthouse Cove At Tequesta Condo
+  -     TIMBERWALK PUD THS
+  -     JUPITER BAY 1 THRU 6 CONDO
+  -     SEA BROOK PLACE PH I
+  -     OCEANCREST CONDO
+  -     TEQUESTA OAKS
+  -     WATERBEND JONATHANS LNDG CONDO
+  -     SEA RISE CONDO
+  -     VILLAS OF OCEAN DUNES
+  -     JUPITER COVE CONDO
+  -     JUPITER BAY EAST CONDO
+  -     TEQUESTA TRACE CONDO
+  -     RIVER WALK PL 2 THS
+  -     RIVER WALK PLAT III THS
+  -     WEST BAY @ JONTHNS LDG CONDO

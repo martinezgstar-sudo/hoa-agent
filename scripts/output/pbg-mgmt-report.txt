@@ -1,0 +1,502 @@
+=== PALM BEACH GARDENS MGMT_COMPANY BACKFILL REPORT ===
+Date: 2026-05-20 10:02:14
+Source: /Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
+Snapshot: /Users/izzymartinez/Agents/hoa-agent/logs/snapshots/pbg-mgmt-pre-2026-05-20T13-51-03Z.json
+Target communities:        411
+  with state_entity_number: 134
+  name-only:                277
+Lines streamed:            12,607,458
+Candidate name pairs:      3,949,051
+Sunbiz matches (doc):      89
+Sunbiz matches (name):     257
+Auto-approved (assoc):     260
+Queued for review:         86
+No match:                  138
+
+Direct field updates to communities:
+  state_entity_number     : 115
+  entity_status           : 115
+  street_address          : 102
+  incorporation_date      : 90
+  registered_agent        : 36
+  management_company      : 19
+  management_company direct writes: 19
+  pending_community_data rows inserted: 132
+
+AUTO-APPROVED (Association/HOA/Condominium matches):
+  1.00 [doc ]  A Place In The Woods Property Owners Association Inc    ← PARK PLACE AT MEADOW WOODS HOMEOWNERS' ASSOCIATION [N41430]
+  1.00 [doc ]  A Place In The Woods Property Owners Associationinc.    ← A PLACE IN THE WOODS PROPERTY OWNERS ASSOCIATIONIN [745245]
+  1.00 [name]  Arrow Wood Homeowners' Association, Inc.                ← ARROW WOOD HOMEOWNERS' ASSOCIATION, INC. [N02296]
+  1.00 [name]  Aspen Glen Homeowners Association, Inc.                 ← ASPEN GLEN HOMEOWNERS ASSOCIATION, INC. [N13000000757]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → SKRLD, INC
+  1.00 [name]  Aspri Homeowners' Sub-Association, Inc.                 ← ASPRI HOMEOWNERS' SUB-ASSOCIATION, INC. [N95000002960]
+  1.00 [doc ]  Avondale At Bear Lakes Property Owners Association, Inc ← AVONDALE AT BEAR LAKES PROPERTY OWNERS ASSOCIATION [N94000001702]
+  1.00 [name]  Beaumont Place Property Owners' Association,Inc.        ← BEAUMONT PLACE PROPERTY OWNERS' ASSOCIATION,INC. [766616]
+  1.00 [doc ]  Bedford At Lake Catherine Homeowners Association, Inc.  ← BEDFORD AT LAKE CATHERINE HOMEOWNERS ASSOCIATION,  [N36539]
+  1.00 [name]  Bent Cypress Homeowners Association, Inc.               ← BENT CYPRESS HOMEOWNERS ASSOCIATION, INC. [N25992]
+  1.00 [doc ]  Blue Heron Shoppes Property Owners' Association, Inc.   ← BLUE HERON SHOPPES PROPERTY OWNERS' ASSOCIATION, I [N03000000081]
+  1.00 [name]  Canterbury Homeowners Association, Inc.                 ← CANTERBURY HOMEOWNERS ASSOCIATION, INC. [N07366]
+  1.00 [name]  Championship Property Owners Association, Inc.          ← CHAMPIONSHIP PROPERTY OWNERS ASSOCIATION, INC. [N19586]
+  1.00 [name]  Cielo Community Association, Inc.                       ← CIELO COMMUNITY ASSOCIATION, INC. [N05000006151]
+  1.00 [doc ]  Cimarron Cove Master Association, Inc.                  ← CIMARRON COVE MASTER ASSOCIATION, INC. [N08000001169]
+  1.00 [doc ]  Cocoplum Property Owners Association Of Palm Beach, Inc ← COCOPLUM PROPERTY OWNERS ASSOCIATION OF PALM BEACH [N01000009027]
+  1.00 [name]  Commodore'S Pocket Homeowners Association, Inc.         ← COMMODORE'S POCKET HOMEOWNERS ASSOCIATION, INC. [N47084]
+  1.00 [doc ]  Concerned Homeowners Association Of Ballen Isles, Inc.  ← CONCERNED HOMEOWNERS ASSOCIATION OF BALLEN ISLES,  [N97000001553]
+  1.00 [doc ]  Congress Park Homes Property Owners Association, Inc.   ← CONGRESS PARK HOMES PROPERTY OWNERS ASSOCIATION, I [N14729]
+  1.00 [name]  Copperhead Community Association, Inc.                  ← COPPERHEAD COMMUNITY ASSOCIATION, INC. [N99000006134]
+  1.00 [doc ]  Coral Reef Commons Master Property Owners' Association, ← CORAL REEF COMMONS MASTER PROPERTY OWNERS' ASSOCIA [N18000003682]
+  1.00 [name]  Covered Bridge Estates Homeowners' Association, Inc.    ← COVERED BRIDGE ESTATES HOMEOWNERS' ASSOCIATION, IN [N04000003934]
+  1.00 [doc ]  Cresswind At Lake Harris Homeowners Association, Inc.   ← CRESSWIND AT LAKE HARRIS HOMEOWNERS ASSOCIATION, I [N24000001215]
+  1.00 [doc ]  Cresswind Hammock Oaks Homeowners Association, Inc.     ← CRESSWIND HAMMOCK OAKS HOMEOWNERS ASSOCIATION, INC [N24000004882]
+  1.00 [name]  Cypress Hollow Homeowners' Association, Inc.            ← CYPRESS HOLLOW HOMEOWNERS' ASSOCIATION, INC. [N19913]
+  1.00 [doc ]  Cypress Isle Estates At Breakers West Homeowners Associ ← CYPRESS ISLE ESTATES AT BREAKERS WEST HOMEOWNERS A [N93000001232]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → KONYK & LEMME PLLC
+  1.00 [doc ]  Cypress Lakes Homeowners' Association 11, Inc.          ← THE FOUNTAINS AT CYPRESS LAKES HOMEOWNERS' ASSOCIA [N94000000867]
+  1.00 [name]  Cypress Lakes Homeowners' Association 11, Inc.          ← CYPRESS LAKES HOMEOWNERS' ASSOCIATION 11, INC. [N35373]
+  1.00 [name]  Dakota Property Owners Association, Inc.                ← DAKOTA PROPERTY OWNERS ASSOCIATION, INC. [N06000007069]
+  1.00 [name]  Delray Trails Homeowner Association, Inc.               ← DELRAY TRAILS HOMEOWNER ASSOCIATION, INC. [N20000001354]
+  1.00 [doc ]  Donald Ross Village Commercial/Mixed Use Property Owner ← DONALD ROSS VILLAGE COMMERCIAL/MIXED USE PROPERTY  [N03000009048]
+  1.00 [doc ]  Donald Ross/Military Property Owners Association, Inc.  ← DONALD ROSS/MILITARY PROPERTY OWNERS ASSOCIATION,  [N03000005881]
+  1.00 [name]  Dorado Homeowners' Sub-Association, Inc.                ← DORADO HOMEOWNERS' SUB-ASSOCIATION, INC. [N94000004860]
+  1.00 [name]  Doubletree North Property Owners' Association, Inc.     ← DOUBLETREE NORTH PROPERTY OWNERS' ASSOCIATION, INC [N08000008360]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → E&J PROPERTIES, LLC
+  1.00 [name]  Eagleton Cove Homeowners Association, Inc.              ← EAGLETON COVE HOMEOWNERS ASSOCIATION, INC. [N35660]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE, PLLC
+  1.00 [name]  Eagleton Estates Homeowners Association, Inc.           ← EAGLETON ESTATES HOMEOWNERS ASSOCIATION, INC. [N29906]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE, PLLC
+  1.00 [name]  Edgemere Homeowner'S Association, Inc.                  ← EDGEMERE HOMEOWNER'S ASSOCIATION, INC. [751495]
+  1.00 [name]  Elaine Townhomes Property Owners' Association, Inc.     ← ELAINE TOWNHOMES PROPERTY OWNERS' ASSOCIATION, INC [N22000005109]
+  1.00 [name]  Elmarc Townhouse Homeowners Association, Inc.           ← ELMARC TOWNHOUSE HOMEOWNERS ASSOCIATION, INC. [N36254]
+  1.00 [name]  Entrada Acres Property Owners Association, Inc.         ← ENTRADA ACRES PROPERTY OWNERS ASSOCIATION, INC. [N25000011969]
+  1.00 [name]  Everlands Master Association, Inc.                      ← EVERLANDS MASTER ASSOCIATION, INC. [N21000006733]
+  1.00 [doc ]  Fairway View Of The Palm Beaches Homeowner Association, ← FAIRWAY VIEW OF THE PALM BEACHES HOMEOWNER ASSOCIA [N05000008984]
+  1.00 [name]  Farmington Estates Homeowners Association, Inc.         ← FARMINGTON ESTATES HOMEOWNERS ASSOCIATION, INC. [N34764]
+  1.00 [doc ]  Flatwoods At Babcock Neighborhood Association, Inc.     ← FLATWOODS AT BABCOCK NEIGHBORHOOD ASSOCIATION, INC [N23000012036]
+  1.00 [name]  Frenchman'S Cove Property Owners Association, Inc.      ← FRENCHMAN'S COVE PROPERTY OWNERS ASSOCIATION, INC. [757072]
+  1.00 [doc ]  Frenchman'S Reserve Master Property Owners Association, ← FRENCHMAN'S RESERVE MASTER PROPERTY OWNERS ASSOCIA [N01000001036]
+  1.00 [doc ]  Frenchmans Creek HOA                                    ← THE COCOA BEACH AREA HOTEL AND MOTEL ASSOCIATION,  [N36299]
+  1.00 [name]  Frenchmen'S Landing Property Owners Association, Inc.   ← FRENCHMEN'S LANDING PROPERTY OWNERS ASSOCIATION, I [751945]
+  1.00 [name]  Galleon Cove Homeowners' Sub-Association, Inc.          ← GALLEON COVE HOMEOWNERS' SUB-ASSOCIATION, INC. [N96000000785]
+  1.00 [name]  Garden Trail A P.U.D. Homeowners Association, Inc.      ← GARDEN TRAIL A P.U.D. HOMEOWNERS ASSOCIATION, INC. [N29448]
+  1.00 [doc ]  Garden Villas Townhouses Homeowner'S Association, Inc.  ← GARDEN VILLAS TOWNHOUSES HOMEOWNER'S ASSOCIATION,  [752305]
+  1.00 [name]  Glengary Home Owners Association, Inc.                  ← GLENGARY HOME OWNERS ASSOCIATION, INC. [747412]
+  1.00 [name]  Glenspur Property Owners' Association, Inc.             ← GLENSPUR PROPERTY OWNERS' ASSOCIATION, INC. [N05000007777]
+  1.00 [doc ]  Golfers Village Civic Association, Inc.                 ← GOLFERS VILLAGE CIVIC ASSOCIATION, INC. [709739]
+  1.00 [name]  Grand Cay Homeowners Association, Inc.                  ← GRAND CAY HOMEOWNERS ASSOCIATION, INC. [N95000003160]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE, PLLC
+  1.00 [doc ]  Grand Prix Village Property Owners' Association, Inc.   ← GRAND PRIX VILLAGE PROPERTY OWNERS' ASSOCIATION, I [N38461]
+  1.00 [doc ]  Grand Prix Village South Homeowners Association, Inc.   ← GRAND PRIX VILLAGE SOUTH HOMEOWNERS ASSOCIATION, I [N12000002260]
+  1.00 [doc ]  Greenway Village Association Second, Inc.               ← GREENWAY VILLAGE ASSOCIATION SECOND, INC. [717967]
+  1.00 [name]  Greyson Community Association, Inc.                     ← GREYSON COMMUNITY ASSOCIATION, INC. [N17000004977]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → SKRLD, INC
+  1.00 [doc ]  Grove Plaza Master Property Owner'S Association, Inc.   ← GROVE PLAZA MASTER PROPERTY OWNER'S ASSOCIATION, I [N99000003261]
+  1.00 [doc ]  Harbour Point Townhomes Homeowners Association, Inc.    ← HARBOUR POINT TOWNHOMES HOMEOWNERS ASSOCIATION, IN [N95000002271]
+  1.00 [name]  Harmony Isles Homeowners Association, Inc.              ← HARMONY ISLES HOMEOWNERS ASSOCIATION, INC. [N25000014968]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → N        FL                                       ASSOCIATION
+  1.00 [name]  Heather Run Property Owners' Association, Inc.          ← HEATHER RUN PROPERTY OWNERS' ASSOCIATION, INC. [N19914]
+  1.00 [doc ]  Hidden Hollow Of Palm Beach Homeowners' Association, In ← HIDDEN HOLLOW OF PALM BEACH HOMEOWNERS' ASSOCIATIO [N97000004234]
+  1.00 [name]  Hilltop Gardens Homeowner'S Association, Inc            ← HILLTOP GARDENS HOMEOWNER'S ASSOCIATION, INC [N05000005351]
+  1.00 [name]  Hilltop Park Property Owners Association, Inc.          ← HILLTOP PARK PROPERTY OWNERS ASSOCIATION, INC. [710491]
+  1.00 [name]  Homeowners Taxbusters LLC                               ← HOMEOWNERS TAXBUSTERS LLC [L09000017721]
+  1.00 [name]  Ironwood No. I Homeowners Association, Inc.             ← IRONWOOD NO. I HOMEOWNERS ASSOCIATION, INC. [755445]
+  1.00 [doc ]  Island At The Villages Of Palm Beach Lakes Homeowners A ← ISLAND AT THE VILLAGES OF PALM BEACH LAKES HOMEOWN [N18983]
+  1.00 [doc ]  Island Residents Association, Inc.                      ← FISHER ISLAND RESIDENTS ASSOCIATION, INC. [N16000001009]
+  1.00 [name]  Island Residents Association, Inc.                      ← ISLAND RESIDENTS ASSOCIATION, INC. [N45662]
+  1.00 [doc ]  Jupiter Farms Center Property Owners' Association, Inc. ← JUPITER FARMS CENTER PROPERTY OWNERS' ASSOCIATION, [N96000004834]
+  1.00 [doc ]  Jupiter Harbour Property Owners' Association, Inc.      ← DOCKSIDE AT JUPITER HARBOUR PROPERTY OWNERS ASSOCI [N97000000429]
+  1.00 [name]  Jupiter Harbour Property Owners' Association, Inc.      ← JUPITER HARBOUR PROPERTY OWNERS' ASSOCIATION, INC. [759625]
+  1.00 [name]  Jupiter Landings Property Owners' Association, Inc.     ← JUPITER LANDINGS PROPERTY OWNERS' ASSOCIATION, INC [N04948]
+  1.00 [doc ]  Jupiter Yacht Club Master Property Owners' Association, ← JUPITER YACHT CLUB MASTER PROPERTY OWNERS' ASSOCIA [N98000002718]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → DOMNP          CAPITAL REALTY
+  1.00 [name]  Kidd Lane Homeowners Association, Inc.                  ← KIDD LANE HOMEOWNERS ASSOCIATION, INC. [N03000005212]
+  1.00 [name]  Lakefield South Homeowners' Association, Inc.           ← LAKEFIELD SOUTH HOMEOWNERS' ASSOCIATION, INC. [N32023]
+  1.00 [name]  Lakeshore At The Fountains Homeowners Association, Inc. ← LAKESHORE AT THE FOUNTAINS HOMEOWNERS ASSOCIATION, [N21000010805]
+        mgmt: auto-approved → O CAMPBELL PROPERTY MANAGEMENT
+  1.00 [name]  Lakeside Green Homeowners Association No. 9, Inc.       ← LAKESIDE GREEN HOMEOWNERS ASSOCIATION NO. 9, INC. [N34211]
+  1.00 [name]  Lakeside Neighborhood Homeowner'S Association, Inc.     ← LAKESIDE NEIGHBORHOOD HOMEOWNER'S ASSOCIATION, INC [N24499]
+  1.00 [doc ]  Las Palmas Equestrian Homeowners Association, Inc.      ← LAS PALMAS EQUESTRIAN HOMEOWNERS ASSOCIATION, INC. [N05000000466]
+  1.00 [name]  Laurel Cove Community Association, Inc.                 ← LAUREL COVE COMMUNITY ASSOCIATION, INC. [N25000014417]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → N        FL                                       ASSOCIATION
+  1.00 [name]  Lazy 7 Property Owners' Association, Inc.               ← LAZY 7 PROPERTY OWNERS' ASSOCIATION, INC. [N50807]
+  1.00 [doc ]  Little Cypress Pointe Homeowners Association, Inc.      ← LITTLE CYPRESS POINTE HOMEOWNERS ASSOCIATION, INC. [N96000001104]
+  1.00 [doc ]  Los Flores Ranches Property Owners' Association, Inc.   ← LOS FLORES RANCHES PROPERTY OWNERS' ASSOCIATION, I [N21743]
+  1.00 [doc ]  Lost Tree Preserve Townhome Owners Association, Inc.    ← LOST TREE PRESERVE TOWNHOME OWNERS ASSOCIATION, IN [N25000012225]
+  1.00 [name]  Loxahatchee Groves-Iv Property Owners Association, Inc. ← LOXAHATCHEE GROVES-IV PROPERTY OWNERS ASSOCIATION, [751687]
+  1.00 [name]  Loxahatchee Pointe Homeowners Association, Inc.         ← LOXAHATCHEE POINTE HOMEOWNERS ASSOCIATION, INC. [N94000000938]
+  1.00 [doc ]  Magnolia Place At Palm Beach Gardens HOA Inc            ← MAGNOLIA PLACE AT PALM BEACH GARDENS HOA INC [N20000004599]
+  1.00 [doc ]  Magnolia Place Homeowners Association, Inc.             ← SWEET MAGNOLIA PLACE HOMEOWNERS ASSOCIATION, INC. [N99000000761]
+  1.00 [name]  Mariner'S Cove Property Owners Association, Inc.        ← MARINER'S COVE PROPERTY OWNERS ASSOCIATION, INC. [N20278]
+  1.00 [name]  Martin Preserve Community Association, Inc.             ← MARTIN PRESERVE COMMUNITY ASSOCIATION, INC. [N07000005762]
+        mgmt: auto-approved → NRAI SERVICES, INC
+  1.00 [name]  Mayfair Homeowners Association, Inc.                    ← MAYFAIR HOMEOWNERS ASSOCIATION, INC. [N25000002385]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FL                                       ASSOCIATION
+  1.00 [name]  Meadows HOA/Pbg, Inc                                    ← MEADOWS HOA/PBG, INC [N18000008895]
+  1.00 [name]  Miramar Homeowners Association, Inc.                    ← MIRAMAR HOMEOWNERS ASSOCIATION, INC. [750954]
+  1.00 [name]  Monterey Pointe Homeowners Association, Inc.            ← MONTEREY POINTE HOMEOWNERS ASSOCIATION, INC. [N46796]
+  1.00 [name]  Nash Trail Homeowners Association, Inc                  ← NASH TRAIL HOMEOWNERS ASSOCIATION, INC [N26000000174]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → N        FL                                       ASSOCIATION
+  1.00 [name]  Nativa Homeowner'S Association, Inc.                    ← NATIVA HOMEOWNER'S ASSOCIATION, INC. [N04000010942]
+  1.00 [name]  Native Trails Property Owners Association, Inc          ← NATIVE TRAILS PROPERTY OWNERS ASSOCIATION, INC [N12000000294]
+  1.00 [name]  Nature'S Hideaway Homeowners Association Inc.           ← NATURE'S HIDEAWAY HOMEOWNERS ASSOCIATION INC. [N97000003551]
+  1.00 [doc ]  North East County Homeowners Association, Inc.          ← NORTH EAST COUNTY HOMEOWNERS ASSOCIATION, INC. [747647]
+  1.00 [name]  Northpoint Property Owners' Association, Inc.           ← NORTHPOINT PROPERTY OWNERS' ASSOCIATION, INC. [N20288]
+  1.00 [name]  Oakmont Estates Homeowners Association, Inc.            ← OAKMONT ESTATES HOMEOWNERS ASSOCIATION, INC. [N03000004952]
+  1.00 [name]  Oceanside Modern Homeowners' Association, Inc.          ← OCEANSIDE MODERN HOMEOWNERS' ASSOCIATION, INC. [N23000000577]
+  1.00 [name]  Oceanside Townhomes Homeowner Association, Inc.         ← OCEANSIDE TOWNHOMES HOMEOWNER ASSOCIATION, INC. [N16000004644]
+        mgmt: auto-approved → PARADIGM COMMUNITY ASSOC. MANAGEMENT
+  1.00 [doc ]  Oceanside Townhomes South Homeowners' Association, Inc. ← OCEANSIDE TOWNHOMES SOUTH HOMEOWNERS' ASSOCIATION, [N19000002769]
+  1.00 [name]  Old Gate Property Owners' Association, Inc.             ← OLD GATE PROPERTY OWNERS' ASSOCIATION, INC. [N05000000045]
+  1.00 [doc ]  Old Hammock Cove Master Association, Inc.               ← OLD HAMMOCK COVE MASTER ASSOCIATION, INC. [N06000007621]
+  1.00 [name]  Old Marsh Homeowners Association, Inc.                  ← OLD MARSH HOMEOWNERS ASSOCIATION, INC. [N23243]
+  1.00 [doc ]  Old Palm Grove Homeowners' Association, Inc.            ← OLD PALM GROVE HOMEOWNERS' ASSOCIATION, INC. [N03000001770]
+        mgmt: auto-approved → HAAG MANAGEMENT & REALTY
+  1.00 [doc ]  Old Port Cove Property Owners Association, Inc.         ← OLD PORT COVE PROPERTY OWNERS ASSOCIATION, INC. [720611]
+  1.00 [name]  Olympus Property Owners' Association, Inc.              ← OLYMPUS PROPERTY OWNERS' ASSOCIATION, INC. [744136]
+  1.00 [name]  Osprey Isles Homeowners Association, Inc.               ← OSPREY ISLES HOMEOWNERS ASSOCIATION, INC. [N02000003520]
+        mgmt: auto-approved → SEA BREEZE COMMUNITY MANAGEMENT
+  1.00 [name]  PGA Club Cottages Homeowners' Association, Inc.         ← PGA CLUB COTTAGES HOMEOWNERS' ASSOCIATION, INC. [752033]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE, PLLC
+  1.00 [name]  PGA Commons Property Owner'S Association, Inc.          ← PGA COMMONS PROPERTY OWNER'S ASSOCIATION, INC. [N03000005508]
+  1.00 [doc ]  PGA Hotel-Retail Property Owners' Association, Inc.     ← PGA HOTEL-RETAIL PROPERTY OWNERS' ASSOCIATION, INC [P00000091762]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → USKUMAR, PRABBU, PALE & BANERJEE, LLC
+  1.00 [name]  PGA Hotel-Retail Property Owners' Association, Inc.     ← PGA HOTEL-RETAIL PROPERTY OWNERS' ASSOCIATION, INC [N06000006022]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → USKUMAR, PRABHU, PATE & BANERJEE, LLC
+  1.00 [doc ]  Palm Beach Country Estates Residents Association, Inc.  ← PALM BEACH COUNTRY ESTATES RESIDENTS ASSOCIATION,  [N18000008022]
+  1.00 [doc ]  Palm Harbor Property Owners Association, Inc.           ← HAMMOCK AT PALM HARBOR HOMEOWNERS ASSOCIATION, INC [N24000009719]
+  1.00 [name]  Palm Harbor Property Owners Association, Inc.           ← PALM HARBOR PROPERTY OWNERS ASSOCIATION, INC. [N11872]
+  1.00 [doc ]  Paradigm Community Association Management Services, Inc ← PARADIGM COMMUNITY ASSOCIATION MANAGEMENT SERVICES [P15000013930]
+  1.00 [name]  Parcel 5B Property Owners Association, Inc.             ← PARCEL 5B PROPERTY OWNERS ASSOCIATION, INC. [N07000002944]
+        mgmt: auto-approved → CAARON GROUP REALTY LLC
+  1.00 [name]  Parcel No. 19 Community Association, Inc.               ← PARCEL NO. 19 COMMUNITY ASSOCIATION, INC. [N07000005501]
+  1.00 [name]  Parkside Green Homeowners Association, Inc.             ← PARKSIDE GREEN HOMEOWNERS ASSOCIATION, INC. [N04443]
+  1.00 [name]  Peacock Plaza Property Owners Association, Inc.         ← PEACOCK PLAZA PROPERTY OWNERS ASSOCIATION, INC. [N06000009039]
+  1.00 [name]  Pelican Square Property Owners Association, Inc.        ← PELICAN SQUARE PROPERTY OWNERS ASSOCIATION, INC. [N20000002183]
+  1.00 [name]  Pelican Village Property Owners' Association, Inc.      ← PELICAN VILLAGE PROPERTY OWNERS' ASSOCIATION, INC. [N04000010025]
+  1.00 [name]  Pennock Preserve Homeowners Association, Inc.           ← PENNOCK PRESERVE HOMEOWNERS ASSOCIATION, INC. [N08000000930]
+  1.00 [name]  Pepperwood Community Association, Inc.                  ← PEPPERWOOD COMMUNITY ASSOCIATION, INC. [N25000005864]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → N        FL                                       ASSOCIATION
+  1.00 [name]  Phase Iii Property Owners Association, Inc.             ← PHASE III PROPERTY OWNERS ASSOCIATION, INC. [N08000005086]
+  1.00 [name]  Pinehurst Gardens Homeowners Association, Inc.          ← PINEHURST GARDENS HOMEOWNERS ASSOCIATION, INC. [741625]
+  1.00 [doc ]  Pinehurst Village Homeowners Association, Inc.          ← T.G. PINEHURST VILLAGE HOMEOWNER'S ASSOCIATION, IN [N96000000352]
+  1.00 [doc ]  Port Commerce Center Property Owners Association, Inc.  ← PORT COMMERCE CENTER PROPERTY OWNERS ASSOCIATION,  [N19814]
+  1.00 [doc ]  Port St. Lucie Square Property Owners Association, Inc. ← PORT ST. LUCIE SQUARE PROPERTY OWNERS ASSOCIATION, [N38898]
+  1.00 [name]  Prestwick Chase Homeowners Association, Inc.            ← PRESTWICK CHASE HOMEOWNERS ASSOCIATION, INC. [N03525]
+  1.00 [name]  Prosperity Village Homeowners Association, Inc.         ← PROSPERITY VILLAGE HOMEOWNERS ASSOCIATION, INC. [N22000000152]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → JONES FOSTER SERVICE, LLC
+  1.00 [name]  Rainwood East Homeowners Association, Inc.              ← RAINWOOD EAST HOMEOWNERS ASSOCIATION, INC. [762158]
+  1.00 [name]  Ranch Colony Property Owners' Association, Inc.         ← RANCH COLONY PROPERTY OWNERS' ASSOCIATION, INC. [749569]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → DOMNP          MMI OF THE PALM BEACHES INC
+  1.00 [name]  Residences At Banyan Cay Homeowners Association, Inc.   ← RESIDENCES AT BANYAN CAY HOMEOWNERS ASSOCIATION, I [N18000004997]
+  1.00 [name]  Reynolds Ranch Homeowners Association, Inc.             ← REYNOLDS RANCH HOMEOWNERS ASSOCIATION, INC. [N16000000260]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → NYK               CHELLE         ESQ    PKONYK & LEMME PLLC
+  1.00 [doc ]  Rustic Lakes Property Owners Assn., Inc.                ← RUSTIC LAKES PROPERTY OWNERS ASSN., INC. [755118]
+  1.00 [name]  Sabal Ridge Property Owners' Association, Inc.          ← SABAL RIDGE PROPERTY OWNERS' ASSOCIATION, INC. [N03526]
+  1.00 [name]  San Michele Homeowners Association, Inc.                ← SAN MICHELE HOMEOWNERS ASSOCIATION, INC. [N99000007084]
+  1.00 [name]  Sanctuary Pbg Homeowners Association, Inc.              ← SANCTUARY PBG HOMEOWNERS ASSOCIATION, INC. [N94000000226]
+  1.00 [name]  Sandtree Home Owners Association, Inc.                  ← SANDTREE HOME OWNERS ASSOCIATION, INC. [745754]
+  1.00 [name]  Sapphire Lake Homeowners Association, Inc.              ← SAPPHIRE LAKE HOMEOWNERS ASSOCIATION, INC. [N23000010561]
+        mgmt: auto-approved → ASSOCIATED CORPORATE SERVICES, LLC
+  1.00 [name]  Seacrest Villas Association, Inc.                       ← SEACREST VILLAS ASSOCIATION, INC. [720530]
+  1.00 [doc ]  Seminole Gardens At Woodbine Parcel "F" Homeowners' Sub ← SEMINOLE GARDENS AT WOODBINE PARCEL "F" HOMEOWNERS [N02000005761]
+  1.00 [name]  Shady Lakes Homeowners' Association, Inc.               ← SHADY LAKES HOMEOWNERS' ASSOCIATION, INC. [761320]
+  1.00 [name]  Siena Oaks Homeowners Association, Inc.                 ← SIENA OAKS HOMEOWNERS ASSOCIATION, INC. [N35741]
+  1.00 [doc ]  South Odenton Narragansett Home Owners Association, Inc ← SOUTH ODENTON NARRAGANSETT HOME OWNERS ASSOCIATION [N15000000929]
+  1.00 [doc ]  Spring Hills Southwest Master Association, Inc.         ← SPRING HILLS SOUTHWEST MASTER ASSOCIATION, INC. [N25000006590]
+  1.00 [doc ]  Stamford At The Villages Of Palm Beach Lakes Homeowners ← STAMFORD AT THE VILLAGES OF PALM BEACH LAKES HOMEO [N29061]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → ROSENBAUM PLLC
+  1.00 [name]  Steeplechase Property Owners' Association, Inc.         ← STEEPLECHASE PROPERTY OWNERS' ASSOCIATION, INC. [740600]
+  1.00 [name]  Stonehaven Estates Homeowners Association, Inc.         ← STONEHAVEN ESTATES HOMEOWNERS ASSOCIATION, INC. [N99000005102]
+  1.00 [name]  Sturbridge Village Homeowners Association, Inc.         ← STURBRIDGE VILLAGE HOMEOWNERS ASSOCIATION, INC. [759514]
+  1.00 [name]  Suburban Pines Homeowners Association, Inc.             ← SUBURBAN PINES HOMEOWNERS ASSOCIATION, INC. [N02716]
+        mgmt: auto-approved → O BLOCK MANAGEMENT AND CONSULTING, LLC
+  1.00 [name]  Summerwinds Of Jupiter Homeowners Association,  Inc.    ← SUMMERWINDS OF JUPITER HOMEOWNERS ASSOCIATION,  IN [N01279]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE PLLC
+  1.00 [doc ]  Sun Terrace At The Oaks Homeowners Association, Inc.    ← SUN TERRACE AT THE OAKS HOMEOWNERS ASSOCIATION, IN [N38185]
+  1.00 [name]  The Country Homeowners Association, Inc.                ← THE COUNTRY HOMEOWNERS ASSOCIATION, INC. [739153]
+  1.00 [doc ]  The Gardens Commerce Center Property Owners Association ← THE GARDENS COMMERCE CENTER PROPERTY OWNERS ASSOCI [N08000000094]
+  1.00 [doc ]  The Hamptons At Maplewood Homeowners Association, Inc.  ← THE HAMPTONS AT MAPLEWOOD HOMEOWNERS ASSOCIATION,  [N24565]
+  1.00 [name]  The Island Property Owners' Association, Inc.           ← THE ISLAND PROPERTY OWNERS' ASSOCIATION, INC. [N25466]
+  1.00 [doc ]  The Mallet Hill Property Owners Association, Inc.       ← THE MALLET HILL PROPERTY OWNERS ASSOCIATION, INC. [N96000003682]
+  1.00 [doc ]  The Meadows Of Fort Pierce Homeowner'S Association, Inc ← THE MEADOWS OF FORT PIERCE HOMEOWNER'S ASSOCIATION [N06000005429]
+  1.00 [doc ]  The Meadows Residents Association, Inc.                 ← THE MEADOWS RESIDENTS ASSOCIATION, INC. [G38292]
+  1.00 [doc ]  The Snook Hole Homeowners Association, Inc.             ← THE SNOOK HOLE HOMEOWNERS ASSOCIATION, INC. [N39371]
+  1.00 [doc ]  The Springs At Boynton Community Association, Inc.      ← THE SPRINGS AT BOYNTON COMMUNITY ASSOCIATION, INC. [N98000001951]
+  1.00 [doc ]  The Village At Verona Lakes Homeowners Association, Inc ← THE VILLAGE AT VERONA LAKES HOMEOWNERS ASSOCIATION [N00000003547]
+  1.00 [doc ]  The Vineyards At Palm Beach Homeowners Association, Inc ← THE VINEYARDS AT PALM BEACH HOMEOWNERS ASSOCIATION [N99000003914]
+  1.00 [doc ]  Thousand Oaks At Congress Master Association, Inc.      ← THOUSAND OAKS AT CONGRESS MASTER ASSOCIATION, INC. [N03000001636]
+  1.00 [name]  Thurston Home Owners Association, Inc.                  ← THURSTON HOME OWNERS ASSOCIATION, INC. [747411]
+  1.00 [doc ]  Towne Place Townhomes Homeowners' Association, Inc.     ← TOWNE PLACE TOWNHOMES HOMEOWNERS' ASSOCIATION, INC [N01000000185]
+  1.00 [doc ]  Townhomes At Jupiter Harbour Homeowners Association, In ← TOWNHOMES AT JUPITER HARBOUR HOMEOWNERS ASSOCIATIO [N19352]
+  1.00 [name]  Traditions Property Owners Association, Inc.            ← TRADITIONS PROPERTY OWNERS ASSOCIATION, INC. [N24000014045]
+  1.00 [doc ]  Tree Lake Homeowners Association, Inc.                  ← BENT TREE LAKE CENTRAL ASSOCIATION, INC. [738279]
+  1.00 [name]  Tree Lake Homeowners Association, Inc.                  ← TREE LAKE HOMEOWNERS ASSOCIATION, INC. [744366]
+  1.00 [name]  Turtlemound Pointe Property Owners Association, Inc.    ← TURTLEMOUND POINTE PROPERTY OWNERS ASSOCIATION, IN [N08000006087]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → JONES FOSTER SERVICE, LLC
+  1.00 [doc ]  Villa D'Este At PGA National Homeowners' Association, I ← VILLA D'ESTE AT PGA NATIONAL HOMEOWNERS' ASSOCIATI [N33678]
+  1.00 [doc ]  Village Square Professional Park Property Owners' Assoc ← VILLAGE SQUARE PROFESSIONAL PARK PROPERTY OWNERS'  [N98000001522]
+  1.00 [doc ]  Village Square Property Owners' Association, Inc.       ← THE VILLAGE SQUARE PLAT NO. 3 PROPERTY OWNERS ASSO [N08000006705]
+  1.00 [doc ]  Villas Of Burwick And Thurston Homeowners Association,  ← VILLAS OF BURWICK AND THURSTON HOMEOWNERS ASSOCIAT [753030]
+  1.00 [name]  Villas On Antique Row Homeowners Association, Inc.      ← VILLAS ON ANTIQUE ROW HOMEOWNERS ASSOCIATION, INC. [N12000008069]
+  1.00 [doc ]  Waterside Of Vero Beach Property Owners Association, In ← WATERSIDE OF VERO BEACH PROPERTY OWNERS ASSOCIATIO [N04000008240]
+  1.00 [name]  Wellington Classic Estates Property Owners Association, ← WELLINGTON CLASSIC ESTATES PROPERTY OWNERS ASSOCIA [N07000005372]
+  1.00 [name]  Westchester Homeowners Association, Inc.                ← WESTCHESTER HOMEOWNERS ASSOCIATION, INC. [753972]
+  1.00 [name]  Westwood Gardens Homeowners Association, Inc.           ← WESTWOOD GARDENS HOMEOWNERS ASSOCIATION, INC. [N01978]
+  1.00 [name]  White Fences Property Owners, Inc.                      ← WHITE FENCES PROPERTY OWNERS, INC. [765026]
+  1.00 [name]  Whitmore Estates Homeowners Association, Inc.           ← WHITMORE ESTATES HOMEOWNERS ASSOCIATION, INC. [N23000015086]
+  1.00 [name]  Wind In -The -Pines Property Owners Association, Inc    ← WIND IN -THE -PINES PROPERTY OWNERS ASSOCIATION, I [P18000050600]
+  1.00 [name]  Windermere Homeowners Association, Inc.                 ← WINDERMERE HOMEOWNERS ASSOCIATION, INC. [N04505]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → FIELDS & BACHOVE, PLLC
+  1.00 [name]  Winding Oaks Homeowners Association, Inc.               ← WINDING OAKS HOMEOWNERS ASSOCIATION, INC. [N45182]
+  1.00 [name]  Windsong Estates Homeowners Association, Inc.           ← WINDSONG ESTATES HOMEOWNERS ASSOCIATION, INC. [N20000009923]
+  1.00 [doc ]  Windsor Park Abacoa Homeowners Association, Inc.        ← WINDSOR PARK ABACOA HOMEOWNERS ASSOCIATION, INC. [N06000010430]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → O CAPITAL REALTY
+  1.00 [name]  Wood Hill Estates Property Owners Association,  Inc.    ← WOOD HILL ESTATES PROPERTY OWNERS ASSOCIATION,  IN [744487]
+  1.00 [name]  Woodbine Master Association, Inc.                       ← WOODBINE MASTER ASSOCIATION, INC. [N93000005752]
+  1.00 [doc ]  Woodland Lakes Home Owners Association, Inc.            ← WOODLAND LAKES HOME OWNERS ASSOCIATION, INC. [735988]
+  0.98 [name]  A Place In The Woods Property Owners Associationinc.    ← A PLACE IN THE WOODS PROPERTY OWNERS ASSOCIATION I [N11000000444]
+  0.97 [name]  Port Commerce Center Property Owners Association, Inc.  ← PORT COMMERCE CENTER II PROPERTY OWNERS ASSOCIATIO [N14733]
+  0.97 [name]  Congress Park Homes Property Owners Association, Inc.   ← CONGRESS PARK HOMES II PROPERTY OWNERS ASSOCIATION [N14731]
+  0.97 [name]  Woodland Lakes Home Owners Association, Inc.            ← WOODLAND LAKES II HOME OWNERS ASSOCIATION, INC. [N02000006798]
+  0.95 [name]  Magnolia Place Homeowners Association, Inc.             ← MAGNOLIA ACRES HOMEOWNERS ASSOCIATION, INC. [P21000052230]
+  0.95 [name]  Garden Villas Townhouses Homeowner'S Association, Inc.  ← GARDEN VILLA TOWNHOMES HOMEOWNERS ASSOCIATION, INC [N25000009262]
+  0.95 [name]  Sun Terrace At The Oaks Homeowners Association, Inc.    ← SUN TERRACE AT THE LAKES HOWEOWNERS ASSOCIATION, I [N36562]
+  0.94 [name]  Island At The Villages Of Palm Beach Lakes Homeowners A ← STAMFORD AT THE VILLAGES OF PALM BEACH LAKES HOMEO [N29061]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → ROSENBAUM PLLC
+  0.93 [name]  Towne Place Townhomes Homeowners' Association, Inc.     ← WALDEN PLACE TOWNHOMES HOMEOWNERS' ASSOCIATION, IN [N15000004580]
+  0.93 [name]  Little Cypress Pointe Homeowners Association, Inc.      ← CYPRESS POINTE HOMEOWNERS ASSOCIATION, INC. [N96000002001]
+        mgmt: auto-approved → NEWELL PROPERTY MANAGEMENT SERVICES LLC
+  0.92 [name]  Harbour Point Townhomes Homeowners Association, Inc.    ← AVON POINT TOWNHOMES HOMEOWNERS' ASSOCIATION, INC. [N09000006820]
+  0.92 [name]  Oceanside Townhomes South Homeowners' Association, Inc. ← OCEANSIDE TOWNHOMES HOMEOWNER ASSOCIATION, INC. [N16000004644]
+        mgmt: auto-approved → PARADIGM COMMUNITY ASSOC. MANAGEMENT
+  0.92 [name]  Cimarron Cove Master Association, Inc.                  ← CINNAMON COVE MASTER ASSOCIATION, INC. [765034]
+        mgmt: auto-approved → O NEWELL PROPERTY MANAGEMENT LLC
+  0.92 [name]  Village Square Professional Park Property Owners' Assoc ← LAUREL PROFESSIONAL PARK PROPERTY OWNERS' ASSOCIAT [N94000004562]
+  0.92 [name]  Las Palmas Equestrian Homeowners Association, Inc.      ← THE PALMS EQUESTRIAN HOMEOWNERS' ASSOCIATION, INC. [N21000001921]
+  0.92 [name]  The Village At Verona Lakes Homeowners Association, Inc ← THE VILLAGES AT SUMMER LAKES HOMEOWNERS ASSOCIATIO [N01000002501]
+        mgmt: auto-approved → COMMUNITY MANAGEMENT
+  0.92 [name]  Village Square Property Owners' Association, Inc.       ← HERITAGE SQUARE PROPERTY OWNERS ASSOCIATION, INC. [N08334]
+  0.91 [name]  Pinehurst Village Homeowners Association, Inc.          ← PINEHURST VILLAGE PROPERTY OWNERS ASSOCIATION, INC [N27291]
+  0.91 [name]  Lost Tree Preserve Townhome Owners Association, Inc.    ← LOST TREE PRESERVE OWNERS ASSOCIATION, INC. [N18000000775]
+  0.90 [name]  The Meadows Residents Association, Inc.                 ← THE MEADOWS WEST ASSOCIATION, INC. [N43411]
+  0.90 [name]  The Gardens Commerce Center Property Owners Association ← THE DISTRICT COMMERCE CENTER PROPERTY OWNERS' ASSO [N25000007391]
+  0.90 [name]  Abacoa Plaza Property Owners' Association, Inc.         ← RT PLAZA PROPERTY OWNERS ASSOCIATION, INC. [N05000002471]
+  0.90 [name]  Golfers Village Civic Association, Inc.                 ← FLAGLER VILLAGE CIVIC ASSOCIATION, INC. [N05000007414]
+  0.89 [name]  Jupiter Farms Center Property Owners' Association, Inc. ← JUPITER COMMERCE CENTER PROPERTY OWNERS ASSOCIATIO [N06000003201]
+  0.89 [name]  Cresswind Hammock Oaks Homeowners Association, Inc.     ← HAMMOCK OAKS HOMEOWNERS ASSOCIATION, INC. [757490]
+  0.89 [name]  The Meadows Of Fort Pierce Homeowner'S Association, Inc ← THE MEADOWS AT FORT MEADE HOMEOWNERS ASSOCIATION,  [N25000016345]
+  0.89 [name]  North East County Homeowners Association, Inc.          ← PINELLAS COUNTY HOMEOWNERS ASSOCIATION, INC. [503794]
+  0.89 [name]  Bedford At Lake Catherine Homeowners Association, Inc.  ← LAKE CATHERINE HOMEOWNERS ASSOCIATION, INC. [755599]
+  0.89 [name]  Blue Heron Shoppes Property Owners' Association, Inc.   ← BLUE RUN RANCHES PROPERTY OWNERS' ASSOCIATION, INC [N06000000251]
+  0.89 [name]  Townhomes At Jupiter Harbour Homeowners Association, In ← DOCKSIDE AT JUPITER HARBOUR HOMEOWNERS ASSOCIATION [N03000004441]
+  0.88 [name]  The Mallet Hill Property Owners Association, Inc.       ← MANGO HILL PROPERTY OWNERS ASSOCIATION, INC. [746210]
+        mgmt: queued (assoc match, agent not obvious mgmt co) → NEIGHBORHOOD PROPERTY
+  0.88 [name]  Old Palm Grove Homeowners' Association, Inc.            ← SABAL GROVE HOMEOWNERS ASSOCIATION, INC. [N50250]
+  0.88 [name]  Frenchman'S Reserve Master Property Owners Association, ← TORREY PRESERVE MASTER PROPERTY OWNERS ASSOCIATION [N21000009804]
+  0.88 [name]  Old Port Cove Property Owners Association, Inc.         ← KATIE COVE PROPERTY OWNERS ASSOCIATION, INC. [N25000004161]
+  0.88 [name]  Port St. Lucie Square Property Owners Association, Inc. ← CORPORATE SQUARE PROPERTY OWNERS ASSOCIATION, INC. [N98000006032]
+  0.88 [name]  The Springs At Boynton Community Association, Inc.      ← THE SPRINGS COMMUNITY ASSOCIATION, INC. [720400]
+  0.87 [name]  Paradigm Community Association Management Services, Inc ← PARADISE COMMUNITY ASSOCIATION MANAGEMENT, INC. [P12000045080]
+  0.87 [name]  The Hamptons At Maplewood Homeowners Association, Inc.  ← MEWS AT MAPLEWOOD HOMEOWNERS' ASSOCIATION, INC. [N93000005783]
+  0.87 [name]  Grand Prix Village Property Owners' Association, Inc.   ← GRAND PRIX VILLAGE SOUTH HOMEOWNERS ASSOCIATION, I [N12000002260]
+  0.87 [name]  The Vineyards At Palm Beach Homeowners Association, Inc ← THE VINEYARDS AT LAUDERHILL HOMEOWNERS' ASSOCIATIO [N96000005252]
+  0.86 [name]  Los Flores Ranches Property Owners' Association, Inc.   ← BLUE RUN RANCHES PROPERTY OWNERS' ASSOCIATION, INC [N06000000251]
+  0.86 [name]  Villa D'Este At PGA National Homeowners' Association, I ← COVENTRY AT PGA NATIONAL HOMEOWNERS ASSOCIATION, I [N13573]
+        mgmt: auto-approved → LANG MANAGEMENT CO INC
+  0.86 [name]  Palm Beach Country Estates Residents Association, Inc.  ← PALM BEACH COUNTRY ESTATES LANDOWNERS ASSOCIATION, [P04000122511]
+  0.86 [name]  Old Hammock Cove Master Association, Inc.               ← HAMMOCK ISLES MASTER ASSOCIATION, INC. [N03000008080]
+        mgmt: auto-approved → PROPERTY MANAGEMENT
+  0.86 [name]  Cresswind At Lake Harris Homeowners Association, Inc.   ← CYPRESS POINT LAKE PARKER HOMEOWNERS ASSOCIATION,  [N24000011410]
+  0.86 [name]  Grove Plaza Master Property Owner'S Association, Inc.   ← LAUREL PLAZA PROPERTY OWNER'S ASSOCIATION, INC. [N14000009490]
+  0.86 [name]  Rustic Lakes Property Owners Assn., Inc.                ← RUSTIC ACRES PROPERTY OWNERS ASSOCIATION, INC. [718400]
+        mgmt: auto-approved → O COASTAL PROPERTY MANAGEMENT
+  0.86 [name]  Avondale At Bear Lakes Property Owners Association, Inc ← AVONDALE PROPERTY OWNERS ASSOCIATION, INC. [N93000001860]
+        mgmt: auto-approved → THE MELROSE MANAGEMENT GROUP
+  0.85 [name]  Jupiter Yacht Club Master Property Owners' Association, ← JUPITER FARMS CENTER PROPERTY OWNERS' ASSOCIATION, [N96000004834]
+  0.85 [name]  A Place In The Woods Property Owners Association Inc    ← RANGELINE WOODS PROPERTY OWNERS ASSOCIATION, INC. [N00000000600]
+  0.85 [name]  Hidden Hollow Of Palm Beach Homeowners' Association, In ← HIDDEN HOLLOW HOMEOWNERS ASSOCIATION, INC. [N33971]
+  0.84 [name]  Windsor Park Abacoa Homeowners Association, Inc.        ← THE ISLAND AT ABACOA HOMEOWNERS ASSOCIATION, INC. [N98000006650]
+  0.84 [name]  Flatwoods At Babcock Neighborhood Association, Inc.     ← LAKEWOOD AREA NEIGHBORHOOD ASSOCIATION, INC. [N32284]
+  0.84 [name]  Coral Reef Commons Master Property Owners' Association, ← CORAL CAYE PROPERTY OWNERS' ASSOCIATION, INC. [N15000004331]
+  0.84 [name]  Greenway Village Association Second, Inc.               ← GREENWAY VILLAGE SOUTH ASSOCIATION NO.4, INC. [728612]
+  0.83 [name]  Grand Prix Village South Homeowners Association, Inc.   ← GRAND PALM OF LAKE WORTH HOMEOWNERS ASSOCIATION, I [N07000000910]
+  0.83 [name]  Cypress Isle Estates At Breakers West Homeowners Associ ← THE ENCLAVE AT BREAKERS WEST HOMEOWNERS ASSOCIATIO [N18640]
+  0.81 [name]  Residences At Legacy Place Condominium                  ← RESIDENCES AT LEGACY PLACE CONDOMINIUM ASSOCIATION [N05000010350]
+        mgmt: auto-approved → O GRS COMMUNITY MANAGEMENT
+  0.81 [name]  Donald Ross Village Commercial/Mixed Use Property Owner ← NARCOOSSEE COMMERCIAL PROPERTY OWNERS ASSOCIATION, [N23000006924]
+  0.80 [name]  South Odenton Narragansett Home Owners Association, Inc ← DENTON OAKS HOME OWNERS ASSOCIATION, INC. [N99000003909]
+  0.80 [name]  Fairway View Of The Palm Beaches Homeowner Association, ← FAIRWAY VILLAS HOMEOWNERS ASSOCIATION, INC. [N28684]
+        mgmt: auto-approved → SUNRISE PROPERTY & ESTATE MANAGEMENT LLC
+  0.79 [name]  Legends At The Gardens Condominium                      ← LEGENDS AT THE GARDENS CONDOMINIUM ASSOCIATION, IN [N03000010712]
+        mgmt: auto-approved → O CAMPBELL PROPERTY MANAGEMENT
+  0.79 [name]  Thousand Oaks At Congress Master Association, Inc.      ← THOUSAND OAKS OWNERSHIP ASSOCIATION, INC. [739896]
+
+QUEUED FOR REVIEW (LLC/holding/other matches):
+  1.00 [doc ]  2701 PGA BOULEVARD CONDOMINIUM                          ← MASTIQUE I 12701 MASTIQUE BEACH BOULEVARD UNIT 160 [L17000095987]
+  1.00 [doc ]  Abacoa Plaza Property Owners' Association, Inc.         ← SC-ABACOA PLAZA ASSOCIATES, LLLP [A01000001452]
+  1.00 [doc ]  Chamber Of Commerce Condo                               ← ECHAMBER OF COMMERCE INC. [P00000013944]
+  1.00 [doc ]  HIGHLAND PINES PL 2                                     ← FI-HIGHLAND PINES, LLC [L02000034773]
+  1.00 [name]  HOA Verified Incorporated                               ← HOA VERIFIED INCORPORATED [P24000046751]
+  1.00 [doc ]  Halvosa'S Hoagie Shop LLC                               ← HALVOSA'S HOAGIE SHOP LLC [L11000102172]
+  1.00 [doc ]  Homeowner Foreclosure Assistance U.S.A., LLC            ← HOMEOWNER FORECLOSURE ASSISTANCE U.S.A., LLC [L08000092633]
+  1.00 [name]  Homeowner Helpers, Inc.                                 ← HOMEOWNER HELPERS, INC. [P03000058654]
+  1.00 [doc ]  MARINA GARDENS PL 2                                     ← 49 MARINA GARDENS, LLC [L14000119303]
+  1.00 [doc ]  Ml Hoard Consulting LLC                                 ← ML HOARD CONSULTING LLC [L23000475560]
+  1.00 [doc ]  OLD PALM GROVE                                          ← GOLD PALM GROVE, INC. [514860]
+  1.00 [doc ]  Oak Park Office Condo                                   ← EAST PARK OFFICE CONDO, LLC [L25000093544]
+  1.00 [doc ]  Palm Beach Gardens 6                                    ← PALM BEACH GARDENS INC [100819]
+  1.00 [doc ]  The Homeowner'S Defense Firm, LLC                       ← THE HOMEOWNER'S DEFENSE FIRM, LLC [L10000094958]
+  0.89 [name]  Eastpointe Country Club                                 ← EASTPOINTE COUNTRY CLUB, INC. [743502]
+  0.89 [name]  RESIDENCES AT MIDTOWN CONDO                             ← RESIDENCES AT MIDTOWN LLC [L05000094731]
+  0.88 [name]  VINTAGE OAKS T1                                         ← VINTAGE OAKS LTD. [A99000002010]
+  0.87 [name]  Ml Hoard Consulting LLC                                 ← HOGGARD CONSULTING, LLC [L18000003630]
+  0.87 [name]  GARDEN VILLAS                                           ← GARDEN VILLAS LLC [L06000005288]
+  0.87 [name]  GREEN MEADOWS                                           ← GREEN MEADOWS INC [322961]
+  0.87 [name]  Windward Cove                                           ← WINDWARD COVE LLC [L20000080674]
+  0.86 [name]  HIGHLAND PINES PL 2                                     ← HIGHLAND PINES LTD [B08000000251]
+  0.86 [name]  GLENBROOK CONDO                                         ← GLENBROOK CONDO, LLC [L10000085381]
+  0.86 [name]  Mediterranea                                            ← MEDITERRANEA LLC [L25000325888]
+  0.86 [name]  SANDALWOOD ESTATES                                      ← SANDALWOOD ESTATES, INC. [G75316]
+  0.85 [name]  HIGHLAND PINES AS IN                                    ← HIGHLAND PINES, INC. [M30704]
+  0.85 [name]  LEXINGTON GREEN CONDO                                   ← LEXINGTON GREEN LLC [L23000458320]
+  0.85 [name]  Prosperity Bay Village                                  ← PROSPERITY BAY LLC [L15000164209]
+  0.85 [name]  Cypress Hollow                                          ← CYPRESS HOLLOW, LLC [L08000112153]
+  0.85 [name]  Crystal Bay                                             ← CRYSTAL BAY LLC [L25000145497]
+  0.85 [name]  Meridian Park                                           ← MERIDIAN BANK [F21000004749]
+  0.85 [name]  San Michele                                             ← SAN MICHELE LLC [L04000093637]
+  0.84 [name]  Artistry                                                ← KP ARTISTRY [L21000294938]
+  0.84 [name]  Chamber Of Commerce Condo                               ← CHAMBER OF COMMERCE, INC. [F05000000892]
+  0.83 [name]  Monterey Pointe                                         ← MONTEREY POINTE, L.C. [L98000002323]
+  0.83 [name]  WESTWOOD LAKES PL 4                                     ← WESTWOOD LAKE LLC [L24000248203]
+  0.83 [name]  MERIDIAN CONDO #004                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.83 [name]  MERIDIAN CONDO #014                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.83 [name]  MONTEREY POINTE PL 2                                    ← MONTEREY POINTE, L.C. [L98000002323]
+  0.83 [name]  GARDENS PARK                                            ← GARDENS PARK, LLC [L21000185272]
+  0.83 [name]  MAGNOLIA BAY                                            ← MAGNOLIA BAY, LLC [M05000001550]
+  0.83 [name]  Square Lake Plaza Condo                                 ← SQUARE LAKE PLAZA, INC. [J15318]
+  0.83 [name]  TRAILS END VILLAS CONDO                                 ← TRAILS END VILLAS, INC. [719650]
+  0.82 [name]  FAIRWAY VILLAS                                          ← FAIRWAY VILLAGES LLC [L05000008402]
+  0.82 [name]  Woodbine Par C                                          ← WOODBINE RV PARK LLC [L23000021670]
+  0.82 [name]  Bent Tree                                               ← BENT TREE CO. [P12000069387]
+  0.82 [name]  Coral Cay                                               ← CORAL CAY LLC [L22000000046]
+  0.82 [name]  Sanctuary                                               ← SANCTUARY LLC [M04000001927]
+  0.82 [name]  WINCHESTER COURTS REPL                                  ← WINCHESTER COURT GROUP, LLC [L13000165736]
+  0.81 [name]  Crystal Pointe                                          ← CRYSTAL P INC [P22000085341]
+  0.81 [name]  Garden Oaks                                             ← GARDEN OAKS, LLC [L07000076560]
+  0.81 [name]  Square Lake                                             ← SQUARE LAKE INC. [P16000091051]
+  0.81 [name]  CYPRESS POINT CONDO                                     ← CYPRESS POINT, LLC [L14000176380]
+  0.81 [name]  MARINA GARDENS PL 3                                     ← MARINA GARDENS INC [177049]
+  0.81 [name]  PINE CONE ESTATES                                       ← PINE CONE ESTATES, L.L.C. [L02000006265]
+  0.81 [name]  WESTWOOD GARDENS PL NO 1                                ← WESTWOOD GARDENS NO. 1, LTD. [A07690]
+  0.80 [name]  Apartments At Timberlake Condominium                    ← APARTMENTS AT TIMBERLAKE, LLC [L05000003656]
+  0.80 [name]  CAMBERWELL CONDO                                        ← CAMBERWELL LLC [L25000238861]
+  0.80 [name]  Mirabella At Mirasol Pl C                               ← MIRABELLA AT MIRAMAR, LLC [L05000116266]
+  0.80 [name]  SANDALWOOD                                              ← SANDALWOOD, LLC [L04000025895]
+  0.79 [name]  The Homeowner'S Defense Firm, LLC                       ← THE MORTGAGE DEFENSE FIRM, LLC [L08000107376]
+  0.79 [name]  Courtyard Gardens Prof Condo                            ← COURTYARD GARDENS ALF LLC [L18000132043]
+  0.79 [name]  Frenchmans Creek HOA                                    ← FRENCHMAN'S CREEK, LTD. [A23330]
+  0.79 [name]  Palm Beach Square                                       ← 976 PALM BEACH SQUARE, LLC [L17000252869]
+  0.79 [name]  WESTWOOD GARDENS PL 2                                   ← WESTWOOD GARDENS, INC. [G16411]
+  0.79 [name]  WESTWOOD GARDENS PL 3                                   ← WESTWOOD GARDENS, INC. [G16411]
+  0.79 [name]  MERIDIAN CONDO 1                                        ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.79 [name]  Winchester Court                                        ← WINCHESTER CORPORATION [551253]
+  0.79 [name]  BRIARWOOD CONDO                                         ← BRIARWOOD INC [265427]
+  0.79 [name]  Evergrene Pcd                                           ← EVERGRENE, INC. [P07000028806]
+  0.79 [name]  LAKES CONDO                                             ← LAKES  CONDO  LLC [L13000054286]
+  0.78 [name]  MEADOWBROOK AT PGA CONDO                                ← MEADOWBROOK GAS CO INC [232000]
+  0.78 [name]  Garden Oaks South                                       ← GARDEN LAKES SOUTH, INC. [V71085]
+  0.78 [name]  Horseshoe Acres West                                    ← HORSESHOE ACRES, INC. [468685]
+  0.78 [name]  MARINA GARDENS PL 2                                     ← MARINA GARDENS, L.L.C. [L01000019041]
+  0.78 [name]  MERIDIAN CONDO #002                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #003                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #005                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #006                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #007                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #008                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #009                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #010                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #011                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #012                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+  0.78 [name]  MERIDIAN CONDO #013                                     ← MERIDIAN CONDO 304 LLC [M16000003746]
+
+NO MATCH (138 communities — first 40 shown):
+  -  PALM BAY CLUB CONDO
+  -  Palm Bay Club Homeowners Association, Inc.
+  -  ROYAL POINT MANOR EAST CONDO
+  -  Palms At Ballenisles
+  -  Ballenisles Pod
+  -  OAKS SUNTERRACE PL 2
+  -  TAMBERLANE #1 CONDO
+  -  TAMBERLANE #7 CONDO
+  -  PINEHURST GARDENS
+  -  GLENWOOD TWNHS
+  -  2979 PGA CONDO
+  -  PGA CLUB COTTAGES
+  -  ROYAL POINT MANOR WEST CONDO
+  -  TARA CONDO
+  -  PGA PATIO HOME
+  -  GARDENWAY A THRU G CONDO
+  -  WINCHESTER COURTS
+  -  VISION 1
+  -  OAKS SUNTERRACE PL 4
+  -  PGA RESORT COMMUNITY PL OF HEATHER RUN
+  -  CINNAMON PL 1
+  -  RAINWOOD EAST REPLAT
+  -  PRESTWICK CHASE UNIT 3 OF PGA  RESORT COMMUNITY
+  -  LEGENDS CONDO
+  -  PGA RESORT COMMUNITY PL OF PRESTWICK CHASE UNIT 2
+  -  PGA RESORT COMMUNITY PL OF WINDERMERE 2
+  -  PGA RESORT COMMUNITY PL OF TOWNHOMES OF MARLWOOD
+  -  DUNBAR WOODS CONDO I THRU III
+  -  TR M3 PL THS/AKA RESORT VILLAS
+  -  VILLAS GLENGARY
+  -  LONGWOOD #2 CONDO
+  -  RYDER CUP VILLAS CONDO
+  -  DUNBAR WOODS CONDO IV
+  -  PGA RESORT COMMUNITY PL OF MONTEREY POINTE
+  -  PINEWOOD CONDO I & II
+  -  LONGWOOD #3 CONDO
+  -  GLENWOOD TWNHS AMND
+  -  PALM GARDENS CONDO
+  -  PGA COMMONS PL 1
+  -  MIRAMAR TOWNHOMES
+
+=== POST-RUN VERIFICATION (CLAUDE.md rule #18) ===
+
+Pre-state (snapshot pbg-mgmt-pre-2026-05-20T13-51-03Z.json, n=411 PBG rows missing mgmt_company):
+  entity_status        non-null: 149   null: 262
+  registered_agent     non-null:  17   null: 394
+  state_entity_number  non-null: 149   null: 262
+  street_address       non-null: 130   null: 281
+  incorporation_date   non-null:  61   null: 350
+  management_company   non-null:   0   null: 411
+
+Post-state (all PBG published, n=516):
+  management_company      set:  124   missing: 392
+  entity_status           set:  295   missing: 221
+  registered_agent        set:   65   missing: 451
+  state_entity_number     set:  291   missing: 225
+  street_address          set:  258   missing: 258
+  incorporation_date      set:  169   missing: 347
+
+Delta on this session's 411-row target:
+  management_company   +19  (script wrote 19 direct, matches DB delta)
+  entity_status       +146  (script reported 115 — diff explained by parallel
+                              writes from other sources between snapshot/post)
+  registered_agent     +48  (script reported 36)
+  street_address      +128
+  incorporation_date  +108
+
+Rollback applied to 4 mismatched doc matches whose row-stored
+state_entity_number pointed to an unrelated Sunbiz entity:
+  - Frenchmans Creek HOA               (N36299 → Cocoa Beach hotel assoc)
+  - 2701 PGA BOULEVARD CONDOMINIUM     (L17000095987 → Mastique I)
+  - Abacoa Plaza POA                   (A01000001452 → SC-Abacoa Plaza LLLP)
+  - A Place In The Woods POA Inc       (N41430 → Park Place at Meadow Woods)
+All 4 nulled their bad state_entity_number plus any other fields the
+session wrote off the wrong entity. All 4 added to pending_community_data
+with source_type='sunbiz_mismatch_flag' for admin review.
+
+pending_community_data rows inserted this session: 145
+  (sunbiz_match + sunbiz_match_llc + sunbiz_mismatch_flag · status=pending)
+
+No deletes. No is_master/master_hoa_id changes. Plan rule #18 met.

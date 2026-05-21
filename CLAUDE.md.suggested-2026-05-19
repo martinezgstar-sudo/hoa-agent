@@ -1,5 +1,5 @@
 # HOA Agent — Claude Code Session Context
-Last updated: 2026-05-20 (live-count refresh by hoa-social agent)
+Last updated: May 2026
 
 ## Project Identity
 - Product: HOA Agent — Florida HOA intelligence platform
@@ -18,30 +18,29 @@ Last updated: 2026-05-20 (live-count refresh by hoa-social agent)
   (morningstarpb.com) — cleaning company
 - MorningStar is the first advertiser on HOA Agent
 
-## Current Stats (verified live 2026-05-20)
-- 8,007 published communities in Palm Beach County
-  (status counts: 8,007 published · 270 removed · 7 needs_review ·
-   9 duplicate · 0 draft. Drift since May 5 snapshot: -19 published
-   net, +13 removed, +9 duplicate — reflects additional commercial/
-   dedupe sweeps.)
-- 171 confirmed 55+ communities · 854 confirmed gated · 11 both
-  (live as of 2026-05-20; minor drift from May 3 sweep counts)
+## Current Stats
+- 8,026 published communities in Palm Beach County
+  (after May 2026 location-verify + dedupe sessions: -258 commercial/mgmt
+   → status=removed, -7 outside-FL → status=needs_review, -2 Briar Bay
+   duplicates → status=duplicate, +1,208 city corrections applied)
+- 173 confirmed 55+ communities · 855 confirmed gated · 10 both
+  (post amenities-text sweep May 3 2026; +11 gated from amenities scan)
 - Coverage: Palm Beach County only (expanding to
   Broward and Miami-Dade in 2026)
 - Admin dashboard: https://www.hoa-agent.com/admin
 
-## Data Completeness Baseline (verified live 2026-05-20)
-Live percentages over published rows (n=8,007). Replaces May 5 snapshot
-which is preserved at logs/snapshots/CLAUDE.md.before-refresh-2026-05-20:
-- ZIP code:           99.25%  (was 98.9%)
-- Unit count:         60.98%  (was 60.7%)
-- Entity status:      33.67%  (was 34.1%)
-- Street address:     29.30%  (was 29.2%)
-- Registered agent:    7.01%  (was 5.1% — backfill landed)
-- Management company:  4.85%  (was 5.0%)
-- Amenities:           1.60%  (was 1.6%)
-- Monthly fees:        1.32%  (was 1.3%)
-- Website URL:         0.59%  (was 0.6%)
+## Data Completeness Baseline (May 5, 2026)
+Snapshot taken at start of HOA Agent 7 session, BEFORE the registered_agent
+backfill / Briar Bay Master Sunbiz writes:
+- ZIP code:           98.9%
+- Unit count:         60.7%
+- Entity status:      34.1%
+- Street address:     29.2%
+- Registered agent:    5.1%
+- Management company:  5.0%
+- Amenities:           1.6%
+- Monthly fees:        1.3%
+- Website URL:         0.6%
 Target before Broward expansion: 85% on all fields.
 
 ## Contact routing (May 2026)
@@ -138,15 +137,21 @@ FEES (three columns, never monthly_fee alone):
 
 CONTACT:
 - website_url — community website (NOT hoa_website)
-- phone — phone number
-- email — email address
 - street_address — street address
 - zip_code — zip code
+- zip_codes — array of multi-ZIP communities
+- street_address_range — normalized address range
+- city_verified — boolean: ZIP→city mapping confirmed
+# NOTE 2026-05-19 audit: `phone` and `email` are NOT real columns on
+# `communities` — earlier docs listed them but the live schema has neither.
+# Use the dedicated contact tables (community_suggestions, suggestions,
+# advertiser_profiles) or claim/contact API routes instead.
 
 ENTITY DATA (auto-approvable from Sunbiz):
-- entity_status — Active/Inactive
-- state_entity_number — Florida entity number
+- entity_status — Active/Inactive (12-char cap; check parser when ingesting)
+- state_entity_number — Florida entity number (12 chars max — see audit)
 - registered_agent — registered agent name
+- registered_agent_address — full address of Sunbiz registered agent
 - incorporation_date — date of incorporation
 - legal_name — legal entity name
 
@@ -163,9 +168,30 @@ STATS:
 - review_count — number of reviews
 - news_reputation_score — 1-10 score
 - news_reputation_label — text label
+- news_reputation_updated_at — when news_reputation was last computed
 - litigation_count — number of cases
 - assessment_signal_count — number of signals
 - fee_observation_count — number of fee observations
+- confidence_score — overall record confidence (0..1)
+- property_type — single_family / condo / townhouse / mobile_home / ...
+  (no DB CHECK enforces this — convention only)
+
+NORMALIZATION:
+- canonical_name_raw — original-form name before normalization
+- subdivision_names — array of CAMA subdivision strings linked to this row
+
+VERIFICATION + AUDIT SYSTEM (added since the original column doc was written):
+- verification_status — CHECK-constrained to {pending, verified, in_progress, failed}.
+  Earlier docs mentioned 'locked' and downstream code wrote 'auto_researched';
+  both are rejected by the live constraint as of 2026-05-19.
+- verification_score — numeric verification score
+- verification_attempts — integer count of automation passes
+- verification_notes — jsonb array of audit entries (use this for the
+  granular provenance that doesn't fit in the status column, e.g. {"date":...,
+  "source":"auto_researched","fields_updated":[...]}).
+- verified_at — timestamptz when last human-verified
+- data_freshness_date — date last touched by any research run
+- locked_at, locked_by — row-level lock metadata
 
 MASTER/SUB HOA (production schema — these are the live columns):
 - master_hoa_id — uuid reference to master community
@@ -183,6 +209,11 @@ COLUMNS THAT DO NOT EXIST — never use these:
 - age_restricted (does not exist)
 - hoa_website (does not exist)
 - name (use canonical_name)
+- phone (does not exist on `communities`; see CONTACT note above)
+- email (does not exist on `communities`; see CONTACT note above)
+- parent_id, is_master (declared in 20260501_master_sub_hoa.sql but the
+  migration was never applied to production; live uses master_hoa_id and
+  is_sub_hoa)
 
 Before writing any new script always verify columns:
 SELECT column_name FROM information_schema.columns
@@ -429,11 +460,11 @@ New boolean columns on communities table:
 - is_gated: true for gated communities
 - is_age_restricted: true for any age restriction (auto-set true when is_55_plus=true)
 
-Current counts (live 2026-05-20):
-- Confirmed 55+: 171 (was 173 post May 3 sweep — 2 rows removed/dedup'd)
-- Confirmed gated: 854 (was 855)
-- Both 55+ and gated: 11 (was 10)
-- is_age_restricted: tracks is_55_plus
+Current counts (post-sweep, May 3 2026):
+- Confirmed 55+: 173 (top: Delray 54, Lake Worth 51, WPB 31)
+- Confirmed gated: 855 (top: Boca 165, WPB 144, Lake Worth 129)
+- Both 55+ and gated: 10
+- is_age_restricted: 173
 
 Detection sources in priority order:
 1. amenities field text (fastest — no API call)
@@ -461,40 +492,19 @@ Per-community detection in research script: detect_gated_55plus() — Tier 3b.
 ---
 
 ## Master/Sub HOA System
-Production columns (use these): master_hoa_id (uuid → master id),
-is_sub_hoa (boolean). A master is identified by other rows pointing
-to it via master_hoa_id, not by a flag on itself.
-Aspirational columns NOT in production: is_master, parent_id (do not query).
+Columns: is_master (boolean), parent_id (uuid)
+Legacy columns: master_hoa_id, is_sub_hoa (keep for compat)
 
-Confirmed Palm Beach County masters — live sub-counts as of 2026-05-20
-(queried via communities.master_hoa_id with status='published'):
-- Abacoa Property Owners' Assembly, Inc. (43 subs)
-- PGA National (40 subs)
-- Mirasol Property Owners Association, Inc. (30 subs)
-- Boca West Master Association, Inc. (29 subs)
-- The Club At Ibis Property Owners' Association, Inc. (27 subs)
-- Jonathan's Landing Property Owners Association (17 subs)
-- Golden Lakes Village Association, Inc. (13 subs)
-- River Bridge Property Owners' Association, Inc. (13 subs)
-- Villages Of Palm Beach Lakes Property Owners' Association, Inc. (12 subs)
-- The Polo Club Of Boca Raton Property Owners Association, Inc. (11 subs)
-- Breakers West Master Association (10 subs)
-- Indian Spring Village Homeowners' Association, Inc. (7 subs)
-- Woodbine Master Association, Inc. (7 subs)
-- Evergrene Master Association, Inc. (6 subs)
-- Baywinds Community Association, Inc. (5 subs)
-- Ballenisles Community Association, Inc. (2 subs)
-- Olympia Master Association, Inc. (1 sub — note: down from earlier
-  "17 village subs" estimate; village links need a re-link sweep)
+Confirmed Palm Beach County masters:
+- PGA National (17 subs)
+- Abacoa (15 subs)
+- Ibis Golf and Country Club (9 subs)
+- Mirasol (7 subs)
+- Olympia (17 village subs)
+- BallenIsles (2 subs)
+- Evergrene (2 subs)
 - Seven Bridges (0 subs — single HOA)
 - The Acreage — NO master HOA, ITID governs
-
-Drift note: Sub-counts here are materially higher than the May 5
-estimates (PGA 17→40, Abacoa 15→43, Mirasol 7→30, Ibis 9→27, Evergrene
-2→6) because additional master_hoa_id links landed during May
-backfills. Olympia is the lone regression — village links appear to
-have been unlinked or never connected to the master row; flag for
-admin review per rule #17 (never auto-unlink).
 
 ---
 

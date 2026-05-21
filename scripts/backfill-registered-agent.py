@@ -62,24 +62,77 @@ def fetch_targets():
     return rows
 
 
+_STREET_TYPES = r"(?:BLVD|BOULEVARD|DR|DRIVE|ST|STREET|AVE|AVENUE|RD|ROAD|LN|LANE|WAY|CT|COURT|PL|PLACE|PKWY|PARKWAY|TER|TERRACE|TRL|TRAIL|CIR|CIRCLE|HWY|HIGHWAY)"
+_BIG_CITIES = {"TAMPA", "MIAMI", "ORLANDO", "JACKSONVILLE", "NAPLES", "SARASOTA"}
+
+
+def _clean_agent(s):
+    """Post-process a regex-captured agent name.
+    - Reject cross-field bleed (3+ consecutive spaces in raw capture)
+    - Strip leading COR_RA_NAME_TYPE byte ('O ' Organization, 'P ' Person)
+    - Reject street addresses, state-code residue, suffix-only fragments,
+      and known Pattern-B C-strip artifacts
+    """
+    if not s:
+        return None
+    raw = s.strip()
+    # Cross-field bleed: 3+ consecutive whitespace means the regex spanned
+    # the COR_RA_NAME_TYPE byte and another fixed-width field. Reject.
+    if re.search(r"\s{3,}", raw):
+        return None
+    # Strip leading name-type byte residue: single letter O or P followed
+    # by one or more spaces and a real name continuation
+    m = re.match(r"^[OP]\s+([A-Z][A-Z0-9].*)$", raw)
+    if m:
+        raw = m.group(1).strip()
+    s = re.sub(r"\s+", " ", raw).strip()
+    if len(s) < 5:
+        return None
+    # State-code address residue
+    if re.match(r"^(FL|NY|GA|CA|TX|NC|SC|VA|IL|MA|OH|MI|NJ)\s+[A-Z]", s):
+        return None
+    # Suffix-only capture
+    if re.match(r"^(ASSOCIATION|INC|LLC|CORP|PA|P\.A\.|PLLC|ESQ\.?|COMPANY|GROUP)\s*$", s):
+        return None
+    # Street-address residue: contains a street-type word (BLVD/DRIVE/etc.)
+    if re.search(r"\b" + _STREET_TYPES + r"\b", s):
+        return None
+    # Directional + street pattern (S. OCEAN, N MAIN, etc.)
+    if re.match(r"^[NSEW]\.?\s+[A-Z]", s):
+        return None
+    # Contains a big-city name (clear address bleed)
+    if any(c in s.split() for c in _BIG_CITIES):
+        return None
+    # Known Pattern-B leftovers (defensive even though Pattern B is removed)
+    if s in {"OMPANY", "HRISTOPHER", "HRIS", "ATHY", "ARYE", "MDF"}:
+        return None
+    return s
+
+
 def parse_registered_agent(line: str):
-    """Best-effort registered-agent extraction from cordata fixed-width row."""
-    rest = line[93:]
-    # Pattern A: company-style suffix
+    """Best-effort registered-agent extraction from cordata fixed-width row.
+
+    Patched 2026-05-21 (mission-goal):
+      - Added PA / P.A. / PLLC / ESQ to suffix list (law firms)
+      - Removed Pattern B (`\\bC...` indicator) — was eating the 'C' off real
+        names like CHRISTOPHER / COMPANY and producing junk
+      - Added _clean_agent post-processor that strips the COR_RA_NAME_TYPE
+        byte ('O '/'P '), rejects too-short captures and state-code address
+        residue, and rejects suffix-only fragments
+    """
+    # COR_NAME ends at col 204; COR_STATUS at [204]; payload starts at [205].
+    rest = line[205:]
+    # Pattern A: company / law-firm suffix
     m = re.search(
-        r"([A-Z][A-Z\s&,\.\-]{5,55}(?:MANAGEMENT|SERVICES|REALTY|PROPERTY|GROUP|LLC|INC|CORP|ASSOCIATION|HOLDINGS|TRUST|PARTNERS|SOLUTIONS|ADVISORS|CONSULT(?:ING|ANTS)?))\s",
+        r"([A-Z][A-Z\s&,\.\-]{5,55}(?:MANAGEMENT|SERVICES|REALTY|PROPERTY|GROUP|LLC|INC|CORP|ASSOCIATION|HOLDINGS|TRUST|PARTNERS|SOLUTIONS|ADVISORS|CONSULT(?:ING|ANTS)?|PLLC|P\.A\.|PA|ESQ\.?))\s",
         rest,
     )
     if m:
-        return m.group(1).strip()
-    # Pattern B: 'C' indicator marker followed by name
-    m = re.search(r"\bC([A-Z][A-Z\s&,\.\-]{5,60}?)\s+[CP]\d{4}", rest)
-    if m:
-        return m.group(1).strip()
-    # Pattern C: 'AGENT' literal
+        return _clean_agent(m.group(1))
+    # Pattern C: 'AGENT' literal marker
     m = re.search(r"AGENT\s+([A-Z][A-Z\s&,\.\-]{5,60})", rest)
     if m:
-        return m.group(1).strip()
+        return _clean_agent(m.group(1))
     return None
 
 
@@ -126,7 +179,9 @@ def main():
                 n += 1
                 if len(line) < 100:
                     continue
-                doc = line[:13].strip().upper()
+                # FIXED 2026-05-19: cordata byte offsets corrected
+                # (was [:13], now [:12]).
+                doc = line[:12].strip().upper()
                 if not doc or doc not in by_doc:
                     continue
                 # Already found? Skip

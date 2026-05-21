@@ -327,8 +327,10 @@ def search_sunbiz_local(f: CommunityFindings) -> None:
         try:
             with open(fpath, "r", errors="ignore") as fh:
                 for line in fh:
-                    # Only match against the entity name field (cols 13–93 of the record)
-                    entity_name_field = line[13:93].upper()
+                    # FIXED 2026-05-19: cordata byte offsets corrected
+                    # (was [13:93], now [12:204] — entity name is 192 chars
+                    # starting at col 12, not 80 chars starting at col 13).
+                    entity_name_field = line[12:204].upper()
                     if all(w in entity_name_field for w in search_words):
                         found_line = line
                         break
@@ -344,12 +346,17 @@ def search_sunbiz_local(f: CommunityFindings) -> None:
 
     # Parse the fixed-width cordata record
     try:
-        doc_num  = found_line[:13].strip()
-        ent_name = found_line[13:93].strip()
-        rest     = found_line[93:]
+        # FIXED 2026-05-19: cordata byte offsets corrected
+        # (was [:13]/[13:93], now [:12]/[12:204]).
+        doc_num  = found_line[:12].strip()
+        ent_name = found_line[12:204].strip()
+        # FIXED 2026-05-19: cordata byte offsets corrected.
+        # COR_STATUS is the single char at [204]; payload starts at [205].
+        # Previously rest = found_line[93:] and status_char = rest.strip()[:1].
+        rest     = found_line[205:]
 
         # Status indicator: A=Active, I=Inactive
-        status_char = rest.strip()[:1] if rest.strip() else ""
+        status_char = found_line[204] if len(found_line) > 204 else ""
         is_active   = status_char == "A"
 
         # Extract addresses (principal ~pos 13-80 within rest)

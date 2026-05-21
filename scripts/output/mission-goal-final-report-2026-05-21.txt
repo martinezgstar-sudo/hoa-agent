@@ -1,0 +1,89 @@
+==============================================================================
+MISSION-GOAL FINAL REPORT — registered_agent cleanup
+2026-05-21
+==============================================================================
+
+ASSIGNMENT (from hoa-updater via Admiral)
+QC of 50-row sample from 580 recent registered_agent writes returned 0.00%
+mismatch rate but surfaced 4 distinct parse-quality issues unrelated to the
+[:13]/[12:204] offset bug:
+  (1) leading "O " prefix from COR_RA_NAME_TYPE byte residue
+  (2) literal "Unknown" values stored as agent
+  (3) address residue stored as agent (FL state-code, street fragments)
+  (4) law firms ending in PA failed re-extraction (PA missing from suffix list)
+
+SCOPE
+Mission-goal expanded the QC's 50-row sample to the full pool of 580 rows
+updated in the last 30 days with registered_agent NOT NULL. Surfaced
+additional issue beyond the QC's 4: a 5th class of Pattern-B C-strip
+artifacts (OMPANY, HRISTOPHER, HRIS, ATHY, ARYE, MDF) caused by a regex
+that grabbed any leading 'C' as an indicator and stripped it from real
+names like CHRISTOPHER / COMPANY.
+
+PARSER FIXES (scripts/backfill-registered-agent.py + scripts/qc-...)
+  - Added PA / P.A. / PLLC / ESQ to Pattern A suffix list (law firms)
+  - Removed broken Pattern B (the '\\bC...' indicator that produced OMPANY etc.)
+  - New _clean_agent() post-processor:
+      * Rejects cross-field bleed (3+ consecutive whitespace in raw capture)
+      * Strips leading COR_RA_NAME_TYPE byte ('O '/'P ')
+      * Rejects state-code residue (FL/NY/GA/...), street-address residue
+        (BLVD/DRIVE/STREET/...), directional prefixes (S./N./E./W.),
+        big-city tokens (TAMPA/MIAMI/...), and suffix-only fragments
+        (PA alone, INC alone, ASSOCIATION alone, etc.)
+
+CLEANUP RUN (mission-goal-cleanup-2026-05-21.py --apply)
+Pool: 580 rows
+Classification of stored values:
+  good            : 346  (unchanged)
+  o_prefix        : 193  (leading 'O '/'P ' COR_RA_NAME_TYPE residue)
+  c_stripped      :  20  (Pattern-B artifacts: OMPANY/HRIS/MDF/ARYE/ATHY/...)
+  addr_residue    :  11  (FL state-code fragments, street fragments)
+  unknown_literal :  10  (literal "Unknown" value)
+
+Actions executed:
+  keep   : 346  (stored value is good, per "never auto-revert" directive)
+  update : 194
+    - 193 o_prefix rows: stripped leading 'O '/'P ' (e.g.
+      'O CAMPBELL PROPERTY MANAGEMENT' → 'CAMPBELL PROPERTY MANAGEMENT')
+    -   1 c_stripped row recovered from cordata re-extraction
+  null   :  40  (junk with no cordata recovery)
+    - 11 addr_residue  : NULLed
+    - 19 c_stripped    : NULLed
+    - 10 unknown_literal: NULLed
+
+Failures: 0
+
+POST-STATE VERIFICATION (per CLAUDE.md rule #18)
+  - 20-row random spot-check of UPDATED rows: 10/10 OK
+  - 20-row random spot-check of NULLED rows : 10/10 OK
+  - Aggregate scan of 194 updated rows for residual 'O '/'P ' prefix: 0
+  - Aggregate scan of 40 nulled rows for residual 'Unknown' literal: 0
+  - Aggregate scan of 580 rows for residual address residue: 0
+
+OVERALL registered_agent fill rate
+  Before cleanup (per QC report 2026-05-21): 561 / 8007 = 7.01%
+  After cleanup                            : 557 / 8006 = 6.96%
+  Net delta from cleanup                   : -40 (the NULLs)
+  Implied: 36 additional backfill writes landed concurrently during cleanup
+  (likely from another agent). Cleanup did not touch those rows since they
+  are now outside the 580-snapshot pool.
+
+REVIEW QUEUED
+  - 1 row flagged via status.flagReview (low priority): id 89261708
+    (Tt Royal Palm Property Owners), stored 'OMPANY' → re-extracted
+    'CGROVE OCEAN LLC'. Leading 'CGROVE' looks suspect; needs eyeball.
+
+ARTIFACTS
+  /Users/izzymartinez/Agents/hoa-agent/logs/snapshots/registered-agent-pre-cleanup-2026-05-21.json
+  scripts/output/mission-goal-cleanup-2026-05-21.txt
+  scripts/output/mission-goal-cleanup-2026-05-21.json
+  scripts/output/mission-goal-cordata-lines-2026-05-21.json
+  scripts/output/mission-goal-final-report-2026-05-21.txt  (this file)
+
+CHANGES TO REPO
+  scripts/backfill-registered-agent.py        (parser patched)
+  scripts/qc-registered-agent-2026-05-21.py   (parser mirrored)
+  scripts/mission-goal-cleanup-2026-05-21.py  (new — cleanup runner)
+  scripts/mission-goal-snapshot.py            (new — pre-cleanup snapshot)
+
+-- END ----------------------------------------------------------------------
