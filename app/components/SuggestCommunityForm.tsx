@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co')
+const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key')
 
 export default function SuggestCommunityForm({ searchQuery }: { searchQuery: string }) {
   const [name, setName] = useState(searchQuery || "")

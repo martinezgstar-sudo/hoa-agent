@@ -17,8 +17,8 @@ const AREA_CONFIG: Record<string, { display: string, city?: string, description:
   "north-palm-beach": { display: "North Palm Beach", city: "North Palm Beach", description: "Best HOA communities in North Palm Beach, FL." },
 }
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co')
+const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key')
 
 export default function BestHOAPage({ params }: { params: Promise<{ area: string }> }) {
   const { area } = use(params)

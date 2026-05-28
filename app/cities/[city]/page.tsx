@@ -63,7 +63,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
     const serverSupabase = process.env.SUPABASE_SERVICE_ROLE_KEY
       ? createClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'),
           process.env.SUPABASE_SERVICE_ROLE_KEY
         )
       : supabase

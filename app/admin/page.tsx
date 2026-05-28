@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 
 const ADMIN_PASSWORD = "Valean2008!"
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co')
+const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key')
 
 
 
@@ -22,6 +22,453 @@ interface Comment {
 }
 
 
+
+type SocialPost = {
+  id: string
+  company: string
+  platform: string
+  caption: string
+  image_path: string | null
+  scheduled_for: string
+  status: string
+  post_url: string | null
+  created_at: string
+}
+
+function normalizeCompany(company: string) {
+  return company.replace(/_/g, "-").toLowerCase()
+}
+
+function formatCompanyLabel(company: string) {
+  const c = normalizeCompany(company)
+  if (c.includes("morningstar")) return "MorningStar"
+  if (c.includes("hoa")) return "HOA Agent"
+  return company
+}
+
+function companyCardStyle(company: string): Record<string, string> {
+  const c = normalizeCompany(company)
+  if (c.includes("morningstar")) {
+    return { borderLeft: "4px solid #1D9E75", backgroundColor: "#F6FDF9" }
+  }
+  return { borderLeft: "4px solid #1B2B6B", backgroundColor: "#F5F7FC" }
+}
+
+function formatScheduled(iso: string) {
+  return new Date(iso).toLocaleString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  })
+}
+
+function imageSrc(imagePath: string | null): string | null {
+  if (!imagePath) return null
+  const p = imagePath.trim()
+  if (p.startsWith("http://") || p.startsWith("https://")) return p
+  if (p.startsWith("/")) return p
+  return null
+}
+
+function SocialPostingsTab() {
+  const [posts, setPosts] = useState<SocialPost[]>([])
+  const [filter, setFilter] = useState("pending")
+  const [loading, setLoading] = useState(false)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editCaption, setEditCaption] = useState("")
+  const [message, setMessage] = useState("")
+
+  async function fetchPosts(status: string) {
+    setLoading(true)
+    setMessage("")
+    try {
+      const res = await fetch("/api/admin/social-queue?status=" + encodeURIComponent(status), {
+        headers: { "x-admin-password": ADMIN_PASSWORD },
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Failed to load posts")
+      setPosts(data.posts || [])
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Failed to load posts")
+      setPosts([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts(filter)
+  }, [filter])
+
+  async function patchPost(id: string, patch: { status?: string; caption?: string }) {
+    const res = await fetch("/api/admin/social-queue", {
+      method: "PATCH",
+      headers: {
+        "x-admin-password": ADMIN_PASSWORD,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, ...patch }),
+    })
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.error || "Update failed")
+    setPosts((prev) => prev.map((p) => (p.id === id ? (data.post as SocialPost) : p)))
+  }
+
+  async function copyCaption(post: SocialPost) {
+    const text = post.caption || ""
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text)
+      } else {
+        const ta = document.createElement("textarea")
+        ta.value = text
+        ta.style.position = "fixed"
+        ta.style.left = "-9999px"
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand("copy")
+        document.body.removeChild(ta)
+      }
+      setCopiedId(post.id)
+      setTimeout(() => setCopiedId((id) => (id === post.id ? null : id)), 2000)
+    } catch {
+      setMessage("Could not copy to clipboard — try selecting the caption manually.")
+    }
+  }
+
+  async function approve(id: string) {
+    try {
+      await patchPost(id, { status: "approved" })
+      if (filter === "pending") setPosts((prev) => prev.filter((p) => p.id !== id))
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Approve failed")
+    }
+  }
+
+  async function reject(id: string) {
+    try {
+      await patchPost(id, { status: "rejected" })
+      if (filter === "pending") setPosts((prev) => prev.filter((p) => p.id !== id))
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Reject failed")
+    }
+  }
+
+  function startEdit(post: SocialPost) {
+    setEditingId(post.id)
+    setEditCaption(post.caption || "")
+  }
+
+  async function saveEdit(id: string) {
+    try {
+      await patchPost(id, { caption: editCaption })
+      setEditingId(null)
+      setEditCaption("")
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Save failed")
+    }
+  }
+
+  const filters = [
+    { key: "pending", label: "Pending" },
+    { key: "approved", label: "Approved" },
+    { key: "posted", label: "Posted" },
+    { key: "all", label: "All" },
+  ]
+
+  const platformLabel = (p: string) =>
+    p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "12px" }}>
+        <div style={{ fontSize: "13px", color: "#888" }}>
+          Review scheduled posts, copy captions for manual publishing, approve or edit before they go out.
+        </div>
+        <button
+          type="button"
+          onClick={() => fetchPosts(filter)}
+          style={{ fontSize: "12px", padding: "6px 14px", borderRadius: "8px", border: "1px solid #e0e0e0", backgroundColor: "#fff", cursor: "pointer" }}
+        >
+          Refresh
+        </button>
+      </div>
+
+      <div style={{ display: "flex", gap: "8px", marginBottom: "24px", flexWrap: "wrap" }}>
+        {filters.map((f) => (
+          <button
+            key={f.key}
+            type="button"
+            onClick={() => setFilter(f.key)}
+            style={{
+              padding: "6px 16px",
+              borderRadius: "20px",
+              border: "1px solid #e5e5e5",
+              backgroundColor: filter === f.key ? "#1a1a1a" : "#fff",
+              color: filter === f.key ? "#fff" : "#555",
+              cursor: "pointer",
+              fontSize: "12px",
+              fontWeight: "500",
+            }}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {message && (
+        <div style={{ backgroundColor: "#FEE9E9", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#A32D2D" }}>
+          {message}
+        </div>
+      )}
+
+      {loading && <div style={{ textAlign: "center", color: "#888", padding: "40px" }}>Loading...</div>}
+      {!loading && posts.length === 0 && (
+        <div style={{ textAlign: "center", color: "#888", padding: "60px" }}>No posts in this view.</div>
+      )}
+
+      {!loading &&
+        posts.map((post) => {
+          const src = imageSrc(post.image_path)
+          const isEditing = editingId === post.id
+          return (
+            <div
+              key={post.id}
+              style={{
+                ...companyCardStyle(post.company),
+                border: "1px solid #e5e5e5",
+                borderRadius: "12px",
+                padding: "20px",
+                marginBottom: "16px",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
+                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: "700",
+                      padding: "3px 10px",
+                      borderRadius: "20px",
+                      backgroundColor: normalizeCompany(post.company).includes("morningstar") ? "#E1F5EE" : "#DBEAFE",
+                      color: normalizeCompany(post.company).includes("morningstar") ? "#155A3F" : "#1B2B6B",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    {formatCompanyLabel(post.company)}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: "600",
+                      padding: "3px 10px",
+                      borderRadius: "20px",
+                      backgroundColor: "#f0f0f0",
+                      color: "#444",
+                    }}
+                  >
+                    {platformLabel(post.platform)}
+                  </span>
+                </div>
+                <span
+                  style={{
+                    fontSize: "11px",
+                    padding: "2px 10px",
+                    borderRadius: "20px",
+                    backgroundColor:
+                      post.status === "approved"
+                        ? "#E1F5EE"
+                        : post.status === "posted"
+                          ? "#DBEAFE"
+                          : post.status === "rejected"
+                            ? "#FEE9E9"
+                            : post.status === "failed"
+                              ? "#FEE9E9"
+                              : "#FAEEDA",
+                    color:
+                      post.status === "approved"
+                        ? "#155A3F"
+                        : post.status === "posted"
+                          ? "#1B2B6B"
+                          : post.status === "rejected" || post.status === "failed"
+                            ? "#A32D2D"
+                            : "#854F0B",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {post.status}
+                </span>
+              </div>
+
+              <div style={{ fontSize: "12px", color: "#666", marginBottom: "12px" }}>
+                Scheduled: <strong style={{ color: "#1a1a1a" }}>{formatScheduled(post.scheduled_for)}</strong>
+              </div>
+
+              {src && (
+                <div style={{ marginBottom: "12px" }}>
+                  <img
+                    src={src}
+                    alt=""
+                    style={{ maxWidth: "100%", maxHeight: "280px", borderRadius: "8px", border: "1px solid #e5e5e5", objectFit: "contain" }}
+                  />
+                </div>
+              )}
+              {!src && post.image_path && (
+                <div style={{ fontSize: "11px", color: "#888", marginBottom: "12px" }}>
+                  Image: {post.image_path}
+                </div>
+              )}
+
+              {isEditing ? (
+                <textarea
+                  value={editCaption}
+                  onChange={(e) => setEditCaption(e.target.value)}
+                  rows={6}
+                  style={{
+                    width: "100%",
+                    padding: "12px",
+                    borderRadius: "8px",
+                    border: "1px solid #e0e0e0",
+                    fontSize: "13px",
+                    lineHeight: 1.6,
+                    boxSizing: "border-box",
+                    marginBottom: "12px",
+                    fontFamily: "inherit",
+                  }}
+                />
+              ) : (
+                <div style={{ fontSize: "13px", color: "#333", lineHeight: 1.65, marginBottom: "14px", whiteSpace: "pre-wrap" }}>
+                  {post.caption}
+                </div>
+              )}
+
+              {post.post_url && (
+                <div style={{ marginBottom: "12px" }}>
+                  <a href={post.post_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "12px", color: "#1B2B6B" }}>
+                    View published post →
+                  </a>
+                </div>
+              )}
+
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <button
+                  type="button"
+                  onClick={() => copyCaption(post)}
+                  style={{
+                    fontSize: "12px",
+                    padding: "7px 16px",
+                    borderRadius: "8px",
+                    backgroundColor: copiedId === post.id ? "#1D9E75" : "#1B2B6B",
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer",
+                    fontWeight: "600",
+                  }}
+                >
+                  {copiedId === post.id ? "Copied ✓" : "Copy caption"}
+                </button>
+                {!isEditing && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => approve(post.id)}
+                      disabled={post.status === "approved"}
+                      style={{
+                        fontSize: "12px",
+                        padding: "7px 16px",
+                        borderRadius: "8px",
+                        backgroundColor: post.status === "approved" ? "#e5e5e5" : "#1D9E75",
+                        color: post.status === "approved" ? "#888" : "#fff",
+                        border: "none",
+                        cursor: post.status === "approved" ? "default" : "pointer",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => reject(post.id)}
+                      disabled={post.status === "rejected"}
+                      style={{
+                        fontSize: "12px",
+                        padding: "7px 16px",
+                        borderRadius: "8px",
+                        backgroundColor: "#fff",
+                        color: "#E24B4A",
+                        border: "1px solid #E24B4A",
+                        cursor: post.status === "rejected" ? "default" : "pointer",
+                      }}
+                    >
+                      Reject
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => startEdit(post)}
+                      style={{
+                        fontSize: "12px",
+                        padding: "7px 16px",
+                        borderRadius: "8px",
+                        backgroundColor: "#f0f0f0",
+                        color: "#555",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
+                {isEditing && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => saveEdit(post.id)}
+                      style={{
+                        fontSize: "12px",
+                        padding: "7px 16px",
+                        borderRadius: "8px",
+                        backgroundColor: "#1B2B6B",
+                        color: "#fff",
+                        border: "none",
+                        cursor: "pointer",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingId(null)
+                        setEditCaption("")
+                      }}
+                      style={{
+                        fontSize: "12px",
+                        padding: "7px 16px",
+                        borderRadius: "8px",
+                        backgroundColor: "#fff",
+                        color: "#555",
+                        border: "1px solid #e0e0e0",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          )
+        })}
+    </div>
+  )
+}
 
 function CommentsTab() {
   const [comments, setComments] = useState<any[]>([])
@@ -550,6 +997,7 @@ export default function AdminPage() {
     {key:"field_updates",label:"Field Updates"},
     {key:"research",label:"Research"},
     {key:"leads",label:"Leads"},
+    {key:"social",label:"Social Postings"},
     {key:"news",label:"News",href:"/admin/news"},
     {key:"ads",label:"Advertiser Signups ›",href:"/admin/ads"},
     {key:"pending",label:"Pending ›",href:"/admin/pending"},
@@ -589,6 +1037,7 @@ export default function AdminPage() {
         {tab === "field_updates" && <FieldSuggestionsTab/>}
         {tab === "research" && <ResearchTab/>}
         {tab === "leads" && <LeadsTab/>}
+        {tab === "social" && <SocialPostingsTab/>}
       </div>
     </main>
   )
@@ -756,127 +1205,271 @@ function LeadsTab() {
 
 // ── Research Tools Tab ────────────────────────────────────────────────────────
 
+type CountyRow = {
+  county: string
+  total: number
+  live: number
+  needs_review: number
+  draft: number
+  verified: number
+  pending_verification: number
+  last_activity: string | null
+}
+
+type ActivityRow = {
+  id: string
+  canonical_name: string
+  slug: string
+  city: string
+  county: string
+  status: string
+  verification_status: string
+  updated_at: string
+  created_at: string
+  activity_type: 'created' | 'updated'
+}
+
+type StuckRow = {
+  id: string
+  canonical_name: string
+  slug: string
+  city: string
+  county: string
+  status: string
+  verification_status: string
+  management_company: string | null
+  created_at: string
+  updated_at: string
+  days_stuck: number
+}
+
+type ResearchStatus = {
+  scoreboard: CountyRow[]
+  activity: ActivityRow[]
+  stuck: StuckRow[]
+  pendingDataCount: number
+  pendingFeeCount: number
+  lastFetched: string
+}
+
 function ResearchTab() {
-  const [stats, setStats]       = useState<{pending_data_count:number,pending_fee_count:number,last_run:any}|null>(null)
-  const [running, setRunning]   = useState(false)
-  const [output, setOutput]     = useState("")
-  const [dryRun, setDryRun]     = useState(true)
+  const [status, setStatus] = useState<ResearchStatus | null>(null)
+  const [statusLoading, setStatusLoading] = useState(true)
+  const [statusError, setStatusError] = useState("")
+  const [running, setRunning] = useState(false)
+  const [output, setOutput] = useState("")
+  const [dryRun, setDryRun] = useState(true)
   const [batchSize, setBatchSize] = useState(10)
 
-  useEffect(() => {
-    fetch("/api/admin/research", { headers: { "x-admin-password": ADMIN_PASSWORD } })
-      .then(r => r.json())
-      .then(d => setStats(d))
-      .catch(() => {})
-  }, [])
+  async function loadStatus() {
+    setStatusLoading(true)
+    setStatusError("")
+    try {
+      const res = await fetch("/api/admin/research-status", {
+        headers: { "x-admin-password": ADMIN_PASSWORD }
+      })
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Failed to load" }))
+        throw new Error(err.error || `HTTP ${res.status}`)
+      }
+      const data = await res.json()
+      setStatus(data)
+    } catch (e) {
+      setStatusError(e instanceof Error ? e.message : "Failed to load research status")
+    } finally {
+      setStatusLoading(false)
+    }
+  }
+
+  useEffect(() => { loadStatus() }, [])
 
   async function runResearch() {
     setRunning(true)
-    setOutput("Starting research batch…\n")
+    setOutput("Starting research batch...\n")
     try {
       const res = await fetch("/api/admin/research", {
         method: "POST",
-        headers: { "x-admin-password": ADMIN_PASSWORD, "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-admin-password": ADMIN_PASSWORD },
         body: JSON.stringify({ batch: batchSize, dry_run: dryRun })
       })
-      const json = await res.json()
-      if (json.ok) {
-        setOutput(json.stdout || json.summary || "Done.")
-      } else {
-        setOutput("Error: " + (json.error || "unknown") + "\n" + (json.stderr || ""))
-      }
-    } catch (e: unknown) {
-      setOutput("Network error: " + String(e))
+      const text = await res.text()
+      setOutput(text)
+      loadStatus()
+    } catch (e) {
+      setOutput(`Error: ${e instanceof Error ? e.message : "unknown"}`)
+    } finally {
+      setRunning(false)
     }
-    setRunning(false)
+  }
+
+  function formatDate(iso: string | null): string {
+    if (!iso) return "Never"
+    const d = new Date(iso)
+    if (isNaN(d.getTime())) return "Unknown"
+    return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })
   }
 
   return (
-    <div>
-      <h2 style={{fontSize:"16px",fontWeight:"700",color:"#1a1a1a",marginBottom:"4px"}}>Research Tools</h2>
-      <p style={{fontSize:"13px",color:"#888",marginBottom:"24px"}}>
-        Run the comprehensive research pipeline against thin communities.
-        Government-sourced data auto-approves; listing fees and other data go to the pending review queue.
-      </p>
+    <div style={{display:"flex",flexDirection:"column",gap:"24px"}}>
+      <div>
+        <h2 style={{fontSize:"18px",fontWeight:"700",color:"#1a1a1a",marginBottom:"4px"}}>Research</h2>
+        <p style={{fontSize:"13px",color:"#666",margin:0}}>County expansion progress, agent activity, and the manual research pipeline.</p>
+      </div>
 
-      {/* Stats cards */}
-      {stats && (
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"24px"}}>
-          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
-            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Pending Data Items</div>
-            <div style={{fontSize:"28px",fontWeight:"700",color:"#1B2B6B"}}>{stats.pending_data_count ?? "—"}</div>
+      {statusError && (
+        <div style={{padding:"12px 16px",backgroundColor:"#fff5f5",border:"1px solid #fecaca",borderRadius:"8px",color:"#991b1b",fontSize:"13px"}}>
+          {statusError} <button onClick={loadStatus} style={{marginLeft:"8px",textDecoration:"underline",background:"none",border:"none",color:"#991b1b",cursor:"pointer"}}>Retry</button>
+        </div>
+      )}
+
+      <div style={{backgroundColor:"#fff",borderRadius:"12px",border:"1px solid #e5e5e5",overflow:"hidden"}}>
+        <div style={{padding:"16px 20px",borderBottom:"1px solid #e5e5e5"}}>
+          <h3 style={{fontSize:"14px",fontWeight:"700",color:"#1a1a1a",margin:0}}>County Expansion</h3>
+          <p style={{fontSize:"12px",color:"#666",margin:"2px 0 0 0"}}>Where the data lives across Florida</p>
+        </div>
+        {statusLoading ? (
+          <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>Loading...</div>
+        ) : (
+          <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
+            <thead>
+              <tr style={{backgroundColor:"#f9f9f9",textAlign:"left"}}>
+                <th style={{padding:"10px 20px",fontWeight:"600",color:"#666"}}>County</th>
+                <th style={{padding:"10px 12px",fontWeight:"600",color:"#666",textAlign:"right"}}>Total</th>
+                <th style={{padding:"10px 12px",fontWeight:"600",color:"#666",textAlign:"right"}}>Live</th>
+                <th style={{padding:"10px 12px",fontWeight:"600",color:"#666",textAlign:"right"}}>Needs Review</th>
+                <th style={{padding:"10px 12px",fontWeight:"600",color:"#666",textAlign:"right"}}>Verified</th>
+                <th style={{padding:"10px 20px",fontWeight:"600",color:"#666"}}>Last Activity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {status?.scoreboard.map(row => (
+                <tr key={row.county} style={{borderTop:"1px solid #f0f0f0"}}>
+                  <td style={{padding:"12px 20px",fontWeight:"600",color:"#1a1a1a"}}>{row.county}</td>
+                  <td style={{padding:"12px",textAlign:"right",color:"#1a1a1a"}}>{row.total.toLocaleString()}</td>
+                  <td style={{padding:"12px",textAlign:"right",color: row.live > 0 ? "#16a34a" : "#999"}}>{row.live.toLocaleString()}</td>
+                  <td style={{padding:"12px",textAlign:"right",color: row.needs_review > 0 ? "#e65c00" : "#999"}}>{row.needs_review.toLocaleString()}</td>
+                  <td style={{padding:"12px",textAlign:"right",color:"#1a1a1a"}}>{row.verified.toLocaleString()}</td>
+                  <td style={{padding:"12px 20px",color:"#666"}}>{formatDate(row.last_activity)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div style={{backgroundColor:"#fff",borderRadius:"12px",border:"1px solid #e5e5e5",overflow:"hidden"}}>
+        <div style={{padding:"16px 20px",borderBottom:"1px solid #e5e5e5",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div>
+            <h3 style={{fontSize:"14px",fontWeight:"700",color:"#1a1a1a",margin:0}}>Recent Agent Activity</h3>
+            <p style={{fontSize:"12px",color:"#666",margin:"2px 0 0 0"}}>Last 30 days, newest first ({status?.activity.length ?? 0} shown)</p>
           </div>
-          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
-            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Pending Fee Observations</div>
-            <div style={{fontSize:"28px",fontWeight:"700",color:"#1B2B6B"}}>{stats.pending_fee_count ?? "—"}</div>
+          <button onClick={loadStatus} style={{padding:"6px 12px",fontSize:"12px",border:"1px solid #e5e5e5",borderRadius:"6px",background:"#fff",cursor:"pointer",color:"#666"}}>Refresh</button>
+        </div>
+        <div style={{maxHeight:"360px",overflowY:"auto"}}>
+          {statusLoading ? (
+            <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>Loading...</div>
+          ) : status?.activity.length === 0 ? (
+            <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>No activity in the last 30 days</div>
+          ) : (
+            <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
+              <tbody>
+                {status?.activity.map(row => (
+                  <tr key={row.id} style={{borderTop:"1px solid #f0f0f0"}}>
+                    <td style={{padding:"10px 20px",color:"#666",whiteSpace:"nowrap",width:"140px"}}>{formatDate(row.updated_at)}</td>
+                    <td style={{padding:"10px 8px",whiteSpace:"nowrap",width:"80px"}}>
+                      <span style={{fontSize:"11px",fontWeight:"600",padding:"2px 8px",borderRadius:"4px",backgroundColor: row.activity_type === "created" ? "#dcfce7" : "#dbeafe",color: row.activity_type === "created" ? "#166534" : "#1e40af"}}>
+                        {row.activity_type === "created" ? "+ Created" : "Updated"}
+                      </span>
+                    </td>
+                    <td style={{padding:"10px 8px"}}>
+                      <a href={`/community/${row.slug}`} target="_blank" style={{color:"#1B2B6B",fontWeight:"600",textDecoration:"none"}}>{row.canonical_name}</a>
+                      <span style={{color:"#999",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
+                    </td>
+                    <td style={{padding:"10px 20px",textAlign:"right",whiteSpace:"nowrap"}}>
+                      <span style={{fontSize:"11px",fontWeight:"600",padding:"2px 8px",borderRadius:"4px",backgroundColor: row.status === "live" ? "#dcfce7" : row.status === "needs_review" ? "#fef3c7" : "#f3f4f6",color: row.status === "live" ? "#166534" : row.status === "needs_review" ? "#92400e" : "#666"}}>
+                        {row.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+
+      {!statusLoading && status && status.stuck.length > 0 && (
+        <div style={{backgroundColor:"#fff",borderRadius:"12px",border:"1px solid #fecaca",overflow:"hidden"}}>
+          <div style={{padding:"16px 20px",borderBottom:"1px solid #fecaca",backgroundColor:"#fef2f2"}}>
+            <h3 style={{fontSize:"14px",fontWeight:"700",color:"#991b1b",margin:0}}>Stuck Queue ({status.stuck.length})</h3>
+            <p style={{fontSize:"12px",color:"#7f1d1d",margin:"2px 0 0 0"}}>Communities in needs_review for over 7 days, waiting on you</p>
           </div>
-          <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px"}}>
-            <div style={{fontSize:"11px",color:"#888",fontWeight:600,marginBottom:"6px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Last Run</div>
-            <div style={{fontSize:"13px",fontWeight:"600",color:"#333"}}>
-              {stats.last_run
-                ? new Date(stats.last_run.run_at).toLocaleString()
-                : "Never"}
-            </div>
-            {stats.last_run && (
-              <div style={{fontSize:"11px",color:"#888",marginTop:"4px"}}>
-                {stats.last_run.communities_researched} communities · {stats.last_run.fields_filled} fields
-              </div>
-            )}
+          <div style={{maxHeight:"240px",overflowY:"auto"}}>
+            <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
+              <tbody>
+                {status.stuck.map(row => (
+                  <tr key={row.id} style={{borderTop:"1px solid #f0f0f0"}}>
+                    <td style={{padding:"10px 20px"}}>
+                      <a href={`/community/${row.slug}`} target="_blank" style={{color:"#1B2B6B",fontWeight:"600",textDecoration:"none"}}>{row.canonical_name}</a>
+                      <span style={{color:"#999",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
+                    </td>
+                    <td style={{padding:"10px 20px",textAlign:"right",color:"#991b1b",fontWeight:"600",whiteSpace:"nowrap"}}>{row.days_stuck} days</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}
 
-      {/* Controls */}
-      <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px",marginBottom:"16px"}}>
-        <div style={{display:"flex",gap:"16px",alignItems:"flex-end",flexWrap:"wrap"}}>
+      <div style={{backgroundColor:"#fff",borderRadius:"12px",border:"1px solid #e5e5e5",padding:"20px"}}>
+        <h3 style={{fontSize:"14px",fontWeight:"700",color:"#1a1a1a",margin:"0 0 4px 0"}}>Manual Research Pipeline</h3>
+        <p style={{fontSize:"12px",color:"#666",margin:"0 0 16px 0"}}>Run the research pipeline against thin communities. Government-sourced data auto-approves; listing fees and other data go to the pending review queue.</p>
+
+        <div style={{display:"flex",gap:"24px",marginBottom:"16px",flexWrap:"wrap"}}>
           <div>
-            <label style={{display:"block",fontSize:"11px",fontWeight:600,color:"#888",marginBottom:"6px",textTransform:"uppercase"}}>
-              Batch Size
-            </label>
-            <select value={batchSize} onChange={e => setBatchSize(Number(e.target.value))}
-              style={{padding:"8px 12px",borderRadius:"8px",border:"1px solid #e5e5e5",fontSize:"13px",backgroundColor:"#fff"}}>
-              {[5,10,20,50].map(n => <option key={n} value={n}>{n} communities</option>)}
+            <div style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Data Items</div>
+            <div style={{fontSize:"24px",fontWeight:"700",color:"#1a1a1a"}}>{status?.pendingDataCount ?? 0}</div>
+          </div>
+          <div>
+            <div style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Fee Observations</div>
+            <div style={{fontSize:"24px",fontWeight:"700",color:"#1a1a1a"}}>{status?.pendingFeeCount ?? 0}</div>
+          </div>
+        </div>
+
+        <div style={{display:"flex",gap:"12px",alignItems:"flex-end",flexWrap:"wrap"}}>
+          <div>
+            <label style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Batch Size</label>
+            <select value={batchSize} onChange={e => setBatchSize(Number(e.target.value))} style={{padding:"8px 12px",border:"1px solid #e5e5e5",borderRadius:"8px",fontSize:"13px",backgroundColor:"#fff"}}>
+              <option value={5}>5 communities</option>
+              <option value={10}>10 communities</option>
+              <option value={25}>25 communities</option>
+              <option value={50}>50 communities</option>
             </select>
           </div>
           <div>
-            <label style={{display:"block",fontSize:"11px",fontWeight:600,color:"#888",marginBottom:"6px",textTransform:"uppercase"}}>
-              Mode
-            </label>
-            <select value={dryRun ? "dry" : "live"}
-              onChange={e => setDryRun(e.target.value === "dry")}
-              style={{padding:"8px 12px",borderRadius:"8px",border:"1px solid #e5e5e5",fontSize:"13px",backgroundColor:"#fff"}}>
+            <label style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Mode</label>
+            <select value={dryRun ? "dry" : "live"} onChange={e => setDryRun(e.target.value === "dry")} style={{padding:"8px 12px",border:"1px solid #e5e5e5",borderRadius:"8px",fontSize:"13px",backgroundColor:"#fff"}}>
               <option value="dry">Dry Run (log only)</option>
               <option value="live">Live (write to DB)</option>
             </select>
           </div>
-          <button onClick={runResearch} disabled={running}
-            style={{padding:"9px 20px",borderRadius:"8px",border:"none",
-              backgroundColor: running ? "#ccc" : "#1B2B6B",
-              color:"#fff",fontSize:"13px",fontWeight:600,cursor:running?"not-allowed":"pointer"}}>
-            {running ? "Running…" : `▶ Run Research Batch (${batchSize} communities)`}
+          <button onClick={runResearch} disabled={running} style={{padding:"9px 20px",borderRadius:"8px",border:"none",backgroundColor: running ? "#999" : "#1B2B6B",color:"#fff",fontSize:"13px",fontWeight:600,cursor: running ? "wait" : "pointer"}}>
+            {running ? "Running..." : `Run Research Batch (${batchSize} communities)`}
           </button>
-          <a href="/admin/pending"
-            style={{padding:"9px 20px",borderRadius:"8px",border:"1px solid #e5e5e5",
-              color:"#1B2B6B",fontSize:"13px",fontWeight:600,textDecoration:"none",
-              backgroundColor:"#fff",display:"inline-block"}}>
-            View Pending Approvals →
+          <a href="/admin/pending" style={{padding:"9px 20px",borderRadius:"8px",border:"1px solid #e5e5e5",color:"#1B2B6B",fontSize:"13px",fontWeight:600,textDecoration:"none",backgroundColor:"#fff",display:"inline-block"}}>
+            View Pending Approvals
           </a>
         </div>
         {dryRun && (
-          <div style={{marginTop:"12px",fontSize:"12px",color:"#e65c00",backgroundColor:"#fff8f0",
-            padding:"8px 12px",borderRadius:"6px",border:"1px solid #ffd5a8"}}>
-            ⚠ Dry Run mode — findings will be logged but NOT written to the database.
-            Switch to Live mode to write auto-approvable data and queue pending items.
+          <div style={{marginTop:"12px",fontSize:"12px",color:"#e65c00",backgroundColor:"#fff8f0",padding:"8px 12px",borderRadius:"6px",border:"1px solid #ffd5a8"}}>
+            Dry Run mode: findings will be logged but NOT written to the database. Switch to Live mode to write auto-approvable data and queue pending items.
           </div>
         )}
       </div>
 
-      {/* Output */}
       {output && (
-        <div style={{backgroundColor:"#1a1a1a",borderRadius:"12px",padding:"16px",
-          fontFamily:"monospace",fontSize:"12px",color:"#e5e5e5",
-          whiteSpace:"pre-wrap",maxHeight:"500px",overflowY:"auto",
-          lineHeight:"1.6"}}>
+        <div style={{backgroundColor:"#1a1a1a",borderRadius:"12px",padding:"16px",fontFamily:"monospace",fontSize:"12px",color:"#e5e5e5",whiteSpace:"pre-wrap",maxHeight:"500px",overflowY:"auto",lineHeight:"1.6"}}>
           {output}
         </div>
       )}

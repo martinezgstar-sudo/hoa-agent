@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, Lock, Scale, ShieldAlert } from 'lucide-react'
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'),
+  (process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-key')
 )
 
 export default async function CommunityLegalPage({ params }: { params: Promise<{ slug: string }> }) {
