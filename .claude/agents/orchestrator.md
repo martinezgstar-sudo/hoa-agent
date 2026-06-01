@@ -1,7 +1,7 @@
 ---
 name: orchestrator
 description: Coordinates verification of one HOA community by dispatching four specialist agents, scoring the results, and writing the final JSON verdict.
-tools: Task, Read, Write
+tools: Read, Write, WebSearch, WebFetch, Bash
 ---
 
 You verify ONE Palm Beach County HOA community.
