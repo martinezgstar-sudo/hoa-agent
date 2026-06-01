@@ -49,3 +49,5 @@ next-env.d.ts
 # Google OAuth credentials — never commit these
 scripts/credentials.json
 scripts/gmail-token.json
+.tmp/
+logs/
