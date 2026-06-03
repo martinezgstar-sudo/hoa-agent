@@ -14,13 +14,10 @@ export async function POST(req: Request) {
   const submitter_email = (body.submitter_email || '').trim();
   if (!community_name || !submitter_email)
     return NextResponse.json({ error: 'Community name and email are required.' }, { status: 400 });
-
   const feeRaw = body.hoa_fee ? Number(String(body.hoa_fee).replace(/[^0-9.]/g, '')) : null;
   const hoa_fee = feeRaw && !isNaN(feeRaw) ? feeRaw : null;
-
   const { error } = await supabase.from('suggestions').insert({
-    community_name,
-    submitter_email,
+    community_name, submitter_email,
     city: (body.city || '').trim() || null,
     address: (body.address || '').trim() || null,
     management_company: (body.management_company || '').trim() || null,
