@@ -20,7 +20,7 @@ export const SITE_NAV: NavLink[] = [
 
 export default function NavBar({
   desktopLinks = SITE_NAV,
-  shareHref = '/search',
+  shareHref = '/submit',
   shareLabel = 'Share your association',
 }: {
   desktopLinks?: NavLink[]

@@ -205,7 +205,7 @@ export default function HomeSearch() {
         Not seeing your association?
       </div>
       <a
-        href="/search"
+        href="/submit"
         style={{
           display: "block",
           marginTop: "4px",

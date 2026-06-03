@@ -587,7 +587,7 @@ export default function SearchPage() {
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:"1px solid #eee",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
               Not seeing your association?
             </div>
-            <a href="/search" style={{display:"block",padding:"10px 0",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
+            <a href="/submit" style={{display:"block",padding:"10px 0",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
               + Submit your association
             </a>
           </form>
@@ -730,7 +730,7 @@ export default function SearchPage() {
             ))}
             <div style={{marginTop:"20px",textAlign:"center"}}>
               <a
-                href="/search"
+                href="/submit"
                 style={{
                   display:"inline-block",
                   width:"100%",
