@@ -432,6 +432,7 @@ export default function NewsAdminPage() {
         >
           News
         </a>
+        <a href="/admin/legal" style={{ padding:'16px 20px', borderBottom:'3px solid transparent', backgroundColor:'transparent', color:'#666', cursor:'pointer', fontSize:'13px', fontWeight:'400', textDecoration:'none' }}>Legal</a>
       </div>
 
       <div style={{ maxWidth: '980px', margin: '0 auto', padding: '28px 20px' }}>

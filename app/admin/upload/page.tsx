@@ -94,6 +94,7 @@ export default function AdminUploadPage() {
     { key: "research",      label: "Research",       href: "/admin" },
     { key: "news",          label: "News",           href: "/admin/news" },
     { key: "pending",       label: "Pending ›",      href: "/admin/pending" },
+    { key: "legal",         label: "Legal",          href: "/admin/legal" },
   ]
 
   return (
