@@ -31,6 +31,8 @@ const FIELD_SPECS: Array<{ key: string; type: FieldType }> = [
   { key: 'str_restriction', type: 'text' },
   { key: 'vehicle_restriction', type: 'text' },
   { key: 'subdivision_names', type: 'text' },
+  { key: 'phone', type: 'text' },
+  { key: 'email', type: 'text' },
   // int
   { key: 'unit_count', type: 'int' },
   // numeric
@@ -57,8 +59,26 @@ const RESEARCH_COOLDOWN_DAYS = 30
 // Returns a cleaned value suitable for the column type, or undefined to skip.
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function coerceField(type: FieldType, raw: any): string | number | boolean | undefined {
+function coerceField(type: FieldType, raw: any, key?: string): string | number | boolean | undefined {
   if (raw == null) return undefined
+
+  // Contact fields are stored as text but need stricter validation.
+  if (key === 'email') {
+    if (typeof raw !== 'string' && typeof raw !== 'number') return undefined
+    const v = String(raw).trim()
+    if (!v || v.length > 200) return undefined
+    if (/\s/.test(v)) return undefined
+    if (!v.includes('@') || !v.includes('.')) return undefined
+    return v
+  }
+
+  if (key === 'phone') {
+    if (typeof raw !== 'string' && typeof raw !== 'number') return undefined
+    const v = String(raw).trim()
+    if (!v || v.length > 500) return undefined
+    if ((v.match(/\d/g) || []).length < 10) return undefined
+    return v
+  }
 
   if (type === 'text') {
     if (typeof raw !== 'string' && typeof raw !== 'number') return undefined
@@ -209,6 +229,8 @@ Fields (use the exact types and formats shown):
 - str_restriction: string (short-term rental policy text) or omit
 - vehicle_restriction: string (vehicle/parking policy text) or omit
 - subdivision_names: string (comma-separated subdivision names) or omit
+- phone: string (main HOA or management office number, digits only or formatted) or omit
+- email: string (HOA or management contact email) or omit
 - unit_count: positive integer or omit
 - monthly_fee_min: positive number, monthly USD or omit
 - monthly_fee_max: positive number, monthly USD or omit
@@ -414,7 +436,7 @@ export async function GET(request: NextRequest) {
     for (const { key } of FIELD_SPECS) {
       const current = community[key]
       if (current != null && current !== '') continue
-      const value = coerceField(FIELD_TYPE[key], extracted[key])
+      const value = coerceField(FIELD_TYPE[key], extracted[key], key)
       if (value === undefined) continue
       updatePayload[key] = value
       fieldsUpdated.push(key)
