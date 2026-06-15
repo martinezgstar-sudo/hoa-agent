@@ -12,16 +12,93 @@ function isAuthorized(request: NextRequest): boolean {
   )
 }
 
-// All fields the research pipeline can fill.
-// age_restricted and gated added in 20260501_research_stats migration.
-const UPDATABLE_FIELDS = [
-  'management_company', 'hoa_website', 'phone', 'email',
-  'unit_count', 'monthly_fee_min', 'amenities', 'pet_restriction',
-  'rental_approval', 'age_restricted', 'gated',
+// All fields the research pipeline can fill, with their column types.
+// These are the only real, writable columns on the communities table.
+type FieldType = 'text' | 'int' | 'num' | 'date' | 'bool'
+
+const FIELD_SPECS: Array<{ key: string; type: FieldType }> = [
+  // text
+  { key: 'management_company', type: 'text' },
+  { key: 'website_url', type: 'text' },
+  { key: 'legal_name', type: 'text' },
+  { key: 'entity_status', type: 'text' },
+  { key: 'state_entity_number', type: 'text' },
+  { key: 'registered_agent', type: 'text' },
+  { key: 'registered_agent_address', type: 'text' },
+  { key: 'amenities', type: 'text' },
+  { key: 'pet_restriction', type: 'text' },
+  { key: 'rental_approval', type: 'text' },
+  { key: 'str_restriction', type: 'text' },
+  { key: 'vehicle_restriction', type: 'text' },
+  { key: 'subdivision_names', type: 'text' },
+  // int
+  { key: 'unit_count', type: 'int' },
+  // numeric
+  { key: 'monthly_fee_min', type: 'num' },
+  { key: 'monthly_fee_max', type: 'num' },
+  { key: 'monthly_fee_median', type: 'num' },
+  // date
+  { key: 'incorporation_date', type: 'date' },
+  // boolean
+  { key: 'is_gated', type: 'bool' },
+  { key: 'is_55_plus', type: 'bool' },
+  { key: 'is_age_restricted', type: 'bool' },
 ]
+
+const UPDATABLE_FIELDS = FIELD_SPECS.map((f) => f.key)
+const FIELD_TYPE: Record<string, FieldType> = Object.fromEntries(
+  FIELD_SPECS.map((f) => [f.key, f.type])
+)
 
 const BATCH_SIZE = 20
 const RESEARCH_COOLDOWN_DAYS = 30
+
+// ── Field coercion ──────────────────────────────────────────────────────────
+// Returns a cleaned value suitable for the column type, or undefined to skip.
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function coerceField(type: FieldType, raw: any): string | number | boolean | undefined {
+  if (raw == null) return undefined
+
+  if (type === 'text') {
+    if (typeof raw !== 'string' && typeof raw !== 'number') return undefined
+    const v = String(raw).trim()
+    if (!v || v.length > 500) return undefined
+    if (['n/a', 'none', 'unknown', 'null'].includes(v.toLowerCase())) return undefined
+    return v
+  }
+
+  if (type === 'int') {
+    const n = typeof raw === 'number' ? raw : Number(String(raw).replace(/[^0-9.\-]/g, ''))
+    if (!Number.isFinite(n)) return undefined
+    if (!Number.isInteger(n)) return undefined
+    if (n <= 0 || n >= 1000000) return undefined
+    return n
+  }
+
+  if (type === 'num') {
+    const n = typeof raw === 'number' ? raw : Number(String(raw).replace(/[^0-9.\-]/g, ''))
+    if (!Number.isFinite(n)) return undefined
+    if (n <= 0 || n >= 100000) return undefined
+    return n
+  }
+
+  if (type === 'date') {
+    const v = String(raw).trim()
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return undefined
+    return v
+  }
+
+  if (type === 'bool') {
+    if (typeof raw === 'boolean') return raw
+    const v = String(raw).trim().toLowerCase()
+    if (['true', 'yes', 'y', '1'].includes(v)) return true
+    if (['false', 'no', 'n', '0'].includes(v)) return false
+    return undefined
+  }
+
+  return undefined
+}
 
 // ── helpers ─────────────────────────────────────────────────────────────────
 
@@ -82,44 +159,6 @@ async function duckduckgoSearch(
   }
 }
 
-// ── Website contact scraper (Task 8) ────────────────────────────────────────
-
-const PHONE_RE = /(\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4})/g
-const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g
-
-async function scrapeWebsiteForContact(
-  url: string
-): Promise<{ phone: string | null; email: string | null }> {
-  try {
-    const resp = await fetch(url, {
-      headers: { 'User-Agent': 'HOAAgent/1.0' },
-      signal: AbortSignal.timeout(10000),
-    })
-    if (!resp.ok) return { phone: null, email: null }
-    const html = await resp.text()
-
-    // Strip tags and decode entities
-    const text = html
-      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/&amp;/g, '&')
-      .replace(/&nbsp;/g, ' ')
-
-    const phones = [...text.matchAll(PHONE_RE)].map((m) => m[1])
-    const emails = [...text.matchAll(EMAIL_RE)].filter(
-      (m) => !m[0].includes('example.') && !m[0].endsWith('.png') && !m[0].endsWith('.jpg')
-    )
-
-    return {
-      phone: phones[0] ?? null,
-      email: emails[0]?.[0] ?? null,
-    }
-  } catch {
-    return { phone: null, email: null }
-  }
-}
-
 // ── AI extraction via Claude Haiku ──────────────────────────────────────────
 
 async function aiExtractCommunityData(
@@ -146,7 +185,7 @@ async function aiExtractCommunityData(
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 600,
+        max_tokens: 1024,
         messages: [
           {
             role: 'user',
@@ -154,18 +193,30 @@ async function aiExtractCommunityData(
 
 ${combined}
 
-Return a JSON object with ONLY the fields you found clear evidence for (omit fields you are not confident about):
-- management_company: string or null
-- hoa_website: string (full URL) or null
-- phone: string or null
-- email: string or null
-- unit_count: integer or null
-- monthly_fee_min: number or null
-- amenities: comma-separated string or null
-- pet_restriction: "Yes", "No", or descriptive string or null
-- rental_approval: "Yes", "No", or descriptive string or null
-- age_restricted: "55+", "No", or descriptive string or null
-- gated: "Yes", "No", or null
+Return a JSON object with ONLY the fields you found clear evidence for. Omit any field you are not confident about — do not guess. Convert any annual or yearly fee figures to a MONTHLY amount before returning them.
+
+Fields (use the exact types and formats shown):
+- management_company: string (company name) or omit
+- website_url: string (full URL, e.g. "https://example.com") or omit
+- legal_name: string (registered legal entity name) or omit
+- entity_status: string ("Active" or "Inactive") or omit
+- state_entity_number: string (Florida entity/document number) or omit
+- registered_agent: string (agent name) or omit
+- registered_agent_address: string or omit
+- amenities: string (comma-separated list) or omit
+- pet_restriction: string (descriptive policy text) or omit
+- rental_approval: string (descriptive rental/leasing policy text) or omit
+- str_restriction: string (short-term rental policy text) or omit
+- vehicle_restriction: string (vehicle/parking policy text) or omit
+- subdivision_names: string (comma-separated subdivision names) or omit
+- unit_count: positive integer or omit
+- monthly_fee_min: positive number, monthly USD or omit
+- monthly_fee_max: positive number, monthly USD or omit
+- monthly_fee_median: positive number, monthly USD or omit
+- incorporation_date: string in "YYYY-MM-DD" format or omit
+- is_gated: boolean true/false or omit
+- is_55_plus: boolean true/false or omit
+- is_age_restricted: boolean true/false or omit
 
 Return only valid JSON. Do not include markdown fences.`,
           },
@@ -281,27 +332,36 @@ export async function GET(request: NextRequest) {
   const recentIds = new Set((recentLogs || []).map((r: any) => r.community_id))
 
   // Fetch all published communities
-  const { data: allCommunities } = await supabase
+  const selectCols = ['id', 'canonical_name', 'city', 'county', 'property_type']
+    .concat(UPDATABLE_FIELDS)
+    .join(', ')
+  const { data: allCommunities, error: fetchError } = await supabase
     .from('communities')
-    .select(
-      'id, canonical_name, city, county, property_type, management_company, hoa_website, phone, email, unit_count, monthly_fee_min, amenities, pet_restriction, rental_approval, age_restricted, gated, subdivision_aliases'
-    )
+    .select(selectCols)
     .eq('status', 'published')
 
-  const all = allCommunities || []
+  if (fetchError) {
+    console.error('[research] failed to fetch communities:', fetchError.message)
+    return NextResponse.json(
+      { error: 'Failed to fetch communities', detail: fetchError.message },
+      { status: 500 }
+    )
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const all = (allCommunities as any[] | null) || []
   const thinCountBefore = countThin(all)
 
   // ── PASS 1: Main research batch (Task 6) ──────────────────────────────────
 
   // Sort by thinness, skip recently researched
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const candidates = all
-    .filter((c: any) => !recentIds.has(c.id))
-    .map((c: any) => ({
+    .filter((c) => !recentIds.has(c.id))
+    .map((c) => ({
       ...c,
       thinness: UPDATABLE_FIELDS.filter((f) => !c[f]).length,
     }))
-    .sort((a: any, b: any) => b.thinness - a.thinness)
+    .sort((a, b) => b.thinness - a.thinness)
     .slice(0, BATCH_SIZE)
 
   console.log(
@@ -330,6 +390,8 @@ export async function GET(request: NextRequest) {
       `"${name}" DBPR Florida HOA registration`,
       `sunbiz "${name}" homeowners association Florida incorporated`,
       `"${name}" ${city} amenities pool gated age-restricted`,
+      `"${name}" ${city} HOA monthly fees dues assessments`,
+      `"${name}" ${city} HOA pet rental leasing rules restrictions`,
     ]
 
     const allResults: Array<{ title: string; snippet: string; url: string }> = []
@@ -344,25 +406,37 @@ export async function GET(request: NextRequest) {
     const sourcesChecked = [...new Set(allResults.map((r) => r.url).filter(Boolean))].slice(0, 12)
     const extracted = await aiExtractCommunityData(name, city, allResults, ANTHROPIC_API_KEY)
 
-    // Only fill null/empty fields — never overwrite existing data
+    // Only fill null/empty fields — never overwrite existing data.
+    // Build the payload strictly from FIELD_SPECS, coercing each AI value.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updatePayload: Record<string, any> = {}
     const fieldsUpdated: string[] = []
-    for (const field of UPDATABLE_FIELDS) {
-      if (extracted[field] != null && !community[field]) {
-        updatePayload[field] = extracted[field]
-        fieldsUpdated.push(field)
-      }
+    for (const { key } of FIELD_SPECS) {
+      const current = community[key]
+      if (current != null && current !== '') continue
+      const value = coerceField(FIELD_TYPE[key], extracted[key])
+      if (value === undefined) continue
+      updatePayload[key] = value
+      fieldsUpdated.push(key)
     }
 
     if (Object.keys(updatePayload).length > 0) {
       if (dryRun) {
         dryRunSQLLines.push(toUpdateSQL(id, name, updatePayload))
+        totalUpdated++
+        totalFieldsFilled += fieldsUpdated.length
       } else {
-        await supabase.from('communities').update(updatePayload).eq('id', id)
+        const { error: updateError } = await supabase
+          .from('communities')
+          .update(updatePayload)
+          .eq('id', id)
+        if (updateError) {
+          console.error(`[research] update failed for ${name}:`, updateError.message)
+        } else {
+          totalUpdated++
+          totalFieldsFilled += fieldsUpdated.length
+        }
       }
-      totalUpdated++
-      totalFieldsFilled += fieldsUpdated.length
     }
 
     // Log research run
@@ -390,60 +464,18 @@ export async function GET(request: NextRequest) {
     await new Promise((r) => setTimeout(r, 1500))
   }
 
-  // ── PASS 2: Website scrape for contact info (Task 8) ─────────────────────
-  // Target: published communities that have hoa_website but missing phone OR email
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const websiteScrapeTargets = all.filter(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (c: any) => c.hoa_website && (!c.phone || !c.email)
-  ).slice(0, 30)
-
-  let websitesScrapped = 0
-  let websitesUpdated = 0
-
-  for (const community of websiteScrapeTargets) {
-    const { id, canonical_name: name, hoa_website, phone, email } = community
-    const { phone: scrapedPhone, email: scrapedEmail } = await scrapeWebsiteForContact(hoa_website)
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const updatePayload: Record<string, any> = {}
-    const fieldsUpdated: string[] = []
-    if (scrapedPhone && !phone) { updatePayload.phone = scrapedPhone; fieldsUpdated.push('phone') }
-    if (scrapedEmail && !email) { updatePayload.email = scrapedEmail; fieldsUpdated.push('email') }
-
-    if (Object.keys(updatePayload).length > 0) {
-      if (dryRun) {
-        dryRunSQLLines.push(toUpdateSQL(id, name + ' [website-scrape]', updatePayload))
-      } else {
-        await supabase.from('communities').update(updatePayload).eq('id', id)
-        try {
-          await supabase.from('community_research_log').insert({
-            community_id: id,
-            researched_at: new Date().toISOString(),
-            fields_updated: fieldsUpdated,
-            sources_checked: [hoa_website],
-            notes: `Website scrape of ${hoa_website}, updated: ${fieldsUpdated.join(', ')}`,
-          })
-        } catch { /* non-fatal */ }
-      }
-      websitesUpdated++
-      totalFieldsFilled += fieldsUpdated.length
-    }
-
-    websitesScrapped++
-    console.log(`[scrape] ${name}: ${fieldsUpdated.join(', ') || 'no contact found'}`)
-    await new Promise((r) => setTimeout(r, 500))
-  }
+  // ── PASS 2 removed ────────────────────────────────────────────────────────
+  // The website-scrape pass wrote phone/email, which are not real columns on
+  // the communities table. Counters are kept at 0 so the report still compiles.
+  const websitesScrapped = 0
+  const websitesUpdated = 0
 
   // ── PASS 3: Condo unit count research (Task 7) ────────────────────────────
   // Target: condos missing unit_count, not recently researched
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const condoTargets = all
     .filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (c: any) =>
+      (c) =>
         !recentIds.has(c.id) &&
         !c.unit_count &&
         c.property_type?.toLowerCase().includes('condo')
