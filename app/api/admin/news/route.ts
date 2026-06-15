@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 
 function isAuthed(request: NextRequest): boolean {
   const adminPassword = request.headers.get('x-admin-password')
-  return adminPassword === process.env.ADMIN_PASSWORD || adminPassword === 'Valean2008!'
+  return adminPassword === process.env.ADMIN_PASSWORD
 }
 
 function getSupabaseAdmin() {

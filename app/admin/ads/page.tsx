@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 
 type Profile = {
   id: string
@@ -30,9 +30,7 @@ type Ad = {
 type Tab = "pending" | "active" | "all"
 
 export default function AdminAdsPage() {
-  const [authed, setAuthed] = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true",
-  )
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState("")
   const [tab, setTab] = useState<Tab>("pending")
   const [rows, setRows] = useState<Profile[]>([])

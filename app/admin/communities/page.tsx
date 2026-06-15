@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 
 const EMPTY_FORM = {
   canonical_name: "",
@@ -30,9 +30,7 @@ const EMPTY_FORM = {
 }
 
 export default function AdminCommunitiesPage() {
-  const [authed, setAuthed] = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true"
-  )
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState("")
   const [form, setForm] = useState({ ...EMPTY_FORM })
   const [saving, setSaving] = useState(false)

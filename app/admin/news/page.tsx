@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 
-const ADMIN_PASSWORD = 'Valean2008!'
+const ADMIN_PASSWORD = ''
 
 type CommunityMatch = {
   id: string
@@ -65,9 +65,7 @@ function fmtDate(d?: string | null) {
 }
 
 export default function NewsAdminPage() {
-  const [authed, setAuthed] = useState(
-    typeof window !== 'undefined' && sessionStorage.getItem('hoa_admin') === 'true',
-  )
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState('')
   const [tab, setTab] = useState<TabKey>('pending')
   const [items, setItems] = useState<NewsItem[]>([])

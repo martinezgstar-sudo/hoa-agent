@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -507,9 +507,7 @@ const centerStyle: React.CSSProperties = {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function PendingPage() {
-  const [authed, setAuthed]   = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true"
-  )
+  const [authed, setAuthed]   = useState(true)
   const [password, setPassword] = useState("")
   const [tab, setTab]           = useState<"data" | "fees">("data")
 

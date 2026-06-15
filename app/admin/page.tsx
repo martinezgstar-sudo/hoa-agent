@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co')
 const SUPABASE_KEY = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key')
 
@@ -612,7 +612,7 @@ function CommunitiesTab() {
     <div style={{marginBottom:"16px"}}>
       <label style={{fontSize:"12px",fontWeight:"600",color:"#555",display:"block",marginBottom:"4px"}}>{label}</label>
       <input type={type} value={(form as any)[k]} onChange={e => handleField(k, e.target.value)} placeholder={placeholder}
-        style={{width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
+        style={{width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"13px",outline:"none",boxSizing:"border-box",color:"#1a1a1a",backgroundColor:"#fff"}}/>
     </div>
   )
 
@@ -620,7 +620,7 @@ function CommunitiesTab() {
     <div style={{marginBottom:"16px"}}>
       <label style={{fontSize:"12px",fontWeight:"600",color:"#555",display:"block",marginBottom:"4px"}}>{label}</label>
       <select value={(form as any)[k]} onChange={e => handleField(k, e.target.value)}
-        style={{width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"13px",outline:"none",boxSizing:"border-box",backgroundColor:"#fff"}}>
+        style={{width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #e0e0e0",fontSize:"13px",outline:"none",boxSizing:"border-box",color:"#1a1a1a",backgroundColor:"#fff"}}>
         {options.map(o => <option key={o} value={o}>{o}</option>)}
       </select>
     </div>
@@ -966,7 +966,7 @@ function FieldSuggestionsTab() {
 }
 
 export default function AdminPage() {
-  const [authed, setAuthed] = useState(typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true")
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState("")
   const [tab, setTab] = useState("comments")
 

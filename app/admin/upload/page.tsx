@@ -2,12 +2,10 @@
 
 import { useState } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 
 export default function AdminUploadPage() {
-  const [authed, setAuthed] = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true"
-  )
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState("")
   const [uploadType, setUploadType] = useState<"communities" | "observations">("communities")
   const [file, setFile] = useState<File | null>(null)

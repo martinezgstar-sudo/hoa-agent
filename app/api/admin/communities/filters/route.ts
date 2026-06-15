@@ -6,7 +6,7 @@ export const revalidate = 0
 
 function isAuthed(req: NextRequest): boolean {
   const p = req.headers.get("x-admin-password")
-  return p === process.env.ADMIN_PASSWORD || p === "Valean2008!"
+  return p === process.env.ADMIN_PASSWORD
 }
 
 function admin() {

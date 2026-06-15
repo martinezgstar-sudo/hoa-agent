@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from "react"
 
-const ADMIN_PASSWORD = "Valean2008!"
+const ADMIN_PASSWORD = ""
 
 export default function AdminCommentsPage() {
-  const [authed, setAuthed] = useState(
-    typeof window !== "undefined" && sessionStorage.getItem("hoa_admin") === "true"
-  )
+  const [authed, setAuthed] = useState(true)
   const [password, setPassword] = useState("")
   const [comments, setComments] = useState<any[]>([])
   const [filter, setFilter] = useState("pending")

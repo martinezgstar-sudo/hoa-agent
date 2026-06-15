@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAdminRequest } from '@/lib/admin-auth'
+
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ''
 
 const rateLimit = new Map<string, { count: number; resetTime: number }>()
 
@@ -16,8 +19,45 @@ function getIP(request: NextRequest): string {
   return ip
 }
 
-export function middleware(request: NextRequest) {
+function isAdminLoginPath(pathname: string): boolean {
+  return (
+    pathname === '/admin/login' ||
+    pathname === '/api/admin/login' ||
+    pathname.startsWith('/admin/login/') ||
+    pathname.startsWith('/api/admin/login/')
+  )
+}
+
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
+
+  // ── Admin gating ──────────────────────────────────────────────────────────
+  const isAdminPage = pathname === '/admin' || pathname.startsWith('/admin/')
+  const isAdminApi = pathname === '/api/admin' || pathname.startsWith('/api/admin/')
+
+  if ((isAdminPage || isAdminApi) && !isAdminLoginPath(pathname)) {
+    const authed = await isAdminRequest(request)
+
+    if (!authed) {
+      if (isAdminApi) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+      const loginUrl = new URL('/admin/login', request.url)
+      loginUrl.searchParams.set('next', pathname + request.nextUrl.search)
+      return NextResponse.redirect(loginUrl)
+    }
+
+    // Authenticated: inject the admin password header so route handlers
+    // pass their own checks without the browser ever holding the secret.
+    if (isAdminApi) {
+      const headers = new Headers(request.headers)
+      headers.set('x-admin-password', ADMIN_PASSWORD)
+      return NextResponse.next({ request: { headers } })
+    }
+    return NextResponse.next()
+  }
+
+  // ── Rate limiting (unchanged) ─────────────────────────────────────────────
   const limit = RATE_LIMITS[pathname]
 
   if (!limit) return NextResponse.next()
@@ -58,6 +98,9 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/admin',
+    '/admin/:path*',
+    '/api/admin/:path*',
     '/api/communities-search',
     '/api/address-search',
     '/api/address-lookup',

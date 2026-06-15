@@ -11,9 +11,9 @@ export const dynamic = "force-dynamic"
  * 2026-05-01 that never got a response. Idempotent: skips rows that
  * already have `backfill_sent_at` set.
  *
- * Auth: x-admin-password header must equal ADMIN_PASSWORD env var
- * (or the dev-mode "Valean2008!" fallback used by other /api/admin
- * routes).
+ * Auth: x-admin-password header must equal ADMIN_PASSWORD env var.
+ * In production the middleware injects this header for authenticated
+ * admin sessions; the browser never holds the secret.
  *
  * Source table: `suggestions` (where /api/report-request writes).
  * The task spec mentioned community_suggestions but the legacy leads
@@ -61,8 +61,6 @@ function isAuthed(req: NextRequest): boolean {
   const provided = req.headers.get("x-admin-password") || ""
   const expected = process.env.ADMIN_PASSWORD || ""
   if (expected && provided === expected) return true
-  // Same fallback the rest of /api/admin uses
-  if (provided === "Valean2008!") return true
   return false
 }
 

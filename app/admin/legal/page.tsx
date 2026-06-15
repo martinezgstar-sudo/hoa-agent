@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LegalReview() {
   const [password, setPassword] = useState("");
-  const [authed, setAuthed] = useState(false);
+  // Middleware gates this route, so render authed and load on mount.
+  const [authed, setAuthed] = useState(true);
   const [links, setLinks] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [q, setQ] = useState<Record<string, string>>({});
@@ -16,6 +17,11 @@ export default function LegalReview() {
     const j = await r.json();
     setLinks(j.links ?? []); setAuthed(true); setLoading(false);
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load("");
+  }, []);
   async function decide(id: string, action: "approve" | "reject") {
     await fetch("/api/admin/legal/decide", {
       method: "POST",
