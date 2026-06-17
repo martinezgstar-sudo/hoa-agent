@@ -1,26 +1,42 @@
 #!/usr/bin/env python3
 """
 research-hoa-comprehensive.py
-HOA Agent — Comprehensive community research pipeline.
+HOA Agent — Deep, PROPOSE-ONLY community enricher.
 
-Tiers:
-  1 — Local LaCie files (Sunbiz cordata, PBCPAO CAMA/Parcels)
-  2 — Government APIs  (CourtListener, NewsAPI)
-  3 — Web search       (DuckDuckGo — 11 queries)
-  4 — Listing sites    (Zillow / Realtor — fee observations only)
-  5 — Browser          (Playwright — PBCPAO subdivision, DBPR)
+This script NEVER writes to the communities table. It enriches a small
+number of communities per run and stages every finding for admin approval:
+
+  - Fee fields (monthly_fee_min/max/median) -> pending_fee_observations
+  - Every other field                       -> pending_community_data
+                                               (auto_approvable=false, status='pending')
+
+The existing admin pending page + approval API already apply approved
+values to communities. This script only proposes.
+
+Per community it:
+  1. Gathers evidence — DuckDuckGo search, local Sunbiz, DBPR (Playwright).
+  2. Reads documents — builds candidate URLs from website_url + official /
+     management-company domains in the top results, fetches each page,
+     follows links to governing documents / budgets / rules, downloads up
+     to 5 PDFs, and extracts their text with pdfplumber.
+  3. AI extraction — passes the page text + PDF text + search results to
+     Claude and asks for every real field, citing only what the documents
+     or sources state, converting annual fees to monthly.
+  4. Stages — validates, dedupes against existing pending/approved rows and
+     against the community's current (non-null) values, then inserts.
 
 Usage:
-  python3 scripts/research-hoa-comprehensive.py --batch 10
-  python3 scripts/research-hoa-comprehensive.py --community-id <uuid>
-  python3 scripts/research-hoa-comprehensive.py --batch 5 --dry-run true
+  python3 scripts/research-hoa-comprehensive.py --batch 10 --require-website true --dry-run false
+  python3 scripts/research-hoa-comprehensive.py --community-id <uuid> --dry-run true
 
 Options:
-  --community-id   UUID of a specific community to research
-  --batch          Number of communities to research (default: 10)
-  --status         Community status filter (default: published)
-  --dry-run        true/false — log without writing to DB (default: true)
-  --output-dir     Directory for log files (default: scripts/output)
+  --community-id    UUID of a specific community to enrich
+  --batch           Number of communities (default: 10)
+  --status          Community status filter (default: published)
+  --require-website true/false — only pick communities with website_url set
+                    (default: false; nightly cron passes false, demo passes true)
+  --dry-run         true/false — gather + log without inserting (default: true)
+  --output-dir      Directory for log files (default: scripts/output)
 """
 
 import argparse
@@ -28,47 +44,82 @@ import json
 import math
 import os
 import re
+import subprocess
 import sys
+import tempfile
+import threading
 import time
 import urllib.parse
 import urllib.request
 from datetime import date, datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
 LACIE_PATH     = "/Volumes/LaCie/FL-Palm Beach County Data "
 CORDATA_DIR    = LACIE_PATH + "/cordata_extracted"
-PBCPAO_CSV     = LACIE_PATH + "/Property_Information_Table_-6553152689149400476.csv"
 
 SUPABASE_URL   = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "")
 SUPABASE_ANON  = os.environ.get("NEXT_PUBLIC_SUPABASE_ANON_KEY", "")
 SUPABASE_SVC   = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
-NEWS_API_KEY   = os.environ.get("NEWS_API_KEY", "")
 
-# Fee sources we no longer fetch from. Existing observations in
-# pending_fee_observations are preserved (admin can still review/reject
-# them); only NEW fetches are blocked.
-#   zillow → returns the fee-range filter slider values ($100, $200, $300,
-#            $400, $500) as if they were real fees, polluting the queue.
-SKIP_FEE_SOURCES = {"zillow", "zillow.com"}
+# AI extraction runs through the local `claude` CLI on the Claude subscription
+# (CLAUDE_CODE_OAUTH_TOKEN), NOT the paid Anthropic API — matching the rest of
+# this machine's cron infra (run.sh), which deliberately never bills the API.
+AI_MODEL    = os.environ.get("AI_MODEL", "sonnet")
+CLAUDE_BIN  = os.environ.get("CLAUDE_BIN", "claude")
+AI_HAS_AUTH = bool(os.environ.get("CLAUDE_CODE_OAUTH_TOKEN")) or os.path.exists(
+    os.path.expanduser("~/.claude/.credentials.json"))
 
-# Auto-approvable field set
-AUTO_APPROVE_FIELDS = {
-    "entity_status", "state_entity_number", "registered_agent",
-    "incorporation_date", "unit_count", "gated", "age_restricted",
-    "is_gated", "is_55_plus", "is_age_restricted",
-    "street_address", "zip_code",
-}
+# Every real column this enricher may propose. Names are the EXACT
+# communities columns (see CLAUDE.md). Nothing outside this set is staged.
+FEE_FIELDS = {"monthly_fee_min", "monthly_fee_max", "monthly_fee_median"}
 
-# Fields that ALWAYS require admin review
-ADMIN_ONLY_FIELDS = {
+ALLOWED_FIELDS = {
+    "management_company", "website_url", "legal_name", "entity_status",
+    "state_entity_number", "registered_agent", "registered_agent_address",
+    "incorporation_date", "unit_count",
     "monthly_fee_min", "monthly_fee_max", "monthly_fee_median",
-    "management_company", "amenities", "pet_restriction",
-    "rental_approval", "str_restriction", "vehicle_restriction",
-    "website_url",
+    "amenities", "pet_restriction", "rental_approval", "str_restriction",
+    "vehicle_restriction", "subdivision_names",
+    "is_gated", "is_55_plus", "is_age_restricted",
+    "phone", "email",
 }
+
+# Field type buckets used for validation.
+BOOL_FIELDS    = {"is_gated", "is_55_plus", "is_age_restricted"}
+INT_FIELDS     = {"unit_count"}
+NUMERIC_FIELDS = FEE_FIELDS  # numeric, positive
+DATE_FIELDS    = {"incorporation_date"}
+
+# source_type must be one of these (per staging spec).
+ALLOWED_SOURCE_TYPES = {"pdf", "website", "search", "sunbiz", "dbpr"}
+
+# Substrings of links/text that flag a governing/financial document worth reading.
+DOC_KEYWORDS = [
+    "document", "governing", "declaration", "ccr", "cc&r", "rules",
+    "regulation", "bylaw", "budget", "financial", "amenities", "fee",
+    "assessment",
+]
+
+# Domains we never treat as the community's "official / management" site.
+NON_OFFICIAL_DOMAINS = [
+    "zillow", "realtor", "trulia", "redfin", "homes.com", "movoto",
+    "facebook", "instagram", "twitter", "x.com", "youtube", "tiktok",
+    "linkedin", "pinterest", "yelp", "reddit", "google.", "bing.com",
+    "duckduckgo", "wikipedia", "niche.com", "bestplaces", "neighborhoodscout",
+    "apartments.com", "rent.com", "loopnet",
+]
+
+# Per-community wall-clock budget for the document-fetch phase (seconds).
+DOC_FETCH_BUDGET_SECS = 60
+MAX_PDFS_PER_COMMUNITY = 5
+MAX_PDF_BYTES          = 10 * 1024 * 1024  # 10MB
+PDF_CHAR_CAP           = 8000
+PDF_COMBINED_CHAR_CAP  = 20000
+PAGE_TEXT_CHAR_CAP     = 8000
+MAX_CANDIDATE_PAGES    = 6
 
 HTTP_HEADERS = {
     "User-Agent": (
@@ -87,7 +138,7 @@ def log(msg: str):
     print(f"[{ts}] {msg}", flush=True)
 
 
-def fetch(url: str, timeout: int = 12, headers: Optional[dict] = None) -> str:
+def fetch(url: str, timeout: int = 15, headers: Optional[dict] = None) -> str:
     try:
         h = dict(HTTP_HEADERS)
         if headers:
@@ -100,7 +151,10 @@ def fetch(url: str, timeout: int = 12, headers: Optional[dict] = None) -> str:
 
 
 def text_from_html(html: str) -> str:
+    # Drop scripts/styles before stripping tags so we don't keep JS noise.
+    html = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
     t = re.sub(r"<[^>]+>", " ", html)
+    t = t.replace("&nbsp;", " ").replace("&amp;", "&")
     return re.sub(r"\s+", " ", t).strip()
 
 
@@ -110,32 +164,29 @@ def round_fee(amount: float, direction: str = "nearest") -> float:
         return math.floor(amount / 25) * 25
     if direction == "up":
         return math.ceil(amount / 25) * 25
-    # nearest
     return round(amount / 25) * 25
 
 
-def is_slider_noise(fee_list) -> bool:
-    """Detect Zillow-style fee-range filter slider values.
-
-    Returns True when 3+ fees from the same source are all exact $100
-    multiples and there are at least 3 of them — the signature of UI
-    range-slider stops ($100/$200/$300/$400/$500), not real HOA fees.
-    """
-    fees = [float(f) for f in fee_list if f is not None]
-    if len(fees) < 3:
-        return False
-    multiples_of_100 = [f for f in fees if f % 100 == 0]
-    return len(multiples_of_100) >= 3 and len(multiples_of_100) == len(fees)
+def domain_of(url: str) -> str:
+    try:
+        host = urllib.parse.urlparse(url).netloc.lower()
+        return host[4:] if host.startswith("www.") else host
+    except Exception:
+        return ""
 
 
-def supabase_get(path: str, params: Optional[dict] = None) -> dict:
-    """Read-only Supabase REST API call using anon key."""
+# ── Supabase REST ─────────────────────────────────────────────────────────────
+
+def supabase_get(path: str, params: Optional[dict] = None) -> Any:
+    """Read-only Supabase REST call. Uses the service-role key when available
+    (this is a trusted local/cron script), falling back to the anon key."""
+    key = SUPABASE_SVC if (SUPABASE_SVC and SUPABASE_SVC != "your_service_role_key_here") else SUPABASE_ANON
     url = f"{SUPABASE_URL}/rest/v1/{path}"
     if params:
         url += "?" + urllib.parse.urlencode(params)
     html = fetch(url, headers={
-        "apikey": SUPABASE_ANON,
-        "Authorization": f"Bearer {SUPABASE_ANON}",
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
         "Accept": "application/json",
     })
     if html.startswith("ERROR"):
@@ -147,7 +198,7 @@ def supabase_get(path: str, params: Optional[dict] = None) -> dict:
 
 
 def supabase_post(table: str, payload: dict, dry_run: bool) -> dict:
-    """Insert a row via service role key. No-ops in dry_run mode."""
+    """Insert a row via the service-role key. No-ops in dry_run mode."""
     if dry_run:
         return {"dry_run": True, "payload": payload}
     if not SUPABASE_SVC or SUPABASE_SVC == "your_service_role_key_here":
@@ -167,470 +218,26 @@ def supabase_post(table: str, payload: dict, dry_run: bool) -> dict:
         return {"error": str(e)}
 
 
-def supabase_update(table: str, match: dict, payload: dict, dry_run: bool) -> dict:
-    """Update matching rows via service role key."""
-    if dry_run:
-        return {"dry_run": True, "match": match, "payload": payload}
-    if not SUPABASE_SVC or SUPABASE_SVC == "your_service_role_key_here":
-        return {"error": "SUPABASE_SERVICE_ROLE_KEY not set"}
-    qs = "&".join(f"{k}=eq.{urllib.parse.quote(str(v))}" for k, v in match.items())
-    url = f"{SUPABASE_URL}/rest/v1/{table}?{qs}"
-    body = json.dumps(payload).encode()
-    try:
-        req = urllib.request.Request(url, data=body, method="PATCH", headers={
-            "apikey": SUPABASE_SVC,
-            "Authorization": f"Bearer {SUPABASE_SVC}",
-            "Content-Type": "application/json",
-            "Prefer": "return=representation",
-        })
-        with urllib.request.urlopen(req, timeout=15) as r:
-            return json.loads(r.read().decode())
-    except Exception as e:
-        return {"error": str(e)}
+# ── Evidence container ────────────────────────────────────────────────────────
+
+class Evidence:
+    """One labelled chunk of text the AI is allowed to cite."""
+
+    def __init__(self, source_type: str, source_url: str, text: str):
+        self.source_type = source_type
+        self.source_url  = source_url
+        self.text        = text
 
 
-# ── Findings accumulator ──────────────────────────────────────────────────────
+# ── TIER: DuckDuckGo search ───────────────────────────────────────────────────
 
-class CommunityFindings:
-    """Collects all data found for one community during a research run."""
-
-    def __init__(self, community: dict):
-        self.community      = community
-        self.community_id   = community["id"]
-        self.name           = community.get("canonical_name", "")
-        self.city           = community.get("city", "")
-
-        self.auto_fields:    dict[str, dict] = {}  # field_name → {value, source_url, source_type, confidence}
-        self.pending_fields: dict[str, list] = {}  # field_name → [{value, source_url, source_type, confidence}]
-        self.fee_obs:        list[dict]      = []  # fee observations for pending_fee_observations
-        self.sources_checked: list[str]      = []
-        self.notes: list[str]                = []
-
-    def add_auto(self, field: str, value: Any, source_url: str, source_type: str, confidence: float = 1.0):
-        """Add a government-sourced, auto-approvable finding."""
-        # Only add if field is in auto set AND community currently has null for it
-        if field not in AUTO_APPROVE_FIELDS:
-            return
-        existing = self.community.get(field)
-        if existing is not None and existing != "":
-            return  # never overwrite
-        self.auto_fields[field] = {
-            "value": str(value),
-            "source_url": source_url,
-            "source_type": source_type,
-            "confidence": confidence,
-        }
-
-    def add_pending(self, field: str, value: Any, source_url: str, source_type: str, confidence: float = 0.7):
-        """Queue a finding for admin review."""
-        if not value:
-            return
-        existing = self.community.get(field)
-        if existing is not None and existing != "":
-            return  # never overwrite
-        self.pending_fields.setdefault(field, []).append({
-            "value": str(value),
-            "source_url": source_url,
-            "source_type": source_type,
-            "confidence": confidence,
-        })
-
-    def add_fee_obs(self, amount: float, source_url: str, source_type: str, listing_date: Optional[str] = None):
-        """Record a fee observation (always goes to pending_fee_observations).
-
-        Skips sources listed in SKIP_FEE_SOURCES (currently: zillow). Existing
-        rows in the DB are untouched — only new fetches are gated.
-        """
-        if source_type and source_type.lower() in SKIP_FEE_SOURCES:
-            return
-        self.fee_obs.append({
-            "fee_amount": amount,
-            "fee_rounded_min":    round_fee(amount, "down"),
-            "fee_rounded_max":    round_fee(amount, "up"),
-            "fee_rounded_median": round_fee(amount),
-            "source_url": source_url,
-            "source_type": source_type,
-            "listing_date": listing_date,
-        })
-
-    def filter_slider_noise(self) -> int:
-        """Drop slider-noise fee observations (per source).
-
-        Returns count of removed observations.
-        """
-        if not self.fee_obs:
-            return 0
-        # Group fees by source_type
-        by_source: dict[str, list] = {}
-        for obs in self.fee_obs:
-            by_source.setdefault(obs["source_type"], []).append(obs)
-        kept: list[dict] = []
-        removed = 0
-        for src, group in by_source.items():
-            amounts = [g["fee_amount"] for g in group]
-            if is_slider_noise(amounts):
-                removed += len(group)
-                self.note(f"Slider noise filtered: {len(group)} obs from {src}")
-            else:
-                kept.extend(group)
-        self.fee_obs = kept
-        return removed
-
-    def log_source(self, description: str):
-        self.sources_checked.append(description)
-
-    def note(self, msg: str):
-        self.notes.append(msg)
-
-    def summary(self) -> dict:
-        return {
-            "community_id": self.community_id,
-            "community_name": self.name,
-            "auto_fields_found": len(self.auto_fields),
-            "pending_fields_found": sum(len(v) for v in self.pending_fields.values()),
-            "fee_observations": len(self.fee_obs),
-            "auto_fields": {k: v["value"] for k, v in self.auto_fields.items()},
-            "pending_fields": {k: [x["value"] for x in v] for k, v in self.pending_fields.items()},
-            "sources_checked": len(self.sources_checked),
-            "notes": self.notes,
-        }
-
-
-# ── TIER 1 — Local LaCie files ────────────────────────────────────────────────
-
-def search_sunbiz_local(f: CommunityFindings) -> None:
-    """Search local Sunbiz cordata files for the community entity."""
-    if not os.path.isdir(CORDATA_DIR):
-        f.log_source("Sunbiz local: LaCie drive not mounted at /Volumes/LaCie")
-        f.note("LaCie drive not available — skipping Sunbiz local search")
-        return
-
-    name_upper = f.name.upper()
-    # Build search terms — require match in the ENTITY NAME portion (cols 13-93)
-    stop_words = {"HOMEOWNERS","ASSOCIATION","CONDOMINIUM","PROPERTY","OWNERS","THE","AND",
-                  "INCORPORATED","INC","LLC","CORP","LTD","ESTATE","ESTATES","AT","OF","IN"}
-    words = [w for w in re.split(r"\W+", name_upper) if len(w) > 3 and w not in stop_words]
-    # Need at least 2 significant words; use first 3 for matching
-    if len(words) < 2:
-        f.log_source(f"Sunbiz local: name too short for reliable search ({f.name[:40]})")
-        return
-    search_words = words[:3]
-    search_term = " ".join(search_words)
-
-    log(f"  [Sunbiz local] searching for: {search_term!r}")
-    found_line = None
-
-    for fname in sorted(os.listdir(CORDATA_DIR)):
-        if not fname.endswith(".txt"):
-            continue
-        fpath = os.path.join(CORDATA_DIR, fname)
-        try:
-            with open(fpath, "r", errors="ignore") as fh:
-                for line in fh:
-                    # FIXED 2026-05-19: cordata byte offsets corrected
-                    # (was [13:93], now [12:204] — entity name is 192 chars
-                    # starting at col 12, not 80 chars starting at col 13).
-                    entity_name_field = line[12:204].upper()
-                    if all(w in entity_name_field for w in search_words):
-                        found_line = line
-                        break
-        except Exception:
-            pass
-        if found_line:
-            break
-
-    f.log_source(f"Sunbiz local (cordata): {'found' if found_line else 'not found'} for {name_upper[:50]}")
-
-    if not found_line:
-        return
-
-    # Parse the fixed-width cordata record
-    try:
-        # FIXED 2026-05-19: cordata byte offsets corrected
-        # (was [:13]/[13:93], now [:12]/[12:204]).
-        doc_num  = found_line[:12].strip()
-        ent_name = found_line[12:204].strip()
-        # FIXED 2026-05-19: cordata byte offsets corrected.
-        # COR_STATUS is the single char at [204]; payload starts at [205].
-        # Previously rest = found_line[93:] and status_char = rest.strip()[:1].
-        rest     = found_line[205:]
-
-        # Status indicator: A=Active, I=Inactive
-        status_char = found_line[204] if len(found_line) > 204 else ""
-        is_active   = status_char == "A"
-
-        # Extract addresses (principal ~pos 13-80 within rest)
-        addr_match = re.search(r"(\d{2,5}\s+[A-Z][A-Z\s]+(?:DR|DRIVE|BLVD|BOULEVARD|AVE|AVENUE|ST|STREET|RD|ROAD|LN|LANE|WAY|CT|COURT|PL|PLACE))\s+([A-Z][A-Z\s]+)\s+(FL)(\d{5})", rest, re.IGNORECASE)
-        street  = addr_match.group(1).strip() if addr_match else None
-        city    = addr_match.group(2).strip() if addr_match else None
-        zipcode = addr_match.group(4)         if addr_match else None
-
-        # Filing date: 8-digit run MMDDYYYY near doc_num area
-        date_match = re.search(r"(\d{8})(?=\d{9})", rest)
-        inc_date = None
-        if date_match:
-            d = date_match.group(1)
-            if len(d) == 8:
-                try:
-                    inc_date = f"{d[4:8]}-{d[0:2]}-{d[2:4]}"
-                except Exception:
-                    pass
-
-        # Registered agent: look for known management company patterns after "C " indicator
-        ra_match = re.search(r"\bC([A-Z][A-Z\s&,\.]{5,60}?)\s+[CP]\d{4}", rest)
-        if not ra_match:
-            # Try pattern: "REGISTERED AGENTS" or company name after principal addr
-            ra_match = re.search(r"([A-Z][A-Z\s&,\.]{5,50}(?:MANAGEMENT|SERVICES|REALTY|PROPERTY|GROUP|LLC|INC|CORP))\s", rest)
-        registered_agent = ra_match.group(1).strip() if ra_match else None
-
-        # Store findings
-        source_url = f"local://LaCie/cordata — doc {doc_num}"
-        source_type = "sunbiz_local"
-
-        f.add_auto("state_entity_number", doc_num, source_url, source_type)
-        f.add_auto("entity_status", "ACTIVE" if is_active else "INACTIVE", source_url, source_type)
-        if inc_date:
-            f.add_auto("incorporation_date", inc_date, source_url, source_type)
-        if street:
-            f.add_auto("street_address", street, source_url, source_type)
-        if zipcode:
-            f.add_auto("zip_code", zipcode, source_url, source_type)
-        if registered_agent:
-            f.add_auto("registered_agent", registered_agent.strip(), source_url, source_type)
-
-        f.note(f"Sunbiz: {ent_name} | doc={doc_num} | status={'ACTIVE' if is_active else 'INACTIVE'} | ra={registered_agent}")
-        log(f"  [Sunbiz local] HIT: {doc_num} {ent_name[:50]}")
-    except Exception as e:
-        f.note(f"Sunbiz parse error: {e}")
-        log(f"  [Sunbiz local] parse error: {e}")
-
-
-def search_pbcpao_local(f: CommunityFindings) -> None:
-    """Search local PBCPAO CSV for subdivision parcel count (unit_count)."""
-    if not os.path.isfile(PBCPAO_CSV):
-        f.log_source("PBCPAO local: CSV not found at LaCie path")
-        return
-
-    import csv
-
-    name_upper = f.name.upper()
-    # Build a search term: first 25 chars of name, uppercase
-    search_substr = name_upper[:25]
-
-    log(f"  [PBCPAO local] scanning for: {search_substr!r}")
-    count = 0
-    try:
-        with open(PBCPAO_CSV, "r", errors="ignore") as fh:
-            reader = csv.DictReader(fh)
-            for row in reader:
-                subdiv = row.get("SUBDIV_NAME", "").upper()
-                if search_substr[:15] in subdiv:
-                    count += 1
-    except Exception as e:
-        f.log_source(f"PBCPAO local: error — {e}")
-        return
-
-    f.log_source(f"PBCPAO local CSV: {'found' if count > 0 else 'not found'} ({count} parcels)")
-    if count > 0:
-        f.add_auto(
-            "unit_count", count,
-            source_url="local://LaCie/Property_Information_Table",
-            source_type="pbcpao_local",
-            confidence=1.0,
-        )
-        f.note(f"PBCPAO: {count} parcels found → unit_count={count}")
-        log(f"  [PBCPAO local] {count} parcels → unit_count={count}")
-
-
-# ── TIER 2 — Government APIs ──────────────────────────────────────────────────
-
-def search_courtlistener(f: CommunityFindings) -> None:
-    """Check CourtListener for litigation involving this community."""
-    q = urllib.parse.quote_plus(f'"{f.name}" Florida')
-    url = f"https://www.courtlistener.com/api/rest/v4/search/?q={q}&type=o&court=flsd,flmd,flnd,fls1,fls11,fls12,fls3,fls4&format=json"
-    html = fetch(url, timeout=15)
-    f.log_source(f"CourtListener: {url[:80]}")
-
-    if html.startswith("ERROR"):
-        f.note(f"CourtListener error: {html[:100]}")
-        return
-
-    try:
-        data = json.loads(html)
-        count = data.get("count", 0)
-        results = data.get("results", [])
-
-        if count > 0:
-            case_names = [r.get("caseName", "") for r in results[:3]]
-            f.note(f"CourtListener: {count} cases — {', '.join(case_names)}")
-            log(f"  [CourtListener] {count} cases found")
-            # Queue litigation count for admin review
-            f.add_pending(
-                "litigation_count", count,
-                source_url=f"https://www.courtlistener.com/?q={urllib.parse.quote_plus(f.name)}&type=o",
-                source_type="courtlistener",
-                confidence=0.85,
-            )
-        else:
-            f.note("CourtListener: no cases found")
-    except Exception as e:
-        f.note(f"CourtListener parse error: {e}")
-
-
-def search_newsapi(f: CommunityFindings) -> None:
-    """Search NewsAPI for recent news about the community."""
-    if not NEWS_API_KEY:
-        f.log_source("NewsAPI: no API key configured")
-        return
-
-    q = urllib.parse.quote_plus(f'"{f.name}"')
-    url = f"https://newsapi.org/v2/everything?q={q}&language=en&sortBy=relevancy&pageSize=5"
-    html = fetch(url, timeout=15, headers={"X-Api-Key": NEWS_API_KEY})
-    f.log_source(f"NewsAPI: {url[:80]}")
-
-    if html.startswith("ERROR"):
-        return
-    try:
-        data = json.loads(html)
-        articles = data.get("articles", [])
-        for art in articles[:3]:
-            f.note(f"NewsAPI: {art.get('title','')} — {art.get('url','')[:60]}")
-    except Exception:
-        pass
-
-
-# ── GATED / 55+ DETECTION ─────────────────────────────────────────────────────
-# Auto-approvable booleans. Only update if currently false. Never set true→false.
-# Source priority: amenities text → name pattern (handled in SQL) → DDG (≥2 hits).
-
-GATED_AMENITIES_TERMS = [
-    "gated", "guard gate", "security gate", "controlled access",
-    "guardhouse", "guard house", "gatehouse",
-]
-PLUS55_AMENITIES_TERMS = [
-    "55+", "55 plus", "age 55", "55 and older", "55 or older",
-    "age restricted", "age-restricted", "active adult",
-    "adult community", "hopa", "62+",
-]
-GATED_WEB_TERMS = [
-    "gated community", "gated entrance", "guard gate",
-    "security gate", "controlled access", "guardhouse",
-    "guard house", "gatehouse",
-]
-PLUS55_WEB_TERMS = [
-    "55+", "55 and older", "55 or older", "age 55",
-    "age-restricted", "age restricted", "active adult",
-    "adult community", "hopa", "62+",
-]
-
-
-def detect_gated_55plus(f: "CommunityFindings", dry_run: bool) -> None:
-    """Detect gated/55+ status from amenities first, then DDG (need ≥2 hits).
-    Auto-updates is_gated / is_55_plus / is_age_restricted directly on
-    communities — only if currently false. Never reverses true→false."""
-    cid       = f.community_id
-    name      = f.name
-    city      = f.city or "Florida"
-    cur_gated = bool(f.community.get("is_gated"))
-    cur_55    = bool(f.community.get("is_55_plus"))
-    amenities = (f.community.get("amenities") or "").lower()
-
-    set_gated = False
-    set_55    = False
-
-    # Step 1 — amenities text scan (free / no API)
-    if not cur_gated and amenities:
-        for t in GATED_AMENITIES_TERMS:
-            if t in amenities:
-                set_gated = True
-                f.note(f"is_gated=true via amenities ('{t}')")
-                break
-    if not cur_55 and amenities:
-        for t in PLUS55_AMENITIES_TERMS:
-            if t in amenities:
-                set_55 = True
-                f.note(f"is_55_plus=true via amenities ('{t}')")
-                break
-
-    # Step 2 — web sweep only if still missing flag
-    if (not cur_gated and not set_gated) or (not cur_55 and not set_55):
-        queries = [
-            f'"{name}" gated community {city} Florida',
-            f'"{name}" 55+ age restricted {city} Florida',
-            f'"{name}" active adult community {city} FL',
-            f'"{name}" guard gate {city}',
-            f'"{name}" adult living {city} Florida',
-        ]
-        g_hits = 0
-        p_hits = 0
-        for q in queries:
-            results = ddg_search(q, max_results=4)
-            blob = " ".join((t + " " + s) for _u, t, s in results).lower()
-            if not blob:
-                time.sleep(0.4)
-                continue
-            for t in GATED_WEB_TERMS:
-                if t in blob:
-                    g_hits += 1
-                    break
-            for t in PLUS55_WEB_TERMS:
-                if t in blob:
-                    p_hits += 1
-                    break
-            time.sleep(0.4)
-
-        if not cur_gated and not set_gated and g_hits >= 2:
-            set_gated = True
-            f.note(f"is_gated=true via DDG ({g_hits} confirming queries)")
-        if not cur_55 and not set_55 and p_hits >= 2:
-            set_55 = True
-            f.note(f"is_55_plus=true via DDG ({p_hits} confirming queries)")
-
-    # Step 3 — apply (auto-approve, never overwrite true→false)
-    payload: dict = {}
-    if set_gated:
-        payload["is_gated"] = True
-    if set_55:
-        payload["is_55_plus"] = True
-        payload["is_age_restricted"] = True
-    if payload and not dry_run and SUPABASE_SVC and SUPABASE_SVC != "your_service_role_key_here":
-        payload["updated_at"] = "now()"
-        # Build a filter that only matches rows where the booleans are still false
-        bool_filters = []
-        if set_gated: bool_filters.append("is_gated=eq.false")
-        if set_55:    bool_filters.append("is_55_plus=eq.false")
-        qs = "&".join([f"id=eq.{cid}", "status=eq.published"] + bool_filters)
-        try:
-            req = urllib.request.Request(
-                f"{SUPABASE_URL}/rest/v1/communities?{qs}",
-                data=json.dumps(payload).encode(),
-                method="PATCH",
-                headers={
-                    "apikey": SUPABASE_SVC,
-                    "Authorization": f"Bearer {SUPABASE_SVC}",
-                    "Content-Type": "application/json",
-                    "Prefer": "return=minimal",
-                },
-            )
-            urllib.request.urlopen(req, timeout=15).read()
-        except Exception as e:
-            f.note(f"detect_gated_55plus PATCH error: {e}")
-
-
-# ── TIER 3 — DuckDuckGo web search ────────────────────────────────────────────
-
-def ddg_search(query: str, max_results: int = 6) -> list[tuple[str, str, str]]:
-    """
-    DuckDuckGo HTML scrape.
-    Returns list of (url, title, snippet).
-    """
+def ddg_search(query: str, max_results: int = 6) -> List[Tuple[str, str, str]]:
+    """DuckDuckGo HTML scrape. Returns list of (url, title, snippet)."""
     q = urllib.parse.quote_plus(query)
     html = fetch(f"https://html.duckduckgo.com/html/?q={q}")
     if html.startswith("ERROR") or not html:
         return []
-
     results = []
-    # Extract (href, title) pairs from result__a links
     for href, title in re.findall(
         r'<a\s+class="result__a"\s+href="(/l/\?[^"]+)"[^>]*>(.*?)</a>',
         html, re.DOTALL
@@ -638,552 +245,895 @@ def ddg_search(query: str, max_results: int = 6) -> list[tuple[str, str, str]]:
         real = re.search(r"uddg=(https?[^&]+)", href)
         url = urllib.parse.unquote(real.group(1)) if real else ""
         title_clean = re.sub(r"<[^>]+>", "", title).strip()
-
-        # Find snippet right after this link
         snip_match = re.search(
             r'class="result__snippet"[^>]*>(.*?)</a>',
             html[html.find(href): html.find(href) + 3000], re.DOTALL
         )
         snip = re.sub(r"<[^>]+>", "", snip_match.group(1)).strip() if snip_match else ""
-        results.append((url, title_clean, snip))
-
+        if url:
+            results.append((url, title_clean, snip))
     return results
 
 
-def extract_from_text(text: str) -> dict[str, Any]:
-    """Extract structured data from arbitrary text using regex."""
-    out: dict[str, Any] = {}
+def gather_search(name: str, city: str) -> Tuple[List[Evidence], List[Tuple[str, str, str]]]:
+    """Run the search queries; return (evidence chunks, raw results for URL building)."""
+    queries = [
+        f'"{name}" HOA {city} Florida management company',
+        f'"{name}" HOA fees monthly Florida',
+        f'"{name}" homeowners association {city} official website',
+        f'"{name}" HOA documents declaration rules {city} Florida',
+        f'"{name}" HOA amenities pet rental restrictions {city}',
+        f'"{name}" Florida Division of Corporations Sunbiz registered agent',
+    ]
+    evidence: List[Evidence] = []
+    all_results: List[Tuple[str, str, str]] = []
+    seen_urls = set()
+    for q in queries:
+        results = ddg_search(q, max_results=6)
+        if not results:
+            time.sleep(0.5)
+            continue
+        blob_parts = []
+        for url, title, snippet in results:
+            blob_parts.append(f"{title} — {snippet} ({url})")
+            if url not in seen_urls:
+                seen_urls.add(url)
+                all_results.append((url, title, snippet))
+        evidence.append(Evidence("search", f"ddg:{q}", " | ".join(blob_parts)[:4000]))
+        time.sleep(0.7)
+    return evidence, all_results
 
-    # Fees: require specific HOA context to avoid Zillow range slider noise
-    # Valid patterns: "HOA fee: $350/mo", "monthly HOA $425", "$350 /month HOA"
-    fee_matches = re.findall(
-        r"(?:hoa\s+fee|monthly\s+(?:hoa|dues|fee)|hoa\s+dues|hoa\s+assessment)"
-        r"[^\$\d]{0,30}\$\s*([\d,]+)",
-        text, re.IGNORECASE
-    )
-    # Also: "$XXX /mo" only if preceded by relevant context within 100 chars
-    for m in re.finditer(r"\$\s*([\d,]+)\s*/\s*(?:mo|month)\b", text, re.IGNORECASE):
-        ctx = text[max(0, m.start()-100):m.start()]
-        if re.search(r"hoa|dues|fee|assessment|homeowner", ctx, re.IGNORECASE):
-            fee_matches.append(m.group(1))
-    fees = []
-    for fm in fee_matches:
+
+# ── TIER: local Sunbiz ────────────────────────────────────────────────────────
+# The cordata corpus is ~17GB (10 × 1.7GB files) on a slow LaCie USB drive.
+# Scanning it once PER COMMUNITY took ~210s each. Instead we scan it ONCE PER
+# RUN for the whole batch: seed a single ripgrep/grep pass with every
+# community's rarest name word, stream the matches, and stop as soon as every
+# community has a hit. One bounded pass regardless of batch size.
+
+# OFF by default: a full pass over the 17GB corpus on the LaCie USB drive costs
+# minutes and can't fit a per-run budget alongside web+doc+AI work. Entity data
+# still arrives via the Sunbiz *website* (search tier) + AI. Set SUNBIZ_LOCAL=1
+# to opt in to the bounded one-pass local scan when the drive is mounted.
+SUNBIZ_LOCAL    = os.environ.get("SUNBIZ_LOCAL", "0").lower() in {"1", "true", "yes"}
+SUNBIZ_TIMEOUT  = int(os.environ.get("SUNBIZ_TIMEOUT", "180"))
+_SUNBIZ_STOP = {"HOMEOWNERS", "ASSOCIATION", "CONDOMINIUM", "PROPERTY", "OWNERS",
+                "THE", "AND", "INCORPORATED", "INC", "LLC", "CORP", "LTD",
+                "ESTATE", "ESTATES", "AT", "OF", "IN"}
+
+
+def sunbiz_search_words(name: str) -> List[str]:
+    """Significant entity-name words to match a community against cordata."""
+    words = [w for w in re.split(r"\W+", (name or "").upper())
+             if len(w) > 3 and w not in _SUNBIZ_STOP]
+    return words[:3]
+
+
+def parse_sunbiz_line(line: str) -> Optional[Evidence]:
+    """Parse one fixed-width cordata record into a labelled evidence chunk."""
+    try:
+        doc_num   = line[:12].strip()
+        ent_name  = line[12:204].strip()
+        rest      = line[205:]
+        status_ch = line[204] if len(line) > 204 else ""
+        is_active = status_ch == "A"
+        text = (
+            f"Florida Division of Corporations (Sunbiz) record.\n"
+            f"Legal entity name: {ent_name}\n"
+            f"State document/entity number: {doc_num}\n"
+            f"Entity status: {'Active' if is_active else 'Inactive'}\n"
+            f"Raw record tail: {rest[:600].strip()}"
+        )
+        return Evidence("sunbiz", f"local://LaCie/cordata#{doc_num}", text)
+    except Exception:
+        return None
+
+
+def sunbiz_prescan(communities: List[dict]) -> Dict[str, Evidence]:
+    """Single batch-wide pass over the cordata corpus. Returns
+    {community_id -> Evidence} for every community that matched."""
+    out: Dict[str, Evidence] = {}
+    if not SUNBIZ_LOCAL or not os.path.isdir(CORDATA_DIR):
+        return out
+    files = [os.path.join(CORDATA_DIR, fn) for fn in sorted(os.listdir(CORDATA_DIR))
+             if fn.endswith(".txt")]
+    if not files:
+        return out
+
+    remaining: Dict[str, List[str]] = {}
+    for c in communities:
+        sw = sunbiz_search_words(c.get("canonical_name", ""))
+        if len(sw) >= 2:
+            remaining[c["id"]] = sw
+    if not remaining:
+        return out
+
+    seeds = sorted({max(sw, key=len) for sw in remaining.values()})
+    rg = "rg" if _which("rg") else None
+    if rg:
+        cmd = ["rg", "-i", "-F", "-I", "--no-line-number"]
+        for s in seeds:
+            cmd += ["-e", s]
+        cmd += files
+    else:
+        cmd = ["grep", "-i", "-h", "-F"]
+        for s in seeds:
+            cmd += ["-e", s]
+        cmd += files
+
+    log(f"  [sunbiz] one-pass cordata scan for {len(remaining)} communities "
+        f"({len(seeds)} seeds, {'rg' if rg else 'grep'}, cap {SUNBIZ_TIMEOUT}s)…")
+    try:
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                                text=True, encoding="utf-8", errors="ignore")
+    except Exception as e:
+        log(f"  [sunbiz] scan failed to start: {e}")
+        return out
+
+    # Hard wall-clock cap via a watchdog. A blocking `for line in proc.stdout`
+    # will not honour a deadline check when rg is reading 17GB and emitting
+    # nothing (rare seeds), so we kill the process from a timer thread; that
+    # closes stdout and ends the loop with whatever matched so far.
+    def _kill():
         try:
-            v = float(fm.replace(",", ""))
-            # Plausible HOA fee range: $75–$5000/month
-            if 75 <= v <= 5000:
-                fees.append(v)
+            proc.kill()
         except Exception:
             pass
-    if fees:
-        out["fees"] = sorted(set(fees))
-
-    # Phone
-    phones = re.findall(r"\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}", text)
-    if phones:
-        out["phone"] = phones[0]
-
-    # Email
-    emails = [e for e in re.findall(
-        r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}", text
-    ) if not any(x in e.lower() for x in ["example", "noreply", "zillow", "trulia", "google"])]
-    if emails:
-        out["email"] = emails[0]
-
-    # Management company
-    mgmt = re.findall(
-        r"(?:managed by|management company|management)[:\s]+([A-Za-z][A-Za-z\s&,\.]{4,60})",
-        text, re.IGNORECASE
-    )
-    if mgmt:
-        out["management_company"] = mgmt[0].strip()
-
-    # Gated
-    if re.search(r"\bgated\s+community\b|\bgated\s+entrance\b|\bsecurity\s+gate\b", text, re.IGNORECASE):
-        out["gated"] = "Yes"
-
-    # Age restricted
-    if re.search(r"\b55\+\s*community\b|\bage-restricted\b|\bactive\s+adult\b", text, re.IGNORECASE):
-        out["age_restricted"] = "55+"
-    elif re.search(r"\ball\s+ages\b|\bno\s+age\s+restriction\b|\bfamilies\s+welcome\b", text, re.IGNORECASE):
-        out["age_restricted"] = "No"
-
-    # Amenities
-    amenity_keywords = [
-        "pool", "heated pool", "gym", "fitness center", "clubhouse",
-        "tennis", "basketball", "playground", "dog park", "spa", "sauna",
-        "volleyball", "bocce", "pickleball", "walking trail", "lake access",
-    ]
-    found_amenities = [a for a in amenity_keywords if a in text.lower()]
-    if found_amenities:
-        out["amenities"] = ", ".join(found_amenities)
-
-    # Pet policy
-    pet = re.search(
-        r"pet[s]?\s+(?:allowed|welcome|permitted|ok|not allowed|prohibited|restricted)[^.]{0,80}",
-        text, re.IGNORECASE
-    )
-    if pet:
-        out["pet_restriction"] = pet.group(0).strip()
-
-    # Rental restrictions
-    rental = re.search(
-        r"(?:rental|rent)[s]?\s+(?:allowed|prohibited|restricted|approval|permitted)[^.]{0,80}|"
-        r"no\s+(?:short[- ]term\s+)?rentals[^.]{0,40}",
-        text, re.IGNORECASE
-    )
-    if rental:
-        out["rental_approval"] = rental.group(0).strip()
-
+    watchdog = threading.Timer(SUNBIZ_TIMEOUT, _kill)
+    watchdog.start()
+    try:
+        for line in proc.stdout:
+            if not remaining:
+                break
+            namefield = line[12:204].upper()
+            matched = [cid for cid, sw in remaining.items()
+                       if all(w in namefield for w in sw)]
+            for cid in matched:
+                ev = parse_sunbiz_line(line)
+                if ev:
+                    out[cid] = ev
+                del remaining[cid]
+    except Exception:
+        pass
+    finally:
+        watchdog.cancel()
+        _kill()
+    log(f"  [sunbiz] matched {len(out)}/{len(out) + len(remaining)} communities")
     return out
 
 
-def run_ddg_searches(f: CommunityFindings) -> None:
-    """Run all 11 DuckDuckGo queries for a community."""
-    name = f.name
-    city = f.city or "Florida"
-
-    queries = [
-        (f'"{name}" HOA {city} Florida management company',          "mgmt"),
-        (f'"{name}" HOA fees monthly Florida',                        "fees"),
-        (f'"{name}" homeowners association management contact',       "mgmt"),
-        (f'"{name}" HOA pet policy Florida',                          "pets"),
-        (f'"{name}" HOA reviews complaints',                          "reviews"),
-        (f'"{name}" HOA rental restrictions Florida',                 "rental"),
-        (f'"{name}" HOA amenities pool gate clubhouse',               "amenities"),
-        (f'site:yelp.com "{name}" HOA',                               "yelp"),
-        (f'site:facebook.com "{name}" HOA',                           "facebook"),
-        (f'site:reddit.com "{name}" HOA',                             "reddit"),
-        (f'site:hoamanagement.com "{name}"',                          "hoamanagement"),
-    ]
-
-    for query, qtype in queries:
-        results = ddg_search(query)
-        f.log_source(f"DDG ({qtype}): {query[:70]} → {len(results)} results")
-        if not results:
-            continue
-
-        for url, title, snippet in results:
-            combined = f"{title} {snippet}"
-            extracted = extract_from_text(combined)
-
-            # Handle fees separately — always to fee observations.
-            # Zillow disabled (slider noise); add_fee_obs() drops it silently.
-            for fee_val in extracted.get("fees", []):
-                src_type = "realtor" if "realtor" in url.lower() else \
-                           "trulia" if "trulia" in url.lower() else \
-                           "redfin" if "redfin" in url.lower() else \
-                           "homes_com" if "homes.com" in url.lower() else \
-                           "web_search"
-                f.add_fee_obs(fee_val, url, src_type)
-
-            # Other extracted data — to pending (admin review)
-            for field in ["management_company", "gated", "age_restricted",
-                          "amenities", "pet_restriction", "rental_approval"]:
-                if field in extracted:
-                    confidence = 0.65 if qtype in {"reddit","reviews","facebook"} else 0.75
-                    f.add_pending(field, extracted[field], url, f"duckduckgo_{qtype}", confidence)
-
-        time.sleep(0.8)  # be polite to DDG
-
-    # Attempt to fetch the most promising non-listing pages
-    all_urls_seen: set[str] = set()
-    for query, qtype in queries[:5]:  # only fetch for first 5 queries
-        results = ddg_search(query, max_results=3)
-        for url, _, _ in results:
-            if url in all_urls_seen:
-                continue
-            all_urls_seen.add(url)
-            skip = ["zillow","realtor","trulia","redfin","duckduckgo",
-                    "bing.com","google.com","facebook","instagram","twitter",
-                    "youtube","maps.google"]
-            if any(s in url.lower() for s in skip):
-                continue
-            html = fetch(url, timeout=10)
-            if html.startswith("ERROR"):
-                continue
-            page_text = text_from_html(html)
-            # Check the page mentions our community
-            if f.name[:15].upper() not in page_text.upper():
-                continue
-            extracted = extract_from_text(page_text)
-            for fee_val in extracted.get("fees", []):
-                f.add_fee_obs(fee_val, url, "web_page")
-            for field in ["management_company", "amenities", "pet_restriction",
-                          "rental_approval", "gated", "age_restricted", "website_url"]:
-                if field in extracted:
-                    f.add_pending(field, extracted[field], url, "web_page", 0.70)
-
-        time.sleep(0.5)
+def _which(binary: str) -> bool:
+    from shutil import which
+    return which(binary) is not None
 
 
-# ── TIER 4 — Fee databases & directories (fee observations only) ────────────
+# ── TIER: DBPR (Playwright) ───────────────────────────────────────────────────
 
-# Sites we ask DDG to restrict to. Each query returns up to 6 results.
-# All extracted fees go to pending_fee_observations (never auto-approved).
-FEE_SITE_QUERIES: list[tuple[str, str]] = [
-    # Source A — HOA fee databases
-    ("livingin.com",         "site:livingin.com"),
-    ("niche.com",            "site:niche.com"),
-    ("bestplaces.net",       "site:bestplaces.net"),
-    ("neighborhoodscout",    "site:neighborhoodscout.com"),
-    # Source B — Real estate sites that publish HOA fee fields
-    ("redfin.com",           "site:redfin.com"),
-    ("homes.com",            "site:homes.com"),
-    ("trulia.com",           "site:trulia.com"),
-    # Source C — Florida-specific HOA directories
-    ("floridahoa.org",       "site:floridahoa.org"),
-    ("hoamanagement.com",    "site:hoamanagement.com"),
-]
-
-
-def search_listing_sites(f: CommunityFindings) -> None:
-    """Search HOA fee databases + real estate sites for fee mentions.
-
-    Replaces the old Zillow/Realtor scrape. Each source is queried via DDG
-    with a site: filter, then results' titles+snippets are run through
-    extract_from_text() (which requires HOA-context words near the dollar
-    amount). All matches go to pending_fee_observations for admin review.
-
-    After all sources are checked, slider-noise filter runs once to drop
-    any source whose fees look like UI range-slider stops.
-    """
-    for src_name, site_filter in FEE_SITE_QUERIES:
-        if src_name in SKIP_FEE_SOURCES:
-            continue
-        query = f'"{f.name}" HOA fee monthly {site_filter}'
-        results = ddg_search(query, max_results=4)
-        f.log_source(f"Fee DDG ({src_name}): {len(results)} results")
-        if not results:
-            time.sleep(0.4)
-            continue
-        for url, title, snippet in results:
-            combined = f"{title} {snippet}"
-            extracted = extract_from_text(combined)
-            for fee_val in extracted.get("fees", []):
-                # Only count fees in plausible HOA range
-                if 50 <= fee_val <= 2500:
-                    f.add_fee_obs(fee_val, url, src_name)
-        time.sleep(0.5)
-
-    # Run slider-noise detector across what was collected this round.
-    removed = f.filter_slider_noise()
-    if removed > 0:
-        log(f"  [Tier 4] dropped {removed} slider-noise fee observations")
-
-
-# ── TIER 5 — Browser sources (Playwright) ────────────────────────────────────
-
-def search_browser_sources(f: CommunityFindings) -> None:
-    """Playwright-based search for PBCPAO and DBPR."""
+def gather_dbpr(name: str, city: str) -> Optional[Evidence]:
+    """Playwright DBPR CAM-license lookup; return evidence chunk if any text found."""
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        f.log_source("Playwright: not installed — skipping browser tier")
-        f.note("Playwright not available. Install: pip3 install playwright && playwright install chromium")
-        return
-
-    log(f"  [Playwright] launching browser for PBCPAO + DBPR…")
-
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True)
-        ctx = browser.new_context(
-            user_agent=HTTP_HEADERS["User-Agent"],
-            viewport={"width": 1280, "height": 800},
-        )
-        page = ctx.new_page()
-        page.set_default_timeout(20000)
-
-        # ── PBCPAO subdivision search ────────────────────────────────────────
-        # Only run if unit_count not already found locally
-        if "unit_count" not in f.auto_fields and not f.community.get("unit_count"):
-            try:
-                page.goto("https://pbcpao.gov/", wait_until="domcontentloaded")
-                page.wait_for_timeout(2000)
-                # Try to find a subdivision search input
-                search_input = page.query_selector("input[placeholder*='subdivision' i], input[name*='subdiv' i], input[id*='subdiv' i]")
-                if search_input:
-                    search_input.fill(f.name[:20])
-                    page.keyboard.press("Enter")
-                    page.wait_for_timeout(3000)
-                    body = page.inner_text("body")
-                    # Count parcels if table found
-                    rows = re.findall(r"parcel", body, re.IGNORECASE)
-                    if rows:
-                        f.log_source(f"PBCPAO browser: {len(rows)} parcel mentions found")
-                        f.note(f"PBCPAO browser found {len(rows)} parcel mentions")
-                else:
-                    f.log_source("PBCPAO browser: no subdivision input found on page")
-            except Exception as e:
-                f.log_source(f"PBCPAO browser: error — {e}")
-
-        # ── DBPR manager license search ──────────────────────────────────────
-        try:
-            q = urllib.parse.quote_plus(f.name[:30])
+        return None
+    try:
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(headless=True)
+            ctx = browser.new_context(
+                user_agent=HTTP_HEADERS["User-Agent"],
+                viewport={"width": 1280, "height": 800},
+            )
+            page = ctx.new_page()
+            page.set_default_timeout(20000)
+            q = urllib.parse.quote_plus(name[:30])
             page.goto(
                 f"https://www.myfloridalicense.com/wl11.asp?mode=0&SID=&brd=&typ=&"
-                f"SearchType=LicNbr&LicNbr=&SearchValue={q}&city={(f.city or '').replace(' ','+')}"
-                f"&county=&state=FL&zip=&applybutton=Apply+for+License",
+                f"SearchType=Name&SearchValue={q}&city={(city or '').replace(' ', '+')}"
+                f"&county=&state=FL&zip=",
                 wait_until="domcontentloaded",
                 timeout=20000,
             )
             page.wait_for_timeout(2500)
             body = page.inner_text("body")
-            # Look for CAM (Community Association Manager) licenses
-            cam_matches = re.findall(
-                r"([A-Z][a-z]+,\s*[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+CAM\s+(\d{5,})",
-                body
-            )
-            if cam_matches:
-                mgr_name = cam_matches[0][0]
-                lic_num  = cam_matches[0][1]
-                f.add_pending(
-                    "management_company", mgr_name,
-                    source_url=f"https://www.myfloridalicense.com — CAM {lic_num}",
-                    source_type="dbpr",
-                    confidence=0.80,
+            browser.close()
+            body = re.sub(r"\s+", " ", body or "").strip()
+            if body and "CAM" in body.upper():
+                return Evidence(
+                    "dbpr",
+                    "https://www.myfloridalicense.com/wl11.asp",
+                    f"Florida DBPR license search results for '{name}':\n{body[:3000]}",
                 )
-                f.note(f"DBPR: CAM manager {mgr_name} (lic {lic_num})")
-                log(f"  [DBPR] CAM manager: {mgr_name}")
-            else:
-                f.log_source("DBPR: no CAM license found")
+    except Exception:
+        return None
+    return None
+
+
+# ── DOCUMENT READING ──────────────────────────────────────────────────────────
+
+_pdfplumber = None
+
+
+def ensure_pdfplumber():
+    """Import pdfplumber, pip-installing it on first use if missing."""
+    global _pdfplumber
+    if _pdfplumber is not None:
+        return _pdfplumber
+    try:
+        import pdfplumber  # noqa
+        _pdfplumber = pdfplumber
+        return _pdfplumber
+    except ImportError:
+        log("  [docs] pdfplumber missing — pip installing…")
+        try:
+            subprocess.run(
+                [sys.executable, "-m", "pip", "install", "--quiet", "pdfplumber"],
+                check=True,
+            )
+            import pdfplumber  # noqa
+            _pdfplumber = pdfplumber
+            return _pdfplumber
         except Exception as e:
-            f.log_source(f"DBPR browser: error — {e}")
+            log(f"  [docs] pdfplumber install failed: {e}")
+            return None
 
-        browser.close()
+
+def build_candidate_urls(website_url: Optional[str],
+                         search_results: List[Tuple[str, str, str]]) -> List[str]:
+    """Candidate pages to scan for document links: the community's own website
+    plus the official / management-company domains found in the top results."""
+    candidates: List[str] = []
+    seen_domains = set()
+
+    def add(url: str):
+        if not url or not url.lower().startswith("http"):
+            return
+        d = domain_of(url)
+        if not d or d in seen_domains:
+            return
+        if any(bad in url.lower() for bad in NON_OFFICIAL_DOMAINS):
+            return
+        seen_domains.add(d)
+        candidates.append(url)
+
+    if website_url:
+        add(website_url.strip())
+    for url, _title, _snip in search_results:
+        if len(candidates) >= MAX_CANDIDATE_PAGES:
+            break
+        add(url)
+    return candidates[:MAX_CANDIDATE_PAGES]
 
 
-# ── Write findings to DB ──────────────────────────────────────────────────────
+def find_document_links(html: str, base_url: str) -> List[str]:
+    """Find links to governing documents / budgets / rules on a page."""
+    links: List[str] = []
+    seen = set()
+    for href, text in re.findall(r'<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>',
+                                 html, re.DOTALL | re.IGNORECASE):
+        text_clean = re.sub(r"<[^>]+>", "", text).strip().lower()
+        href_low = href.lower()
+        is_pdf = href_low.split("?")[0].endswith(".pdf")
+        kw_hit = any(k in href_low or k in text_clean for k in DOC_KEYWORDS)
+        if not (is_pdf or kw_hit):
+            continue
+        absolute = urllib.parse.urljoin(base_url, href)
+        if not absolute.lower().startswith("http"):
+            continue
+        if absolute in seen:
+            continue
+        seen.add(absolute)
+        # PDFs first — they carry the real governing-document text.
+        links.insert(0, absolute) if is_pdf else links.append(absolute)
+    return links
 
-def write_findings(f: CommunityFindings, dry_run: bool, output_lines: list[str]) -> dict:
+
+def download_pdf(url: str, dest_dir: str, timeout: int = 15) -> Optional[str]:
+    """Stream a PDF to disk. Skip >10MB, non-200, or HTML login pages."""
+    try:
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            if getattr(r, "status", 200) != 200:
+                return None
+            ctype = (r.headers.get("Content-Type") or "").lower()
+            if "html" in ctype:
+                return None  # login / interstitial page, not a real PDF
+            first = r.read(5)
+            if not first.startswith(b"%PDF"):
+                return None  # not actually a PDF
+            data = bytearray(first)
+            while True:
+                chunk = r.read(65536)
+                if not chunk:
+                    break
+                data.extend(chunk)
+                if len(data) > MAX_PDF_BYTES:
+                    return None  # too big — skip
+            fname = re.sub(r"[^A-Za-z0-9._-]", "_", url.split("/")[-1] or "doc")[:80]
+            if not fname.lower().endswith(".pdf"):
+                fname += ".pdf"
+            path = os.path.join(dest_dir, fname)
+            with open(path, "wb") as fh:
+                fh.write(data)
+            return path
+    except Exception:
+        return None
+
+
+def extract_pdf_text(path: str) -> str:
+    """Extract up to PDF_CHAR_CAP chars of text from a PDF via pdfplumber."""
+    pdfplumber = ensure_pdfplumber()
+    if not pdfplumber:
+        return ""
+    out = []
+    total = 0
+    try:
+        with pdfplumber.open(path) as pdf:
+            for page in pdf.pages:
+                txt = page.extract_text() or ""
+                if not txt:
+                    continue
+                out.append(txt)
+                total += len(txt)
+                if total >= PDF_CHAR_CAP:
+                    break
+    except Exception:
+        return ""
+    return re.sub(r"\s+", " ", " ".join(out)).strip()[:PDF_CHAR_CAP]
+
+
+def read_documents(name: str, website_url: Optional[str],
+                   search_results: List[Tuple[str, str, str]],
+                   notes: List[str]) -> Tuple[List[Evidence], List[str]]:
+    """Fetch candidate pages, follow document links, download + read PDFs.
+
+    Bounded by DOC_FETCH_BUDGET_SECS so one slow site cannot stall the run.
+    Returns (evidence chunks, list of PDF URLs actually read).
     """
-    Persist all findings:
-    - Auto-approvable → update communities directly (or dry-run log)
-    - Pending data    → insert to pending_community_data
-    - Fee obs         → insert to pending_fee_observations
-    - Research log    → insert to community_research_log
-    """
-    auto_approved  = 0
-    pending_queued = 0
-    fees_queued    = 0
+    deadline = time.monotonic() + DOC_FETCH_BUDGET_SECS
+    evidence: List[Evidence] = []
+    pdfs_read: List[str] = []
+    combined_pdf_chars = 0
+    tmp_dir = tempfile.mkdtemp(prefix="hoa_pdf_")
 
-    # ── Auto-approve (direct update) ──────────────────────────────────────
-    for field, info in f.auto_fields.items():
-        result = supabase_update(
-            "communities",
-            {"id": f.community_id},
-            {field: info["value"]},
-            dry_run,
+    candidates = build_candidate_urls(website_url, search_results)
+    notes.append(f"doc candidates: {len(candidates)}")
+    own_domain = domain_of(website_url) if website_url else ""
+    name_token = (name.split()[0].upper() if name.split() else "")
+
+    doc_links: List[str] = []
+    for url in candidates:
+        if time.monotonic() > deadline:
+            notes.append("doc budget hit (page scan)")
+            break
+        html = fetch(url, timeout=15)
+        if html.startswith("ERROR") or not html:
+            continue
+        # Keep the page as website evidence. The community's OWN website is
+        # always kept; third-party search-result pages are kept only when the
+        # community name appears (avoids unrelated-page noise).
+        page_text = text_from_html(html)
+        is_own = bool(own_domain) and own_domain in domain_of(url)
+        if is_own or (len(name_token) > 2 and name_token in page_text.upper()):
+            evidence.append(Evidence("website", url, page_text[:PAGE_TEXT_CHAR_CAP]))
+        for link in find_document_links(html, url):
+            if link not in doc_links:
+                doc_links.append(link)
+
+    # Download + read up to MAX_PDFS_PER_COMMUNITY PDFs.
+    for link in doc_links:
+        if len(pdfs_read) >= MAX_PDFS_PER_COMMUNITY:
+            break
+        if combined_pdf_chars >= PDF_COMBINED_CHAR_CAP:
+            break
+        if time.monotonic() > deadline:
+            notes.append("doc budget hit (pdf download)")
+            break
+        if not link.lower().split("?")[0].endswith(".pdf"):
+            continue
+        path = download_pdf(link, tmp_dir)
+        if not path:
+            continue
+        text = extract_pdf_text(path)
+        try:
+            os.remove(path)
+        except Exception:
+            pass
+        if not text:
+            continue
+        remaining = PDF_COMBINED_CHAR_CAP - combined_pdf_chars
+        text = text[:remaining]
+        combined_pdf_chars += len(text)
+        pdfs_read.append(link)
+        evidence.append(Evidence("pdf", link, text))
+
+    try:
+        os.rmdir(tmp_dir)
+    except Exception:
+        pass
+    return evidence, pdfs_read
+
+
+# ── AI EXTRACTION ─────────────────────────────────────────────────────────────
+
+EXTRACT_SYSTEM = (
+    "You are a precise data-extraction engine for a Florida HOA database. "
+    "Extract ONLY facts explicitly stated in the supplied evidence. Never "
+    "infer, guess, or use outside knowledge. Every value you return MUST be "
+    "directly supported by one evidence chunk, and you MUST cite that chunk's "
+    "exact source_url and source_type. Convert any annual/yearly fee or dues "
+    "figure to a MONTHLY amount (divide by 12) before returning it. "
+    "Respond with strict JSON only — no prose, no code fences."
+)
+
+
+def ai_extract(name: str, city: str, evidence: List[Evidence]) -> List[dict]:
+    """Extract real fields with citations via the `claude` CLI (subscription).
+    Returns list of {field_name, value, source_url, source_type, confidence,
+    evidence}."""
+    if not evidence:
+        return []
+
+    chunks = []
+    budget = 60000  # cap total evidence chars sent
+    for i, ev in enumerate(evidence):
+        block = (f"=== EVIDENCE [{i}] source_type={ev.source_type} "
+                 f"source_url={ev.source_url} ===\n{ev.text}\n")
+        if budget - len(block) < 0:
+            block = block[:budget]
+        chunks.append(block)
+        budget -= len(block)
+        if budget <= 0:
+            break
+
+    field_list = ", ".join(sorted(ALLOWED_FIELDS))
+    user = (
+        f"Community: {name} in {city or 'Florida'}, Palm Beach County, Florida.\n\n"
+        f"Extract any of these EXACT fields that the evidence explicitly states:\n"
+        f"{field_list}\n\n"
+        "Rules:\n"
+        "- monthly_fee_min / monthly_fee_max / monthly_fee_median are MONTHLY "
+        "USD numbers (convert annual dues by dividing by 12).\n"
+        "- is_gated / is_55_plus / is_age_restricted are booleans true or false.\n"
+        "- incorporation_date is YYYY-MM-DD.\n"
+        "- subdivision_names is a comma-separated string.\n"
+        "- unit_count is a positive integer.\n"
+        "- Only include a field if an evidence chunk explicitly states it. "
+        "Omit everything you are unsure about.\n"
+        "- source_type MUST be exactly one of: pdf, website, search, sunbiz, dbpr "
+        "(matching the chunk you used). source_url MUST be that chunk's url.\n\n"
+        'Return JSON of this shape:\n'
+        '{"fields":[{"field_name":"...","value":"...","source_url":"...",'
+        '"source_type":"...","confidence":0.0,"evidence":"<=120 char quote"}]}\n\n'
+        "EVIDENCE:\n" + "\n".join(chunks)
+    )
+
+    prompt = EXTRACT_SYSTEM + "\n\n" + user
+
+    # Run the `claude` CLI on the subscription. Strip ANTHROPIC_API_KEY from the
+    # child env so the CLI authenticates via CLAUDE_CODE_OAUTH_TOKEN, never the
+    # (billed) API.
+    child_env = dict(os.environ)
+    child_env.pop("ANTHROPIC_API_KEY", None)
+    child_env.pop("ANTHROPIC_AUTH_TOKEN", None)
+    try:
+        proc = subprocess.run(
+            [CLAUDE_BIN, "--model", AI_MODEL, "-p"],
+            input=prompt, capture_output=True, text=True,
+            timeout=150, env=child_env,
         )
-        status = "DRY_RUN" if dry_run else ("OK" if "error" not in result else f"ERR:{result.get('error','')}")
-        line = f"  AUTO-APPROVE  {field} = {info['value']!r}  [{info['source_type']}]  [{status}]"
-        output_lines.append(line)
-        log(line)
-        auto_approved += 1
+    except Exception as e:
+        log(f"  [ai] claude CLI call failed: {e}")
+        return []
+    if proc.returncode != 0:
+        log(f"  [ai] claude CLI exit {proc.returncode}: {(proc.stderr or '')[:160]}")
+        return []
+    text = (proc.stdout or "").strip()
+    # Strip code fences if present, then grab the outermost JSON object.
+    text = text.strip()
+    text = re.sub(r"^```(?:json)?|```$", "", text, flags=re.MULTILINE).strip()
+    m = re.search(r"\{.*\}", text, re.DOTALL)
+    if not m:
+        return []
+    try:
+        parsed = json.loads(m.group(0))
+    except Exception:
+        return []
+    fields = parsed.get("fields", [])
+    return fields if isinstance(fields, list) else []
 
-    # ── Pending community data ─────────────────────────────────────────────
-    for field, observations in f.pending_fields.items():
-        # Pick the best observation (highest confidence)
-        best = max(observations, key=lambda x: x["confidence"])
+
+# ── VALIDATION ────────────────────────────────────────────────────────────────
+
+def validate_field(field: str, raw_value: Any) -> Optional[str]:
+    """Validate + normalize one proposed value. Returns a clean string, or
+    None if it fails validation (caller drops it)."""
+    if raw_value is None:
+        return None
+
+    if field in BOOL_FIELDS:
+        if isinstance(raw_value, bool):
+            return "true" if raw_value else "false"
+        v = str(raw_value).strip().lower()
+        if v in {"true", "yes", "1"}:
+            return "true"
+        if v in {"false", "no", "0"}:
+            return "false"
+        return None
+
+    if field in INT_FIELDS:
+        try:
+            n = int(round(float(str(raw_value).replace(",", "").strip())))
+        except Exception:
+            return None
+        if n <= 0 or n > 200000:
+            return None
+        return str(n)
+
+    if field in NUMERIC_FIELDS:
+        try:
+            n = float(str(raw_value).replace(",", "").replace("$", "").strip())
+        except Exception:
+            return None
+        if n <= 0 or n > 100000:
+            return None
+        return str(n)
+
+    if field in DATE_FIELDS:
+        v = str(raw_value).strip()[:10]
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", v):
+            return None
+        try:
+            datetime.strptime(v, "%Y-%m-%d")
+        except Exception:
+            return None
+        return v
+
+    if field == "email":
+        v = str(raw_value).strip()
+        if (" " in v or "@" not in v or "." not in v.split("@")[-1]
+                or len(v) >= 200 or len(v) < 5):
+            return None
+        return v
+
+    if field == "phone":
+        v = str(raw_value).strip()
+        digits = re.sub(r"\D", "", v)
+        if len(digits) < 10:
+            return None
+        return v[:500]
+
+    # Default: free text — trimmed, under 500 chars.
+    v = str(raw_value).strip()
+    if not v:
+        return None
+    return v[:500]
+
+
+# ── Community current-value + dedupe lookups ──────────────────────────────────
+
+def existing_pending_fields(community_id: str) -> set:
+    """field_names already pending or approved in pending_community_data."""
+    rows = supabase_get("pending_community_data", {
+        "community_id": f"eq.{community_id}",
+        "status": "in.(pending,approved)",
+        "select": "field_name,status",
+    })
+    if not isinstance(rows, list):
+        return set()
+    return {r.get("field_name") for r in rows if r.get("field_name")}
+
+
+def has_pending_fee(community_id: str) -> bool:
+    """True if a pending/approved fee observation already exists."""
+    rows = supabase_get("pending_fee_observations", {
+        "community_id": f"eq.{community_id}",
+        "status": "in.(pending,approved)",
+        "select": "id",
+        "limit": "1",
+    })
+    return isinstance(rows, list) and len(rows) > 0
+
+
+# ── Enrich one community ──────────────────────────────────────────────────────
+
+def is_empty(val: Any) -> bool:
+    return val is None or (isinstance(val, str) and val.strip() == "")
+
+
+def enrich_community(community: dict, dry_run: bool, output_lines: List[str],
+                     sunbiz_ev: Optional[Evidence] = None) -> dict:
+    name = community.get("canonical_name", "Unknown")
+    cid  = community.get("id", "")
+    city = community.get("city", "") or ""
+    website = community.get("website_url")
+
+    log(f"\n{'─'*60}")
+    log(f"Enriching: {name} [{cid[:8]}…]")
+    log(f"{'─'*60}")
+    output_lines.append(f"\n=== {name} ({cid}) ===")
+
+    notes: List[str] = []
+    evidence: List[Evidence] = []
+
+    # 1 — Gather as today: search, Sunbiz, DBPR.
+    log("  [gather] DuckDuckGo search…")
+    search_ev, search_results = gather_search(name, city)
+    evidence.extend(search_ev)
+
+    if sunbiz_ev:
+        evidence.append(sunbiz_ev)
+        notes.append("sunbiz: hit")
+
+    log("  [gather] DBPR (Playwright)…")
+    dbpr = gather_dbpr(name, city)
+    if dbpr:
+        evidence.append(dbpr)
+        notes.append("dbpr: hit")
+
+    # 2 — Document reading (60s budget).
+    log("  [docs] reading documents…")
+    doc_ev, pdfs_read = read_documents(name, website, search_results, notes)
+    evidence.extend(doc_ev)
+    log(f"  [docs] PDFs read: {len(pdfs_read)}")
+    for p in pdfs_read:
+        output_lines.append(f"  PDF READ   {p}")
+        log(f"    PDF: {p}")
+
+    # 3 — AI extraction over all evidence.
+    log(f"  [ai] extracting from {len(evidence)} evidence chunks…")
+    raw_fields = ai_extract(name, city, evidence)
+    log(f"  [ai] returned {len(raw_fields)} candidate fields")
+
+    # 4 — Stage: validate, dedupe, only-if-currently-null.
+    pending_existing = existing_pending_fields(cid)
+    fee_blocked = has_pending_fee(cid) or not all(
+        is_empty(community.get(c)) for c in FEE_FIELDS
+    )
+    staged_this_run: set = set()
+
+    counts_by_field: Dict[str, int] = {}
+    counts_by_source: Dict[str, int] = {}
+    pcd_inserted = 0
+    fee_inserted = 0
+
+    # Collect fee numbers separately so we emit ONE fee observation.
+    fee_values: Dict[str, float] = {}
+    fee_source_url = ""
+    fee_source_type = ""
+
+    for item in raw_fields:
+        if not isinstance(item, dict):
+            continue
+        field = (item.get("field_name") or "").strip()
+        if field not in ALLOWED_FIELDS:
+            continue
+        src_type = (item.get("source_type") or "").strip().lower()
+        if src_type not in ALLOWED_SOURCE_TYPES:
+            src_type = "search"
+        src_url = (item.get("source_url") or "").strip()[:500]
+        try:
+            confidence = float(item.get("confidence", 0.7))
+        except Exception:
+            confidence = 0.7
+        confidence = max(0.0, min(1.0, confidence))
+
+        clean = validate_field(field, item.get("value"))
+        if clean is None:
+            output_lines.append(f"  DROP(invalid)  {field} = {item.get('value')!r}")
+            continue
+
+        # Only propose where the community's current value is null/empty.
+        if not is_empty(community.get(field)):
+            continue
+
+        if field in FEE_FIELDS:
+            if fee_blocked:
+                continue
+            fee_values[field] = float(clean)
+            if not fee_source_url:
+                fee_source_url, fee_source_type = src_url, src_type
+            continue
+
+        # Dedupe non-fee fields against pending/approved + this run.
+        if field in pending_existing or field in staged_this_run:
+            output_lines.append(f"  SKIP(dup)      {field}")
+            continue
+
         row = {
-            "community_id":   f.community_id,
-            "field_name":     field,
-            "proposed_value": best["value"],
-            "source_url":     best["source_url"],
-            "source_type":    best["source_type"],
-            "confidence":     best["confidence"],
-            "auto_approvable": field in AUTO_APPROVE_FIELDS,
-            "status":         "pending",
+            "community_id":    cid,
+            "field_name":      field,
+            "proposed_value":  clean,
+            "source_url":      src_url,
+            "source_type":     src_type,
+            "confidence":      confidence,
+            "auto_approvable": False,
+            "status":          "pending",
         }
         result = supabase_post("pending_community_data", row, dry_run)
-        status = "DRY_RUN" if dry_run else ("OK" if "error" not in result else f"ERR:{result.get('error','')}")
-        val_repr = repr(best['value'])[:60]
-        line = f"  PENDING       {field} = {val_repr}  [{best['source_type']}]  [{status}]"
-        output_lines.append(line)
-        log(line)
-        pending_queued += 1
+        ok = dry_run or "error" not in result
+        status = "DRY_RUN" if dry_run else ("OK" if ok else f"ERR:{result.get('error','')}")
+        output_lines.append(
+            f"  PENDING   {field} = {clean[:60]!r}  [{src_type}]  [{status}]"
+        )
+        log(f"    PENDING {field} [{src_type}] {status}")
+        if ok:
+            staged_this_run.add(field)
+            pcd_inserted += 1
+            counts_by_field[field] = counts_by_field.get(field, 0) + 1
+            counts_by_source[src_type] = counts_by_source.get(src_type, 0) + 1
 
-    # ── Fee observations ───────────────────────────────────────────────────
-    for obs in f.fee_obs:
-        row = {
-            "community_id":       f.community_id,
-            "fee_amount":         obs["fee_amount"],
-            "fee_rounded_min":    obs["fee_rounded_min"],
-            "fee_rounded_max":    obs["fee_rounded_max"],
-            "fee_rounded_median": obs["fee_rounded_median"],
-            "source_url":         obs["source_url"],
-            "source_type":        obs["source_type"],
-            "listing_date":       obs.get("listing_date"),
+    # Emit a single fee observation if any monthly fee numbers came back.
+    if fee_values and not fee_blocked:
+        vals = sorted(fee_values.values())
+        fmin = fee_values.get("monthly_fee_min", vals[0])
+        fmax = fee_values.get("monthly_fee_max", vals[-1])
+        fmed = fee_values.get("monthly_fee_median", round((fmin + fmax) / 2, 2))
+        amount = fmed
+        fee_row = {
+            "community_id":       cid,
+            "fee_amount":         amount,
+            "fee_rounded_min":    round_fee(fmin, "down"),
+            "fee_rounded_max":    round_fee(fmax, "up"),
+            "fee_rounded_median": round_fee(fmed),
+            "source_url":         fee_source_url,
+            "source_type":        fee_source_type or "search",
+            "listing_date":       date.today().isoformat(),
             "status":             "pending",
         }
-        result = supabase_post("pending_fee_observations", row, dry_run)
-        status = "DRY_RUN" if dry_run else ("OK" if "error" not in result else f"ERR:{result.get('error','')}")
-        line = f"  FEE OBS       ${obs['fee_amount']}  (rnd ${obs['fee_rounded_median']})  [{obs['source_type']}]  [{status}]"
-        output_lines.append(line)
-        log(line)
-        fees_queued += 1
+        result = supabase_post("pending_fee_observations", fee_row, dry_run)
+        ok = dry_run or "error" not in result
+        status = "DRY_RUN" if dry_run else ("OK" if ok else f"ERR:{result.get('error','')}")
+        output_lines.append(
+            f"  FEE OBS   ${amount} (rnd ${fee_row['fee_rounded_median']}) "
+            f"[{fee_row['source_type']}]  [{status}]"
+        )
+        log(f"    FEE OBS ${amount} {status}")
+        if ok:
+            fee_inserted += 1
+            counts_by_source[fee_row["source_type"]] = \
+                counts_by_source.get(fee_row["source_type"], 0) + 1
 
-    # ── Research log ──────────────────────────────────────────────────────
+    # Research log (audit trail) — also propose-only by nature.
     log_row = {
-        "community_id":   f.community_id,
-        "researched_at":  datetime.utcnow().isoformat() + "Z",
-        "fields_updated": list(f.auto_fields.keys()),
-        "sources_checked": f.sources_checked,
-        "notes": "; ".join(f.notes),
+        "community_id":    cid,
+        "researched_at":   datetime.utcnow().isoformat() + "Z",
+        "fields_updated":  sorted(staged_this_run),
+        "sources_checked": [ev.source_type for ev in evidence],
+        "notes": (f"PDFs read: {len(pdfs_read)}; proposals: "
+                  f"{pcd_inserted} field + {fee_inserted} fee; " + "; ".join(notes))[:1000],
     }
     supabase_post("community_research_log", log_row, dry_run)
 
+    field_breakdown = ", ".join(f"{k}={v}" for k, v in sorted(counts_by_field.items())) or "none"
+    output_lines.append(
+        f"  TOTALS: pending_community_data={pcd_inserted} "
+        f"fee_obs={fee_inserted} | by field: {field_breakdown}"
+    )
+    log(f"  DONE: pcd={pcd_inserted} fee={fee_inserted} pdfs={len(pdfs_read)}")
+
     return {
-        "auto_approved":  auto_approved,
-        "pending_queued": pending_queued,
-        "fees_queued":    fees_queued,
+        "community_id": cid,
+        "name": name,
+        "pcd_inserted": pcd_inserted,
+        "fee_inserted": fee_inserted,
+        "pdfs_read": len(pdfs_read),
+        "counts_by_field": counts_by_field,
+        "counts_by_source": counts_by_source,
     }
 
 
-# ── Research one community ────────────────────────────────────────────────────
+# ── Fetch communities ─────────────────────────────────────────────────────────
 
-def research_community(community: dict, dry_run: bool) -> dict:
-    name = community.get("canonical_name", "Unknown")
-    cid  = community.get("id", "")
-    log(f"\n{'─'*60}")
-    log(f"Researching: {name} [{cid[:8]}…]")
-    log(f"{'─'*60}")
-
-    f = CommunityFindings(community)
-    output_lines: list[str] = [f"\n=== {name} ==="]
-
-    # ── Tier 1 ────────────────────────────────────────────────────────────
-    log("  [Tier 1] Local LaCie files…")
-    search_sunbiz_local(f)
-    search_pbcpao_local(f)
-
-    # ── Tier 2 ────────────────────────────────────────────────────────────
-    log("  [Tier 2] Government APIs…")
-    search_courtlistener(f)
-    search_newsapi(f)
-
-    # ── Tier 3 ────────────────────────────────────────────────────────────
-    log("  [Tier 3] DuckDuckGo searches…")
-    run_ddg_searches(f)
-    log("  [Tier 3b] Gated / 55+ detection (amenities → web)…")
-    detect_gated_55plus(f, dry_run)
-
-    # ── Tier 4 ────────────────────────────────────────────────────────────
-    log("  [Tier 4] Listing sites (fee obs only)…")
-    search_listing_sites(f)
-
-    # ── Tier 5 ────────────────────────────────────────────────────────────
-    log("  [Tier 5] Browser sources (Playwright)…")
-    search_browser_sources(f)
-
-    # ── Write / log ────────────────────────────────────────────────────────
-    counts = write_findings(f, dry_run, output_lines)
-    summary = f.summary()
-
-    output_lines.append(f"\n  TOTALS: auto={counts['auto_approved']} | pending={counts['pending_queued']} | fee_obs={counts['fees_queued']}")
-    output_lines.append(f"  Sources checked: {len(f.sources_checked)}")
-    if f.notes:
-        output_lines.append("  Notes: " + "; ".join(f.notes[:5]))
-
-    log(f"  DONE: auto={counts['auto_approved']} | pending={counts['pending_queued']} | fee_obs={counts['fees_queued']}")
-    return {"summary": summary, "output_lines": output_lines, **counts}
+SELECT_COLS = ",".join(["id", "canonical_name", "slug", "city", "status"]
+                       + sorted(ALLOWED_FIELDS))
 
 
-# ── Fetch communities from Supabase ──────────────────────────────────────────
-
-def fetch_communities(community_id: Optional[str], batch: int, status: str) -> list[dict]:
-    """Fetch communities to research from Supabase."""
+def fetch_communities(community_id: Optional[str], batch: int, status: str,
+                      require_website: bool) -> List[dict]:
     if community_id:
-        data = supabase_get("communities", {"id": f"eq.{community_id}", "limit": "1",
-            "select": "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities"})
+        data = supabase_get("communities", {
+            "id": f"eq.{community_id}", "limit": "1", "select": SELECT_COLS})
         return data if isinstance(data, list) else []
 
-    # Fetch thinnest communities (most null fields)
-    data = supabase_get("communities", {
-        "status":           f"eq.{status}",
+    params = {
+        "status": f"eq.{status}",
         "management_company": "is.null",
-        "order":            "canonical_name.asc",
-        "limit":            str(batch * 4),  # fetch extra so we can skip CAMA junk
-        "select":           "id,canonical_name,slug,city,status,management_company,unit_count,monthly_fee_min,amenities",
-    })
+        "order": "updated_at.asc",
+        "limit": str(batch * 4),
+        "select": SELECT_COLS,
+    }
+    if require_website:
+        params["website_url"] = "not.is.null"
+    data = supabase_get("communities", params)
     if not isinstance(data, list):
         log(f"Error fetching communities: {data}")
         return []
-
-    # Skip obvious CAMA artifacts (asterisks, all-caps junk)
     clean = [
         c for c in data
         if "*" not in c.get("canonical_name", "")
         and c.get("canonical_name", "").strip()
+        and (not require_website or (c.get("website_url") or "").strip())
     ]
     return clean[:batch]
 
 
-# ── Main ─────────────────────────────────────────────────────────────────────
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="HOA comprehensive research script")
+    parser = argparse.ArgumentParser(description="HOA propose-only deep enricher")
     parser.add_argument("--community-id", help="UUID of specific community")
-    parser.add_argument("--batch", type=int, default=10, help="Number of communities (default: 10)")
+    parser.add_argument("--batch", type=int, default=10, help="Number of communities")
     parser.add_argument("--status", default="published", help="Community status filter")
+    parser.add_argument("--require-website", default="false",
+                        help="true/false — only pick communities with website_url set")
     parser.add_argument("--dry-run", default="true", help="true/false (default: true)")
     parser.add_argument("--output-dir", default="scripts/output", help="Output directory")
     args = parser.parse_args()
 
     dry_run = args.dry_run.lower() not in {"false", "0", "no"}
+    require_website = args.require_website.lower() in {"true", "1", "yes"}
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    log_file = output_dir / f"research-log-{date.today().isoformat()}.txt"
+    log_file = output_dir / f"enrich-log-{date.today().isoformat()}.txt"
 
-    log(f"HOA Research Pipeline")
-    log(f"Mode: {'DRY RUN' if dry_run else 'LIVE'} | Batch: {args.batch} | Status: {args.status}")
-    log(f"Output: {log_file}")
+    log("HOA Propose-Only Deep Enricher")
+    log(f"Mode: {'DRY RUN' if dry_run else 'LIVE'} | Batch: {args.batch} | "
+        f"Status: {args.status} | require_website={require_website}")
+    log(f"AI: claude CLI model={AI_MODEL} "
+        f"({'auth ok' if AI_HAS_AUTH else 'NO OAUTH TOKEN — extraction will fail'})")
     log(f"LaCie: {'mounted' if os.path.isdir(LACIE_PATH) else 'NOT MOUNTED'}")
+    log(f"Output: {log_file}")
 
-    communities = fetch_communities(args.community_id, args.batch, args.status)
+    communities = fetch_communities(args.community_id, args.batch, args.status, require_website)
     if not communities:
-        log("No communities found to research. Check Supabase connection.")
+        log("No communities found to enrich. Check Supabase connection / filters.")
         sys.exit(1)
+    log(f"\nFetched {len(communities)} communities to enrich")
 
-    log(f"\nFetched {len(communities)} communities to research")
-
-    all_output_lines = [
-        f"HOA Research Run — {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-        f"Mode: {'DRY RUN' if dry_run else 'LIVE'}",
+    out: List[str] = [
+        f"HOA Deep Enrich Run — {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+        f"Mode: {'DRY RUN' if dry_run else 'LIVE'} | require_website={require_website}",
         f"Communities: {len(communities)}",
         "=" * 60,
     ]
 
-    totals = {"auto_approved": 0, "pending_queued": 0, "fees_queued": 0}
+    grand_field: Dict[str, int] = {}
+    grand_source: Dict[str, int] = {}
+    total_pcd = total_fee = total_pdfs = 0
+
+    # One batch-wide pass over the 17GB cordata corpus (instead of per community).
+    sunbiz_map = sunbiz_prescan(communities)
 
     for community in communities:
-        result = research_community(community, dry_run)
-        all_output_lines.extend(result["output_lines"])
-        for k in totals:
-            totals[k] += result.get(k, 0)
+        try:
+            res = enrich_community(community, dry_run, out,
+                                   sunbiz_ev=sunbiz_map.get(community["id"]))
+        except Exception as e:
+            log(f"  ERROR enriching {community.get('canonical_name')}: {e}")
+            out.append(f"  ERROR: {community.get('canonical_name')}: {e}")
+            continue
+        total_pcd  += res["pcd_inserted"]
+        total_fee  += res["fee_inserted"]
+        total_pdfs += res["pdfs_read"]
+        for k, v in res["counts_by_field"].items():
+            grand_field[k] = grand_field.get(k, 0) + v
+        for k, v in res["counts_by_source"].items():
+            grand_source[k] = grand_source.get(k, 0) + v
 
-    # Summary footer
-    all_output_lines.append("\n" + "=" * 60)
-    all_output_lines.append("GRAND TOTALS")
-    all_output_lines.append(f"  Communities researched : {len(communities)}")
-    all_output_lines.append(f"  Auto-approved          : {totals['auto_approved']}")
-    all_output_lines.append(f"  Queued for admin review: {totals['pending_queued']}")
-    all_output_lines.append(f"  Fee observations       : {totals['fees_queued']}")
-    all_output_lines.append("=" * 60)
+    out.append("\n" + "=" * 60)
+    out.append("GRAND TOTALS")
+    out.append(f"  Communities enriched      : {len(communities)}")
+    out.append(f"  PDFs read                 : {total_pdfs}")
+    out.append(f"  pending_community_data rows: {total_pcd}")
+    out.append(f"  pending_fee_observations  : {total_fee}")
+    out.append(f"  By field : " + (", ".join(f"{k}={v}" for k, v in sorted(grand_field.items())) or "none"))
+    out.append(f"  By source: " + (", ".join(f"{k}={v}" for k, v in sorted(grand_source.items())) or "none"))
+    out.append("=" * 60)
 
-    # Write log file
     with open(log_file, "w") as fh:
-        fh.write("\n".join(all_output_lines))
+        fh.write("\n".join(out))
     log(f"\nLog saved to: {log_file}")
-
-    # Also write to dry-run-research.txt if in dry run mode
-    if dry_run:
-        dry_file = output_dir / "dry-run-research.txt"
-        with open(dry_file, "w") as fh:
-            fh.write("\n".join(all_output_lines))
-        log(f"Dry-run output saved to: {dry_file}")
-
-    log("\nDone.")
+    print("\n".join(out[-12:]))
+    log("Done.")
 
 
 if __name__ == "__main__":
