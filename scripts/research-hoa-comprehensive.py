@@ -61,7 +61,7 @@ from typing import Any, Dict, List, Optional, Tuple
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
-from lib.enrich_chain import build_chains, Chains  # noqa: E402
+from lib.enrich_chain import build_chains, Chains, sunbiz_key  # noqa: E402
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -330,6 +330,11 @@ def gather_search(name: str, city: str, chains: Chains
 # it (e.g. when the LaCie drive is unmounted); the prescan is also a no-op then.
 SUNBIZ_LOCAL    = os.environ.get("SUNBIZ_LOCAL", "1").lower() in {"1", "true", "yes"}
 SUNBIZ_TIMEOUT  = int(os.environ.get("SUNBIZ_TIMEOUT", "180"))
+# Compact local Sunbiz index (built by scripts/build-sunbiz-index.py). The
+# launchd service reads this instead of scanning the TCC-gated LaCie corpus.
+SUNBIZ_INDEX_PATH = os.environ.get("SUNBIZ_INDEX_PATH") or os.path.join(
+    os.path.expanduser("~"), "Library", "Application Support", "hoa-agent",
+    "sunbiz-index", "sunbiz.db")
 _SUNBIZ_STOP = {"HOMEOWNERS", "ASSOCIATION", "CONDOMINIUM", "PROPERTY", "OWNERS",
                 "THE", "AND", "INCORPORATED", "INC", "LLC", "CORP", "LTD",
                 "ESTATE", "ESTATES", "AT", "OF", "IN"}
@@ -369,9 +374,61 @@ def parse_sunbiz_line(line: str) -> Optional[Evidence]:
         return None
 
 
+def sunbiz_index_lookup(communities: List[dict]) -> Optional[Dict[str, Evidence]]:
+    """Resolve local-Sunbiz entity fields from the compact SQLite index built by
+    build-sunbiz-index.py (readable under launchd, unlike the LaCie corpus).
+    Matches each community by sunbiz_key. Returns {community_id -> Evidence}
+    (possibly empty), or None when the index file is absent (caller then falls
+    back to the legacy LaCie corpus scan)."""
+    if not os.path.exists(SUNBIZ_INDEX_PATH):
+        return None
+    import sqlite3
+    try:
+        con = sqlite3.connect(f"file:{SUNBIZ_INDEX_PATH}?mode=ro", uri=True)
+    except Exception as e:
+        log(f"  [sunbiz] index open failed ({e}); falling back")
+        return None
+    out: Dict[str, Evidence] = {}
+    try:
+        cur = con.cursor()
+        for c in communities:
+            key = sunbiz_key(c.get("canonical_name", ""))
+            if len(key) < 3:
+                continue
+            cur.execute(
+                "SELECT legal_name, entity_status, state_entity_number, "
+                "incorporation_date, registered_agent, registered_agent_address "
+                "FROM entities WHERE name_key=? "
+                "ORDER BY status_active DESC, incorporation_date DESC LIMIT 1",
+                (key,))
+            row = cur.fetchone()
+            if not row:
+                continue
+            legal, status, doc, inc, ra, raddr = row
+            fields = {k: v for k, v in {
+                "legal_name": legal, "entity_status": status,
+                "state_entity_number": doc, "incorporation_date": inc,
+                "registered_agent": ra, "registered_agent_address": raddr,
+            }.items() if v}
+            if not fields:
+                continue
+            text = ("Florida Division of Corporations (Sunbiz) — local index match.\n"
+                    + "\n".join(f"{k}: {v}" for k, v in fields.items()))
+            out[c["id"]] = Evidence("sunbiz", f"sunbiz-index://{doc}", text, fields=fields)
+    finally:
+        con.close()
+    log(f"  [sunbiz] local index matched {len(out)}/{len(communities)} communities "
+        f"({SUNBIZ_INDEX_PATH})")
+    return out
+
+
 def sunbiz_prescan(communities: List[dict]) -> Dict[str, Evidence]:
-    """Single batch-wide pass over the cordata corpus. Returns
-    {community_id -> Evidence} for every community that matched."""
+    """Resolve local-Sunbiz evidence for the batch. Prefers the compact local
+    index (readable everywhere, incl. launchd); falls back to a single bounded
+    pass over the LaCie cordata corpus when the index is absent."""
+    indexed = sunbiz_index_lookup(communities)
+    if indexed is not None:
+        return indexed
     out: Dict[str, Evidence] = {}
     if not SUNBIZ_LOCAL or not os.path.isdir(CORDATA_DIR):
         return out

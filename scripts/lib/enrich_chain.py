@@ -48,6 +48,54 @@ HTML_SHELL_BYTES = 10 * 1024          # an HTML body under this is treated as a 
 CACHE_TTL_SECS   = 30 * 24 * 3600     # 30 days
 
 
+# ── name normalization ────────────────────────────────────────────────────────
+# normalize_name mirrors scripts/lib/dedupe-check.py (that file's hyphenated
+# name isn't importable). sunbiz_key builds on it to produce the SAME match key
+# used by both build-sunbiz-index.py and the enricher's local-Sunbiz lookup.
+_SUFFIX_RE = re.compile(
+    r"\b("
+    r"property\s+owners?(?:\s+association)?|"
+    r"home\s*owners?(?:\s+association)?|"
+    r"homeowners(?:'\s|\s|')?(?:\s*association)?|"
+    r"condominium(?:\s+association)?|"
+    r"condo(?:\s+association)?|"
+    r"association|hoa|coa|poa|"
+    r"incorporated|inc|"
+    r"l\.?\s*l\.?\s*c\.?|llc|"
+    r"corporation|corp|company|co\.?|limited|ltd"
+    r")\b\.?",
+    re.IGNORECASE,
+)
+_PUNCT_RE = re.compile(r"[^\w\s]")
+_WS_RE    = re.compile(r"\s+")
+_SUNBIZ_KEY_DROP = {"pud", "unit", "units", "phase", "section", "sec", "parcel",
+                    "tract", "no", "ph", "building", "bldg", "lot", "blk", "block"}
+_ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii"}
+
+
+def normalize_name(name: str) -> str:
+    """Lowercase, strip punctuation + common HOA/condo/legal suffixes, collapse ws."""
+    if not name:
+        return ""
+    s = name.lower()
+    s = _PUNCT_RE.sub(" ", s)
+    for _ in range(4):
+        new = _SUFFIX_RE.sub(" ", s)
+        if new == s:
+            break
+        s = new
+    return _WS_RE.sub(" ", s).strip()
+
+
+def sunbiz_key(name: str) -> str:
+    """Match key shared by the Sunbiz index builder and the enricher lookup:
+    normalize_name, then drop community descriptors (PUD, Unit N, Phase II, …)
+    so 'Trends at Boca Raton Unit 1' matches the 'TRENDS AT BOCA RATON …' entity."""
+    toks = [t for t in normalize_name(name).split()
+            if t not in _SUNBIZ_KEY_DROP and t not in _ROMAN and not t.isdigit()]
+    return " ".join(toks)
+
+
 # ── control-flow signals ──────────────────────────────────────────────────────
 class ProviderLimit(Exception):
     """Provider hit a rate-limit / quota / auth wall (429/403/401/402)."""
