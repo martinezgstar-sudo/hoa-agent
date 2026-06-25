@@ -11,6 +11,19 @@ import NewsFeed from '@/app/components/NewsFeed'
 import LegalCases from '@/app/components/LegalCases'
 import SponsoredCard from '@/app/components/SponsoredCard'
 
+// Render new community slugs without a redeploy. dynamicParams lets any slug
+// not returned by generateStaticParams render on-demand; revalidate caches the
+// result (ISR) and the /api/revalidate route can bust it on demand.
+export const dynamicParams = true
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  // ISR on-demand: don't prerender the ~8k published pages at build time.
+  // Each page is generated and cached on first request and refreshed every
+  // `revalidate` seconds, so newly published slugs appear with no redeploy.
+  return []
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const { data: community } = await supabase
