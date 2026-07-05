@@ -2,7 +2,7 @@
 // Run as hoa-goal. Updates title, description, context in-place.
 
 const path = require('path');
-require('dotenv').config({ path: path.join(process.env.HOME, 'Documents/hoa-agent/.env.local') });
+require('dotenv').config({ path: path.join(process.env.HOME, 'Projects/hoa-agent/.env.local') });
 const { createClient } = require('@supabase/supabase-js');
 const status = require('/Users/izzymartinez/Agents/command-center/lib/agent-status.js');
 

@@ -1,7 +1,7 @@
 const path = require('path');
 const status = require('/Users/izzymartinez/Agents/command-center/lib/agent-status.js');
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: '/Users/izzymartinez/Documents/hoa-agent/.env.local' });
+require('dotenv').config({ path: '/Users/izzymartinez/Projects/hoa-agent/.env.local' });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -25,7 +25,7 @@ const proposals = [
       estimated_time: 60,
       why_now: 'Plan requires 7 posts/wk minimum; no posting proposals in queue; week 22 starts in 4 days (2026-05-25).',
       source: 'HOA_PLAN.md SOCIAL OUTREACH — tactics 1, 2, 3',
-      output_path: '/Users/izzymartinez/Documents/hoa-agent/drafts/social-week-22-2026.md',
+      output_path: '/Users/izzymartinez/Projects/hoa-agent/drafts/social-week-22-2026.md',
       success_criteria: '7 distinct drafts covering 3 FB + 2 IG + 2 LinkedIn; each names a specific community (slug) or report; no DB writes; no posts published; Admiral sign-off required before any send.',
       content_source_query: "SELECT canonical_name, slug, city FROM communities WHERE status='published' AND management_company IS NOT NULL AND monthly_fee_median IS NOT NULL AND unit_count IS NOT NULL AND entity_status IS NOT NULL LIMIT 16;",
       guardrails: ['no scheduling', 'no sends', 'no advertiser names', 'no fee numbers Neelix cannot point to in DB'],
@@ -44,10 +44,10 @@ const proposals = [
       estimated_time: 90,
       why_now: 'Research input already exists from prior cycle; outreach pipeline empty for Harry; pairs with Tom Paris vendor proposal as outreach Wave 1.',
       source: 'HOA_PLAN.md THE CREW — Harry Kim: Outreach to property management companies',
-      input_path: '/Users/izzymartinez/Documents/hoa-agent/scripts/output/harry-mgmt-top10-notes.md',
+      input_path: '/Users/izzymartinez/Projects/hoa-agent/scripts/output/harry-mgmt-top10-notes.md',
       output_paths: [
-        '/Users/izzymartinez/Documents/hoa-agent/scripts/output/harry-mgmt-outreach-packet-2026-05-21.md',
-        '/Users/izzymartinez/Documents/hoa-agent/scripts/output/harry-mgmt-outreach-packet-2026-05-21.csv',
+        '/Users/izzymartinez/Projects/hoa-agent/scripts/output/harry-mgmt-outreach-packet-2026-05-21.md',
+        '/Users/izzymartinez/Projects/hoa-agent/scripts/output/harry-mgmt-outreach-packet-2026-05-21.csv',
       ],
       success_criteria: '10 rows in CSV with verified contact + source URL + verification date; 3 distinct email templates ≤200 words each; merge tokens shown ({first_name},{company},{community_count}); zero sends.',
       guardrails: ['rate limit per existing outreach rules: 20 emails/day max once approved', 'never auto-send', 'Admiral signs off per-company before any send'],
@@ -67,8 +67,8 @@ const proposals = [
       why_now: 'Vendor pipeline is empty; MorningStar is the sole live advertiser; revenue diversification gated on having a credible target list before sales begin.',
       source: 'HOA_PLAN.md THE CREW — Tom Paris: Sign up vendors for the platform',
       output_paths: [
-        '/Users/izzymartinez/Documents/hoa-agent/scripts/output/vendor-target-list-2026-05-21.md',
-        '/Users/izzymartinez/Documents/hoa-agent/scripts/output/vendor-target-list-2026-05-21.csv',
+        '/Users/izzymartinez/Projects/hoa-agent/scripts/output/vendor-target-list-2026-05-21.md',
+        '/Users/izzymartinez/Projects/hoa-agent/scripts/output/vendor-target-list-2026-05-21.csv',
       ],
       success_criteria: '25 rows × 7 cols; 5 vendors per category; each row has ≥2 source URLs and verification date; pitch outline names MorningStar precedent + 3 plan tiers + Sponsored Card v4; zero outreach.',
       categories: ['insurance', 'landscaping', 'painting', 'security/access', 'asphalt/paving'],

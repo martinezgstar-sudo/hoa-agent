@@ -25,6 +25,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Keep form fields readable regardless of OS dark mode. Tailwind Preflight
+   applies `color: inherit` to inputs, so without an explicit color they pick
+   up the dark-mode body foreground (#ededed) above and render as white text on
+   a white field. Set an explicit dark text color, white field, and readable
+   placeholder. Inline styles still override these where a field intends to. */
+input,
+textarea,
+select {
+  color: #171717;
+  background-color: #ffffff;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af; /* gray-400 */
+}
+
 /* Skip-to-content link — visible only on keyboard focus (WCAG 2.4.1) */
 .skip-to-content {
   position: absolute;

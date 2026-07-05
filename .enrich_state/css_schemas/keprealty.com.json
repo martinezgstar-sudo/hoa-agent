@@ -1,0 +1,1 @@
+{"name": "hoa", "baseSelector": ".amh-header-buttons", "fields": [{"name": "phone", "selector": ".amh-phone-text-hide", "type": "text"}, {"name": "email", "selector": ".amh-email-text-hide", "type": "text"}]}

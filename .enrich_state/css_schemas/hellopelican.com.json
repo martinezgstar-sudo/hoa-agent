@@ -1,0 +1,1 @@
+{"name": "hoa", "baseSelector": ".si-site-container-fluid", "fields": [{"name": "phone", "selector": ".phone-link a.si-phone-link", "type": "text"}, {"name": "website", "selector": ".logo a", "type": "attribute|href"}]}

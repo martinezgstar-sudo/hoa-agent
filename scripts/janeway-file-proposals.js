@@ -1,7 +1,7 @@
 // Janeway proposal filer — writes 3 gap-targeted proposals to agent_review_queue
 // Agent: hoa-boards (running) → files as hoa-dir (Janeway captain seat)
 const path = require('path');
-require('dotenv').config({ path: path.join(process.env.HOME, 'Documents/hoa-agent/.env.local') });
+require('dotenv').config({ path: path.join(process.env.HOME, 'Projects/hoa-agent/.env.local') });
 const { createClient } = require('@supabase/supabase-js');
 const status = require('/Users/izzymartinez/Agents/command-center/lib/agent-status.js');
 

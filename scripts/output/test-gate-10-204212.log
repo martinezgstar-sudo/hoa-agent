@@ -1,0 +1,197 @@
+[20:42:12] HOA Propose-Only Deep Enricher
+[20:42:12] Mode: DRY RUN | Batch: 10 | Status: published | require_website=False | without_website=True | skip_researched_days=0
+[20:42:12] AI: claude CLI model=haiku (auth ok)
+[20:42:12] LaCie: mounted
+[20:42:12] Output: scripts/output/enrich-log-2026-06-18.txt
+[20:42:12] Search providers present (in order): ['searxng', 'jina_search', 'ddg_lite']
+[20:42:12] Quota at start: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:42:19] 
+Fetched 10 communities to enrich
+[20:42:19]   [sunbiz] one-pass cordata scan for 6 communities (6 seeds, rg, cap 180s)…
+[20:45:20]   [sunbiz] matched 0/6 communities
+[20:45:20] 
+────────────────────────────────────────────────────────────
+[20:45:20] Enriching: Osprey Point HOA [e703e43e…]
+[20:45:20] ────────────────────────────────────────────────────────────
+[20:45:20]   [gather] search chain…
+[20:45:20]     search [searxng (cache) → 10] "Osprey Point HOA" HOA Boynton Beach Florida management
+[20:45:20]     search [searxng (cache) → 10] "Osprey Point HOA" HOA fees monthly Florida
+[20:45:20]     search [searxng (cache) → 10] "Osprey Point HOA" homeowners association Boynton Beach
+[20:45:20]     search [searxng (cache) → 2] "Osprey Point HOA" HOA documents declaration rules Boyn
+[20:45:20]     search [searxng (cache) → 1] "Osprey Point HOA" HOA amenities pet rental restriction
+[20:45:20]     search [searxng (cache) → 10] "Osprey Point HOA" Florida Division of Corporations Sun
+[20:45:20]   [gather] DBPR (Playwright)…
+[20:45:20]   [docs] reading documents…
+[20:45:20]     [docs] 6 candidate page(s) [search only]: https://www.jacksonville.gov/getContentAsset/1dbad241-034d-4377-b47c-2337c386a4f7/135b97c9-84fa-4e82-b956-0fbccec4aa1f/05-12-25-GAB-CPAC-Meeting-Summary.pdf?language=en, https://mail.floridacommunitynetwork.net/fcnbrd_list.php?mastertable=fcnhoa&masterkey1=N98000002783, https://realmanage.com/locations/florida/osprey/, https://www.hellopelican.com/property-search/detail/240/O6304558/107-royal-troon-loop-davenport-fl-33837/?src=2, https://sawgrasscommunity.com/covenants-and-restrictions/, https://www.scribd.com/document/659355159/JTA-TDP-2019-2029-1
+[20:45:20]     [docs] fetched https://www.jacksonville.gov/getContentAsset/1dbad241-034d-4377-b47c-2337c386a4f7/135b97c9-84fa-4e82-b956-0fbccec4aa1f/05-12-25-GAB-CPAC-Meeting-Summary.pdf?language=en (8000b) via requests/pdf_text (cache)
+[20:45:20]     [docs] fetched https://mail.floridacommunitynetwork.net/fcnbrd_list.php?mastertable=fcnhoa&masterkey1=N98000002783 (4258b) via crawl4ai/text (cache)
+[20:45:20]     [docs] fetched https://realmanage.com/locations/florida/osprey/ (742715b) via requests/html (cache)
+[20:45:20]     [docs] fetched https://www.hellopelican.com/property-search/detail/240/O6304558/107-royal-troon-loop-davenport-fl-33837/?src=2 (355617b) via requests/html (cache)
+[20:45:20]     [docs] fetched https://sawgrasscommunity.com/covenants-and-restrictions/ (253b) via crawl4ai/text (cache)
+[20:45:20]     [docs] fetched https://www.scribd.com/document/659355159/JTA-TDP-2019-2029-1 (1813203b) via requests/html (cache)
+[20:45:20]     [docs] doc links: 3 (pdf: 0)
+[20:45:20]   [docs] PDFs read: 0
+[20:45:30]   [ai] extracting [page/pdf, signals=fee$,phone] from 2 chunk(s) (12000 chars, was 43176)…
+[20:45:45]   [ai] CALLED → 0 fields, ~3432 input tokens
+[20:45:53]     PENDING management_company [website] DRY_RUN
+[20:45:53]   DONE: staged=1 pcd=1 fee=0 pdfs=0 | filter 43176->12000 chars | claude=CALLED ~3432 tok
+[20:45:53]   QUOTA: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:45:53] 
+────────────────────────────────────────────────────────────
+[20:45:53] Enriching: Boca Raton Golf Course PUD [7d2dec0e…]
+[20:45:53] ────────────────────────────────────────────────────────────
+[20:45:53]   [gather] search chain…
+[20:45:53]     search [searxng (cache) → 10] "Boca Raton Golf Course PUD" HOA Boca Raton Florida man
+[20:45:53]     search [searxng (cache) → 10] "Boca Raton Golf Course PUD" HOA fees monthly Florida
+[20:45:53]     search [searxng (cache) → 10] "Boca Raton Golf Course PUD" homeowners association Boc
+[20:45:53]     search [searxng (cache) → 2] "Boca Raton Golf Course PUD" HOA documents declaration 
+[20:45:53]     search [searxng (cache) → 10] "Boca Raton Golf Course PUD" HOA amenities pet rental r
+[20:45:53]     search [searxng (cache) → 10] "Boca Raton Golf Course PUD" Florida Division of Corpor
+[20:45:53]   [gather] DBPR (Playwright)…
+[20:45:53]   [docs] reading documents…
+[20:45:53]     [docs] 6 candidate page(s) [search only]: https://discover.pbcgov.org/pzb/zoning/Hearings-Meetings-ZC/03%20ZV-PDD-2023-955-John%20West.pdf, https://www.thesainzgroup.com/listing-detail/1183838132/8125-Crystal-Downs-AVE-Boca-Raton-FL, https://www.interealtyxchange.com/listing-detail/1184057789/8252-Crystal-Downs-AVE-Boca-Raton-FL, https://www.luxfloridahome.com/listing-detail/1183837861/20041-Pacific-Dunes-DR-Boca-Raton-FL, https://www.paristeamrealtysolutions.com/listings/city/Boca-Raton/, https://www.hawkeyemanagementinc.com/
+[20:45:53]     [docs] fetched https://discover.pbcgov.org/pzb/zoning/Hearings-Meetings-ZC/03%20ZV-PDD-2023-955-John%20West.pdf (8000b) via requests/pdf_text (cache)
+[20:45:54]     [docs] fetch FAIL https://www.thesainzgroup.com/listing-detail/1183838132/8125-Crystal-Downs-AVE-Boca-Raton-FL
+[20:45:54]     [docs] fetch FAIL https://www.interealtyxchange.com/listing-detail/1184057789/8252-Crystal-Downs-AVE-Boca-Raton-FL
+[20:45:55]     [docs] fetch FAIL https://www.luxfloridahome.com/listing-detail/1183837861/20041-Pacific-Dunes-DR-Boca-Raton-FL
+[20:45:55]     [docs] fetched https://www.paristeamrealtysolutions.com/listings/city/Boca-Raton/ (332505b) via requests/html (cache)
+[20:45:55]     [docs] fetched https://www.hawkeyemanagementinc.com/ (128444b) via requests/html (cache)
+[20:45:55]     [docs] doc links: 8 (pdf: 0)
+[20:45:55]   [docs] PDFs read: 0
+[20:46:13]   [css] generated reusable JSON-CSS schema for paristeamrealtysolutions.com
+[20:47:10]   [css] generated reusable JSON-CSS schema for hawkeyemanagementinc.com
+[20:47:10]   [ai] extracting [page/pdf, signals=phone,email,mgmt] from 2 chunk(s) (12000 chars, was 40180)…
+[20:47:20]   [ai] CALLED → 0 fields, ~3434 input tokens
+[20:47:28]   DONE: staged=0 pcd=0 fee=0 pdfs=0 | filter 40180->12000 chars | claude=CALLED ~3434 tok
+[20:47:28]   QUOTA: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:47:28] 
+────────────────────────────────────────────────────────────
+[20:47:28] Enriching: King Arthur Estates [481b8102…]
+[20:47:28] ────────────────────────────────────────────────────────────
+[20:47:28]   [gather] search chain…
+[20:47:28]     search [searxng (cache) → 10] "King Arthur Estates" HOA Palm Beach Gardens Florida ma
+[20:47:28]     search [searxng (cache) → 10] "King Arthur Estates" HOA fees monthly Florida
+[20:47:28]     search [searxng (cache) → 10] "King Arthur Estates" homeowners association Palm Beach
+[20:47:28]     search [searxng (cache) → 2] "King Arthur Estates" HOA documents declaration rules P
+[20:47:28]     search [searxng (cache) → 10] "King Arthur Estates" HOA amenities pet rental restrict
+[20:47:28]     search [searxng (cache) → 10] "King Arthur Estates" Florida Division of Corporations 
+[20:47:28]   [gather] DBPR (Playwright)…
+[20:47:28]   [docs] reading documents…
+[20:47:28]     [docs] 6 candidate page(s) [search only]: https://discover.pbcgov.org/pzb/zoning/pdf/plat_index.pdf, https://www.echofineproperties.com/communities/palm-beach-gardens-homes/the-isles/, https://www.bestofluxuryrealty.com/Palm-Beach-Gardens/Sandalwood-Estates-Condos-For-Sale, https://erec.mypalmbeachclerk.com/Search/DocumentAndInfoByBookPage?Key=Assessor&booktype=O&booknumber=34026&pagenumber=447, https://www.raveis.com/prop/B26038464/4698-arthur-street-palm-beach-gardens-fl-33418, https://www.mhvillage.com/parks/3387
+[20:47:28]     [docs] fetched https://discover.pbcgov.org/pzb/zoning/pdf/plat_index.pdf (8000b) via requests/pdf_text (cache)
+[20:47:41]     [docs] fetch FAIL https://www.echofineproperties.com/communities/palm-beach-gardens-homes/the-isles/
+[20:47:41]     [docs] fetched https://www.bestofluxuryrealty.com/Palm-Beach-Gardens/Sandalwood-Estates-Condos-For-Sale (249927b) via requests/html (cache)
+[20:47:41]     [docs] fetched https://erec.mypalmbeachclerk.com/Search/DocumentAndInfoByBookPage?Key=Assessor&booktype=O&booknumber=34026&pagenumber=447 (2545376b) via requests/html (cache)
+[20:47:41]     [docs] fetched https://www.raveis.com/prop/B26038464/4698-arthur-street-palm-beach-gardens-fl-33418 (166637b) via requests/html (cache)
+[20:47:41]     [docs] fetched https://www.mhvillage.com/parks/3387 (221245b) via requests/html (cache)
+[20:47:41]     [docs] doc links: 7 (pdf: 2): https://www.raveis.com/Content/PDFs/WRNY-NY-SOP.pdf, https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf
+[20:47:41]     [docs] PDF skip (unreadable/blocked): https://www.raveis.com/Content/PDFs/WRNY-NY-SOP.pdf
+[20:47:41]     [docs] PDF read https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf via requests (cache)
+[20:47:41]   [docs] PDFs read: 1
+[20:47:41]     PDF: https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf
+[20:48:55]   [css] generated reusable JSON-CSS schema for raveis.com
+[20:50:00]   [css] generated reusable JSON-CSS schema for mhvillage.com
+[20:50:00]   [ai] extracting [page/pdf, signals=fee$,phone] from 3 chunk(s) (12000 chars, was 54384)…
+[20:50:20]   [ai] CALLED → 2 fields, ~3435 input tokens
+[20:50:21]     PENDING phone [website] DRY_RUN
+[20:50:21]     PENDING management_company [website] DRY_RUN
+[20:50:21]     PENDING email [website] DRY_RUN
+[20:50:21]     PENDING website_url [website] DRY_RUN
+[20:50:21]   DONE: staged=4 pcd=4 fee=0 pdfs=1 | filter 54384->12000 chars | claude=CALLED ~3435 tok
+[20:50:21]   QUOTA: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:50:21] 
+────────────────────────────────────────────────────────────
+[20:50:21] Enriching: Trends at Boca Raton Unit 1 [b9faa20e…]
+[20:50:21] ────────────────────────────────────────────────────────────
+[20:50:21]   [gather] search chain…
+[20:50:21]     search [searxng (cache) → 10] "Trends at Boca Raton Unit 1" HOA Boca Raton Florida ma
+[20:50:21]     search [searxng (cache) → 10] "Trends at Boca Raton Unit 1" HOA fees monthly Florida
+[20:50:21]     search [searxng (cache) → 10] "Trends at Boca Raton Unit 1" homeowners association Bo
+[20:50:21]     search [searxng (cache) → 2] "Trends at Boca Raton Unit 1" HOA documents declaration
+[20:50:21]     search [searxng (cache) → 5] "Trends at Boca Raton Unit 1" HOA amenities pet rental 
+[20:50:21]     search [searxng (cache) → 10] "Trends at Boca Raton Unit 1" Florida Division of Corpo
+[20:50:21]   [gather] DBPR (Playwright)…
+[20:50:21]   [docs] reading documents…
+[20:50:21]     [docs] 6 candidate page(s) [search only]: https://discover.pbcgov.org/pzb/zoning/pdf/plat_index.pdf, https://www.trendshoa.com/our-community, https://www.singerislandcondos.us/listing-florida_comingle_sold/r11125101-8463-dynasty-drive-boca-raton-fl-33433/, https://investproinc.com/fl/boca-raton/boca-grand-condo/233-s-federal-highway-203/, https://subdivisions.com/boca-raton-fl/trends-at-boca-raton-single-family-homes-for-rent, https://realmanage.com/locations/florida/boca-raton/
+[20:50:21]     [docs] fetched https://discover.pbcgov.org/pzb/zoning/pdf/plat_index.pdf (8000b) via requests/pdf_text (cache)
+[20:50:21]     [docs] fetched https://www.trendshoa.com/our-community (741992b) via requests/html (cache)
+[20:50:21]     [docs] fetched https://www.singerislandcondos.us/listing-florida_comingle_sold/r11125101-8463-dynasty-drive-boca-raton-fl-33433/ (480220b) via requests/html (cache)
+[20:50:21]     [docs] fetched https://investproinc.com/fl/boca-raton/boca-grand-condo/233-s-federal-highway-203/ (6705b) via crawl4ai/text (cache)
+[20:50:21]     [docs] fetched https://subdivisions.com/boca-raton-fl/trends-at-boca-raton-single-family-homes-for-rent (337028b) via requests/html (cache)
+[20:50:23]     [docs] fetch FAIL https://realmanage.com/locations/florida/boca-raton/
+[20:50:23]     [docs] doc links: 6 (pdf: 5): https://www.trendshoa.com/_files/ugd/0152bf_7c24ced7ae0448119c22e378fe64b86d.pdf, https://www.trendshoa.com/_files/ugd/0152bf_6568242647f545d5bd2f5c3efb5b76e8.pdf, https://www.trendshoa.com/_files/ugd/0152bf_23265502ded14e098c7b13ef2d2dfea7.pdf, https://www.trendshoa.com/_files/ugd/0152bf_d433d83ceb2e4cf8899161344539d258.pdf?index=true, https://www.trendshoa.com/_files/ugd/0152bf_d433d83ceb2e4cf8899161344539d258.pdf
+[20:50:23]     [docs] PDF read https://www.trendshoa.com/_files/ugd/0152bf_7c24ced7ae0448119c22e378fe64b86d.pdf via requests (cache)
+[20:50:23]     [docs] PDF read https://www.trendshoa.com/_files/ugd/0152bf_6568242647f545d5bd2f5c3efb5b76e8.pdf via requests (cache)
+[20:50:23]     [docs] PDF read https://www.trendshoa.com/_files/ugd/0152bf_23265502ded14e098c7b13ef2d2dfea7.pdf via requests (cache)
+[20:50:35]     [docs] PDF skip (unreadable/blocked): https://www.trendshoa.com/_files/ugd/0152bf_d433d83ceb2e4cf8899161344539d258.pdf?index=true
+[20:50:51]     [docs] PDF skip (unreadable/blocked): https://www.trendshoa.com/_files/ugd/0152bf_d433d83ceb2e4cf8899161344539d258.pdf
+[20:50:51]   [docs] PDFs read: 3
+[20:50:51]     PDF: https://www.trendshoa.com/_files/ugd/0152bf_7c24ced7ae0448119c22e378fe64b86d.pdf
+[20:50:51]     PDF: https://www.trendshoa.com/_files/ugd/0152bf_6568242647f545d5bd2f5c3efb5b76e8.pdf
+[20:50:51]     PDF: https://www.trendshoa.com/_files/ugd/0152bf_23265502ded14e098c7b13ef2d2dfea7.pdf
+[20:51:02]   [ai] extracting [page/pdf, signals=phone] from 3 chunk(s) (12000 chars, was 52084)…
+[20:51:20]   [ai] CALLED → 3 fields, ~3435 input tokens
+[20:51:21]     PENDING management_company [website] DRY_RUN
+[20:51:21]     PENDING phone [website] DRY_RUN
+[20:51:21]   DONE: staged=2 pcd=2 fee=0 pdfs=3 | filter 52084->12000 chars | claude=CALLED ~3435 tok
+[20:51:21]   QUOTA: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:51:21] 
+────────────────────────────────────────────────────────────
+[20:51:21] Enriching: Forest Estates [f945852a…]
+[20:51:21] ────────────────────────────────────────────────────────────
+[20:51:21]   [gather] search chain…
+[20:51:21]     search [searxng (cache) → 10] "Forest Estates" HOA West Palm Beach Florida management
+[20:51:21]     search [searxng (cache) → 10] "Forest Estates" HOA fees monthly Florida
+[20:51:21]     search [searxng (cache) → 10] "Forest Estates" homeowners association West Palm Beach
+[20:51:21]     search [searxng (cache) → 10] "Forest Estates" HOA documents declaration rules West P
+[20:51:21]     search [searxng (cache) → 10] "Forest Estates" HOA amenities pet rental restrictions 
+[20:51:21]     search [searxng (cache) → 1] "Forest Estates" Florida Division of Corporations Sunbi
+[20:51:21]   [gather] DBPR (Playwright)…
+[20:51:21]   [docs] reading documents…
+[20:51:21]     [docs] 6 candidate page(s) [search only]: https://www.afdb.org/fileadmin/uploads/afdb/Documents/Publications/From_Fragility_to_Resilience_-_Managing_Natural_Resources_in_Fragile_Situations_in_Africa.pdf, https://www.miamidade.gov/resources/budget/adopted/fy2022-23/volume-1.pdf, https://www.scribd.com/document/520446089/Nred-Active-Hoa, https://www.blackwoodconservation.org/wp-content/uploads/2019/07/Global-Status-of-Dalbergia-and-Pterocarpus-Rosewood-CITES-2017-.pdf, https://www.govmvmt.org/wp-content/uploads/2023/11/Peoplelink-Temporary-Staffing-RPO-Proposal_UNF.pdf, https://red.nv.gov/uploadedFiles/rednvgov/Content/Administration/Public_Records/NRED-ACTIVE-HOA.xlsx
+[20:51:21]     [docs] fetch FAIL https://www.afdb.org/fileadmin/uploads/afdb/Documents/Publications/From_Fragility_to_Resilience_-_Managing_Natural_Resources_in_Fragile_Situations_in_Africa.pdf
+[20:51:21]     [docs] fetched https://www.miamidade.gov/resources/budget/adopted/fy2022-23/volume-1.pdf (8000b) via requests/pdf_text (cache)
+[20:51:21]     [docs] fetched https://www.scribd.com/document/520446089/Nred-Active-Hoa (1639770b) via requests/html (cache)
+[20:51:21]     [docs] fetched https://www.blackwoodconservation.org/wp-content/uploads/2019/07/Global-Status-of-Dalbergia-and-Pterocarpus-Rosewood-CITES-2017-.pdf (8000b) via requests/pdf_text (cache)
+[20:51:21]     [docs] fetched https://www.govmvmt.org/wp-content/uploads/2023/11/Peoplelink-Temporary-Staffing-RPO-Proposal_UNF.pdf (8000b) via requests/pdf_text (cache)
+[20:51:21]     [docs] fetched https://red.nv.gov/uploadedFiles/rednvgov/Content/Administration/Public_Records/NRED-ACTIVE-HOA.xlsx (186415b) via requests/html (cache)
+[20:51:21]     [docs] doc links: 3 (pdf: 0)
+[20:51:21]   [docs] PDFs read: 0
+[20:51:21]   [ai] extracting [snippets, signals=fee$,mgmt] from 5 chunk(s) (12000 chars, was 15503)…
+[20:51:38]   [ai] CALLED → 0 fields, ~3433 input tokens
+[20:51:47]   DONE: staged=0 pcd=0 fee=0 pdfs=0 | filter 15503->12000 chars | claude=CALLED ~3433 tok
+[20:51:47]   QUOTA: searxng=76d,76m | jina_search=0d,0m | ddg_lite=0d,0m | requests=0d,0m | crawl4ai=0d,0m | jina_reader=0d,0m
+[20:51:47] 
+────────────────────────────────────────────────────────────
+[20:51:47] Enriching: Whitehall Condo of the Lands of the President [272898c4…]
+[20:51:47] ────────────────────────────────────────────────────────────
+[20:51:47]   [gather] search chain…
+[20:51:47]     search [searxng (cache) → 10] "Whitehall Condo of the Lands of the President" HOA Wes
+[20:51:47]     search [searxng (cache) → 10] "Whitehall Condo of the Lands of the President" HOA fee
+[20:51:47]     search [searxng (cache) → 10] "Whitehall Condo of the Lands of the President" homeown
+[20:51:47]     search [searxng (cache) → 6] "Whitehall Condo of the Lands of the President" HOA doc
+[20:51:47]     search [searxng (cache) → 10] "Whitehall Condo of the Lands of the President" HOA ame
+[20:51:47]     search [searxng (cache) → 3] "Whitehall Condo of the Lands of the President" Florida
+[20:51:47]   [gather] DBPR (Playwright)…
+[20:51:47]   [docs] reading documents…
+[20:51:47]     [docs] 6 candidate page(s) [search only]: https://sobocarealestate.com/listing-detail/1176473042/3710-Whitehall-DR-404-West-Palm-Beach-FL, https://www.lpthomesearch.com/listing-detail/1176476269/3826-Whitehall-DR-205-West-Palm-Beach-FL, https://www.fultongrace.com/home-details/10673522/3710-whitehall-drive-105-west-palm-beach-33401-fl/, https://www.compass.com/homedetails/3516-Whitehall-Dr-Unit-403-West-Palm-Beach-FL-33401/1C2EKP_pid/, https://www.totalrealtyconcepts.com/listings/city/West-Palm-Beach/, https://axenrealty.com/listing-detail/1176476294/3826-Whitehall-DR-205-West-Palm-Beach-FL
+[20:51:51]     [docs] fetch FAIL https://sobocarealestate.com/listing-detail/1176473042/3710-Whitehall-DR-404-West-Palm-Beach-FL
+[20:51:56]     [docs] fetch FAIL https://www.lpthomesearch.com/listing-detail/1176476269/3826-Whitehall-DR-205-West-Palm-Beach-FL
+[20:51:56]     [docs] fetched https://www.fultongrace.com/home-details/10673522/3710-whitehall-drive-105-west-palm-beach-33401-fl/ (4180b) via crawl4ai/text (cache)
+[20:51:56]     [docs] fetched https://www.compass.com/homedetails/3516-Whitehall-Dr-Unit-403-West-Palm-Beach-FL-33401/1C2EKP_pid/ (770897b) via requests/html (cache)
+[20:51:56]     [docs] fetched https://www.totalrealtyconcepts.com/listings/city/West-Palm-Beach/ (313781b) via requests/html (cache)
+[20:52:00]     [docs] fetch FAIL https://axenrealty.com/listing-detail/1176476294/3826-Whitehall-DR-205-West-Palm-Beach-FL
+[20:52:00]     [docs] doc links: 13 (pdf: 7): https://www.compass.com/ucfe-assets/consumer-footer/7/Notice_of_Reasonable_Accommodation_to_Prospective_Tenant.pdf, https://www.compass.com/ucfe-assets/consumer-footer/7/NY-StandardOperatingProcedures-2026-03.pdf, https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf, https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-4-1_1.pdf, https://www.compass.com/ucfe-assets/consumer-footer/7/IABS-1-2.pdf, https://www.compass.com/ucfe-assets/consumer-footer/7/(6-2-2020)-PRE-Posted-Rules-of-Entry.pdf, https://www.compass.com/ucfe-assets/consumer-footer/7/EVerify_Participation_eng_span.pdf
+[20:52:00]     [docs] PDF read https://www.compass.com/ucfe-assets/consumer-footer/7/Notice_of_Reasonable_Accommodation_to_Prospective_Tenant.pdf via requests (cache)
+[20:52:09]     [docs] PDF skip (unreadable/blocked): https://www.compass.com/ucfe-assets/consumer-footer/7/NY-StandardOperatingProcedures-2026-03.pdf
+[20:52:09]     [docs] PDF read https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf via requests (cache)
+[20:52:09]     [docs] PDF read https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-4-1_1.pdf via requests (cache)
+[20:52:09]     [docs] PDF read https://www.compass.com/ucfe-assets/consumer-footer/7/IABS-1-2.pdf via requests (cache)
+[20:52:09]     [docs] PDF read https://www.compass.com/ucfe-assets/consumer-footer/7/(6-2-2020)-PRE-Posted-Rules-of-Entry.pdf via requests (cache)
+[20:52:09]   [docs] PDFs read: 5
+[20:52:09]     PDF: https://www.compass.com/ucfe-assets/consumer-footer/7/Notice_of_Reasonable_Accommodation_to_Prospective_Tenant.pdf
+[20:52:09]     PDF: https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf
+[20:52:09]     PDF: https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-4-1_1.pdf
+[20:52:09]     PDF: https://www.compass.com/ucfe-assets/consumer-footer/7/IABS-1-2.pdf
+[20:52:09]     PDF: https://www.compass.com/ucfe-assets/consumer-footer/7/(6-2-2020)-PRE-Posted-Rules-of-Entry.pdf
+[20:53:11]   [ai] extracting [page/pdf, signals=fee$,phone,email,mgmt] from 2 chunk(s) (12000 chars, was 50651)…

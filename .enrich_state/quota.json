@@ -1,0 +1,30 @@
+{
+  "day": "2026-06-29",
+  "month": "2026-06",
+  "counts": {
+    "searxng": {
+      "day": 20,
+      "month": 96
+    },
+    "jina_search": {
+      "day": 0,
+      "month": 0
+    },
+    "ddg_lite": {
+      "day": 0,
+      "month": 0
+    },
+    "requests": {
+      "day": 0,
+      "month": 0
+    },
+    "jina_reader": {
+      "day": 0,
+      "month": 0
+    },
+    "crawl4ai": {
+      "day": 0,
+      "month": 0
+    }
+  }
+}

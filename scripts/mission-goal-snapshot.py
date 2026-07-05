@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 import requests
 from dotenv import load_dotenv
 
-REPO = "/Users/izzymartinez/Documents/hoa-agent"
+REPO = "/Users/izzymartinez/Projects/hoa-agent"
 load_dotenv(os.path.join(REPO, ".env.local"), override=True)
 URL = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
 KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")

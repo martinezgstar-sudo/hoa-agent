@@ -1,0 +1,1 @@
+{"name": "hoa", "baseSelector": ".idx-details", "fields": [{"name": "phone", "selector": ".header__phone", "type": "text"}]}

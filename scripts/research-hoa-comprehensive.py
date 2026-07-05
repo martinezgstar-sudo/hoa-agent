@@ -1771,7 +1771,8 @@ def recently_enriched_ids(days: int) -> set:
 
 def fetch_communities(community_id: Optional[str], batch: int, status: str,
                       require_website: bool, without_website: bool = False,
-                      skip_researched_days: int = 14) -> List[dict]:
+                      skip_researched_days: int = 14,
+                      exclude_ids: Optional[set] = None) -> List[dict]:
     if community_id:
         data = supabase_get("communities", {
             "id": f"eq.{community_id}", "limit": "1", "select": SELECT_COLS})
@@ -1811,7 +1812,9 @@ def fetch_communities(community_id: Optional[str], batch: int, status: str,
         log(f"Selection: {len(pool)} in pool, {len(pool) - len(fresh)} already "
             f"enriched in last {skip_researched_days}d → preferring {len(fresh)} fresh")
     # Prefer fresh; backfill with recently-seen only if we'd otherwise be short.
-    return (fresh + stale)[:batch]
+    exclude_ids = exclude_ids or set()
+    ordered = [c for c in (fresh + stale) if c.get("id") not in exclude_ids]
+    return ordered[:batch]
 
 
 # ── Continuous loop service (checkpointed, defer-not-fail) ────────────────────
@@ -1830,6 +1833,7 @@ def load_checkpoint() -> dict:
               "iterations"):
         cp.setdefault(k, 0)
     cp.setdefault("deferred_backoff", {})   # community_id -> epoch until eligible
+    cp.setdefault("defer_count", {})   # community_id -> times deferred
     cp.setdefault("last_community_id", None)
     cp.setdefault("last_community_name", None)
     return cp
@@ -1876,8 +1880,8 @@ def enrich_loop(args, dry_run: bool, chains: Chains,
                                   if v > now}
         working = fetch_communities(None, work_batch, args.status,
                                     require_website, without_website,
-                                    args.skip_researched_days)
-        working = [c for c in working if c.get("id") not in cp["deferred_backoff"]]
+                                    args.skip_researched_days,
+                                    exclude_ids=set(cp["deferred_backoff"]))
         if not working:
             log(f"[idle] no due communities (or all backed off); sleeping {idle_secs}s")
             time.sleep(idle_secs)
@@ -1897,8 +1901,11 @@ def enrich_loop(args, dry_run: bool, chains: Chains,
             except Exception as e:
                 # Defer-not-fail: no research_log was written, so it returns later.
                 log(f"[defer] {name[:40]} — exception: {e}")
+                n = cp["defer_count"].get(cid, 0) + 1
+                cp["defer_count"][cid] = n
+                delay = backoff_secs if n < 3 else 7 * 24 * 3600
                 cp["deferred"] += 1
-                cp["deferred_backoff"][cid] = time.time() + backoff_secs
+                cp["deferred_backoff"][cid] = time.time() + delay
                 cp["iterations"] += 1
                 cp["last_community_id"], cp["last_community_name"] = cid, name
                 cp["last_finished_at"] = datetime.utcnow().isoformat() + "Z"
@@ -1914,8 +1921,11 @@ def enrich_loop(args, dry_run: bool, chains: Chains,
                 print(ln, flush=True)
 
             if res.get("status") == "deferred":
+                n = cp["defer_count"].get(cid, 0) + 1
+                cp["defer_count"][cid] = n
+                delay = backoff_secs if n < 3 else 7 * 24 * 3600
                 cp["deferred"] += 1
-                cp["deferred_backoff"][cid] = time.time() + backoff_secs
+                cp["deferred_backoff"][cid] = time.time() + delay
                 log(f"[defer] {name[:40]} — backing off {backoff_secs}s")
             else:
                 cp["processed"] += 1

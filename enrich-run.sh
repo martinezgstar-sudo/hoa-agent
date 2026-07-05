@@ -12,7 +12,7 @@
 # Usage: enrich-run.sh [batch]   (default batch 15; spec asks for 10–20)
 export PATH="/Users/izzymartinez/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 export HOME="/Users/izzymartinez"
-cd /Users/izzymartinez/Documents/hoa-agent || exit 1
+cd /Users/izzymartinez/Projects/hoa-agent || exit 1
 
 # Supabase keys (NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, …)
 set -a; [ -f .env.local ] && . ./.env.local; set +a

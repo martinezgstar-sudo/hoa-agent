@@ -23,7 +23,7 @@ from pathlib import Path
 
 # ── env ──────────────────────────────────────────────────────────────────────
 env = {}
-with open(os.path.expanduser('~/Documents/hoa-agent/.env.local')) as f:
+with open(os.path.expanduser('~/Projects/hoa-agent/.env.local')) as f:
     for line in f:
         line = line.strip()
         if line and not line.startswith('#') and '=' in line:

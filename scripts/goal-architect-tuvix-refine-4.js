@@ -1,7 +1,7 @@
 const status = require('/Users/izzymartinez/Agents/command-center/lib/agent-status.js');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
-require('dotenv').config({ path: path.join(process.env.HOME, 'Documents/hoa-agent/.env.local') });
+require('dotenv').config({ path: path.join(process.env.HOME, 'Projects/hoa-agent/.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

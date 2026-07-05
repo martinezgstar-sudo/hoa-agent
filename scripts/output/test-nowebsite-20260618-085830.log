@@ -1,0 +1,144 @@
+[08:58:30] HOA Propose-Only Deep Enricher
+[08:58:30] Mode: LIVE | Batch: 10 | Status: published | require_website=False | without_website=True | skip_researched_days=0
+[08:58:30] AI: claude CLI model=sonnet (auth ok)
+[08:58:30] LaCie: mounted
+[08:58:30] Output: scripts/output/enrich-log-2026-06-18.txt
+[08:58:32] 
+Fetched 10 communities to enrich
+[08:58:32] 
+────────────────────────────────────────────────────────────
+[08:58:32] Enriching: Osprey Point HOA [e703e43e…]
+[08:58:32] ────────────────────────────────────────────────────────────
+[08:58:32]   [gather] DuckDuckGo search…
+[08:58:36]   [gather] DBPR (Playwright)…
+[08:58:36]   [docs] reading documents…
+[08:58:36]     [docs] 0 candidate page(s) [search only]: none
+[08:58:36]     [docs] doc links: 0 (pdf: 0)
+[08:58:36]   [docs] PDFs read: 0
+[08:58:36]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:58:37]   DONE: pcd=0 fee=0 pdfs=0
+[08:58:37] 
+────────────────────────────────────────────────────────────
+[08:58:37] Enriching: Boca Raton Golf Course PUD [7d2dec0e…]
+[08:58:37] ────────────────────────────────────────────────────────────
+[08:58:37]   [gather] DuckDuckGo search…
+[08:58:42]   [gather] DBPR (Playwright)…
+[08:58:42]   [docs] reading documents…
+[08:58:42]     [docs] 0 candidate page(s) [search only]: none
+[08:58:42]     [docs] doc links: 0 (pdf: 0)
+[08:58:42]   [docs] PDFs read: 0
+[08:58:42]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:58:43]   DONE: pcd=0 fee=0 pdfs=0
+[08:58:43] 
+────────────────────────────────────────────────────────────
+[08:58:43] Enriching: King Arthur Estates [481b8102…]
+[08:58:43] ────────────────────────────────────────────────────────────
+[08:58:43]   [gather] DuckDuckGo search…
+[08:58:48]   [gather] DBPR (Playwright)…
+[08:58:48]   [docs] reading documents…
+[08:58:48]     [docs] 0 candidate page(s) [search only]: none
+[08:58:48]     [docs] doc links: 0 (pdf: 0)
+[08:58:48]   [docs] PDFs read: 0
+[08:58:48]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:58:48]   DONE: pcd=0 fee=0 pdfs=0
+[08:58:48] 
+────────────────────────────────────────────────────────────
+[08:58:48] Enriching: Trends at Boca Raton Unit 1 [b9faa20e…]
+[08:58:48] ────────────────────────────────────────────────────────────
+[08:58:48]   [gather] DuckDuckGo search…
+[08:58:53]   [gather] DBPR (Playwright)…
+[08:58:53]   [docs] reading documents…
+[08:58:53]     [docs] 0 candidate page(s) [search only]: none
+[08:58:53]     [docs] doc links: 0 (pdf: 0)
+[08:58:53]   [docs] PDFs read: 0
+[08:58:53]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:58:54]   DONE: pcd=0 fee=0 pdfs=0
+[08:58:54] 
+────────────────────────────────────────────────────────────
+[08:58:54] Enriching: Forest Estates [f945852a…]
+[08:58:54] ────────────────────────────────────────────────────────────
+[08:58:54]   [gather] DuckDuckGo search…
+[08:58:59]   [gather] DBPR (Playwright)…
+[08:58:59]   [docs] reading documents…
+[08:58:59]     [docs] 0 candidate page(s) [search only]: none
+[08:58:59]     [docs] doc links: 0 (pdf: 0)
+[08:58:59]   [docs] PDFs read: 0
+[08:58:59]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:58:59]   DONE: pcd=0 fee=0 pdfs=0
+[08:58:59] 
+────────────────────────────────────────────────────────────
+[08:58:59] Enriching: Whitehall Condo of the Lands of the President [272898c4…]
+[08:58:59] ────────────────────────────────────────────────────────────
+[08:58:59]   [gather] DuckDuckGo search…
+[08:59:04]   [gather] DBPR (Playwright)…
+[08:59:04]   [docs] reading documents…
+[08:59:04]     [docs] 0 candidate page(s) [search only]: none
+[08:59:04]     [docs] doc links: 0 (pdf: 0)
+[08:59:04]   [docs] PDFs read: 0
+[08:59:04]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:59:04]   DONE: pcd=0 fee=0 pdfs=0
+[08:59:04] 
+────────────────────────────────────────────────────────────
+[08:59:04] Enriching: FLA Mango Estates AS [cf66c4da…]
+[08:59:04] ────────────────────────────────────────────────────────────
+[08:59:04]   [gather] DuckDuckGo search…
+[08:59:09]   [gather] DBPR (Playwright)…
+[08:59:09]   [docs] reading documents…
+[08:59:09]     [docs] 0 candidate page(s) [search only]: none
+[08:59:09]     [docs] doc links: 0 (pdf: 0)
+[08:59:09]   [docs] PDFs read: 0
+[08:59:09]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:59:10]   DONE: pcd=0 fee=0 pdfs=0
+[08:59:10] 
+────────────────────────────────────────────────────────────
+[08:59:10] Enriching: Osprey [adfc0c7f…]
+[08:59:10] ────────────────────────────────────────────────────────────
+[08:59:10]   [gather] DuckDuckGo search…
+[08:59:14]   [gather] DBPR (Playwright)…
+[08:59:14]   [docs] reading documents…
+[08:59:14]     [docs] 0 candidate page(s) [search only]: none
+[08:59:14]     [docs] doc links: 0 (pdf: 0)
+[08:59:14]   [docs] PDFs read: 0
+[08:59:14]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:59:15]   DONE: pcd=0 fee=0 pdfs=0
+[08:59:15] 
+────────────────────────────────────────────────────────────
+[08:59:15] Enriching: HUB Properties [a6ea41d1…]
+[08:59:15] ────────────────────────────────────────────────────────────
+[08:59:15]   [gather] DuckDuckGo search…
+[08:59:21]   [gather] DBPR (Playwright)…
+[08:59:21]   [docs] reading documents…
+[08:59:21]     [docs] 0 candidate page(s) [search only]: none
+[08:59:21]     [docs] doc links: 0 (pdf: 0)
+[08:59:21]   [docs] PDFs read: 0
+[08:59:21]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:59:22]   DONE: pcd=0 fee=0 pdfs=0
+[08:59:22] 
+────────────────────────────────────────────────────────────
+[08:59:22] Enriching: French Quarter [72ac0e66…]
+[08:59:22] ────────────────────────────────────────────────────────────
+[08:59:22]   [gather] DuckDuckGo search…
+[08:59:29]   [gather] DBPR (Playwright)…
+[08:59:29]   [docs] reading documents…
+[08:59:29]     [docs] 0 candidate page(s) [search only]: none
+[08:59:29]     [docs] doc links: 0 (pdf: 0)
+[08:59:29]   [docs] PDFs read: 0
+[08:59:29]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[08:59:31]   DONE: pcd=0 fee=0 pdfs=0
+[08:59:31] 
+Log saved to: scripts/output/enrich-log-2026-06-18.txt
+
+=== French Quarter (72ac0e66-d6c3-4d3f-8738-33be4238f277) ===
+  SKIP: skipped: no usable evidence
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+============================================================
+GRAND TOTALS
+  Communities enriched      : 10
+  PDFs read                 : 0
+  pending_community_data rows: 0
+  pending_fee_observations  : 0
+  By field : none
+  By source: none
+============================================================
+[08:59:31] Done.

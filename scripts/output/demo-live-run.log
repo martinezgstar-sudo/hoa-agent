@@ -1,0 +1,144 @@
+[21:04:01] HOA Propose-Only Deep Enricher
+[21:04:01] Mode: LIVE | Batch: 10 | Status: published | require_website=True
+[21:04:01] AI: claude CLI model=sonnet (auth ok)
+[21:04:01] LaCie: mounted
+[21:04:01] Output: scripts/output/enrich-log-2026-06-16.txt
+[21:04:02] 
+Fetched 10 communities to enrich
+[21:04:02] 
+────────────────────────────────────────────────────────────
+[21:04:02] Enriching: PANACHE AT BOCA POINTE CONDO [086df229…]
+[21:04:02] ────────────────────────────────────────────────────────────
+[21:04:02]   [gather] DuckDuckGo search…
+[21:04:07]   [gather] DBPR (Playwright)…
+[21:04:07]   [docs] reading documents…
+[21:04:08]   [docs] PDFs read: 0
+[21:04:08]   [ai] extracting from 1 evidence chunks…
+[21:04:22]   [ai] returned 0 candidate fields
+[21:04:23]   DONE: pcd=0 fee=0 pdfs=0
+[21:04:23] 
+────────────────────────────────────────────────────────────
+[21:04:23] Enriching: EL VIENTO AT BOCA POINTE CONDO [46ab4491…]
+[21:04:23] ────────────────────────────────────────────────────────────
+[21:04:23]   [gather] DuckDuckGo search…
+[21:04:28]   [gather] DBPR (Playwright)…
+[21:04:28]   [docs] reading documents…
+[21:04:29]   [docs] PDFs read: 0
+[21:04:29]   [ai] extracting from 1 evidence chunks…
+[21:04:49]   [ai] returned 0 candidate fields
+[21:04:51]   DONE: pcd=0 fee=0 pdfs=0
+[21:04:51] 
+────────────────────────────────────────────────────────────
+[21:04:51] Enriching: LA PAZ @ BOCA POINTE CONDO [e7c8b362…]
+[21:04:51] ────────────────────────────────────────────────────────────
+[21:04:51]   [gather] DuckDuckGo search…
+[21:04:56]   [gather] DBPR (Playwright)…
+[21:04:56]   [docs] reading documents…
+[21:04:57]   [docs] PDFs read: 0
+[21:04:57]   [ai] extracting from 1 evidence chunks…
+[21:05:14]   [ai] returned 0 candidate fields
+[21:05:15]   DONE: pcd=0 fee=0 pdfs=0
+[21:05:15] 
+────────────────────────────────────────────────────────────
+[21:05:15] Enriching: Villa Flora At Boca Pointe Homeowners Association, Inc. [d7eaab4f…]
+[21:05:15] ────────────────────────────────────────────────────────────
+[21:05:15]   [gather] DuckDuckGo search…
+[21:05:20]   [gather] DBPR (Playwright)…
+[21:05:20]   [docs] reading documents…
+[21:05:21]   [docs] PDFs read: 0
+[21:05:21]   [ai] extracting from 1 evidence chunks…
+[21:05:37]   [ai] returned 0 candidate fields
+[21:05:38]   DONE: pcd=0 fee=0 pdfs=0
+[21:05:38] 
+────────────────────────────────────────────────────────────
+[21:05:38] Enriching: The Palms At Boca Pointe Homeowners' Association, Inc. [3c4d9c40…]
+[21:05:38] ────────────────────────────────────────────────────────────
+[21:05:38]   [gather] DuckDuckGo search…
+[21:05:43]   [gather] DBPR (Playwright)…
+[21:05:43]   [docs] reading documents…
+[21:05:44]   [docs] PDFs read: 0
+[21:05:44]   [ai] extracting from 1 evidence chunks…
+[21:06:07]   [ai] returned 0 candidate fields
+[21:06:08]   DONE: pcd=0 fee=0 pdfs=0
+[21:06:08] 
+────────────────────────────────────────────────────────────
+[21:06:08] Enriching: Valencia At Boca Pointe Homeowners Association, Inc. [970459c5…]
+[21:06:08] ────────────────────────────────────────────────────────────
+[21:06:08]   [gather] DuckDuckGo search…
+[21:06:13]   [gather] DBPR (Playwright)…
+[21:06:13]   [docs] reading documents…
+[21:06:15]   [docs] PDFs read: 0
+[21:06:15]   [ai] extracting from 1 evidence chunks…
+[21:06:31]   [ai] returned 0 candidate fields
+[21:06:32]   DONE: pcd=0 fee=0 pdfs=0
+[21:06:32] 
+────────────────────────────────────────────────────────────
+[21:06:32] Enriching: The Plum At Boca Pointe Homeowners Association, Inc. [3ae80c59…]
+[21:06:32] ────────────────────────────────────────────────────────────
+[21:06:32]   [gather] DuckDuckGo search…
+[21:06:37]   [gather] DBPR (Playwright)…
+[21:06:37]   [docs] reading documents…
+[21:06:38]   [docs] PDFs read: 0
+[21:06:38]   [ai] extracting from 1 evidence chunks…
+[21:06:51]   [ai] returned 0 candidate fields
+[21:06:52]   DONE: pcd=0 fee=0 pdfs=0
+[21:06:52] 
+────────────────────────────────────────────────────────────
+[21:06:52] Enriching: Boca West Master Association, Inc. [a957feaf…]
+[21:06:52] ────────────────────────────────────────────────────────────
+[21:06:52]   [gather] DuckDuckGo search…
+[21:06:58]   [gather] DBPR (Playwright)…
+[21:06:58]   [docs] reading documents…
+[21:07:03]   [docs] pdfplumber missing — pip installing…
+  WARNING: The script pypdfium2 is installed in '/Users/izzymartinez/Library/Python/3.9/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script pdfplumber is installed in '/Users/izzymartinez/Library/Python/3.9/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the '/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip' command.
+[21:07:23]   [docs] PDFs read: 0
+[21:07:23]   [ai] extracting from 1 evidence chunks…
+[21:07:44]   [ai] returned 6 candidate fields
+[21:07:46]     PENDING phone [website] OK
+[21:07:46]     PENDING email [website] OK
+[21:07:46]     PENDING amenities [website] OK
+[21:07:47]   DONE: pcd=3 fee=0 pdfs=0
+[21:07:47] 
+────────────────────────────────────────────────────────────
+[21:07:47] Enriching: REGENCY AT BOCA POINTE CONDO [81def10d…]
+[21:07:47] ────────────────────────────────────────────────────────────
+[21:07:47]   [gather] DuckDuckGo search…
+[21:07:53]   [gather] DBPR (Playwright)…
+[21:07:53]   [docs] reading documents…
+[21:07:54]   [docs] PDFs read: 0
+[21:07:54]   [ai] extracting from 1 evidence chunks…
+[21:08:24]   [ai] returned 0 candidate fields
+[21:08:24]   DONE: pcd=0 fee=0 pdfs=0
+[21:08:24] 
+────────────────────────────────────────────────────────────
+[21:08:24] Enriching: Majestic Isles [3d731577…]
+[21:08:24] ────────────────────────────────────────────────────────────
+[21:08:24]   [gather] DuckDuckGo search…
+[21:08:32]   [gather] DBPR (Playwright)…
+[21:08:32]   [docs] reading documents…
+[21:08:32]   [docs] PDFs read: 0
+[21:08:32]   [ai] extracting from 0 evidence chunks…
+[21:08:32]   [ai] returned 0 candidate fields
+[21:08:33]   DONE: pcd=0 fee=0 pdfs=0
+[21:08:33] 
+Log saved to: scripts/output/enrich-log-2026-06-16.txt
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== Majestic Isles (3d731577-cdb6-48e0-a781-f043ad92d134) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+============================================================
+GRAND TOTALS
+  Communities enriched      : 10
+  PDFs read                 : 0
+  pending_community_data rows: 3
+  pending_fee_observations  : 0
+  By field : amenities=1, email=1, phone=1
+  By source: website=3
+============================================================
+[21:08:33] Done.

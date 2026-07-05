@@ -7,7 +7,7 @@ Last updated: 2026-05-20 (live-count refresh by hoa-social agent)
 - Stack: Next.js, Supabase, Vercel Pro, Resend,
   Anthropic API, Mapbox, CourtListener
 - GitHub: martinezgstar-sudo/hoa-agent
-- Local path: /Users/izzymartinez/Documents/hoa-agent
+- Local path: /Users/izzymartinez/Projects/hoa-agent
 - Supabase project ID: uacgzbojhjelzirvbphg
 - Entity: HOA Agent LLC — Florida, filed April 20, 2026
 

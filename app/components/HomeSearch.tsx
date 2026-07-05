@@ -112,6 +112,8 @@ export default function HomeSearch() {
                 boxSizing: "border-box",
                 fontFamily: "inherit",
                 minHeight: "44px",
+                color: "#1a1a1a",
+                backgroundColor: "#fff",
               }}
             />
             {showDropdown && (

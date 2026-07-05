@@ -2,7 +2,7 @@
 // Tour 2026-05-24: Olympia village re-link (Tuvok) | entity_status Sunbiz backfill (Seven) | Assessment-signal board packet (B'Elanna)
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: path.join(process.env.HOME, 'Documents/hoa-agent/.env.local') });
+require('dotenv').config({ path: path.join(process.env.HOME, 'Projects/hoa-agent/.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

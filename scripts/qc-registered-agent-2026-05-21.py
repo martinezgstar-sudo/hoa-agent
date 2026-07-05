@@ -27,7 +27,7 @@ warnings.filterwarnings("ignore")
 import requests
 from dotenv import load_dotenv
 
-REPO = "/Users/izzymartinez/Documents/hoa-agent"
+REPO = "/Users/izzymartinez/Projects/hoa-agent"
 sys.path.insert(0, os.path.join(REPO, "scripts/lib"))
 import importlib.util
 spec = importlib.util.spec_from_file_location(

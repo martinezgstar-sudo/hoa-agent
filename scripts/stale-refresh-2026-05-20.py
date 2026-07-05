@@ -25,7 +25,7 @@ from typing import Dict, List, Optional, Tuple
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
-load_dotenv(dotenv_path="/Users/izzymartinez/Documents/hoa-agent/.env.local")
+load_dotenv(dotenv_path="/Users/izzymartinez/Projects/hoa-agent/.env.local")
 
 SUPABASE_URL = os.environ["NEXT_PUBLIC_SUPABASE_URL"]
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]

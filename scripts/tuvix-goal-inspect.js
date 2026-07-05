@@ -1,7 +1,7 @@
 // Inspect a few unrefined proposals in full to assess what refinement they need
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: path.join(process.env.HOME, 'Documents/hoa-agent/.env.local') });
+require('dotenv').config({ path: path.join(process.env.HOME, 'Projects/hoa-agent/.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

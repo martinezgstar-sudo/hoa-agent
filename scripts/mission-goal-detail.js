@@ -1,5 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: '/Users/izzymartinez/Documents/hoa-agent/.env.local' });
+require('dotenv').config({ path: '/Users/izzymartinez/Projects/hoa-agent/.env.local' });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

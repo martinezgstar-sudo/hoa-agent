@@ -43,7 +43,7 @@ normalize_for_sunbiz = name_normalize.normalize_for_sunbiz
 name_stem = name_normalize.name_stem
 candidate_patterns = name_normalize.candidate_patterns
 
-load_dotenv(dotenv_path="/Users/izzymartinez/Documents/hoa-agent/.env.local")
+load_dotenv(dotenv_path="/Users/izzymartinez/Projects/hoa-agent/.env.local")
 
 URL = os.environ["NEXT_PUBLIC_SUPABASE_URL"]
 KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]

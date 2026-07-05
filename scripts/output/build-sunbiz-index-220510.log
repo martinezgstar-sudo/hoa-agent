@@ -1,0 +1,14 @@
+  [1/10] cordata0.txt — read 1,260,599 kept 20,502 (45s)
+  [2/10] cordata1.txt — read 2,521,533 kept 41,156 (89s)
+  [3/10] cordata2.txt — read 3,782,389 kept 61,487 (134s)
+  [4/10] cordata3.txt — read 5,043,227 kept 82,254 (178s)
+  [5/10] cordata4.txt — read 6,304,085 kept 102,847 (223s)
+  [6/10] cordata5.txt — read 7,564,766 kept 123,215 (268s)
+  [7/10] cordata6.txt — read 8,825,439 kept 143,699 (313s)
+  [8/10] cordata7.txt — read 10,086,150 kept 164,030 (357s)
+  [9/10] cordata8.txt — read 11,346,821 kept 184,296 (402s)
+  [10/10] cordata9.txt — read 12,607,458 kept 204,587 (447s)
+
+Indexed 204,587 association entities from 12,607,458 records in 447s
+Index: /Users/izzymartinez/Library/Application Support/hoa-agent/sunbiz-index/sunbiz.db
+Size : 39.0 MB

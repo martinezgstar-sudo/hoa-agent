@@ -1,0 +1,47 @@
+HOA Deep Enrich Run — 2026-06-16 21:04
+Mode: LIVE | require_website=True
+Communities: 10
+============================================================
+
+=== PANACHE AT BOCA POINTE CONDO (086df229-4b58-4343-9c58-fcc96c7f3e81) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== EL VIENTO AT BOCA POINTE CONDO (46ab4491-ef0b-4831-a03f-129f02c3d186) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== LA PAZ @ BOCA POINTE CONDO (e7c8b362-bb1c-47a1-b905-b00020e402ad) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== Villa Flora At Boca Pointe Homeowners Association, Inc. (d7eaab4f-8335-4f6a-9c47-4bd7a7de58a2) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== The Palms At Boca Pointe Homeowners' Association, Inc. (3c4d9c40-4ed9-451d-8c89-84ce42d7f484) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== Valencia At Boca Pointe Homeowners Association, Inc. (970459c5-e056-4062-a2a1-31932fc201ef) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== The Plum At Boca Pointe Homeowners Association, Inc. (3ae80c59-c656-4851-aec3-a985d26dc73e) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== Boca West Master Association, Inc. (a957feaf-fbd3-4a35-a12c-08bf1fe2096d) ===
+  PENDING   phone = '(561) 488-1598'  [website]  [OK]
+  PENDING   email = 'amartinez@bocawestmaster.com'  [website]  [OK]
+  PENDING   amenities = "pool, restaurants, golf courses, tennis courts, children's a"  [website]  [OK]
+  TOTALS: pending_community_data=3 fee_obs=0 | by field: amenities=1, email=1, phone=1
+
+=== REGENCY AT BOCA POINTE CONDO (81def10d-eff5-4dca-8565-512bd8d049da) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+=== Majestic Isles (3d731577-cdb6-48e0-a781-f043ad92d134) ===
+  TOTALS: pending_community_data=0 fee_obs=0 | by field: none
+
+============================================================
+GRAND TOTALS
+  Communities enriched      : 10
+  PDFs read                 : 0
+  pending_community_data rows: 3
+  pending_fee_observations  : 0
+  By field : amenities=1, email=1, phone=1
+  By source: website=3
+============================================================

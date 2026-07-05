@@ -1,0 +1,173 @@
+[09:07:00] HOA Propose-Only Deep Enricher
+[09:07:00] Mode: LIVE | Batch: 10 | Status: published | require_website=False | without_website=True | skip_researched_days=0
+[09:07:00] AI: claude CLI model=sonnet (auth ok)
+[09:07:00] LaCie: mounted
+[09:07:00] Output: scripts/output/enrich-log-2026-06-18.txt
+[09:07:02] 
+Fetched 10 communities to enrich
+[09:07:02]   [sunbiz] one-pass cordata scan for 6 communities (6 seeds, rg, cap 600s)…
+[09:15:32]   [sunbiz] matched 6/6 communities
+[09:15:32] 
+────────────────────────────────────────────────────────────
+[09:15:32] Enriching: Osprey Point HOA [e703e43e…]
+[09:15:32] ────────────────────────────────────────────────────────────
+[09:15:32]   [gather] DuckDuckGo search…
+[09:17:05]   [gather] DBPR (Playwright)…
+[09:17:05]   [docs] reading documents…
+[09:17:05]     [docs] 0 candidate page(s) [search only]: none
+[09:17:05]     [docs] doc links: 0 (pdf: 0)
+[09:17:05]   [docs] PDFs read: 0
+[09:17:05]   [ai] extracting from 1 evidence chunks…
+[09:17:31]   [ai] returned 3 candidate fields
+[09:17:33]   DONE: pcd=0 fee=0 pdfs=0
+[09:17:33] 
+────────────────────────────────────────────────────────────
+[09:17:33] Enriching: Boca Raton Golf Course PUD [7d2dec0e…]
+[09:17:33] ────────────────────────────────────────────────────────────
+[09:17:33]   [gather] DuckDuckGo search…
+[09:19:06]   [gather] DBPR (Playwright)…
+[09:19:06]   [docs] reading documents…
+[09:19:06]     [docs] 0 candidate page(s) [search only]: none
+[09:19:06]     [docs] doc links: 0 (pdf: 0)
+[09:19:06]   [docs] PDFs read: 0
+[09:19:06]   [ai] extracting from 1 evidence chunks…
+[09:19:42]   [ai] returned 5 candidate fields
+[09:19:43]     PENDING legal_name [sunbiz] OK
+[09:19:43]     PENDING state_entity_number [sunbiz] OK
+[09:19:44]     PENDING entity_status [sunbiz] OK
+[09:19:44]     PENDING registered_agent [sunbiz] OK
+[09:19:44]     PENDING registered_agent_address [sunbiz] OK
+[09:19:44]   DONE: pcd=5 fee=0 pdfs=0
+[09:19:44] 
+────────────────────────────────────────────────────────────
+[09:19:44] Enriching: King Arthur Estates [481b8102…]
+[09:19:44] ────────────────────────────────────────────────────────────
+[09:19:44]   [gather] DuckDuckGo search…
+[09:21:17]   [gather] DBPR (Playwright)…
+[09:21:17]   [docs] reading documents…
+[09:21:17]     [docs] 0 candidate page(s) [search only]: none
+[09:21:17]     [docs] doc links: 0 (pdf: 0)
+[09:21:17]   [docs] PDFs read: 0
+[09:21:17]   [ai] extracting from 1 evidence chunks…
+[09:21:31]   [ai] returned 0 candidate fields
+[09:21:32]   DONE: pcd=0 fee=0 pdfs=0
+[09:21:32] 
+────────────────────────────────────────────────────────────
+[09:21:32] Enriching: Trends at Boca Raton Unit 1 [b9faa20e…]
+[09:21:32] ────────────────────────────────────────────────────────────
+[09:21:32]   [gather] DuckDuckGo search…
+[09:23:05]   [gather] DBPR (Playwright)…
+[09:23:05]   [docs] reading documents…
+[09:23:05]     [docs] 0 candidate page(s) [search only]: none
+[09:23:05]     [docs] doc links: 0 (pdf: 0)
+[09:23:05]   [docs] PDFs read: 0
+[09:23:05]   [ai] extracting from 1 evidence chunks…
+[09:23:34]   [ai] returned 5 candidate fields
+[09:23:36]     PENDING legal_name [sunbiz] OK
+[09:23:36]     PENDING state_entity_number [sunbiz] OK
+[09:23:36]     PENDING entity_status [sunbiz] OK
+[09:23:36]     PENDING registered_agent [sunbiz] OK
+[09:23:37]     PENDING registered_agent_address [sunbiz] OK
+[09:23:37]   DONE: pcd=5 fee=0 pdfs=0
+[09:23:37] 
+────────────────────────────────────────────────────────────
+[09:23:37] Enriching: Forest Estates [f945852a…]
+[09:23:37] ────────────────────────────────────────────────────────────
+[09:23:37]   [gather] DuckDuckGo search…
+[09:25:10]   [gather] DBPR (Playwright)…
+[09:25:10]   [docs] reading documents…
+[09:25:10]     [docs] 0 candidate page(s) [search only]: none
+[09:25:10]     [docs] doc links: 0 (pdf: 0)
+[09:25:10]   [docs] PDFs read: 0
+[09:25:10]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[09:25:11]   DONE: pcd=0 fee=0 pdfs=0
+[09:25:11] 
+────────────────────────────────────────────────────────────
+[09:25:11] Enriching: Whitehall Condo of the Lands of the President [272898c4…]
+[09:25:11] ────────────────────────────────────────────────────────────
+[09:25:11]   [gather] DuckDuckGo search…
+[09:26:44]   [gather] DBPR (Playwright)…
+[09:26:44]   [docs] reading documents…
+[09:26:44]     [docs] 0 candidate page(s) [search only]: none
+[09:26:44]     [docs] doc links: 0 (pdf: 0)
+[09:26:44]   [docs] PDFs read: 0
+[09:26:44]   [ai] extracting from 1 evidence chunks…
+[09:27:22]   [ai] returned 6 candidate fields
+[09:27:24]     PENDING legal_name [sunbiz] OK
+[09:27:25]     PENDING state_entity_number [sunbiz] OK
+[09:27:25]     PENDING entity_status [sunbiz] OK
+[09:27:26]     PENDING incorporation_date [sunbiz] OK
+[09:27:26]     PENDING registered_agent [sunbiz] OK
+[09:27:26]     PENDING registered_agent_address [sunbiz] OK
+[09:27:26]   DONE: pcd=6 fee=0 pdfs=0
+[09:27:26] 
+────────────────────────────────────────────────────────────
+[09:27:26] Enriching: FLA Mango Estates AS [cf66c4da…]
+[09:27:26] ────────────────────────────────────────────────────────────
+[09:27:26]   [gather] DuckDuckGo search…
+[09:28:59]   [gather] DBPR (Playwright)…
+[09:28:59]   [docs] reading documents…
+[09:28:59]     [docs] 0 candidate page(s) [search only]: none
+[09:28:59]     [docs] doc links: 0 (pdf: 0)
+[09:28:59]   [docs] PDFs read: 0
+[09:28:59]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[09:29:00]   DONE: pcd=0 fee=0 pdfs=0
+[09:29:00] 
+────────────────────────────────────────────────────────────
+[09:29:00] Enriching: Osprey [adfc0c7f…]
+[09:29:00] ────────────────────────────────────────────────────────────
+[09:29:00]   [gather] DuckDuckGo search…
+[09:30:34]   [gather] DBPR (Playwright)…
+[09:30:34]   [docs] reading documents…
+[09:30:34]     [docs] 0 candidate page(s) [search only]: none
+[09:30:34]     [docs] doc links: 0 (pdf: 0)
+[09:30:34]   [docs] PDFs read: 0
+[09:30:34]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[09:30:35]   DONE: pcd=0 fee=0 pdfs=0
+[09:30:35] 
+────────────────────────────────────────────────────────────
+[09:30:35] Enriching: HUB Properties [a6ea41d1…]
+[09:30:35] ────────────────────────────────────────────────────────────
+[09:30:35]   [gather] DuckDuckGo search…
+[09:32:08]   [gather] DBPR (Playwright)…
+[09:32:08]   [docs] reading documents…
+[09:32:08]     [docs] 0 candidate page(s) [search only]: none
+[09:32:08]     [docs] doc links: 0 (pdf: 0)
+[09:32:08]   [docs] PDFs read: 0
+[09:32:08]   [skip] no usable evidence (search/docs/sunbiz/dbpr all empty)
+[09:32:09]   DONE: pcd=0 fee=0 pdfs=0
+[09:32:09] 
+────────────────────────────────────────────────────────────
+[09:32:09] Enriching: French Quarter [72ac0e66…]
+[09:32:09] ────────────────────────────────────────────────────────────
+[09:32:09]   [gather] DuckDuckGo search…
+[09:33:42]   [gather] DBPR (Playwright)…
+[09:33:42]   [docs] reading documents…
+[09:33:42]     [docs] 0 candidate page(s) [search only]: none
+[09:33:42]     [docs] doc links: 0 (pdf: 0)
+[09:33:42]   [docs] PDFs read: 0
+[09:33:42]   [ai] extracting from 1 evidence chunks…
+[09:34:07]   [ai] returned 6 candidate fields
+[09:34:09]     PENDING legal_name [sunbiz] OK
+[09:34:09]     PENDING state_entity_number [sunbiz] OK
+[09:34:09]     PENDING entity_status [sunbiz] OK
+[09:34:10]     PENDING incorporation_date [sunbiz] OK
+[09:34:10]     PENDING registered_agent [sunbiz] OK
+[09:34:10]     PENDING registered_agent_address [sunbiz] OK
+[09:34:10]   DONE: pcd=6 fee=0 pdfs=0
+[09:34:10] 
+Log saved to: scripts/output/enrich-log-2026-06-18.txt
+  PENDING   registered_agent = 'DAVIS, HAROLYN P'  [sunbiz]  [OK]
+  PENDING   registered_agent_address = '4001 BENEVA RD STE 405, SARASOTA, FL 34233'  [sunbiz]  [OK]
+  TOTALS: pending_community_data=6 fee_obs=0 | by field: entity_status=1, incorporation_date=1, legal_name=1, registered_agent=1, registered_agent_address=1, state_entity_number=1
+
+============================================================
+GRAND TOTALS
+  Communities enriched      : 10
+  PDFs read                 : 0
+  pending_community_data rows: 22
+  pending_fee_observations  : 0
+  By field : entity_status=4, incorporation_date=2, legal_name=4, registered_agent=4, registered_agent_address=4, state_entity_number=4
+  By source: sunbiz=22
+============================================================
+[09:34:10] Done.
