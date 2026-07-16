@@ -101,6 +101,15 @@ interface Community {
   is_55_plus?: boolean
   is_gated?: boolean
   is_age_restricted?: boolean
+  // trash & utilities (display-only)
+  trash_pickup_days?: string | null
+  trash_provider?: string | null
+  recycling_pickup_days?: string | null
+  water_provider?: string | null
+  sewer_provider?: string | null
+  electric_provider?: string | null
+  natural_gas_available?: boolean | null
+  internet_providers?: string | null
 }
 
 async function getCommunity(slug: string) {
@@ -168,6 +177,23 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     : (community.review_avg ?? null)
 
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
+
+  // ── Trash & Utilities (DISPLAY ONLY — no forms, mirrors Assessment Signals
+  // precedent). Rows are built from the 8 utility columns; the section renders
+  // only when at least one field is non-null (hasTrashUtilities guard below).
+  const trashRows = [
+    { label: 'Trash pickup days', val: community.trash_pickup_days },
+    { label: 'Trash provider', val: community.trash_provider },
+    { label: 'Recycling pickup days', val: community.recycling_pickup_days },
+  ].filter((r) => r.val != null && String(r.val).trim() !== '')
+  const utilityRows = [
+    { label: 'Water', val: community.water_provider },
+    { label: 'Sewer', val: community.sewer_provider },
+    { label: 'Electric', val: community.electric_provider },
+    { label: 'Natural gas', val: community.natural_gas_available == null ? null : (community.natural_gas_available ? 'Yes' : 'No') },
+    { label: 'Internet options', val: community.internet_providers },
+  ].filter((r) => r.val != null && String(r.val).trim() !== '')
+  const hasTrashUtilities = trashRows.length > 0 || utilityRows.length > 0
 
   // Sponsored ads — fetch advertisers targeting this community's city.
   // Uses the service-role client (server component only — key never reaches
@@ -359,6 +385,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     ...(community.is_gated ? [{
       question: `Is ${community.canonical_name} a gated community?`,
       answer: `Yes, ${community.canonical_name} is a gated community with controlled access in ${community.city}, Florida.`,
+    }] : []),
+    ...(community.trash_pickup_days ? [{
+      question: `What day is trash pickup at ${community.canonical_name}?`,
+      answer: 'Trash pickup at ' + community.canonical_name + ' is ' + community.trash_pickup_days
+        + (community.trash_provider ? ', serviced by ' + community.trash_provider : '')
+        + '. Verify schedules with your association or provider.',
     }] : []),
   ]
 
@@ -597,6 +629,43 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             })}
           </div>
         </div>
+
+        {/* TRASH & UTILITIES — display only, renders only when at least one field is populated */}
+        {hasTrashUtilities && (
+          <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
+              <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Trash &amp; Utilities</div>
+              <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>public + resident</span>
+            </div>
+            {trashRows.length > 0 && (
+              <div style={{marginBottom: utilityRows.length > 0 ? '14px' : '0px'}}>
+                <div style={{fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px'}}>Trash &amp; Recycling</div>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                  {trashRows.map((r) => (
+                    <div key={r.label} style={{display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap'}}>
+                      <span style={{color: '#888', fontSize: '12px'}}>{r.label}</span>
+                      <span style={{color: '#1a1a1a', fontSize: '13px', textAlign: 'right'}}>{r.val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {utilityRows.length > 0 && (
+              <div>
+                <div style={{fontSize: '11px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px'}}>Utilities</div>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                  {utilityRows.map((r) => (
+                    <div key={r.label} style={{display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap'}}>
+                      <span style={{color: '#888', fontSize: '12px'}}>{r.label}</span>
+                      <span style={{color: '#1a1a1a', fontSize: '13px', textAlign: 'right'}}>{r.val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div style={{fontSize: '11px', color: '#aaa', marginTop: '12px'}}>Verify schedules with your association or provider.</div>
+          </div>
+        )}
 
         {community.legal_name && (
           <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
