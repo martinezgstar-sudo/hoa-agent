@@ -2,7 +2,7 @@
 //
 // Reusable JSON-LD builders for HOA Agent. Every builder returns a plain
 // object that is then run through `stripNulls` so the output never carries
-// null / undefined / empty-string properties — that's the difference
+// null / undefined / empty-string properties - that's the difference
 // between schema Google trusts and schema Google flags.
 //
 // Usage (community page):
@@ -20,7 +20,7 @@ export const SITE = "https://www.hoa-agent.com"
 // ─── Generic stripper ────────────────────────────────────────────────────────
 
 /**
- * Deep-clean an object/array — remove null, undefined, empty strings,
+ * Deep-clean an object/array - remove null, undefined, empty strings,
  * empty arrays, and empty plain objects. Arrays preserve order. Non-plain
  * objects (Date, RegExp, etc.) are returned as-is. Top-level returns are
  * always plain.
@@ -143,7 +143,7 @@ export interface CommunityLike {
   news_reputation_score?: number | null
 }
 
-/** Best-effort address object — omits fields that are missing. */
+/** Best-effort address object - omits fields that are missing. */
 function buildAddress(c: CommunityLike) {
   return {
     "@type": "PostalAddress",
@@ -203,7 +203,7 @@ function buildPlaceDescription(c: CommunityLike): string {
 
 /**
  * Place schema for the physical community. Always emit. Address fields
- * gracefully omit when missing — never emits address: null.
+ * gracefully omit when missing - never emits address: null.
  */
 export function buildPlaceSchema(c: CommunityLike) {
   if (!c.slug || !c.canonical_name) return undefined
@@ -353,13 +353,13 @@ export function truncate(s: string, maxLen: number): string {
   // Otherwise fall back to last complete word boundary.
   const lastSpace = cut.lastIndexOf(" ")
   const slice = lastSpace > 0 ? cut.slice(0, lastSpace) : cut
-  const safe = slice.replace(/[\s\.,;:\-—]+$/, "")
+  const safe = slice.replace(/[\s\.,;:\-\u{2014}]+$/u, "")
   return safe + "..."
 }
 
 /** Append "community" to a free-text property_type unless it already
  * ends in a community-like noun. Lower-cased throughout for
- * Google-style meta descriptions. Conservative whitelist — we'd rather
+ * Google-style meta descriptions. Conservative whitelist - we'd rather
  * say "estates community" (slightly redundant) than "is a estates"
  * (bad grammar). */
 function normalizePropertyType(raw: string | null | undefined): string {
@@ -388,7 +388,7 @@ export function buildCommunityMetaDescription(c: CommunityLike): string {
   const city = c.city || "Palm Beach County"
   const zip = c.zip_code ? ` ${c.zip_code}` : ""
 
-  // Core sentences in priority order — the closer is optional so it
+  // Core sentences in priority order - the closer is optional so it
   // doesn't crowd out real data on long names.
   const core: string[] = []
   core.push(`${name} is a ${propertyType} in ${city}, Florida${zip}.`)
@@ -425,17 +425,17 @@ export function buildCommunityMetaDescription(c: CommunityLike): string {
   const CAP = 175
   if (withCloser.length <= CAP) return withCloser
 
-  // Closer overflows — try core alone before any truncation
+  // Closer overflows - try core alone before any truncation
   const coreOnly = core.join(" ")
   if (coreOnly.length <= CAP) return coreOnly
 
-  // Core itself overflows — peel core sentences from the end (least
+  // Core itself overflows - peel core sentences from the end (least
   // important first) until it fits. We never truncate mid-content.
   for (let n = core.length - 1; n >= 1; n--) {
     const slim = core.slice(0, n).join(" ")
     if (slim.length <= CAP) return slim
   }
-  // Even just the first sentence is > CAP — fall back to word-boundary
+  // Even just the first sentence is > CAP - fall back to word-boundary
   // truncate of the first sentence with ellipsis.
   return truncate(core[0], CAP)
 }

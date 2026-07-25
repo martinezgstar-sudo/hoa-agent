@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
   if (management) {
     dbQuery = dbQuery.ilike('management_company', `%${management}%`)
   }
-  // hoa_type filter — uses legacy schema only (is_sub_hoa + master_hoa_id)
+  // hoa_type filter - uses legacy schema only (is_sub_hoa + master_hoa_id)
   // until the migration adding is_master/parent_id runs in production.
   if (hoaType === 'master') {
     // Master = communities that have other communities pointing to them via master_hoa_id.

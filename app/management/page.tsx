@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "HOA Management Companies — Palm Beach County Directory | HOA Agent",
+  title: "HOA Management Companies - Palm Beach County Directory | HOA Agent",
   description:
     "Browse Palm Beach County HOA and condo management companies. See which communities each firm manages and contact information for due diligence.",
   alternates: { canonical: "https://www.hoa-agent.com/management" },
@@ -50,7 +50,7 @@ export default async function ManagementIndexPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "HOA & Condo Management Companies — Palm Beach County",
+    name: "HOA & Condo Management Companies - Palm Beach County",
     description: `${companies.length} management companies serving Palm Beach County HOA and condo associations`,
     numberOfItems: companies.length,
     itemListElement: companies.slice(0, 50).map((c, i) => ({

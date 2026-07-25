@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import ArticleLayout from "@/app/components/ArticleLayout"
 
 const SLUG = "/florida-hoa-law"
-const TITLE = "Florida HOA Law — Plain English Guide to Chapters 718, 720 & SB 4-D"
+const TITLE = "Florida HOA Law - Plain English Guide to Chapters 718, 720 & SB 4-D"
 const DESC = "Florida HOA and condo law explained. Chapter 718 governs condos, Chapter 720 governs HOAs, and SB 4-D added structural reserve and milestone inspection requirements after Surfside."
 const PUBLISHED = "2026-05-03"
 
@@ -19,9 +19,9 @@ export default function Page() {
       category="FLORIDA HOA LAW" title={TITLE} description={DESC}
       publishedDate={PUBLISHED} slug={SLUG}
       toc={[
-        { id: "chapter-718", label: "Chapter 718 — Condominium Act" },
-        { id: "chapter-720", label: "Chapter 720 — Homeowners Association Act" },
-        { id: "sb-4d", label: "SB 4-D — Surfside reforms (2022)" },
+        { id: "chapter-718", label: "Chapter 718 - Condominium Act" },
+        { id: "chapter-720", label: "Chapter 720 - Homeowners Association Act" },
+        { id: "sb-4d", label: "SB 4-D - Surfside reforms (2022)" },
         { id: "owner-rights", label: "Owner rights under Florida law" },
         { id: "elections", label: "Board election rules" },
         { id: "assessments", label: "Assessment collection rules" },
@@ -33,7 +33,7 @@ export default function Page() {
         { q: "Can my Florida HOA force me to remove a satellite dish or solar panels?", a: "Federal and Florida law generally protect satellite dishes under one meter and solar panels from association restrictions, though associations can regulate placement to a limited extent." },
       ]}
     >
-      <h2 id="chapter-718">Chapter 718 — Condominium Act</h2>
+      <h2 id="chapter-718">Chapter 718 - Condominium Act</h2>
       <p>
         Florida Statute Chapter 718 (the &quot;Condominium Act&quot;) governs every condominium association in Florida. It defines the relationship between unit owners, the association, and the developer (during the developer-control period). Chapter 718 covers:
       </p>
@@ -51,9 +51,9 @@ export default function Page() {
         The Florida Department of Business and Professional Regulation (DBPR) Division of Florida Condominiums, Timeshares, and Mobile Homes regulates Chapter 718 associations. Owners can file complaints with DBPR for governance violations.
       </p>
 
-      <h2 id="chapter-720">Chapter 720 — Homeowners Association Act</h2>
+      <h2 id="chapter-720">Chapter 720 - Homeowners Association Act</h2>
       <p>
-        Florida Statute Chapter 720 governs traditional homeowners associations — typically single-family and townhome communities where owners hold fee-simple title to their lots. Key provisions include:
+        Florida Statute Chapter 720 governs traditional homeowners associations - typically single-family and townhome communities where owners hold fee-simple title to their lots. Key provisions include:
       </p>
       <ul>
         <li>Owner rights to inspect records (most documents within 10 business days)</li>
@@ -64,10 +64,10 @@ export default function Page() {
         <li>Fining and suspension procedures</li>
       </ul>
       <p>
-        Chapter 720 is generally less prescriptive than Chapter 718 — bylaws and CC&Rs do more of the work in HOAs. There is no equivalent state regulator that handles routine HOA disputes, which is why members often have to file in civil court for enforcement.
+        Chapter 720 is generally less prescriptive than Chapter 718 - bylaws and CC&Rs do more of the work in HOAs. There is no equivalent state regulator that handles routine HOA disputes, which is why members often have to file in civil court for enforcement.
       </p>
 
-      <h2 id="sb-4d">SB 4-D — Surfside reforms (2022)</h2>
+      <h2 id="sb-4d">SB 4-D - Surfside reforms (2022)</h2>
       <p>
         After the June 24, 2021 collapse of Champlain Towers South in Surfside, Florida, the legislature passed SB 4-D requiring two major changes to condominium governance:
       </p>
@@ -76,7 +76,7 @@ export default function Page() {
           <strong>Milestone Inspections.</strong> Buildings three stories or taller must undergo Milestone Inspections at 30 years of age (25 years for coastal buildings within three miles of the coast) and every 10 years thereafter. The inspection assesses structural integrity and life safety.
         </li>
         <li>
-          <strong>Structural Integrity Reserve Studies (SIRS).</strong> Condo associations must commission a SIRS every 10 years and fund reserves accordingly. The SIRS examines components like roof, structural concrete, plumbing, electrical, fire-protection systems, and waterproofing — and the association must fund reserves for any component flagged as needing replacement.
+          <strong>Structural Integrity Reserve Studies (SIRS).</strong> Condo associations must commission a SIRS every 10 years and fund reserves accordingly. The SIRS examines components like roof, structural concrete, plumbing, electrical, fire-protection systems, and waterproofing - and the association must fund reserves for any component flagged as needing replacement.
         </li>
       </ol>
       <p>

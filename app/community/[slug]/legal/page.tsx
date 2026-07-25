@@ -71,7 +71,7 @@ export default async function CommunityLegalPage({ params }: { params: Promise<{
           </span>
         </div>
         <p style={{ fontSize: '12px', color: '#666', lineHeight: '1.6' }}>
-          Cases are sourced from CourtListener, a public legal database maintained by the Free Law Project. Records include Florida state and federal court opinions. Case names, docket numbers, and court citations are as filed. HOA Agent does not verify the accuracy of court records — always confirm directly with the court or a licensed attorney.
+          Cases are sourced from CourtListener, a public legal database maintained by the Free Law Project. Records include Florida state and federal court opinions. Case names, docket numbers, and court citations are as filed. HOA Agent does not verify the accuracy of court records - always confirm directly with the court or a licensed attorney.
         </p>
       </div>
 

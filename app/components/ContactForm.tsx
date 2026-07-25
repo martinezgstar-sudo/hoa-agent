@@ -44,7 +44,7 @@ export default function ContactForm({ subject, fields = "simple", successMessage
       if (!res.ok || !json.success) throw new Error(json.error || "Submission failed")
       setDone(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Network error — please try again.")
+      setError(err instanceof Error ? err.message : "Network error - please try again.")
     } finally {
       setBusy(false)
     }
@@ -86,7 +86,7 @@ export default function ContactForm({ subject, fields = "simple", successMessage
         <>
           <div>
             <label style={labelStyle}>Community name and URL *</label>
-            <input required value={form.community || ""} onChange={(e) => set("community", e.target.value)} placeholder="e.g. Shoma Townhomes — https://www.hoa-agent.com/community/…" style={inputStyle} />
+            <input required value={form.community || ""} onChange={(e) => set("community", e.target.value)} placeholder="e.g. Shoma Townhomes - https://www.hoa-agent.com/community/…" style={inputStyle} />
           </div>
           <div>
             <label style={labelStyle}>Field that is incorrect *</label>

@@ -14,13 +14,13 @@ const HomeSearch = dynamic(() => import('@/app/components/HomeSearch'), {
 const GuideForm = dynamic(() => import('@/app/components/GuideForm'))
 
 export const metadata: Metadata = {
-  title: 'HOA Agent — Know the HOA Before You Commit',
+  title: 'HOA Agent | Know the HOA Before You Commit',
   description:
-    'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+    'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews, all free. Source-attributed data.',
   alternates: { canonical: 'https://www.hoa-agent.com/' },
   openGraph: {
-    title: 'HOA Agent — Know the HOA Before You Commit',
-    description: 'Search 8,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews — free.',
+    title: 'HOA Agent | Know the HOA Before You Commit',
+    description: 'Search 8,000+ Palm Beach County HOA and condo communities. Fees, assessments, restrictions, and reviews, all free.',
     url: 'https://www.hoa-agent.com/',
     siteName: 'HOA Agent',
     type: 'website',
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'HOA Agent — Know the HOA Before You Commit',
-    description: 'Search Palm Beach County HOA communities. Fees, restrictions, litigation history, and reviews — free.',
+    title: 'HOA Agent | Know the HOA Before You Commit',
+    description: 'Search Palm Beach County HOA communities. Fees, restrictions, litigation history, and reviews, all free.',
     images: ['https://www.hoa-agent.com/logo.png'],
   },
 }
@@ -75,7 +75,7 @@ export default async function Home() {
 
   const totalCommunities = count || 0
 
-  // JSON-LD bundle via shared helper — single @graph block for cleanliness.
+  // JSON-LD bundle via shared helper - single @graph block for cleanliness.
   const { buildWebSiteSchema, buildHoaAgentOrgSchema, jsonLdGraph } = await import('@/app/lib/seo/json-ld')
   const homepageGraphHtml = jsonLdGraph([
     buildWebSiteSchema(),
@@ -84,9 +84,9 @@ export default async function Home() {
       '@type': 'WebPage',
       '@id': 'https://www.hoa-agent.com#webpage',
       url: 'https://www.hoa-agent.com',
-      name: 'HOA Agent — Know the HOA Before You Commit',
+      name: 'HOA Agent | Know the HOA Before You Commit',
       description:
-        'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews — free. Source-attributed data.',
+        'Search 8,000+ Palm Beach County HOA communities. Find fees, restrictions, management company, and real resident reviews, all free. Source-attributed data.',
       isPartOf: { '@id': 'https://www.hoa-agent.com' },
       mainEntity: { '@id': 'https://www.hoa-agent.com#org' },
     },
@@ -162,7 +162,7 @@ export default async function Home() {
       </section>
 
       <section style={{padding: '0 32px 32px', maxWidth: '680px', margin: '0 auto'}}>
-        <div style={{fontSize: '11px', fontWeight: '600', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px'}}>Featured communities — Palm Beach County</div>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px'}}>Featured communities: Palm Beach County</div>
         {featured?.map((c) => (
           <a key={c.id} href={"/community/" + c.slug} style={{textDecoration: 'none'}}>
             <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px 20px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', cursor: 'pointer'}}>
@@ -194,7 +194,7 @@ export default async function Home() {
         <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px'}}>
           {[
             {step: 'Step 1', title: 'Search your community', desc: 'Find by name, address, city or management company.'},
-            {step: 'Step 2', title: 'Read real experiences', desc: 'Fees, restrictions and reviews from actual residents — all source-labeled.'},
+            {step: 'Step 2', title: 'Read real experiences', desc: 'Fees, restrictions and reviews from actual residents - all source-labeled.'},
             {step: 'Step 3', title: 'Share what you know', desc: 'Get the full report with source trail, fee history and resident intelligence.'},
           ].map((h) => (
             <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
@@ -226,7 +226,7 @@ export default async function Home() {
             },
             {
               q: 'Is HOA Agent free to use?',
-              a: 'Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community.',
+              a: 'Basic community profiles - fees, restrictions, management info, news reputation, and resident reviews - are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community.',
             },
             {
               q: 'How often is the data updated?',
@@ -234,7 +234,7 @@ export default async function Home() {
             },
             {
               q: 'What counties does HOA Agent cover?',
-              a: 'HOA Agent currently covers Palm Beach County, Florida — over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
+              a: 'HOA Agent currently covers Palm Beach County, Florida - over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
             },
             {
               q: 'Can I trust the litigation data?',
@@ -289,7 +289,7 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "Is HOA Agent free to use?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Basic community profiles - fees, restrictions, management info, news reputation, and resident reviews - are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community." }
             },
             {
               "@type": "Question",
@@ -299,7 +299,7 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "What counties does HOA Agent cover?",
-              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent currently covers Palm Beach County, Florida — over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned." }
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent currently covers Palm Beach County, Florida - over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned." }
             },
             {
               "@type": "Question",

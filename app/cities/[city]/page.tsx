@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const { city: citySlug } = await params
   const city = CITY_DISPLAY[citySlug] || citySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'City'
   return {
-    title: `${city} HOA Communities — Fees, Reviews & Restrictions | HOA Agent`,
+    title: `${city} HOA Communities - Fees, Reviews & Restrictions | HOA Agent`,
     description: `Browse HOA communities in ${city}. Find fees, restrictions, reviews and management company details for every homeowners association in ${city}, Palm Beach County.`,
     keywords: `${city} HOA, ${city} homeowners association, ${city} HOA fees, best HOA ${city}, HOA communities ${city} FL`,
   }
@@ -141,7 +141,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"12px",marginBottom:"32px"}}>
           {[
         {num: total.toString(), label: "Communities"},
-            {num: withFees > 0 ? "$"+Math.round(avgFee)+"/mo" : "—", label: "Avg HOA fee"},
+            {num: withFees > 0 ? "$"+Math.round(avgFee)+"/mo" : "-", label: "Avg HOA fee"},
             {num: withFees.toString(), label: "With fee data"},
           ].map(s => (
             <div key={s.label} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px",textAlign:"center"}}>

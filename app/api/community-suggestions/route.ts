@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
   // Append details to proposed_value if both provided (single column on the queue side)
   if (body.details && body.details.trim()) {
-    proposed_value = `${proposed_value} — ${body.details.trim()}`
+    proposed_value = `${proposed_value} - ${body.details.trim()}`
   }
 
   const sb = admin()

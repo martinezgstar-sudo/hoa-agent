@@ -48,9 +48,9 @@ async function fetchCompanyAndCommunities(slug: string): Promise<{ name: string;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const result = await fetchCompanyAndCommunities(slug)
-  if (!result) return { title: "Company Not Found — HOA Agent" }
+  if (!result) return { title: "Company Not Found | HOA Agent" }
   const { name, communities } = result
-  const title = `${name} — HOA Management | HOA Agent`
+  const title = `${name} - HOA Management | HOA Agent`
   const description = `${name} is an HOA management company serving ${communities.length} communities in Palm Beach County, Florida. View the full list of communities they manage.`
   const canonical = `https://www.hoa-agent.com/management/${slug}`
   return {

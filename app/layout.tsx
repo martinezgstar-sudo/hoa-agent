@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     ],
     apple: '/logo.png',
   },
-  title: 'HOA Agent — HOA Intelligence Platform',
+  title: 'HOA Agent | HOA Intelligence Platform',
   description: 'Real experiences from real residents. HOA fees, assessments, restrictions and reviews all in one place.',
   keywords: 'HOA fees, HOA reviews, condo fees, HOA assessments, homeowners association, community reviews',
   openGraph: {
-    title: 'HOA Agent — HOA Intelligence Platform',
+    title: 'HOA Agent | HOA Intelligence Platform',
     description: 'Know the HOA before you commit. Fees, assessments, restrictions and reviews for Palm Beach County communities.',
     url: 'https://hoa-agent.com',
     siteName: 'HOA Agent',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'HOA Agent — HOA Intelligence Platform',
+    title: 'HOA Agent | HOA Intelligence Platform',
     description: 'Know the HOA before you commit.',
     images: ['https://hoa-agent.com/logo.png'],
   },

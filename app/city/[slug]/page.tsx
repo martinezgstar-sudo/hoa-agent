@@ -110,7 +110,7 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
   'west-palm-beach': {
     name: 'West Palm Beach',
     blurb:
-      'West Palm Beach is one of Palm Beach County\'s most dynamic cities, with a diverse mix of waterfront condominiums, gated single-family communities, and urban townhomes. HOA fees vary widely — from under $200/month in established neighborhoods to over $800/month in luxury high-rises along the Intracoastal. Many communities here have active boards, formal architectural review processes, and rental restrictions worth knowing before you sign.',
+      'West Palm Beach is one of Palm Beach County\'s most dynamic cities, with a diverse mix of waterfront condominiums, gated single-family communities, and urban townhomes. HOA fees vary widely - from under $200/month in established neighborhoods to over $800/month in luxury high-rises along the Intracoastal. Many communities here have active boards, formal architectural review processes, and rental restrictions worth knowing before you sign.',
   },
   'boca-raton': {
     name: 'Boca Raton',
@@ -120,12 +120,12 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
   'jupiter': {
     name: 'Jupiter',
     blurb:
-      'Jupiter offers a relaxed coastal lifestyle with HOA communities ranging from beachside condo complexes to equestrian estates further west. Many communities are smaller — under 200 units — giving homeowners more direct access to board decisions. Special assessments have become more common as communities built in the 1980s and 1990s tackle deferred maintenance and structural reserve requirements under newer Florida law.',
+      'Jupiter offers a relaxed coastal lifestyle with HOA communities ranging from beachside condo complexes to equestrian estates further west. Many communities are smaller - under 200 units - giving homeowners more direct access to board decisions. Special assessments have become more common as communities built in the 1980s and 1990s tackle deferred maintenance and structural reserve requirements under newer Florida law.',
   },
   'palm-beach-gardens': {
     name: 'Palm Beach Gardens',
     blurb:
-      'Palm Beach Gardens is known for master-planned communities with comprehensive amenities: golf, tennis, resort pools, and staffed entry gates. The city sits in a growth corridor and new construction communities are still forming their associations. HOA governance quality varies significantly — some communities have decades of stable board history, others are still working through developer-to-homeowner control transitions.',
+      'Palm Beach Gardens is known for master-planned communities with comprehensive amenities: golf, tennis, resort pools, and staffed entry gates. The city sits in a growth corridor and new construction communities are still forming their associations. HOA governance quality varies significantly - some communities have decades of stable board history, others are still working through developer-to-homeowner control transitions.',
   },
   'lake-worth': {
     name: 'Lake Worth',
@@ -135,7 +135,7 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
   'delray-beach': {
     name: 'Delray Beach',
     blurb:
-      'Delray Beach spans a wide spectrum — from active adult 55+ communities like Kings Point and Hunters Run to newer coastal developments commanding premium HOA fees. The active adult segment is particularly significant here; buyers should confirm age-restriction status and understand the amenity packages bundled into dues. Rental restrictions in age-restricted communities are often more stringent than the broader market.',
+      'Delray Beach spans a wide spectrum - from active adult 55+ communities like Kings Point and Hunters Run to newer coastal developments commanding premium HOA fees. The active adult segment is particularly significant here; buyers should confirm age-restriction status and understand the amenity packages bundled into dues. Rental restrictions in age-restricted communities are often more stringent than the broader market.',
   },
   'boynton-beach': {
     name: 'Boynton Beach',
@@ -145,12 +145,12 @@ const CITIES: Record<string, { name: string; blurb: string }> = {
   'royal-palm-beach': {
     name: 'Royal Palm Beach',
     blurb:
-      'Royal Palm Beach is a master-planned village in central Palm Beach County built largely in the 1980s and 1990s. Communities here lean heavily toward single-family homes and townhomes inside HOA-governed subdivisions, with monthly fees that are typically modest compared with coastal cities. The Shoma Homes developments and other townhome enclaves dominate the market — most share a single master association that handles common-area maintenance and gates.',
+      'Royal Palm Beach is a master-planned village in central Palm Beach County built largely in the 1980s and 1990s. Communities here lean heavily toward single-family homes and townhomes inside HOA-governed subdivisions, with monthly fees that are typically modest compared with coastal cities. The Shoma Homes developments and other townhome enclaves dominate the market - most share a single master association that handles common-area maintenance and gates.',
   },
   'wellington': {
     name: 'Wellington',
     blurb:
-      'Wellington is a planned community known for equestrian neighborhoods, golf course estates, and family-oriented HOAs. Property values trend upward with proximity to Wellington International (the international polo and equestrian venue). HOA fees vary widely — from under $200/month in older townhome communities to over $1,000/month in equestrian estates with shared barn and arena access. Buyers should review covenant restrictions on horse keeping, fencing, and outbuildings carefully.',
+      'Wellington is a planned community known for equestrian neighborhoods, golf course estates, and family-oriented HOAs. Property values trend upward with proximity to Wellington International (the international polo and equestrian venue). HOA fees vary widely - from under $200/month in older townhome communities to over $1,000/month in equestrian estates with shared barn and arena access. Buyers should review covenant restrictions on horse keeping, fencing, and outbuildings carefully.',
   },
 }
 
@@ -164,8 +164,8 @@ const PAGE_SIZE = 50
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const city = CITIES[slug]
-  if (!city) return { title: 'City Not Found — HOA Agent' }
-  const title = `${city.name} HOA Communities — Fees, Reviews & Litigation | HOA Agent Palm Beach County`
+  if (!city) return { title: 'City Not Found | HOA Agent' }
+  const title = `${city.name} HOA Communities - Fees, Reviews & Litigation | HOA Agent Palm Beach County`
   const description = `Browse HOA and condo communities in ${city.name}, Florida. Find litigation history, news reputation scores, monthly fees, and resident reviews. Free on HOA Agent.`
   const canonical = `https://www.hoa-agent.com/city/${slug}`
   return {
@@ -217,7 +217,7 @@ export default async function CityPage({ params, searchParams }: Props) {
     communities = fallback.data ?? null
   }
 
-  // Richness sort — data-rich communities first
+  // Richness sort - data-rich communities first
   function richness(c: Record<string, unknown>): number {
     let s = 0
     if (c.management_company) s += 15

@@ -30,10 +30,10 @@ export default function Page() {
 
       <h2>Editorial principles</h2>
       <ul>
-        <li>Sourcing first — every field is tied to a public record or verified submission.</li>
-        <li>Honest about uncertainty — if we don&apos;t know, we say we don&apos;t know.</li>
-        <li>No anonymous accusations — we don&apos;t publish unverifiable allegations.</li>
-        <li>Independence — no affiliation with any HOA, manager, brokerage, or agency.</li>
+        <li>Sourcing first - every field is tied to a public record or verified submission.</li>
+        <li>Honest about uncertainty - if we don&apos;t know, we say we don&apos;t know.</li>
+        <li>No anonymous accusations - we don&apos;t publish unverifiable allegations.</li>
+        <li>Independence - no affiliation with any HOA, manager, brokerage, or agency.</li>
         <li>Corrections within 7 days.</li>
       </ul>
 

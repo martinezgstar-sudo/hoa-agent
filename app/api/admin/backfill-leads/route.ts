@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic"
  *
  * Source table: `suggestions` (where /api/report-request writes).
  * The task spec mentioned community_suggestions but the legacy leads
- * are in `suggestions` — verified at probe time.
+ * are in `suggestions` - verified at probe time.
  *
  * Returns:
  *   { ok: true, count_sent, count_skipped, count_failed,

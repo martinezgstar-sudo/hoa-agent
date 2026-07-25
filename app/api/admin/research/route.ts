@@ -154,7 +154,7 @@ class CommunityFindings {
   note(m: string) { this.notes.push(m) }
 }
 
-// ── TIER 2 — CourtListener ───────────────────────────────────────────────────
+// ── TIER 2 - CourtListener ───────────────────────────────────────────────────
 
 async function searchCourtListener(f: CommunityFindings): Promise<void> {
   const q = encodeURIComponent(`"${f.name}" Florida`)
@@ -170,7 +170,7 @@ async function searchCourtListener(f: CommunityFindings): Promise<void> {
     const count = data.count ?? 0
     if (count > 0) {
       const names = (data.results ?? []).slice(0, 3).map(r => r.caseName ?? "").filter(Boolean)
-      f.note(`CourtListener: ${count} cases — ${names.join(", ")}`)
+      f.note(`CourtListener: ${count} cases - ${names.join(", ")}`)
       f.addPending(
         "litigation_count", count,
         `https://www.courtlistener.com/?q=${encodeURIComponent(f.name)}&type=o`,
@@ -184,7 +184,7 @@ async function searchCourtListener(f: CommunityFindings): Promise<void> {
   }
 }
 
-// ── TIER 2 — NewsAPI ─────────────────────────────────────────────────────────
+// ── TIER 2 - NewsAPI ─────────────────────────────────────────────────────────
 
 async function searchNewsAPI(f: CommunityFindings): Promise<void> {
   const key = process.env.NEWSAPI_KEY ?? process.env.NEWS_API_KEY ?? ""
@@ -200,14 +200,14 @@ async function searchNewsAPI(f: CommunityFindings): Promise<void> {
   try {
     const data = JSON.parse(body) as { articles?: Array<{ title?: string; url?: string }> }
     for (const a of (data.articles ?? []).slice(0, 3)) {
-      f.note(`NewsAPI: ${a.title ?? ""} — ${(a.url ?? "").slice(0, 60)}`)
+      f.note(`NewsAPI: ${a.title ?? ""} - ${(a.url ?? "").slice(0, 60)}`)
     }
   } catch {
     /* ignore */
   }
 }
 
-// ── TIER 3 — DuckDuckGo + extraction ─────────────────────────────────────────
+// ── TIER 3 - DuckDuckGo + extraction ─────────────────────────────────────────
 
 async function ddgSearch(query: string, maxResults = 6): Promise<Array<[string, string, string]>> {
   const q = encodeURIComponent(query)
@@ -225,7 +225,7 @@ async function ddgSearch(query: string, maxResults = 6): Promise<Array<[string, 
     const realUrl = realUrlMatch ? decodeURIComponent(realUrlMatch[1]) : ""
     const title = titleRaw.replace(/<[^>]+>/g, "").trim()
 
-    // Snippet — search forward from this link's position
+    // Snippet - search forward from this link's position
     const idx = html.indexOf(href)
     const window = html.slice(idx, idx + 3000)
     const snipMatch = window.match(/class="result__snippet"[^>]*>([\s\S]*?)<\/a>/)
@@ -385,13 +385,13 @@ async function runDDGSearches(f: CommunityFindings): Promise<void> {
 async function researchCommunity(c: Community): Promise<CommunityFindings> {
   const f = new CommunityFindings(c)
 
-  // Tier 2 — government APIs (run in parallel)
+  // Tier 2 - government APIs (run in parallel)
   await Promise.all([
     searchCourtListener(f),
     searchNewsAPI(f),
   ])
 
-  // Tier 3 — DuckDuckGo searches (sequential, with rate limiting)
+  // Tier 3 - DuckDuckGo searches (sequential, with rate limiting)
   await runDDGSearches(f)
 
   return f
@@ -473,7 +473,7 @@ async function writeFindings(sb: SupabaseClient, f: CommunityFindings, dryRun: b
   return counts
 }
 
-// ── GET — stats for dashboard ────────────────────────────────────────────────
+// ── GET - stats for dashboard ────────────────────────────────────────────────
 
 export async function GET(req: NextRequest) {
   if (!isAuthed(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -501,7 +501,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// ── POST — run research batch (native TS, no Python) ─────────────────────────
+// ── POST - run research batch (native TS, no Python) ─────────────────────────
 
 export async function POST(req: NextRequest) {
   if (!isAuthed(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

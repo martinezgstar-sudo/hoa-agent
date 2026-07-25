@@ -35,7 +35,7 @@ export default function AnalyticsPage() {
       setAuthChecked(true)
 
       // Load events filtered by advertiser_id, exclude bots.
-      // Pull last 365 days max — anything older is excluded for performance.
+      // Pull last 365 days max - anything older is excluded for performance.
       const since = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString()
       const all: EventRow[] = []
       for (let off = 0; off < 50000; off += 1000) {
@@ -175,7 +175,7 @@ function HeatRow({ values }: { values: number[] }) {
           return (
             <div
               key={h}
-              title={`${h.toString().padStart(2, "0")}:00 — ${v} clicks`}
+              title={`${h.toString().padStart(2, "0")}:00 - ${v} clicks`}
               style={{ height: "24px", backgroundColor: bg, borderRadius: "3px" }}
             />
           )

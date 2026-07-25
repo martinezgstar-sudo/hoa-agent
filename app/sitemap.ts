@@ -80,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // /city/[slug] — primary city pages with hero + stats + sort
+  // /city/[slug] - primary city pages with hero + stats + sort
   const cityUrls = CITY_SLUGS.map((slug) => ({
     url: `${SITE}/city/${slug}`,
     lastModified: now,
@@ -121,13 +121,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // Management directory (top-level only — per-company pages added by
+  // Management directory (top-level only - per-company pages added by
   // a separate fetch below)
   const managementIndexUrls = [
     { url: `${SITE}/management`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
   ]
 
-  // Per-management-company sitemap entries — fetch all distinct management_company
+  // Per-management-company sitemap entries - fetch all distinct management_company
   // values across published communities, slugify them.
   const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80)
   const mgmtSlugs = new Set<string>()

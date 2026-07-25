@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Palm Beach County HOA Fee Report 2026',
-    description: 'HOA fee analysis for Palm Beach County — by city, property type, and distribution.',
+    description: 'HOA fee analysis for Palm Beach County - by city, property type, and distribution.',
   },
 }
 
@@ -137,14 +137,14 @@ export default async function FeeReportPage() {
             href="/pricing"
             style={{ fontSize: '13px', color: '#fff', fontWeight: 600, textDecoration: 'none', backgroundColor: '#1B2B6B', padding: '8px 16px', borderRadius: '8px', display: 'inline-block' }}
           >
-            Unlock Full Report — $2.99
+            Unlock Full Report - $2.99
           </Link>
           <span style={{ fontSize: '12px', color: '#888', alignSelf: 'center' }}>
             Get the full community table with citations, source URLs, and CSV export.
           </span>
         </div>
 
-        {/* FREE TIER — only headline stats and city count */}
+        {/* FREE TIER - only headline stats and city count */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '32px' }}>
           {[
             { label: 'Communities analyzed', value: data.total.toLocaleString() },
@@ -158,7 +158,7 @@ export default async function FeeReportPage() {
           ))}
         </div>
 
-        {/* FREE TIER — fee distribution buckets without counts/percentages */}
+        {/* FREE TIER - fee distribution buckets without counts/percentages */}
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '16px' }}>
           Fee distribution
         </h2>
@@ -172,9 +172,9 @@ export default async function FeeReportPage() {
           ))}
         </div>
 
-        {/* FREE TIER — teaser table: only first 3 cities */}
+        {/* FREE TIER - teaser table: only first 3 cities */}
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '16px' }}>
-          Average fees by city <span style={{ fontSize: '13px', fontWeight: 400, color: '#888' }}>(preview — top 3 cities)</span>
+          Average fees by city <span style={{ fontSize: '13px', fontWeight: 400, color: '#888' }}>(preview - top 3 cities)</span>
         </h2>
         <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
@@ -229,14 +229,14 @@ export default async function FeeReportPage() {
           </p>
           <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px 0', fontSize: '14px', color: 'rgba(255,255,255,0.95)', lineHeight: 1.9 }}>
             <li>✓ Fee ranges, median, and average for every city</li>
-            <li>✓ Individual community fee data — all {data.total.toLocaleString()} rows</li>
+            <li>✓ Individual community fee data - all {data.total.toLocaleString()} rows</li>
             <li>✓ Sortable and filterable by city, fee, community name</li>
             <li>✓ Highest and lowest fee communities revealed</li>
             <li>✓ CSV download for your records</li>
             <li>✓ Updated as new data is verified</li>
           </ul>
           <Link href="/pricing" style={{ display: 'inline-block', backgroundColor: '#1D9E75', color: '#fff', fontSize: '15px', fontWeight: 700, padding: '12px 24px', borderRadius: '10px', textDecoration: 'none' }}>
-            Unlock Full Report — $2.99
+            Unlock Full Report - $2.99
           </Link>
           <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginTop: '10px' }}>
             One-time payment. No subscription required.

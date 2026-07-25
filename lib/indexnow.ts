@@ -38,7 +38,7 @@ export async function submitToIndexNow(urls: string[]): Promise<{ ok: boolean; s
   }
 }
 
-/** Submit a single URL — convenience wrapper. */
+/** Submit a single URL - convenience wrapper. */
 export async function submitOneToIndexNow(url: string): Promise<{ ok: boolean; error?: string }> {
   const r = await submitToIndexNow([url])
   return { ok: r.ok, error: r.error }

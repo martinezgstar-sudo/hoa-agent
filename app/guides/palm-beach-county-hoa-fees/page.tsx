@@ -3,7 +3,7 @@ import ArticleLayout from "@/app/components/ArticleLayout"
 import { supabase } from "@/lib/supabase"
 
 const SLUG = "/guides/palm-beach-county-hoa-fees"
-const TITLE = "Palm Beach County HOA Fees — 2026 Guide"
+const TITLE = "Palm Beach County HOA Fees - 2026 Guide"
 const DESC = "Average HOA and condo fees by city in Palm Beach County, Florida. What drives high fees, how to verify them, and our methodology for sourcing fee data."
 const PUBLISHED = "2026-05-03"
 
@@ -61,7 +61,7 @@ export default async function Page() {
       ]}
       faq={[
         { q: "What is the average HOA fee in Palm Beach County?", a: "Across all property types and cities in our database, the average monthly HOA fee is roughly $300-$400. Condos in coastal cities can run $700+. Single-family HOAs in inland cities can be under $150." },
-        { q: "Why have Florida HOA fees gone up so much since 2022?", a: "Three reasons: (1) property insurance crisis — master condo policies have multiplied; (2) SB 4-D reserve requirements after the 2021 Surfside collapse; (3) labor and material inflation across landscaping, security, and maintenance." },
+        { q: "Why have Florida HOA fees gone up so much since 2022?", a: "Three reasons: (1) property insurance crisis - master condo policies have multiplied; (2) SB 4-D reserve requirements after the 2021 Surfside collapse; (3) labor and material inflation across landscaping, security, and maintenance." },
       ]}
     >
       <h2 id="averages">Average HOA fees by city</h2>
@@ -103,7 +103,7 @@ export default async function Page() {
 
       <h2 id="by-type">Fees by property type</h2>
       <p>
-        Single-family HOAs in Palm Beach County typically range from <strong>$80–$300</strong> per month. Townhome HOAs run <strong>$200–$500</strong>. Condos vary widely by age and location — <strong>$300–$1,500+</strong>. Luxury high-rise condos along the Intracoastal can exceed $2,000 per month.
+        Single-family HOAs in Palm Beach County typically range from <strong>$80–$300</strong> per month. Townhome HOAs run <strong>$200–$500</strong>. Condos vary widely by age and location - <strong>$300–$1,500+</strong>. Luxury high-rise condos along the Intracoastal can exceed $2,000 per month.
       </p>
 
       <h2 id="verify">How to verify a community&apos;s fee</h2>
@@ -111,7 +111,7 @@ export default async function Page() {
         Listing-site fees are often outdated or wrong. The most reliable sources, in order:
       </p>
       <ol>
-        <li><strong>Estoppel certificate.</strong> The official statement from the association — required at closing in Florida.</li>
+        <li><strong>Estoppel certificate.</strong> The official statement from the association - required at closing in Florida.</li>
         <li><strong>Current annual budget.</strong> Shows the dollar amount per unit and what it covers.</li>
         <li><strong>The management company directly.</strong> Call them and ask.</li>
         <li><strong>Resident submissions on HOA Agent.</strong> Verified resident reports tend to be accurate.</li>
@@ -123,7 +123,7 @@ export default async function Page() {
         HOA Agent collects fee observations from listing sites, resident submissions, public budget filings, and (when available) the Florida Division of Corporations. Every fee is rounded to the nearest $25 and stored as min/median/max so we never imply false precision. Listing-site fees are clearly labeled and require admin approval before they affect a community profile.
       </p>
       <p>
-        We exclude any source that produces &quot;slider noise&quot; — repeated round-number values like $100/$200/$300/$400/$500 that are actually filter UI artifacts, not real fees. For full data sourcing details see <a href="/methodology">our methodology page</a>.
+        We exclude any source that produces &quot;slider noise&quot; - repeated round-number values like $100/$200/$300/$400/$500 that are actually filter UI artifacts, not real fees. For full data sourcing details see <a href="/methodology">our methodology page</a>.
       </p>
     </ArticleLayout>
   )

@@ -38,11 +38,11 @@ interface PendingFeeRow {
 // ── Shared helpers ────────────────────────────────────────────────────────────
 
 function pct(n: number | null) {
-  if (n === null) return "—"
+  if (n === null) return "-"
   return `${Math.round(n * 100)}%`
 }
 function fmt(n: number | null) {
-  if (n === null || n === undefined) return "—"
+  if (n === null || n === undefined) return "-"
   return `$${n.toLocaleString()}`
 }
 function badge(label: string, color: string) {
@@ -93,7 +93,7 @@ function PendingDataTab() {
         proposed_value: row.proposed_value })
     })
     const json = await res.json()
-    setMsg(json.ok ? `✓ Approved — ${row.field_name} updated` : `✗ ${json.error}`)
+    setMsg(json.ok ? `✓ Approved - ${row.field_name} updated` : `✗ ${json.error}`)
     load()
   }
 
@@ -193,9 +193,9 @@ function PendingDataTab() {
                     {row.source_url ? (
                       <a href={row.source_url} target="_blank"
                         style={{fontSize:"11px",color:"#1B2B6B",textDecoration:"none"}}>link ↗</a>
-                    ) : "—"}
+                    ) : "-"}
                   </td>
-                  <td style={tdStyle}>{row.source_type ? badge(row.source_type, "blue") : "—"}</td>
+                  <td style={tdStyle}>{row.source_type ? badge(row.source_type, "blue") : "-"}</td>
                   <td style={tdStyle}>{pct(row.confidence)}</td>
                   <td style={tdStyle}>{row.auto_approvable ? badge("auto","green") : badge("manual","orange")}</td>
                   <td style={tdStyle}>{badge(row.status, row.status==="approved"?"green":row.status==="rejected"?"red":"orange")}</td>
@@ -299,7 +299,7 @@ function PendingFeesTab() {
       })
     })
     const json = await res.json()
-    setMsg(json.ok ? `✓ Fee approved — monthly_fee set on community` : `✗ ${json.error}`)
+    setMsg(json.ok ? `✓ Fee approved - monthly_fee set on community` : `✗ ${json.error}`)
     load()
   }
 
@@ -389,7 +389,7 @@ function PendingFeesTab() {
                     <strong style={{color:"#666"}}>{row.source_type || "unknown"}</strong>
                     {row.source_url && (
                       <>
-                        {" — "}
+                        {" - "}
                         <a href={row.source_url} target="_blank"
                           style={{color:"#888",textDecoration:"underline"}}>source ↗</a>
                       </>
@@ -597,7 +597,7 @@ export default function PendingPage() {
           <p style={{fontSize:"13px",color:"#888",marginTop:"6px",marginBottom:0}}>
             {tab === "data"
               ? "Review proposed community field updates. Auto-approvable (government-sourced) rows can be bulk-approved."
-              : "Fee data from listing sites. Never auto-approved — review each observation carefully before applying to communities."}
+              : "Fee data from listing sites. Never auto-approved - review each observation carefully before applying to communities."}
           </p>
         </div>
         {tab === "data"  && <PendingDataTab/>}

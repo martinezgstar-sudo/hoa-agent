@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'HOA Agent — For BNI Members',
+  title: 'HOA Agent | For BNI Members',
   description: 'HOA Agent: free HOA intelligence for Palm Beach County real estate professionals.',
   robots: { index: false, follow: false },
 }
@@ -30,7 +30,7 @@ export default function BniPage() {
 
         <p style={{ fontSize: '16px', color: '#444', lineHeight: 1.8, marginBottom: '36px' }}>
           HOA Agent is a free platform for researching any HOA or condo community in Palm Beach County.
-          Before your next showing, pull up the community profile — fees, pet restrictions, vehicle rules,
+          Before your next showing, pull up the community profile - fees, pet restrictions, vehicle rules,
           rental approval requirements, litigation history, and news reputation, all in one place.
           No account. No subscription. Free.
         </p>
@@ -70,7 +70,7 @@ export default function BniPage() {
             8,000+ communities. Completely free.
           </div>
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)', marginBottom: '24px', lineHeight: 1.7 }}>
-            Start with any Palm Beach County community — no login required.
+            Start with any Palm Beach County community - no login required.
           </p>
           <Link
             href="/search"

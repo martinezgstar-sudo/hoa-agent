@@ -5,7 +5,7 @@ export const revalidate = 600 // 10-minute ISR cache; categories rarely change
 
 /**
  * GET /api/categories
- * Public — used by the CategoryAutocomplete component on the signup flow.
+ * Public - used by the CategoryAutocomplete component on the signup flow.
  * Returns active rows from ad_categories ordered by parent_group, name.
  *
  * No auth required; this is a static reference list. Service-role client

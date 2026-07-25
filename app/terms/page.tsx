@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Terms of Service | HOA Agent',
-  description: 'HOA Agent terms of service. Informational use only — not legal advice.',
+  description: 'HOA Agent terms of service. Informational use only - not legal advice.',
   openGraph: {
     title: 'Terms of Service | HOA Agent',
     description: 'HOA Agent terms of service. Data is informational only, not legal advice.',
@@ -42,7 +42,7 @@ export default function TermsPage() {
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>4. User Submissions</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>By submitting a review, comment, or community suggestion, you confirm that your submission is truthful and does not contain defamatory, discriminatory, or illegal content. We reserve the right to moderate, edit, or remove any submission at our discretion. You grant HOA Agent a perpetual, non-exclusive, royalty-free license to display, distribute, and use your submission on our platform and in related marketing materials.</p>
 
-        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>5. Prohibited Uses — Scraping and Data Extraction</h2>
+        <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>5. Prohibited Uses - Scraping and Data Extraction</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>You may not use automated tools, bots, crawlers, scrapers, or any other means to extract, copy, or collect data from HOA Agent in bulk. Specifically prohibited:</p>
         <ul style={{fontSize:"14px",color:"#555",lineHeight:"2",marginBottom:"16px",paddingLeft:"24px"}}>
           <li>Automated scraping of community profiles, fee data, or restriction data</li>

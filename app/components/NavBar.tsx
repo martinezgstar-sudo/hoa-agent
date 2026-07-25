@@ -8,7 +8,7 @@ type NavLink = {
   label: string
 }
 
-// Canonical site nav — used on every page unless a caller overrides
+// Canonical site nav - used on every page unless a caller overrides
 export const SITE_NAV: NavLink[] = [
   { href: '/search', label: 'Search' },
   { href: '/city', label: 'Cities' },

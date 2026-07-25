@@ -217,7 +217,7 @@ export default function PlanSelectionPage() {
           Pricing per month. Category exclusivity guaranteed in your selected ZIPs.
         </p>
 
-        {/* Step 1 — Tier */}
+        {/* Step 1 - Tier */}
         <Section title="1. Choose tier">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px" }}>
             {PLANS.map((p) => (
@@ -260,7 +260,7 @@ export default function PlanSelectionPage() {
           </div>
         </Section>
 
-        {/* Step 2 — Category */}
+        {/* Step 2 - Category */}
         <Section title="2. Your service category">
           <CategoryAutocomplete
             id="ad-category"
@@ -275,11 +275,11 @@ export default function PlanSelectionPage() {
           />
         </Section>
 
-        {/* Step 3 — ZIP picker */}
+        {/* Step 3 - ZIP picker */}
         <Section title="3. Target ZIP codes">
           {plan === "county" ? (
             <div style={{ padding: "14px 16px", backgroundColor: "#E1F5EE", border: "1px solid #c1ddd0", borderRadius: "10px", fontSize: "13px", color: "#155A3F" }}>
-              ✓ All Palm Beach County ZIPs included with the County plan — no input required.
+              ✓ All Palm Beach County ZIPs included with the County plan - no input required.
             </div>
           ) : (
             <>
@@ -339,7 +339,7 @@ export default function PlanSelectionPage() {
           )}
         </Section>
 
-        {/* Step 4 — Exclusivity check */}
+        {/* Step 4 - Exclusivity check */}
         <Section title="4. Availability check">
           <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap", marginBottom: "10px" }}>
             <button

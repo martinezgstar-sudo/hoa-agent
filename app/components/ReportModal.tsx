@@ -22,7 +22,7 @@ export default function ReportModal() {
   return (
     <>
       <button onClick={() => setOpen(true)} style={{fontSize:"13px",padding:"10px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap"}}>
-        Get report — 
+        Get report - 
       </button>
       {open && (
         <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,backgroundColor:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:"24px"}} onClick={() => setOpen(false)}>
@@ -32,13 +32,13 @@ export default function ReportModal() {
               <div style={{textAlign:"center",padding:"16px 0"}}>
                 <div style={{fontSize:"40px",marginBottom:"16px"}}>✓</div>
                 <div style={{fontSize:"18px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>You are on the list</div>
-                <div style={{fontSize:"14px",color:"#888",lineHeight:"1.6"}}>Full reports are coming soon. We will email you as soon as they are available — along with a discount for early access.</div>
+                <div style={{fontSize:"14px",color:"#888",lineHeight:"1.6"}}>Full reports are coming soon. We will email you as soon as they are available - along with a discount for early access.</div>
               </div>
             ) : (
               <>
-                <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"8px"}}>Full HOA Report — </div>
+                <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"8px"}}>Full HOA Report - </div>
                 <h2 style={{fontSize:"22px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",lineHeight:"1.3"}}>Get the complete picture</h2>
-                <p style={{fontSize:"13px",color:"#888",lineHeight:"1.7",marginBottom:"20px"}}>Full reports are coming soon. Enter your email to be notified when available — early access customers get a discount.</p>
+                <p style={{fontSize:"13px",color:"#888",lineHeight:"1.7",marginBottom:"20px"}}>Full reports are coming soon. Enter your email to be notified when available - early access customers get a discount.</p>
                 <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"20px"}}>
                   {["Complete fee trend analysis","Full source trail with citations","All special assessment signals","Restriction detail","Management company history","Downloadable PDF"].map(i => (
                     <div key={i} style={{display:"flex",alignItems:"center",gap:"8px",fontSize:"13px",color:"#444"}}>

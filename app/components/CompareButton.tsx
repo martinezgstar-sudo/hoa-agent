@@ -118,7 +118,7 @@ export default function CompareButton({ slug, variant = "default", className = "
         toggle()
       }}
       disabled={atCap}
-      title={atCap ? `Maximum ${MAX_COMPARE} communities — remove one first` : ""}
+      title={atCap ? `Maximum ${MAX_COMPARE} communities - remove one first` : ""}
       className={className}
       style={{ ...baseStyle, ...colorStyle }}
     >

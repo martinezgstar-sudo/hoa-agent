@@ -11,13 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     .eq('slug', slug)
     .single()
 
-  if (!community) return { title: 'Community Not Found — HOA Agent' }
+  if (!community) return { title: 'Community Not Found | HOA Agent' }
 
   const feeStr = community.monthly_fee_min && community.monthly_fee_max
     ? `HOA fees $${community.monthly_fee_min}-$${community.monthly_fee_max}/mo.`
     : 'HOA fee data available.'
 
-  const title = `${community.canonical_name} — ${community.city} HOA | HOA Agent`
+  const title = `${community.canonical_name} - ${community.city} HOA | HOA Agent`
   const description = `${community.canonical_name} is a ${community.property_type || 'residential'} community in ${community.city}, FL. ${feeStr} View fees, assessments, restrictions and managemenmpany details.`
 
   return {
@@ -161,7 +161,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{display: 'inline-block', padding: '6px 14px', borderRadius: '20px', backgroundColor: confidence.bg, color: confidence.color, fontSize: '13px', fontWeight: '600', marginBottom: '4px'}}>
                 {confidence.stars} {confidence.label}
               </div>
-              <div style={{fontSize: '11px', color: '#888', marginTop: '4px'}}>Updated {community.data_freshness_date ? community.data_freshness_date.split('T')[0] : '—'}</div>
+              <div style={{fontSize: '11px', color: '#888', marginTop: '4px'}}>Updated {community.data_freshness_date ? community.data_freshness_date.split('T')[0] : '-'}</div>
             </div>
           </div>
         </div>
@@ -192,15 +192,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '14px'}}>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min} – $${community.monthly_fee_max}/mo` : '—'}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_min && community.monthly_fee_max ? `$${community.monthly_fee_min} – $${community.monthly_fee_max}/mo` : '-'}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Observed range</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_median ? `$${community.monthly_fee_median}/mo` : '—'}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_median ? `$${community.monthly_fee_median}/mo` : '-'}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Normalized median</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' data points' : ''}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '-'}{community.fee_observation_count ? ' data points' : ''}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Fee Reports</div>
             </div>
           </div>
@@ -323,10 +323,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', position: 'relative', overflow: 'hidden'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px', filter: 'blur(4px)', userSelect: 'none', pointerEvents: 'none'}}>
-            <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>— Entity, registered agent, status.</span></div>
-            <div><strong style={{fontWeight: '500'}}>Resident submissions</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
-            <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points with citation links.</span></div>
-            <div><strong style={{fontWeight: '500'}}>Public records</strong> <span style={{color: '#888'}}>— County property appraiser, clerk of courts.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>- Entity, registered agent, status.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Resident submissions</strong> <span style={{color: '#888'}}>- Fee range, restrictions, assessment mentions.</span></div>
+            <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>- Additional data points with citation links.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Public records</strong> <span style={{color: '#888'}}>- County property appraiser, clerk of courts.</span></div>
           </div>
           <div style={{position: 'absolute', top: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '12px'}}>
             <div style={{fontSize: '20px', marginBottom: '8px'}}>🔒</div>

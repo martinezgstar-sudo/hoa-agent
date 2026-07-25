@@ -15,7 +15,7 @@ function getAdmin() {
   return createClient(url, key)
 }
 
-// ── GET — fetch pending rows ──────────────────────────────────────────────────
+// ── GET - fetch pending rows ──────────────────────────────────────────────────
 
 export async function GET(req: NextRequest) {
   if (!isAuthed(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ rows: data })
 }
 
-// ── POST — approve / reject / bulk_approve_auto ───────────────────────────────
+// ── POST - approve / reject / bulk_approve_auto ───────────────────────────────
 
 export async function POST(req: NextRequest) {
   if (!isAuthed(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Press information and media inquiries for HOA Agent, the Florida HOA intelligence platform serving Palm Beach County.',
   openGraph: {
     title: 'Press | HOA Agent',
-    description: 'Media resources and press inquiries for HOA Agent — Palm Beach County HOA intelligence platform.',
+    description: 'Media resources and press inquiries for HOA Agent - Palm Beach County HOA intelligence platform.',
     url: 'https://hoa-agent.com/press',
     siteName: 'HOA Agent',
     type: 'website',
@@ -41,7 +41,7 @@ export default function PressPage() {
         <p style={{ fontSize: '16px', color: '#444', lineHeight: 1.8, marginBottom: '40px' }}>
           HOA Agent is a Florida HOA intelligence platform serving Palm Beach County homebuyers,
           residents, and real estate professionals. We make it easy to research any HOA community
-          before buying, renting, or moving in — fees, restrictions, litigation history, and
+          before buying, renting, or moving in - fees, restrictions, litigation history, and
           resident reviews all in one free platform.
         </p>
 
@@ -57,7 +57,7 @@ export default function PressPage() {
             },
             {
               label: 'Coverage',
-              value: 'Palm Beach County, Florida — 8,000+ HOA and condo communities',
+              value: 'Palm Beach County, Florida - 8,000+ HOA and condo communities',
             },
             {
               label: 'Mission',
@@ -65,7 +65,7 @@ export default function PressPage() {
             },
             {
               label: 'Availability',
-              value: 'Free — no account or subscription required.',
+              value: 'Free - no account or subscription required.',
             },
           ].map((item) => (
             <div key={item.label} style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>

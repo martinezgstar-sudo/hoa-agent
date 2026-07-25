@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic"
  *     session_id?: string,
  *   }
  *
- * Public endpoint — fire-and-forget. Always returns { ok: true } so the
+ * Public endpoint - fire-and-forget. Always returns { ok: true } so the
  * client never sees a failure. IP is hashed (SHA-256) before storage.
  * User agent is sniffed for known bots → is_bot=true.
  */
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     const inMs = (body as { in_viewport_ms?: number }).in_viewport_ms
     const in_viewport_ms = typeof inMs === "number" && Number.isFinite(inMs) ? Math.max(0, Math.min(86_400_000, Math.round(inMs))) : null
 
-    // Don't await the insert — return fast; insert resolves in background.
+    // Don't await the insert - return fast; insert resolves in background.
     void sb
       .from("ad_events")
       .insert({

@@ -26,9 +26,9 @@ export default function PrivacyPage() {
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>4. Third Party Services</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent uses the following third party services to operate the platform. Each has its own privacy policy governing how they handle data:</p>
         <ul style={{fontSize:"14px",color:"#555",lineHeight:"2",marginBottom:"16px",paddingLeft:"24px"}}>
-          <li>Supabase — database hosting and storage (supabase.com/privacy)</li>
-          <li>Vercel — website hosting and deployment (vercel.com/legal/privacy-policy)</li>
-          <li>Resend — transactional email delivery (resend.com/legal/privacy-policy)</li>
+          <li>Supabase - database hosting and storage (supabase.com/privacy)</li>
+          <li>Vercel - website hosting and deployment (vercel.com/legal/privacy-policy)</li>
+          <li>Resend - transactional email delivery (resend.com/legal/privacy-policy)</li>
         </ul>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>We do not share your personal information with these services beyond what is necessary to operate the platform.</p>
 

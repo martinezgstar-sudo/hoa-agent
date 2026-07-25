@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import ArticleLayout from "@/app/components/ArticleLayout"
 
 const SLUG = "/editorial-standards"
-const TITLE = "Editorial Standards — HOA Agent"
+const TITLE = "Editorial Standards | HOA Agent"
 const DESC = "How HOA Agent commits to accuracy, source citation, corrections, and verification of resident-submitted information."
 const PUBLISHED = "2026-05-03"
 
@@ -20,7 +20,7 @@ export default function Page() {
     >
       <h2>Our commitment to accuracy</h2>
       <p>
-        Every field on a community profile is sourced. We never publish information we cannot attribute to a specific public record, government API, or verified resident submission. When we are uncertain, we say so — &quot;Unverified&quot; or &quot;not on file&quot; is a feature, not a defect.
+        Every field on a community profile is sourced. We never publish information we cannot attribute to a specific public record, government API, or verified resident submission. When we are uncertain, we say so - &quot;Unverified&quot; or &quot;not on file&quot; is a feature, not a defect.
       </p>
 
       <h2>Source citation</h2>

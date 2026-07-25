@@ -4,7 +4,7 @@ import ContactForm from "@/app/components/ContactForm"
 
 export const metadata: Metadata = {
   title: "Contact HOA Agent",
-  description: "Get in touch with HOA Agent — questions, partnerships, corrections, and press inquiries. We typically respond within 2 business days.",
+  description: "Get in touch with HOA Agent - questions, partnerships, corrections, and press inquiries. We typically respond within 2 business days.",
   alternates: { canonical: "https://www.hoa-agent.com/contact" },
 }
 

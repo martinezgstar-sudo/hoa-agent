@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
 
   const sb = admin()
 
-  // Cities — paginate published rows
+  // Cities - paginate published rows
   const cityCounts: Record<string, number> = {}
   for (let off = 0; off < 12000; off += 1000) {
     const { data } = await sb
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
 
-  // Masters — communities that other rows point to via master_hoa_id
+  // Masters - communities that other rows point to via master_hoa_id
   const masterCounts: Record<string, number> = {}
   for (let off = 0; off < 12000; off += 1000) {
     const { data } = await sb

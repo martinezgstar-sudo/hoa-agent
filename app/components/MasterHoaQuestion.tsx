@@ -70,7 +70,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
   if (status === "success") {
     return (
       <div style={{backgroundColor:"#E1F5EE",border:"1px solid #1D9E75",borderRadius:"10px",padding:"14px 18px",marginBottom:"12px",fontSize:"13px",color:"#1B2B6B",fontWeight:"500"}}>
-        ✓ Thank you — connection recorded and verified.
+        ✓ Thank you - connection recorded and verified.
       </div>
     )
   }
@@ -90,7 +90,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
           </button>
           <button onClick={() => { setAnswer("no"); handleSubmit() }}
             style={{padding:"8px 18px",borderRadius:"8px",backgroundColor:"#fff",color:"#555",border:"1px solid #e5e5e5",cursor:"pointer",fontSize:"13px"}}>
-            No — standalone
+            No - standalone
           </button>
           <button onClick={() => { setAnswer("unsure"); handleSubmit() }}
             style={{padding:"8px 18px",borderRadius:"8px",backgroundColor:"#fff",color:"#555",border:"1px solid #e5e5e5",cursor:"pointer",fontSize:"13px"}}>
@@ -128,7 +128,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
             </button>
             <button onClick={handleSubmit} disabled={!masterId || status==="submitting"}
               style={{flex:2,padding:"9px",borderRadius:"8px",backgroundColor:masterId?"#1B2B6B":"#ccc",color:"#fff",border:"none",cursor:masterId?"pointer":"not-allowed",fontSize:"13px",fontWeight:"600"}}>
-              {status==="submitting" ? "Saving..." : "Confirm — verified connection"}
+              {status==="submitting" ? "Saving..." : "Confirm - verified connection"}
             </button>
           </div>
         </div>

@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
   )
   const data = await res.json()
   const suggestions = (Array.isArray(data) ? data : []).map((c: any) => ({
-    label: `${c.canonical_name} — ${c.city}`,
+    label: `${c.canonical_name} - ${c.city}`,
     slug: c.slug,
     city: c.city,
     is_55_plus: !!c.is_55_plus,

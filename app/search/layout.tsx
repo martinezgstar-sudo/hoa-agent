@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Search HOA Communities | HOA Agent',
-    description: 'Search Palm Beach County HOA communities — fees, restrictions, reviews.',
+    description: 'Search Palm Beach County HOA communities - fees, restrictions, reviews.',
   },
 }
 

@@ -4,13 +4,13 @@ import { use } from "react"
 
 const AREA_CONFIG: Record<string, { display: string, city?: string, description: string }> = {
   "palm-beach-county": { display: "Palm Beach County", description: "Browse the top-rated HOA communities across Palm Beach County, ranked by resident reviews and data quality." },
-  "west-palm-beach": { display: "West Palm Beach", city: "West Palm Beach", description: "Find the best homeowners associations in West Palm Beach, FL — rated by real residents." },
+  "west-palm-beach": { display: "West Palm Beach", city: "West Palm Beach", description: "Find the best homeowners associations in West Palm Beach, FL - rated by real residents." },
   "boca-raton": { display: "Boca Raton", city: "Boca Raton", description: "Discover top-rated HOA communities in Boca Raton, FL. Compare fees, amenities and resident reviews." },
-  "boynton-beach": { display: "Boynton Beach", city: "Boynton Beach", description: "Find the best HOA communities in Boynton Beach, FL — real reviews from real residents." },
+  "boynton-beach": { display: "Boynton Beach", city: "Boynton Beach", description: "Find the best HOA communities in Boynton Beach, FL - real reviews from real residents." },
   "delray-beach": { display: "Delray Beach", city: "Delray Beach", description: "Top-rated homeowners associations in Delray Beach, FL. See fees, restrictions and reviews." },
-  "jupiter": { display: "Jupiter", city: "Jupiter", description: "Best HOA communities in Jupiter, FL — ranked by resident reviews and fee transparency." },
+  "jupiter": { display: "Jupiter", city: "Jupiter", description: "Best HOA communities in Jupiter, FL - ranked by resident reviews and fee transparency." },
   "palm-beach-gardens": { display: "Palm Beach Gardens", city: "Palm Beach Gardens", description: "Find top-rated HOA communities in Palm Beach Gardens, FL." },
-  "wellington": { display: "Wellington", city: "Wellington", description: "Best homeowners associations in Wellington, FL — real data from real residents." },
+  "wellington": { display: "Wellington", city: "Wellington", description: "Best homeowners associations in Wellington, FL - real data from real residents." },
   "lake-worth": { display: "Lake Worth", city: "Lake Worth", description: "Top-rated HOA communities in Lake Worth, FL." },
   "royal-palm-beach": { display: "Royal Palm Beach", city: "Royal Palm Beach", description: "Find the best HOA communities in Royal Palm Beach, FL." },
   "riviera-beach": { display: "Riviera Beach", city: "Riviera Beach", description: "Top-rated homeowners associations in Riviera Beach, FL." },

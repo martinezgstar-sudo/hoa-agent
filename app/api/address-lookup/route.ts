@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const city = searchParams.get('city') || ''
   const streetName = searchParams.get('streetName') || ''
 
-  // Try neighborhood match first — most specific
+  // Try neighborhood match first - most specific
   if (neighborhood) {
     const { data: byNeighborhood } = await supabase
       .from('communities')

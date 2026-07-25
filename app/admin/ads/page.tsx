@@ -252,11 +252,11 @@ export default function AdminAdsPage() {
                   {[p.email, p.phone].filter(Boolean).join(" · ")}
                 </div>
                 <div style={{ display: "flex", gap: "6px", marginTop: "8px", flexWrap: "wrap" }}>
-                  <Pill label={`Plan: ${p.subscription_plan || "—"}`} bg="#E6F1FB" color="#0C447C" />
-                  <Pill label={`Status: ${p.subscription_status || "—"}`} bg={statusBg(p.subscription_status)} color={statusColor(p.subscription_status)} />
-                  <Pill label={`Cat: ${p.category_text || "—"}${p.category_id ? "" : " (custom)"}`} bg="#FEF3C7" color="#92400E" />
+                  <Pill label={`Plan: ${p.subscription_plan || "-"}`} bg="#E6F1FB" color="#0C447C" />
+                  <Pill label={`Status: ${p.subscription_status || "-"}`} bg={statusBg(p.subscription_status)} color={statusColor(p.subscription_status)} />
+                  <Pill label={`Cat: ${p.category_text || "-"}${p.category_id ? "" : " (custom)"}`} bg="#FEF3C7" color="#92400E" />
                   <Pill
-                    label={p.subscription_plan === "county" ? "ZIPs: countywide" : `ZIPs: ${(p.target_zips || []).slice(0, 4).join(", ") || "—"}${(p.target_zips || []).length > 4 ? "…" : ""}`}
+                    label={p.subscription_plan === "county" ? "ZIPs: countywide" : `ZIPs: ${(p.target_zips || []).slice(0, 4).join(", ") || "-"}${(p.target_zips || []).length > 4 ? "…" : ""}`}
                     bg="#f0f0f0" color="#555"
                   />
                 </div>
@@ -336,13 +336,13 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
             ["Phone", p.phone],
             ["Plan", p.subscription_plan],
             ["Status", p.subscription_status],
-            ["Category", `${p.category_text || ""} ${p.category_id ? "" : "(custom — needs review)"}`.trim()],
+            ["Category", `${p.category_text || ""} ${p.category_id ? "" : "(custom - needs review)"}`.trim()],
             ["Target ZIPs", p.subscription_plan === "county" ? "All Palm Beach County ZIPs" : (p.target_zips || []).join(", ")],
             ["Created", p.created_at ? new Date(p.created_at).toLocaleString() : ""],
           ].map(([k, v], i) => (
             <div key={i} style={{ display: "contents" }}>
               <div style={{ color: "#888", fontWeight: 600 }}>{k}</div>
-              <div style={{ color: "#1a1a1a", wordBreak: "break-word" }}>{v || "—"}</div>
+              <div style={{ color: "#1a1a1a", wordBreak: "break-word" }}>{v || "-"}</div>
             </div>
           ))}
         </div>
@@ -363,7 +363,7 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
                     {a.cta_text || "CTA"} → {a.cta_url}
                   </div>
                 )}
-                <div style={{ fontSize: "10px", color: "#888", marginTop: "4px" }}>status: {a.status || "—"}</div>
+                <div style={{ fontSize: "10px", color: "#888", marginTop: "4px" }}>status: {a.status || "-"}</div>
               </div>
             ))}
           </div>

@@ -38,7 +38,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Googlebot',        allow: '/' },
       { userAgent: 'Bingbot',          allow: '/' },
 
-      // ── Bots that abuse /claim/* — keep them blocked from claim only ──
+      // ── Bots that abuse /claim/* - keep them blocked from claim only ──
       { userAgent: 'MJ12bot',     disallow: ['/claim/', '/api/claim/'] },
       { userAgent: 'AhrefsBot',   disallow: ['/claim/', '/api/claim/'] },
       { userAgent: 'SemrushBot',  disallow: ['/claim/', '/api/claim/'] },

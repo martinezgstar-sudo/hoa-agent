@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import ArticleLayout from "@/app/components/ArticleLayout"
 
 const SLUG = "/guides/how-to-read-hoa-documents"
-const TITLE = "How to Read HOA Documents Before You Buy — Florida Guide"
+const TITLE = "How to Read HOA Documents Before You Buy - Florida Guide"
 const DESC = "A practical, step-by-step guide to the CC&Rs, budget, reserve study, meeting minutes, and rules every Florida HOA and condo buyer should request before closing."
 const PUBLISHED = "2026-05-03"
 
@@ -38,16 +38,16 @@ export default function Page() {
         Florida law gives buyers and members a clear list of documents the HOA or condominium association must produce on request. Before you write an offer, ask the seller or your real estate agent to deliver:
       </p>
       <ul>
-        <li><strong>Declaration of Covenants, Conditions & Restrictions (CC&Rs)</strong> — the legal document that defines what owners can and cannot do.</li>
-        <li><strong>Articles of Incorporation</strong> — confirms the association is a Florida corporation in good standing.</li>
-        <li><strong>Bylaws</strong> — how the board is elected, how meetings work, voting thresholds.</li>
-        <li><strong>Rules and Regulations</strong> — the day-to-day rules that change more often than the CC&Rs.</li>
-        <li><strong>Most recent annual budget</strong> — line-item operating budget plus reserve allocations.</li>
-        <li><strong>Most recent year-end financial report</strong> — audited or reviewed statements depending on size.</li>
-        <li><strong>Most recent reserve study</strong> — engineer&apos;s estimate of major repair timelines and costs.</li>
-        <li><strong>Past 12 months of board meeting minutes</strong> — what the board has actually been discussing.</li>
-        <li><strong>Estoppel certificate</strong> — the seller&apos;s current balance.</li>
-        <li><strong>Insurance summary</strong> — what the master policy covers and what owners must carry separately.</li>
+        <li><strong>Declaration of Covenants, Conditions & Restrictions (CC&Rs)</strong>: the legal document that defines what owners can and cannot do.</li>
+        <li><strong>Articles of Incorporation</strong>: confirms the association is a Florida corporation in good standing.</li>
+        <li><strong>Bylaws</strong>: how the board is elected, how meetings work, voting thresholds.</li>
+        <li><strong>Rules and Regulations</strong>: the day-to-day rules that change more often than the CC&Rs.</li>
+        <li><strong>Most recent annual budget</strong>: line-item operating budget plus reserve allocations.</li>
+        <li><strong>Most recent year-end financial report</strong>: audited or reviewed statements depending on size.</li>
+        <li><strong>Most recent reserve study</strong>: engineer&apos;s estimate of major repair timelines and costs.</li>
+        <li><strong>Past 12 months of board meeting minutes</strong>: what the board has actually been discussing.</li>
+        <li><strong>Estoppel certificate</strong>: the seller&apos;s current balance.</li>
+        <li><strong>Insurance summary</strong>: what the master policy covers and what owners must carry separately.</li>
       </ul>
 
       <h2 id="ccr">How to read the CC&Rs</h2>
@@ -63,7 +63,7 @@ export default function Page() {
         The annual budget shows you where your monthly fee actually goes. Healthy budgets allocate roughly 60–70% to operating expenses (utilities, insurance, landscaping, management, payroll) and the rest to reserves. If reserves are under-funded relative to the reserve study, that gap is going to come back as a special assessment.
       </p>
       <p>
-        Compare year-over-year insurance line items. In Florida, master condo and HOA insurance has spiked dramatically since 2022. A 30%+ jump in insurance year-over-year is normal — but it has to be funded through dues, not by quietly draining reserves.
+        Compare year-over-year insurance line items. In Florida, master condo and HOA insurance has spiked dramatically since 2022. A 30%+ jump in insurance year-over-year is normal - but it has to be funded through dues, not by quietly draining reserves.
       </p>
 
       <h2 id="reserves">Reserves and reserve studies</h2>
@@ -71,7 +71,7 @@ export default function Page() {
         The reserve study is the most under-read document in Florida real estate. It is an engineer&apos;s projection of when each major component (roof, paint, asphalt, pool deck, elevators, structural envelope) will need replacement and what it will cost in today&apos;s dollars.
       </p>
       <p>
-        After the 2021 Surfside collapse, Florida passed SB 4-D requiring condominium associations to <strong>fully fund</strong> reserves based on a Structural Integrity Reserve Study (SIRS). Communities that previously waived or partially-funded reserves are now required to catch up — which is why Florida condo fees have climbed rapidly since 2024.
+        After the 2021 Surfside collapse, Florida passed SB 4-D requiring condominium associations to <strong>fully fund</strong> reserves based on a Structural Integrity Reserve Study (SIRS). Communities that previously waived or partially-funded reserves are now required to catch up - which is why Florida condo fees have climbed rapidly since 2024.
       </p>
       <p>
         Look for two numbers: the <strong>fully funded balance</strong> the study recommends and the <strong>actual current balance</strong>. If the actual balance is well below recommended, expect either dues increases or a special assessment.
@@ -82,14 +82,14 @@ export default function Page() {
         The minutes tell you what the board is actually arguing about. A community where most meetings discuss landscape vendor changes is healthy. A community where every meeting features litigation updates, owner complaints about the manager, or postponed roof projects is a community with active problems.
       </p>
       <p>
-        Pay attention to mentions of pending lawsuits, building code violations, or major repairs that keep getting deferred. Compare what is in the minutes to what is in the budget — if the minutes mention a $200,000 roof repair that is not in the budget or reserves, that is a future special assessment.
+        Pay attention to mentions of pending lawsuits, building code violations, or major repairs that keep getting deferred. Compare what is in the minutes to what is in the budget - if the minutes mention a $200,000 roof repair that is not in the budget or reserves, that is a future special assessment.
       </p>
 
       <h2 id="red-flags">Red flags that should change your offer</h2>
       <ul>
         <li>Pending litigation against the association (especially construction defect claims).</li>
         <li>Reserve balance below 50% of fully-funded recommendation.</li>
-        <li>Recent board turnover — multiple board members resigning within a year.</li>
+        <li>Recent board turnover - multiple board members resigning within a year.</li>
         <li>Minutes mention of any milestone inspection finding requiring structural repair.</li>
         <li>Special assessment in the past 24 months without a corresponding capital improvement.</li>
         <li>Insurance coverage gaps or claims that exhausted master policy limits.</li>
@@ -101,7 +101,7 @@ export default function Page() {
         Florida Statute Chapter 718 (condos) and Chapter 720 (HOAs) both require associations to deliver these documents to prospective buyers and current members on request. Members have inspection rights for most records within 10 business days of a written request. A board that delays or refuses to produce documents is itself a red flag.
       </p>
       <p>
-        For more detail on what Florida HOA and condo law specifically requires, read our <a href="/florida-hoa-law">Florida HOA Law explainer</a>. To check the entity status of any Palm Beach County HOA, <a href="/search">search for the community on HOA Agent</a> — every profile shows the Florida Division of Corporations entity number and current status.
+        For more detail on what Florida HOA and condo law specifically requires, read our <a href="/florida-hoa-law">Florida HOA Law explainer</a>. To check the entity status of any Palm Beach County HOA, <a href="/search">search for the community on HOA Agent</a> - every profile shows the Florida Division of Corporations entity number and current status.
       </p>
     </ArticleLayout>
   )

@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: "Name and email are required" }, { status: 400 })
     }
 
-    const subjectLine = `[HOA Agent] ${subject || "Contact"} — ${name} <${email}>`
+    const subjectLine = `[HOA Agent] ${subject || "Contact"} - ${name} <${email}>`
 
     const lines: string[] = [
       `Subject: ${subject || "Contact"}`,
@@ -41,9 +41,9 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.RESEND_API_KEY
     if (!apiKey) {
-      console.warn("[contact] RESEND_API_KEY not set — message logged only")
+      console.warn("[contact] RESEND_API_KEY not set - message logged only")
       console.log("[contact submission]", { subjectLine, lines })
-      return NextResponse.json({ success: true, warning: "Email not sent — server unconfigured" })
+      return NextResponse.json({ success: true, warning: "Email not sent - server unconfigured" })
     }
 
     const res = await fetch("https://api.resend.com/emails", {
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       const errBody = await res.text()
       console.error("[contact] Resend error:", res.status, errBody.slice(0, 200))
-      // Still return success to user — the email got into our logs
+      // Still return success to user - the email got into our logs
       return NextResponse.json({ success: true, warning: "Submission queued" })
     }
 

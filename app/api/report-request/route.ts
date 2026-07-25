@@ -10,8 +10,8 @@ export const runtime = "nodejs"
  *   1. Inserts a row into `suggestions` (the legacy report-request table).
  *   2. Sends an internal notification to info@hoa-agent.com (BCC
  *      fieldlogisticsfl@gmail.com so Izzy keeps a personal copy).
- *   3. Sends an auto-responder to the submitter — Izzy's exact copy
- *      from 2026-05-10 — wrapped in try/catch so a Resend failure can
+ *   3. Sends an auto-responder to the submitter - Izzy's exact copy
+ *      from 2026-05-10 - wrapped in try/catch so a Resend failure can
  *      never break the DB write or the API response.
  *   4. Skips the auto-responder for Izzy's own test addresses
  *      (izzymartinez@gmail.com, izzyhomesfl@gmail.com, izzy@hoa-agent.com)
@@ -33,7 +33,7 @@ const IZZY_TEST_ADDRESSES = new Set([
   "izzy@hoa-agent.com",
 ])
 
-const AUTOREPLY_SUBJECT = "We got your request — Izzy from HOA Agent"
+const AUTOREPLY_SUBJECT = "We got your request - Izzy from HOA Agent"
 
 const AUTOREPLY_TEXT = `Hi,
 
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
   if (community_slug) notesParts.push(`community=${community_slug}`)
   if (body.notes) notesParts.push((body.notes || "").slice(0, 500))
 
-  // 1) Persist — capture inserted id so we can stamp auto_responder_sent_at later.
+  // 1) Persist - capture inserted id so we can stamp auto_responder_sent_at later.
   let insertedId: string | null = null
   try {
     const { data, error: dbErr } = await supabase
@@ -150,14 +150,14 @@ export async function POST(request: NextRequest) {
     console.warn("[report-request] db threw:", e)
   }
 
-  // 2) Emails — wrap each in try/catch so a single failure never blocks the others
+  // 2) Emails - wrap each in try/catch so a single failure never blocks the others
   const apiKey = process.env.RESEND_API_KEY || ""
   let userEmailStatus: "sent" | "skipped" | "error" = "skipped"
   let internalEmailStatus: "sent" | "skipped" | "error" = "skipped"
   let stampStatus: "stamped" | "skipped" | "error" = "skipped"
 
   if (apiKey) {
-    // Auto-responder — skip Izzy's own test addresses
+    // Auto-responder - skip Izzy's own test addresses
     if (IZZY_TEST_ADDRESSES.has(email)) {
       userEmailStatus = "skipped"
     } else {

@@ -4,7 +4,7 @@ import { Resend } from 'resend'
 const ADMIN_EMAIL = process.env.CLAIM_ADMIN_EMAIL || 'admin@hoa-agent.com'
 
 // In-memory rate limit (per-IP). Survives within a single serverless instance.
-// Vercel may spin up multiple instances so this is a soft cap, not a hard one —
+// Vercel may spin up multiple instances so this is a soft cap, not a hard one -
 // the bigger protection is bot blocking in robots.txt.
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
 const RATE_LIMIT_MAX = 3
@@ -78,7 +78,7 @@ IP: ${ip}
 
     // If RESEND_API_KEY is missing, log + return success rather than 500
     if (!process.env.RESEND_API_KEY) {
-      console.warn('[claim api] RESEND_API_KEY not set — logging submission only')
+      console.warn('[claim api] RESEND_API_KEY not set - logging submission only')
       console.log('[claim api submission]', { name, email, communityName })
       return NextResponse.json({ success: true, warning: 'Email not sent (server unconfigured)' })
     }

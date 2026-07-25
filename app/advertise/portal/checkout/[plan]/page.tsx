@@ -116,15 +116,15 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
           Review and activate
         </div>
         <p style={{ fontSize: "14px", color: "#666", marginBottom: "24px" }}>
-          {p.label} plan — ${p.price.toFixed(2)}/month
+          {p.label} plan - ${p.price.toFixed(2)}/month
         </p>
 
         {/* Summary card */}
         <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px 22px", marginBottom: "16px" }}>
-          <SummaryRow label="Tier"     value={`${p.label} — $${p.price.toFixed(2)}/mo`} />
-          <SummaryRow label="Email"    value={email || "—"} />
-          <SummaryRow label="Category" value={profile?.category_text || "—"} status={profile?.category_id ? "matched" : "pending_review"} />
-          <SummaryRow label="ZIPs"     value={plan === "county" ? "All Palm Beach County ZIPs" : targetZips.length ? targetZips.join(", ") : "—"} />
+          <SummaryRow label="Tier"     value={`${p.label} - $${p.price.toFixed(2)}/mo`} />
+          <SummaryRow label="Email"    value={email || "-"} />
+          <SummaryRow label="Category" value={profile?.category_text || "-"} status={profile?.category_id ? "matched" : "pending_review"} />
+          <SummaryRow label="ZIPs"     value={plan === "county" ? "All Palm Beach County ZIPs" : targetZips.length ? targetZips.join(", ") : "-"} />
           <SummaryRow label="Exclusivity" value={plan === "county" ? "Countywide in your category" : `${targetZips.length} ZIP${targetZips.length === 1 ? "" : "s"} in your category`} />
         </div>
 

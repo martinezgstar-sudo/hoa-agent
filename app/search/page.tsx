@@ -130,7 +130,7 @@ function SuggestForm({ address }: { address: string }) {
       <form onSubmit={handleSubmit}>
         {step === 1 && (
           <div>
-            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 of 3 — Community basics</div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 of 3 - Community basics</div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Community name *</label>
               <div style={{position:"relative"}}>
@@ -140,7 +140,7 @@ function SuggestForm({ address }: { address: string }) {
                   placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
                 {showNameDropdown && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e0e0e0",borderRadius:"8px",zIndex:100,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"4px"}}>
-                    <div style={{fontSize:"11px",color:"#888",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database — select to skip adding:</div>
+                    <div style={{fontSize:"11px",color:"#888",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database - select to skip adding:</div>
                     {nameMatches.map((m: any) => (
                       <div key={m.slug} onClick={() => { window.open("/community/"+m.slug, "_blank"); setShowNameDropdown(false) }}
                         style={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
@@ -186,13 +186,13 @@ function SuggestForm({ address }: { address: string }) {
             </div>
             <button type="button" onClick={() => setStep(2)} disabled={!communityName || !city || (!hoaFee && !feeUnsure)}
               style={{width:"100%",padding:"12px",borderRadius:"8px",backgroundColor:(communityName && city && (hoaFee || feeUnsure))?"#1B2B6B":"#ccc",color:"#fff",border:"none",cursor:(communityName && city && (hoaFee || feeUnsure))?"pointer":"not-allowed",fontSize:"14px",fontWeight:"600"}}>
-              Next — Restrictions
+              Next - Restrictions
             </button>
           </div>
         )}
         {step === 2 && (
           <div>
-            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 of 3 — Restrictions *</div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 of 3 - Restrictions *</div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Short-term rentals allowed? (Airbnb, VRBO)</label>
               <div style={{display:"flex",flexWrap:"wrap"}}>
@@ -227,13 +227,13 @@ function SuggestForm({ address }: { address: string }) {
               <button type="button" onClick={() => setStep(1)}
                 style={{flex:1,padding:"12px",borderRadius:"8px",backgroundColor:"#fff",color:"#1B2B6B",border:"1.5px solid #1B2B6B",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Back</button>
               <button type="button" onClick={() => setStep(3)}
-                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Next — Optional details</button>
+                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Next - Optional details</button>
             </div>
           </div>
         )}
         {step === 3 && (
           <div>
-            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 — Optional details</div>         <div style={sectionStyle}>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 of 3 - Optional details</div>         <div style={sectionStyle}>
               <label style={labelStyle}>Management company</label>
               <input value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Seacrest Services" style={inputStyle}/>
             </div>
@@ -333,7 +333,7 @@ export default function SearchPage() {
     let zipQuery = supabase
       .from("communities")
       .select(
-        // is_master/parent_id not in production schema yet — use legacy is_sub_hoa + master_hoa_id
+        // is_master/parent_id not in production schema yet - use legacy is_sub_hoa + master_hoa_id
         "id, canonical_name, slug, city, zip_code, unit_count, property_type, monthly_fee_min, monthly_fee_max, review_count, review_avg, is_sub_hoa, master_hoa_id",
       )
       .eq("status", "published")
@@ -524,7 +524,7 @@ export default function SearchPage() {
           <p style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>
             {zipMode
               ? "Published associations in this ZIP code, sorted by unit count."
-              : "Search by community name, city, management company — or enter a property address"}
+              : "Search by community name, city, management company - or enter a property address"}
           </p>
           <form onSubmit={handleSubmit} style={{position:"relative",width:"100%"}}>
             <div style={{display:"flex",flexWrap:"wrap",gap:"8px",alignItems:"stretch",width:"100%"}}>

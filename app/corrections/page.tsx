@@ -3,7 +3,7 @@ import ArticleLayout from "@/app/components/ArticleLayout"
 import ContactForm from "@/app/components/ContactForm"
 
 const SLUG = "/corrections"
-const TITLE = "Corrections — HOA Agent"
+const TITLE = "Corrections | HOA Agent"
 const DESC = "How to report an error on a community profile. We acknowledge corrections within 7 days."
 const PUBLISHED = "2026-05-03"
 

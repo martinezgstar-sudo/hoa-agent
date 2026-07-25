@@ -200,10 +200,10 @@ export default function PortalDashboardPage() {
             <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px", display: "flex", flexDirection: "column", gap: "12px", fontSize: "13px" }}>
               <div><strong style={{ color: "#666" }}>Company:</strong> {profile.company_name}</div>
               <div><strong style={{ color: "#666" }}>Email:</strong> {profile.email}</div>
-              <div><strong style={{ color: "#666" }}>Phone:</strong> {profile.phone || "—"}</div>
-              <div><strong style={{ color: "#666" }}>Website:</strong> {profile.website_url || "—"}</div>
-              <div><strong style={{ color: "#666" }}>Category:</strong> {profile.category || "—"}</div>
-              <div><strong style={{ color: "#666" }}>Target cities:</strong> {(profile.target_cities || []).join(", ") || "—"}</div>
+              <div><strong style={{ color: "#666" }}>Phone:</strong> {profile.phone || "-"}</div>
+              <div><strong style={{ color: "#666" }}>Website:</strong> {profile.website_url || "-"}</div>
+              <div><strong style={{ color: "#666" }}>Category:</strong> {profile.category || "-"}</div>
+              <div><strong style={{ color: "#666" }}>Target cities:</strong> {(profile.target_cities || []).join(", ") || "-"}</div>
             </div>
             <div style={{ fontSize: "12px", color: "#888", marginTop: "12px" }}>
               Editable settings coming soon. Email <a href="/contact">contact us</a> to make changes for now.
@@ -216,7 +216,7 @@ export default function PortalDashboardPage() {
             <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a1a", marginBottom: "20px" }}>Billing</h2>
             <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px" }}>
               <div style={{ fontSize: "14px", marginBottom: "10px" }}>
-                <strong>Current plan:</strong> {profile.plan ? profile.plan[0].toUpperCase() + profile.plan.slice(1) : "—"}
+                <strong>Current plan:</strong> {profile.plan ? profile.plan[0].toUpperCase() + profile.plan.slice(1) : "-"}
               </div>
               <div style={{ fontSize: "13px", color: "#666" }}>
                 Status: <span style={{ fontWeight: 600 }}>{profile.plan_status || "pending"}</span>

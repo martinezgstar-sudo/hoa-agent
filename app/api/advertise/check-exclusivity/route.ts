@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic"
  *     category_text: string,
  *     zip_codes: string[],         // ignored when plan='county'
  *     plan: 'starter' | 'growth' | 'county',
- *     advertiser_id?: uuid          // optional — caller's own profile, excluded from conflicts
+ *     advertiser_id?: uuid          // optional - caller's own profile, excluded from conflicts
  *   }
  *
  * Returns:
@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic"
  *
  * Rules:
  * 1. If category_id is null (custom category), return available=true with
- *    a note — exclusivity will be enforced after admin approves the category.
+ *    a note - exclusivity will be enforced after admin approves the category.
  * 2. For 'county' plan: load all distinct PBC ZIPs from communities.
  * 3. For each requested ZIP, conflict if any advertiser_zip_categories row
  *    exists with same category_id + same zip_code AND status IN
@@ -87,12 +87,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ available: false, conflicts: [], error: "Invalid plan" }, { status: 400 })
   }
 
-  // Custom category — no exclusivity to check yet
+  // Custom category - no exclusivity to check yet
   if (!body.category_id) {
     return NextResponse.json({
       available: true,
       conflicts: [],
-      note: "Pending admin review — custom category. Exclusivity will be enforced after the category is approved.",
+      note: "Pending admin review - custom category. Exclusivity will be enforced after the category is approved.",
     })
   }
 
@@ -171,7 +171,7 @@ export async function POST(req: NextRequest) {
   // 3) If applicant is requesting a county plan, also block when ANY ZIP-level
   //    competitor exists in the same category (county requires the whole map clear)
   if (plan === "county" && zipRows && zipRows.length > 0) {
-    // Already covered above — every overlapping zip becomes a conflict
+    // Already covered above - every overlapping zip becomes a conflict
   }
 
   return NextResponse.json({

@@ -164,7 +164,7 @@ export default function CreateAdPage() {
         {batches.map((opts, batchIdx) => (
           <div key={batchIdx} style={{ marginBottom: "28px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#1a1a1a", marginBottom: "12px" }}>
-              {batchIdx === 0 ? "Your 4 ad options" : `More options — Batch ${batchIdx + 1}`}
+              {batchIdx === 0 ? "Your 4 ad options" : `More options - Batch ${batchIdx + 1}`}
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "14px" }}>
               {opts.map((opt) => (

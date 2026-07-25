@@ -3,7 +3,7 @@ import Link from "next/link"
 import NavBar from "@/app/components/NavBar"
 
 export const metadata: Metadata = {
-  title: "HOA Guides — Florida Homeowner Association Resources | HOA Agent",
+  title: "HOA Guides - Florida Homeowner Association Resources | HOA Agent",
   description:
     "Plain-English guides on Florida HOA and condo associations. How to read HOA documents, evaluate communities before buying, understand special assessments, and navigate Florida HOA law.",
   alternates: { canonical: "https://www.hoa-agent.com/guides" },
@@ -18,11 +18,11 @@ const GUIDES = [
   {
     slug: "what-is-a-special-assessment",
     title: "What Is a Special Assessment?",
-    description: "Special assessments explained — what they are, when Florida HOAs can charge them, and how to find out if a community has had any.",
+    description: "Special assessments explained - what they are, when Florida HOAs can charge them, and how to find out if a community has had any.",
   },
   {
     slug: "florida-hoa-vs-condo-association",
-    title: "HOA vs Condo Association in Florida — Key Differences",
+    title: "HOA vs Condo Association in Florida - Key Differences",
     description: "Florida Statute Chapter 718 governs condos. Chapter 720 governs HOAs. Owner rights, reserves, and election rules differ in important ways.",
   },
   {
@@ -32,7 +32,7 @@ const GUIDES = [
   },
   {
     slug: "palm-beach-county-hoa-fees",
-    title: "Palm Beach County HOA Fees — 2026 Guide",
+    title: "Palm Beach County HOA Fees - 2026 Guide",
     description: "Average HOA and condo fees by city in Palm Beach County, what drives high fees, and how to verify before you buy.",
   },
 ]

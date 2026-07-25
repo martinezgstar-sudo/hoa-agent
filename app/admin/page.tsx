@@ -136,7 +136,7 @@ function SocialPostingsTab() {
       setCopiedId(post.id)
       setTimeout(() => setCopiedId((id) => (id === post.id ? null : id)), 2000)
     } catch {
-      setMessage("Could not copy to clipboard — try selecting the caption manually.")
+      setMessage("Could not copy to clipboard - try selecting the caption manually.")
     }
   }
 
@@ -763,7 +763,7 @@ function SuggestionsTab() {
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"12px"}}>
             <div>
               <div style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a"}}>{s.community_name}</div>
-              <div style={{fontSize:"12px",color:"#888"}}>{s.city} — {new Date(s.created_at).toLocaleDateString()}</div>
+              <div style={{fontSize:"12px",color:"#888"}}>{s.city} - {new Date(s.created_at).toLocaleDateString()}</div>
             </div>
             <div style={{display:"flex",gap:"8px"}}>
               <button onClick={() => approve(s)} style={{padding:"7px 12px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:"500"}}>Approve</button>
@@ -1194,7 +1194,7 @@ function LeadsTab() {
             <>
               <div style={{ fontSize: "12px", fontWeight: 600, color: "#A32D2D", marginTop: "10px", marginBottom: "4px" }}>Failed:</div>
               <ul style={{ margin: 0, paddingLeft: "18px", fontSize: "12px", color: "#A32D2D", lineHeight: 1.7 }}>
-                {result.failed.map((f) => (<li key={f.email}>{f.email} — {f.error}</li>))}
+                {result.failed.map((f) => (<li key={f.email}>{f.email} - {f.error}</li>))}
               </ul>
             </>
           )}

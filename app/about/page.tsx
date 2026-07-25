@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'About HOA Agent | Florida HOA Intelligence Platform',
-    description: 'The story behind HOA Agent — free HOA intelligence for Palm Beach County buyers and residents.',
+    description: 'The story behind HOA Agent - free HOA intelligence for Palm Beach County buyers and residents.',
   },
 }
 
@@ -41,7 +41,7 @@ export default function AboutPage() {
         <p style={{ fontSize: '16px', color: '#444', lineHeight: 1.8, marginBottom: '32px' }}>
           HOA Agent is a free public database of homeowners association and condo community
           information for Palm Beach County, Florida. We make it easy to look up fees, restrictions,
-          management company details, litigation history, news reputation, and resident reviews — all
+          management company details, litigation history, news reputation, and resident reviews - all
           in one place, before you buy, rent, or move in.
         </p>
 
@@ -52,14 +52,14 @@ export default function AboutPage() {
           <p style={{ fontSize: '15px', color: '#333', lineHeight: 1.8, margin: 0 }}>
             A work truck got towed from a driveway because of a vehicle restriction buried in an
             HOA document that the owner had never seen. The truck wasn't illegally parked. It
-            wasn't blocking anyone. But the HOA had a rule — page 47 of a 90-page covenant
-            document — that prohibited commercial vehicles from being visible from the street
+            wasn't blocking anyone. But the HOA had a rule - page 47 of a 90-page covenant
+            document - that prohibited commercial vehicles from being visible from the street
             overnight. $280 tow fee. No warning.
           </p>
           <p style={{ fontSize: '15px', color: '#333', lineHeight: 1.8, marginTop: '14px', marginBottom: 0 }}>
             That kind of thing happens every day in HOA communities throughout Florida. Vehicle
             restrictions, pet limits, short-term rental bans, special assessment histories,
-            ongoing lawsuits — this information is technically public but practically inaccessible.
+            ongoing lawsuits - this information is technically public but practically inaccessible.
             HOA Agent exists to change that.
           </p>
         </div>
@@ -74,8 +74,8 @@ export default function AboutPage() {
 
         <ul style={{ paddingLeft: '20px', marginBottom: '36px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {[
-            'Monthly HOA fees — minimum, maximum, and median based on observed data',
-            'Restrictions — short-term rentals, pets, vehicles, and rental approval requirements',
+            'Monthly HOA fees - minimum, maximum, and median based on observed data',
+            'Restrictions - short-term rentals, pets, vehicles, and rental approval requirements',
             'Management company name and contact',
             'Entity status and registration details',
             'Litigation history and active court cases',
@@ -108,7 +108,7 @@ export default function AboutPage() {
             Start your HOA research
           </div>
           <p style={{ fontSize: '14px', color: '#666', marginBottom: '20px' }}>
-            Search over 8,000 Palm Beach County communities — free, no account required.
+            Search over 8,000 Palm Beach County communities - free, no account required.
           </p>
           <Link href="/search" style={{ fontSize: '14px', backgroundColor: '#1B2B6B', color: '#fff', padding: '10px 28px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block' }}>
             Search communities

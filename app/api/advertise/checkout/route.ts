@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
  * returns its URL. Otherwise returns a 501 with a clear message so the
  * placeholder UI can show "payment coming soon".
  *
- * Stripe SDK intentionally NOT used — this file talks to the Stripe REST
+ * Stripe SDK intentionally NOT used - this file talks to the Stripe REST
  * API directly via fetch so the project ships without an npm install.
  */
 const PLAN_ENV: Record<string, string | undefined> = {

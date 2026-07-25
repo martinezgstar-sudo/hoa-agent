@@ -74,7 +74,7 @@ export default function AdvertiserSignupPage() {
       }
       router.push("/advertise/portal/plan")
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Network error — please try again.")
+      setError(err instanceof Error ? err.message : "Network error - please try again.")
     } finally {
       setBusy(false)
     }

@@ -19,7 +19,7 @@ export default function Reports() {
         <div style={{textAlign:"center",marginBottom:"56px"}}>
           <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"12px"}}>HOA Agent Reports</div>
           <h1 style={{fontSize:"36px",fontWeight:"700",color:"#1B2B6B",marginBottom:"16px",lineHeight:"1.2"}}>Know everything before you commit</h1>
-          <p style={{fontSize:"16px",color:"#666",maxWidth:"520px",margin:"0 auto",lineHeight:"1.6"}}>Community reports give buyers, agents and investors the full picture — fees, restrictions, entity status, source trail and resident intelligence in one place.</p>
+          <p style={{fontSize:"16px",color:"#666",maxWidth:"520px",margin:"0 auto",lineHeight:"1.6"}}>Community reports give buyers, agents and investors the full picture - fees, restrictions, entity status, source trail and resident intelligence in one place.</p>
         </div>
 
         {/* Single Report */}
@@ -43,7 +43,7 @@ export default function Reports() {
 
         {/* Agent Bundles */}
         <div style={{marginBottom:"48px"}}>
-          <div style={{fontSize:"13px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"16px"}}>Agent bundles — buy in bulk and save</div>
+          <div style={{fontSize:"13px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"16px"}}>Agent bundles - buy in bulk and save</div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"16px"}}>
             {[
               {name:"Starter",qty:"5 reports",price:"$24",per:"$4.80 each",savings:"Save 20%",highlight:false},
@@ -73,7 +73,7 @@ export default function Reports() {
         <div style={{backgroundColor:"#1B2B6B",borderRadius:"16px",padding:"32px",color:"#fff",marginBottom:"48px"}}>
           <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"12px"}}>For local businesses</div>
           <h2 style={{fontSize:"24px",fontWeight:"700",marginBottom:"12px"}}>Advertise to HOA buyers</h2>
-          <p style={{fontSize:"14px",color:"rgba(255,255,255,0.8)",marginBottom:"24px",lineHeight:"1.6",maxWidth:"480px"}}>Reach buyers actively researching communities in your area. Exclusive zip code sponsorships — one vendor per trade per zip code in Palm Beach County.</p>
+          <p style={{fontSize:"14px",color:"rgba(255,255,255,0.8)",marginBottom:"24px",lineHeight:"1.6",maxWidth:"480px"}}>Reach buyers actively researching communities in your area. Exclusive zip code sponsorships - one vendor per trade per zip code in Palm Beach County.</p>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"12px",marginBottom:"24px"}}>
             {[
               {size:"Small zip",price:"$99/mo",desc:"1-2 zip codes"},

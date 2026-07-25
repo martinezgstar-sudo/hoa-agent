@@ -752,7 +752,7 @@ export default function NewsAdminPage() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ManualLinker — inline component used per news article
+// ManualLinker - inline component used per news article
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ManualLinker(props: {

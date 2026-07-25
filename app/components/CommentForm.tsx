@@ -147,13 +147,13 @@ export default function CommentForm({ communityId }: { communityId: string }) {
 
         {step === 1 && (
           <div>
-            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 — About you</div>
+            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 1 - About you</div>
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"8px"}}>Are you a current or former resident of this community?</div>
               <div style={{display:"flex",gap:"8px"}}>
                 <SelectBtn value="yes" current={isResident} onClick={() => setIsResident("yes")} label="Yes"/>
-                <SelectBtn value="no" current={isResident} onClick={() => setIsResident("no")} label="No — but I know this community"/>              </div>
+                <SelectBtn value="no" current={isResident} onClick={() => setIsResident("no")} label="No - but I know this community"/>              </div>
             </div>
 
             {isResident === "yes" && (
@@ -200,21 +200,21 @@ export default function CommentForm({ communityId }: { communityId: string }) {
             )}
 
             <div style={{marginBottom:"20px"}}>
-              <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Email (optional — only used to notify you when approved, never displayed)</div>
+              <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Email (optional - only used to notify you when approved, never displayed)</div>
               <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com"
                 style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
             </div>
 
             <button type="button" onClick={() => setStep(2)}
               style={{width:"100%",padding:"12px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
-              Next — HOA Details
+              Next - HOA Details
             </button>
           </div>
         )}
 
         {step === 2 && (
           <div>
-            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 — HOA details</div>
+            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 - HOA details</div>
           <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>Monthly fee and management company are required. Other fields are optional.</div>
 
             {residentType === "renter" ? (
@@ -240,7 +240,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Management company name <span style={{color:"#E24B4A"}}>*</span></div>
-              <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>Required — helps us keep management data accurate</div>
+              <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>Required - helps us keep management data accurate</div>
               <input type="text" value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Castle Group, FirstService, Lang Management"
                 style={{width:"100%",border:"1.5px solid " + (managementCompany ? "#e5e5e5" : "#EF9F27"),borderRadius:"8px",padding:"10px 12px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
             </div>
@@ -315,7 +315,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               </button>
               <button type="button" onClick={() => setStep(3)}
                 style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
-                Next — Your Review
+                Next - Your Review
               </button>
             </div>
           </div>
@@ -323,7 +323,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
 
         {step === 3 && (
           <div>
-            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 — Your review</div>
+            <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 3 - Your review</div>
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"10px"}}>Rate your experience</div>
@@ -337,7 +337,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Your review *</div>
               <textarea value={comment} onChange={e => setComment(e.target.value)} required rows={5}
-                placeholder="Share your experience — HOA management, community atmosphere, any issues or highlights buyers should know about..."
+                placeholder="Share your experience - HOA management, community atmosphere, any issues or highlights buyers should know about..."
                 style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",resize:"vertical",outline:"none",boxSizing:"border-box",fontFamily:"system-ui,sans-serif"}}/>
               <div style={{fontSize:"11px",color:"#aaa",marginTop:"4px"}}>{comment.length}/2000</div>
             </div>

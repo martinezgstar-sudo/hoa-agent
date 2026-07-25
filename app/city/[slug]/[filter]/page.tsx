@@ -6,7 +6,7 @@ import type { Metadata } from "next"
 
 export const revalidate = 3600
 
-// Curated city dictionary — must match parent /city/[slug] page
+// Curated city dictionary - must match parent /city/[slug] page
 const CITIES: Record<string, string> = {
   "west-palm-beach": "West Palm Beach", "boca-raton": "Boca Raton",
   "jupiter": "Jupiter", "palm-beach-gardens": "Palm Beach Gardens",
@@ -48,7 +48,7 @@ const FILTERS: Record<string, FilterDef> = {
   "townhomes": {
     label: "Townhomes",
     intro:
-      "Townhome communities can be governed by either Chapter 718 or Chapter 720 depending on how the property was platted. Read the CC&Rs carefully — your insurance and reserve obligations depend on the structure.",
+      "Townhome communities can be governed by either Chapter 718 or Chapter 720 depending on how the property was platted. Read the CC&Rs carefully - your insurance and reserve obligations depend on the structure.",
     clauses: [{ op: 'ilike', col: 'property_type', val: '%townhome%' }],
   },
   "pet-friendly": {
@@ -63,7 +63,7 @@ const FILTERS: Record<string, FilterDef> = {
   "affordable": {
     label: "Affordable Fee",
     intro:
-      "Communities with monthly HOA fees under $250. Affordable does not necessarily mean under-funded — many single-family HOAs in inland Palm Beach County operate cleanly at low fees because they have minimal amenities and shared infrastructure.",
+      "Communities with monthly HOA fees under $250. Affordable does not necessarily mean under-funded - many single-family HOAs in inland Palm Beach County operate cleanly at low fees because they have minimal amenities and shared infrastructure.",
     clauses: [{ op: 'lte', col: 'monthly_fee_median', val: 250 }],
   },
   "high-fee": {
@@ -106,7 +106,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, filter } = await params
   const city = CITIES[slug]
   const f = FILTERS[filter]
-  if (!city || !f) return { title: "Not Found — HOA Agent" }
+  if (!city || !f) return { title: "Not Found | HOA Agent" }
   const title = filter === '55-plus'
     ? `55+ HOA Communities in ${city} | HOA Agent`
     : filter === 'gated'

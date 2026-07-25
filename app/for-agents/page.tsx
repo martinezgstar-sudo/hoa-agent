@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Real estate agents use HOA Agent to research HOA litigation history, fees, assessments, and restrictions before showing listings in Palm Beach County.',
   openGraph: {
     title: 'For Real Estate Agents | HOA Agent',
-    description: 'Due diligence for every Palm Beach County listing. HOA fees, litigation history, special assessments, and restrictions — all in one free tool.',
+    description: 'Due diligence for every Palm Beach County listing. HOA fees, litigation history, special assessments, and restrictions - all in one free tool.',
     url: 'https://hoa-agent.com/for-agents',
     siteName: 'HOA Agent',
     type: 'website',
@@ -27,7 +27,7 @@ const USE_CASES = [
   },
   {
     title: 'During buyer education',
-    body: 'Show your buyer the litigation count and news reputation score. If a community has three active court cases and a string of negative news coverage, that\'s a conversation to have before the offer — not after the inspection.',
+    body: 'Show your buyer the litigation count and news reputation score. If a community has three active court cases and a string of negative news coverage, that\'s a conversation to have before the offer - not after the inspection.',
   },
   {
     title: 'Listing research',
@@ -73,7 +73,7 @@ export default function ForAgentsPage() {
         <p style={{ fontSize: '16px', color: '#555', lineHeight: 1.8, marginBottom: '48px', maxWidth: '600px' }}>
           Every Palm Beach County listing inside an HOA carries hidden data your buyers need to know.
           HOA Agent gives you instant access to litigation history, fee ranges, restriction details,
-          and news reputation — free, no account required.
+          and news reputation - free, no account required.
         </p>
 
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '20px' }}>

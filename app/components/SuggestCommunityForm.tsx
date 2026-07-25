@@ -120,7 +120,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
             {showDrafts && draftMatches.length > 0 && (
               <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1.5px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 8px 24px rgba(0,0,0,0.1)",zIndex:100,marginTop:"4px",overflow:"hidden"}}>
                 <div style={{padding:"8px 12px",fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.05em",backgroundColor:"#f9f9f9"}}>
-                  Already in our database — click to select
+                  Already in our database - click to select
                 </div>
                 {draftMatches.map(d => (
                   <div key={d.id} onClick={() => selectDraft(d)}
@@ -135,7 +135,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                   style={{padding:"10px 14px",fontSize:"12px",color:"#1D9E75",cursor:"pointer",fontWeight:"500",borderTop:"1px solid #f0f0f0",backgroundColor:"#f9f9f9"}}
                   onMouseEnter={e => (e.currentTarget.style.backgroundColor="#E1F5EE")}
                   onMouseLeave={e => (e.currentTarget.style.backgroundColor="#f9f9f9")}>
-                  + None of these — submit "{name}" as a new community
+                  + None of these - submit "{name}" as a new community
                 </div>
               </div>
             )}
@@ -195,7 +195,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
           </div>
 
           <div style={{marginBottom:"20px"}}>
-            <div style={{fontSize:"12px",fontWeight:"600",color:"#555",marginBottom:"6px"}}>Your email (optional — we will notify you when added)</div>
+            <div style={{fontSize:"12px",fontWeight:"600",color:"#555",marginBottom:"6px"}}>Your email (optional - we will notify you when added)</div>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com"
               style={{width:"100%",padding:"10px 12px",borderRadius:"8px",border:"1.5px solid #e5e5e5",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
           </div>

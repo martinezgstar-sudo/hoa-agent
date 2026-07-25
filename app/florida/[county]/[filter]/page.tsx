@@ -9,7 +9,7 @@ const FILTERS: Record<string, {
 }> = {
   'pet-friendly': {
     label: 'Pet Friendly HOA Communities',
-    title: 'Pet Friendly HOA Communities in {county} — Fees & Reviews | HOA Agent',
+    title: 'Pet Friendly HOA Communities in {county} - Fees & Reviews | HOA Agent',
     description: 'Find pet friendly HOA communities in {county}, Florida. Browse communities that allow dogs and cats with verified fee data, resident reviews, and restriction details.',
     query: { pet_restriction: 'ilike.%Yes%' }
   },
@@ -27,19 +27,19 @@ const FILTERS: Record<string, {
   },
   'low-hoa-fees': {
     label: 'Low HOA Fee Communities',
-    title: 'Low HOA Fee Communities in {county} — Under $300/mo | HOA Agent',
+    title: 'Low HOA Fee Communities in {county} - Under $300/mo | HOA Agent',
     description: 'Find affordable HOA communities in {county} with low monthly fees. Browse communities with fees under $300/month with verified data and resident reviews.',
     query: { monthly_fee_max: 'lte.300' }
   },
   'condos': {
     label: 'HOA Condo Communities',
-    title: 'HOA Condo Communities in {county} — Fees & Reviews | HOA Agent',
+    title: 'HOA Condo Communities in {county} - Fees & Reviews | HOA Agent',
     description: 'Browse HOA condo communities in {county}, Florida. Find verified fee data, restions, management companies, and resident reviews for condos.',
     query: { property_type: 'ilike.%Condo%' }
   },
   'single-family': {
     label: 'Single Family HOA Communities',
-    title: 'Single Family HOA Communities in {county} — Fees & Reviews | HOA Agent',
+    title: 'Single Family HOA Communities in {county} - Fees & Reviews | HOA Agent',
     description: 'Browse single family home HOA communities in {county}, Florida. Find verified fee data, restrictions, management companies, and resident reviews.',
     query: { property_type: 'ilike.%Single family%' }
   },
@@ -51,7 +51,7 @@ const FILTERS: Record<string, {
   },
   'master-hoa': {
     label: 'Master HOA Communities',
-    title: 'Master HOA Communities in {county} — Full Sub-Community Guide | HOA Agent',
+    title: 'Master HOA Communities in {county} - Full Sub-Community Guide | HOA Agent',
     description: 'Explore master-planned HOA communities in {county}, Florida. Browse all sub-communities, combined fee totals, and resident reviews.',
     query: { is_sub_hoa: 'eq.false' }
   }

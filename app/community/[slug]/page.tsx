@@ -32,9 +32,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     .eq('slug', slug)
     .single()
 
-  if (!community) return { title: 'Community Not Found — HOA Agent' }
+  if (!community) return { title: 'Community Not Found | HOA Agent' }
 
-  const title = `${community.canonical_name} HOA Fees, Reviews & Restrictions — ${community.city}, FL | HOA Agent`
+  const title = `${community.canonical_name} HOA Fees, Reviews & Restrictions - ${community.city}, FL | HOA Agent`
   const { buildCommunityMetaDescription } = await import('@/app/lib/seo/json-ld')
   const description = buildCommunityMetaDescription(community as Parameters<typeof buildCommunityMetaDescription>[0])
   const canonical = `https://www.hoa-agent.com/community/${slug}`
@@ -155,7 +155,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   // Live count + average from community_comments. The communities.review_count
   // and communities.review_avg cached fields can fall out of sync when comments
-  // are inserted/approved without a trigger updating them — read live to avoid
+  // are inserted/approved without a trigger updating them - read live to avoid
   // showing 0 reviews when an approved comment exists.
   const { count: liveCommentCount } = await supabase
     .from('community_comments')
@@ -178,7 +178,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
 
-  // ── Trash & Utilities (DISPLAY ONLY — no forms, mirrors Assessment Signals
+  // ── Trash & Utilities (DISPLAY ONLY - no forms, mirrors Assessment Signals
   // precedent). Rows are built from the 8 utility columns; the section renders
   // only when at least one field is non-null (hasTrashUtilities guard below).
   const trashRows = [
@@ -195,8 +195,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   ].filter((r) => r.val != null && String(r.val).trim() !== '')
   const hasTrashUtilities = trashRows.length > 0 || utilityRows.length > 0
 
-  // Sponsored ads — fetch advertisers targeting this community's city.
-  // Uses the service-role client (server component only — key never reaches
+  // Sponsored ads - fetch advertisers targeting this community's city.
+  // Uses the service-role client (server component only - key never reaches
   // the browser) so RLS doesn't hide active campaigns. Until the public
   // anon-read policy in migration 20260503_advertiser_system.sql is applied
   // in production, the public anon client returns 0 rows from `advertisers`.
@@ -219,7 +219,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         if (ads) pageAdvertisers = ads
       }
     } catch {
-      // Table missing or env unset — gracefully no ads
+      // Table missing or env unset - gracefully no ads
     }
   }
 
@@ -278,7 +278,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     masterHoa = data
   }
 
-  // Sub-communities (shown on master pages) — published only
+  // Sub-communities (shown on master pages) - published only
   const subQuery = await supabase
     .from('communities')
     .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,monthly_fee_median,property_type,unit_count,status')
@@ -424,7 +424,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <span aria-current="page" style={{color: '#1a1a1a', fontWeight: 500}}>{community.canonical_name}</span>
         </nav>
 
-        {/* PART-OF BANNER — shown on sub-community pages */}
+        {/* PART-OF BANNER - shown on sub-community pages */}
         {isSub && masterHoa && (
           <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', borderTop: '1px solid #b8e5d4', borderBottom: '1px solid #b8e5d4', borderRadius: 0, padding: '8px 12px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             <div style={{fontSize: '12px', color: '#1B2B6B', lineHeight: '1.45'}}>
@@ -452,7 +452,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 <div style={{display:'inline-block',fontSize:'10px',padding:'2px 8px',borderRadius:'999px',backgroundColor:'#FAEEDA',color:'#854F0B',marginBottom:'6px',maxWidth:'100%'}}>Sub-association</div>
               )}
               <div style={{display:'flex',alignItems:'center',gap:'8px',flexWrap:'wrap',marginBottom:'6px'}}>
-                <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name} — {community.city}, FL</h1>
+                <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name} - {community.city}, FL</h1>
                 <CompareButton slug={community.slug} variant="compact" />
                 {String(community.entity_status || '').toLowerCase() === 'active' && (
                   <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#1D9E75',fontWeight:600}}>
@@ -513,15 +513,15 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
           <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '14px'}}>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + ' – $' + community.monthly_fee_max + '/mo' : '—'}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_min && community.monthly_fee_max ? '$' + community.monthly_fee_min + ' – $' + community.monthly_fee_max + '/mo' : '-'}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Observed range</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_median ? '$' + community.monthly_fee_median + '/mo' : '—'}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.monthly_fee_median ? '$' + community.monthly_fee_median + '/mo' : '-'}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Normalized median</div>
             </div>
             <div>
-              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '—'}{community.fee_observation_count ? ' data points' : ''}</div>
+              <div style={{fontSize: '16px', fontWeight: '500', color: '#1a1a1a'}}>{community.fee_observation_count || '-'}{community.fee_observation_count ? ' data points' : ''}</div>
               <div style={{fontSize: '11px', color: '#888', marginTop: '2px'}}>Fee reports</div>
             </div>
           </div>
@@ -630,7 +630,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         </div>
 
-        {/* TRASH & UTILITIES — display only, renders only when at least one field is populated */}
+        {/* TRASH & UTILITIES - display only, renders only when at least one field is populated */}
         {hasTrashUtilities && (
           <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
@@ -678,7 +678,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         )}
 
-        {/* SUB-COMMUNITIES HUB SECTION — shown on master HOA pages */}
+        {/* SUB-COMMUNITIES HUB SECTION - shown on master HOA pages */}
         {subCommunities.length > 0 && (
           <div style={{backgroundColor: '#fff', border: '1px solid #1B2B6B', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px'}}>
@@ -765,10 +765,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px', position: 'relative', overflow: 'hidden'}}>
           <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Source trail</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px', filter: 'blur(4px)', userSelect: 'none', pointerEvents: 'none'}}>
-            <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>— Entity, registered agent, status.</span></div>
-            <div><strong style={{fontWeight: '500'}}>Resident submissions</strong> <span style={{color: '#888'}}>— Fee range, restrictions, assessment mentions.</span></div>
-            <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>— Additional data points with citation links.</span></div>
-            <div><strong style={{fontWeight: '500'}}>Public records</strong> <span style={{color: '#888'}}>— County property appraiser, clerk of courts.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Florida Division of Corporations</strong> <span style={{color: '#888'}}>- Entity, registered agent, status.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Resident submissions</strong> <span style={{color: '#888'}}>- Fee range, restrictions, assessment mentions.</span></div>
+            <div><strong style={{fontWeight: '500'}}>User submissions</strong> <span style={{color: '#888'}}>- Additional data points with citation links.</span></div>
+            <div><strong style={{fontWeight: '500'}}>Public records</strong> <span style={{color: '#888'}}>- County property appraiser, clerk of courts.</span></div>
           </div>
           <div style={{position: 'absolute', top: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.85)', borderRadius: '12px'}}>
             <div style={{fontSize: '20px', marginBottom: '8px'}}>🔒</div>
@@ -781,7 +781,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         <NewsFeed communityId={community.id} communityName={community.canonical_name} />
         <LegalCases communityId={community.id} communityName={community.canonical_name} />
 
-        {/* About — auto-generated neighborhood context */}
+        {/* About - auto-generated neighborhood context */}
         <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginTop:'20px', marginBottom:'12px'}}>
           <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'10px'}}>About {community.canonical_name}</h2>
           <p style={{fontSize:'13px', color:'#555', lineHeight:1.7, margin:0}}>
@@ -798,7 +798,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </p>
         </div>
 
-        {/* Florida HOA Law — short pointer (full text moved to /florida-hoa-law) */}
+        {/* Florida HOA Law - short pointer (full text moved to /florida-hoa-law) */}
         <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'14px 18px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center', gap:'12px', flexWrap:'wrap'}}>
           <div style={{fontSize:'13px', color:'#555', lineHeight:1.5}}>
             Governed by{' '}

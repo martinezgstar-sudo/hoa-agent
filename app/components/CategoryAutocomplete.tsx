@@ -26,7 +26,7 @@ interface Props {
 }
 
 /**
- * CategoryAutocomplete — type-ahead category picker.
+ * CategoryAutocomplete - type-ahead category picker.
  *
  * - Loads /api/categories once on mount, caches in component state.
  * - Filters as the user types (substring match, case-insensitive).
@@ -86,7 +86,7 @@ export default function CategoryAutocomplete({
     const exact = allCategories.find((c) => c.name.toLowerCase() === lower)
     setMatchedId(exact ? exact.id : null)
     onChange({ category_id: exact ? exact.id : null, category_text: trimmed })
-    // we deliberately exclude `onChange` from deps — parent rarely memoises it
+    // we deliberately exclude `onChange` from deps - parent rarely memoises it
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, allCategories])
 
@@ -133,10 +133,10 @@ export default function CategoryAutocomplete({
       {/* Match status line */}
       <div style={{ marginTop: "6px", fontSize: "11px", color: text.trim() ? (matchedId ? "#1D9E75" : "#854F0B") : "#888" }}>
         {!text.trim()
-          ? "Pick from the list or type your own — we'll review custom categories before activating."
+          ? "Pick from the list or type your own - we'll review custom categories before activating."
           : matchedId
-            ? "✓ Matched an existing category — exclusivity will be checked against this ZIP."
-            : "Custom category — will be flagged for admin review (pending_review)."}
+            ? "✓ Matched an existing category - exclusivity will be checked against this ZIP."
+            : "Custom category - will be flagged for admin review (pending_review)."}
       </div>
 
       {open && filtered.length > 0 && (

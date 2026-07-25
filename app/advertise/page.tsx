@@ -7,7 +7,7 @@ import SponsoredCard from "@/app/components/SponsoredCard"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "Advertise on HOA Agent — Reach Palm Beach County HOA Residents",
+  title: "Advertise on HOA Agent - Reach Palm Beach County HOA Residents",
   description:
     "Reach 8,000+ HOA and condo communities in Palm Beach County. AI-built ads from your website. From $9.99/month.",
   alternates: { canonical: "https://www.hoa-agent.com/advertise" },
@@ -72,7 +72,7 @@ const CATEGORIES = [
 const FAQ = [
   { q: "How long until my ad goes live?", a: "Once you sign up and complete your plan, your ad goes live within minutes. Our AI ad generator builds 4 ad options from your website in about 30 seconds." },
   { q: "Can I change my ad after publishing?", a: "Yes. Edit your ads any time from the advertiser portal. You can pause, swap, or rotate ads at will." },
-  { q: "What ZIP codes can I target?", a: "Starter targets 1 ZIP, Growth up to 5 ZIPs, County covers every Palm Beach County ZIP. Each tier guarantees category exclusivity within the selected ZIPs — no two advertisers in the same category will appear in the same ZIP." },
+  { q: "What ZIP codes can I target?", a: "Starter targets 1 ZIP, Growth up to 5 ZIPs, County covers every Palm Beach County ZIP. Each tier guarantees category exclusivity within the selected ZIPs - no two advertisers in the same category will appear in the same ZIP." },
   { q: "How does Claude create my ad?", a: "Enter your website URL. Claude visits the site, reads your content, and generates 4 ad options with different angles. You pick the one you like and tweak any field before publishing." },
   { q: "Can I cancel anytime?", a: "Yes. Cancel from the billing tab in your portal. No long-term contracts." },
 ]
@@ -147,7 +147,7 @@ export default async function AdvertisePage() {
       <section style={{ padding: "48px 24px", backgroundColor: "#f9f9f9" }}>
         <div style={{ maxWidth: "560px", margin: "0 auto" }}>
           <div style={{ fontSize: "11px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px", textAlign: "center" }}>
-            Example — How your ad appears on community pages
+            Example - How your ad appears on community pages
           </div>
           <SponsoredCard advertisers={[exampleAd]} />
         </div>

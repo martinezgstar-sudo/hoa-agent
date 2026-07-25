@@ -126,8 +126,8 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string
 
 /**
  * DELETE /api/admin/news/[id]/link-communities
- * Body: { community_news_ids: ["uuid", ...] }   — unlink specific rows
- *   OR  { community_ids:      ["uuid", ...] }   — unlink by community
+ * Body: { community_news_ids: ["uuid", ...] }   - unlink specific rows
+ *   OR  { community_ids:      ["uuid", ...] }   - unlink by community
  * Only deletes rows whose link_source = 'manual'. Auto matches are not
  * touched here (use the existing PATCH approve/reject flow for those).
  */

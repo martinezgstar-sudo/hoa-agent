@@ -5,19 +5,19 @@ export default function PitchPage() {
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#0f1623",minHeight:"100vh",color:"#fff"}}>
       <nav style={{padding:"24px 48px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
         <a href="/" style={{textDecoration:"none"}}><img src="/logo.png" alt="HOA Agent" style={{height:"40px",width:"auto"}}/></a>
-        <div style={{fontSize:"12px",color:"rgba(255,255,255,0.4)",letterSpacing:"0.1em",textTransform:"uppercase"}}>Confidential — Partner Overview</div>
+        <div style={{fontSize:"12px",color:"rgba(255,255,255,0.4)",letterSpacing:"0.1em",textTransform:"uppercase"}}>Confidential - Partner Overview</div>
       </nav>
       <section style={{padding:"80px 48px 64px",maxWidth:"900px",margin:"0 auto",textAlign:"center"}}>
         <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"20px"}}>HOA Intelligence Platform</div>
         <h1 style={{fontSize:"px",fontWeight:"700",lineHeight:"1.1",marginBottom:"24px",color:"#fff"}}>The missing data layer for Florida real estate</h1>
-        <p style={{fontSize:"18px",color:"rgba(255,255,255,0.6)",lineHeight:"1.7",maxWidth:"620px",margin:"0 auto 40px"}}>HOA Agent aggregates fee data, restrictions, assessments, and resident reviews for HOA and condo communities — structured, source-attributed, and searchable.</p>
+        <p style={{fontSize:"18px",color:"rgba(255,255,255,0.6)",lineHeight:"1.7",maxWidth:"620px",margin:"0 auto 40px"}}>HOA Agent aggregates fee data, restrictions, assessments, and resident reviews for HOA and condo communities - structured, source-attributed, and searchable.</p>
         <a href="https://hoa-agent.com" target="_blank" style={{display:"inline-block",padding:"14px 32px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"14px",fontWeight:"600"}}>View Live Platform</a>
       </section>
       <section style={{padding:"64px 48px",maxWidth:"900px",margin:"0 auto",borderTop:"1px solid rgba(255,255,255,0.08)"}}>
         <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"16px"}}>The Problem</div>
         <h2 style={{fontSize:"32px",fontWeight:"600",lineHeight:"1.2",marginBottom:"20px"}}>HOA data is broken</h2>
-        <p style={{fontSize:"15px",color:"rgba(255,255,255,0.6)",lineHeight:"1.8",marginBottom:"16px"}}>HOA and condo fees are one of the largest hidden costs in real estate. For a $400,000 home, a $500/month HOA fee adds $6,000 per year in carrng costs — yet buyers have no reliable single source for this data.</p>
-        <p style={{fontSize:"15px",color:"rgba(255,255,255,0.6)",lineHeight:"1.8"}}>It is scattered across county records, buried in HOA documents, and inconsistent across platforms. Nobody has built a clean structured database from the source — the residents themselves.</p>
+        <p style={{fontSize:"15px",color:"rgba(255,255,255,0.6)",lineHeight:"1.8",marginBottom:"16px"}}>HOA and condo fees are one of the largest hidden costs in real estate. For a $400,000 home, a $500/month HOA fee adds $6,000 per year in carrng costs - yet buyers have no reliable single source for this data.</p>
+        <p style={{fontSize:"15px",color:"rgba(255,255,255,0.6)",lineHeight:"1.8"}}>It is scattered across county records, buried in HOA documents, and inconsistent across platforms. Nobody has built a clean structured database from the source - the residents themselves.</p>
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"16px",marginTop:"32px"}}>
           {[{stat:"73%",label:"of Florida homes are in an HOA or condo association"},{stat:"$400-800",label:"average monthly HOA fee in Palm Beach County"},{stat:"0",label:"reliable structured databases for Florida HOA data"}].map(s => (
             <div key={s.stat} style={{backgroundColor:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"12px",padding:"20px 24px"}}>
@@ -61,7 +61,7 @@ export default function PitchPage() {
         <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.15em",marginBottom:"16px"}}>Growth Path</div>
         <h2 style={{fontSize:"32px",fontWeight:"600",lineHeight:"1.2",marginBottom:"40px"}}>From Palm Beach to national</h2>
         <div style={{display:"flex",flexDirection:"column",gap:"16px"}}>
-          {[{phase:"Phase 1",title:"Complete Palm Beach County",desc:"Build resident review database and public records pipeline. Cover all 2,000 plus HOA communities in Palm Beach County."},{phase:"Phase 2",title:"South Florida Expansion",desc:"Expand to Broward and Miami-Dade counties. Target 10,000 plus communities. Launch B2B API for property management companies."},{phase:"Phase 3",title:"Statewide Florida",desc:"Full Florida coverage. Launch white label platform for brokerages. Data licensing with title companies and mortgage lenders."},{phase:"Phase 4",title:"National Expansion",desc:"Expand to HOA-dense states — Arizona, Texas, Nevada, California. Position as the definitive national HOA intelligence platform."}].map((p,i) => (
+          {[{phase:"Phase 1",title:"Complete Palm Beach County",desc:"Build resident review database and public records pipeline. Cover all 2,000 plus HOA communities in Palm Beach County."},{phase:"Phase 2",title:"South Florida Expansion",desc:"Expand to Broward and Miami-Dade counties. Target 10,000 plus communities. Launch B2B API for property management companies."},{phase:"Phase 3",title:"Statewide Florida",desc:"Full Florida coverage. Launch white label platform for brokerages. Data licensing with title companies and mortgage lenders."},{phase:"Phase 4",title:"National Expansion",desc:"Expand to HOA-dense states - Arizona, Texas, Nevada, California. Position as the definitive national HOA intelligence platform."}].map((p,i) => (
             <div key={p.phase} style={{display:"flex",gap:"24px",alignItems:"flex-start"}}>
               <div style={{width:"32px",height:"32px",borderRadius:"50%",backgroundColor:"#1D9E75",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"13px",fontWeight:"700",flexShrink:0}}>{i+1}</div>
               <div style={{backgroundColor:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"12px",padding:"20px 24px",flex:1}}>

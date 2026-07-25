@@ -165,7 +165,7 @@ export default function FirstReviewToast({
           Be the first to contribute to this association
         </p>
         <p style={{ margin: '0 0 20px 0', fontSize: '15px', lineHeight: 1.55, color: '#555' }}>
-          This association page has no information yet. Share what you know — HOA fees, rules,
+          This association page has no information yet. Share what you know - HOA fees, rules,
           management experience, or anything that would help future residents.
         </p>
         <button

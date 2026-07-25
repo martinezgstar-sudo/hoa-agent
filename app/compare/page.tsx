@@ -229,7 +229,7 @@ function ComparePageInner() {
                   { label: "News Reputation", get: repScore },
                   { label: "Litigation Count", get: litCell },
                   { label: "Age Restricted", get: (c: Community) => (
-                    c.is_55_plus ? <span style={{ color: "#92400E", fontWeight: 600 }}>Yes — 55+ Community</span>
+                    c.is_55_plus ? <span style={{ color: "#92400E", fontWeight: 600 }}>Yes - 55+ Community</span>
                     : c.is_age_restricted ? <span style={{ color: "#6B21A8", fontWeight: 600 }}>Yes</span>
                     : <span style={{ color: "#1D9E75" }}>No</span>
                   ) },
@@ -241,7 +241,7 @@ function ComparePageInner() {
                   { label: "Rental Restrictions", get: (c: Community) => c.rental_approval || NA },
                   { label: "STR Restrictions", get: (c: Community) => c.str_restriction || NA },
                   { label: "Amenities", get: (c: Community) => c.amenities || NA },
-                  { label: "Reviews", get: (c: Community) => c.review_count ? `${c.review_avg ?? "—"}★ (${c.review_count})` : NA },
+                  { label: "Reviews", get: (c: Community) => c.review_count ? `${c.review_avg ?? "-"}★ (${c.review_count})` : NA },
                   { label: "Website", get: (c: Community) => c.website_url ? <a href={c.website_url} target="_blank" rel="noopener" style={{ color: "#1D9E75" }}>Visit ↗</a> : NA },
                 ].map((row, i) => (
                   <tr key={row.label} style={{ borderBottom: "1px solid #f0f0f0", backgroundColor: i % 2 === 0 ? "#fff" : "#fafafa" }}>

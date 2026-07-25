@@ -19,10 +19,10 @@ function admin() {
  * GET /api/admin/communities/search?q=foo&city=Boca&master_hoa_id=uuid&limit=20
  *
  * Type-ahead community search for the admin news linker.
- * - q       — substring on canonical_name (ilike, optional)
- * - city    — exact city match (optional)
- * - master_hoa_id — only sub-communities of this master (optional)
- * - limit   — max results (default 20, max 100)
+ * - q       - substring on canonical_name (ilike, optional)
+ * - city    - exact city match (optional)
+ * - master_hoa_id - only sub-communities of this master (optional)
+ * - limit   - max results (default 20, max 100)
  *
  * Always filters status='published'. Returns id, canonical_name, slug,
  * city, zip_code, master_hoa_id.

@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
     ])
 
     // Show ALL pending news_items, not just ones with a pending community_news
-    // match. Many fetched articles never get a community match — they still
+    // match. Many fetched articles never get a community match - they still
     // need admin review (approve as general PBC news, or reject as off-topic).
     // The previous filter hid them entirely, leaving the admin page empty.
     const pending = pendingRaw

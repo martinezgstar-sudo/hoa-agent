@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
  * Marks the advertiser_profiles row subscription_status='pending_manual',
  * sends a Resend notification to fieldlogisticsfl@gmail.com so Izzy can
  * follow up to collect payment, and returns 200 once the DB write
- * succeeds. Email failure does NOT block the DB write — it is logged
+ * succeeds. Email failure does NOT block the DB write - it is logged
  * server-side and noted in the response.
  */
 export async function POST(req: NextRequest) {
@@ -56,9 +56,9 @@ export async function POST(req: NextRequest) {
         <li><strong>Email:</strong> ${prof.email || body.email || "(not on file)"}</li>
         <li><strong>Company:</strong> ${prof.company_name || "(not set)"}</li>
         <li><strong>Phone:</strong> ${prof.phone || "(not set)"}</li>
-        <li><strong>Category:</strong> ${prof.category_text || "—"} ${prof.category_id ? "(matched)" : "(custom — needs admin review)"}</li>
+        <li><strong>Category:</strong> ${prof.category_text || "-"} ${prof.category_id ? "(matched)" : "(custom - needs admin review)"}</li>
         <li><strong>Plan:</strong> ${prof.subscription_plan}</li>
-        <li><strong>ZIPs:</strong> ${plan === "county" ? "All Palm Beach County" : targetZips.length ? targetZips.join(", ") : "—"}</li>
+        <li><strong>ZIPs:</strong> ${plan === "county" ? "All Palm Beach County" : targetZips.length ? targetZips.join(", ") : "-"}</li>
       </ul>
       <p>Activate at: <a href="https://www.hoa-agent.com/admin/ads">https://www.hoa-agent.com/admin/ads</a></p>
     `.trim()
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
           from: process.env.RESEND_FROM_EMAIL || "info@hoa-agent.com",
           to: ["info@hoa-agent.com"],
           bcc: ["fieldlogisticsfl@gmail.com"],
-          subject: `New advertiser signup (${plan}) — ${prof.company_name || prof.email || prof.id}`,
+          subject: `New advertiser signup (${plan}) - ${prof.company_name || prof.email || prof.id}`,
           html: summaryHtml,
         }),
       })

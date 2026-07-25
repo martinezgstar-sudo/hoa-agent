@@ -41,7 +41,7 @@ textarea::placeholder {
   color: #9ca3af; /* gray-400 */
 }
 
-/* Skip-to-content link — visible only on keyboard focus (WCAG 2.4.1) */
+/* Skip-to-content link - visible only on keyboard focus (WCAG 2.4.1) */
 .skip-to-content {
   position: absolute;
   left: -9999px;
