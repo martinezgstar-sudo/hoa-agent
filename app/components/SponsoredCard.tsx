@@ -4,6 +4,10 @@ import { useEffect, useRef } from "react"
 
 export type Advertiser = {
   id: string
+  /** advertiser_profiles.id. ad_events.advertiser_id FKs to it, so without this
+   *  every event lands unattributed — which is what produced 1,791 orphaned
+   *  rows and a vendor dashboard stuck at zero. */
+  profile_id?: string | null
   company_name: string
   tagline?: string | null
   phone?: string | null
@@ -68,7 +72,10 @@ function track(
       headers: { "Content-Type": "application/json" },
       keepalive: true,
       body: JSON.stringify({
-        ad_id: a.id,
+        // ad_id intentionally omitted: it FKs to advertiser_ads(id), and the
+        // public card renders from `advertisers`, so sending a.id here violated
+        // the constraint and the route silently dropped the whole attribution.
+        advertiser_id: a.profile_id ?? null,
         event_type,
         community_slug: ctx.communitySlug ?? null,
         community_id: ctx.communityId ?? null,

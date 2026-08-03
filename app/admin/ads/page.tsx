@@ -12,6 +12,8 @@ type Profile = {
   category_id?: string | null
   category_text?: string | null
   subscription_plan?: string | null
+  access_level?: string | null
+  access_note?: string | null
   subscription_status?: string | null
   target_zips?: string[] | null
   created_at?: string
@@ -71,6 +73,28 @@ export default function AdminAdsPage() {
     if (!authed) return
     load()
   }, [authed])
+
+  // Admin-only vendor access control. There is deliberately no vendor-facing
+  // equivalent: a vendor must never set their own access level or tier.
+  async function setAccess(p: Profile, patch: { access_level?: string; tier?: string }, label: string) {
+    if (!confirm(`${label} for ${p.company_name || p.email || p.id}?`)) return
+    setBusyId(p.id)
+    try {
+      const res = await fetch("/api/admin/vendor-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-password": ADMIN_PASSWORD },
+        body: JSON.stringify({ id: p.id, ...patch }),
+      })
+      const j = await res.json()
+      if (!j.ok) throw new Error(j.error || "failed")
+      setMsg(`\u2713 ${label}: ${j.vendor.company_name || j.vendor.email} \u2192 ${j.vendor.access_level}${j.vendor.plan ? " / " + j.vendor.plan : ""}`)
+      await load()
+    } catch (e) {
+      setMsg(`\u2717 ${label} failed: ${e instanceof Error ? e.message : String(e)}`)
+    } finally {
+      setBusyId("")
+    }
+  }
 
   async function approve(p: Profile) {
     if (!confirm(`Approve ${p.company_name || p.email || p.id}? This will activate their category lock.`)) return
@@ -267,6 +291,21 @@ export default function AdminAdsPage() {
                 </button>
                 <button type="button" onClick={() => reject(p)} disabled={busyId === p.id || p.subscription_status === "rejected"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "1px solid #E24B4A", backgroundColor: "#fff", color: "#A32D2D", cursor: "pointer" }}>
                   Reject
+                </button>
+                <button type="button" onClick={() => setAccess(p, { access_level: "comp" }, "Comp full access")} disabled={busyId === p.id || p.access_level === "comp"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "1px solid #1B2B6B", backgroundColor: p.access_level === "comp" ? "#eee" : "#fff", color: "#1B2B6B", cursor: p.access_level === "comp" ? "default" : "pointer" }}>
+                  Comp
+                </button>
+                <button type="button" onClick={() => setAccess(p, { access_level: "paid" }, "Grant full access")} disabled={busyId === p.id || p.access_level === "paid"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 600, borderRadius: "8px", border: "1px solid #1D9E75", backgroundColor: "#fff", color: "#137A57", cursor: "pointer" }}>
+                  Grant
+                </button>
+                <select value={p.subscription_plan || ""} onChange={(e) => e.target.value && setAccess(p, { tier: e.target.value }, `Set tier ${e.target.value}`)} disabled={busyId === p.id} style={{ padding: "7px 8px", fontSize: "12px", borderRadius: "8px", border: "1px solid #e5e5e5", color: "#555" }}>
+                  <option value="">Tier…</option>
+                  <option value="starter">starter (1 ad)</option>
+                  <option value="growth">growth (3 ads)</option>
+                  <option value="county">county (5 ads)</option>
+                </select>
+                <button type="button" onClick={() => setAccess(p, { access_level: "suspended" }, "Suspend")} disabled={busyId === p.id || p.access_level === "suspended"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 600, borderRadius: "8px", border: "1px solid #E24B4A", backgroundColor: "#fff", color: "#A32D2D", cursor: "pointer" }}>
+                  Suspend
                 </button>
                 <button type="button" onClick={() => viewDetails(p)} disabled={busyId === p.id} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 600, borderRadius: "8px", border: "1px solid #e5e5e5", backgroundColor: "#fff", color: "#555", cursor: "pointer" }}>
                   View Details

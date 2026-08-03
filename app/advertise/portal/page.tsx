@@ -18,6 +18,9 @@ type Profile = {
   target_cities: string[] | null
   max_ads: number | null
   logo_url: string | null
+  /** trial | paid | comp | suspended — admin-controlled, gates portal access. */
+  access_level: string | null
+  access_note: string | null
 }
 
 type Ad = {
@@ -42,7 +45,7 @@ export default function PortalDashboardPage() {
   const [ads, setAds] = useState<Ad[]>([])
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<Tab>("My Ads")
-  const [stats, setStats] = useState<{ impressions: number; clicks: number }>({ impressions: 0, clicks: 0 })
+  const [stats, setStats] = useState<{ impressions: number; clicks: number; impressionsAll: number; clicksAll: number }>({ impressions: 0, clicks: 0, impressionsAll: 0, clicksAll: 0 })
 
   useEffect(() => {
     (async () => {
@@ -55,7 +58,23 @@ export default function PortalDashboardPage() {
         .select("*")
         .eq("id", userId)
         .maybeSingle()
-      if (!prof || !prof.plan) { router.push("/advertise/portal/plan"); return }
+      // Access is decided by access_level, not by `plan`.
+      //
+      // This line used to read `if (!prof || !prof.plan)`. advertiser_profiles
+      // carries FOUR overlapping plan fields — plan, plan_status,
+      // subscription_plan, subscription_status — and they disagreed. The
+      // MorningStar account had subscription_plan "growth" and
+      // subscription_status "active", but `plan` was NULL because nothing ever
+      // wrote it, so an active advertiser was bounced to the payment screen on
+      // every single login.
+      //
+      // access_level is now the single source of truth and is admin-controlled:
+      //   comp / paid -> portal
+      //   suspended   -> portal, read-only banner (never silently redirected)
+      //   trial       -> plan screen
+      if (!prof) { router.push("/advertise/portal/plan"); return }
+      const level = (prof as Profile).access_level ?? "trial"
+      if (level === "trial") { router.push("/advertise/portal/plan"); return }
       setProfile(prof as Profile)
 
       const { data: adRows } = await supabase
@@ -65,16 +84,25 @@ export default function PortalDashboardPage() {
         .order("created_at", { ascending: false })
       setAds((adRows || []) as Ad[])
 
-      // 30-day analytics for ads owned by this advertiser
-      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
-      const { data: analytics } = await supabase
-        .from("ad_analytics")
-        .select("event_type, advertiser_id, created_at")
-        .gte("created_at", thirtyDaysAgo)
+      // Ad counts come from ad_events via the advertiser_ad_stats view.
+      //
+      // This block used to query `ad_analytics`, which has ZERO rows and never
+      // had any — the tracking endpoint at /api/ads/track writes to `ad_events`,
+      // which holds 1,789 rows going back to 2026-05-10. So the dashboard
+      // confidently displayed 0 impressions and 0 clicks while impressions were
+      // being recorded the whole time. The view also excludes bot traffic, which
+      // matters here: 1,276 of those 1,787 impressions are flagged is_bot.
+      const { data: adStats } = await supabase
+        .from("advertiser_ad_stats")
+        .select("impressions, clicks, impressions_30d, clicks_30d")
         .eq("advertiser_id", userId)
-      const imps = (analytics || []).filter((a: { event_type: string }) => a.event_type === "impression").length
-      const clk = (analytics || []).filter((a: { event_type: string }) => a.event_type === "click").length
-      setStats({ impressions: imps, clicks: clk })
+        .maybeSingle()
+      setStats({
+        impressions: adStats?.impressions_30d ?? 0,
+        clicks: adStats?.clicks_30d ?? 0,
+        impressionsAll: adStats?.impressions ?? 0,
+        clicksAll: adStats?.clicks ?? 0,
+      })
 
       setLoading(false)
     })()
@@ -219,7 +247,7 @@ export default function PortalDashboardPage() {
                 <strong>Current plan:</strong> {profile.plan ? profile.plan[0].toUpperCase() + profile.plan.slice(1) : "—"}
               </div>
               <div style={{ fontSize: "13px", color: "#666" }}>
-                Status: <span style={{ fontWeight: 600 }}>{profile.plan_status || "pending"}</span>
+                Status: <span style={{ fontWeight: 600 }}>{profile.access_level === "comp" ? "Complimentary \u2014 full access" : profile.access_level === "paid" ? "Active" : profile.access_level === "suspended" ? "Suspended" : (profile.plan_status || "pending")}</span>
               </div>
               <div style={{ marginTop: "16px", fontSize: "12px", color: "#888" }}>
                 Full billing management coming soon. Email <a href="/contact">contact us</a> for billing questions.

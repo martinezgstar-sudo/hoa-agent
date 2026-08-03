@@ -185,7 +185,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
         const adminSb = createClient(supaUrl, supaSvc, { auth: { persistSession: false } })
         const { data: ads } = await adminSb
           .from('advertisers')
-          .select('id, company_name, tagline, phone, cta_text, cta_url, category, logo_url, plan, target_cities, target_counties, status')
+          .select('id, profile_id, company_name, tagline, phone, cta_text, cta_url, category, logo_url, plan, target_cities, target_counties, status')
           .eq('status', 'active')
           .contains('target_cities', [community.city])
           .order('plan', { ascending: false })
