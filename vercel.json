@@ -9,36 +9,12 @@
       "schedule": "0 9 * * *"
     },
     {
-      "path": "/api/cron/fetch-news",
-      "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/cron/enrich-news",
-      "schedule": "0 7 * * *"
-    },
-    {
-      "path": "/api/cron/fetch-legal",
-      "schedule": "0 8 * * 0"
-    },
-    {
-      "path": "/api/cron/verify-legal",
-      "schedule": "0 9 * * 0"
-    },
-    {
       "path": "/api/cron/news",
       "schedule": "0 11 * * *"
     },
     {
       "path": "/api/cron/legal",
       "schedule": "0 12 * * *"
-    },
-    {
-      "path": "/api/cron/research",
-      "schedule": "0 7 * * *"
-    },
-    {
-      "path": "/api/cron/facebook-search",
-      "schedule": "0 14 * * 0"
     }
   ]
 }

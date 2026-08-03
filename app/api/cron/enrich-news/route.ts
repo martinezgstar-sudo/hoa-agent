@@ -1,6 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
+// PAUSED 2026-08-03 by owner decision: "pause, then convert survivors".
+// This route calls the metered Anthropic API. It was firing on a Vercel cron
+// with no explicit trigger, against a policy of one weekly Claude pass, while
+// ANTHROPIC_API_KEY is live in Vercel Production.
+//
+// Two independent locks, both required to run it again:
+//   1. its entry is removed from vercel.json crons (nothing schedules it)
+//   2. this gate - set CLAUDE_CRONS_ENABLED=1 in Vercel Production
+// The schedule alone coming back does NOT re-enable spending.
+function claudeCronsDisabled(): Response | null {
+  if (process.env.CLAUDE_CRONS_ENABLED === "1") return null
+  return new Response(
+    JSON.stringify({ ok: false, paused: true, reason: "Claude cron paused; set CLAUDE_CRONS_ENABLED=1 to re-enable" }),
+    { status: 503, headers: { "content-type": "application/json" } },
+  )
+}
+
+
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ''
 
 function isAuthorized(request: NextRequest): boolean {
@@ -13,6 +31,9 @@ function isAuthorized(request: NextRequest): boolean {
 }
 
 export async function GET(request: NextRequest) {
+  const paused = claudeCronsDisabled()
+  if (paused) return paused
+
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }

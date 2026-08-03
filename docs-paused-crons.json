@@ -1,0 +1,32 @@
+{
+  "paused_at": "2026-08-03",
+  "reason": "Owner decision: pause then convert. These six called the metered Anthropic API on a schedule with no explicit trigger, against a policy of one weekly Claude pass. ANTHROPIC_API_KEY is live in Vercel Production, so they could spend.",
+  "restore": "Re-add an entry to vercel.json crons AND set CLAUDE_CRONS_ENABLED=1 in Vercel Production. Both are required.",
+  "approved_weekly_claude_pass": "admin-triage-run.sh, user crontab, Sundays 08:00 - untouched",
+  "paused": [
+    {
+      "path": "/api/cron/fetch-news",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/enrich-news",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/fetch-legal",
+      "schedule": "0 8 * * 0"
+    },
+    {
+      "path": "/api/cron/verify-legal",
+      "schedule": "0 9 * * 0"
+    },
+    {
+      "path": "/api/cron/research",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/facebook-search",
+      "schedule": "0 14 * * 0"
+    }
+  ]
+}
