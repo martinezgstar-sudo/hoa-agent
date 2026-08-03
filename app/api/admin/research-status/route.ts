@@ -35,8 +35,11 @@ export async function GET(request: NextRequest) {
       supabase.from('v_county_expansion').select('*'),
       supabase.from('v_recent_research_activity').select('*'),
       supabase.from('v_stuck_queue').select('*'),
-      supabase.from('pending_community_data').select('id', { count: 'exact', head: true }),
-      supabase.from('pending_fee_observations').select('id', { count: 'exact', head: true }),
+      // Count only what is actually awaiting review. Without the status filter
+      // these counted every row ever written, so the dashboard showed 3,385
+      // "pending" when 3,282 of those had already been approved or rejected.
+      supabase.from('pending_community_data').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+      supabase.from('pending_fee_observations').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
     ])
 
     const queryErrors = [
