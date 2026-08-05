@@ -59,7 +59,7 @@ const AUTOREPLY_HTML = `
 
   <p><strong>Here's what we have today:</strong></p>
   <ul>
-    <li>Free community pages with HOA fees, master associations, management companies, and litigation history at <a href="https://www.hoa-agent.com" style="color:#1D9E75;">hoa-agent.com</a></li>
+    <li>Free community pages with HOA fees, master associations, management companies, and litigation history at <a href="https://www.hoa-agent.com" style="color:#06875e;">hoa-agent.com</a></li>
     <li>Real-time data from Florida Sunbiz, Palm Beach County Property Appraiser, and CourtListener</li>
   </ul>
 
@@ -73,7 +73,7 @@ const AUTOREPLY_HTML = `
   <p style="margin-top:24px;">
     <strong>Izzy Martinez</strong><br/>
     HOA Agent<br/>
-    <a href="tel:5615674114" style="color:#1D9E75;text-decoration:none;">561-567-4114</a>
+    <a href="tel:5615674114" style="color:#06875e;text-decoration:none;">561-567-4114</a>
   </p>
 </div>`.trim()
 

@@ -59,14 +59,14 @@ export default function AnalyticsPage() {
   const stats = useMemo(() => computeStats(events), [events])
 
   if (!authChecked) {
-    return <div style={{ padding: 60, textAlign: "center", color: "#888" }}>Checking session…</div>
+    return <div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Checking session…</div>
   }
 
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "14px 24px" }}>
         <Link href="/advertise/portal" style={{ fontSize: "13px", color: "#1B2B6B", textDecoration: "none", fontWeight: 600 }}>← Back to portal</Link>
-        <span style={{ marginLeft: "12px", fontSize: "13px", color: "#888" }}>/ Analytics</span>
+        <span style={{ marginLeft: "12px", fontSize: "13px", color: "#595959" }}>/ Analytics</span>
       </div>
 
       <div style={{ maxWidth: "880px", margin: "0 auto", padding: "32px 20px" }}>
@@ -76,9 +76,9 @@ export default function AnalyticsPage() {
         </div>
 
         {loading ? (
-          <div style={{ color: "#888", fontSize: "13px" }}>Loading…</div>
+          <div style={{ color: "#595959", fontSize: "13px" }}>Loading…</div>
         ) : events.length === 0 ? (
-          <div style={{ padding: "40px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#888", fontSize: "13px" }}>
+          <div style={{ padding: "40px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#595959", fontSize: "13px" }}>
             No events yet. Once your ads go live and impressions start firing, your data will appear here.
           </div>
         ) : (
@@ -127,9 +127,9 @@ function ctrLabel(ctr: number): string {
 function Kpi({ label, value, sub }: { label: string; value: number; sub?: string }) {
   return (
     <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "14px 16px" }}>
-      <div style={{ fontSize: "10px", fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
+      <div style={{ fontSize: "10px", fontWeight: 700, color: "#595959", textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
       <div style={{ fontSize: "24px", fontWeight: 700, color: "#1B2B6B", marginTop: "4px" }}>{value.toLocaleString()}</div>
-      {sub && <div style={{ fontSize: "11px", color: "#1D9E75", marginTop: "2px", fontWeight: 600 }}>{sub}</div>}
+      {sub && <div style={{ fontSize: "11px", color: "#06875e", marginTop: "2px", fontWeight: 600 }}>{sub}</div>}
     </div>
   )
 }
@@ -144,7 +144,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 function Muted({ children }: { children: React.ReactNode }) {
-  return <div style={{ fontSize: "12px", color: "#888" }}>{children}</div>
+  return <div style={{ fontSize: "12px", color: "#595959" }}>{children}</div>
 }
 
 function BarList({ items }: { items: Array<{ label: string; value: number }> }) {
@@ -155,7 +155,7 @@ function BarList({ items }: { items: Array<{ label: string; value: number }> }) 
         <div key={it.label} style={{ display: "grid", gridTemplateColumns: "120px 1fr 50px", alignItems: "center", gap: "10px", fontSize: "12px" }}>
           <span style={{ color: "#555", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={it.label}>{it.label}</span>
           <div style={{ height: "8px", backgroundColor: "#f0f0f0", borderRadius: "4px", overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${(it.value / max) * 100}%`, backgroundColor: "#1D9E75", borderRadius: "4px" }} />
+            <div style={{ height: "100%", width: `${(it.value / max) * 100}%`, backgroundColor: "#06875e", borderRadius: "4px" }} />
           </div>
           <span style={{ color: "#1a1a1a", fontWeight: 600, textAlign: "right" }}>{it.value}</span>
         </div>
@@ -181,7 +181,7 @@ function HeatRow({ values }: { values: number[] }) {
           )
         })}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(24, 1fr)", gap: "2px", fontSize: "9px", color: "#888", marginTop: "4px", textAlign: "center" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(24, 1fr)", gap: "2px", fontSize: "9px", color: "#595959", marginTop: "4px", textAlign: "center" }}>
         {Array.from({ length: 24 }).map((_, h) => <span key={h}>{h % 6 === 0 ? h : ""}</span>)}
       </div>
     </div>

@@ -199,10 +199,10 @@ export default async function CityFilterPage({ params }: Props) {
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
 
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "40px 20px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
-          <Link href="/city" style={{ color: "#1D9E75", textDecoration: "none" }}>Cities</Link>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+          <Link href="/city" style={{ color: "#06875e", textDecoration: "none" }}>Cities</Link>
           {" › "}
-          <Link href={`/city/${slug}`} style={{ color: "#1D9E75", textDecoration: "none" }}>{city}</Link>
+          <Link href={`/city/${slug}`} style={{ color: "#06875e", textDecoration: "none" }}>{city}</Link>
           {" › "}{f.label}
         </div>
         <h1 style={{ fontSize: "32px", fontWeight: 700, color: "#1B2B6B", marginBottom: "12px", letterSpacing: "-0.02em" }}>
@@ -213,8 +213,8 @@ export default async function CityFilterPage({ params }: Props) {
         </p>
 
         {list.length === 0 ? (
-          <div style={{ padding: "32px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#888" }}>
-            No {f.label.toLowerCase()} communities found in {city}. <Link href={`/city/${slug}`} style={{ color: "#1D9E75" }}>← Back to {city}</Link>
+          <div style={{ padding: "32px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#595959" }}>
+            No {f.label.toLowerCase()} communities found in {city}. <Link href={`/city/${slug}`} style={{ color: "#06875e" }}>← Back to {city}</Link>
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -223,7 +223,7 @@ export default async function CityFilterPage({ params }: Props) {
                 <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px" }}>
                   <div>
                     <div style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a" }}>{c.canonical_name as string}</div>
-                    <div style={{ fontSize: "12px", color: "#888", marginTop: "3px" }}>
+                    <div style={{ fontSize: "12px", color: "#595959", marginTop: "3px" }}>
                       {[c.property_type, c.management_company].filter(Boolean).join(" · ")}
                     </div>
                   </div>

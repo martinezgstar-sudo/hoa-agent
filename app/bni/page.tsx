@@ -20,7 +20,7 @@ export default function BniPage() {
           <span style={{ fontSize: '16px', fontWeight: 600, color: '#1B2B6B' }}>HOA Agent</span>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           Welcome, BNI Members
         </div>
 
@@ -54,7 +54,7 @@ export default function BniPage() {
             },
           ].map((s) => (
             <div key={s.step} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#1D9E75', color: '#fff', fontSize: '14px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#06875e', color: '#fff', fontSize: '14px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 {s.step}
               </div>
               <div>
@@ -74,7 +74,7 @@ export default function BniPage() {
           </p>
           <Link
             href="/search"
-            style={{ fontSize: '14px', backgroundColor: '#1D9E75', color: '#fff', padding: '12px 28px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}
+            style={{ fontSize: '14px', backgroundColor: '#06875e', color: '#fff', padding: '12px 28px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}
           >
             Search communities now →
           </Link>

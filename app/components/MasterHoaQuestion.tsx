@@ -69,7 +69,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
 
   if (status === "success") {
     return (
-      <div style={{backgroundColor:"#E1F5EE",border:"1px solid #1D9E75",borderRadius:"10px",padding:"14px 18px",marginBottom:"12px",fontSize:"13px",color:"#1B2B6B",fontWeight:"500"}}>
+      <div style={{backgroundColor:"#E1F5EE",border:"1px solid #06875e",borderRadius:"10px",padding:"14px 18px",marginBottom:"12px",fontSize:"13px",color:"#1B2B6B",fontWeight:"500"}}>
         ✓ Thank you — connection recorded and verified.
       </div>
     )
@@ -115,7 +115,7 @@ export default function MasterHoaQuestion({ communityId, communityName }: Props)
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor="#fff")}>
                     <div style={{fontWeight:"500"}}>{m.canonical_name}</div>
-                    <div style={{fontSize:"11px",color:"#888"}}>{m.city}</div>
+                    <div style={{fontSize:"11px",color:"#595959"}}>{m.city}</div>
                   </div>
                 ))}
               </div>

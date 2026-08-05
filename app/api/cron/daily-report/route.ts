@@ -64,14 +64,14 @@ export async function GET() {
 
   const html = '<div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;padding:24px">' +
     '<div style="margin-bottom:24px"><span style="font-size:22px;font-weight:700;color:#1B2B6B">HOA</span>' +
-    '<span style="font-size:22px;font-weight:700;color:#1D9E75">Agent</span>' +
+    '<span style="font-size:22px;font-weight:700;color:#06875e">Agent</span>' +
     '<span style="font-size:13px;color:#888;margin-left:12px">Daily Report</span></div>' +
     '<div style="background:#f5f5f5;border-radius:8px;padding:16px;margin-bottom:24px">' +
     '<div style="font-size:15px;font-weight:600;color:#1a1a1a">' + date + '</div>' +
     '<div style="margin-top:8px">' +
     '<span style="font-size:20px;font-weight:700;color:#1B2B6B">' + (newComments || []).length + '</span>' +
     '<span style="font-size:12px;color:#888"> new reviews &nbsp;&nbsp;</span>' +
-    '<span style="font-size:20px;font-weight:700;color:#1D9E75">' + (newSuggestions || []).length + '</span>' +
+    '<span style="font-size:20px;font-weight:700;color:#06875e">' + (newSuggestions || []).length + '</span>' +
     '<span style="font-size:12px;color:#888"> new suggestions</span>' +
     '</div></div>' +
     '<h3 style="color:#1a1a1a;margin-bottom:12px">New Reviews</h3>' +

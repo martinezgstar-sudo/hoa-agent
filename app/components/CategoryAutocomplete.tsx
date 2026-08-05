@@ -122,7 +122,7 @@ export default function CategoryAutocomplete({
           width: "100%",
           padding: "11px 14px",
           fontSize: "14px",
-          border: "1px solid " + (matchedId ? "#1D9E75" : "#d0d0d0"),
+          border: "1px solid " + (matchedId ? "#06875e" : "#d0d0d0"),
           borderRadius: "10px",
           outline: "none",
           boxSizing: "border-box",
@@ -131,7 +131,7 @@ export default function CategoryAutocomplete({
       />
 
       {/* Match status line */}
-      <div style={{ marginTop: "6px", fontSize: "11px", color: text.trim() ? (matchedId ? "#1D9E75" : "#854F0B") : "#888" }}>
+      <div style={{ marginTop: "6px", fontSize: "11px", color: text.trim() ? (matchedId ? "#06875e" : "#854F0B") : "#595959" }}>
         {!text.trim()
           ? "Pick from the list or type your own — we'll review custom categories before activating."
           : matchedId
@@ -159,7 +159,7 @@ export default function CategoryAutocomplete({
         >
           {Array.from(grouped.entries()).map(([group, items]) => (
             <div key={group}>
-              <div style={{ padding: "8px 12px 4px", fontSize: "10px", fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              <div style={{ padding: "8px 12px 4px", fontSize: "10px", fontWeight: 700, color: "#595959", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                 {group}
               </div>
               {items.map((c) => (

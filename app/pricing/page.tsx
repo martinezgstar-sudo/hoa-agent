@@ -24,18 +24,18 @@ export default function PricingPage() {
         </a>
         <div style={{display:'flex',gap:'24px',alignItems:'center'}}>
           <a href='/search' style={{fontSize:'13px',color:'#666',textDecoration:'none'}}>Search</a>
-          <a href='/reports' style={{fontSize:'13px',color:'#1D9E75',textDecoration:'none',fontWeight:'500'}}>Reports</a>
+          <a href='/reports' style={{fontSize:'13px',color:'#06875e',textDecoration:'none',fontWeight:'500'}}>Reports</a>
         </div>
       </nav>
       <section style={{padding:'80px 32px 64px',textAlign:'center',maxWidth:'800px',margin:'0 auto'}}>
-        <div style={{fontSize:'11px',fontWeight:'600',color:'#1D9E75',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'16px'}}>Simple pricing</div>
+        <div style={{fontSize:'11px',fontWeight:'600',color:'#06875e',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'16px'}}>Simple pricing</div>
         <h1 style={{fontSize:'40px',fontWeight:'600',color:'#1a1a1a',lineHeight:'1.2',marginBottom:'16px'}}>Pricing — Free for Homeowners</h1>
         <p style={{fontSize:'16px',color:'#666',marginBottom:'56px',maxWidth:'480px',margin:'0 auto 56px',lineHeight:'1.6'}}>Start free. Pay only when you need deeper data.</p>
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px',maxWidth:'800px',margin:'0 auto'}}>
           {[
             {price:'Free',label:'Basic Access',color:'#f9f9f9',border:'#e5e5e5',items:['Community profiles','Fee ranges','Entity status','Address search','Up to 10 reviews','City filters'],cta:'Search now',href:'/search',ctaStyle:{backgroundColor:'#fff',color:'#1B2B6B',border:'1px solid #1B2B6B'}},
             {price:'$2.99',label:'Reviews Unlock',color:'#EEF2FF',border:'#1B2B6B',items:['All resident reviews','Per community','One-time purchase','Instant access','No subscription','Email confirmation'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1B2B6B',color:'#fff',border:'none'}},
-            {price:'TBD',label:'Full Report',color:'#E1F5EE',border:'#1D9E75',items:['Complete fee trend PDF','Full source trail','All assessment signals','Restriction detail','Management history','Downloadable PDF'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#1D9E75',color:'#fff',border:'none'}},
+            {price:'TBD',label:'Full Report',color:'#E1F5EE',border:'#06875e',items:['Complete fee trend PDF','Full source trail','All assessment signals','Restriction detail','Management history','Downloadable PDF'],cta:'Coming soon',href:'#',ctaStyle:{backgroundColor:'#06875e',color:'#fff',border:'none'}},
           ].map(t => (
             <div key={t.label} style={{backgroundColor:t.color,border:'2px solid '+t.border,borderRadius:'16px',padding:'28px 24px',textAlign:'left'}}>
               <div style={{fontSize:'36px',fontWeight:'700',color:'#1a1a1a',marginBottom:'4px'}}>{t.price}</div>
@@ -43,7 +43,7 @@ export default function PricingPage() {
               <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'24px'}}>
                 {t.items.map(i => (
                   <div key={i} style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'13px',color:'#444'}}>
-                    <span style={{color:'#1D9E75',fontWeight:'600'}}>✓</span>{i}
+                    <span style={{color:'#06875e',fontWeight:'600'}}>✓</span>{i}
                   </div>
                 ))}
               </div>

@@ -38,7 +38,7 @@ export default function AdvertiserLoginPage() {
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ maxWidth: "380px", margin: "0 auto", padding: "80px 20px 40px" }}>
-        <Link href="/advertise" style={{ fontSize: "13px", color: "#888", textDecoration: "none" }}>← Back</Link>
+        <Link href="/advertise" style={{ fontSize: "13px", color: "#595959", textDecoration: "none" }}>← Back</Link>
         <div style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", margin: "20px 0 6px", letterSpacing: "-0.02em" }}>
           Advertiser sign in
         </div>
@@ -62,14 +62,14 @@ export default function AdvertiserLoginPage() {
           )}
           <button type="submit" disabled={busy} style={{
             padding: "12px", fontSize: "14px", fontWeight: 600,
-            backgroundColor: busy ? "#999" : "#1B2B6B", color: "#fff",
+            backgroundColor: busy ? "#595959" : "#1B2B6B", color: "#fff",
             border: "none", borderRadius: "10px", cursor: busy ? "not-allowed" : "pointer",
           }}>
             {busy ? "Signing in…" : "Sign In"}
           </button>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
-            <Link href="/advertise/forgot-password" style={{ color: "#1D9E75" }}>Forgot password?</Link>
-            <Link href="/advertise/signup" style={{ color: "#1D9E75", fontWeight: 600 }}>Create account</Link>
+            <Link href="/advertise/forgot-password" style={{ color: "#06875e" }}>Forgot password?</Link>
+            <Link href="/advertise/signup" style={{ color: "#06875e", fontWeight: 600 }}>Create account</Link>
           </div>
         </form>
       </div>

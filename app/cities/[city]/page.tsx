@@ -122,10 +122,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
       />
       <div style={{maxWidth:"800px",margin:"0 auto",padding:"32px"}}>
 
-        <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>
-          <a href="/" style={{color:"#888",textDecoration:"none"}}>HOA Agent</a>
+        <div style={{fontSize:"12px",color:"#595959",marginBottom:"16px"}}>
+          <a href="/" style={{color:"#595959",textDecoration:"none"}}>HOA Agent</a>
           {" › "}
-          <a href="/search" style={{color:"#888",textDecoration:"none"}}>Communities</a>
+          <a href="/search" style={{color:"#595959",textDecoration:"none"}}>Communities</a>
           {" › "}
           <span>{city}</span>
         </div>
@@ -146,7 +146,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           ].map(s => (
             <div key={s.label} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px",textAlign:"center"}}>
               <div style={{fontSize:"24px",fontWeight:"700",color:"#1B2B6B",marginBottom:"4px"}}>{s.num}</div>
-              <div style={{fontSize:"12px",color:"#888"}}>{s.label}</div>
+              <div style={{fontSize:"12px",color:"#595959"}}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -154,23 +154,23 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         {communities && communities.length > 0 ? (
           <CitySearch city={city} communities={communities} />
         ) : (
-          <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>
+          <div style={{textAlign:"center",padding:"60px",color:"#595959",fontSize:"14px"}}>
             No published communities found for {city} yet.
             <div style={{marginTop:"16px"}}>
-              <a href="/search" style={{color:"#1D9E75",textDecoration:"none"}}>Search all communities →</a>
+              <a href="/search" style={{color:"#06875e",textDecoration:"none"}}>Search all communities →</a>
             </div>
           </div>
         )}
 
         <div style={{marginTop:"40px",backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
           <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Know a community in {city} not listed here?</div>
-          <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>Help buyers by sharing what you know about your HOA.</div>
-          <a href="/search" style={{display:"inline-block",padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:"600"}}>Share your HOA experience</a>
+          <div style={{fontSize:"13px",color:"#595959",marginBottom:"16px"}}>Help buyers by sharing what you know about your HOA.</div>
+          <a href="/search" style={{display:"inline-block",padding:"10px 24px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:"600"}}>Share your HOA experience</a>
         </div>
 
       </div>
 
-      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888",marginTop:"40px"}}>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#595959",marginTop:"40px"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
       </footer>
@@ -188,7 +188,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           <p style={{fontSize:"14px",color:"#666",lineHeight:"1.6",marginBottom:"18px"}}>
             We could not load city communities right now. Please try again in a moment.
           </p>
-          <a href="/search" style={{display:"inline-block",padding:"10px 18px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:600}}>
+          <a href="/search" style={{display:"inline-block",padding:"10px 18px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:600}}>
             Browse all communities
           </a>
         </div>

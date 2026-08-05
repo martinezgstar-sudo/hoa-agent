@@ -46,20 +46,20 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 16px",height:"64px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#06875e"}}>Agent</span></span>
         </a>
         <div style={{display:"flex",gap:"12px",alignItems:"center"}}>
           <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Browse</a>
           <a href="/reports" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Reports</a>
-          <a href="/search" style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"6px 12px",borderRadius:"6px",whiteSpace:"nowrap",textDecoration:"none"}}>Share your HOA</a>
+          <a href="/search" style={{fontSize:"13px",backgroundColor:"#06875e",color:"#fff",padding:"6px 12px",borderRadius:"6px",whiteSpace:"nowrap",textDecoration:"none"}}>Share your HOA</a>
         </div>
       </nav>
 
       <div style={{maxWidth:"800px",margin:"0 auto",padding:"32px"}}>
-        <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>
-          <a href="/" style={{color:"#888",textDecoration:"none"}}>HOA Agent</a>
+        <div style={{fontSize:"12px",color:"#595959",marginBottom:"16px"}}>
+          <a href="/" style={{color:"#595959",textDecoration:"none"}}>HOA Agent</a>
           {" › "}
-          <a href="/best-hoa/palm-beach-county" style={{color:"#888",textDecoration:"none"}}>Best HOA Communities</a>
+          <a href="/best-hoa/palm-beach-county" style={{color:"#595959",textDecoration:"none"}}>Best HOA Communities</a>
           {" › "}
           <span>{config.display}</span>
         </div>
@@ -79,9 +79,9 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
         </div>
 
         {loading ? (
-          <div style={{textAlign:"center",padding:"40px",color:"#888"}}>Loading...</div>
+          <div style={{textAlign:"center",padding:"40px",color:"#595959"}}>Loading...</div>
         ) : communities.length === 0 ? (
-          <div style={{textAlign:"center",padding:"60px",color:"#888",fontSize:"14px"}}>No communities found yet for {config.display}.</div>
+          <div style={{textAlign:"center",padding:"60px",color:"#595959",fontSize:"14px"}}>No communities found yet for {config.display}.</div>
         ) : (
           communities.map((c, i) => (
             <a key={c.id} href={"/community/"+c.slug} style={{textDecoration:"none"}}>
@@ -91,17 +91,17 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
                     <div style={{fontSize:"12px",fontWeight:"700",color:"#1B2B6B",width:"24px"}}>#{i+1}</div>
                     <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a"}}>{c.canonical_name}</div>
                   </div>
-                  <div style={{fontSize:"12px",color:"#888",marginLeft:"32px"}}>
+                  <div style={{fontSize:"12px",color:"#595959",marginLeft:"32px"}}>
                     {c.city} · {c.property_type || "HOA"}
                     {c.management_company ? " · " + c.management_company : ""}
                   </div>
                   {c.review_count > 0 && (
-                    <div style={{fontSize:"12px",color:"#1D9E75",marginLeft:"32px",marginTop:"4px"}}>
+                    <div style={{fontSize:"12px",color:"#06875e",marginLeft:"32px",marginTop:"4px"}}>
                       {"★".repeat(Math.round(c.rw_avg || 0))} {Number(c.review_avg).toFixed(1)} · {c.review_count} review{c.review_count !== 1 ? "s" : ""}
                     </div>
                   )}
                   {c.amenities && (
-                    <div style={{fontSize:"11px",color:"#888",marginLeft:"32px",marginTop:"4px"}}>
+                    <div style={{fontSize:"11px",color:"#595959",marginLeft:"32px",marginTop:"4px"}}>
                       {c.amenities.split("|").slice(0,4).join(" · ")}
                     </div>
                   )}
@@ -112,9 +112,9 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
                       ${Math.round(c.monthly_fee_min)}{c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? "–$"+Math.round(c.monthly_fee_max) : ""}/mo
                     </div>
                   ) : (
-                    <div style={{fontSize:"12px",color:"#aaa"}}>Fee unknown</div>
+                    <div style={{fontSize:"12px",color:"#595959"}}>Fee unknown</div>
                   )}
-                  <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>View profile →</div>
+                  <div style={{fontSize:"11px",color:"#06875e",marginTop:"4px"}}>View profile →</div>
                 </div>
               </div>
             </a>
@@ -123,12 +123,12 @@ export default function BestHOAPage({ params }: { params: Promise<{ area: string
 
         <div style={{marginTop:"32px",backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
           <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Know a great HOA in {config.display}?</div>
-          <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>Share your experience and help future buyers make better decisions.</div>
-          <a href="/search" style={{display:"inline-block",padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:"600"}}>Share your HOA</a>
+          <div style={{fontSize:"13px",color:"#595959",marginBottom:"16px"}}>Share your experience and help future buyers make better decisions.</div>
+          <a href="/search" style={{display:"inline-block",padding:"10px 24px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",textDecoration:"none",fontSize:"13px",fontWeight:"600"}}>Share your HOA</a>
         </div>
       </div>
 
-      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888",marginTop:"40px"}}>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#595959",marginTop:"40px"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
       <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
       </footer>

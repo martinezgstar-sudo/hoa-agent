@@ -67,7 +67,7 @@ export default async function ManagementIndexPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "48px 20px 60px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
           Palm Beach County Directory
         </div>
         <h1 style={{ fontSize: "32px", fontWeight: 700, color: "#1B2B6B", letterSpacing: "-0.02em", marginBottom: "12px" }}>
@@ -78,8 +78,8 @@ export default async function ManagementIndexPage() {
           Click any company to see the full list of communities they manage.
         </p>
         {companies.length === 0 ? (
-          <div style={{ padding: "24px", textAlign: "center", color: "#888", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
-            No management company data yet. <Link href="/search" style={{ color: "#1D9E75" }}>Search communities</Link>.
+          <div style={{ padding: "24px", textAlign: "center", color: "#595959", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
+            No management company data yet. <Link href="/search" style={{ color: "#06875e" }}>Search communities</Link>.
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -87,7 +87,7 @@ export default async function ManagementIndexPage() {
               <Link key={c.slug} href={`/management/${c.slug}`} style={{ textDecoration: "none" }}>
                 <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "10px", padding: "12px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <span style={{ fontSize: "14px", fontWeight: 500, color: "#1a1a1a" }}>{c.name}</span>
-                  <span style={{ fontSize: "12px", color: "#1D9E75", fontWeight: 600 }}>
+                  <span style={{ fontSize: "12px", color: "#06875e", fontWeight: 600 }}>
                     {c.count} {c.count === 1 ? "community" : "communities"} →
                   </span>
                 </div>

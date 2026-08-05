@@ -37,7 +37,7 @@ function LoginForm() {
     <main style={{ minHeight: "100vh", backgroundColor: "#f7f7f8", fontFamily: "system-ui, sans-serif", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
       <form onSubmit={submit} style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 12, padding: 32, width: "100%", maxWidth: 360, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
         <div style={{ fontSize: 22, fontWeight: 700, color: "#1B2B6B", letterSpacing: "-0.02em", marginBottom: 4 }}>
-          HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+          HOA<span style={{ color: "#06875e" }}>Agent</span>
         </div>
         <h1 style={{ fontSize: 16, fontWeight: 600, color: "#1a1a1a", margin: "0 0 20px" }}>Admin sign in</h1>
         <input

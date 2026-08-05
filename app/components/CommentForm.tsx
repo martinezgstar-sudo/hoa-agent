@@ -89,13 +89,13 @@ export default function CommentForm({ communityId }: { communityId: string }) {
     return (
       <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px 24px",marginBottom:"12px"}}>
         <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"6px"}}>Share your HOA experience</div>
-        <div style={{fontSize:"12px",color:"#888",marginBottom:"14px",lineHeight:"1.6"}}>
+        <div style={{fontSize:"12px",color:"#595959",marginBottom:"14px",lineHeight:"1.6"}}>
           Add your fee, rules, management experience, or review to help future residents.
         </div>
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"10px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:"600"}}
+          style={{fontSize:"13px",backgroundColor:"#06875e",color:"#fff",padding:"10px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:"600"}}
         >
           Open share form
         </button>
@@ -128,7 +128,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
   return (
     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px"}}>
       <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Share your HOA experience</div>
-      <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Your identity is protected. Anonymous submissions are fully supported. We never share your information with the HOA, managemt company, or any third party.</div>
+      <div style={{fontSize:"12px",color:"#595959",marginBottom:"20px"}}>Your identity is protected. Anonymous submissions are fully supported. We never share your information with the HOA, managemt company, or any third party.</div>
           <button
             type="button"
             onClick={() => setIsOpen(false)}
@@ -182,7 +182,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               <div style={{display:"flex",gap:"8px",alignItems:"center",padding:"12px 16px",backgroundColor:"#f9f9f9",borderRadius:"8px"}}>
                 <div style={{flex:1}}>
                   <div style={{fontSize:"13px",fontWeight:"500",color:"#1a1a1a"}}>Post anonymously</div>
-                  <div style={{fontSize:"11px",color:"#888"}}>Your name will not appear publicly</div>
+                  <div style={{fontSize:"11px",color:"#595959"}}>Your name will not appear publicly</div>
                 </div>
                 <button type="button" onClick={() => setIsAnonymous(!isAnonymous)}
                   style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",backgroundColor:isAnonymous?"#1B2B6B":"#ccc",position:"relative",transition:"background 0.2s"}}>
@@ -215,14 +215,14 @@ export default function CommentForm({ communityId }: { communityId: string }) {
         {step === 2 && (
           <div>
             <div style={{fontSize:"13px",fontWeight:"600",color:"#1B2B6B",marginBottom:"16px",textTransform:"uppercase",letterSpacing:"0.05em"}}>Step 2 — HOA details</div>
-          <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>Monthly fee and management company are required. Other fields are optional.</div>
+          <div style={{fontSize:"12px",color:"#595959",marginBottom:"16px"}}>Monthly fee and management company are required. Other fields are optional.</div>
 
             {residentType === "renter" ? (
               <div style={{marginBottom:"16px"}}>
                 <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly rent amount <span style={{color:"#E24B4A"}}>*</span></div>
-                <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>This helps us understand owner vs renter ratios in this community.</div>
+                <div style={{fontSize:"11px",color:"#595959",marginBottom:"8px"}}>This helps us understand owner vs renter ratios in this community.</div>
                 <div style={{position:"relative"}}>
-                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#595959",fontSize:"13px"}}>$</span>
                   <input type="number" value={rentAmount} onChange={e => setRentAmount(e.target.value)} placeholder="2500"
                     style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px 10px 24px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
                 </div>
@@ -231,7 +231,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               <div style={{marginBottom:"16px"}}>
                 <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Monthly HOA fee <span style={{color:"#E24B4A"}}>*</span></div>
                 <div style={{position:"relative"}}>
-                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#595959",fontSize:"13px"}}>$</span>
                   <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350"
                     style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px 10px 24px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
                 </div>
@@ -240,7 +240,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
 
             <div style={{marginBottom:"16px"}}>
               <div style={{fontSize:"12px",color:"#555",marginBottom:"6px"}}>Management company name <span style={{color:"#E24B4A"}}>*</span></div>
-              <div style={{fontSize:"11px",color:"#888",marginBottom:"8px"}}>Required — helps us keep management data accurate</div>
+              <div style={{fontSize:"11px",color:"#595959",marginBottom:"8px"}}>Required — helps us keep management data accurate</div>
               <input type="text" value={managementCompany} onChange={e => setManagementCompany(e.target.value)} placeholder="e.g. Castle Group, FirstService, Lang Management"
                 style={{width:"100%",border:"1.5px solid " + (managementCompany ? "#e5e5e5" : "#EF9F27"),borderRadius:"8px",padding:"10px 12px",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
             </div>
@@ -339,10 +339,10 @@ export default function CommentForm({ communityId }: { communityId: string }) {
               <textarea value={comment} onChange={e => setComment(e.target.value)} required rows={5}
                 placeholder="Share your experience — HOA management, community atmosphere, any issues or highlights buyers should know about..."
                 style={{width:"100%",border:"1.5px solid #e5e5e5",borderRadius:"8px",padding:"10px 12px",fontSize:"13px",resize:"vertical",outline:"none",boxSizing:"border-box",fontFamily:"system-ui,sans-serif"}}/>
-              <div style={{fontSize:"11px",color:"#aaa",marginTop:"4px"}}>{comment.length}/2000</div>
+              <div style={{fontSize:"11px",color:"#595959",marginTop:"4px"}}>{comment.length}/2000</div>
             </div>
 
-            <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"12px 16px",marginBottom:"16px",fontSize:"12px",color:"#888",lineHeight:"1.6"}}>
+            <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"12px 16px",marginBottom:"16px",fontSize:"12px",color:"#595959",lineHeight:"1.6"}}>
               <strong style={{color:"#555"}}>Privacy notice:</strong> Your identity will never be shared with the HOA, management company, board members, or any third party. {isAnonymous ? "Your review will be posted anonymously." : name ? `Your review will be posted as "${name}".` : "Your review will be posted anonymously."}
             </div>
 
@@ -354,7 +354,7 @@ export default function CommentForm({ communityId }: { communityId: string }) {
                 Back
               </button>
               <button type="submit" disabled={status==="submitting" || !comment.trim()}
-                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:comment.trim()?"#1D9E75":"#ccc",color:"#fff",border:"none",cursor:comment.trim()?"pointer":"not-allowed",fontSize:"14px",fontWeight:"600"}}>
+                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:comment.trim()?"#06875e":"#ccc",color:"#fff",border:"none",cursor:comment.trim()?"pointer":"not-allowed",fontSize:"14px",fontWeight:"600"}}>
                 {status==="submitting" ? "Submitting..." : "Submit review"}
               </button>
             </div>

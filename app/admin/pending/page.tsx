@@ -52,8 +52,8 @@ function badge(label: string, color: string) {
       fontSize:"11px",fontWeight:600,
       backgroundColor: color === "green" ? "#e8f9f2" : color === "blue" ? "#e8f0ff" :
         color === "orange" ? "#fff3e0" : color === "red" ? "#ffeaea" : "#f5f5f5",
-      color: color === "green" ? "#1D9E75" : color === "blue" ? "#1B2B6B" :
-        color === "orange" ? "#e65c00" : color === "red" ? "#c0392b" : "#888",
+      color: color === "green" ? "#06875e" : color === "blue" ? "#1B2B6B" :
+        color === "orange" ? "#e65c00" : color === "red" ? "#c0392b" : "#595959",
     }}>{label}</span>
   )
 }
@@ -148,7 +148,7 @@ function PendingDataTab() {
         </select>
         {autoCount > 0 && filterStatus === "pending" && (
           <button onClick={bulkApproveAuto} disabled={bulkWorking}
-            style={{...btnStyle, backgroundColor:"#1D9E75", color:"#fff", marginLeft:"auto"}}>
+            style={{...btnStyle, backgroundColor:"#06875e", color:"#fff", marginLeft:"auto"}}>
             {bulkWorking ? "Working…" : `✓ Bulk approve ${autoCount} auto-approvable`}
           </button>
         )}
@@ -157,7 +157,7 @@ function PendingDataTab() {
       {msg && (
         <div style={{padding:"10px 14px",borderRadius:"8px",
           backgroundColor: msg.startsWith("✓") ? "#e8f9f2" : "#ffeaea",
-          color: msg.startsWith("✓") ? "#1D9E75" : "#c0392b",
+          color: msg.startsWith("✓") ? "#06875e" : "#c0392b",
           fontSize:"13px",marginBottom:"16px"}}>
           {msg}
         </div>
@@ -184,7 +184,7 @@ function PendingDataTab() {
                     <div style={{fontWeight:600,fontSize:"12px"}}>{row.communities?.canonical_name || row.community_id.slice(0,8)}</div>
                     {row.communities?.slug && (
                       <a href={`/community/${row.communities.slug}`} target="_blank"
-                        style={{fontSize:"11px",color:"#888",textDecoration:"none"}}>view ↗</a>
+                        style={{fontSize:"11px",color:"#595959",textDecoration:"none"}}>view ↗</a>
                     )}
                   </td>
                   <td style={tdStyle}><code style={{fontSize:"11px",background:"#E8EDF2",color:"#1B2B6B",fontWeight:600,padding:"2px 6px",borderRadius:"4px"}}>{row.field_name}</code></td>
@@ -203,7 +203,7 @@ function PendingDataTab() {
                     {row.status === "pending" && (
                       <div style={{display:"flex",gap:"6px"}}>
                         <button onClick={() => approve(row)}
-                          style={{...btnSmall, backgroundColor:"#1D9E75",color:"#fff"}}>✓</button>
+                          style={{...btnSmall, backgroundColor:"#06875e",color:"#fff"}}>✓</button>
                         <button onClick={() => reject(row.id)}
                           style={{...btnSmall, backgroundColor:"#f5f5f5",color:"#c0392b"}}>✗</button>
                       </div>
@@ -213,7 +213,7 @@ function PendingDataTab() {
               ))}
             </tbody>
           </table>
-          <div style={{fontSize:"12px",color:"#888",marginTop:"12px"}}>{rows.length} record{rows.length!==1?"s":""}</div>
+          <div style={{fontSize:"12px",color:"#595959",marginTop:"12px"}}>{rows.length} record{rows.length!==1?"s":""}</div>
         </div>
       )}
     </div>
@@ -324,7 +324,7 @@ function PendingFeesTab() {
           <option value="rejected">Rejected</option>
           <option value="">All statuses</option>
         </select>
-        <div style={{fontSize:"12px",color:"#888",marginLeft:"auto"}}>
+        <div style={{fontSize:"12px",color:"#595959",marginLeft:"auto"}}>
           ⚠ Fees from listing sites (Zillow, Realtor.com, MLS) are never auto-approved.
         </div>
       </div>
@@ -332,7 +332,7 @@ function PendingFeesTab() {
       {msg && (
         <div style={{padding:"10px 14px",borderRadius:"8px",
           backgroundColor: msg.startsWith("✓") ? "#e8f9f2" : "#ffeaea",
-          color: msg.startsWith("✓") ? "#1D9E75" : "#c0392b",
+          color: msg.startsWith("✓") ? "#06875e" : "#c0392b",
           fontSize:"13px",marginBottom:"16px"}}>
           {msg}
         </div>
@@ -368,21 +368,21 @@ function PendingFeesTab() {
                     {row.source_type ? badge(row.source_type,"orange") : null}
                     {badge(row.status, row.status==="approved"?"green":row.status==="rejected"?"red":"orange")}
                     {countByCommunity[row.community_id] > 1 && (
-                      <span style={{fontSize:"11px",color:"#1D9E75",fontWeight:600}}>
+                      <span style={{fontSize:"11px",color:"#06875e",fontWeight:600}}>
                         {countByCommunity[row.community_id]} obs for this community
                       </span>
                     )}
                   </div>
                   {row.communities?.slug && (
                     <a href={`/community/${row.communities.slug}`} target="_blank"
-                      style={{fontSize:"11px",color:"#888",textDecoration:"none"}}>view community ↗</a>
+                      style={{fontSize:"11px",color:"#595959",textDecoration:"none"}}>view community ↗</a>
                   )}
                 </div>
 
                 {/* Found + editable overrides column */}
                 <div>
                   <div style={{
-                    fontSize:"12px",color:"#888",marginBottom:"8px",
+                    fontSize:"12px",color:"#595959",marginBottom:"8px",
                     fontStyle:"italic",
                   }}>
                     Found: <strong style={{color:"#666"}}>{fmt(row.fee_amount)}</strong> from{" "}
@@ -391,7 +391,7 @@ function PendingFeesTab() {
                       <>
                         {" — "}
                         <a href={row.source_url} target="_blank"
-                          style={{color:"#888",textDecoration:"underline"}}>source ↗</a>
+                          style={{color:"#595959",textDecoration:"underline"}}>source ↗</a>
                       </>
                     )}
                     {row.listing_date && (
@@ -410,7 +410,7 @@ function PendingFeesTab() {
                     <FeeInput label="Median" value={ov.median} onChange={v => setOverrideField(row.id,"median",v)} disabled={row.status !== "pending"}/>
                     <FeeInput label="Max"    value={ov.max}    onChange={v => setOverrideField(row.id,"max",v)}    disabled={row.status !== "pending"}/>
                   </div>
-                  <div style={{fontSize:"11px",color:"#999",marginTop:"6px"}}>
+                  <div style={{fontSize:"11px",color:"#595959",marginTop:"6px"}}>
                     Round to nearest $25. Enter your independently verified amount.
                   </div>
                 </div>
@@ -420,7 +420,7 @@ function PendingFeesTab() {
                   {row.status === "pending" && (
                     <>
                       <button onClick={() => approveFee(row)}
-                        style={{...btnStyle, backgroundColor:"#1D9E75",color:"#fff",minWidth:"100px"}}
+                        style={{...btnStyle, backgroundColor:"#06875e",color:"#fff",minWidth:"100px"}}
                         title="Apply your verified values to monthly_fee_min/median/max">
                         ✓ Approve
                       </button>
@@ -434,7 +434,7 @@ function PendingFeesTab() {
               </div>
             )
           })}
-          <div style={{fontSize:"12px",color:"#888",marginTop:"4px"}}>{rows.length} observation{rows.length!==1?"s":""}</div>
+          <div style={{fontSize:"12px",color:"#595959",marginTop:"4px"}}>{rows.length} observation{rows.length!==1?"s":""}</div>
         </div>
       )}
     </div>
@@ -444,11 +444,11 @@ function PendingFeesTab() {
 function FeeInput({ label, value, onChange, disabled }: { label: string; value: string; onChange: (v: string) => void; disabled?: boolean }) {
   return (
     <div>
-      <div style={{fontSize:"10px",color:"#888",marginBottom:"3px",fontWeight:600}}>{label}</div>
+      <div style={{fontSize:"10px",color:"#595959",marginBottom:"3px",fontWeight:600}}>{label}</div>
       <div style={{position:"relative"}}>
         <span style={{
           position:"absolute",left:"8px",top:"50%",transform:"translateY(-50%)",
-          color:"#888",fontSize:"12px",pointerEvents:"none",
+          color:"#595959",fontSize:"12px",pointerEvents:"none",
         }}>$</span>
         <input
           type="number"
@@ -494,14 +494,14 @@ const tableStyle: React.CSSProperties = {
 }
 const thStyle: React.CSSProperties = {
   textAlign:"left" as any,padding:"10px 12px",
-  fontWeight:600,color:"#888",fontSize:"11px",
+  fontWeight:600,color:"#595959",fontSize:"11px",
   borderBottom:"1px solid #e5e5e5",whiteSpace:"nowrap" as any
 }
 const tdStyle: React.CSSProperties = {
   padding:"10px 12px",verticalAlign:"top" as any,color:"#1a1a1a"
 }
 const centerStyle: React.CSSProperties = {
-  textAlign:"center" as any,color:"#888",padding:"48px",fontSize:"14px"
+  textAlign:"center" as any,color:"#595959",padding:"48px",fontSize:"14px"
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -518,9 +518,9 @@ export default function PendingPage() {
         <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",
           borderRadius:"16px",padding:"40px",width:"340px",textAlign:"center"}}>
           <div style={{fontSize:"24px",fontWeight:"700",color:"#1B2B6B",marginBottom:"4px"}}>
-            HOA<span style={{color:"#1D9E75"}}>Agent</span>
+            HOA<span style={{color:"#06875e"}}>Agent</span>
           </div>
-          <div style={{fontSize:"13px",color:"#888",marginBottom:"28px"}}>Pending Review</div>
+          <div style={{fontSize:"13px",color:"#595959",marginBottom:"28px"}}>Pending Review</div>
           <input type="password" placeholder="Password" value={password}
             onChange={e => setPassword(e.target.value)}
             onKeyDown={e => {
@@ -559,12 +559,12 @@ export default function PendingPage() {
         justifyContent:"space-between",height:"64px"}}>
         <a href="/" style={{textDecoration:"none"}}>
           <span style={{fontSize:"20px",fontWeight:"700",color:"#1B2B6B"}}>
-            HOA<span style={{color:"#1D9E75"}}>Agent</span>
+            HOA<span style={{color:"#06875e"}}>Agent</span>
           </span>
         </a>
         <div style={{display:"flex",gap:"16px",alignItems:"center"}}>
-          <a href="/admin" style={{fontSize:"12px",color:"#888",textDecoration:"none"}}>← Admin</a>
-          <a href="/" style={{fontSize:"12px",color:"#888",textDecoration:"none"}}>Back to site</a>
+          <a href="/admin" style={{fontSize:"12px",color:"#595959",textDecoration:"none"}}>← Admin</a>
+          <a href="/" style={{fontSize:"12px",color:"#595959",textDecoration:"none"}}>Back to site</a>
         </div>
       </nav>
 
@@ -594,7 +594,7 @@ export default function PendingPage() {
           <h1 style={{fontSize:"20px",fontWeight:"700",color:"#1a1a1a",margin:0}}>
             {tab === "data" ? "Pending Community Data" : "Pending Fee Observations"}
           </h1>
-          <p style={{fontSize:"13px",color:"#888",marginTop:"6px",marginBottom:0}}>
+          <p style={{fontSize:"13px",color:"#595959",marginTop:"6px",marginBottom:0}}>
             {tab === "data"
               ? "Review proposed community field updates. Auto-approvable (government-sourced) rows can be bulk-approved."
               : "Fee data from listing sites. Never auto-approved — review each observation carefully before applying to communities."}

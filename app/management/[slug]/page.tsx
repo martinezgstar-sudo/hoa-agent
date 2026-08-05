@@ -107,8 +107,8 @@ export default async function ManagementCompanyPage({ params }: Props) {
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
 
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "40px 20px 60px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
-          <Link href="/management" style={{ color: "#1D9E75", textDecoration: "none" }}>Management Companies</Link>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+          <Link href="/management" style={{ color: "#06875e", textDecoration: "none" }}>Management Companies</Link>
           {" › "}{name}
         </div>
         <h1 style={{ fontSize: "32px", fontWeight: 700, color: "#1B2B6B", letterSpacing: "-0.02em", marginBottom: "12px" }}>
@@ -129,7 +129,7 @@ export default async function ManagementCompanyPage({ params }: Props) {
                   <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "10px", padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <div style={{ fontSize: "14px", fontWeight: 500, color: "#1a1a1a" }}>{c.canonical_name as string}</div>
-                      <div style={{ fontSize: "11px", color: "#888" }}>{[c.property_type, c.unit_count ? `${c.unit_count} units` : null].filter(Boolean).join(" · ")}</div>
+                      <div style={{ fontSize: "11px", color: "#595959" }}>{[c.property_type, c.unit_count ? `${c.unit_count} units` : null].filter(Boolean).join(" · ")}</div>
                     </div>
                     {c.monthly_fee_median ? (
                       <div style={{ fontSize: "13px", color: "#1B2B6B", fontWeight: 600 }}>${c.monthly_fee_median as number}/mo</div>

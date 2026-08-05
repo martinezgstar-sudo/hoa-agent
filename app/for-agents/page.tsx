@@ -62,7 +62,7 @@ export default function ForAgentsPage() {
 
       <div style={{ maxWidth: '760px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           For Real Estate Agents
         </div>
 
@@ -96,7 +96,7 @@ export default function ForAgentsPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '10px', marginBottom: '52px' }}>
           {DATA_POINTS.map((dp) => (
             <div key={dp.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px 16px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#1D9E75', marginBottom: '4px' }}>{dp.label}</div>
+              <div style={{ fontSize: '13px', fontWeight: 600, color: '#06875e', marginBottom: '4px' }}>{dp.label}</div>
               <div style={{ fontSize: '12px', color: '#888' }}>{dp.desc}</div>
             </div>
           ))}
@@ -110,7 +110,7 @@ export default function ForAgentsPage() {
             Search any Palm Beach County HOA or condo community. No login, no subscription,
             no paywall. Use it on every listing, every showing, every buyer consultation.
           </p>
-          <Link href="/search" style={{ fontSize: '14px', backgroundColor: '#1D9E75', color: '#fff', padding: '10px 24px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}>
+          <Link href="/search" style={{ fontSize: '14px', backgroundColor: '#06875e', color: '#fff', padding: '10px 24px', borderRadius: '8px', textDecoration: 'none', display: 'inline-block', fontWeight: 600 }}>
             Search communities now
           </Link>
         </div>

@@ -110,12 +110,12 @@ export default function CreateAdPage() {
     setSaved(`Ad saved: "${opt.angle}"`)
   }
 
-  if (!profile) return <div style={{ padding: 60, textAlign: "center", color: "#888" }}>Loading…</div>
+  if (!profile) return <div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Loading…</div>
 
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ maxWidth: "920px", margin: "0 auto", padding: "40px 20px" }}>
-        <Link href="/advertise/portal" style={{ fontSize: "13px", color: "#888", textDecoration: "none" }}>← Back to portal</Link>
+        <Link href="/advertise/portal" style={{ fontSize: "13px", color: "#595959", textDecoration: "none" }}>← Back to portal</Link>
         <h1 style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", margin: "16px 0 10px", letterSpacing: "-0.02em" }}>
           Create a new ad
         </h1>
@@ -141,7 +141,7 @@ export default function CreateAdPage() {
             <button onClick={() => generateAds()} disabled={busy || !websiteUrl}
               style={{
                 padding: "11px 22px", fontSize: "14px", fontWeight: 600,
-                backgroundColor: (busy || !websiteUrl) ? "#999" : "#1D9E75",
+                backgroundColor: (busy || !websiteUrl) ? "#595959" : "#06875e",
                 color: "#fff", border: "none", borderRadius: "8px",
                 cursor: (busy || !websiteUrl) ? "not-allowed" : "pointer",
               }}>
@@ -169,7 +169,7 @@ export default function CreateAdPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "14px" }}>
               {opts.map((opt) => (
                 <div key={opt.option_number} style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "16px" }}>
-                  <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", marginBottom: "4px", letterSpacing: "0.04em" }}>
+                  <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", marginBottom: "4px", letterSpacing: "0.04em" }}>
                     Option {opt.option_number}
                   </div>
                   <div style={{ fontSize: "13px", color: "#666", marginBottom: "10px", fontStyle: "italic" }}>

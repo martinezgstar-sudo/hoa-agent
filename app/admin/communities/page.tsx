@@ -107,9 +107,9 @@ export default function AdminCommunitiesPage() {
       <div style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui,sans-serif" }}>
         <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "16px", padding: "40px", width: "340px", textAlign: "center" }}>
           <div style={{ fontSize: "24px", fontWeight: "700", color: "#1B2B6B", marginBottom: "4px" }}>
-            HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+            HOA<span style={{ color: "#06875e" }}>Agent</span>
           </div>
-          <div style={{ fontSize: "13px", color: "#888", marginBottom: "28px" }}>Admin Dashboard</div>
+          <div style={{ fontSize: "13px", color: "#595959", marginBottom: "28px" }}>Admin Dashboard</div>
           <input
             type="password"
             placeholder="Password"
@@ -158,10 +158,10 @@ export default function AdminCommunitiesPage() {
       <nav style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
         <a href="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: "20px", fontWeight: "700", color: "#1B2B6B" }}>
-            HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+            HOA<span style={{ color: "#06875e" }}>Agent</span>
           </span>
         </a>
-        <a href="/" style={{ fontSize: "12px", color: "#888", textDecoration: "none" }}>Back to site</a>
+        <a href="/" style={{ fontSize: "12px", color: "#595959", textDecoration: "none" }}>Back to site</a>
       </nav>
 
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex" }}>
@@ -187,7 +187,7 @@ export default function AdminCommunitiesPage() {
 
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "32px 24px" }}>
         <h1 style={{ fontSize: "22px", fontWeight: "600", color: "#1a1a1a", marginBottom: "4px" }}>Add Community</h1>
-        <p style={{ fontSize: "13px", color: "#888", marginBottom: "32px" }}>
+        <p style={{ fontSize: "13px", color: "#595959", marginBottom: "32px" }}>
           Fill in the details below to add a new HOA community to the database.
         </p>
 

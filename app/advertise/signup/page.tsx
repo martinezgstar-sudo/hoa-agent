@@ -93,7 +93,7 @@ export default function AdvertiserSignupPage() {
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ maxWidth: "440px", margin: "0 auto", padding: "60px 20px 40px" }}>
-        <Link href="/advertise" style={{ fontSize: "13px", color: "#888", textDecoration: "none" }}>← Back</Link>
+        <Link href="/advertise" style={{ fontSize: "13px", color: "#595959", textDecoration: "none" }}>← Back</Link>
         <div style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", margin: "20px 0 6px", letterSpacing: "-0.02em" }}>
           Create your advertiser account
         </div>
@@ -137,7 +137,7 @@ export default function AdvertiserSignupPage() {
           </div>
           <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "12px", color: "#555" }}>
             <input type="checkbox" checked={form.terms} onChange={e => set("terms", e.target.checked)} required />
-            I agree to the <Link href="/terms" style={{ color: "#1D9E75" }}>terms of service</Link>.
+            I agree to the <Link href="/terms" style={{ color: "#06875e" }}>terms of service</Link>.
           </label>
 
           {error && (
@@ -148,14 +148,14 @@ export default function AdvertiserSignupPage() {
 
           <button type="submit" disabled={busy} style={{
             padding: "12px", fontSize: "14px", fontWeight: 600,
-            backgroundColor: busy ? "#999" : "#1B2B6B", color: "#fff",
+            backgroundColor: busy ? "#595959" : "#1B2B6B", color: "#fff",
             border: "none", borderRadius: "10px", cursor: busy ? "not-allowed" : "pointer",
           }}>
             {busy ? "Creating account…" : "Create Account"}
           </button>
 
           <div style={{ textAlign: "center", fontSize: "13px", color: "#666" }}>
-            Already have an account? <Link href="/advertise/login" style={{ color: "#1D9E75", fontWeight: 600 }}>Sign in</Link>
+            Already have an account? <Link href="/advertise/login" style={{ color: "#06875e", fontWeight: 600 }}>Sign in</Link>
           </div>
         </form>
       </div>

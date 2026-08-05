@@ -96,7 +96,7 @@ export default function ClaimPage({ params }: { params: Promise<{ slug: string }
           </p>
           <Link
             href={`/community/${slug}`}
-            style={{ fontSize: '14px', color: '#1D9E75', fontWeight: 600, textDecoration: 'none' }}
+            style={{ fontSize: '14px', color: '#06875e', fontWeight: 600, textDecoration: 'none' }}
           >
             ← Back to community page
           </Link>
@@ -113,7 +113,7 @@ export default function ClaimPage({ params }: { params: Promise<{ slug: string }
           ← Back to community page
         </Link>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           HOA Representative
         </div>
 

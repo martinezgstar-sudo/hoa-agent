@@ -168,9 +168,9 @@ export default function AdminAdsPage() {
       <div style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui,sans-serif" }}>
         <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "16px", padding: "40px", width: "340px", textAlign: "center" }}>
           <div style={{ fontSize: "24px", fontWeight: 700, color: "#1B2B6B", marginBottom: "4px" }}>
-            HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+            HOA<span style={{ color: "#06875e" }}>Agent</span>
           </div>
-          <div style={{ fontSize: "13px", color: "#888", marginBottom: "28px" }}>Admin Ads</div>
+          <div style={{ fontSize: "13px", color: "#595959", marginBottom: "28px" }}>Admin Ads</div>
           <input
             id="admin-password"
             name="admin-password"
@@ -206,7 +206,7 @@ export default function AdminAdsPage() {
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "14px 24px" }}>
         <a href="/admin" style={{ fontSize: "13px", color: "#1B2B6B", textDecoration: "none", fontWeight: 600 }}>← Admin home</a>
-        <span style={{ marginLeft: "12px", fontSize: "13px", color: "#888" }}>/ Advertiser signups</span>
+        <span style={{ marginLeft: "12px", fontSize: "13px", color: "#595959" }}>/ Advertiser signups</span>
       </div>
 
       <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "28px 20px" }}>
@@ -257,10 +257,10 @@ export default function AdminAdsPage() {
           </div>
         )}
 
-        {loading && <div style={{ color: "#888", fontSize: "13px" }}>Loading…</div>}
+        {loading && <div style={{ color: "#595959", fontSize: "13px" }}>Loading…</div>}
 
         {!loading && visible.length === 0 && (
-          <div style={{ padding: "32px", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#888", textAlign: "center", fontSize: "13px" }}>
+          <div style={{ padding: "32px", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#595959", textAlign: "center", fontSize: "13px" }}>
             No advertisers in this tab.
           </div>
         )}
@@ -272,7 +272,7 @@ export default function AdminAdsPage() {
                 <div style={{ fontSize: "15px", fontWeight: 700, color: "#1a1a1a" }}>
                   {p.company_name || p.email || p.id}
                 </div>
-                <div style={{ fontSize: "11px", color: "#888", marginTop: "2px" }}>
+                <div style={{ fontSize: "11px", color: "#595959", marginTop: "2px" }}>
                   {[p.email, p.phone].filter(Boolean).join(" · ")}
                 </div>
                 <div style={{ display: "flex", gap: "6px", marginTop: "8px", flexWrap: "wrap" }}>
@@ -286,7 +286,7 @@ export default function AdminAdsPage() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                <button type="button" onClick={() => approve(p)} disabled={busyId === p.id || p.subscription_status === "active"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "none", backgroundColor: p.subscription_status === "active" ? "#ddd" : "#1D9E75", color: "#fff", cursor: p.subscription_status === "active" ? "default" : "pointer" }}>
+                <button type="button" onClick={() => approve(p)} disabled={busyId === p.id || p.subscription_status === "active"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "none", backgroundColor: p.subscription_status === "active" ? "#ddd" : "#06875e", color: "#fff", cursor: p.subscription_status === "active" ? "default" : "pointer" }}>
                   Approve
                 </button>
                 <button type="button" onClick={() => reject(p)} disabled={busyId === p.id || p.subscription_status === "rejected"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "1px solid #E24B4A", backgroundColor: "#fff", color: "#A32D2D", cursor: "pointer" }}>
@@ -295,7 +295,7 @@ export default function AdminAdsPage() {
                 <button type="button" onClick={() => setAccess(p, { access_level: "comp" }, "Comp full access")} disabled={busyId === p.id || p.access_level === "comp"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 700, borderRadius: "8px", border: "1px solid #1B2B6B", backgroundColor: p.access_level === "comp" ? "#eee" : "#fff", color: "#1B2B6B", cursor: p.access_level === "comp" ? "default" : "pointer" }}>
                   Comp
                 </button>
-                <button type="button" onClick={() => setAccess(p, { access_level: "paid" }, "Grant full access")} disabled={busyId === p.id || p.access_level === "paid"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 600, borderRadius: "8px", border: "1px solid #1D9E75", backgroundColor: "#fff", color: "#137A57", cursor: "pointer" }}>
+                <button type="button" onClick={() => setAccess(p, { access_level: "paid" }, "Grant full access")} disabled={busyId === p.id || p.access_level === "paid"} style={{ padding: "7px 12px", fontSize: "12px", fontWeight: 600, borderRadius: "8px", border: "1px solid #06875e", backgroundColor: "#fff", color: "#137A57", cursor: "pointer" }}>
                   Grant
                 </button>
                 <select value={p.subscription_plan || ""} onChange={(e) => e.target.value && setAccess(p, { tier: e.target.value }, `Set tier ${e.target.value}`)} disabled={busyId === p.id} style={{ padding: "7px 8px", fontSize: "12px", borderRadius: "8px", border: "1px solid #e5e5e5", color: "#555" }}>
@@ -364,9 +364,9 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
           <div>
             <div style={{ fontSize: "18px", fontWeight: 700, color: "#1B2B6B" }}>{p.company_name || p.email}</div>
-            <div style={{ fontSize: "11px", color: "#888" }}>{p.id}</div>
+            <div style={{ fontSize: "11px", color: "#595959" }}>{p.id}</div>
           </div>
-          <button type="button" onClick={onClose} style={{ background: "none", border: "none", fontSize: "20px", color: "#888", cursor: "pointer" }}>×</button>
+          <button type="button" onClick={onClose} style={{ background: "none", border: "none", fontSize: "20px", color: "#595959", cursor: "pointer" }}>×</button>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "8px 16px", fontSize: "13px", marginBottom: "20px" }}>
@@ -380,7 +380,7 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
             ["Created", p.created_at ? new Date(p.created_at).toLocaleString() : ""],
           ].map(([k, v], i) => (
             <div key={i} style={{ display: "contents" }}>
-              <div style={{ color: "#888", fontWeight: 600 }}>{k}</div>
+              <div style={{ color: "#595959", fontWeight: 600 }}>{k}</div>
               <div style={{ color: "#1a1a1a", wordBreak: "break-word" }}>{v || "—"}</div>
             </div>
           ))}
@@ -390,7 +390,7 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
           Ad creatives ({ads.length})
         </div>
         {ads.length === 0 ? (
-          <div style={{ fontSize: "12px", color: "#888" }}>No ads created yet.</div>
+          <div style={{ fontSize: "12px", color: "#595959" }}>No ads created yet.</div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {ads.map((a) => (
@@ -398,11 +398,11 @@ function DetailModal({ detail, onClose }: { detail: { profile: Profile; ads: Ad[
                 <div style={{ fontSize: "12px", fontWeight: 700, color: "#1a1a1a" }}>{a.headline || "(no headline)"}</div>
                 <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>{a.body || ""}</div>
                 {a.cta_url && (
-                  <div style={{ fontSize: "11px", color: "#1D9E75", marginTop: "4px" }}>
+                  <div style={{ fontSize: "11px", color: "#06875e", marginTop: "4px" }}>
                     {a.cta_text || "CTA"} → {a.cta_url}
                   </div>
                 )}
-                <div style={{ fontSize: "10px", color: "#888", marginTop: "4px" }}>status: {a.status || "—"}</div>
+                <div style={{ fontSize: "10px", color: "#595959", marginTop: "4px" }}>status: {a.status || "—"}</div>
               </div>
             ))}
           </div>

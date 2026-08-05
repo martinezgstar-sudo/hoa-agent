@@ -113,7 +113,7 @@ export default function PortalDashboardPage() {
     router.push("/advertise")
   }
 
-  if (loading) return <div style={{ padding: 60, textAlign: "center", color: "#888" }}>Loading…</div>
+  if (loading) return <div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Loading…</div>
   if (!profile) return null
 
   return (
@@ -121,7 +121,7 @@ export default function PortalDashboardPage() {
       {/* Portal nav */}
       <nav style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", height: "60px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ fontSize: "18px", fontWeight: 700, color: "#1B2B6B", textDecoration: "none" }}>
-          HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+          HOA<span style={{ color: "#06875e" }}>Agent</span>
         </Link>
         <div style={{ display: "flex", gap: "16px", alignItems: "center", fontSize: "13px" }}>
           <span style={{ color: "#666" }}>{profile.company_name}</span>
@@ -149,18 +149,18 @@ export default function PortalDashboardPage() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
               <div>
                 <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a1a", margin: 0 }}>Your ads</h2>
-                <div style={{ fontSize: "12px", color: "#888", marginTop: "4px" }}>
+                <div style={{ fontSize: "12px", color: "#595959", marginTop: "4px" }}>
                   {ads.length} of {profile.max_ads ?? 1} ad slot{(profile.max_ads ?? 1) === 1 ? "" : "s"} used
                 </div>
               </div>
               <Link href="/advertise/portal/create" style={{
-                padding: "10px 18px", backgroundColor: "#1D9E75", color: "#fff",
+                padding: "10px 18px", backgroundColor: "#06875e", color: "#fff",
                 borderRadius: "8px", textDecoration: "none", fontSize: "13px", fontWeight: 600,
               }}>+ New Ad</Link>
             </div>
             {ads.length === 0 ? (
-              <div style={{ padding: "40px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#888" }}>
-                No ads yet. <Link href="/advertise/portal/create" style={{ color: "#1D9E75" }}>Create your first ad</Link>.
+              <div style={{ padding: "40px", textAlign: "center", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", color: "#595959" }}>
+                No ads yet. <Link href="/advertise/portal/create" style={{ color: "#06875e" }}>Create your first ad</Link>.
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -197,20 +197,20 @@ export default function PortalDashboardPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px", marginBottom: "20px" }}>
               <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px" }}>
                 <div style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B" }}>{stats.impressions.toLocaleString()}</div>
-                <div style={{ fontSize: "11px", color: "#888", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Impressions</div>
+                <div style={{ fontSize: "11px", color: "#595959", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Impressions</div>
               </div>
               <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px" }}>
-                <div style={{ fontSize: "26px", fontWeight: 700, color: "#1D9E75" }}>{stats.clicks.toLocaleString()}</div>
-                <div style={{ fontSize: "11px", color: "#888", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Clicks</div>
+                <div style={{ fontSize: "26px", fontWeight: 700, color: "#06875e" }}>{stats.clicks.toLocaleString()}</div>
+                <div style={{ fontSize: "11px", color: "#595959", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Clicks</div>
               </div>
               <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px" }}>
                 <div style={{ fontSize: "26px", fontWeight: 700, color: "#1a1a1a" }}>
                   {stats.impressions > 0 ? ((stats.clicks / stats.impressions) * 100).toFixed(1) : "0"}%
                 </div>
-                <div style={{ fontSize: "11px", color: "#888", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Click-through rate</div>
+                <div style={{ fontSize: "11px", color: "#595959", textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "4px" }}>Click-through rate</div>
               </div>
             </div>
-            <div style={{ fontSize: "12px", color: "#888", marginBottom: "16px" }}>
+            <div style={{ fontSize: "12px", color: "#595959", marginBottom: "16px" }}>
               Per-day breakdowns and per-city analytics available on the full Analytics page.
             </div>
             <a
@@ -233,7 +233,7 @@ export default function PortalDashboardPage() {
               <div><strong style={{ color: "#666" }}>Category:</strong> {profile.category || "—"}</div>
               <div><strong style={{ color: "#666" }}>Target cities:</strong> {(profile.target_cities || []).join(", ") || "—"}</div>
             </div>
-            <div style={{ fontSize: "12px", color: "#888", marginTop: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#595959", marginTop: "12px" }}>
               Editable settings coming soon. Email <a href="/contact">contact us</a> to make changes for now.
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function PortalDashboardPage() {
               <div style={{ fontSize: "13px", color: "#666" }}>
                 Status: <span style={{ fontWeight: 600 }}>{profile.access_level === "comp" ? "Complimentary \u2014 full access" : profile.access_level === "paid" ? "Active" : profile.access_level === "suspended" ? "Suspended" : (profile.plan_status || "pending")}</span>
               </div>
-              <div style={{ marginTop: "16px", fontSize: "12px", color: "#888" }}>
+              <div style={{ marginTop: "16px", fontSize: "12px", color: "#595959" }}>
                 Full billing management coming soon. Email <a href="/contact">contact us</a> for billing questions.
               </div>
             </div>

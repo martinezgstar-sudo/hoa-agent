@@ -20,7 +20,7 @@ function isAddressOrZipQuery(val: string) {
 }
 
 function getConfidenceLabel(score: number) {
-  if (score >= 3) return { label: "High", color: "#1D9E75", bg: "#E1F5EE", stars: "★★★" }
+  if (score >= 3) return { label: "High", color: "#06875e", bg: "#E1F5EE", stars: "★★★" }
   if (score >= 2) return { label: "Medium", color: "#EF9F27", bg: "#FAEEDA", stars: "★★☆" }
   return { label: "Low", color: "#E24B4A", bg: "#FEE9E9", stars: "★☆☆" }
 }
@@ -121,7 +121,7 @@ function SuggestForm({ address }: { address: string }) {
   return (
     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",marginTop:"16px",textAlign:"left"}}>
       <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Add this community</div>
-      <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Help buyers know what to expect. Fields marked * are required.</div>
+      <div style={{fontSize:"12px",color:"#595959",marginBottom:"20px"}}>Help buyers know what to expect. Fields marked * are required.</div>
       <div style={{display:"flex",gap:"8px",marginBottom:"20px"}}>
         {[1,2,3].map(s => (
           <div key={s} style={{flex:1,height:"4px",borderRadius:"2px",backgroundColor:step>=s?"#1B2B6B":"#e5e5e5"}}></div>
@@ -140,15 +140,15 @@ function SuggestForm({ address }: { address: string }) {
                   placeholder="e.g. Bermuda Run HOA" style={inputStyle}/>
                 {showNameDropdown && (
                   <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1px solid #e0e0e0",borderRadius:"8px",zIndex:100,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"4px"}}>
-                    <div style={{fontSize:"11px",color:"#888",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database — select to skip adding:</div>
+                    <div style={{fontSize:"11px",color:"#595959",padding:"8px 12px 4px",borderBottom:"1px solid #f0f0f0"}}>Already in our database — select to skip adding:</div>
                     {nameMatches.map((m: any) => (
                       <div key={m.slug} onClick={() => { window.open("/community/"+m.slug, "_blank"); setShowNameDropdown(false) }}
                         style={{padding:"10px 12px",cursor:"pointer",fontSize:"13px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                         <span style={{color:"#1a1a1a"}}>{m.label}</span>
-                        <span style={{fontSize:"11px",color:"#1D9E75"}}>View profile →</span>
+                        <span style={{fontSize:"11px",color:"#06875e"}}>View profile →</span>
                       </div>
                     ))}
-                    <div style={{padding:"8px 12px",fontSize:"12px",color:"#888",borderTop:"1px solid #f0f0f0"}}>
+                    <div style={{padding:"8px 12px",fontSize:"12px",color:"#595959",borderTop:"1px solid #f0f0f0"}}>
                       Not listed? Continue filling the form to add it.
                     </div>
                   </div>
@@ -163,7 +163,7 @@ function SuggestForm({ address }: { address: string }) {
               <label style={labelStyle}>Monthly HOA fee *</label>
               <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
                 <div style={{position:"relative",flex:1}}>
-                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#888",fontSize:"13px"}}>$</span>
+                  <span style={{position:"absolute",left:"12px",top:"50%",transform:"translateY(-50%)",color:"#595959",fontSize:"13px"}}>$</span>
                 <input type="number" value={hoaFee} onChange={e => setHoaFee(e.target.value)} placeholder="350" disabled={feeUnsure}
                     style={{...inputStyle,paddingLeft:"24px",opacity:feeUnsure?0.4:1}}/>
                 </div>
@@ -263,9 +263,9 @@ function SuggestForm({ address }: { address: string }) {
                     {String.fromCharCode(9733)}
                   </button>
                 ))}
-                {rating > 0 && <button type="button" onClick={() => setRating(0)} style={{background:"none",border:"none",cursor:"pointer",fontSize:"11px",color:"#888",marginLeft:"8px"}}>Clear</button>}
+                {rating > 0 && <button type="button" onClick={() => setRating(0)} style={{background:"none",border:"none",cursor:"pointer",fontSize:"11px",color:"#595959",marginLeft:"8px"}}>Clear</button>}
               </div>
-              <div style={{fontSize:"11px",color:"#aaa"}}>{rating===1?"Poor":rating===2?"Below average":rating===3?"Average":rating===4?"Good":rating===5?"Excellent":""}</div>
+              <div style={{fontSize:"11px",color:"#595959"}}>{rating===1?"Poor":rating===2?"Below average":rating===3?"Average":rating===4?"Good":rating===5?"Excellent":""}</div>
             </div>
             <div style={sectionStyle}>
               <label style={labelStyle}>Share your experience (optional)</label>
@@ -283,14 +283,14 @@ function SuggestForm({ address }: { address: string }) {
                 placeholder="Gate code policy, parking rules, recent fee increases..."
                 style={{...inputStyle,resize:"vertical",fontFamily:"system-ui,sans-serif"}}/>
             </div>
-            <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"12px 16px",marginBottom:"16px",fontSize:"12px",color:"#888"}}>
+            <div style={{backgroundColor:"#f9f9f9",borderRadius:"8px",padding:"12px 16px",marginBottom:"16px",fontSize:"12px",color:"#595959"}}>
               Your submission will be reviewed before publishing. We never share your email publicly.
             </div>
             <div style={{display:"flex",gap:"8px"}}>
               <button type="button" onClick={() => setStep(2)}
                 style={{flex:1,padding:"12px",borderRadius:"8px",backgroundColor:"#fff",color:"#1B2B6B",border:"1.5px solid #1B2B6B",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>Back</button>
               <button type="submit" disabled={status==="submitting"}
-                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
+                style={{flex:2,padding:"12px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
                 {status==="submitting" ? "Submitting..." : "Submit community"}
               </button>
             </div>
@@ -521,7 +521,7 @@ export default function SearchPage() {
           <h1 style={{fontSize:"22px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>
             {zipMode ? `Associations in ZIP ${zipMode}` : "Search HOA communities"}
           </h1>
-          <p style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>
+          <p style={{fontSize:"13px",color:"#595959",marginBottom:"16px"}}>
             {zipMode
               ? "Published associations in this ZIP code, sorted by unit count."
               : "Search by community name, city, management company — or enter a property address"}
@@ -560,7 +560,7 @@ export default function SearchPage() {
                   />
                 )}
               </div>
-              <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"10px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap",minHeight:"44px"}}>
+              <button type="submit" style={{fontSize:"13px",padding:"10px 20px",borderRadius:"10px",backgroundColor:"#06875e",color:"#fff",border:"none",cursor:"pointer",fontWeight:"500",whiteSpace:"nowrap",minHeight:"44px"}}>
                 {searching ? "Searching..." : "Search"}
               </button>
               <button type="button" onClick={() => setShowFilters(!showFilters)}
@@ -571,28 +571,28 @@ export default function SearchPage() {
                 <button
                   type="button"
                   onClick={() => handleSortChange("units")}
-                  style={{fontSize:"12px",padding:"10px 12px",border:"none",backgroundColor:sortBy==="units"?"#1D9E75":"#fff",color:sortBy==="units"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="units"?"600":"500"}}
+                  style={{fontSize:"12px",padding:"10px 12px",border:"none",backgroundColor:sortBy==="units"?"#06875e":"#fff",color:sortBy==="units"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="units"?"600":"500"}}
                 >
                   Most units
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSortChange("az")}
-                  style={{fontSize:"12px",padding:"10px 12px",border:"none",borderLeft:"1px solid #e0e0e0",backgroundColor:sortBy==="az"?"#1D9E75":"#fff",color:sortBy==="az"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="az"?"600":"500"}}
+                  style={{fontSize:"12px",padding:"10px 12px",border:"none",borderLeft:"1px solid #e0e0e0",backgroundColor:sortBy==="az"?"#06875e":"#fff",color:sortBy==="az"?"#fff":"#555",cursor:"pointer",fontWeight:sortBy==="az"?"600":"500"}}
                 >
                   A to Z
                 </button>
               </div>
             </div>
-            <div style={{marginTop:"12px",paddingTop:"12px",borderTop:"1px solid #eee",fontSize:"12px",color:"#999",fontStyle:"italic"}}>
+            <div style={{marginTop:"12px",paddingTop:"12px",borderTop:"1px solid #eee",fontSize:"12px",color:"#595959",fontStyle:"italic"}}>
               Not seeing your association?
             </div>
-            <a href="/submit" style={{display:"block",padding:"10px 0",minHeight:"44px",fontSize:"13px",color:"#1D9E75",fontWeight:600,textDecoration:"none"}}>
+            <a href="/submit" style={{display:"block",padding:"10px 0",minHeight:"44px",fontSize:"13px",color:"#06875e",fontWeight:600,textDecoration:"none"}}>
               + Submit your association
             </a>
           </form>
 
-          {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#888",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
+          {isAddress && !addressResult && <div style={{fontSize:"12px",color:"#595959",marginTop:"10px"}}>Enter a Palm Beach County address to find its HOA</div>}
 
           {!isAddress && !zipMode && (
             <div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginTop:"12px"}}>
@@ -617,7 +617,7 @@ export default function SearchPage() {
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px"}}>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Property type</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Property type</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     {["Single family","Condo","Townhouse"].map(v => (
                       <FilterBtn key={v} value={v} current={filterPropertyType}
@@ -628,7 +628,7 @@ export default function SearchPage() {
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Pets</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Pets</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     <FilterBtn value="yes" current={filterPets} onClick={() => handleFilterChange("pets", filterPets === "yes" ? "" : "yes", setFilterPets)} label="Allowed" />
                     <FilterBtn value="no" current={filterPets} onClick={() => handleFilterChange("pets", filterPets === "no" ? "" : "no", setFilterPets)} label="Not allowed" />
@@ -636,7 +636,7 @@ export default function SearchPage() {
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Short-term rentals</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Short-term rentals</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     <FilterBtn value="allowed" current={filterStr} onClick={() => handleFilterChange("str", filterStr === "allowed" ? "" : "allowed", setFilterStr)} label="Allowed" />
                     <FilterBtn value="not_allowed" current={filterStr} onClick={() => handleFilterChange("str", filterStr === "not_allowed" ? "" : "not_allowed", setFilterStr)} label="Not allowed" />
@@ -644,7 +644,7 @@ export default function SearchPage() {
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Monthly fee</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Monthly fee</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     {[{val:"under200",label:"Under $200"},{val:"200to400",label:"$200–$400"},{val:"400to600",label:"$400–$600"},{val:"over600",label:"$600+"}].map(f => (
                       <FilterBtn key={f.val} value={f.val} current={filterFeeRange}
@@ -655,14 +655,14 @@ export default function SearchPage() {
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Reviews</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Reviews</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     <FilterBtn value="yes" current={filterHasReviews} onClick={() => handleFilterChange("has_reviews", filterHasReviews === "yes" ? "" : "yes", setFilterHasReviews)} label="Has reviews" />
                   </div>
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>HOA type</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>HOA type</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
                     <FilterBtn value="master" current={filterHoaType} onClick={() => handleFilterChange("hoa_type", filterHoaType === "master" ? "" : "master", setFilterHoaType)} label="Master HOA" />
                     <FilterBtn value="sub" current={filterHoaType} onClick={() => handleFilterChange("hoa_type", filterHoaType === "sub" ? "" : "sub", setFilterHoaType)} label="Sub-community" />
@@ -671,7 +671,7 @@ export default function SearchPage() {
                 </div>
 
                 <div>
-                  <div style={{fontSize:"11px",fontWeight:"600",color:"#888",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Management company</div>
+                  <div style={{fontSize:"11px",fontWeight:"600",color:"#595959",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Management company</div>
                   <input
                     type="text"
                     value={filterManagement}
@@ -703,7 +703,7 @@ export default function SearchPage() {
         {zipMode && (
           <div style={{marginBottom:"24px"}}>
             {zipLoading && (
-              <div style={{fontSize:"14px",color:"#888",padding:"16px 0"}}>Loading associations…</div>
+              <div style={{fontSize:"14px",color:"#595959",padding:"16px 0"}}>Loading associations…</div>
             )}
             {!zipLoading && zipCommunities.length === 0 && (
               <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center",color:"#666",fontSize:"14px"}}>
@@ -714,7 +714,7 @@ export default function SearchPage() {
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none",display:"block",marginBottom:"10px"}}>
                 <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
                   <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{c.canonical_name}</div>
-                  <div style={{fontSize:"13px",color:"#888",marginBottom: (c.is_master || c.master_hoa_id || c.is_sub_hoa) ? "6px" : "0"}}>
+                  <div style={{fontSize:"13px",color:"#595959",marginBottom: (c.is_master || c.master_hoa_id || c.is_sub_hoa) ? "6px" : "0"}}>
                     {c.city}
                     {c.unit_count != null ? ` · ${c.unit_count} units` : ""}
                     {c.property_type ? ` · ${c.property_type}` : ""}
@@ -737,7 +737,7 @@ export default function SearchPage() {
                   maxWidth:"400px",
                   padding:"14px 20px",
                   borderRadius:"10px",
-                  backgroundColor:"#1D9E75",
+                  backgroundColor:"#06875e",
                   color:"#fff",
                   fontSize:"15px",
                   fontWeight:600,
@@ -755,23 +755,23 @@ export default function SearchPage() {
           <div style={{marginBottom:"24px"}}>
             {addressResult.match ? (
               <div>
-                <div style={{fontSize:"13px",color:"#888",marginBottom:"12px"}}>HOA community found for this address:</div>
+                <div style={{fontSize:"13px",color:"#595959",marginBottom:"12px"}}>HOA community found for this address:</div>
                 <a href={"/community/" + addressResult.match.slug} style={{textDecoration:"none"}}>
-                  <div style={{backgroundColor:"#fff",border:"2px solid #1D9E75",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
+                  <div style={{backgroundColor:"#fff",border:"2px solid #06875e",borderRadius:"12px",padding:"16px 20px",cursor:"pointer"}}>
                     <div style={{fontSize:"15px",fontWeight:"600",color:"#1a1a1a",marginBottom:"3px"}}>{addressResult.match.canonical_name}</div>
-                    <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{addressResult.match.city}</div>
-                    <div style={{fontSize:"13px",color:"#1D9E75",fontWeight:"500"}}>View community profile →</div>
+                    <div style={{fontSize:"12px",color:"#595959",marginBottom:"8px"}}>{addressResult.match.city}</div>
+                    <div style={{fontSize:"13px",color:"#06875e",fontWeight:"500"}}>View community profile →</div>
                   </div>
                 </a>
               </div>
             ) : addressResult.cityMatches ? (
               <div>
-                <div style={{fontSize:"13px",color:"#888",marginBottom:"12px"}}>No exact match found. HOA communities in this area:</div>
+                <div style={{fontSize:"13px",color:"#595959",marginBottom:"12px"}}>No exact match found. HOA communities in this area:</div>
                 {addressResult.cityMatches.map((c: any) => (
                   <a key={c.slug} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                     <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"14px 20px",marginBottom:"8px",cursor:"pointer"}}>
                       <div style={{fontSize:"14px",fontWeight:"500",color:"#1a1a1a"}}>{c.canonical_name}</div>
-                      <div style={{fontSize:"12px",color:"#888"}}>{c.city}</div>
+                      <div style={{fontSize:"12px",color:"#595959"}}>{c.city}</div>
                     </div>
                   </a>
                 ))}
@@ -785,7 +785,7 @@ export default function SearchPage() {
             ) : (
               <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"24px",textAlign:"center"}}>
                 <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"8px"}}>This HOA is not in our database yet</div>
-                <div style={{fontSize:"13px",color:"#888",marginBottom:"16px"}}>We cover 8,000+ communities in Palm Beach County. Help us add yours.</div>
+                <div style={{fontSize:"13px",color:"#595959",marginBottom:"16px"}}>We cover 8,000+ communities in Palm Beach County. Help us add yours.</div>
                 <button onClick={() => setShowSuggestForm(true)} style={{fontSize:"13px",padding:"8px 20px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer"}}>Suggest this community</button>
                 {showSuggestForm && <div style={{marginTop:"16px"}}><SuggestForm address={query} /></div>}
               </div>
@@ -795,16 +795,16 @@ export default function SearchPage() {
 
         {!zipMode && !addressResult && (
           <>
-            <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>{loading ? "Searching..." : communities.length + " communities found in Palm Beach County"}</div>
+            <div style={{fontSize:"12px",color:"#595959",marginBottom:"16px"}}>{loading ? "Searching..." : communities.length + " communities found in Palm Beach County"}</div>
             {communities.length === 0 && !loading && query && (
-              <div style={{textAlign:"center",padding:"24px 0 8px",color:"#888",fontSize:"14px"}}>No communities found for "{query}". Try a different search or suggest it below.</div>
+              <div style={{textAlign:"center",padding:"24px 0 8px",color:"#595959",fontSize:"14px"}}>No communities found for "{query}". Try a different search or suggest it below.</div>
             )}
             {communities.map((c: any) => (
               <a key={c.id} href={"/community/" + c.slug} style={{textDecoration:"none"}}>
                 <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",marginBottom:"10px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",cursor:"pointer"}}>
                   <div>
                     <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a",marginBottom:"3px"}}>{c.canonical_name}</div>
-                    <div style={{fontSize:"12px",color:"#888",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
+                    <div style={{fontSize:"12px",color:"#595959",marginBottom:"8px"}}>{c.city_verified ? c.city : "Palm Beach County"}{c.property_type ? " · " + c.property_type : ""}{c.unit_count ? " · " + c.unit_count + " units" : ""}</div>
                     <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
                       {c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#1B2B6B",color:"#fff"}}>Master Community</span>}
                       {(c.master_hoa_id || c.is_sub_hoa) && !c.is_master && <span style={{fontSize:"11px",padding:"2px 8px",borderRadius:"4px",backgroundColor:"#FAEEDA",color:"#854F0B"}}>Sub-community</span>}
@@ -820,7 +820,7 @@ export default function SearchPage() {
                   <div style={{textAlign:"right",flexShrink:0,marginLeft:"16px"}}>
                     <div style={{fontSize:"15px",fontWeight:"500",color:"#1a1a1a"}}>{c.monthly_fee_min && c.monthly_fee_max ? "$" + c.monthly_fee_min + "-$" + c.monthly_fee_max + "/mo" : "Fee unknown"}</div>
                     {(() => { const conf = getConfidenceLabel(c.confidence_score); return <div style={{display:"inline-block",padding:"2px 10px",borderRadius:"20px",backgroundColor:conf.bg,color:conf.color,fontSize:"11px",fontWeight:"600"}}>{conf.stars} {conf.label}</div> })()}
-                    <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"4px"}}>View profile →</div>
+                    <div style={{fontSize:"11px",color:"#06875e",marginTop:"4px"}}>View profile →</div>
                     <div style={{marginTop:"6px"}}>
                       <CompareButton slug={c.slug} variant="compact" />
                     </div>
@@ -833,10 +833,10 @@ export default function SearchPage() {
         )}
       </div>
 
-      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#595959"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#595959",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>
     </main>
   )

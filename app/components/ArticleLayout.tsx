@@ -52,7 +52,7 @@ export default function ArticleLayout({
 
       <article style={{ maxWidth: "740px", margin: "0 auto", padding: "48px 20px 80px" }}>
         {category && (
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
             {category}
           </div>
         )}
@@ -62,7 +62,7 @@ export default function ArticleLayout({
         <p style={{ fontSize: "16px", color: "#555", lineHeight: 1.6, marginBottom: "24px" }}>
           {description}
         </p>
-        <div style={{ fontSize: "12px", color: "#888", marginBottom: "32px" }}>
+        <div style={{ fontSize: "12px", color: "#595959", marginBottom: "32px" }}>
           By <strong>HOA Agent Editorial Team</strong> ·
           {" "}Published {new Date(publishedDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
           {updatedDate && updatedDate !== publishedDate && (
@@ -72,7 +72,7 @@ export default function ArticleLayout({
 
         {toc && toc.length > 0 && (
           <nav style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "10px", padding: "16px 20px", marginBottom: "28px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "#595959", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
               In this article
             </div>
             <ol style={{ margin: 0, paddingLeft: "18px", fontSize: "13px", lineHeight: 1.8, color: "#1B2B6B" }}>
@@ -101,7 +101,7 @@ export default function ArticleLayout({
 
         <div style={{ marginTop: "40px", padding: "20px", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "10px", textAlign: "center" }}>
           <div style={{ fontSize: "13px", color: "#666", marginBottom: "10px" }}>Want more guides like this?</div>
-          <Link href="/guides" style={{ fontSize: "13px", color: "#1D9E75", fontWeight: 600, textDecoration: "none" }}>Browse all HOA Agent guides →</Link>
+          <Link href="/guides" style={{ fontSize: "13px", color: "#06875e", fontWeight: 600, textDecoration: "none" }}>Browse all HOA Agent guides →</Link>
         </div>
       </article>
     </main>

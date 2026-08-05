@@ -41,6 +41,6 @@ body {
 }
 .skip-to-content:focus {
   left: 8px;
-  outline: 2px solid #1D9E75;
+  outline: 2px solid #06875e;
   outline-offset: 2px;
 }

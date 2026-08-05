@@ -59,8 +59,8 @@ export default function CompareButton({ slug, variant = "default", className = "
         className={className}
         style={
           variant === "compact"
-            ? { display: "inline-block", padding: "4px 10px", fontSize: "11px", color: "#888" }
-            : { display: "inline-block", padding: "6px 14px", fontSize: "12px", color: "#888" }
+            ? { display: "inline-block", padding: "4px 10px", fontSize: "11px", color: "#595959" }
+            : { display: "inline-block", padding: "6px 14px", fontSize: "12px", color: "#595959" }
         }
       >
         + Compare
@@ -98,7 +98,7 @@ export default function CompareButton({ slug, variant = "default", className = "
         }
 
   const colorStyle: React.CSSProperties = inList
-    ? { backgroundColor: "#1D9E75", color: "#fff", borderColor: "#1D9E75" }
+    ? { backgroundColor: "#06875e", color: "#fff", borderColor: "#06875e" }
     : atCap
       ? { backgroundColor: "#f0f0f0", color: "#bbb", borderColor: "#e0e0e0" }
       : { backgroundColor: "#fff", color: "#1B2B6B", borderColor: "#1B2B6B" }

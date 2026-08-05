@@ -29,7 +29,7 @@ export default function SiteFooter() {
           <Link style={linkStyle} href="/city/boynton-beach">Boynton Beach</Link>
           <Link style={linkStyle} href="/city/royal-palm-beach">Royal Palm Beach</Link>
           <Link style={linkStyle} href="/city/wellington">Wellington</Link>
-          <Link style={{ ...linkStyle, color: "#1D9E75", fontWeight: 600, marginTop: "6px" }} href="/city">View all cities →</Link>
+          <Link style={{ ...linkStyle, color: "#06875e", fontWeight: 600, marginTop: "6px" }} href="/city">View all cities →</Link>
         </div>
 
         <div style={colStyle}>
@@ -56,19 +56,20 @@ export default function SiteFooter() {
           <div style={headerStyle}>Legal</div>
           <Link style={linkStyle} href="/terms">Terms of Service</Link>
           <Link style={linkStyle} href="/privacy">Privacy Policy</Link>
+          <Link style={linkStyle} href="/accessibility">Accessibility</Link>
           <Link style={linkStyle} href="/corrections">Corrections</Link>
-          <a href="/contact">contact us</a>
+          <Link style={linkStyle} href="/contact">Contact us</Link>
         </div>
       </div>
 
       <div style={{ maxWidth: "1080px", margin: "32px auto 0", borderTop: "1px solid #f0f0f0", paddingTop: "20px" }}>
-        <p style={{ fontSize: "12px", color: "#888", lineHeight: 1.6, marginBottom: "10px" }}>
+        <p style={{ fontSize: "12px", color: "#595959", lineHeight: 1.6, marginBottom: "10px" }}>
           HOA Agent covers 8,000+ HOA and condo communities across Palm Beach County Florida including
           West Palm Beach, Boca Raton, Jupiter, Palm Beach Gardens, Lake Worth, Delray Beach,
           Boynton Beach, Royal Palm Beach, Wellington, and Riviera Beach. Find HOA fees, litigation
           history, special assessments, and community reviews before you buy or rent.
         </p>
-        <p style={{ fontSize: "11px", color: "#aaa", marginTop: "8px" }}>
+        <p style={{ fontSize: "11px", color: "#595959", marginTop: "8px" }}>
           © {new Date().getFullYear()} HOA Agent LLC · West Palm Beach, Florida ·
           {" "}HOA Agent LLC is not affiliated with any HOA, management company, or government agency.
           Always verify HOA information directly with the association before relying on it for a real estate transaction.

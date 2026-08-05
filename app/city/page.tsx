@@ -61,7 +61,7 @@ export default async function CityIndexPage() {
       />
 
       <div style={{ maxWidth: '780px', margin: '0 auto', padding: '40px 20px' }}>
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>
           Palm Beach County
         </div>
 
@@ -82,7 +82,7 @@ export default async function CityIndexPage() {
                 <div style={{ fontSize: '16px', fontWeight: 600, color: '#1B2B6B', marginBottom: '6px' }}>{city.name}</div>
                 <div style={{ fontSize: '12px', color: '#888' }}>{city.tagline}</div>
                 <div style={{ marginTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '12px', color: '#1D9E75', fontWeight: 500 }}>Browse communities →</span>
+                  <span style={{ fontSize: '12px', color: '#06875e', fontWeight: 500 }}>Browse communities →</span>
                   {counts[city.slug] > 0 && (
                     <span style={{ fontSize: '11px', color: '#888' }}>{counts[city.slug]} listed</span>
                   )}

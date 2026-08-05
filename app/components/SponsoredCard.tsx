@@ -45,7 +45,7 @@ function getSessionId(): string | null {
 
 // Category → initials-circle background color
 const CATEGORY_COLOR: Record<string, string> = {
-  cleaning: "#1D9E75",
+  cleaning: "#06875e",
   landscaping: "#534AB7",
   insurance: "#1B2B6B",
   legal: "#534AB7",
@@ -172,7 +172,7 @@ export default function SponsoredCard({ advertisers, communitySlug, communityId,
           right: "12px",
           fontSize: "10px",
           fontWeight: 600,
-          color: "#999",
+          color: "#595959",
           textTransform: "uppercase",
           letterSpacing: "0.06em",
           backgroundColor: "rgba(255,255,255,0.85)",
@@ -262,7 +262,7 @@ export default function SponsoredCard({ advertisers, communitySlug, communityId,
                   <a
                     href={`tel:${ad.phone.replace(/[^0-9+]/g, "")}`}
                     onClick={() => track("phone_click", ad, { communitySlug, communityId, city, zipCode })}
-                    style={{ color: "#1D9E75", textDecoration: "none", fontWeight: 500 }}
+                    style={{ color: "#06875e", textDecoration: "none", fontWeight: 500 }}
                   >
                     {ad.phone}
                   </a>
@@ -286,7 +286,7 @@ export default function SponsoredCard({ advertisers, communitySlug, communityId,
                 style={{
                   display: "inline-block",
                   padding: "10px 20px",
-                  backgroundColor: "#1D9E75",
+                  backgroundColor: "#06875e",
                   color: "#fff",
                   fontSize: "14px",
                   fontWeight: 600,

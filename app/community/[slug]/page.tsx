@@ -394,20 +394,20 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
         {/* PART-OF BANNER — shown on sub-community pages */}
         {isSub && masterHoa && (
-          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', borderTop: '1px solid #b8e5d4', borderBottom: '1px solid #b8e5d4', borderRadius: 0, padding: '8px 12px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
+          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #06875e', borderTop: '1px solid #b8e5d4', borderBottom: '1px solid #b8e5d4', borderRadius: 0, padding: '8px 12px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             <div style={{fontSize: '12px', color: '#1B2B6B', lineHeight: '1.45'}}>
-              <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Part of {masterHoa.canonical_name}.</span>
+              <span style={{fontWeight: 600, color: '#06875e', marginRight: '6px'}}>Part of {masterHoa.canonical_name}.</span>
               Verify both association fee structures before purchasing.
             </div>
-            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', color: '#1D9E75', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', whiteSpace: 'nowrap', flexShrink: 0}}>
+            <a href={'/community/' + masterHoa.slug} style={{fontSize: '12px', color: '#06875e', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', whiteSpace: 'nowrap', flexShrink: 0}}>
               View master HOA →
             </a>
           </div>
         )}
         {/* Legacy fallback: parent known but not fetched */}
         {isSub && !masterHoa && effectiveParentId && (
-          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #1D9E75', padding: '8px 12px', marginBottom: '12px', fontSize: '12px', color: '#1B2B6B'}}>
-            <span style={{fontWeight: 600, color: '#1D9E75', marginRight: '6px'}}>Sub-community.</span>
+          <div style={{backgroundColor: '#E1F5EE', borderLeft: '3px solid #06875e', padding: '8px 12px', marginBottom: '12px', fontSize: '12px', color: '#1B2B6B'}}>
+            <span style={{fontWeight: 600, color: '#06875e', marginRight: '6px'}}>Sub-community.</span>
             This community is part of a master HOA. Verify both fee structures before purchasing.
           </div>
         )}
@@ -423,8 +423,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 <h1 style={{fontSize: '24px', fontWeight: '600', color: '#1a1a1a', margin: 0}}>{community.canonical_name} — {community.city}, FL</h1>
                 <CompareButton slug={community.slug} variant="compact" />
                 {String(community.entity_status || '').toLowerCase() === 'active' && (
-                  <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#1D9E75',fontWeight:600}}>
-                    <span style={{width:'6px',height:'6px',backgroundColor:'#1D9E75',borderRadius:'999px'}}></span>
+                  <span style={{display:'inline-flex',alignItems:'center',gap:'6px',fontSize:'11px',padding:'4px 10px',borderRadius:'999px',backgroundColor:'#E1F5EE',color:'#06875e',fontWeight:600}}>
+                    <span style={{width:'6px',height:'6px',backgroundColor:'#06875e',borderRadius:'999px'}}></span>
                     Active
                   </span>
                 )}
@@ -446,7 +446,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{fontSize:'18px',color:'#EF9F27',lineHeight:'1.2'}}>
                 {'★'.repeat(Math.round(liveReviewAvg || 0)).padEnd(5, '☆')}
               </div>
-              <a href="#leave-review" style={{display: 'inline-block', marginTop: '4px', fontSize:'12px',color:'#1D9E75',textDecoration:'none',fontWeight:600}}>{liveReviewCount} reviews</a>
+              <a href="#leave-review" style={{display: 'inline-block', marginTop: '4px', fontSize:'12px',color:'#06875e',textDecoration:'none',fontWeight:600}}>{liveReviewCount} reviews</a>
             </div>
           </div>
         </div>
@@ -558,7 +558,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
               {amenitiesList.map((amenity: string) => (
                 <span key={amenity} style={{fontSize: '12px', padding: '4px 10px', borderRadius: '20px', backgroundColor: '#f0f0f0', color: '#444', display: 'flex', alignItems: 'center', gap: '4px'}}>
-                  <span style={{color: '#1D9E75'}}>✓</span> {amenity}
+                  <span style={{color: '#06875e'}}>✓</span> {amenity}
               </span>
               ))}
             </div>
@@ -581,7 +581,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               return (
                 <div key={r.label} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f9f9f9', borderRadius: '8px', padding: '10px 12px', gap: '8px'}}>
                   <div style={{display: 'flex', gap: '8px', alignItems: 'center'}}>
-                    <span style={{fontSize: '13px', color: isUnknown ? '#aaa' : (r.val || '').toLowerCase().includes('no') || (r.val || '').toLowerCase().includes('prohibit') ? '#E24B4A' : '#1D9E75', flexShrink: 0}}>
+                    <span style={{fontSize: '13px', color: isUnknown ? '#aaa' : (r.val || '').toLowerCase().includes('no') || (r.val || '').toLowerCase().includes('prohibit') ? '#E24B4A' : '#06875e', flexShrink: 0}}>
                       {isUnknown ? '?' : (r.val || '').toLowerCase().includes('no') || (r.val || '').toLowerCase().includes('prohibit') ? '✕' : '✓'}
                     </span>
                     <div>
@@ -634,7 +634,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                     </div>
                     <div style={{textAlign: 'right', flexShrink: 0, marginLeft: '12px'}}>
                       <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a'}}>{sub.monthly_fee_min && sub.monthly_fee_max ? '$' + sub.monthly_fee_min + '–$' + sub.monthly_fee_max + '/mo' : 'Fee unknown'}</div>
-                      <div style={{fontSize: '11px', color: '#1D9E75'}}>View profile →</div>
+                      <div style={{fontSize: '11px', color: '#06875e'}}>View profile →</div>
                     </div>
                   </div>
                 </a>
@@ -736,7 +736,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <strong>Florida Statute {isCondo ? 'Chapter 718 (Condominium Act)' : 'Chapter 720 (HOA Act)'}</strong>
             {isCondo ? ' · subject to SB 4-D milestone inspections.' : ' · 48-hour board-meeting notice; assessment vote thresholds apply.'}
           </div>
-          <a href="/florida-hoa-law" style={{fontSize:'12px', color:'#1D9E75', fontWeight:600, textDecoration:'none', whiteSpace:'nowrap'}}>
+          <a href="/florida-hoa-law" style={{fontSize:'12px', color:'#06875e', fontWeight:600, textDecoration:'none', whiteSpace:'nowrap'}}>
             Read the full guide →
           </a>
         </div>
@@ -794,7 +794,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             ))}
           </div>
           {community.city_verified && (
-            <a href={'/cities/' + community.city.toLowerCase().replace(/ /g, '-')} style={{fontSize:'12px',color:'#1D9E75',textDecoration:'none'}}>
+            <a href={'/cities/' + community.city.toLowerCase().replace(/ /g, '-')} style={{fontSize:'12px',color:'#06875e',textDecoration:'none'}}>
               View all HOA communities in {community.city} →
             </a>
           )}

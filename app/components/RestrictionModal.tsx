@@ -80,7 +80,7 @@ export default function RestrictionModal({ communityId, field, communityName: _c
       <button
         type="button"
         onClick={() => setOpen(true)}
-        style={{ fontSize: "11px", color: "#1D9E75", border: "1px solid #1D9E75", borderRadius: "20px", padding: "2px 9px", backgroundColor: "#fff", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 }}
+        style={{ fontSize: "11px", color: "#06875e", border: "1px solid #06875e", borderRadius: "20px", padding: "2px 9px", backgroundColor: "#fff", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 }}
       >
         + Add
       </button>
@@ -105,7 +105,7 @@ export default function RestrictionModal({ communityId, field, communityName: _c
           <div style={{ textAlign: "center", padding: "16px 0" }}>
             <div style={{ fontSize: "36px", marginBottom: "12px" }}>✓</div>
             <div style={{ fontSize: "15px", fontWeight: "600", color: "#1B2B6B", marginBottom: "8px" }}>Thank you!</div>
-            <div style={{ fontSize: "13px", color: "#888", marginBottom: "20px", lineHeight: "1.6" }}>Your submission will be reviewed and added to this profile within 24 hours.</div>
+            <div style={{ fontSize: "13px", color: "#595959", marginBottom: "20px", lineHeight: "1.6" }}>Your submission will be reviewed and added to this profile within 24 hours.</div>
             <button
               type="button"
               onClick={() => { setOpen(false); setStatus("idle"); setAnswer(""); setDetails(""); setErrorMsg("") }}
@@ -121,9 +121,9 @@ export default function RestrictionModal({ communityId, field, communityName: _c
               handleSubmit()
             }}
           >
-            <div style={{ fontSize: "11px", fontWeight: "600", color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>Add restriction info</div>
+            <div style={{ fontSize: "11px", fontWeight: "600", color: "#06875e", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>Add restriction info</div>
             <div id={`${idPrefix}-question`} style={{ fontSize: "16px", fontWeight: "600", color: "#1a1a1a", marginBottom: "6px", lineHeight: "1.4" }}>{config.question}</div>
-            <div style={{ fontSize: "12px", color: "#888", marginBottom: "20px" }}>{config.subtext}</div>
+            <div style={{ fontSize: "12px", color: "#595959", marginBottom: "20px" }}>{config.subtext}</div>
 
             <fieldset
               style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "20px", border: "none", padding: 0, margin: "0 0 20px" }}
@@ -192,7 +192,7 @@ export default function RestrictionModal({ communityId, field, communityName: _c
               <button
                 type="submit"
                 disabled={!answer || status === "submitting"}
-                style={{ flex: 2, padding: "11px", borderRadius: "8px", backgroundColor: answer ? "#1D9E75" : "#ccc", color: "#fff", border: "none", cursor: answer ? "pointer" : "not-allowed", fontSize: "13px", fontWeight: "600" }}
+                style={{ flex: 2, padding: "11px", borderRadius: "8px", backgroundColor: answer ? "#06875e" : "#ccc", color: "#fff", border: "none", cursor: answer ? "pointer" : "not-allowed", fontSize: "13px", fontWeight: "600" }}
               >
                 {status === "submitting" ? "Submitting..." : "Submit"}
               </button>

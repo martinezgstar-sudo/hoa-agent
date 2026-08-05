@@ -49,7 +49,7 @@ function formatCompanyLabel(company: string) {
 function companyCardStyle(company: string): Record<string, string> {
   const c = normalizeCompany(company)
   if (c.includes("morningstar")) {
-    return { borderLeft: "4px solid #1D9E75", backgroundColor: "#F6FDF9" }
+    return { borderLeft: "4px solid #06875e", backgroundColor: "#F6FDF9" }
   }
   return { borderLeft: "4px solid #1B2B6B", backgroundColor: "#F5F7FC" }
 }
@@ -186,7 +186,7 @@ function SocialPostingsTab() {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "12px" }}>
-        <div style={{ fontSize: "13px", color: "#888" }}>
+        <div style={{ fontSize: "13px", color: "#595959" }}>
           Review scheduled posts, copy captions for manual publishing, approve or edit before they go out.
         </div>
         <button
@@ -226,9 +226,9 @@ function SocialPostingsTab() {
         </div>
       )}
 
-      {loading && <div style={{ textAlign: "center", color: "#888", padding: "40px" }}>Loading...</div>}
+      {loading && <div style={{ textAlign: "center", color: "#595959", padding: "40px" }}>Loading...</div>}
       {!loading && posts.length === 0 && (
-        <div style={{ textAlign: "center", color: "#888", padding: "60px" }}>No posts in this view.</div>
+        <div style={{ textAlign: "center", color: "#595959", padding: "60px" }}>No posts in this view.</div>
       )}
 
       {!loading &&
@@ -319,7 +319,7 @@ function SocialPostingsTab() {
                 </div>
               )}
               {!src && post.image_path && (
-                <div style={{ fontSize: "11px", color: "#888", marginBottom: "12px" }}>
+                <div style={{ fontSize: "11px", color: "#595959", marginBottom: "12px" }}>
                   Image: {post.image_path}
                 </div>
               )}
@@ -363,7 +363,7 @@ function SocialPostingsTab() {
                     fontSize: "12px",
                     padding: "7px 16px",
                     borderRadius: "8px",
-                    backgroundColor: copiedId === post.id ? "#1D9E75" : "#1B2B6B",
+                    backgroundColor: copiedId === post.id ? "#06875e" : "#1B2B6B",
                     color: "#fff",
                     border: "none",
                     cursor: "pointer",
@@ -382,8 +382,8 @@ function SocialPostingsTab() {
                         fontSize: "12px",
                         padding: "7px 16px",
                         borderRadius: "8px",
-                        backgroundColor: post.status === "approved" ? "#e5e5e5" : "#1D9E75",
-                        color: post.status === "approved" ? "#888" : "#fff",
+                        backgroundColor: post.status === "approved" ? "#e5e5e5" : "#06875e",
+                        color: post.status === "approved" ? "#595959" : "#fff",
                         border: "none",
                         cursor: post.status === "approved" ? "default" : "pointer",
                         fontWeight: "600",
@@ -504,14 +504,14 @@ function CommentsTab() {
           </button>
         ))}
       </div>
-      {loading && <div style={{textAlign:"center",color:"#888",padding:"40px"}}>Loading...</div>}
-      {!loading && comments.length === 0 && <div style={{textAlign:"center",color:"#888",padding:"40px"}}>No {filter} comments.</div>}
+      {loading && <div style={{textAlign:"center",color:"#595959",padding:"40px"}}>Loading...</div>}
+      {!loading && comments.length === 0 && <div style={{textAlign:"center",color:"#595959",padding:"40px"}}>No {filter} comments.</div>}
       {comments.map(c => (
         <div key={c.id} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",marginBottom:"12px"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"10px"}}>
             <div>
               <div style={{fontSize:"13px",fontWeight:"500",color:"#1a1a1a"}}>{c.commenter_name}</div>
-              <div style={{fontSize:"11px",color:"#888"}}>{new Date(c.created_at).toLocaleDateString()} · {c.rating ? c.rating + "★" : "No rating"}</div>
+              <div style={{fontSize:"11px",color:"#595959"}}>{new Date(c.created_at).toLocaleDateString()} · {c.rating ? c.rating + "★" : "No rating"}</div>
             </div>
             <span style={{fontSize:"11px",padding:"2px 10px",borderRadius:"20px",backgroundColor:c.status==="approved"?"#E1F5EE":c.status==="rejected"?"#FEE9E9":c.status==="flagged"?"#FAEEDA":"#f0f0f0",color:c.status==="approved"?"#1B2B6B":c.status==="rejected"?"#E24B4A":c.status==="flagged"?"#854F0B":"#555"}}>
               {c.status}
@@ -630,17 +630,17 @@ function CommunitiesTab() {
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 32px",height:"72px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#06875e"}}>Agent</span></span>
         </a>
         <div style={{display:"flex",gap:"16px",alignItems:"center"}}>
           <a href="/admin/comments" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Comments</a>
-          <a href="/admin/communities" style={{fontSize:"13px",color:"#1D9E75",textDecoration:"none",fontWeight:"500"}}>Add Community</a>
+          <a href="/admin/communities" style={{fontSize:"13px",color:"#06875e",textDecoration:"none",fontWeight:"500"}}>Add Community</a>
         </div>
       </nav>
 
       <div style={{maxWidth:"720px",margin:"0 auto",padding:"32px"}}>
         <h1 style={{fontSize:"22px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>Add Community</h1>
-        <p style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>Fill in the details below to add a new HOA community to the database.</p>
+        <p style={{fontSize:"13px",color:"#595959",marginBottom:"32px"}}>Fill in the details below to add a new HOA community to the database.</p>
 
         {message !== "" && (
           <div style={{padding:"12px 16px",borderRadius:"8px",backgroundColor:message.startsWith("Error") ? "#FEE9E9" : "#E1F5EE",color:message.startsWith("Error") ? "#E24B4A" : "#1B2B6B",fontSize:"13px",marginBottom:"24px"}}>
@@ -752,28 +752,28 @@ function SuggestionsTab() {
   return (
     <div>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:"20px"}}>
-        <div style={{fontSize:"13px",color:"#888"}}>Approve, merge or reject community submissions.</div>
+        <div style={{fontSize:"13px",color:"#595959"}}>Approve, merge or reject community submissions.</div>
         <button onClick={load} style={{fontSize:"12px",padding:"6px 14px",borderRadius:"8px",border:"1px solid #e0e0e0",backgroundColor:"#fff",cursor:"pointer"}}>Refresh</button>
       </div>
       {message && <div style={{backgroundColor:"#E1F5EE",borderRadius:"8px",padding:"12px",marginBottom:"16px",fontSize:"13px",color:"#1B2B6B"}}>{message}</div>}
-      {loading && <div style={{textAlign:"center",color:"#888",padding:"40px"}}>Loading...</div>}
-      {!loading && suggestions.length === 0 && <div style={{textAlign:"center",padding:"60px",color:"#888"}}>No pending suggestions.</div>}
+      {loading && <div style={{textAlign:"center",color:"#595959",padding:"40px"}}>Loading...</div>}
+      {!loading && suggestions.length === 0 && <div style={{textAlign:"center",padding:"60px",color:"#595959"}}>No pending suggestions.</div>}
       {suggestions.map(s => (
         <div key={s.id} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px",marginBottom:"16px"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"12px"}}>
             <div>
               <div style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a"}}>{s.community_name}</div>
-              <div style={{fontSize:"12px",color:"#888"}}>{s.city} — {new Date(s.created_at).toLocaleDateString()}</div>
+              <div style={{fontSize:"12px",color:"#595959"}}>{s.city} — {new Date(s.created_at).toLocaleDateString()}</div>
             </div>
             <div style={{display:"flex",gap:"8px"}}>
-              <button onClick={() => approve(s)} style={{padding:"7px 12px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:"500"}}>Approve</button>
+              <button onClick={() => approve(s)} style={{padding:"7px 12px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:"500"}}>Approve</button>
               <button onClick={() => del(s.id)} style={{padding:"7px 12px",borderRadius:"8px",backgroundColor:"#fff",color:"#E24B4A",border:"1px solid #E24B4A",cursor:"pointer",fontSize:"12px"}}>Reject</button>
             </div>
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"8px",marginBottom:"12px"}}>
             {[{l:"Fee",v:s.hoa_fee?"$"+s.hoa_fee+"/mo":null},{l:"STR",v:s.str_restriction},{l:"Pets",v:s.pet_restriction},{l:"Management",v:s.management_company},{l:"Email",v:s.submitter_email}].filter(x=>x.v).map(x => (
               <div key={x.l} style={{backgroundColor:"#f9f9f9",borderRadius:"6px",padding:"8px"}}>
-                <div style={{fontSize:"10px",color:"#888",marginBottom:"2px",textTransform:"uppercase"}}>{x.l}</div>
+                <div style={{fontSize:"10px",color:"#595959",marginBottom:"2px",textTransform:"uppercase"}}>{x.l}</div>
                 <div style={{fontSize:"12px",color:"#1a1a1a"}}>{x.v}</div>
               </div>
             ))}
@@ -786,7 +786,7 @@ function SuggestionsTab() {
                 <div key={c.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 12px",backgroundColor:"#FFFBF0",border:"1px solid #F5E6C8",borderRadius:"8px",marginBottom:"6px"}}>
                   <div>
                     <div style={{fontSize:"13px",fontWeight:"500"}}>{c.canonical_name}</div>
-                    <div style={{fontSize:"11px",color:"#888"}}>{c.city} · {c.status}</div>
+                    <div style={{fontSize:"11px",color:"#595959"}}>{c.city} · {c.status}</div>
                   </div>
                   <div style={{display:"flex",gap:"6px"}}>
                     <a href={"/community/"+c.slug} target="_blank" style={{padding:"5px 10px",borderRadius:"6px",border:"1px solid #e0e0e0",backgroundColor:"#fff",color:"#555",textDecoration:"none",fontSize:"11px"}}>View</a>
@@ -932,25 +932,25 @@ function FieldSuggestionsTab() {
   return (
     <div>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:"20px"}}>
-        <div style={{fontSize:"13px",color:"#888"}}>Review field updates submitted by residents.</div>
+        <div style={{fontSize:"13px",color:"#595959"}}>Review field updates submitted by residents.</div>
         <button onClick={load} style={{fontSize:"12px",padding:"6px 14px",borderRadius:"8px",border:"1px solid #e0e0e0",backgroundColor:"#fff",cursor:"pointer"}}>Refresh</button>
       </div>
       {message && <div style={{backgroundColor:"#E1F5EE",borderRadius:"8px",padding:"12px",marginBottom:"16px",fontSize:"13px",color:"#1B2B6B"}}>{message}</div>}
-      {loading && <div style={{textAlign:"center",color:"#888",padding:"40px"}}>Loading...</div>}
-      {!loading && suggestions.length === 0 && <div style={{textAlign:"center",padding:"60px",color:"#888"}}>No pending field suggestions.</div>}
+      {loading && <div style={{textAlign:"center",color:"#595959",padding:"40px"}}>Loading...</div>}
+      {!loading && suggestions.length === 0 && <div style={{textAlign:"center",padding:"60px",color:"#595959"}}>No pending field suggestions.</div>}
       {suggestions.map((s: any) => (
         <div key={s.id} style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"20px",marginBottom:"12px"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"12px"}}>
             <div>
-              <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"4px"}}>{fieldLabels[s.field_name || s.field] || s.field_name || s.field}</div>
+              <div style={{fontSize:"11px",fontWeight:"600",color:"#06875e",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"4px"}}>{fieldLabels[s.field_name || s.field] || s.field_name || s.field}</div>
               <div style={{fontSize:"14px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{s.communities?.canonical_name}</div>
               <div style={{fontSize:"15px",fontWeight:"500",color:"#1B2B6B",backgroundColor:"#E1F5EE",padding:"5px 12px",borderRadius:"6px",display:"inline-block"}}>{s.proposed_value || s.suggested_value}</div>
               {s.details && <div style={{fontSize:"12px",color:"#666",marginTop:"8px"}}>Details: {s.details}</div>}
             </div>
-            <div style={{fontSize:"11px",color:"#aaa"}}>{new Date(s.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</div>
+            <div style={{fontSize:"11px",color:"#595959"}}>{new Date(s.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</div>
           </div>
           <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
-            <button onClick={() => approve(s)} style={{padding:"7px 16px",borderRadius:"8px",backgroundColor:"#1D9E75",color:"#fff",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:"600"}}>Approve + Publish</button>
+            <button onClick={() => approve(s)} style={{padding:"7px 16px",borderRadius:"8px",backgroundColor:"#06875e",color:"#fff",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:"600"}}>Approve + Publish</button>
             <button onClick={() => reject(s)} style={{padding:"7px 16px",borderRadius:"8px",backgroundColor:"#fff",color:"#E24B4A",border:"1px solid #E24B4A",cursor:"pointer",fontSize:"12px"}}>Reject</button>
             {s.communities?.slug && (
               <a href={"/community/" + s.communities.slug} target="_blank"
@@ -974,8 +974,8 @@ export default function AdminPage() {
     return (
       <div style={{minHeight:"100vh",backgroundColor:"#f9f9f9",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"system-ui,sans-serif"}}>
         <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"16px",padding:"40px",width:"340px",textAlign:"center"}}>
-          <div style={{fontSize:"24px",fontWeight:"700",color:"#1B2B6B",marginBottom:"4px"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></div>
-          <div style={{fontSize:"13px",color:"#888",marginBottom:"28px"}}>Admin Dashboard</div>
+          <div style={{fontSize:"24px",fontWeight:"700",color:"#1B2B6B",marginBottom:"4px"}}>HOA<span style={{color:"#06875e"}}>Agent</span></div>
+          <div style={{fontSize:"13px",color:"#595959",marginBottom:"28px"}}>Admin Dashboard</div>
           <input type="password" placeholder="Password" value={password}
             onChange={e => setPassword(e.target.value)}
             onKeyDown={e => { if (e.key === "Enter" && password === ADMIN_PASSWORD) { setAuthed(true); sessionStorage.setItem("hoa_admin","true") }}}
@@ -1008,9 +1008,9 @@ export default function AdminPage() {
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 24px",display:"flex",alignItems:"center",justifyContent:"space-between",height:"64px"}}>
         <a href="/" style={{textDecoration:"none"}}>
-          <span style={{fontSize:"20px",fontWeight:"700",color:"#1B2B6B"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"20px",fontWeight:"700",color:"#1B2B6B"}}>HOA<span style={{color:"#06875e"}}>Agent</span></span>
         </a>
-        <a href="/" style={{fontSize:"12px",color:"#888",textDecoration:"none"}}>Back to site</a>
+        <a href="/" style={{fontSize:"12px",color:"#595959",textDecoration:"none"}}>Back to site</a>
       </nav>
       <div style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 24px",display:"flex"}}>
         {TABS.map(t => (
@@ -1140,7 +1140,7 @@ function LeadsTab() {
             padding: "9px 16px",
             fontSize: "13px",
             fontWeight: 700,
-            backgroundColor: busy || done || !preview ? "#bbb" : "#1D9E75",
+            backgroundColor: busy || done || !preview ? "#bbb" : "#06875e",
             color: "#fff",
             border: "none",
             borderRadius: "8px",
@@ -1175,7 +1175,7 @@ function LeadsTab() {
       )}
 
       {result && (
-        <div style={{ padding: "14px 16px", backgroundColor: "#E1F5EE", border: "1px solid #1D9E75", borderRadius: "8px" }}>
+        <div style={{ padding: "14px 16px", backgroundColor: "#E1F5EE", border: "1px solid #06875e", borderRadius: "8px" }}>
           <div style={{ fontSize: "13px", fontWeight: 700, color: "#155A3F", marginBottom: "8px" }}>
             Backfill complete
           </div>
@@ -1329,7 +1329,7 @@ function ResearchTab() {
           <p style={{fontSize:"12px",color:"#666",margin:"2px 0 0 0"}}>Where the data lives across Florida</p>
         </div>
         {statusLoading ? (
-          <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>Loading...</div>
+          <div style={{padding:"24px",textAlign:"center",color:"#595959",fontSize:"13px"}}>Loading...</div>
         ) : (
           <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
             <thead>
@@ -1347,8 +1347,8 @@ function ResearchTab() {
                 <tr key={row.county} style={{borderTop:"1px solid #f0f0f0"}}>
                   <td style={{padding:"12px 20px",fontWeight:"600",color:"#1a1a1a"}}>{row.county}</td>
                   <td style={{padding:"12px",textAlign:"right",color:"#1a1a1a"}}>{row.total.toLocaleString()}</td>
-                  <td style={{padding:"12px",textAlign:"right",color: row.live > 0 ? "#16a34a" : "#999"}}>{row.live.toLocaleString()}</td>
-                  <td style={{padding:"12px",textAlign:"right",color: row.needs_review > 0 ? "#e65c00" : "#999"}}>{row.needs_review.toLocaleString()}</td>
+                  <td style={{padding:"12px",textAlign:"right",color: row.live > 0 ? "#16a34a" : "#595959"}}>{row.live.toLocaleString()}</td>
+                  <td style={{padding:"12px",textAlign:"right",color: row.needs_review > 0 ? "#e65c00" : "#595959"}}>{row.needs_review.toLocaleString()}</td>
                   <td style={{padding:"12px",textAlign:"right",color:"#1a1a1a"}}>{row.verified.toLocaleString()}</td>
                   <td style={{padding:"12px 20px",color:"#666"}}>{formatDate(row.last_activity)}</td>
                 </tr>
@@ -1368,9 +1368,9 @@ function ResearchTab() {
         </div>
         <div style={{maxHeight:"360px",overflowY:"auto"}}>
           {statusLoading ? (
-            <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>Loading...</div>
+            <div style={{padding:"24px",textAlign:"center",color:"#595959",fontSize:"13px"}}>Loading...</div>
           ) : status?.activity.length === 0 ? (
-            <div style={{padding:"24px",textAlign:"center",color:"#999",fontSize:"13px"}}>No activity in the last 30 days</div>
+            <div style={{padding:"24px",textAlign:"center",color:"#595959",fontSize:"13px"}}>No activity in the last 30 days</div>
           ) : (
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
               <tbody>
@@ -1384,7 +1384,7 @@ function ResearchTab() {
                     </td>
                     <td style={{padding:"10px 8px"}}>
                       <a href={`/community/${row.slug}`} target="_blank" style={{color:"#1B2B6B",fontWeight:"600",textDecoration:"none"}}>{row.canonical_name}</a>
-                      <span style={{color:"#999",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
+                      <span style={{color:"#595959",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
                     </td>
                     <td style={{padding:"10px 20px",textAlign:"right",whiteSpace:"nowrap"}}>
                       <span style={{fontSize:"11px",fontWeight:"600",padding:"2px 8px",borderRadius:"4px",backgroundColor: row.status === "live" ? "#dcfce7" : row.status === "needs_review" ? "#fef3c7" : "#f3f4f6",color: row.status === "live" ? "#166534" : row.status === "needs_review" ? "#92400e" : "#666"}}>
@@ -1412,7 +1412,7 @@ function ResearchTab() {
                   <tr key={row.id} style={{borderTop:"1px solid #f0f0f0"}}>
                     <td style={{padding:"10px 20px"}}>
                       <a href={`/community/${row.slug}`} target="_blank" style={{color:"#1B2B6B",fontWeight:"600",textDecoration:"none"}}>{row.canonical_name}</a>
-                      <span style={{color:"#999",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
+                      <span style={{color:"#595959",marginLeft:"6px",fontSize:"12px"}}> · {row.city}, {row.county}</span>
                     </td>
                     <td style={{padding:"10px 20px",textAlign:"right",color:"#991b1b",fontWeight:"600",whiteSpace:"nowrap"}}>{row.days_stuck} days</td>
                   </tr>
@@ -1429,18 +1429,18 @@ function ResearchTab() {
 
         <div style={{display:"flex",gap:"24px",marginBottom:"16px",flexWrap:"wrap"}}>
           <div>
-            <div style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Data Items</div>
+            <div style={{fontSize:"11px",color:"#595959",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Data Items</div>
             <div style={{fontSize:"24px",fontWeight:"700",color:"#1a1a1a"}}>{status?.pendingDataCount ?? 0}</div>
           </div>
           <div>
-            <div style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Fee Observations</div>
+            <div style={{fontSize:"11px",color:"#595959",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px"}}>Pending Fee Observations</div>
             <div style={{fontSize:"24px",fontWeight:"700",color:"#1a1a1a"}}>{status?.pendingFeeCount ?? 0}</div>
           </div>
         </div>
 
         <div style={{display:"flex",gap:"12px",alignItems:"flex-end",flexWrap:"wrap"}}>
           <div>
-            <label style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Batch Size</label>
+            <label style={{fontSize:"11px",color:"#595959",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Batch Size</label>
             <select value={batchSize} onChange={e => setBatchSize(Number(e.target.value))} style={{padding:"8px 12px",border:"1px solid #e5e5e5",borderRadius:"8px",fontSize:"13px",backgroundColor:"#fff"}}>
               <option value={5}>5 communities</option>
               <option value={10}>10 communities</option>
@@ -1449,13 +1449,13 @@ function ResearchTab() {
             </select>
           </div>
           <div>
-            <label style={{fontSize:"11px",color:"#999",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Mode</label>
+            <label style={{fontSize:"11px",color:"#595959",textTransform:"uppercase",letterSpacing:"0.5px",display:"block",marginBottom:"4px"}}>Mode</label>
             <select value={dryRun ? "dry" : "live"} onChange={e => setDryRun(e.target.value === "dry")} style={{padding:"8px 12px",border:"1px solid #e5e5e5",borderRadius:"8px",fontSize:"13px",backgroundColor:"#fff"}}>
               <option value="dry">Dry Run (log only)</option>
               <option value="live">Live (write to DB)</option>
             </select>
           </div>
-          <button onClick={runResearch} disabled={running} style={{padding:"9px 20px",borderRadius:"8px",border:"none",backgroundColor: running ? "#999" : "#1B2B6B",color:"#fff",fontSize:"13px",fontWeight:600,cursor: running ? "wait" : "pointer"}}>
+          <button onClick={runResearch} disabled={running} style={{padding:"9px 20px",borderRadius:"8px",border:"none",backgroundColor: running ? "#595959" : "#1B2B6B",color:"#fff",fontSize:"13px",fontWeight:600,cursor: running ? "wait" : "pointer"}}>
             {running ? "Running..." : `Run Research Batch (${batchSize} communities)`}
           </button>
           <a href="/admin/pending" style={{padding:"9px 20px",borderRadius:"8px",border:"1px solid #e5e5e5",color:"#1B2B6B",fontSize:"13px",fontWeight:600,textDecoration:"none",backgroundColor:"#fff",display:"inline-block"}}>

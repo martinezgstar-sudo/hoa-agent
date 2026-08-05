@@ -62,7 +62,7 @@ export default function NavBar({
   const buttonStyle = isMobile
     ? {
         fontSize: '12px',
-        backgroundColor: '#1D9E75',
+        backgroundColor: '#06875e',
         color: '#fff',
         padding: '6px 10px',
         borderRadius: '6px',
@@ -71,7 +71,7 @@ export default function NavBar({
       }
     : {
         fontSize: '13px',
-        backgroundColor: '#1D9E75',
+        backgroundColor: '#06875e',
         color: '#fff',
         padding: '6px 12px',
         borderRadius: '6px',
@@ -96,7 +96,7 @@ export default function NavBar({
       >
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
           <span style={{ fontSize: '22px', fontWeight: '700', color: '#1B2B6B', letterSpacing: '-0.02em' }}>
-            HOA<span style={{ color: '#1D9E75' }}>Agent</span>
+            HOA<span style={{ color: '#06875e' }}>Agent</span>
           </span>
         </Link>
 

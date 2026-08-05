@@ -81,7 +81,7 @@ function litCell(c: Community): React.ReactNode {
 
 export default function ComparePageWrapper() {
   return (
-    <Suspense fallback={<div style={{ padding: 60, textAlign: "center", color: "#888" }}>Loading…</div>}>
+    <Suspense fallback={<div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Loading…</div>}>
       <ComparePageInner />
     </Suspense>
   )
@@ -155,7 +155,7 @@ function ComparePageInner() {
     <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "40px 20px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "10px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "10px" }}>
           Tools
         </div>
         <h1 style={{ fontSize: "32px", fontWeight: 700, color: "#1B2B6B", marginBottom: "8px", letterSpacing: "-0.02em" }}>
@@ -188,7 +188,7 @@ function ComparePageInner() {
         {/* Selected chips */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px" }}>
           {slugs.length === 0 && (
-            <div style={{ fontSize: "13px", color: "#888", fontStyle: "italic" }}>No communities selected. Search above to add.</div>
+            <div style={{ fontSize: "13px", color: "#595959", fontStyle: "italic" }}>No communities selected. Search above to add.</div>
           )}
           {slugs.map((s) => {
             const c = communities.find((x) => x.slug === s)
@@ -201,7 +201,7 @@ function ComparePageInner() {
           })}
         </div>
 
-        {loading && <div style={{ textAlign: "center", padding: "40px", color: "#888" }}>Loading…</div>}
+        {loading && <div style={{ textAlign: "center", padding: "40px", color: "#595959" }}>Loading…</div>}
 
         {/* Comparison table */}
         {!loading && communities.length >= 2 && (
@@ -209,7 +209,7 @@ function ComparePageInner() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", minWidth: "600px" }}>
               <thead>
                 <tr>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "#888", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.04em", backgroundColor: "#f5f5f5", borderBottom: "1px solid #e5e5e5", minWidth: "160px" }}>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontWeight: 600, color: "#595959", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.04em", backgroundColor: "#f5f5f5", borderBottom: "1px solid #e5e5e5", minWidth: "160px" }}>
                     Field
                   </th>
                   {communities.map((c) => (
@@ -231,18 +231,18 @@ function ComparePageInner() {
                   { label: "Age Restricted", get: (c: Community) => (
                     c.is_55_plus ? <span style={{ color: "#92400E", fontWeight: 600 }}>Yes — 55+ Community</span>
                     : c.is_age_restricted ? <span style={{ color: "#6B21A8", fontWeight: 600 }}>Yes</span>
-                    : <span style={{ color: "#1D9E75" }}>No</span>
+                    : <span style={{ color: "#06875e" }}>No</span>
                   ) },
                   { label: "Gated", get: (c: Community) => (
                     c.is_gated ? <span style={{ color: "#1E40AF", fontWeight: 600 }}>Yes</span>
-                    : <span style={{ color: "#1D9E75" }}>No</span>
+                    : <span style={{ color: "#06875e" }}>No</span>
                   ) },
                   { label: "Pet Policy", get: (c: Community) => c.pet_restriction || NA },
                   { label: "Rental Restrictions", get: (c: Community) => c.rental_approval || NA },
                   { label: "STR Restrictions", get: (c: Community) => c.str_restriction || NA },
                   { label: "Amenities", get: (c: Community) => c.amenities || NA },
                   { label: "Reviews", get: (c: Community) => c.review_count ? `${c.review_avg ?? "—"}★ (${c.review_count})` : NA },
-                  { label: "Website", get: (c: Community) => c.website_url ? <a href={c.website_url} target="_blank" rel="noopener" style={{ color: "#1D9E75" }}>Visit ↗</a> : NA },
+                  { label: "Website", get: (c: Community) => c.website_url ? <a href={c.website_url} target="_blank" rel="noopener" style={{ color: "#06875e" }}>Visit ↗</a> : NA },
                 ].map((row, i) => (
                   <tr key={row.label} style={{ borderBottom: "1px solid #f0f0f0", backgroundColor: i % 2 === 0 ? "#fff" : "#fafafa" }}>
                     <td style={{ padding: "10px 16px", fontSize: "12px", color: "#666", fontWeight: 600 }}>{row.label}</td>
@@ -266,7 +266,7 @@ function ComparePageInner() {
 
         {communities.length > 0 && (
           <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <Link href="/search" style={{ fontSize: "13px", color: "#1D9E75", fontWeight: 600 }}>+ Add more from search →</Link>
+            <Link href="/search" style={{ fontSize: "13px", color: "#06875e", fontWeight: 600 }}>+ Add more from search →</Link>
           </div>
         )}
       </div>

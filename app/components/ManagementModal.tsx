@@ -73,7 +73,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
   if (!open) {
     return (
       <button onClick={() => setOpen(true)}
-        style={{fontSize:"11px",color:"#1D9E75",border:"1px solid #1D9E75",borderRadius:"20px",padding:"3px 10px",backgroundColor:"#fff",cursor:"pointer",whiteSpace:"nowrap"}}>
+        style={{fontSize:"11px",color:"#06875e",border:"1px solid #06875e",borderRadius:"20px",padding:"3px 10px",backgroundColor:"#fff",cursor:"pointer",whiteSpace:"nowrap"}}>
         + Know this? Add it
       </button>
     )
@@ -90,7 +90,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:"36px",marginBottom:"12px"}}>✓</div>
             <div style={{fontSize:"15px",fontWeight:"600",color:"#1B2B6B",marginBottom:"8px"}}>Thank you!</div>
-            <div style={{fontSize:"13px",color:"#888",marginBottom:"20px",lineHeight:"1.6"}}>The management company info will be reviewed and added within 24 hours.</div>
+            <div style={{fontSize:"13px",color:"#595959",marginBottom:"20px",lineHeight:"1.6"}}>The management company info will be reviewed and added within 24 hours.</div>
             <button onClick={() => { setOpen(false); setStatus("idle"); setCompany("") }}
               style={{padding:"10px 24px",borderRadius:"8px",backgroundColor:"#1B2B6B",color:"#fff",border:"none",cursor:"pointer",fontSize:"14px",fontWeight:"600"}}>
               Close
@@ -98,9 +98,9 @@ export default function ManagementModal({ communityId, communityName }: Props) {
           </div>
         ) : (
           <>
-            <div style={{fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Add management info</div>
+            <div style={{fontSize:"11px",fontWeight:"600",color:"#06875e",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"8px"}}>Add management info</div>
             <div style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"6px",lineHeight:"1.4"}}>Who manages {communityName}?</div>
-            <div style={{fontSize:"12px",color:"#888",marginBottom:"20px"}}>Start typing to see suggestions from known Palm Beach County management companies.</div>
+            <div style={{fontSize:"12px",color:"#595959",marginBottom:"20px"}}>Start typing to see suggestions from known Palm Beach County management companies.</div>
 
             <div style={{marginBottom:"16px",position:"relative"}}>
               <input
@@ -126,7 +126,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
                   {company.length > 1 && !KNOWN_COMPANIES.some(c => c.toLowerCase() === company.toLowerCase()) && (
                     <div
                       onClick={() => setShowSuggestions(false)}
-                      style={{padding:"10px 14px",fontSize:"12px",color:"#888",cursor:"pointer",fontStyle:"italic"}}
+                      style={{padding:"10px 14px",fontSize:"12px",color:"#595959",cursor:"pointer",fontStyle:"italic"}}
                       onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f5f5f5")}
                       onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#fff")}>
                       Use "{company}" (not in our list)
@@ -150,7 +150,7 @@ export default function ManagementModal({ communityId, communityName }: Props) {
                 Cancel
               </button>
               <button type="button" onClick={handleSubmit} disabled={!company.trim() || status==="submitting"}
-                style={{flex:2,padding:"11px",borderRadius:"8px",backgroundColor:company.trim()?"#1D9E75":"#ccc",color:"#fff",border:"none",cursor:company.trim()?"pointer":"not-allowed",fontSize:"13px",fontWeight:"600"}}>
+                style={{flex:2,padding:"11px",borderRadius:"8px",backgroundColor:company.trim()?"#06875e":"#ccc",color:"#fff",border:"none",cursor:company.trim()?"pointer":"not-allowed",fontSize:"13px",fontWeight:"600"}}>
                 {status==="submitting" ? "Submitting..." : "Submit"}
               </button>
             </div>

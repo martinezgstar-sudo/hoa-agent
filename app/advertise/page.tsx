@@ -117,12 +117,12 @@ export default async function AdvertisePage() {
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
 
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "8px 24px", textAlign: "right", fontSize: "12px" }}>
-        <span style={{ color: "#888" }}>Already an advertiser? </span>
-        <Link href="/advertise/login" style={{ color: "#1D9E75", fontWeight: 600, textDecoration: "none" }}>Sign in →</Link>
+        <span style={{ color: "#595959" }}>Already an advertiser? </span>
+        <Link href="/advertise/login" style={{ color: "#06875e", fontWeight: 600, textDecoration: "none" }}>Sign in →</Link>
       </div>
 
       <section style={{ backgroundColor: "#fff", padding: "64px 24px 56px", textAlign: "center" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "16px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "16px" }}>
           For Local Businesses
         </div>
         <h1 style={{ fontSize: "44px", fontWeight: 700, color: "#1B2B6B", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px", maxWidth: "680px", margin: "0 auto 16px" }}>
@@ -132,21 +132,21 @@ export default async function AdvertisePage() {
           Your ad appears on the HOA community pages where homebuyers, renters, and residents are already researching. Targeted by city, low cost, AI-built from your website.
         </p>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
+          <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#06875e", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
             Start Free Trial →
           </Link>
           <Link href="#pricing" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#fff", color: "#1B2B6B", border: "2px solid #1B2B6B", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
             See Pricing
           </Link>
         </div>
-        <div style={{ marginTop: "24px", fontSize: "13px", color: "#888" }}>
+        <div style={{ marginTop: "24px", fontSize: "13px", color: "#595959" }}>
           {totalCommunities.toLocaleString()}+ communities where your ad can appear
         </div>
       </section>
 
       <section style={{ padding: "48px 24px", backgroundColor: "#f9f9f9" }}>
         <div style={{ maxWidth: "560px", margin: "0 auto" }}>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px", textAlign: "center" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "#595959", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px", textAlign: "center" }}>
             Example — How your ad appears on community pages
           </div>
           <SponsoredCard advertisers={[exampleAd]} />
@@ -164,7 +164,7 @@ export default async function AdvertisePage() {
               { num: 4, title: "Your ad goes live", desc: "Ad appears on community pages within minutes." },
             ].map((s) => (
               <div key={s.num} style={{ padding: "20px", backgroundColor: "#f9f9f9", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
-                <div style={{ fontSize: "12px", color: "#1D9E75", fontWeight: 700, marginBottom: "6px" }}>STEP {s.num}</div>
+                <div style={{ fontSize: "12px", color: "#06875e", fontWeight: 700, marginBottom: "6px" }}>STEP {s.num}</div>
                 <div style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a", marginBottom: "6px" }}>{s.title}</div>
                 <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.6 }}>{s.desc}</div>
               </div>
@@ -179,15 +179,15 @@ export default async function AdvertisePage() {
           <p style={{ textAlign: "center", color: "#666", fontSize: "14px", marginBottom: "36px" }}>Simple monthly plans. Cancel anytime.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
             {PLANS.map((p) => (
-              <div key={p.name} style={{ position: "relative", backgroundColor: "#fff", borderRadius: "14px", padding: "28px 24px", border: p.badge ? "2px solid #1D9E75" : "1px solid #e5e5e5" }}>
+              <div key={p.name} style={{ position: "relative", backgroundColor: "#fff", borderRadius: "14px", padding: "28px 24px", border: p.badge ? "2px solid #06875e" : "1px solid #e5e5e5" }}>
                 {p.badge && (
-                  <div style={{ position: "absolute", top: "-12px", right: "20px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 12px", borderRadius: "12px" }}>{p.badge}</div>
+                  <div style={{ position: "absolute", top: "-12px", right: "20px", backgroundColor: "#06875e", color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 12px", borderRadius: "12px" }}>{p.badge}</div>
                 )}
                 <div style={{ fontSize: "16px", fontWeight: 700, color: "#1B2B6B", marginBottom: "6px" }}>{p.name}</div>
                 <div style={{ fontSize: "30px", fontWeight: 700, color: "#1a1a1a", marginBottom: "4px" }}>
-                  ${p.price}<span style={{ fontSize: "13px", fontWeight: 400, color: "#888" }}>/month</span>
+                  ${p.price}<span style={{ fontSize: "13px", fontWeight: 400, color: "#595959" }}>/month</span>
                 </div>
-                <div style={{ fontSize: "11px", color: "#1D9E75", fontWeight: 600, marginBottom: "16px", letterSpacing: "0.02em" }}>
+                <div style={{ fontSize: "11px", color: "#06875e", fontWeight: 600, marginBottom: "16px", letterSpacing: "0.02em" }}>
                   ✓ Category exclusivity guaranteed
                 </div>
                 <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px 0", fontSize: "13px", color: "#444", lineHeight: 1.9 }}>
@@ -231,7 +231,7 @@ export default async function AdvertisePage() {
         <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.85)", marginBottom: "24px", maxWidth: "480px", margin: "0 auto 24px" }}>
           {totalCommunities.toLocaleString()}+ communities. Targeted by city. AI-built from your website.
         </p>
-        <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
+        <Link href="/advertise/signup" style={{ display: "inline-block", padding: "14px 28px", backgroundColor: "#06875e", color: "#fff", fontSize: "15px", fontWeight: 700, borderRadius: "10px", textDecoration: "none" }}>
           Get Started →
         </Link>
       </section>

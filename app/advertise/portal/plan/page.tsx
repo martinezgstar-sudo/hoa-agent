@@ -204,7 +204,7 @@ export default function PlanSelectionPage() {
   }
 
   if (!authChecked) {
-    return <div style={{ padding: 60, textAlign: "center", color: "#888" }}>Checking session…</div>
+    return <div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Checking session…</div>
   }
 
   return (
@@ -228,7 +228,7 @@ export default function PlanSelectionPage() {
                   position: "relative",
                   display: "block",
                   padding: "16px",
-                  border: "2px solid " + (plan === p.key ? "#1D9E75" : "#e5e5e5"),
+                  border: "2px solid " + (plan === p.key ? "#06875e" : "#e5e5e5"),
                   borderRadius: "12px",
                   backgroundColor: plan === p.key ? "#F4FBF8" : "#fff",
                   cursor: "pointer",
@@ -244,13 +244,13 @@ export default function PlanSelectionPage() {
                   style={{ position: "absolute", left: "-9999px" }}
                 />
                 {p.badge && (
-                  <span style={{ position: "absolute", top: "-10px", right: "12px", backgroundColor: "#1D9E75", color: "#fff", fontSize: "10px", fontWeight: 700, padding: "2px 8px", borderRadius: "10px" }}>
+                  <span style={{ position: "absolute", top: "-10px", right: "12px", backgroundColor: "#06875e", color: "#fff", fontSize: "10px", fontWeight: 700, padding: "2px 8px", borderRadius: "10px" }}>
                     {p.badge}
                   </span>
                 )}
                 <div style={{ fontSize: "14px", fontWeight: 700, color: "#1B2B6B" }}>{p.label}</div>
                 <div style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a1a", marginBottom: "4px" }}>
-                  ${p.price}<span style={{ fontSize: "11px", fontWeight: 400, color: "#888" }}>/mo</span>
+                  ${p.price}<span style={{ fontSize: "11px", fontWeight: 400, color: "#595959" }}>/mo</span>
                 </div>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "11px", color: "#555", lineHeight: 1.6 }}>
                   {p.bullets.map((b) => <li key={b}>✓ {b}</li>)}
@@ -322,7 +322,7 @@ export default function PlanSelectionPage() {
                   Add
                 </button>
               </div>
-              <div style={{ fontSize: "11px", color: "#888", marginBottom: "10px" }}>
+              <div style={{ fontSize: "11px", color: "#595959", marginBottom: "10px" }}>
                 {zips.length} / {planMeta.max_zips} ZIP codes selected
               </div>
               {zips.length > 0 && (
@@ -361,7 +361,7 @@ export default function PlanSelectionPage() {
               {checking ? "Checking…" : "Check availability"}
             </button>
             {available === true && (
-              <span style={{ color: "#1D9E75", fontSize: "13px", fontWeight: 600 }}>
+              <span style={{ color: "#06875e", fontSize: "13px", fontWeight: 600 }}>
                 ✓ All selected ZIPs are available
               </span>
             )}
@@ -406,7 +406,7 @@ export default function PlanSelectionPage() {
             style={{
               padding: "11px 18px",
               borderRadius: "8px",
-              backgroundColor: "#1D9E75",
+              backgroundColor: "#06875e",
               color: "#fff",
               border: "none",
               fontSize: "13px",

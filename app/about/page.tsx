@@ -30,7 +30,7 @@ export default function AboutPage() {
 
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           About
         </div>
 
@@ -45,8 +45,8 @@ export default function AboutPage() {
           in one place, before you buy, rent, or move in.
         </p>
 
-        <div style={{ borderLeft: '3px solid #1D9E75', paddingLeft: '20px', marginBottom: '40px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+        <div style={{ borderLeft: '3px solid #06875e', paddingLeft: '20px', marginBottom: '40px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
             Why we built this
           </div>
           <p style={{ fontSize: '15px', color: '#333', lineHeight: 1.8, margin: 0 }}>

@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ maxWidth: "380px", margin: "0 auto", padding: "80px 20px 40px" }}>
-        <Link href="/advertise/login" style={{ fontSize: "13px", color: "#888", textDecoration: "none" }}>← Back to sign in</Link>
+        <Link href="/advertise/login" style={{ fontSize: "13px", color: "#595959", textDecoration: "none" }}>← Back to sign in</Link>
         <div style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", margin: "20px 0 6px", letterSpacing: "-0.02em" }}>
           Reset your password
         </div>
@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
             )}
             <button type="submit" disabled={busy} style={{
               padding: "12px", fontSize: "14px", fontWeight: 600,
-              backgroundColor: busy ? "#999" : "#1B2B6B", color: "#fff",
+              backgroundColor: busy ? "#595959" : "#1B2B6B", color: "#fff",
               border: "none", borderRadius: "10px", cursor: busy ? "not-allowed" : "pointer",
             }}>
               {busy ? "Sending…" : "Send Reset Link"}

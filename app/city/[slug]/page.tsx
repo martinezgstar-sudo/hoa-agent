@@ -308,8 +308,8 @@ export default async function CityPage({ params, searchParams }: Props) {
       </div>
 
       <div style={{ maxWidth: '780px', margin: '0 auto', padding: '32px 20px' }}>
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '20px' }}>
-          <Link href="/city" style={{ color: '#1D9E75', textDecoration: 'none' }}>Cities</Link>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '20px' }}>
+          <Link href="/city" style={{ color: '#06875e', textDecoration: 'none' }}>Cities</Link>
           {' › '}
           {city.name}
         </div>
@@ -334,7 +334,7 @@ export default async function CityPage({ params, searchParams }: Props) {
         {/* Positive recent news (only if found) */}
         {positiveNews.length > 0 && (
           <div style={{ marginBottom: '28px', backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '18px 20px' }}>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
               Recent News in {city.name}
             </div>
             {positiveNews.map((a, i) => (
@@ -397,7 +397,7 @@ export default async function CityPage({ params, searchParams }: Props) {
 
         {list.length === 0 ? (
           <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e5e5e5', color: '#888' }}>
-            No communities listed yet for {city.name}. <Link href="/search" style={{ color: '#1D9E75' }}>Try the full search.</Link>
+            No communities listed yet for {city.name}. <Link href="/search" style={{ color: '#06875e' }}>Try the full search.</Link>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -411,7 +411,7 @@ export default async function CityPage({ params, searchParams }: Props) {
                   <div>
                     <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1a1a', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {c.richness_score >= 50 && (
-                        <span title="Data-rich profile" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#1D9E75' }} />
+                        <span title="Data-rich profile" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#06875e' }} />
                       )}
                       {c.canonical_name}
                     </div>

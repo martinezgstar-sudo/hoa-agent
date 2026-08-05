@@ -132,26 +132,26 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
 
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 32px",height:"64px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{textDecoration:"none"}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#06875e"}}>Agent</span></span>
         </a>
         <div style={{display:"flex",gap:"12px",alignItems:"center"}}>
           <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Browse</a>
-          <a href="/search" style={{fontSize:"13px",backgroundColor:"#1D9E75",color:"#fff",padding:"6px 12px",borderRadius:"6px",textDecoration:"none"}}>Search HOAs</a>
+          <a href="/search" style={{fontSize:"13px",backgroundColor:"#06875e",color:"#fff",padding:"6px 12px",borderRadius:"6px",textDecoration:"none"}}>Search HOAs</a>
         </div>
       </nav>
 
       <div style={{maxWidth:"800px",margin:"0 auto",padding:"32px 24px"}}>
-        <div style={{fontSize:"12px",color:"#888",marginBottom:"16px"}}>
-          <a href="/" style={{color:"#888",textDecoration:"none"}}>HOA Agent</a>
+        <div style={{fontSize:"12px",color:"#595959",marginBottom:"16px"}}>
+          <a href="/" style={{color:"#595959",textDecoration:"none"}}>HOA Agent</a>
           <span style={{margin:"0 6px"}}>›</span>
-          <a href={`/cities/${county.replace('-county','')}`} style={{color:"#888",textDecoration:"none"}}>{countyName}</a>
+          <a href={`/cities/${county.replace('-county','')}`} style={{color:"#595959",textDecoration:"none"}}>{countyName}</a>
           <span style={{margin:"0 6px"}}>›</span>
           <span style={{color:"#1a1a1a"}}>{label}</span>
         </div>
 
         <h1 style={{fontSize:"28px",fontWeight:"700",color:"#1a1a1a",marginBottom:"8px",lineHeight:"1.3"}}>{label} in {countyName}</h1>
         <p style={{fontSize:"15px",color:"#555",lineHeight:"1.7",marginBottom:"8px"}}>{description}</p>
-        <div style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>{communities?.length || 0} communities found</div>
+        <div style={{fontSize:"13px",color:"#595959",marginBottom:"32px"}}>{communities?.length || 0} communities found</div>
 
         <div style={{display:"flex",flexDirection:"column",gap:"10px",marginBottom:"40px"}}>
           {(communities || []).map((c: any) => (
@@ -159,7 +159,7 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
               <div style={{backgroundColor:"#fff",border:"1px solid #e5e5e5",borderRadius:"12px",padding:"16px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"16px"}}>
                 <div>
                   <div style={{fontSize:"14px",fontWeight:"600",color:"#1a1a1a",marginBottom:"4px"}}>{c.canonical_name}</div>
-                  <div style={{fontSize:"12px",color:"#888"}}>
+                  <div style={{fontSize:"12px",color:"#595959"}}>
                     {c.city}{c.property_type ? " · " + c.property_type : ""}
                     {c.management_company ? " · " + c.management_company : ""}
                   </div>
@@ -173,7 +173,7 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
                   <div style={{fontSize:"14px",fontWeight:"600",color:"#1B2B6B"}}>
                     {c.monthly_fee_min && c.monthly_fee_max ? "$" + c.monthly_fee_min + "–$" + c.monthly_fee_max + "/mo" : "Fee unknown"}
                   </div>
-                  <div style={{fontSize:"11px",color:"#1D9E75",marginTop:"2px"}}>View profile →</div>
+                  <div style={{fontSize:"11px",color:"#06875e",marginTop:"2px"}}>View profile →</div>
                 </div>
               </div>
             </a>
@@ -205,10 +205,10 @@ export default async function FilterPage({ params }: { params: Promise<{ county:
         </div>
       </div>
 
-      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#595959"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent provides informational data only. Not affiliated with any HOA, management company, or government agency.</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#595959",lineHeight:"1.6"}}>HOA Agent provides informational data only. Not affiliated with any HOA, management company, or government agency.</div>
       </footer>
     </main>
   )

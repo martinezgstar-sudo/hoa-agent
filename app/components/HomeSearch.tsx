@@ -132,7 +132,7 @@ export default function HomeSearch() {
                 }}
               >
                 {loading && suggestions.length === 0 && (
-                  <div style={{ padding: "12px 14px", fontSize: "13px", color: "#888" }}>
+                  <div style={{ padding: "12px 14px", fontSize: "13px", color: "#595959" }}>
                     Searching…
                   </div>
                 )}
@@ -164,7 +164,7 @@ export default function HomeSearch() {
                     <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {s.label}
                     </span>
-                    <span style={{ fontSize: "11px", color: "#1D9E75", flexShrink: 0 }}>
+                    <span style={{ fontSize: "11px", color: "#06875e", flexShrink: 0 }}>
                       {s.type === "zip" ? "View ZIP →" : "View profile →"}
                     </span>
                   </button>
@@ -178,7 +178,7 @@ export default function HomeSearch() {
               fontSize: "13px",
               padding: "10px 20px",
               borderRadius: "8px",
-              backgroundColor: "#1D9E75",
+              backgroundColor: "#06875e",
               color: "#fff",
               border: "none",
               cursor: "pointer",
@@ -198,7 +198,7 @@ export default function HomeSearch() {
           paddingTop: "12px",
           borderTop: "1px solid #e5e5e5",
           fontSize: "12px",
-          color: "#999",
+          color: "#595959",
           fontStyle: "italic",
         }}
       >
@@ -212,7 +212,7 @@ export default function HomeSearch() {
           padding: "12px 0",
           minHeight: "44px",
           fontSize: "13px",
-          color: "#1D9E75",
+          color: "#06875e",
           fontWeight: 600,
           textDecoration: "none",
         }}

@@ -102,7 +102,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
   }
 
   if (!authChecked) {
-    return <div style={{ padding: 60, textAlign: "center", color: "#888" }}>Checking session…</div>
+    return <div style={{ padding: 60, textAlign: "center", color: "#595959" }}>Checking session…</div>
   }
 
   const p = PRICE[plan] ?? { label: plan, price: 0 }
@@ -111,7 +111,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", fontFamily: "system-ui,sans-serif" }}>
       <div style={{ maxWidth: "560px", margin: "0 auto", padding: "60px 20px 40px" }}>
-        <Link href="/advertise/portal/plan" style={{ fontSize: "13px", color: "#888", textDecoration: "none" }}>← Change plan</Link>
+        <Link href="/advertise/portal/plan" style={{ fontSize: "13px", color: "#595959", textDecoration: "none" }}>← Change plan</Link>
         <div style={{ fontSize: "26px", fontWeight: 700, color: "#1B2B6B", margin: "20px 0 6px", letterSpacing: "-0.02em" }}>
           Review and activate
         </div>
@@ -144,7 +144,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
             <div style={{
               padding: "10px 12px",
               backgroundColor: msg.type === "error" ? "#FEE9E9" : msg.type === "success" ? "#E1F5EE" : "#FAEEDA",
-              border: "1px solid " + (msg.type === "error" ? "#E24B4A" : msg.type === "success" ? "#1D9E75" : "#EF9F27"),
+              border: "1px solid " + (msg.type === "error" ? "#E24B4A" : msg.type === "success" ? "#06875e" : "#EF9F27"),
               borderRadius: "8px",
               color: msg.type === "error" ? "#A32D2D" : msg.type === "success" ? "#155A3F" : "#854F0B",
               fontSize: "12px",
@@ -161,7 +161,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
               disabled={busy}
               style={{
                 padding: "12px 18px",
-                backgroundColor: busy ? "#888" : "#1D9E75",
+                backgroundColor: busy ? "#595959" : "#06875e",
                 color: "#fff",
                 border: "none",
                 borderRadius: "10px",
@@ -202,7 +202,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
         </div>
 
         {stripeWired === false && (
-          <div style={{ fontSize: "11px", color: "#888", marginTop: "10px" }}>
+          <div style={{ fontSize: "11px", color: "#595959", marginTop: "10px" }}>
             (Diagnostic: Stripe env vars not configured.)
           </div>
         )}
@@ -214,7 +214,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ plan: strin
 function SummaryRow({ label, value, status }: { label: string; value: string; status?: "matched" | "pending_review" }) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f0f0f0", fontSize: "13px" }}>
-      <span style={{ color: "#888", fontWeight: 500 }}>{label}</span>
+      <span style={{ color: "#595959", fontWeight: 500 }}>{label}</span>
       <span style={{ color: "#1a1a1a", textAlign: "right", maxWidth: "60%", wordBreak: "break-word" }}>
         {value}
         {status === "pending_review" && (

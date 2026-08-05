@@ -119,7 +119,7 @@ export default async function FeeReportPage() {
 
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           HOA Agent Reports
         </div>
 
@@ -218,7 +218,7 @@ export default async function FeeReportPage() {
 
         {/* PAYWALL CTA */}
         <div style={{ backgroundColor: '#1B2B6B', color: '#fff', borderRadius: '14px', padding: '32px 28px', marginBottom: '48px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
             Premium Report
           </div>
           <h2 style={{ fontSize: '26px', fontWeight: 700, color: '#fff', marginTop: 0, marginBottom: '8px', letterSpacing: '-0.01em' }}>
@@ -235,7 +235,7 @@ export default async function FeeReportPage() {
             <li>✓ CSV download for your records</li>
             <li>✓ Updated as new data is verified</li>
           </ul>
-          <Link href="/pricing" style={{ display: 'inline-block', backgroundColor: '#1D9E75', color: '#fff', fontSize: '15px', fontWeight: 700, padding: '12px 24px', borderRadius: '10px', textDecoration: 'none' }}>
+          <Link href="/pricing" style={{ display: 'inline-block', backgroundColor: '#06875e', color: '#fff', fontSize: '15px', fontWeight: 700, padding: '12px 24px', borderRadius: '10px', textDecoration: 'none' }}>
             Unlock Full Report — $2.99
           </Link>
           <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginTop: '10px' }}>

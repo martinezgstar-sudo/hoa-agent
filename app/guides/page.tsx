@@ -42,7 +42,7 @@ export default function GuidesIndexPage() {
     <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "48px 20px 60px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
           HOA Agent Guides
         </div>
         <h1 style={{ fontSize: "36px", fontWeight: 700, color: "#1B2B6B", letterSpacing: "-0.02em", marginBottom: "16px" }}>
@@ -57,14 +57,14 @@ export default function GuidesIndexPage() {
               <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "20px 24px" }}>
                 <div style={{ fontSize: "16px", fontWeight: 700, color: "#1B2B6B", marginBottom: "6px" }}>{g.title}</div>
                 <div style={{ fontSize: "13px", color: "#555", lineHeight: 1.6 }}>{g.description}</div>
-                <div style={{ fontSize: "12px", color: "#1D9E75", fontWeight: 600, marginTop: "10px" }}>Read guide →</div>
+                <div style={{ fontSize: "12px", color: "#06875e", fontWeight: 600, marginTop: "10px" }}>Read guide →</div>
               </div>
             </Link>
           ))}
         </div>
         <div style={{ marginTop: "32px", padding: "20px", backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px" }}>
           <div style={{ fontSize: "13px", color: "#666", marginBottom: "8px", fontWeight: 600 }}>Looking for Florida law explainers?</div>
-          <Link href="/florida-hoa-law" style={{ fontSize: "13px", color: "#1D9E75", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/florida-hoa-law" style={{ fontSize: "13px", color: "#06875e", fontWeight: 600, textDecoration: "none" }}>
             Read the Florida HOA Law section →
           </Link>
         </div>

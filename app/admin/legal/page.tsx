@@ -58,8 +58,8 @@ export default function LegalReview() {
   const Nav = () => (
     <>
       <nav style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
-        <a href="/" style={{ textDecoration: "none" }}><span style={{ fontSize: 20, fontWeight: 700, color: "#1B2B6B" }}>HOA<span style={{ color: "#1D9E75" }}>Agent</span></span></a>
-        <a href="/admin" style={{ fontSize: 12, color: "#888", textDecoration: "none" }}>Back to admin</a>
+        <a href="/" style={{ textDecoration: "none" }}><span style={{ fontSize: 20, fontWeight: 700, color: "#1B2B6B" }}>HOA<span style={{ color: "#06875e" }}>Agent</span></span></a>
+        <a href="/admin" style={{ fontSize: 12, color: "#595959", textDecoration: "none" }}>Back to admin</a>
       </nav>
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex" }}>
         {tabs.map((t) => {

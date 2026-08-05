@@ -13,7 +13,7 @@ export default function ContactPage() {
     <main style={{ fontFamily: "system-ui, sans-serif", backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
       <NavBar shareHref="/search" shareLabel="Find my HOA" />
       <div style={{ maxWidth: "640px", margin: "0 auto", padding: "48px 20px 60px" }}>
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#1D9E75", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#06875e", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
           Contact
         </div>
         <h1 style={{ fontSize: "32px", fontWeight: 700, color: "#1B2B6B", letterSpacing: "-0.02em", marginBottom: "12px" }}>
@@ -21,8 +21,8 @@ export default function ContactPage() {
         </h1>
         <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.7, marginBottom: "28px" }}>
           We typically respond within 2 business days. For corrections, please use our{" "}
-          <a href="/corrections" style={{ color: "#1D9E75", fontWeight: 500 }}>corrections page</a>.
-          For press inquiries, see <a href="/press" style={{ color: "#1D9E75", fontWeight: 500 }}>/press</a>.
+          <a href="/corrections" style={{ color: "#06875e", fontWeight: 500 }}>corrections page</a>.
+          For press inquiries, see <a href="/press" style={{ color: "#06875e", fontWeight: 500 }}>/press</a>.
         </p>
         <ContactForm
           subject="General Inquiry"

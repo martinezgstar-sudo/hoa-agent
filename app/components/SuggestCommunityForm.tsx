@@ -101,7 +101,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
   return (
     <div style={{backgroundColor:"#fff",border:"2px solid #1B2B6B",borderRadius:"16px",padding:"24px",margin:"16px 0"}}>
       <div style={{fontSize:"16px",fontWeight:"600",color:"#1B2B6B",marginBottom:"4px"}}>Don't see your community?</div>
-      <div style={{fontSize:"13px",color:"#888",marginBottom:"20px"}}>Suggest it and we'll add it to HOA Agent. Start typing to see if it already exists in our database.</div>
+      <div style={{fontSize:"13px",color:"#595959",marginBottom:"20px"}}>Suggest it and we'll add it to HOA Agent. Start typing to see if it already exists in our database.</div>
 
       {!expanded ? (
         <button onClick={() => { setExpanded(true); if (name.length >= 2) setShowDrafts(true) }}
@@ -119,7 +119,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
               style={{width:"100%",padding:"10px 12px",borderRadius:"8px",border:"1.5px solid #e5e5e5",fontSize:"13px",outline:"none",boxSizing:"border-box"}}/>
             {showDrafts && draftMatches.length > 0 && (
               <div style={{position:"absolute",top:"100%",left:0,right:0,backgroundColor:"#fff",border:"1.5px solid #e5e5e5",borderRadius:"10px",boxShadow:"0 8px 24px rgba(0,0,0,0.1)",zIndex:100,marginTop:"4px",overflow:"hidden"}}>
-                <div style={{padding:"8px 12px",fontSize:"11px",fontWeight:"600",color:"#1D9E75",textTransform:"uppercase",letterSpacing:"0.05em",backgroundColor:"#f9f9f9"}}>
+                <div style={{padding:"8px 12px",fontSize:"11px",fontWeight:"600",color:"#06875e",textTransform:"uppercase",letterSpacing:"0.05em",backgroundColor:"#f9f9f9"}}>
                   Already in our database — click to select
                 </div>
                 {draftMatches.map(d => (
@@ -128,11 +128,11 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor="#fff")}>
                     <div style={{fontWeight:"500",color:"#1a1a1a"}}>{d.canonical_name}</div>
-                    <div style={{fontSize:"11px",color:"#888"}}>{d.city}{d.property_type ? " · " + d.property_type : ""}{d.monthly_fee_min ? " · $" + d.monthly_fee_min + "/mo" : ""}</div>
+                    <div style={{fontSize:"11px",color:"#595959"}}>{d.city}{d.property_type ? " · " + d.property_type : ""}{d.monthly_fee_min ? " · $" + d.monthly_fee_min + "/mo" : ""}</div>
                   </div>
                 ))}
                 <div onClick={() => { setShowDrafts(false); setSelectedDraft(null) }}
-                  style={{padding:"10px 14px",fontSize:"12px",color:"#1D9E75",cursor:"pointer",fontWeight:"500",borderTop:"1px solid #f0f0f0",backgroundColor:"#f9f9f9"}}
+                  style={{padding:"10px 14px",fontSize:"12px",color:"#06875e",cursor:"pointer",fontWeight:"500",borderTop:"1px solid #f0f0f0",backgroundColor:"#f9f9f9"}}
                   onMouseEnter={e => (e.currentTarget.style.backgroundColor="#E1F5EE")}
                   onMouseLeave={e => (e.currentTarget.style.backgroundColor="#f9f9f9")}>
                   + None of these — submit "{name}" as a new community
@@ -187,7 +187,7 @@ export default function SuggestCommunityForm({ searchQuery }: { searchQuery: str
                     onMouseEnter={e => (e.currentTarget.style.backgroundColor="#f5f5f5")}
                     onMouseLeave={e => (e.currentTarget.style.backgroundColor="#fff")}>
                     <div style={{fontWeight:"500",color:"#1a1a1a"}}>{m.canonical_name}</div>
-                    <div style={{fontSize:"11px",color:"#888"}}>{m.city}</div>
+                    <div style={{fontSize:"11px",color:"#595959"}}>{m.city}</div>
                   </div>
                 ))}
               </div>

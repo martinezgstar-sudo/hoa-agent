@@ -61,7 +61,7 @@ export default function CompareBar() {
         href={`/compare?ids=${slugs.join(",")}`}
         style={{
           padding: "7px 14px",
-          backgroundColor: "#1D9E75",
+          backgroundColor: "#06875e",
           color: "#fff",
           textDecoration: "none",
           borderRadius: "8px",

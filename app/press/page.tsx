@@ -30,7 +30,7 @@ export default function PressPage() {
 
       <div style={{ maxWidth: '700px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
           Press
         </div>
 
@@ -90,7 +90,7 @@ export default function PressPage() {
           <a href="/press">press contact form</a>
         </div>
 
-        <div style={{ borderLeft: '3px solid #1D9E75', paddingLeft: '20px', marginBottom: '40px' }}>
+        <div style={{ borderLeft: '3px solid #06875e', paddingLeft: '20px', marginBottom: '40px' }}>
           <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.8, margin: 0 }}>
             HOA Agent LLC is an independent platform not affiliated with any homeowners association,
             condominium association, management company, or government agency. Data is provided for

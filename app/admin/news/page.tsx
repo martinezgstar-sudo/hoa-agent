@@ -263,7 +263,7 @@ export default function NewsAdminPage() {
           }}
         >
           <div style={{ fontSize: '24px', fontWeight: '700', color: '#1B2B6B', marginBottom: '4px' }}>
-            HOA<span style={{ color: '#1D9E75' }}>Agent</span>
+            HOA<span style={{ color: '#06875e' }}>Agent</span>
           </div>
           <div style={{ fontSize: '13px', color: '#888', marginBottom: '28px' }}>Admin News</div>
           <input
@@ -331,7 +331,7 @@ export default function NewsAdminPage() {
       >
         <Link href="/" style={{ textDecoration: 'none' }}>
           <span style={{ fontSize: '20px', fontWeight: '700', color: '#1B2B6B' }}>
-            HOA<span style={{ color: '#1D9E75' }}>Agent</span>
+            HOA<span style={{ color: '#06875e' }}>Agent</span>
           </span>
         </Link>
         <Link href="/admin" style={{ fontSize: '12px', color: '#888', textDecoration: 'none' }}>
@@ -611,7 +611,7 @@ export default function NewsAdminPage() {
                               fontSize: '12px',
                               border: 'none',
                               borderRadius: '7px',
-                              backgroundColor: '#1D9E75',
+                              backgroundColor: '#06875e',
                               color: '#fff',
                               padding: '6px 12px',
                               cursor: 'pointer',
@@ -1082,7 +1082,7 @@ function ManualLinker(props: {
             padding: '7px 14px',
             borderRadius: '7px',
             border: 'none',
-            backgroundColor: picked.length > 0 && !busy ? '#1D9E75' : '#bbb',
+            backgroundColor: picked.length > 0 && !busy ? '#06875e' : '#bbb',
             color: '#fff',
             cursor: picked.length > 0 && !busy ? 'pointer' : 'not-allowed',
             fontWeight: 700,

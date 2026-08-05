@@ -19,7 +19,7 @@ export default function TermsPage() {
     <main style={{fontFamily:"system-ui,sans-serif",backgroundColor:"#f9f9f9",minHeight:"100vh"}}>
       <nav style={{backgroundColor:"#fff",borderBottom:"1px solid #e5e5e5",padding:"0 32px",height:"72px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <a href="/" style={{display:"flex",alignItems:"center",gap:"8px",textDecoration:"none"}}>
-          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#1D9E75"}}>Agent</span></span>
+          <span style={{fontSize:"22px",fontWeight:"700",color:"#1B2B6B",letterSpacing:"-0.02em"}}>HOA<span style={{color:"#06875e"}}>Agent</span></span>
         </a>
         <div style={{display:"flex",gap:"24px",alignItems:"center"}}>
           <a href="/search" style={{fontSize:"13px",color:"#666",textDecoration:"none"}}>Search</a>
@@ -28,7 +28,7 @@ export default function TermsPage() {
       </nav>
       <div style={{maxWidth:"720px",margin:"0 auto",padding:"48px 32px"}}>
         <h1 style={{fontSize:"28px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px"}}>Terms of Service</h1>
-        <p style={{fontSize:"13px",color:"#888",marginBottom:"32px"}}>Last updated: April 2026</p>
+        <p style={{fontSize:"13px",color:"#595959",marginBottom:"32px"}}>Last updated: April 2026</p>
 
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>1. Informational Use Only</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>HOA Agent provides data about homeowner associations and condominium communities for informational purposes only. Nothing on this site constitutes legal, financial, or real estate advice. All data should be independently verified before making any real estate or financial decision.</p>
@@ -78,12 +78,12 @@ export default function TermsPage() {
         <h2 style={{fontSize:"16px",fontWeight:"600",color:"#1a1a1a",marginBottom:"8px",marginTop:"24px"}}>13. Contact</h2>
         <p style={{fontSize:"14px",color:"#555",lineHeight:"1.8",marginBottom:"16px"}}>Questions about these terms? Email us at info@hoa-agent.com.</p>
       </div>
-      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#888"}}>
+      <footer style={{borderTop:"1px solid #e5e5e5",padding:"24px 32px",textAlign:"center",fontSize:"12px",color:"#595959"}}>
         <div style={{marginBottom:"8px",fontWeight:"500",color:"#1a1a1a"}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa"}}>
-          <a href="/terms" style={{color:"#aaa",textDecoration:"none",marginRight:"16px"}}>Terms of Service</a>
-          <a href="/privacy" style={{color:"#aaa",textDecoration:"none"}}>Privacy Policy</a>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#595959"}}>
+          <a href="/terms" style={{color:"#595959",textDecoration:"none",marginRight:"16px"}}>Terms of Service</a>
+          <a href="/privacy" style={{color:"#595959",textDecoration:"none"}}>Privacy Policy</a>
         </div>
       </footer>
     </main>

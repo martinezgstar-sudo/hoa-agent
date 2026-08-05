@@ -47,13 +47,13 @@ HOA Agent
 const BODY_HTML = `
 <div style="font-family:system-ui,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;max-width:560px;">
   <p>Hi,</p>
-  <p>You requested a community report on <a href="https://www.hoa-agent.com" style="color:#1D9E75;">hoa-agent.com</a> a few weeks ago. Apologies for the delay, the platform is in beta and the report product is still being built.</p>
+  <p>You requested a community report on <a href="https://www.hoa-agent.com" style="color:#06875e;">hoa-agent.com</a> a few weeks ago. Apologies for the delay, the platform is in beta and the report product is still being built.</p>
   <p>If you tell me which community you were looking at, I'll research it manually and send you what we have for free. No charge, no signup.</p>
-  <p>Free community pages are live at <a href="https://www.hoa-agent.com" style="color:#1D9E75;">hoa-agent.com</a> if you want to browse.</p>
+  <p>Free community pages are live at <a href="https://www.hoa-agent.com" style="color:#06875e;">hoa-agent.com</a> if you want to browse.</p>
   <p style="margin-top:24px;">
     <strong>Izzy Martinez</strong><br/>
     HOA Agent<br/>
-    <a href="tel:5615674114" style="color:#1D9E75;text-decoration:none;">561-567-4114</a>
+    <a href="tel:5615674114" style="color:#06875e;text-decoration:none;">561-567-4114</a>
   </p>
 </div>`.trim()
 

@@ -52,7 +52,7 @@ export default function ContactForm({ subject, fields = "simple", successMessage
 
   if (done) {
     return (
-      <div style={{ padding: "20px 24px", backgroundColor: "#E1F5EE", border: "1px solid #1D9E75", borderRadius: "10px", color: "#0B5239", fontSize: "14px" }}>
+      <div style={{ padding: "20px 24px", backgroundColor: "#E1F5EE", border: "1px solid #06875e", borderRadius: "10px", color: "#0B5239", fontSize: "14px" }}>
         ✓ {successMessage || "Thank you. We will be in touch soon."}
       </div>
     )
@@ -131,7 +131,7 @@ export default function ContactForm({ subject, fields = "simple", successMessage
         <div style={{ fontSize: "13px", color: "#c0392b", padding: "10px 14px", backgroundColor: "#FEE9E9", borderRadius: "8px" }}>{error}</div>
       )}
 
-      <button type="submit" disabled={busy} style={{ padding: "12px", fontSize: "14px", fontWeight: 600, backgroundColor: busy ? "#999" : "#1B2B6B", color: "#fff", border: "none", borderRadius: "10px", cursor: busy ? "not-allowed" : "pointer" }}>
+      <button type="submit" disabled={busy} style={{ padding: "12px", fontSize: "14px", fontWeight: 600, backgroundColor: busy ? "#595959" : "#1B2B6B", color: "#fff", border: "none", borderRadius: "10px", cursor: busy ? "not-allowed" : "pointer" }}>
         {busy ? "Sending…" : "Send Message"}
       </button>
     </form>

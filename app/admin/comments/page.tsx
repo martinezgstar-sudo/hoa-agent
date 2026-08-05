@@ -42,9 +42,9 @@ export default function AdminCommentsPage() {
       <div style={{ minHeight: "100vh", backgroundColor: "#f9f9f9", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui,sans-serif" }}>
         <div style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "16px", padding: "40px", width: "340px", textAlign: "center" }}>
           <div style={{ fontSize: "24px", fontWeight: "700", color: "#1B2B6B", marginBottom: "4px" }}>
-            HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+            HOA<span style={{ color: "#06875e" }}>Agent</span>
           </div>
-          <div style={{ fontSize: "13px", color: "#888", marginBottom: "28px" }}>Admin Dashboard</div>
+          <div style={{ fontSize: "13px", color: "#595959", marginBottom: "28px" }}>Admin Dashboard</div>
           <input
             type="password"
             placeholder="Password"
@@ -93,10 +93,10 @@ export default function AdminCommentsPage() {
       <nav style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
         <a href="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: "20px", fontWeight: "700", color: "#1B2B6B" }}>
-            HOA<span style={{ color: "#1D9E75" }}>Agent</span>
+            HOA<span style={{ color: "#06875e" }}>Agent</span>
           </span>
         </a>
-        <a href="/" style={{ fontSize: "12px", color: "#888", textDecoration: "none" }}>Back to site</a>
+        <a href="/" style={{ fontSize: "12px", color: "#595959", textDecoration: "none" }}>Back to site</a>
       </nav>
 
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e5e5e5", padding: "0 24px", display: "flex" }}>
@@ -143,16 +143,16 @@ export default function AdminCommentsPage() {
           ))}
         </div>
 
-        {loading && <div style={{ textAlign: "center", color: "#888", padding: "40px" }}>Loading...</div>}
+        {loading && <div style={{ textAlign: "center", color: "#595959", padding: "40px" }}>Loading...</div>}
         {!loading && comments.length === 0 && (
-          <div style={{ textAlign: "center", color: "#888", padding: "40px" }}>No {filter} comments.</div>
+          <div style={{ textAlign: "center", color: "#595959", padding: "40px" }}>No {filter} comments.</div>
         )}
         {comments.map(c => (
           <div key={c.id} style={{ backgroundColor: "#fff", border: "1px solid #e5e5e5", borderRadius: "12px", padding: "16px 20px", marginBottom: "12px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "10px" }}>
               <div>
                 <div style={{ fontSize: "13px", fontWeight: "500", color: "#1a1a1a" }}>{c.commenter_name}</div>
-                <div style={{ fontSize: "11px", color: "#888" }}>
+                <div style={{ fontSize: "11px", color: "#595959" }}>
                   {new Date(c.created_at).toLocaleDateString()} · {c.rating ? c.rating + "★" : "No rating"}
                 </div>
               </div>

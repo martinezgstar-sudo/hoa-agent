@@ -113,7 +113,7 @@ export default function CitySearch({
                     {c.entity_status ? ' · ' + c.entity_status : ''}
                   </div>
                   {(c.review_count || 0) > 0 && (
-                    <div style={{ fontSize: '11px', color: '#1D9E75', marginTop: '4px' }}>
+                    <div style={{ fontSize: '11px', color: '#06875e', marginTop: '4px' }}>
                       {'★'.repeat(Math.round(c.review_avg || 0))} {c.review_avg} · {c.review_count}{' '}
                       review{c.review_count !== 1 ? 's' : ''}
                     </div>
@@ -131,7 +131,7 @@ export default function CitySearch({
                   ) : (
                     <div style={{ fontSize: '12px', color: '#aaa' }}>Fee unknown</div>
                   )}
-                  <div style={{ fontSize: '11px', color: '#1D9E75', marginTop: '4px' }}>
+                  <div style={{ fontSize: '11px', color: '#06875e', marginTop: '4px' }}>
                     View profile →
                   </div>
                 </div>

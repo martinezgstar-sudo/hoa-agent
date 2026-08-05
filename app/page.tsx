@@ -117,7 +117,7 @@ export default async function Home() {
       />
 
       <section style={{backgroundColor: '#fff', padding: '72px 32px 64px', textAlign: 'center', borderBottom: '1px solid #e5e5e5'}}>
-        <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>HOA Intelligence Platform</div>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px'}}>HOA Intelligence Platform</div>
         <h1 style={{fontSize: '44px', fontWeight: '700', color: '#1B2B6B', lineHeight: '1.15', marginBottom: '16px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', letterSpacing: '-0.02em'}}>Know the HOA Before You Commit</h1>
         <p style={{fontSize: '16px', color: '#666', marginBottom: '36px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6'}}>Structured, source-attributed data on HOA and condo communities. Fees, assessments, restrictions and reviews all in one place.</p>
 
@@ -140,7 +140,7 @@ export default async function Home() {
       <section style={{backgroundColor: '#f5f5f5', padding: '16px 32px', display: 'flex', gap: '32px', justifyContent: 'center', flexWrap: 'wrap', borderBottom: '1px solid #e5e5e5'}}>
         {['8,000+ communities tracked', 'Source-attributed data', 'Public records verified', 'Updated weekly'].map((item) => (
           <div key={item} style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#555'}}>
-            <div style={{width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1D9E75'}}></div>
+            <div style={{width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#06875e'}}></div>
             {item}
           </div>
         ))}
@@ -183,7 +183,7 @@ export default async function Home() {
                     ? '$' + Math.round(c.monthly_fee_min) + (c.monthly_fee_max && c.monthly_fee_max !== c.monthly_fee_min ? '-$' + Math.round(c.monthly_fee_max) : '') + '/mo'
                     : c.monthly_fee_min ? 'Fee data available' : 'Fee unknown'}
                 </div>
-                <div style={{fontSize: '11px', color: '#1D9E75', marginTop: '6px'}}>View profile →</div>
+                <div style={{fontSize: '11px', color: '#06875e', marginTop: '6px'}}>View profile →</div>
               </div>
             </div>
           </a>
@@ -198,7 +198,7 @@ export default async function Home() {
             {step: 'Step 3', title: 'Share what you know', desc: 'Get the full report with source trail, fee history and resident intelligence.'},
           ].map((h) => (
             <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
-              <div style={{fontSize: '11px', fontWeight: '600', color: '#1D9E75', marginBottom: '6px'}}>{h.step}</div>
+              <div style={{fontSize: '11px', fontWeight: '600', color: '#06875e', marginBottom: '6px'}}>{h.step}</div>
               <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a', marginBottom: '4px'}}>{h.title}</div>
               <div style={{fontSize: '12px', color: '#888', lineHeight: '1.5'}}>{h.desc}</div>
             </div>
@@ -272,7 +272,7 @@ export default async function Home() {
           <a href="/privacy" style={{color: '#888', textDecoration: 'none'}}>Privacy</a>
           <a href="/terms" style={{color: '#888', textDecoration: 'none'}}>Terms</a>
         </div>
-        <div style={{marginTop:"8px",fontSize:"11px",color:"#aaa",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
+        <div style={{marginTop:"8px",fontSize:"11px",color:"#595959",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>
 
       <script
