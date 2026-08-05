@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { startRun, finishRun } from '@/lib/job-runs'
 
 const supabase = createClient(
   (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'),
@@ -7,6 +8,9 @@ const supabase = createClient(
 )
 
 export async function GET() {
+  const startedAt = Date.now()
+  const runId = await startRun('cron-daily-report')
+
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
 
   const { data: newComments } = await supabase
@@ -93,5 +97,11 @@ export async function GET() {
     })
   })
 
+  await finishRun(
+    runId,
+    'success',
+    `emailed daily report: ${(newComments || []).length} comments, ${(newSuggestions || []).length} suggestions`,
+    startedAt,
+  )
   return NextResponse.json({ ok: true, comments: (newComments || []).length, suggestions: (newSuggestions || []).length })
 }
