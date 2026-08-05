@@ -80,11 +80,11 @@ export default async function CityIndexPage() {
             <Link key={city.slug} href={'/city/' + city.slug} style={{ textDecoration: 'none' }}>
               <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', height: '100%', transition: 'border-color 0.15s' }}>
                 <div style={{ fontSize: '16px', fontWeight: 600, color: '#1B2B6B', marginBottom: '6px' }}>{city.name}</div>
-                <div style={{ fontSize: '12px', color: '#888' }}>{city.tagline}</div>
+                <div style={{ fontSize: '12px', color: '#595959' }}>{city.tagline}</div>
                 <div style={{ marginTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '12px', color: '#06875e', fontWeight: 500 }}>Browse communities →</span>
                   {counts[city.slug] > 0 && (
-                    <span style={{ fontSize: '11px', color: '#888' }}>{counts[city.slug]} listed</span>
+                    <span style={{ fontSize: '11px', color: '#595959' }}>{counts[city.slug]} listed</span>
                   )}
                 </div>
               </div>

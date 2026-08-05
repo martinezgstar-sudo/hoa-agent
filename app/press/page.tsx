@@ -69,7 +69,7 @@ export default function PressPage() {
             },
           ].map((item) => (
             <div key={item.label} style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: '120px', paddingTop: '2px' }}>
+              <div style={{ fontSize: '12px', fontWeight: 600, color: '#595959', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: '120px', paddingTop: '2px' }}>
                 {item.label}
               </div>
               <div style={{ fontSize: '15px', color: '#333', lineHeight: 1.6 }}>

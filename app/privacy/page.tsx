@@ -28,7 +28,7 @@ export default function PrivacyPage() {
       </nav>
       <div style={{maxWidth:'720px',margin:'0 auto',padding:'48px 32px'}}>
         <h1 style={{fontSize:'28px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px'}}>Privacy Policy</h1>
-        <p style={{fontSize:'13px',color:'#888',marginBottom:'32px'}}>Last updated: April 2026</p>
+        <p style={{fontSize:'13px',color:'#595959',marginBottom:'32px'}}>Last updated: April 2026</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>1. Information We Collect</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>We collect information you voluntarily provide including email addresses submitted for our HOA Fee Guide, review submissions including name and comment text, and community suggestions including address and contact email. We also collect standard server logs including IP addresses and browser information.</p>
@@ -57,10 +57,10 @@ export default function PrivacyPage() {
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>9. Contact</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Questions about this privacy policy? Email us at info@hoa-agent.com.</p>
       </div>
-      <footer style={{borderTop:'1px solid #e5e5e5',padding:'24px 32px',textAlign:'center',fontSize:'12px',color:'#888'}}>
+      <footer style={{borderTop:'1px solid #e5e5e5',padding:'24px 32px',textAlign:'center',fontSize:'12px',color:'#595959'}}>
         <div style={{marginBottom:'8px',fontWeight:'500',color:'#1a1a1a'}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
-        <div style={{marginTop:'8px',fontSize:'11px',color:'#aaa'}}><a href='/terms' style={{color:'#aaa',textDecoration:'none',marginRight:'16px'}}>Terms of Service</a><a href='/privacy' style={{color:'#aaa',textDecoration:'none'}}>Privacy Policy</a></div>
+        <div style={{marginTop:'8px',fontSize:'11px',color:'#595959'}}><a href='/terms' style={{color:'#595959',textDecoration:'none',marginRight:'16px'}}>Terms of Service</a><a href='/privacy' style={{color:'#595959',textDecoration:'none'}}>Privacy Policy</a></div>
       </footer>
     </main>
   )

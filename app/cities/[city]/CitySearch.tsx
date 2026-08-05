@@ -64,7 +64,7 @@ export default function CitySearch({
               transform: 'translateY(-50%)',
               border: 'none',
               background: 'transparent',
-              color: '#888',
+              color: '#595959',
               fontSize: '18px',
               lineHeight: 1,
               cursor: 'pointer',
@@ -76,7 +76,7 @@ export default function CitySearch({
         )}
       </div>
 
-      <div style={{ fontSize: '12px', color: '#888', marginBottom: '12px' }}>
+      <div style={{ fontSize: '12px', color: '#595959', marginBottom: '12px' }}>
         Showing {filtered.length} of {communities.length} communities
       </div>
 
@@ -107,7 +107,7 @@ export default function CitySearch({
                   >
                     {c.canonical_name}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#888' }}>
+                  <div style={{ fontSize: '12px', color: '#595959' }}>
                     {c.property_type || 'HOA'}
                     {c.management_company ? ' · ' + c.management_company : ''}
                     {c.entity_status ? ' · ' + c.entity_status : ''}
@@ -129,7 +129,7 @@ export default function CitySearch({
                       /mo
                     </div>
                   ) : (
-                    <div style={{ fontSize: '12px', color: '#aaa' }}>Fee unknown</div>
+                    <div style={{ fontSize: '12px', color: '#595959' }}>Fee unknown</div>
                   )}
                   <div style={{ fontSize: '11px', color: '#06875e', marginTop: '4px' }}>
                     View profile →
@@ -140,7 +140,7 @@ export default function CitySearch({
           ))}
         </div>
       ) : (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#888', fontSize: '14px' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#595959', fontSize: '14px' }}>
           No communities match &quot;{query}&quot;.
         </div>
       )}

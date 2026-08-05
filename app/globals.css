@@ -12,11 +12,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Force light color-scheme. Every page uses hardcoded inline styles that
+ * assume a white background — the previous dark-mode media query inverted
+ * only body's background/foreground and produced dark text on dark bg
+ * across the site for readers with dark OS preference (real WCAG 1.4.3
+ * failure; pa11y flagged /accessibility 24x at 1.14:1 for exactly this).
+ * Removed 2026-08-05. */
+:root {
+  color-scheme: light;
 }
 
 body {

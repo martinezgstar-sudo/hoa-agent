@@ -97,7 +97,7 @@ export default function ForAgentsPage() {
           {DATA_POINTS.map((dp) => (
             <div key={dp.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px 16px' }}>
               <div style={{ fontSize: '13px', fontWeight: 600, color: '#06875e', marginBottom: '4px' }}>{dp.label}</div>
-              <div style={{ fontSize: '12px', color: '#888' }}>{dp.desc}</div>
+              <div style={{ fontSize: '12px', color: '#595959' }}>{dp.desc}</div>
             </div>
           ))}
         </div>
@@ -115,7 +115,7 @@ export default function ForAgentsPage() {
           </Link>
         </div>
 
-        <div style={{ padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '12px', fontSize: '12px', color: '#888', lineHeight: 1.7 }}>
+        <div style={{ padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '12px', fontSize: '12px', color: '#595959', lineHeight: 1.7 }}>
           HOA Agent is provided for informational purposes only and does not constitute legal, financial,
           or real estate advice. Always direct buyers to review official HOA documents, financials, and
           consult with their attorney before closing.

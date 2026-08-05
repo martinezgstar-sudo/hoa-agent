@@ -326,7 +326,7 @@ export default async function CityPage({ params, searchParams }: Props) {
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px 12px', textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 700, color: '#1B2B6B', marginBottom: '2px' }}>{s.value}</div>
-              <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{s.label}</div>
+              <div style={{ fontSize: '10px', color: '#595959', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -340,7 +340,7 @@ export default async function CityPage({ params, searchParams }: Props) {
             {positiveNews.map((a, i) => (
               <a key={i} href={a.url} target="_blank" rel="noopener" style={{ display: 'block', textDecoration: 'none', padding: '8px 0', borderTop: i === 0 ? 'none' : '1px solid #f0f0f0' }}>
                 <div style={{ fontSize: '14px', color: '#1a1a1a', lineHeight: 1.4 }}>{a.title}</div>
-                <div style={{ fontSize: '11px', color: '#888', marginTop: '3px' }}>
+                <div style={{ fontSize: '11px', color: '#595959', marginTop: '3px' }}>
                   {a.source ?? 'News'}
                   {a.published_date ? ` · ${new Date(a.published_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
                 </div>
@@ -391,12 +391,12 @@ export default async function CityPage({ params, searchParams }: Props) {
           ))}
         </div>
 
-        <div style={{ fontSize: '12px', color: '#888', marginBottom: '16px' }}>
+        <div style={{ fontSize: '12px', color: '#595959', marginBottom: '16px' }}>
           Showing {list.length === 0 ? 0 : startIdx + 1}–{startIdx + list.length} of {allList.length} communities in {city.name}{totalPages > 1 ? ` · page ${safePage} of ${totalPages}` : ''}
         </div>
 
         {list.length === 0 ? (
-          <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e5e5e5', color: '#888' }}>
+          <div style={{ padding: '40px', textAlign: 'center', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e5e5e5', color: '#595959' }}>
             No communities listed yet for {city.name}. <Link href="/search" style={{ color: '#06875e' }}>Try the full search.</Link>
           </div>
         ) : (
@@ -415,7 +415,7 @@ export default async function CityPage({ params, searchParams }: Props) {
                       )}
                       {c.canonical_name}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#888', marginTop: '3px' }}>
+                    <div style={{ fontSize: '12px', color: '#595959', marginTop: '3px' }}>
                       {[c.property_type, c.management_company].filter(Boolean).join(' · ')}
                       {c.richness_score === 0 && (
                         <span style={{ marginLeft: '6px', fontSize: '11px', color: '#bbb', fontStyle: 'italic' }}>· Limited information available</span>
@@ -430,7 +430,7 @@ export default async function CityPage({ params, searchParams }: Props) {
                     ) : (
                       <div style={{ fontSize: '12px', color: '#bbb' }}>Fee unknown</div>
                     )}
-                    {c.unit_count ? <div style={{ fontSize: '11px', color: '#aaa' }}>{c.unit_count} units</div> : null}
+                    {c.unit_count ? <div style={{ fontSize: '11px', color: '#595959' }}>{c.unit_count} units</div> : null}
                   </div>
                 </div>
               </Link>

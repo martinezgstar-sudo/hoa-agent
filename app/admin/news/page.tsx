@@ -265,7 +265,7 @@ export default function NewsAdminPage() {
           <div style={{ fontSize: '24px', fontWeight: '700', color: '#1B2B6B', marginBottom: '4px' }}>
             HOA<span style={{ color: '#06875e' }}>Agent</span>
           </div>
-          <div style={{ fontSize: '13px', color: '#888', marginBottom: '28px' }}>Admin News</div>
+          <div style={{ fontSize: '13px', color: '#595959', marginBottom: '28px' }}>Admin News</div>
           <input
             type="password"
             placeholder="Password"
@@ -334,7 +334,7 @@ export default function NewsAdminPage() {
             HOA<span style={{ color: '#06875e' }}>Agent</span>
           </span>
         </Link>
-        <Link href="/admin" style={{ fontSize: '12px', color: '#888', textDecoration: 'none' }}>
+        <Link href="/admin" style={{ fontSize: '12px', color: '#595959', textDecoration: 'none' }}>
           Back to admin
         </Link>
       </nav>
@@ -483,9 +483,9 @@ export default function NewsAdminPage() {
           </div>
         )}
 
-        {loading && <div style={{ color: '#888', fontSize: '14px' }}>Loading...</div>}
+        {loading && <div style={{ color: '#595959', fontSize: '14px' }}>Loading...</div>}
         {!loading && items.length === 0 && (
-          <div style={{ color: '#888', fontSize: '14px' }}>No {tab} news items.</div>
+          <div style={{ color: '#595959', fontSize: '14px' }}>No {tab} news items.</div>
         )}
 
         {!loading &&
@@ -518,7 +518,7 @@ export default function NewsAdminPage() {
                 >
                   {item.title}
                 </a>
-                <div style={{ fontSize: '12px', color: '#888', marginTop: '6px' }}>
+                <div style={{ fontSize: '12px', color: '#595959', marginTop: '6px' }}>
                   {item.source || 'Unknown source'} · {fmtDate(item.published_date)}
                 </div>
 
@@ -558,7 +558,7 @@ export default function NewsAdminPage() {
 
                 <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {visibleMatches.length === 0 && (
-                    <div style={{ fontSize: '12px', color: '#888' }}>No matches in this state.</div>
+                    <div style={{ fontSize: '12px', color: '#595959' }}>No matches in this state.</div>
                   )}
                   {visibleMatches.map((m) => (
                     <div
@@ -586,7 +586,7 @@ export default function NewsAdminPage() {
                               Unknown community
                             </div>
                           )}
-                          <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>
+                          <div style={{ fontSize: '11px', color: '#595959', marginTop: '2px' }}>
                             Confidence: {Math.round((m.match_confidence || 0) * 100)}%
                           </div>
                           <div style={{ fontSize: '11px', color: '#666', marginTop: '3px' }}>
@@ -1029,7 +1029,7 @@ function ManualLinker(props: {
                   borderRadius: '999px',
                   border: '1px solid #c8d3e6',
                   backgroundColor: already ? '#eef0f5' : '#fff',
-                  color: already ? '#999' : '#1B2B6B',
+                  color: already ? '#595959' : '#1B2B6B',
                   cursor: already ? 'default' : 'pointer',
                 }}
                 title={already ? 'Already linked' : 'Add to selection'}

@@ -139,7 +139,7 @@ export default async function FeeReportPage() {
           >
             Unlock Full Report — $2.99
           </Link>
-          <span style={{ fontSize: '12px', color: '#888', alignSelf: 'center' }}>
+          <span style={{ fontSize: '12px', color: '#595959', alignSelf: 'center' }}>
             Get the full community table with citations, source URLs, and CSV export.
           </span>
         </div>
@@ -153,7 +153,7 @@ export default async function FeeReportPage() {
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
               <div style={{ fontSize: '22px', fontWeight: 700, color: '#1B2B6B', marginBottom: '4px' }}>{s.value}</div>
-              <div style={{ fontSize: '11px', color: '#888', lineHeight: 1.4 }}>{s.label}</div>
+              <div style={{ fontSize: '11px', color: '#595959', lineHeight: 1.4 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -165,7 +165,7 @@ export default async function FeeReportPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '10px', marginBottom: '48px' }}>
           {Object.keys(data.buckets).map((label) => (
             <div key={label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '16px', textAlign: 'center' }}>
-              <div style={{ fontSize: '11px', color: '#aaa', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Range</div>
+              <div style={{ fontSize: '11px', color: '#595959', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Range</div>
               <div style={{ fontSize: '14px', color: '#1B2B6B', fontWeight: 700 }}>{label}</div>
               <div style={{ fontSize: '11px', color: '#bbb', marginTop: '6px', fontStyle: 'italic' }}>Unlock to see %</div>
             </div>
@@ -174,7 +174,7 @@ export default async function FeeReportPage() {
 
         {/* FREE TIER — teaser table: only first 3 cities */}
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1B2B6B', marginBottom: '16px' }}>
-          Average fees by city <span style={{ fontSize: '13px', fontWeight: 400, color: '#888' }}>(preview — top 3 cities)</span>
+          Average fees by city <span style={{ fontSize: '13px', fontWeight: 400, color: '#595959' }}>(preview — top 3 cities)</span>
         </h2>
         <div style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>

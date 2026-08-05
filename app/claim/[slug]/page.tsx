@@ -109,7 +109,7 @@ export default function ClaimPage({ params }: { params: Promise<{ slug: string }
     <main style={{ fontFamily: 'system-ui, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
       <div style={{ maxWidth: '560px', margin: '0 auto', padding: '52px 24px 80px' }}>
 
-        <Link href={`/community/${slug}`} style={{ fontSize: '13px', color: '#888', textDecoration: 'none', display: 'inline-block', marginBottom: '32px' }}>
+        <Link href={`/community/${slug}`} style={{ fontSize: '13px', color: '#595959', textDecoration: 'none', display: 'inline-block', marginBottom: '32px' }}>
           ← Back to community page
         </Link>
 
@@ -204,7 +204,7 @@ export default function ClaimPage({ params }: { params: Promise<{ slug: string }
 
         </form>
 
-        <p style={{ marginTop: '24px', fontSize: '12px', color: '#aaa', lineHeight: 1.6, textAlign: 'center' }}>
+        <p style={{ marginTop: '24px', fontSize: '12px', color: '#595959', lineHeight: 1.6, textAlign: 'center' }}>
           We verify all claims before granting access. HOA Agent will never share your contact
           information without permission.
         </p>

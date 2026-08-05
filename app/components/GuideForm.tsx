@@ -36,12 +36,17 @@ export default function GuideForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{display:"flex",gap:"8px",flexShrink:0}}>
+      <label htmlFor="guide-email" style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap", border: 0 }}>
+        Email address for the HOA fee guide
+      </label>
       <input
+        id="guide-email"
         type="email"
         required
         placeholder="your@email.com"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        aria-label="Email address for the HOA fee guide"
         style={{fontSize:"13px",padding:"8px 12px",borderRadius:"8px",border:"1px solid #5DCAA5",outline:"none",width:"200px"}}
       />
       <button

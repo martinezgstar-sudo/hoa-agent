@@ -155,25 +155,25 @@ export default async function Home() {
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px', textAlign: 'center'}}>
               <div style={{fontSize: '28px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px'}}>{stat.num}</div>
-              <div style={{fontSize: '12px', color: '#888'}}>{stat.label}</div>
+              <div style={{fontSize: '12px', color: '#595959'}}>{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       <section style={{padding: '0 32px 32px', maxWidth: '680px', margin: '0 auto'}}>
-        <div style={{fontSize: '11px', fontWeight: '600', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px'}}>Featured communities — Palm Beach County</div>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#595959', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px'}}>Featured communities — Palm Beach County</div>
         {featured?.map((c) => (
           <a key={c.id} href={"/community/" + c.slug} style={{textDecoration: 'none'}}>
             <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px 20px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', cursor: 'pointer'}}>
               <div>
                 <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '3px'}}>{c.canonical_name}</div>
-                <div style={{fontSize: '12px', color: '#888', marginBottom: '8px'}}>{c.city} · {String(c.property_type ?? '')}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
+                <div style={{fontSize: '12px', color: '#595959', marginBottom: '8px'}}>{c.city} · {String(c.property_type ?? '')}{c.unit_count ? ' · ' + c.unit_count + ' units' : ''}</div>
                 <div style={{display: 'flex', gap: '6px'}}>
                   <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#E1F5EE', color: '#1B2B6B'}}>Active entity</span>
                   {(c.assessment_signal_count ?? 0) > 0
                     ? <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#FAEEDA', color: '#854F0B'}}>{c.assessment_signal_count} assessment signals</span>
-                    : <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#888'}}>No signals</span>
+                    : <span style={{fontSize: '11px', padding: '2px 8px', borderRadius: '4px', backgroundColor: '#f0f0f0', color: '#595959'}}>No signals</span>
                   }
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default async function Home() {
             <div key={h.step} style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '16px'}}>
               <div style={{fontSize: '11px', fontWeight: '600', color: '#06875e', marginBottom: '6px'}}>{h.step}</div>
               <div style={{fontSize: '13px', fontWeight: '500', color: '#1a1a1a', marginBottom: '4px'}}>{h.title}</div>
-              <div style={{fontSize: '12px', color: '#888', lineHeight: '1.5'}}>{h.desc}</div>
+              <div style={{fontSize: '12px', color: '#595959', lineHeight: '1.5'}}>{h.desc}</div>
             </div>
           ))}
         </div>
@@ -217,7 +217,7 @@ export default async function Home() {
       </section>
 
       <section style={{padding: '0 32px 48px', maxWidth: '680px', margin: '0 auto'}}>
-        <div style={{fontSize: '11px', fontWeight: '600', color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px'}}>Frequently asked questions</div>
+        <div style={{fontSize: '11px', fontWeight: '600', color: '#595959', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '20px'}}>Frequently asked questions</div>
         <div style={{display: 'flex', flexDirection: 'column', gap: '1px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e5e5'}}>
           {[
             {
@@ -261,16 +261,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#888'}}>
+      <footer style={{borderTop: '1px solid #e5e5e5', padding: '24px 32px', textAlign: 'center', fontSize: '12px', color: '#595959'}}>
         <div style={{marginBottom: '8px', fontWeight: '500', color: '#1a1a1a'}}>HOA Agent</div>
         <div>HOA Intelligence Platform · Palm Beach County · © 2026 HOA Agent LLC</div>
         <div style={{marginTop: '12px', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap'}}>
-          <a href="/about" style={{color: '#888', textDecoration: 'none'}}>About</a>
-          <a href="/for-agents" style={{color: '#888', textDecoration: 'none'}}>For Agents</a>
-          <a href="/press" style={{color: '#888', textDecoration: 'none'}}>Press</a>
-          <a href="/advertise" style={{color: '#888', textDecoration: 'none'}}>Advertise</a>
-          <a href="/privacy" style={{color: '#888', textDecoration: 'none'}}>Privacy</a>
-          <a href="/terms" style={{color: '#888', textDecoration: 'none'}}>Terms</a>
+          <a href="/about" style={{color: '#595959', textDecoration: 'none'}}>About</a>
+          <a href="/for-agents" style={{color: '#595959', textDecoration: 'none'}}>For Agents</a>
+          <a href="/press" style={{color: '#595959', textDecoration: 'none'}}>Press</a>
+          <a href="/advertise" style={{color: '#595959', textDecoration: 'none'}}>Advertise</a>
+          <a href="/privacy" style={{color: '#595959', textDecoration: 'none'}}>Privacy</a>
+          <a href="/terms" style={{color: '#595959', textDecoration: 'none'}}>Terms</a>
         </div>
         <div style={{marginTop:"8px",fontSize:"11px",color:"#595959",lineHeight:"1.6"}}>HOA Agent aggregates public records and resident-submitted data. Always verify fees and restrictions directly with the association before closing. HOA Agent LLC is not affiliated with any HOA, management company, or government agency.</div>
       </footer>

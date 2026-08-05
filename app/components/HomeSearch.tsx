@@ -94,7 +94,11 @@ export default function HomeSearch() {
           }}
         >
           <div style={{ flex: "1 1 200px", minWidth: 0, width: "100%", position: "relative" }}>
+            <label htmlFor="home-search-input" style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap", border: 0 }}>
+              Search communities
+            </label>
             <input
+              id="home-search-input"
               type="text"
               value={query}
               onChange={e => setQuery(e.target.value)}
@@ -102,6 +106,7 @@ export default function HomeSearch() {
               onBlur={() => setTimeout(() => setIsFocused(false), 150)}
               placeholder="Community name, city, or ZIP..."
               autoComplete="off"
+              aria-label="Search communities"
               style={{
                 width: "100%",
                 border: "1.5px solid #e5e5e5",

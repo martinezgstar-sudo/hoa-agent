@@ -81,7 +81,7 @@ export default function BniPage() {
         </div>
 
         <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '28px', textAlign: 'center' }}>
-          <div style={{ fontSize: '13px', color: '#888', marginBottom: '8px' }}>Questions or referrals?</div>
+          <div style={{ fontSize: '13px', color: '#595959', marginBottom: '8px' }}>Questions or referrals?</div>
           <a href="/contact">contact us</a>
         </div>
 

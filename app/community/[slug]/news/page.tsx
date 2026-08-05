@@ -56,7 +56,7 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
   }
 
   const scoreColor = (score: number | null) => {
-    if (!score) return '#888'
+    if (!score) return '#595959'
     if (score <= 3) return '#dc2626'
     if (score <= 5) return '#d97706'
     if (score <= 7) return '#2563eb'
@@ -80,14 +80,14 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
       <h1 style={{ fontSize: '20px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px' }}>
         News Coverage
       </h1>
-      <p style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>
+      <p style={{ fontSize: '13px', color: '#595959', marginBottom: '20px' }}>
         {community.canonical_name} · {community.city}
       </p>
 
       {community.news_reputation_score && (
         <div style={{ backgroundColor: scoreBg(community.news_reputation_score), border: `1px solid ${scoreColor(community.news_reputation_score)}30`, borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ fontSize: '12px', color: '#888', marginBottom: '4px' }}>AI News Reputation Score</div>
+            <div style={{ fontSize: '12px', color: '#595959', marginBottom: '4px' }}>AI News Reputation Score</div>
             <div style={{ fontSize: '24px', fontWeight: '700', color: scoreColor(community.news_reputation_score) }}>
               {community.news_reputation_score}/10
             </div>
@@ -95,7 +95,7 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
               {community.news_reputation_label}
             </div>
           </div>
-          <div style={{ fontSize: '11px', color: '#aaa', maxWidth: '180px', textAlign: 'right', lineHeight: '1.5' }}>
+          <div style={{ fontSize: '11px', color: '#595959', maxWidth: '180px', textAlign: 'right', lineHeight: '1.5' }}>
             Based on AI analysis of {articles.length} news article{articles.length !== 1 ? 's' : ''} mentioning this community
           </div>
         </div>
@@ -110,7 +110,7 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
                 <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(4px)', borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
                   <Lock size={18} color="#1B2B6B" />
                   <p style={{ fontSize: '13px', fontWeight: '600', color: '#1B2B6B', margin: '8px 0 4px' }}>Unlock Full News Access</p>
-                  <p style={{ fontSize: '11px', color: '#888', marginBottom: '12px' }}>See all news coverage for this community</p>
+                  <p style={{ fontSize: '11px', color: '#595959', marginBottom: '12px' }}>See all news coverage for this community</p>
                   <button style={{ backgroundColor: '#1B2B6B', color: '#fff', fontSize: '12px', fontWeight: '600', padding: '8px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>
                     Unlock for $2.99
                   </button>
@@ -119,14 +119,14 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
               <div style={{ filter: isLocked ? 'blur(3px)' : 'none', userSelect: isLocked ? 'none' : 'auto' }}>
                 <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', fontWeight: '600', color: '#1a1a1a', textDecoration: 'none', lineHeight: '1.4', display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
                   {article.title}
-                  <ExternalLink size={12} style={{ flexShrink: 0, marginTop: '3px', color: '#aaa' }} />
+                  <ExternalLink size={12} style={{ flexShrink: 0, marginTop: '3px', color: '#595959' }} />
                 </a>
                 {article.ai_summary && (
                   <p style={{ fontSize: '12px', color: '#666', marginTop: '6px', lineHeight: '1.5' }}>{article.ai_summary}</p>
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
                   <span style={{ fontSize: '11px', fontWeight: '500', color: '#1B2B6B', backgroundColor: '#EEF1FB', padding: '2px 8px', borderRadius: '20px' }}>{article.source}</span>
-                  <span style={{ fontSize: '11px', color: '#aaa' }}>{formatDate(article.published_date)}</span>
+                  <span style={{ fontSize: '11px', color: '#595959' }}>{formatDate(article.published_date)}</span>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@ export default async function CommunityNewsPage({ params }: { params: Promise<{ 
         })}
       </div>
 
-      <p style={{ fontSize: '11px', color: '#aaa', marginTop: '16px', textAlign: 'center' }}>
+      <p style={{ fontSize: '11px', color: '#595959', marginTop: '16px', textAlign: 'center' }}>
         News sourced from public outlets. Read more at each source link. HOA Agent is not responsible for third-party content.
       </p>
     </div>
