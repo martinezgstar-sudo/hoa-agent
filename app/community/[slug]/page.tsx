@@ -91,7 +91,19 @@ interface Community {
   news_reputation_label: string | null
   news_reputation_updated_at: string | null
   city_verified?: boolean
-  website_url?: string
+  // contact — all optional, and null for ~98% of communities
+  website_url?: string | null
+  phone?: string | null
+  email?: string | null
+  // utilities & services
+  electric_provider?: string | null
+  water_provider?: string | null
+  sewer_provider?: string | null
+  trash_provider?: string | null
+  trash_pickup_days?: string | null
+  recycling_pickup_days?: string | null
+  internet_providers?: string | null
+  natural_gas_available?: boolean | null
   // master/sub HOA columns
   is_master?: boolean
   // legacy columns kept for backward compatibility
@@ -168,6 +180,47 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     : (community.review_avg ?? null)
 
   const amenitiesList = community.amenities ? community.amenities.split('|').map((a: string) => a.trim()) : []
+
+  // ── Contact + Utilities ────────────────────────────────────────────────
+  // Both sections are all-or-nothing: if a community has none of the fields,
+  // nothing renders and the page output is unchanged. Today that is ~98% of
+  // published communities (144 of 7,959 have any contact, 74 any utility), so
+  // "renders nothing" is the common path, not the edge case.
+  //
+  // Blank strings are treated as absent. Several enrichment sources write ''
+  // rather than NULL, and an empty string would otherwise produce a labelled
+  // row with no value.
+  const present = (v: unknown): v is string => typeof v === 'string' && v.trim() !== ''
+
+  const hasContact = present(community.phone) || present(community.email) || present(community.website_url)
+
+  // Show the bare host rather than a full URL — these run long and would blow
+  // out the row. Falls back to the raw value if it will not parse.
+  let websiteLabel = community.website_url as string | null
+  if (present(community.website_url)) {
+    try {
+      websiteLabel = new URL(community.website_url).hostname.replace(/^www\./, '')
+    } catch {
+      websiteLabel = community.website_url
+    }
+  }
+
+  const utilityRows: { label: string; value: string }[] = []
+  const addUtility = (label: string, value: unknown) => {
+    if (present(value)) utilityRows.push({ label, value: value.trim() })
+  }
+  addUtility('Electric', community.electric_provider)
+  addUtility('Water', community.water_provider)
+  addUtility('Sewer', community.sewer_provider)
+  addUtility('Trash provider', community.trash_provider)
+  addUtility('Trash pickup', community.trash_pickup_days)
+  addUtility('Recycling pickup', community.recycling_pickup_days)
+  addUtility('Internet', community.internet_providers)
+  // Boolean, so it needs a null check rather than a truthiness check: `false`
+  // means "verified: no natural gas here", which is information worth showing.
+  if (community.natural_gas_available !== null && community.natural_gas_available !== undefined) {
+    utilityRows.push({ label: 'Natural gas', value: community.natural_gas_available ? 'Available' : 'Not available' })
+  }
 
   // Sponsored ads — fetch advertisers targeting this community's city.
   // Uses the service-role client (server component only — key never reaches
@@ -548,6 +601,54 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             </div>
           </div>
         </div>
+
+        {/* Contact — renders only when at least one field exists, and each row
+            only when that field exists. Deliberately unlike Association details
+            above, which shows 'Unknown' placeholders: a community with no
+            contact data must render nothing at all here, so ~98% of pages stay
+            byte-identical. */}
+        {hasContact && (
+          <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Contact</div>
+            <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+              {community.phone && (
+                <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+                  <span style={{color:'#595959',fontSize:'12px'}}>Phone</span>
+                  <a href={'tel:' + String(community.phone).replace(/[^\d+]/g, '')} style={{color:'#06875e',fontSize:'13px',textDecoration:'none',fontWeight:600}}>{community.phone}</a>
+                </div>
+              )}
+              {community.email && (
+                <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+                  <span style={{color:'#595959',fontSize:'12px'}}>Email</span>
+                  <a href={'mailto:' + community.email} style={{color:'#06875e',fontSize:'13px',textDecoration:'none',fontWeight:600,textAlign:'right',overflow:'hidden',textOverflow:'ellipsis',maxWidth:'60%'}}>{community.email}</a>
+                </div>
+              )}
+              {community.website_url && (
+                <div style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+                  <span style={{color:'#595959',fontSize:'12px'}}>Official website</span>
+                  <a href={community.website_url} target="_blank" rel="nofollow noopener" style={{color:'#06875e',fontSize:'13px',textDecoration:'none',fontWeight:600,textAlign:'right',overflow:'hidden',textOverflow:'ellipsis',maxWidth:'60%'}}>{websiteLabel}</a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Utilities & Services — same all-or-nothing rule. natural_gas_available
+            is checked for null rather than truthiness: false is real, verified
+            data and must render as "No", not disappear. */}
+        {utilityRows.length > 0 && (
+          <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+            <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Utilities &amp; services</div>
+            <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+              {utilityRows.map((row) => (
+                <div key={row.label} style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+                  <span style={{color:'#595959',fontSize:'12px'}}>{row.label}</span>
+                  <span style={{color:'#1a1a1a',fontSize:'13px',textAlign:'right',maxWidth:'60%'}}>{row.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {amenitiesList.length > 0 && (
           <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
