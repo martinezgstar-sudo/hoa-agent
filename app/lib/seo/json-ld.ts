@@ -129,6 +129,8 @@ export interface CommunityLike {
   amenities?: string | null
   management_company?: string | null
   website_url?: string | null
+  phone?: string | null
+  email?: string | null
   legal_name?: string | null
   state_entity_number?: string | null
   entity_status?: string | null
@@ -227,6 +229,20 @@ export function buildPlaceSchema(c: CommunityLike) {
       name: c.management_company,
     }
   }
+
+  // Contact details, emitted only when present. stripNulls would drop empty
+  // values anyway, but keeping the guards explicit means a blank string never
+  // reaches the graph as `"telephone": ""`.
+  if (c.phone) place.telephone = c.phone
+  if (c.email) place.email = c.email
+
+  // The community's own website goes in `sameAs`, NOT `url`. `url` is already
+  // this Place's authoritative page on hoa-agent.com and is tied to its @id;
+  // overwriting it with an external domain would make the Place claim it lives
+  // somewhere it does not. `sameAs` is exactly the "another authoritative page
+  // about this entity" slot.
+  if (c.website_url) place.sameAs = [c.website_url]
+
   return place
 }
 
