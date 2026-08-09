@@ -8,8 +8,7 @@ export const runtime = "nodejs"
  * Body: { email: string, community_slug?: string, notes?: string }
  *
  *   1. Inserts a row into `suggestions` (the legacy report-request table).
- *   2. Sends an internal notification to info@hoa-agent.com (BCC
- *      fieldlogisticsfl@gmail.com so Izzy keeps a personal copy).
+ *   2. Sends an internal notification to fieldlogisticsfl@gmail.com.
  *   3. Sends an auto-responder to the submitter — Izzy's exact copy
  *      from 2026-05-10 — wrapped in try/catch so a Resend failure can
  *      never break the DB write or the API response.
@@ -20,12 +19,12 @@ export const runtime = "nodejs"
  *      auto-responder reports `sent`.
  *
  * From address always uses process.env.RESEND_FROM_EMAIL with fallback
- * to info@hoa-agent.com.
+ * to info@hoa-agent.com. That is a SENDER, not a contact address: Resend can
+ * only send from a verified domain, and gmail.com cannot be verified.
  */
 
 const FROM_EMAIL = "info@hoa-agent.com"
-const ADMIN_INBOX = "info@hoa-agent.com"
-const ADMIN_BCC = "fieldlogisticsfl@gmail.com"
+const ADMIN_INBOX = "fieldlogisticsfl@gmail.com"
 
 const IZZY_TEST_ADDRESSES = new Set([
   "izzymartinez@gmail.com",
@@ -197,7 +196,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Internal notification → info@hoa-agent.com with fieldlogisticsfl BCC
+    // Internal notification → fieldlogisticsfl@gmail.com
     try {
       const internalText =
         `New report request\n\n` +
@@ -207,8 +206,10 @@ export async function POST(request: NextRequest) {
         `\nReply directly to follow up.`
       const r2 = await sendEmail({
         apiKey,
+        // BCC removed 2026-08-09: it carried a personal copy while the primary
+        // recipient was info@hoa-agent.com. Both are now the same mailbox, so a
+        // BCC would deliver every report request twice.
         to: [ADMIN_INBOX],
-        bcc: [ADMIN_BCC],
         subject: `Report request: ${email}${community_slug ? " · " + community_slug : ""}`,
         html: `<pre style="font-family:system-ui,sans-serif;white-space:pre-wrap">${internalText.replace(/[<>]/g, (c) => (c === "<" ? "&lt;" : "&gt;"))}</pre>`,
         text: internalText,

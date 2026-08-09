@@ -127,8 +127,9 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || 'info@hoa-agent.com',
-        to: ['info@hoa-agent.com'],
-        bcc: ['fieldlogisticsfl@gmail.com'],
+        // BCC removed 2026-08-09: same mailbox as `to` now, so it would
+        // deliver every review notification twice.
+        to: ['fieldlogisticsfl@gmail.com'],
         subject: 'New HOA Agent review submitted',
         html: '<h2>New review submitted</h2>' +
           '<p><strong>Community:</strong> ' + (body.community_id || 'Unknown') + '</p>' +

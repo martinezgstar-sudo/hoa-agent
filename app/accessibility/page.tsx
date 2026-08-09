@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const LAST_REVIEWED = "2026-08-05"
-const CONTACT_EMAIL = "martinezgstar@gmail.com"
+const CONTACT_EMAIL = "fieldlogisticsfl@gmail.com"
 
 export default function AccessibilityPage() {
   return (
