@@ -1,0 +1,18 @@
+# Per-finding gitleaks exceptions, pinned to commit:file:rule:line.
+# Anything not listed here still blocks a commit or push.
+#
+# ---------------------------------------------------------------------------
+# scripts/scrape-hb1203.js hardcodes the Supabase ANON key.
+#
+# Decoded before allowlisting: role=anon, ref=uacgzbojhjelzirvbphg, iss=supabase.
+# The anon key is public by design — it ships in NEXT_PUBLIC_SUPABASE_ANON_KEY
+# inside every page's JavaScript bundle, and row-level security, not secrecy, is
+# what protects the data.
+#
+# A service_role key in this position would be a genuine incident and must NEVER
+# be allowlisted. The role was verified, not assumed.
+#
+# It remains poor hygiene to hardcode the value rather than read process.env,
+# and it cannot be removed from history without a rewrite. Flagged for the owner
+# rather than refactored here; that is outside the scope of the email audit.
+641c86e530d8d40a9a9491e160bb1fd96e16b726:scripts/scrape-hb1203.js:jwt:7
