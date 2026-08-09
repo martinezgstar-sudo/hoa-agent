@@ -88,7 +88,7 @@ async function sendOne(apiKey: string, to: string): Promise<SendResult> {
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || "info@hoa-agent.com",
         to: [to],
-        reply_to: "info@hoa-agent.com",
+        reply_to: "fieldlogisticsfl@gmail.com",
         subject: SUBJECT,
         html: BODY_HTML,
         text: BODY_TEXT,

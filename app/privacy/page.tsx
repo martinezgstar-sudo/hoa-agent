@@ -43,7 +43,7 @@ export default function PrivacyPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Your data is stored securely on enterprise-grade cloud infrastructure. We take reasonable measures to protect your information but cannot guarantee absolute security.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>5. Your Rights</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>You may request deletion of your personal data at any time by emailing info@hoa-agent.com. We will process deletion requests within 30 days.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>You may request deletion of your personal data at any time by emailing fieldlogisticsfl@gmail.com. We will process deletion requests within 30 days.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>6. Public Records Data</h2>
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Community information displayed on HOA Agent is sourced from public records including Florida Division of Corporations, Palm Beach County property data, and resident submissions. This data is publicly available and not considered private information.</p>
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
         <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>We may update this privacy policy from time to time. We will note the date of the last update at the top of this page.</p>
 
         <h2 style={{fontSize:'16px',fontWeight:'600',color:'#1a1a1a',marginBottom:'8px',marginTop:'24px'}}>9. Contact</h2>
-        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Questions about this privacy policy? Email us at info@hoa-agent.com.</p>
+        <p style={{fontSize:'14px',color:'#555',lineHeight:'1.8',marginBottom:'16px'}}>Questions about this privacy policy? Email us at fieldlogisticsfl@gmail.com.</p>
       </div>
       <footer style={{borderTop:'1px solid #e5e5e5',padding:'24px 32px',textAlign:'center',fontSize:'12px',color:'#595959'}}>
         <div style={{marginBottom:'8px',fontWeight:'500',color:'#1a1a1a'}}>HOA Agent</div>

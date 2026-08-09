@@ -100,7 +100,7 @@ export function buildHoaAgentOrgSchema() {
     logo: `${SITE}/logo.png`,
     description: "Palm Beach County HOA research platform",
     foundingDate: "2026-04-20",
-    email: "info@hoa-agent.com",
+    email: "fieldlogisticsfl@gmail.com",
     address: {
       "@type": "PostalAddress",
       addressLocality: "West Palm Beach",

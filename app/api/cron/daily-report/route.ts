@@ -90,8 +90,9 @@ export async function GET() {
     },
     body: JSON.stringify({
       from: process.env.RESEND_FROM_EMAIL || 'info@hoa-agent.com',
-      to: ['info@hoa-agent.com'],
-      bcc: ['fieldlogisticsfl@gmail.com'],
+      // BCC removed 2026-08-09: it was a personal copy alongside an
+      // info@hoa-agent.com primary. Same mailbox now, so it would duplicate.
+      to: ['fieldlogisticsfl@gmail.com'],
       subject: 'HOA Agent Daily Report - ' + date,
       html
     })

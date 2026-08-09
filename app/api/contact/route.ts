@@ -2,15 +2,21 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
 
-const CONTACT_EMAIL = "info@hoa-agent.com"
-const CONTACT_BCC = "fieldlogisticsfl@gmail.com"
+const CONTACT_EMAIL = "fieldlogisticsfl@gmail.com"
 
 /**
  * POST /api/contact
  * Body: { subject, fields, name, email, ...formFields }
- * Sends an email via Resend to info@hoa-agent.com with fieldlogisticsfl
- * BCC'd as backup. Always returns { success: true } on the user-visible
- * side; logs server errors.
+ * Sends an email via Resend to fieldlogisticsfl@gmail.com. Always returns
+ * { success: true } on the user-visible side; logs server errors.
+ *
+ * The BCC was removed 2026-08-09. It existed to give Izzy a personal copy
+ * while the primary recipient was info@hoa-agent.com; now that the primary IS
+ * that address, a BCC to the same mailbox just delivers every enquiry twice.
+ *
+ * `from` deliberately stays on the hoa-agent.com domain: Resend can only send
+ * from a domain you have verified, and gmail.com cannot be verified. Changing
+ * it would make every contact notification fail to send.
  */
 export async function POST(req: NextRequest) {
   try {
@@ -55,7 +61,6 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || "info@hoa-agent.com",
         to: [CONTACT_EMAIL],
-        bcc: [CONTACT_BCC],
         reply_to: email,
         subject: subjectLine,
         text: lines.join("\n"),

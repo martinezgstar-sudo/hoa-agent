@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const ADMIN_EMAIL = process.env.CLAIM_ADMIN_EMAIL || 'admin@hoa-agent.com'
+const ADMIN_EMAIL = process.env.CLAIM_ADMIN_EMAIL || 'fieldlogisticsfl@gmail.com'
 
 // In-memory rate limit (per-IP). Survives within a single serverless instance.
 // Vercel may spin up multiple instances so this is a soft cap, not a hard one —
