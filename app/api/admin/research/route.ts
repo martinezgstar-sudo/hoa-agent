@@ -154,59 +154,6 @@ class CommunityFindings {
   note(m: string) { this.notes.push(m) }
 }
 
-// ── TIER 2 — CourtListener ───────────────────────────────────────────────────
-
-async function searchCourtListener(f: CommunityFindings): Promise<void> {
-  const q = encodeURIComponent(`"${f.name}" Florida`)
-  const url = `https://www.courtlistener.com/api/rest/v4/search/?q=${q}&type=o&court=flsd,flmd,flnd&format=json`
-  const body = await safeFetch(url, {}, 12000)
-  f.logSource(`CourtListener: ${url.slice(0, 80)}`)
-  if (body.startsWith("ERROR")) {
-    f.note(`CourtListener error: ${body.slice(0, 100)}`)
-    return
-  }
-  try {
-    const data = JSON.parse(body) as { count?: number; results?: Array<{ caseName?: string }> }
-    const count = data.count ?? 0
-    if (count > 0) {
-      const names = (data.results ?? []).slice(0, 3).map(r => r.caseName ?? "").filter(Boolean)
-      f.note(`CourtListener: ${count} cases — ${names.join(", ")}`)
-      f.addPending(
-        "litigation_count", count,
-        `https://www.courtlistener.com/?q=${encodeURIComponent(f.name)}&type=o`,
-        "courtlistener", 0.85,
-      )
-    } else {
-      f.note("CourtListener: no cases found")
-    }
-  } catch {
-    f.note("CourtListener: JSON parse failed")
-  }
-}
-
-// ── TIER 2 — NewsAPI ─────────────────────────────────────────────────────────
-
-async function searchNewsAPI(f: CommunityFindings): Promise<void> {
-  const key = process.env.NEWSAPI_KEY ?? process.env.NEWS_API_KEY ?? ""
-  if (!key) {
-    f.logSource("NewsAPI: no API key configured")
-    return
-  }
-  const q = encodeURIComponent(`"${f.name}"`)
-  const url = `https://newsapi.org/v2/everything?q=${q}&language=en&sortBy=relevancy&pageSize=5`
-  const body = await safeFetch(url, { headers: { "X-Api-Key": key } }, 12000)
-  f.logSource(`NewsAPI: ${url.slice(0, 80)}`)
-  if (body.startsWith("ERROR")) return
-  try {
-    const data = JSON.parse(body) as { articles?: Array<{ title?: string; url?: string }> }
-    for (const a of (data.articles ?? []).slice(0, 3)) {
-      f.note(`NewsAPI: ${a.title ?? ""} — ${(a.url ?? "").slice(0, 60)}`)
-    }
-  } catch {
-    /* ignore */
-  }
-}
-
 // ── TIER 3 — DuckDuckGo + extraction ─────────────────────────────────────────
 
 async function ddgSearch(query: string, maxResults = 6): Promise<Array<[string, string, string]>> {
@@ -385,13 +332,9 @@ async function runDDGSearches(f: CommunityFindings): Promise<void> {
 async function researchCommunity(c: Community): Promise<CommunityFindings> {
   const f = new CommunityFindings(c)
 
-  // Tier 2 — government APIs (run in parallel)
-  await Promise.all([
-    searchCourtListener(f),
-    searchNewsAPI(f),
-  ])
-
   // Tier 3 — DuckDuckGo searches (sequential, with rate limiting)
+  // Tier 2 (CourtListener + NewsAPI) removed in v3 Phase 1; Phase 3 replaces
+  // this whole codepath with the Ollama + SearXNG nightly loop.
   await runDDGSearches(f)
 
   return f
@@ -600,7 +543,8 @@ export async function POST(req: NextRequest) {
     totals,
     errors:              allErrors,
     results:             summaries,
-    note:                "Vercel runtime handles Tier 2 (CourtListener, NewsAPI) + Tier 3 (DuckDuckGo). " +
-                         "Tier 1 (LaCie Sunbiz) and Tier 5 (Playwright) require the local Python script.",
+    note:                "Vercel runtime handles Tier 3 (DuckDuckGo web search). " +
+                         "Tier 1 (LaCie Sunbiz) and Tier 5 (Playwright) require the local Python script. " +
+                         "Tier 2 removed in v3 Phase 1; superseded by the Ollama + SearXNG loop in Phase 3.",
   })
 }

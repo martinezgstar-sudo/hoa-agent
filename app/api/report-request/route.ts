@@ -39,11 +39,11 @@ const AUTOREPLY_TEXT = `Hi,
 Thanks for requesting a community report. HOA Agent is brand new and we're finishing the report product in the coming weeks.
 
 Here's what we have today:
-- Free community pages with HOA fees, master associations, management companies, and litigation history at hoa-agent.com
-- Real-time data from Florida Sunbiz, Palm Beach County Property Appraiser, and CourtListener
+- Free community pages with HOA fees, master associations, and management companies at hoa-agent.com
+- Real-time data from Florida Sunbiz and the Palm Beach County Property Appraiser
 
 Here's what's coming soon:
-- Full report PDFs with financial health, special assessments, news mentions, and litigation summaries
+- Full report PDFs with financial health, special assessments, and management + utility details
 
 I'll email you the moment reports go live. If you have a specific question about a community, hit reply and I'll research it for you.
 
@@ -58,13 +58,13 @@ const AUTOREPLY_HTML = `
 
   <p><strong>Here's what we have today:</strong></p>
   <ul>
-    <li>Free community pages with HOA fees, master associations, management companies, and litigation history at <a href="https://www.hoa-agent.com" style="color:#06875e;">hoa-agent.com</a></li>
-    <li>Real-time data from Florida Sunbiz, Palm Beach County Property Appraiser, and CourtListener</li>
+    <li>Free community pages with HOA fees, master associations, and management companies at <a href="https://www.hoa-agent.com" style="color:#06875e;">hoa-agent.com</a></li>
+    <li>Real-time data from Florida Sunbiz and the Palm Beach County Property Appraiser</li>
   </ul>
 
   <p><strong>Here's what's coming soon:</strong></p>
   <ul>
-    <li>Full report PDFs with financial health, special assessments, news mentions, and litigation summaries</li>
+    <li>Full report PDFs with financial health, special assessments, and management + utility details</li>
   </ul>
 
   <p>I'll email you the moment reports go live. If you have a specific question about a community, hit reply and I'll research it for you.</p>
