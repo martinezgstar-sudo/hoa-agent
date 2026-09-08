@@ -4,7 +4,7 @@ import NavBar from '@/app/components/NavBar'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-export const revalidate = 3600 // refresh hero image + news once per hour
+export const revalidate = 3600 // refresh hero image once per hour
 
 type WikiSummary = { thumbnail?: { source?: string }; description?: string; extract?: string }
 
@@ -35,8 +35,6 @@ type CityStats = {
   avg_fee: number | null
   min_fee: number | null
   max_fee: number | null
-  avg_score: number | null
-  with_litigation: number
   gated: number
   plus55: number
 }
@@ -44,7 +42,7 @@ type CityStats = {
 async function getCityStats(cityName: string): Promise<CityStats> {
   const { data } = await supabase
     .from('communities')
-    .select('property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, news_reputation_score, litigation_count, is_gated, is_55_plus')
+    .select('property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, is_gated, is_55_plus')
     .eq('status', 'published')
     .ilike('city', cityName)
 
@@ -53,9 +51,6 @@ async function getCityStats(cityName: string): Promise<CityStats> {
   const hoas = rows.length - condos
   const fees: number[] = rows
     .map((r) => r.monthly_fee_median ?? r.monthly_fee_min)
-    .filter((v): v is number => typeof v === 'number' && v > 0)
-  const scores: number[] = rows
-    .map((r) => r.news_reputation_score)
     .filter((v): v is number => typeof v === 'number' && v > 0)
   const minFees = rows.map((r) => r.monthly_fee_min).filter((v): v is number => typeof v === 'number' && v > 0)
   const maxFees = rows.map((r) => r.monthly_fee_max).filter((v): v is number => typeof v === 'number' && v > 0)
@@ -67,43 +62,9 @@ async function getCityStats(cityName: string): Promise<CityStats> {
     avg_fee: fees.length >= 3 ? Math.round(fees.reduce((a, b) => a + b, 0) / fees.length) : null,
     min_fee: minFees.length ? Math.min(...minFees) : null,
     max_fee: maxFees.length ? Math.max(...maxFees) : null,
-    avg_score: scores.length >= 3
-      ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
-      : null,
-    with_litigation: rows.filter((r) => (r.litigation_count ?? 0) > 0).length,
     gated: rows.filter((r) => (r as { is_gated?: boolean }).is_gated === true).length,
     plus55: rows.filter((r) => (r as { is_55_plus?: boolean }).is_55_plus === true).length,
   }
-}
-
-type RecentArticle = { title: string; url: string; published_date: string | null; source: string | null }
-
-async function getCityPositiveNews(cityName: string): Promise<RecentArticle[]> {
-  // news_items linked to communities in this city, status=approved, no negative keywords
-  const { data: links } = await supabase
-    .from('community_news')
-    .select('news_item_id, communities!inner(city)')
-    .ilike('communities.city', cityName)
-    .limit(50)
-  const ids = Array.from(new Set((links || []).map((l) => (l as { news_item_id: string }).news_item_id))).slice(0, 30)
-  if (ids.length === 0) return []
-  const { data: items } = await supabase
-    .from('news_items')
-    .select('title, url, published_date, source')
-    .in('id', ids)
-    .eq('status', 'approved')
-    .order('published_date', { ascending: false, nullsFirst: false })
-    .limit(20)
-  const NEG = /(lawsuit|fraud|fine|violation|charges|arrested|embezzle|criminal|sued|stole|theft)/i
-  return (items || [])
-    .filter((it) => !NEG.test(it.title || ''))
-    .slice(0, 3)
-    .map((it) => ({
-      title: it.title,
-      url: it.url,
-      published_date: it.published_date,
-      source: it.source,
-    }))
 }
 
 const CITIES: Record<string, { name: string; blurb: string }> = {
@@ -165,8 +126,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const city = CITIES[slug]
   if (!city) return { title: 'City Not Found — HOA Agent' }
-  const title = `${city.name} HOA Communities — Fees, Reviews & Litigation | HOA Agent Palm Beach County`
-  const description = `Browse HOA and condo communities in ${city.name}, Florida. Find litigation history, news reputation scores, monthly fees, and resident reviews. Free on HOA Agent.`
+  const title = `${city.name} HOA Communities — Fees, Reviews & Restrictions | HOA Agent Palm Beach County`
+  const description = `Browse HOA and condo communities in ${city.name}, Florida. Find monthly fees, restrictions, and resident reviews. Free on HOA Agent.`
   const canonical = `https://www.hoa-agent.com/city/${slug}`
   return {
     title,
@@ -198,7 +159,7 @@ export default async function CityPage({ params, searchParams }: Props) {
   // Try exact ilike first; if zero results (e.g. city stored with different
   // formatting), fall back to a wildcard match anchored to the city name.
   const SELECT_COLS =
-    'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url, news_reputation_score, news_reputation_label, litigation_count'
+    'id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, review_avg, review_count, amenities, website_url'
 
   let { data: communities } = await supabase
     .from('communities')
@@ -225,8 +186,6 @@ export default async function CityPage({ params, searchParams }: Props) {
     if (c.unit_count) s += 10
     if (c.amenities) s += 10
     if (c.website_url) s += 10
-    if (c.news_reputation_score) s += 15
-    if (c.litigation_count !== null && c.litigation_count !== undefined) s += 5
     if (typeof c.review_count === 'number' && (c.review_count as number) > 0) s += 10
     if (c.review_avg) s += 5
     return s
@@ -238,8 +197,7 @@ export default async function CityPage({ params, searchParams }: Props) {
     monthly_fee_median: number | null; unit_count: number | null;
     management_company: string | null; review_avg: number | null; review_count: number | null;
     amenities: string | null; website_url: string | null;
-    news_reputation_score: number | null; news_reputation_label: string | null;
-    litigation_count: number | null; richness_score: number;
+    richness_score: number;
   }
   const allList: Row[] = (communities || []).map((c) => ({
     ...(c as unknown as Row),
@@ -252,11 +210,10 @@ export default async function CityPage({ params, searchParams }: Props) {
   const startIdx = (safePage - 1) * PAGE_SIZE
   const list: Row[] = allList.slice(startIdx, startIdx + PAGE_SIZE)
 
-  // Parallel: hero image + stats + positive news
-  const [hero, stats, positiveNews] = await Promise.all([
+  // Parallel: hero image + stats
+  const [hero, stats] = await Promise.all([
     getCityImage(city.name),
     getCityStats(city.name),
-    getCityPositiveNews(city.name),
   ])
 
   return (
@@ -322,7 +279,6 @@ export default async function CityPage({ params, searchParams }: Props) {
             { label: 'Condos', value: stats.condos > 0 ? stats.condos.toLocaleString() : 'N/A' },
             { label: 'Avg Monthly Fee', value: stats.avg_fee ? `$${stats.avg_fee}` : 'N/A' },
             { label: 'Fee Range', value: stats.min_fee && stats.max_fee ? `$${stats.min_fee}–$${stats.max_fee}` : 'N/A' },
-            { label: 'Avg Reputation', value: stats.avg_score ? `${stats.avg_score}/10` : 'N/A' },
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '10px', padding: '14px 12px', textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 700, color: '#1B2B6B', marginBottom: '2px' }}>{s.value}</div>
@@ -330,24 +286,6 @@ export default async function CityPage({ params, searchParams }: Props) {
             </div>
           ))}
         </div>
-
-        {/* Positive recent news (only if found) */}
-        {positiveNews.length > 0 && (
-          <div style={{ marginBottom: '28px', backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '18px 20px' }}>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: '#06875e', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
-              Recent News in {city.name}
-            </div>
-            {positiveNews.map((a, i) => (
-              <a key={i} href={a.url} target="_blank" rel="noopener" style={{ display: 'block', textDecoration: 'none', padding: '8px 0', borderTop: i === 0 ? 'none' : '1px solid #f0f0f0' }}>
-                <div style={{ fontSize: '14px', color: '#1a1a1a', lineHeight: 1.4 }}>{a.title}</div>
-                <div style={{ fontSize: '11px', color: '#595959', marginTop: '3px' }}>
-                  {a.source ?? 'News'}
-                  {a.published_date ? ` · ${new Date(a.published_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
 
         <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.7, marginBottom: '24px', maxWidth: '640px' }}>
           {city.blurb}
@@ -372,8 +310,6 @@ export default async function CityPage({ params, searchParams }: Props) {
             { key: 'pet-friendly', label: 'Pet-Friendly' },
             { key: 'affordable', label: 'Affordable' },
             { key: 'high-fee', label: 'Premium' },
-            { key: 'with-litigation', label: 'With Litigation' },
-            { key: 'good-standing', label: 'Good Standing' },
             ...(stats.plus55 > 0 ? [{ key: '55-plus', label: `55+ Communities (${stats.plus55})` }] : []),
             ...(stats.gated > 0 ? [{ key: 'gated', label: `Gated Communities (${stats.gated})` }] : []),
           ].map((f) => (

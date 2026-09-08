@@ -90,9 +90,7 @@ export default function AdminUploadPage() {
     { key: "suggestions",   label: "Suggestions",    href: "/admin" },
     { key: "field_updates", label: "Field Updates",  href: "/admin" },
     { key: "research",      label: "Research",       href: "/admin" },
-    { key: "news",          label: "News",           href: "/admin/news" },
     { key: "pending",       label: "Pending ›",      href: "/admin/pending" },
-    { key: "legal",         label: "Legal",          href: "/admin/legal" },
   ]
 
   return (

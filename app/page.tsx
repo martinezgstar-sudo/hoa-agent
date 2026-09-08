@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'HOA Agent — Know the HOA Before You Commit',
-    description: 'Search Palm Beach County HOA communities. Fees, restrictions, litigation history, and reviews — free.',
+    description: 'Search Palm Beach County HOA communities. Fees, restrictions, and reviews — free.',
     images: ['https://www.hoa-agent.com/logo.png'],
   },
 }
@@ -45,8 +45,7 @@ export default async function Home() {
     .from('communities')
     .select('*')
     .eq('status', 'published')
-    .or('management_company.not.is.null,monthly_fee_median.not.is.null,news_reputation_score.not.is.null')
-    .order('news_reputation_score', { ascending: false, nullsFirst: false })
+    .or('management_company.not.is.null,monthly_fee_median.not.is.null')
     .order('review_count', { ascending: false, nullsFirst: false })
     .order('confidence_score', { ascending: false, nullsFirst: false })
     .limit(20)
@@ -55,7 +54,6 @@ export default async function Home() {
     let s = 0
     if (c.management_company) s += 1
     if (c.monthly_fee_median) s += 1
-    if (c.news_reputation_score) s += 1
     if (typeof c.review_count === 'number' && (c.review_count as number) > 0) s += 1
     return s
   }
@@ -64,7 +62,7 @@ export default async function Home() {
     monthly_fee_min: number | null; monthly_fee_max: number | null;
     monthly_fee_median: number | null; management_company: string | null;
     confidence_score: number | null; review_count: number | null; review_avg: number | null;
-    news_reputation_score: number | null; assessment_signal_count: number | null;
+    assessment_signal_count: number | null;
     [k: string]: unknown
   }
   const featured: FeaturedRow[] = ((featuredRaw ?? []) as unknown as FeaturedRow[])
@@ -222,11 +220,11 @@ export default async function Home() {
           {[
             {
               q: 'What is HOA Agent?',
-              a: 'HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, litigation history, and resident reviews so buyers and residents can research any community before committing.',
+              a: 'HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, and resident reviews so buyers and residents can research any community before committing.',
             },
             {
               q: 'Is HOA Agent free to use?',
-              a: 'Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community.',
+              a: 'Basic community profiles — fees, restrictions, management info, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community.',
             },
             {
               q: 'How often is the data updated?',
@@ -237,16 +235,8 @@ export default async function Home() {
               a: 'HOA Agent currently covers Palm Beach County, Florida — over 8,000 HOA and condo communities across every city in the county. Expansion to neighboring counties is planned.',
             },
             {
-              q: 'Can I trust the litigation data?',
-              a: 'Litigation data is pulled from public court records and reflects what is publicly available at the time of the last update. It may not capture all cases or the current status of ongoing proceedings. Consult an attorney for legal advice before making real estate decisions.',
-            },
-            {
               q: 'How do I claim my community page?',
               a: 'HOA representatives and board members can claim their community page by visiting the community profile and clicking "Claim this page" at the bottom. We verify all claims before granting management access.',
-            },
-            {
-              q: 'What is a news reputation score?',
-              a: 'The news reputation score reflects how frequently a community has appeared in local and regional news coverage, and whether that coverage skewed positive or negative. A lower score may indicate the community has been in the news for disputes, lawsuits, or financial issues.',
             },
             {
               q: 'What is a special assessment in an HOA?',
@@ -284,12 +274,12 @@ export default async function Home() {
             {
               "@type": "Question",
               "name": "What is HOA Agent?",
-              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, litigation history, and resident reviews so buyers and residents can research any community before committing." }
+              "acceptedAnswer": { "@type": "Answer", "text": "HOA Agent is a free public database of HOA and condo community information for Palm Beach County, Florida. We aggregate fees, restrictions, and resident reviews so buyers and residents can research any community before committing." }
             },
             {
               "@type": "Question",
               "name": "Is HOA Agent free to use?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Basic community profiles — fees, restrictions, management info, news reputation, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community." }
+              "acceptedAnswer": { "@type": "Answer", "text": "Basic community profiles — fees, restrictions, management info, and resident reviews — are free to browse with no account required. Detailed reports with full source citations and history are available for $2.99 per community." }
             },
             {
               "@type": "Question",
@@ -303,18 +293,8 @@ export default async function Home() {
             },
             {
               "@type": "Question",
-              "name": "Can I trust the litigation data?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Litigation data is pulled from public court records and reflects what is publicly available at the time of the last update. It may not capture all cases or the current status of ongoing proceedings. Consult an attorney for legal advice before making real estate decisions." }
-            },
-            {
-              "@type": "Question",
               "name": "How do I claim my community page?",
               "acceptedAnswer": { "@type": "Answer", "text": "HOA representatives and board members can claim their community page by visiting the community profile and clicking 'Claim this page' at the bottom. We verify all claims before granting management access." }
-            },
-            {
-              "@type": "Question",
-              "name": "What is a news reputation score?",
-              "acceptedAnswer": { "@type": "Answer", "text": "The news reputation score reflects how frequently a community has appeared in local and regional news coverage, and whether that coverage skewed positive or negative. A lower score may indicate the community has been in the news for disputes, lawsuits, or financial issues." }
             },
             {
               "@type": "Question",

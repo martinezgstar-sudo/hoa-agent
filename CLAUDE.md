@@ -1,6 +1,19 @@
 # HOA Agent — Claude Code Session Context
 Last updated: 2026-05-20 (live-count refresh by hoa-social agent)
 
+> **2026-09-08 note:** the legal + news surface described elsewhere in this
+> file (legal_cases, community_legal_cases, news_items, community_news,
+> news_replies, /admin/legal, /admin/news, /api/{legal,news,cron/fetch-news,
+> cron/enrich-news, cron/fetch-legal, cron/verify-legal, cron/news,
+> cron/legal, cron/news-archive}, LegalCases + NewsFeed components,
+> CourtListener + NewsAPI + Guardian fetchers) was ARCHIVED by v3 Phase 1
+> (branch `v3-nightly-loop`, migration
+> `supabase/migrations/20260907_archive_legal_news.sql`). Do not resurrect.
+> The nightly enrichment loop is being rebuilt around Ollama + SearXNG in
+> Phase 3. Sections below that still reference these systems are retained
+> for historical continuity, not as authoritative current state.
+
+
 ## Project Identity
 - Product: HOA Agent — Florida HOA intelligence platform
 - URL: https://www.hoa-agent.com (canonical with www)
@@ -717,10 +730,7 @@ FEATURES IN QUEUE:
 - Sales data layer CAMA matching fix
 
 DATA IN QUEUE:
-- Review 7+ pending news_items in /admin/news
 - Review 40 Zillow-noise fee observations in /admin/pending (reject all)
-- Link unmatched articles: Joggers Run, Black Diamond,
-  La Clara, Riverwalk, Atlantic Cloisters
 - Run python3 scripts/gmail-auth.py for outreach OAuth
 - Run build-outreach-list.py once auth complete
 - Continue nightly research batches

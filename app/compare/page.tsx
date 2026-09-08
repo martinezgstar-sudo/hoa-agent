@@ -15,9 +15,6 @@ type Community = {
   monthly_fee_max: number | null
   monthly_fee_median: number | null
   management_company: string | null
-  news_reputation_score: number | null
-  news_reputation_label: string | null
-  litigation_count: number | null
   pet_restriction: string | null
   rental_approval: string | null
   str_restriction: string | null
@@ -58,25 +55,6 @@ function fmtFee(c: Community): React.ReactNode {
   if (c.monthly_fee_min && c.monthly_fee_max) return `$${c.monthly_fee_min}–$${c.monthly_fee_max}/mo`
   if (c.monthly_fee_median) return `$${c.monthly_fee_median}/mo`
   return NA
-}
-
-function repScore(c: Community): React.ReactNode {
-  if (c.news_reputation_score == null) return NA
-  const s = c.news_reputation_score
-  const bg = s <= 3 ? "#FEE9E9" : s <= 5 ? "#FAEEDA" : s <= 7 ? "#E6F1FB" : "#E1F5EE"
-  const color = s <= 3 ? "#A32D2D" : s <= 5 ? "#854F0B" : s <= 7 ? "#0C447C" : "#0B5239"
-  return (
-    <span style={{ fontSize: "12px", padding: "2px 8px", borderRadius: "4px", backgroundColor: bg, color, fontWeight: 600 }}>
-      {s}/10 {c.news_reputation_label || ""}
-    </span>
-  )
-}
-
-function litCell(c: Community): React.ReactNode {
-  if (c.litigation_count == null) return NA
-  const n = c.litigation_count
-  const color = n === 0 ? "#0B5239" : n <= 2 ? "#854F0B" : "#A32D2D"
-  return <span style={{ color, fontWeight: 600 }}>{n}</span>
 }
 
 export default function ComparePageWrapper() {
@@ -226,8 +204,6 @@ function ComparePageInner() {
                   { label: "Unit Count", get: (c: Community) => c.unit_count ?? NA },
                   { label: "Monthly Fee", get: fmtFee },
                   { label: "Management Company", get: (c: Community) => c.management_company || NA },
-                  { label: "News Reputation", get: repScore },
-                  { label: "Litigation Count", get: litCell },
                   { label: "Age Restricted", get: (c: Community) => (
                     c.is_55_plus ? <span style={{ color: "#92400E", fontWeight: 600 }}>Yes — 55+ Community</span>
                     : c.is_age_restricted ? <span style={{ color: "#6B21A8", fontWeight: 600 }}>Yes</span>

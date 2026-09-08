@@ -3,7 +3,7 @@ import ArticleLayout from "@/app/components/ArticleLayout"
 
 const SLUG = "/guides/how-to-evaluate-hoa-before-buying"
 const TITLE = "How to Evaluate an HOA Before Buying in Florida"
-const DESC = "Ten questions every Florida buyer should answer before closing on a property in an HOA or condo community. How to read litigation history, news scores, and fee trends."
+const DESC = "Ten questions every Florida buyer should answer before closing on a property in an HOA or condo community. How to read fee trends, board minutes, and reserve studies."
 const PUBLISHED = "2026-05-03"
 
 export const metadata: Metadata = {
@@ -20,8 +20,6 @@ export default function Page() {
       publishedDate={PUBLISHED} slug={SLUG}
       toc={[
         { id: "ten-questions", label: "Ten questions every Florida buyer should ask" },
-        { id: "litigation", label: "How to interpret litigation history" },
-        { id: "reputation", label: "How to read news reputation scores" },
         { id: "fees", label: "Fee trends and what they mean" },
         { id: "agent-due-diligence", label: "Using HOA Agent for due diligence" },
         { id: "agents", label: "For real estate agents" },
@@ -42,44 +40,8 @@ export default function Page() {
         <li><strong>What is the pet restriction?</strong> Breed, weight, and number limits matter.</li>
         <li><strong>How active is the board?</strong> Read the past year of meeting minutes — a healthy board addresses issues, a troubled board postpones them.</li>
         <li><strong>Who is the management company?</strong> Larger professional management firms tend to run associations more smoothly than self-managed boards.</li>
-        <li><strong>What recent news exists about this community?</strong> Search the community name in Google News, then check our <a href="/search">community profile</a> for our news reputation score.</li>
+        <li><strong>What recent news exists about this community?</strong> Search the community name in Google News and in the Palm Beach County Clerk of Courts docket search — both are free and fast.</li>
       </ol>
-
-      <h2 id="litigation">How to interpret litigation history</h2>
-      <p>
-        Litigation involving an HOA falls into a few categories. Some are normal and expected:
-      </p>
-      <ul>
-        <li><strong>Assessment collection lawsuits</strong> — every association has a few owners who fall behind. A handful per year on a large community is normal.</li>
-        <li><strong>Lien foreclosures</strong> — same. Routine collection activity.</li>
-      </ul>
-      <p>
-        Others are warning signs:
-      </p>
-      <ul>
-        <li><strong>Construction defect lawsuits</strong> — the association is suing the developer or contractor over building defects. Often signals expensive repairs ahead, but also signals the board is being proactive.</li>
-        <li><strong>Owner vs board lawsuits</strong> — multiple owners suing the board over governance, fines, or denied modifications signals dysfunction.</li>
-        <li><strong>Discrimination or fair housing complaints</strong> — major red flag.</li>
-        <li><strong>Embezzlement or fraud cases</strong> — disqualifying.</li>
-      </ul>
-      <p>
-        HOA Agent pulls litigation data from CourtListener (federal and state courts). Every community profile shows the litigation count and links to the underlying cases.
-      </p>
-
-      <h2 id="reputation">How to read news reputation scores</h2>
-      <p>
-        HOA Agent assigns each community a 1–10 news reputation score based on AI matching of news articles to the community and scoring sentiment and severity:
-      </p>
-      <ul>
-        <li><strong>1–3 (High Risk)</strong> — significant negative coverage. Lawsuits, fraud, fines, milestone inspection failures, board scandals. Buy with caution.</li>
-        <li><strong>4–5 (Under Scrutiny)</strong> — mixed coverage. Some negative items but not at the High Risk level.</li>
-        <li><strong>6–7 (Mixed)</strong> — balanced coverage, both positive and negative.</li>
-        <li><strong>8–9 (Good Standing)</strong> — only positive coverage found.</li>
-        <li><strong>10 (Excellent)</strong> — multiple sources of positive coverage with no negatives.</li>
-      </ul>
-      <p>
-        No score (the most common case) means we have not yet matched any news articles to the community. Absence of news is not a problem — most HOAs are below the news threshold and that is fine.
-      </p>
 
       <h2 id="fees">Fee trends and what they mean</h2>
       <p>
@@ -102,8 +64,6 @@ export default function Page() {
         <li>Search by name, address, or city — try our <a href="/search">search</a>.</li>
         <li>See the current Florida entity status and registration.</li>
         <li>See the management company on file.</li>
-        <li>See the litigation count from CourtListener.</li>
-        <li>See the news reputation score and underlying articles.</li>
         <li>See resident reviews and comments.</li>
         <li>See verified fee data from residents and listing observations.</li>
       </ul>

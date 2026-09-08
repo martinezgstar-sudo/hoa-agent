@@ -998,10 +998,8 @@ export default function AdminPage() {
     {key:"research",label:"Research"},
     {key:"leads",label:"Leads"},
     {key:"social",label:"Social Postings"},
-    {key:"news",label:"News",href:"/admin/news"},
     {key:"ads",label:"Advertiser Signups ›",href:"/admin/ads"},
     {key:"pending",label:"Pending ›",href:"/admin/pending"},
-    {key:"legal",label:"Legal",href:"/admin/legal"},
   ]
 
   return (

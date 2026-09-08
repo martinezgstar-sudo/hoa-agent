@@ -72,18 +72,6 @@ const FILTERS: Record<string, FilterDef> = {
       "Communities with monthly HOA fees above $600. Premium fees typically reflect bundled amenities (golf, tennis, gated security, full-service management) or full coastal master insurance on coastal condos.",
     clauses: [{ op: 'gte', col: 'monthly_fee_median', val: 600 }],
   },
-  "with-litigation": {
-    label: "With Litigation History",
-    intro:
-      "Communities where public court records show one or more legal cases. Routine collection lawsuits are common and not a red flag. Construction defect, governance, or owner-vs-board cases warrant deeper diligence.",
-    clauses: [{ op: 'gt', col: 'litigation_count', val: 0 }],
-  },
-  "good-standing": {
-    label: "Good Standing",
-    intro:
-      "Communities with a news reputation score of 8 or higher. These are communities where matched news coverage is positive or neutral with no significant red flags.",
-    clauses: [{ op: 'gte', col: 'news_reputation_score', val: 8 }],
-  },
   "55-plus": {
     label: "55+",
     intro:
@@ -133,15 +121,13 @@ export async function generateStaticParams() {
 }
 
 const SELECT_COLS =
-  "id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company, news_reputation_score, litigation_count"
+  "id, slug, canonical_name, city, property_type, monthly_fee_min, monthly_fee_max, monthly_fee_median, unit_count, management_company"
 
 function richness(c: Record<string, unknown>): number {
   let s = 0
   if (c.management_company) s += 15
   if (c.monthly_fee_median) s += 20
   if (c.unit_count) s += 10
-  if (c.news_reputation_score) s += 15
-  if (c.litigation_count !== null && c.litigation_count !== undefined) s += 5
   return s
 }
 
