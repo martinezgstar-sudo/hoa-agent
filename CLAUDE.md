@@ -730,10 +730,7 @@ FEATURES IN QUEUE:
 - Sales data layer CAMA matching fix
 
 DATA IN QUEUE:
-- Review 7+ pending news_items in /admin/news
 - Review 40 Zillow-noise fee observations in /admin/pending (reject all)
-- Link unmatched articles: Joggers Run, Black Diamond,
-  La Clara, Riverwalk, Atlantic Cloisters
 - Run python3 scripts/gmail-auth.py for outreach OAuth
 - Run build-outreach-list.py once auth complete
 - Continue nightly research batches
