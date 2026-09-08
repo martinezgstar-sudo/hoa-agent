@@ -1,0 +1,46 @@
+county,city,zip,service,provider_name,provider_phone,provider_url,notes,verified_at
+Palm Beach,,,electric,Florida Power & Light,,https://www.fpl.com/support/contact.html,County-wide default electric provider,2026-09-08T18:28:23Z
+Palm Beach,Lake Worth Beach,,electric,Lake Worth Beach Electric Utility,,https://lakeworthbeachfl.gov/locations/utilities-customer-service,City-run electric — overrides FPL default inside city limits,2026-09-08T18:28:23Z
+Palm Beach,,,gas,Florida Public Utilities,,https://fpuc.com/,County-wide default natural gas provider,2026-09-08T18:28:23Z
+Palm Beach,,,water,Palm Beach County Water Utilities,561-740-4600,https://discover.pbc.gov/waterutilities/Pages/default.aspx,County-wide default water provider (unincorporated + Glades cities absorbed 2013),2026-09-08T18:28:23Z
+Palm Beach,West Palm Beach,,water,City of West Palm Beach Public Utilities,561-822-1300,https://www.wpb.org/Departments/Public-Utilities,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Boca Raton,,water,City of Boca Raton Utility Services,561-393-7750,https://www.myboca.us/384/Utility-Services,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Boynton Beach,,water,City of Boynton Beach Utilities,,https://www.boynton-beach.org/279/Utilities,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Delray Beach,,water,City of Delray Beach Utilities,561-243-7100,https://www.delraybeachfl.gov/services/utility-billing,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Jupiter,,water,Town of Jupiter Utilities,561-741-2300,https://www.jupiter.fl.us/259/Water-Stormwater-Utilities,Town runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Lake Worth Beach,,water,City of Lake Worth Beach Utilities,,https://lakeworthbeachfl.gov/locations/utilities-customer-service,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Riviera Beach,,water,City of Riviera Beach Utility Special District,561-845-4050,https://www.rivierabch.com/government/utility,City runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Wellington,,water,Village of Wellington Utilities,561-791-4010,https://www.wellingtonfl.gov/232/Utilities,Village runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Palm Beach,,water,City of West Palm Beach Public Utilities,561-822-1300,https://www.wpb.org/Departments/Public-Utilities,Town of Palm Beach buys water from City of West Palm Beach,2026-09-08T18:28:23Z
+Palm Beach,Lantana,,water,Town of Lantana Water Utilities,561-540-5000,https://www.lantana.org/210/Utilities,Town runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Palm Beach Gardens,,water,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority (owner cited seacoastutilities.org — real domain is sua.com),2026-09-08T18:28:23Z
+Palm Beach,North Palm Beach,,water,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Lake Park,,water,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Juno Beach,,water,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Tequesta,,water,Village of Tequesta Utilities,561-768-0700,https://www.tequesta.org/116/Utilities---Water-and-Stormwater,Village runs its own water,2026-09-08T18:28:23Z
+Palm Beach,Palm Springs,,water,Village of Palm Springs Utilities,561-584-8200,https://www.vpsfl.org/322/Utilities,Village runs its own water,2026-09-08T18:28:23Z
+Palm Beach,,,sewer,Palm Beach County Water Utilities,561-740-4600,https://discover.pbc.gov/waterutilities/Pages/default.aspx,County-wide default sewer provider (unincorporated + Glades cities absorbed 2013),2026-09-08T18:28:23Z
+Palm Beach,West Palm Beach,,sewer,City of West Palm Beach Public Utilities,561-822-1300,https://www.wpb.org/Departments/Public-Utilities,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Boca Raton,,sewer,City of Boca Raton Utility Services,561-393-7750,https://www.myboca.us/384/Utility-Services,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Boynton Beach,,sewer,City of Boynton Beach Utilities,,https://www.boynton-beach.org/279/Utilities,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Delray Beach,,sewer,City of Delray Beach Utilities,561-243-7100,https://www.delraybeachfl.gov/services/utility-billing,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Jupiter,,sewer,Loxahatchee River District,,https://loxahatcheeriver.org/,Wastewater/sewer district,2026-09-08T18:28:23Z
+Palm Beach,Tequesta,,sewer,Loxahatchee River District,,https://loxahatcheeriver.org/,Tequesta wastewater goes to Loxahatchee River District,2026-09-08T18:28:23Z
+Palm Beach,Lake Worth Beach,,sewer,City of Lake Worth Beach Utilities,,https://lakeworthbeachfl.gov/locations/utilities-customer-service,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Riviera Beach,,sewer,City of Riviera Beach Utility Special District,561-845-4050,https://www.rivierabch.com/government/utility,City runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Wellington,,sewer,Village of Wellington Utilities,561-791-4010,https://www.wellingtonfl.gov/232/Utilities,Village runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Palm Beach,,sewer,City of West Palm Beach Public Utilities,561-822-1300,https://www.wpb.org/Departments/Public-Utilities,Town of Palm Beach buys sewer service from City of West Palm Beach,2026-09-08T18:28:23Z
+Palm Beach,Lantana,,sewer,Town of Lantana Water Utilities,561-540-5000,https://www.lantana.org/210/Utilities,Town runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,Palm Beach Gardens,,sewer,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,North Palm Beach,,sewer,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Lake Park,,sewer,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Juno Beach,,sewer,Seacoast Utility Authority,561-627-2900,https://www.sua.com/,Regional utility authority,2026-09-08T18:28:23Z
+Palm Beach,Palm Springs,,sewer,Village of Palm Springs Utilities,561-584-8200,https://www.vpsfl.org/328/Sewer,Village runs its own sewer,2026-09-08T18:28:23Z
+Palm Beach,,,trash,Solid Waste Authority of Palm Beach County,561-697-2700,https://www.swa.org/407/Contact-Customer-Information-Services,County-wide default trash + recycling hauler (backs city contracts),2026-09-08T18:28:23Z
+Palm Beach,West Palm Beach,,trash,City of West Palm Beach Sanitation,561-822-2075,https://www.wpb.org/Departments/Public-Works/Solid-Waste,City sanitation hauls curbside; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Boca Raton,,trash,City of Boca Raton Municipal Services,561-416-3367,https://www.myboca.us/665/Sanitation,City crews run collection; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Delray Beach,,trash,City of Delray Beach Sanitation Division,561-243-7530,https://www.delraybeachfl.gov/government/city-departments/neighborhood-community-services/garbage-recycling-services,City sanitation; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Boynton Beach,,trash,City of Boynton Beach Solid Waste,561-742-6200,https://www.boynton-beach.org/323/Garbage-Recycling,City-run pickup; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Riviera Beach,,trash,City of Riviera Beach Public Works Sanitation,561-845-4000,https://www.rivierabch.com/solid-waste,City oversees WM contract; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Lake Worth Beach,,trash,Waste Pro USA (Lake Worth Beach contract),,https://www.wasteprousa.com/contact-us/,Contracted hauler; SWA backs disposal,2026-09-08T18:28:23Z
+Palm Beach,Wellington,,trash,FCC Environmental Services (Wellington contract),,https://www.wellingtonfl.gov/939/Solid-Waste,Village contract with FCC Environmental Services since 2021; SWA backs disposal,2026-09-08T18:28:23Z
