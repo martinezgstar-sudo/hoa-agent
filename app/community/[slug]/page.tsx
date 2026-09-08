@@ -7,8 +7,6 @@ import MasterHoaQuestion from '@/app/components/MasterHoaQuestion'
 import FirstReviewToast from '@/app/components/FirstReviewToast'
 import CompareButton from '@/app/components/CompareButton'
 import NavBar from '@/app/components/NavBar'
-import NewsFeed from '@/app/components/NewsFeed'
-import LegalCases from '@/app/components/LegalCases'
 import SponsoredCard from '@/app/components/SponsoredCard'
 
 // Render new community slugs without a redeploy. dynamicParams lets any slug
@@ -28,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const { data: community } = await supabase
     .from('communities')
-    .select('canonical_name,city,zip_code,monthly_fee_min,monthly_fee_max,monthly_fee_median,management_company,property_type,unit_count,litigation_count')
+    .select('canonical_name,city,zip_code,monthly_fee_min,monthly_fee_max,monthly_fee_median,management_company,property_type,unit_count')
     .eq('slug', slug)
     .single()
 
@@ -82,14 +80,10 @@ interface Community {
   vehicle_restriction: string
   rental_approval: string
   assessment_signal_count: number
-  litigation_count: number | null
   amenities: string
   review_count: number | null
   review_avg: number
   data_freshness_date: string
-  news_reputation_score: number | null
-  news_reputation_label: string | null
-  news_reputation_updated_at: string | null
   city_verified?: boolean
   // contact — all optional, and null for ~98% of communities
   website_url?: string | null
@@ -118,7 +112,7 @@ interface Community {
 async function getCommunity(slug: string) {
   const { data, error } = await supabase
     .from('communities')
-    .select('*, city_verified, news_reputation_score, news_reputation_label, litigation_count')
+    .select('*, city_verified')
     .eq('slug', slug)
     .single()
   if (error || !data) return null
@@ -261,17 +255,17 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   // Similar-by-property-type for the "Similar Communities" section.
   // Uses property_type match where possible. Picks 6 random matches.
-  let similarCommunities: Array<{ canonical_name: string; slug: string; city: string; monthly_fee_median: number | null; unit_count: number | null; news_reputation_score: number | null }> = []
+  let similarCommunities: Array<{ canonical_name: string; slug: string; city: string; monthly_fee_median: number | null; unit_count: number | null }> = []
   let cityAvgFee: number | null = null
   if (community.city) {
     const ptFilter = community.property_type
       ? supabase.from('communities')
-          .select('canonical_name, slug, city, monthly_fee_median, unit_count, news_reputation_score')
+          .select('canonical_name, slug, city, monthly_fee_median, unit_count')
           .ilike('city', community.city)
           .ilike('property_type', `%${community.property_type}%`)
           .neq('id', community.id).eq('status', 'published').limit(50)
       : supabase.from('communities')
-          .select('canonical_name, slug, city, monthly_fee_median, unit_count, news_reputation_score')
+          .select('canonical_name, slug, city, monthly_fee_median, unit_count')
           .ilike('city', community.city)
           .neq('id', community.id).eq('status', 'published').limit(50)
     const { data: candidates } = await ptFilter
@@ -366,7 +360,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     creator: { '@type': 'Organization', name: 'HOA Agent', url: 'https://www.hoa-agent.com' },
     license: 'https://creativecommons.org/licenses/by/4.0/',
     dateModified: community.data_freshness_date || new Date().toISOString(),
-    variableMeasured: ['Monthly HOA fee', 'Litigation count', 'News reputation score', 'Unit count'],
+    variableMeasured: ['Monthly HOA fee', 'Unit count'],
   }
 
   const breadcrumbCrumbs = [
@@ -511,12 +505,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           <MasterHoaQuestion communityId={community.id} communityName={community.canonical_name} />
         )}
 
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '10px', marginBottom: '12px'}}>
           {[
             {val: liveReviewAvg ? liveReviewAvg + '★' : (liveReviewCount > 0 ? liveReviewCount + ' reviews' : 'No reviews'), label: liveReviewCount + ' reviews', src: 'user-submitted', link: null, color: null},
             {val: (community.assessment_signal_count || 0) + ' signals', label: 'Assessments', src: 'public + resident', link: null, color: null},
-            {val: community.news_reputation_score ? community.news_reputation_score + '/10' : 'No data', label: community.news_reputation_label || 'News reputation', src: 'AI-analyzed', link: `/community/${community.slug}/news`, color: community.news_reputation_score ? community.news_reputation_score <= 3 ? '#dc2626' : community.news_reputation_score <= 5 ? '#d97706' : community.news_reputation_score <= 7 ? '#2563eb' : '#16a34a' : null},
-            {val: community.litigation_count ? community.litigation_count + ' cases' : 'Search record', label: 'Litigation', src: 'CourtListener', link: `/community/${community.slug}/legal`, color: (community.litigation_count || 0) > 0 ? '#7c3aed' : null},
           ].map((stat) => (
             <div key={stat.label} style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', textAlign: 'center', position: 'relative'}}>
               <div style={{fontSize: '13px', fontWeight: '500', color: stat.color || (stat.val === 'Not listed' || stat.val === 'Unknown' || stat.val === 'No data' || stat.val === 'Search record' ? '#595959' : '#1a1a1a'), marginBottom: '2px', wordBreak: 'break-word'}}>{stat.val}</div>
@@ -810,9 +802,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         </div>
 
-        <NewsFeed communityId={community.id} communityName={community.canonical_name} />
-        <LegalCases communityId={community.id} communityName={community.canonical_name} />
-
         {/* About — auto-generated neighborhood context */}
         <div style={{backgroundColor:'#fff', border:'1px solid #e5e5e5', borderRadius:'12px', padding:'20px 24px', marginTop:'20px', marginBottom:'12px'}}>
           <h2 style={{fontSize:'15px', fontWeight:600, color:'#1a1a1a', marginTop:0, marginBottom:'10px'}}>About {community.canonical_name}</h2>
@@ -825,7 +814,6 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             {community.management_company && ` The community is managed by ${community.management_company}.`}
             {community.is_55_plus && ` ${community.canonical_name} is an age-restricted community for adults 55 and older, governed by the Housing for Older Persons Act (HOPA).`}
             {community.is_gated && ` ${community.canonical_name} is a gated community with controlled access.`}
-            {(community.litigation_count ?? 0) > 0 ? ` Public court records show ${community.litigation_count} legal case${community.litigation_count === 1 ? '' : 's'} associated with this community in the CourtListener database.` : ' No active legal cases were found in public court records for this community.'}
             {' '}Residents and prospective buyers can submit verified information to help keep this profile accurate.
           </p>
         </div>

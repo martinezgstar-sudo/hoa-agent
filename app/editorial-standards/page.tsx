@@ -25,14 +25,12 @@ export default function Page() {
 
       <h2>Source citation</h2>
       <p>
-        Every data point is labeled by source: <em>Sunbiz</em>, <em>PBCPAO</em>, <em>CourtListener</em>, <em>NewsAPI</em>, <em>Resident submission</em>, etc. Premium reports include direct links to the underlying source documents wherever possible.
+        Every data point is labeled by source: <em>Sunbiz</em>, <em>PBCPAO</em>, <em>Municipal utility record</em>, <em>Resident submission</em>, etc. Premium reports include direct links to the underlying source documents wherever possible.
       </p>
 
       <h2>What we publish</h2>
       <ul>
         <li>Public records from government sources</li>
-        <li>News articles that have been matched to specific communities by AI evaluation</li>
-        <li>Court records from CourtListener</li>
         <li>Resident submissions that have been verified by admin review</li>
         <li>Aggregate statistics derived from the above</li>
       </ul>

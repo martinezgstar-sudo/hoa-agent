@@ -141,8 +141,6 @@ export interface CommunityLike {
   is_age_restricted?: boolean | null
   review_avg?: number | null
   review_count?: number | null
-  litigation_count?: number | null
-  news_reputation_score?: number | null
 }
 
 /** Best-effort address object — omits fields that are missing. */
@@ -427,9 +425,6 @@ export function buildCommunityMetaDescription(c: CommunityLike): string {
 
   if (c.management_company && c.management_company.trim()) {
     core.push(`Managed by ${c.management_company.trim()}.`)
-  }
-  if (typeof c.litigation_count === "number" && c.litigation_count > 0) {
-    core.push(`Public litigation history available.`)
   }
 
   const CLOSER = "View fees, restrictions, reviews on HOA Agent."
