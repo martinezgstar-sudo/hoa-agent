@@ -23,7 +23,7 @@
   <array>
     <string>/bin/bash</string>
     <string>-lc</string>
-    <string>cd /Users/izzymartinez/Projects/hoa-agent &amp;&amp; source .env.local &amp;&amp; /usr/local/bin/npx tsx scripts/orchestrator.ts --once</string>
+    <string>cd /Users/izzymartinez/Projects/hoa-agent &amp;&amp; set -a &amp;&amp; source .env.local &amp;&amp; set +a &amp;&amp; /usr/local/bin/npx tsx scripts/orchestrator.ts --once</string>
   </array>
 
   <key>StartInterval</key>
