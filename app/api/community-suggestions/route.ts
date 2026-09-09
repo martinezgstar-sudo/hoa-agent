@@ -85,14 +85,18 @@ export async function POST(req: NextRequest) {
 
   const sb = admin()
 
-  // Validate community_id exists
+  // Validate community_id exists AND is published — CLAUDE.md rule 19
+  // (public queries filter status='published'). Suggestions against
+  // removed/draft/needs_review rows accumulate silently and never
+  // surface; block them at the source.
   const { data: community, error: cErr } = await sb
     .from("communities")
     .select("id, status")
     .eq("id", community_id)
+    .eq("status", "published")
     .maybeSingle()
   if (cErr) return NextResponse.json({ error: cErr.message }, { status: 500 })
-  if (!community) return NextResponse.json({ error: "Unknown community_id" }, { status: 400 })
+  if (!community) return NextResponse.json({ error: "Unknown or unavailable community_id" }, { status: 400 })
 
   const { data: inserted, error: iErr } = await sb
     .from("pending_community_data")
