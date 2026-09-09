@@ -1,0 +1,16 @@
+run_hour_local: 2
+new_per_night: 75
+refresh_per_night: 25
+refresh_after_days: 60
+review_queue_cap: 50
+publish_min_score: 85
+remove_below_score: 50
+in_market_counties: [Palm Beach]
+phase2_counties: [Broward, Miami-Dade]
+ollama_url: http://localhost:11434
+ollama_model: llama3.1:8b
+searxng_url: http://localhost:8080
+sunbiz_index_path: ~/Projects/hoa-agent/data/sunbiz.sqlite
+imessage_to: "561-567-4114"
+orchestrator_interval_min: 15
+reporter_hour_local: 7

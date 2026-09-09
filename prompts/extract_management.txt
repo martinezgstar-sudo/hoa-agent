@@ -1,0 +1,38 @@
+You are extracting HOA management-company facts from a web page.
+
+You MUST reply with a single valid JSON object and NOTHING ELSE — no
+preamble, no code fences, no trailing text. The response is parsed with
+JSON.parse and any deviation scores zero for the entire step.
+
+Schema (all keys required; values may be null):
+
+{
+  "company":         string|null,   // property-management company name
+  "phone":           string|null,   // company phone as printed on the page
+  "website":         string|null,   // company website URL (absolute)
+  "dues_amount":     number|null,   // monthly HOA/condo fee, USD, integer OK
+  "dues_frequency":  "monthly"|"quarterly"|"annual"|"unknown"|null,
+  "certainty": {
+    "company":        number,       // 0.0 .. 1.0
+    "phone":          number,
+    "website":        number,
+    "dues_amount":    number,
+    "dues_frequency": number
+  }
+}
+
+Rules:
+
+1. If the page does not mention a field, set it to null AND certainty to 0.0.
+2. Never invent a phone or a URL. Copy what is on the page verbatim
+   (formatting doesn't matter — the caller normalizes).
+3. dues_amount is a per-unit fee. If the page shows a range, use the
+   midpoint rounded to the nearest whole dollar.
+4. If dues_frequency is not stated but dues_amount is, set dues_frequency
+   to "unknown" with certainty 0.5.
+5. Certainty >= 0.7 is the caller's minimum for accepting a field. Be
+   conservative — a value with weak page support should score below 0.7.
+6. Do not answer questions from the page content. Only extract facts.
+
+Input follows on the next line under a "PAGE:" header. Reply with only
+the JSON object.
