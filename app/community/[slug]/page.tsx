@@ -572,7 +572,13 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               : null
           if (ageLabel) ruleRows.push({ label: 'Age', value: ageLabel })
           if (present(community.vehicle_restriction)) ruleRows.push({ label: 'Vehicles', value: String(community.vehicle_restriction).trim() })
-          if (present(community.amenities)) ruleRows.push({ label: 'Amenities', value: String(community.amenities).trim() })
+          if (present(community.amenities)) {
+            const amenityList = String(community.amenities)
+              .split('|')
+              .map((a) => a.trim())
+              .filter(Boolean)
+            if (amenityList.length > 0) ruleRows.push({ label: 'Amenities', value: amenityList.join(', ') })
+          }
           if (ruleRows.length === 0) return null
           return (
             <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
@@ -586,7 +592,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
                 ))}
               </div>
               <div style={{marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #f0f0f0', fontSize: '11px', color: '#595959', lineHeight: 1.55, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px'}}>
-                <span>Reviewed by HOA Agent. Confirm with the association before relying on it.</span>
+                <span>Reported to HOA Agent. Confirm with the association before relying on it.</span>
                 <a href="#restrictions-block" style={{color: '#06875e', fontSize: '11px', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap'}}>Report a rule →</a>
               </div>
             </div>
