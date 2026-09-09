@@ -3,7 +3,7 @@ new_per_night: 75
 refresh_per_night: 25
 refresh_after_days: 60
 review_queue_cap: 50
-publish_min_score: 85
+publish_min_score: 70
 remove_below_score: 50
 in_market_counties: [Palm Beach]
 phase2_counties: [Broward, Miami-Dade]

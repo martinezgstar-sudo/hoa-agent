@@ -230,6 +230,24 @@ async function startJobRun(sb: SupabaseClient, jobName: string, dry: boolean): P
   return data?.id ?? null;
 }
 
+async function communityHasV3Baseline(sb: SupabaseClient, communityId: string): Promise<boolean> {
+  // Owner ruling 2026-09-09: baseline = any prior change_log row with
+  // action='refreshed' for this community. Old-pipeline confidence
+  // scores are a different rubric and don't count. Absence means this
+  // is the first v3 refresh — treat as baseline pass, never queue.
+  if (!communityId) return false;
+  try {
+    const { count } = await sb
+      .from('change_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('community_id', communityId)
+      .eq('action', 'refreshed');
+    return (count ?? 0) > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function countAttempts(sb: SupabaseClient, source: string): Promise<number> {
   // Track new-row attempt count via change_log entries tagged with
   // source='sunbiz-doc:<doc>'. Refresh rows can also count via
@@ -250,7 +268,7 @@ async function countAttempts(sb: SupabaseClient, source: string): Promise<number
 async function endJobRun(
   sb: SupabaseClient,
   id: number | null,
-  status: 'success' | 'error',
+  status: 'success' | 'failed',
   summary: Record<string, unknown>,
 ): Promise<void> {
   if (id == null) return;
@@ -292,6 +310,7 @@ interface SunbizCandidate {
   filing_date: string | null;
   registered_agent: string | null;
   principal_address: string | null;
+  principal_zip: string | null;
   city: string | null;
   zip: string | null;
 }
@@ -342,7 +361,7 @@ async function pickNewBatch(
     // old ORDER BY document_number ASC was serving up 1970s-era Inactive
     // rows that then all removed as entity_inactive.
     const query = `SELECT document_number, name, normalized_name, status, filing_date,
-                          registered_agent, principal_address, principal_city, mailing_address
+                          registered_agent, principal_address, principal_city, principal_zip, mailing_address
                    FROM sunbiz_pbc_associations
                    WHERE status = 'Active'
                    ORDER BY filing_date DESC NULLS LAST
@@ -376,8 +395,9 @@ async function pickNewBatch(
         filing_date: r.filing_date,
         registered_agent: r.registered_agent,
         principal_address: r.principal_address,
+        principal_zip: r.principal_zip ?? null,
         city: r.principal_city ?? null,
-        zip: null,
+        zip: r.principal_zip ?? null,
       });
       if (picks.length >= limit) break;
     }
@@ -509,7 +529,51 @@ interface SunbizHit {
   registered_agent: string | null;
   principal_address: string | null;
   principal_city: string | null;
+  principal_zip: string | null;
   mailing_address: string | null;
+}
+
+// PBC ZIP → canonical city, copied verbatim from
+// hoa-agent/scripts/verify-locations.py so the v3 zip-city rule stays
+// aligned with the pipeline the existing published rows were verified
+// against. Only ZIPs the rule recognises get city_verified = true; any
+// other zip stays false and the row cannot publish tonight.
+const PBC_ZIP_CITY: Record<string, string> = {
+  '33401': 'West Palm Beach', '33402': 'West Palm Beach', '33403': 'West Palm Beach',
+  '33404': 'West Palm Beach', '33405': 'West Palm Beach', '33406': 'West Palm Beach',
+  '33407': 'West Palm Beach', '33408': 'North Palm Beach', '33409': 'West Palm Beach',
+  '33410': 'Palm Beach Gardens', '33411': 'West Palm Beach', '33412': 'West Palm Beach',
+  '33413': 'West Palm Beach', '33414': 'Wellington', '33415': 'West Palm Beach',
+  '33417': 'West Palm Beach', '33418': 'Palm Beach Gardens', '33426': 'Boynton Beach',
+  '33428': 'Boca Raton', '33430': 'Belle Glade', '33431': 'Boca Raton', '33432': 'Boca Raton',
+  '33433': 'Boca Raton', '33434': 'Boca Raton', '33435': 'Boynton Beach', '33436': 'Boynton Beach',
+  '33437': 'Boynton Beach', '33438': 'Canal Point', '33440': 'Clewiston',
+  '33444': 'Delray Beach', '33445': 'Delray Beach', '33446': 'Delray Beach', '33448': 'Delray Beach',
+  '33449': 'Lake Worth', '33458': 'Jupiter', '33460': 'Lake Worth', '33461': 'Lake Worth',
+  '33462': 'Lake Worth', '33463': 'Lake Worth', '33467': 'Lake Worth', '33469': 'Jupiter',
+  '33470': 'Loxahatchee', '33471': 'Moore Haven', '33472': 'Boynton Beach', '33473': 'Boynton Beach',
+  '33474': 'Boynton Beach', '33476': 'Pahokee', '33477': 'Jupiter', '33478': 'Jupiter',
+  '33480': 'Palm Beach', '33483': 'Delray Beach', '33484': 'Delray Beach', '33486': 'Boca Raton',
+  '33487': 'Boca Raton', '33488': 'Boca Raton', '33496': 'Boca Raton', '33498': 'Boca Raton',
+};
+
+function normalizeCity(s: string | null | undefined): string {
+  return (s ?? '').toUpperCase().replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Zip-city rule: given a ZIP and a city, returns true when the ZIP is a
+ * known PBC ZIP AND the city matches the PBC_ZIP_CITY dictionary entry
+ * for that ZIP (case + whitespace tolerant). Returns false for
+ * out-of-map ZIPs or mismatches. This is the same check hoa-agent has
+ * used for city_verified since May 2026.
+ */
+function checkZipCity(zip: string | null, city: string | null): boolean {
+  if (!zip) return false;
+  const z = zip.trim().slice(0, 5);
+  const expected = PBC_ZIP_CITY[z];
+  if (!expected) return false;
+  return normalizeCity(city) === normalizeCity(expected);
 }
 
 function normalizeForLookup(name: string): string {
@@ -536,7 +600,7 @@ async function sunbizLookupByName(
     // On multiple hits, break the tie by principal_city == community.city
     // (case-insensitive). Still ambiguous → unmatched.
     const query = `SELECT document_number, name, status, filing_date,
-                          registered_agent, principal_address, principal_city, mailing_address
+                          registered_agent, principal_address, principal_city, principal_zip, mailing_address
                    FROM sunbiz_pbc_associations
                    WHERE normalized_name = '${norm.replace(/'/g, "''")}'
                    LIMIT 20;`;
@@ -644,11 +708,19 @@ function stepLocation(f: Findings, cfg: Config): void {
     f.notes.push(`location: out_of_market (county=${county})`);
     return;
   }
-  // Reuse existing city_verified — owner ruling: parcel geocoding waits
-  // for v2. The source is the rule name that produced the boolean.
-  f.city_verified = f.community.city_verified === true;
+  // Owner ruling 2026-09-09: apply the pbc-zip-city rule directly so
+  // new rows also earn city_verified from their Sunbiz principal
+  // address. Refresh rows keep their existing city_verified whenever
+  // the DB already says true; the rule is only re-evaluated when
+  // city_verified is false/null.
+  const c = f.community;
+  const dbVerified = c.city_verified === true;
+  const ruleVerified = checkZipCity(c.zip_code, c.city);
+  f.city_verified = dbVerified || ruleVerified;
   f.location_source = 'pbc-zip-city-rule';
-  f.notes.push(`location: city_verified=${f.city_verified} (rule=pbc-zip-city-rule)`);
+  f.notes.push(
+    `location: city_verified=${f.city_verified} (rule=pbc-zip-city-rule; zip=${c.zip_code ?? 'null'} city=${c.city ?? 'null'})`,
+  );
 }
 
 async function stepManagement(
@@ -848,6 +920,7 @@ function decideFindings(
   cfg: Config,
   queueOpen: boolean,
   attemptCount: number,
+  hasV3Baseline: boolean,
 ): void {
   // Owner rulings 2026-09-08 + 2026-09-09.
   //
@@ -878,17 +951,19 @@ function decideFindings(
   const hasIdentity = !!c.state_entity_number;
 
   if (f.isRefresh) {
-    // Owner ruling 2026-09-09: score_drop fires only on a real drop
-    // (>= 15 points under the row's previous confidence_score). First
-    // refresh (previous null or 0) sets the baseline and never queues.
-    // Being under publish_min_score alone is not a drop — thin
-    // published rows get richer over the 60-day cycle without human
-    // time.
+    // Owner ruling 2026-09-09 (evening): the first v3 refresh of any
+    // row is a baseline pass, regardless of previous confidence_score.
+    // Detected via change_log — a row with zero prior 'refreshed'
+    // action rows has never been touched by the v3 loop. Old-pipeline
+    // confidence numbers are a different rubric and shouldn't drive
+    // score_drop.
+    //
+    // Once a row has been baselined, score_drop fires when
+    // new_score <= previous_confidence_score - 15. entity_inactive
+    // still requires a known identity + observed non-Active status
+    // (identity_skipped still preserves).
     const prev = c.confidence_score ?? 0;
-    const isBaseline = prev === 0;
-    const dropped = !isBaseline && f.score <= prev - 15;
-    // Grandfather still applies: skip entity_inactive when we've never
-    // observed identity for this row.
+    const dropped = hasV3Baseline && prev > 0 && f.score <= prev - 15;
     const leftActive = hasIdentity && !effectiveActive && !f.identity_skipped;
     if (dropped || leftActive) {
       const reason = leftActive ? 'entity_inactive' : 'score_drop';
@@ -910,7 +985,8 @@ function decideFindings(
       }
       return;
     }
-    if (isBaseline) f.notes.push(`decide: baseline set (prev=null/0, new=${f.score}) — no queue this pass`);
+    if (!hasV3Baseline)
+      f.notes.push(`decide: v3 baseline set (score=${f.score}) — no queue this pass, old scores ignored`);
     changes.push({ action: 'refreshed' });
     f.planned_status = null;
     return;
@@ -944,7 +1020,18 @@ function decideFindings(
     return;
   }
 
-  const canPublish = f.score >= cfg.publish_min_score && effectiveActive && cityVerified;
+  // Owner ruling 2026-09-09 (evening): publishing requires THREE
+  // hard gates in addition to score >= publish_min:
+  //   1. identity single match (identity_matched)
+  //   2. entity_status Active
+  //   3. city_verified true (via pbc-zip-city-rule)
+  // Management + fees add to the score but never block publishing.
+  const identityConfirmed = !!(f.identity_matched && !f.identity_skipped);
+  const canPublish =
+    f.score >= cfg.publish_min_score &&
+    identityConfirmed &&
+    effectiveActive &&
+    cityVerified;
   if (canPublish) {
     changes.push({ action: 'published', field: 'status', old_value: c.status, new_value: 'published' });
     f.planned_status = 'published';
@@ -1022,10 +1109,58 @@ function buildPlannedUpdates(f: Findings, cfg: Config): void {
 
 // ────────────────────────── write ──────────────────────────
 
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 120);
+}
+
+async function ensureUniqueSlug(sb: SupabaseClient, base: string): Promise<string> {
+  if (!base) return `community-${Date.now()}`;
+  let slug = base;
+  for (let n = 2; n < 20; n++) {
+    const { data } = await sb.from('communities').select('id').eq('slug', slug).maybeSingle();
+    if (!data) return slug;
+    slug = `${base}-${n}`;
+  }
+  return `${base}-${Date.now()}`;
+}
+
 async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
-  const id = f.community.id;
-  const { error } = await sb.from('communities').update(f.planned_updates).eq('id', id);
-  if (error) throw new Error(`update communities ${id}: ${error.message}`);
+  let id = f.community.id;
+  const isInsert = !id; // new-row shell has id === ''
+  if (isInsert) {
+    // Compose the insert payload. Owner ruling 2026-09-09: publish a
+    // page with verified name, status, address, and utilities. So we
+    // seed canonical_name / city / zip_code / county / state on the
+    // insert alongside the planned updates.
+    const c = f.community;
+    const slug = await ensureUniqueSlug(sb, slugify(c.canonical_name));
+    const payload = {
+      slug,
+      canonical_name: c.canonical_name,
+      city: c.city,
+      county: c.county,
+      state: c.state,
+      zip_code: c.zip_code,
+      ...f.planned_updates,
+      status: f.planned_status ?? 'draft',
+    };
+    const { data, error } = await sb
+      .from('communities')
+      .insert(payload)
+      .select('id, slug')
+      .single();
+    if (error) throw new Error(`insert communities ${c.canonical_name}: ${error.message}`);
+    id = data.id as string;
+    f.community.id = id;
+    f.community.slug = data.slug as string;
+  } else {
+    const { error } = await sb.from('communities').update(f.planned_updates).eq('id', id);
+    if (error) throw new Error(`update communities ${id}: ${error.message}`);
+  }
   for (const c of f.planned_change_log) {
     await sb.from('change_log').insert({
       community_id: id,
@@ -1038,7 +1173,6 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
     });
   }
   if (f.utility_rows && f.utility_rows.length) {
-    // upsert community_utilities
     for (const u of f.utility_rows) {
       await sb.from('community_utilities').upsert(
         {
@@ -1142,6 +1276,10 @@ async function main(): Promise<void> {
         planned_change_log: [],
         notes: [],
       };
+      // Detect whether this row has ever been touched by v3 (any prior
+      // 'refreshed' change_log entry). If not, decide() treats this pass
+      // as baseline and never queues on score_drop.
+      const hasV3Baseline = await communityHasV3Baseline(sb, c.id);
       try {
         await stepIdentity(f, cfg, sunbizFresh.ok);
         stepLocation(f, cfg);
@@ -1151,9 +1289,7 @@ async function main(): Promise<void> {
           await stepUtilities(f, sb);
         }
         scoreFindings(f);
-        // Refresh rows don't use the 3-attempt escalation, but pass 0
-        // so decide() has one signature.
-        decideFindings(f, cfg, queueOpen, 0);
+        decideFindings(f, cfg, queueOpen, 0, hasV3Baseline);
         buildPlannedUpdates(f, cfg);
       } catch (err) {
         f.notes.push(`row error: ${(err as Error).message}`);
@@ -1217,7 +1353,9 @@ async function main(): Promise<void> {
           await stepUtilities(f, sb);
         }
         scoreFindings(f);
-        decideFindings(f, cfg, queueOpen, attempts);
+        // New rows have no v3 history yet — pass true so the baseline
+        // branch (which is refresh-only) doesn't misfire.
+        decideFindings(f, cfg, queueOpen, attempts, true);
         buildPlannedUpdates(f, cfg);
         // Always log an 'attempted' change_log row for new picks so
         // the 3-strike counter advances every night.
@@ -1284,7 +1422,7 @@ async function main(): Promise<void> {
   } catch (err) {
     const stack = (err as Error).stack ?? String(err);
     log('ERROR', stack);
-    await endJobRun(sb, RUN_ID, 'error', { error: stack.slice(0, 2000) });
+    await endJobRun(sb, RUN_ID, 'failed', { error: stack.slice(0, 2000) });
     process.exit(1);
   }
 }

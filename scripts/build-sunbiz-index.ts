@@ -62,12 +62,24 @@ const CORDATA_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
 const OUT_PATH = join(REPO, 'data', 'sunbiz.sqlite');
 const TMP_PATH = OUT_PATH + '.building';
 
-// Owner ruling 2026-09-09: word-boundary tokens only, and drop the
-// generic COA / POA shorthands that grabbed "COAST*" / "POACHER*" etc.
-// The six approved tokens (word-boundary matched):
-//   ASSOCIATION, HOMEOWNERS, CONDOMINIUM, PROPERTY OWNERS, MASTER, COMMUNITY
+// Owner ruling 2026-09-09 (evening): two filters, in order.
+//
+//   1. Entity type must be DOMNP (Domestic Not-for-Profit) in the
+//      cordata layout — chars [205:210] of the fixed-width record.
+//      HOAs, condo associations, and community associations file as
+//      DOMNP. This alone removes every LLC and profit corporation.
+//   2. Name must still hit one of the six word-boundary tokens.
+//      DOMNP includes churches, charities, alumni groups, etc. — the
+//      name pattern narrows to community-shaped associations.
+//
+//   Six approved tokens: ASSOCIATION, HOMEOWNERS, CONDOMINIUM,
+//   PROPERTY OWNERS, MASTER, COMMUNITY. Word-boundary matched.
 const INCLUDE_PATTERN =
   /\b(ASSOCIATION|HOMEOWNERS|CONDOMINIUM|PROPERTY\s+OWNERS|MASTER|COMMUNITY)\b/;
+
+function typeMatches(line: string): boolean {
+  return line.slice(205, 210) === 'DOMNP';
+}
 
 function nameMatches(name: string): boolean {
   return INCLUDE_PATTERN.test(name.toUpperCase());
@@ -104,17 +116,22 @@ interface Parsed {
   filing_date: string | null;
   registered_agent: string | null;
   principal_address: string | null;
-  principal_city: string | null;   // stored separately for the multi-match tie-breaker
+  principal_city: string | null;   // tie-breaker for multi-name-match
+  principal_zip: string | null;    // fuels the pbc-zip-city rule at query time
   mailing_address: string | null;
 }
 
 function parseLine(line: string): Parsed | null {
   if (line.length < 470) return null;
 
+  // Filter 1: entity type must be DOMNP (Domestic Not-for-Profit).
+  if (!typeMatches(line)) return null;
+
   const zip5 = line.slice(334, 339).trim();
   if (!zip5.startsWith('334')) return null;
 
   const name = ws(line.slice(12, 204));
+  // Filter 2: word-boundary name pattern.
   if (!name || !nameMatches(name)) return null;
 
   const document_number = line.slice(0, 12).trim();
@@ -153,6 +170,7 @@ function parseLine(line: string): Parsed | null {
     registered_agent: ra_name,
     principal_address: principal_address || null,
     principal_city: p_city || null,
+    principal_zip: zip5 || null,
     mailing_address,
   };
 }
@@ -199,6 +217,7 @@ async function main(): Promise<void> {
       registered_agent  TEXT,
       principal_address TEXT,
       principal_city    TEXT,
+      principal_zip     TEXT,
       mailing_address   TEXT
     );
     CREATE TABLE sunbiz_meta (
@@ -213,8 +232,8 @@ async function main(): Promise<void> {
   const insert = db.prepare(
     `INSERT OR REPLACE INTO sunbiz_pbc_associations
        (document_number, name, normalized_name, status, filing_date,
-        registered_agent, principal_address, principal_city, mailing_address)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        registered_agent, principal_address, principal_city, principal_zip, mailing_address)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   );
 
   const t0 = Date.now();
@@ -243,6 +262,7 @@ async function main(): Promise<void> {
           rec.registered_agent,
           rec.principal_address,
           rec.principal_city,
+          rec.principal_zip,
           rec.mailing_address,
         );
         kept++;
