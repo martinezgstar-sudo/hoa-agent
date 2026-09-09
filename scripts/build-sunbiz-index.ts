@@ -62,27 +62,58 @@ const CORDATA_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
 const OUT_PATH = join(REPO, 'data', 'sunbiz.sqlite');
 const TMP_PATH = OUT_PATH + '.building';
 
-// Owner ruling 2026-09-09 (evening): two filters, in order.
+// Owner ruling 2026-09-09 (late): three filters, in order.
 //
-//   1. Entity type must be DOMNP (Domestic Not-for-Profit) in the
-//      cordata layout — chars [205:210] of the fixed-width record.
-//      HOAs, condo associations, and community associations file as
-//      DOMNP. This alone removes every LLC and profit corporation.
-//   2. Name must still hit one of the six word-boundary tokens.
-//      DOMNP includes churches, charities, alumni groups, etc. — the
-//      name pattern narrows to community-shaped associations.
+//   1. Entity type must be DOMNP (Domestic Not-for-Profit) — cordata
+//      [205:210] of the fixed-width record.
+//   2. Name must contain ASSOCIATION AND at least one of the required
+//      community-shape tokens.
+//   3. Name must NOT contain any of the exclusion tokens (alumni,
+//      clubs, churches, foundations, medical/dental, etc.).
 //
-//   Six approved tokens: ASSOCIATION, HOMEOWNERS, CONDOMINIUM,
-//   PROPERTY OWNERS, MASTER, COMMUNITY. Word-boundary matched.
-const INCLUDE_PATTERN =
-  /\b(ASSOCIATION|HOMEOWNERS|CONDOMINIUM|PROPERTY\s+OWNERS|MASTER|COMMUNITY)\b/;
+// The same filter is applied as a guard in pickNewBatch inside
+// nightly-enrich.ts so a stale index can't leak old rows.
+export const REQUIRE_ONE = [
+  'HOMEOWNERS', 'OWNERS', 'CONDOMINIUM', 'CONDO', 'PROPERTY',
+  'COMMUNITY', 'MASTER', 'RESIDENTS', 'TOWNHOME', 'TOWNHOMES',
+  'VILLAS', 'ESTATES', 'NEIGHBORHOOD', 'RECREATION', 'MAINTENANCE',
+];
+export const EXCLUDE_ANY = [
+  'ALUMNI', 'CLUB', 'CLUBS', 'CHURCH', 'MINISTRY', 'MINISTRIES',
+  'FOUNDATION', 'CHARITABLE', 'LEAGUE', 'SOCIETY', 'GUILD',
+  'NURSES', 'MEDICAL', 'DENTAL', 'BAR ASSOCIATION', 'CHAMBER',
+  'PROFESSIONAL', 'TRADE', 'BOOSTER', 'PTA', 'PTO', 'ATHLETIC',
+  'BUSINESS',
+];
+
+// Word-boundary regex used by nameMatches. \bASSOCIATION\b is required;
+// one of the REQUIRE_ONE tokens must also appear (word-boundary).
+const ASSOCIATION_PATTERN = /\bASSOCIATION\b/;
+const REQUIRE_ONE_PATTERN = new RegExp(
+  '\\b(' +
+    REQUIRE_ONE.map((t) => t.replace(/\s+/g, '\\s+')).join('|') +
+    ')\\b',
+);
+const EXCLUDE_ANY_PATTERN = new RegExp(
+  '\\b(' +
+    EXCLUDE_ANY.map((t) => t.replace(/\s+/g, '\\s+')).join('|') +
+    ')\\b',
+);
+
+export function nameMatchesTight(name: string): boolean {
+  const up = name.toUpperCase();
+  if (!ASSOCIATION_PATTERN.test(up)) return false;
+  if (!REQUIRE_ONE_PATTERN.test(up)) return false;
+  if (EXCLUDE_ANY_PATTERN.test(up)) return false;
+  return true;
+}
 
 function typeMatches(line: string): boolean {
   return line.slice(205, 210) === 'DOMNP';
 }
 
 function nameMatches(name: string): boolean {
-  return INCLUDE_PATTERN.test(name.toUpperCase());
+  return nameMatchesTight(name);
 }
 
 function normalizeName(name: string): string {

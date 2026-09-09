@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  com.hoaagent.orchestrator.plist
+  Fires every orchestrator_interval_min minutes (config default 15).
+  Each fire runs the six checks once and exits (StartInterval + --once).
+
+  Install:
+    cp scripts/com.hoaagent.orchestrator.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.hoaagent.orchestrator.plist
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.hoaagent.orchestrator.plist
+    rm ~/Library/LaunchAgents/com.hoaagent.orchestrator.plist
+  Logs:
+    ~/Library/Logs/hoaagent/orchestrator.{out,err}.log
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.hoaagent.orchestrator</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>cd /Users/izzymartinez/Projects/hoa-agent &amp;&amp; source .env.local &amp;&amp; /usr/local/bin/npx tsx scripts/orchestrator.ts --once</string>
+  </array>
+
+  <key>StartInterval</key>
+  <integer>900</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/izzymartinez/Library/Logs/hoaagent/orchestrator.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/izzymartinez/Library/Logs/hoaagent/orchestrator.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>/Users/izzymartinez</string>
+  </dict>
+</dict>
+</plist>

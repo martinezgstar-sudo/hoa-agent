@@ -386,8 +386,16 @@ async function pickNewBatch(
       for (const r of data ?? []) if (r.state_entity_number) existing.add(r.state_entity_number);
     }
     const picks: SunbizCandidate[] = [];
+    let filteredForName = 0;
     for (const r of rows) {
       if (r.document_number && existing.has(r.document_number)) continue;
+      // Owner ruling 2026-09-09 (late): guard against a stale index by
+      // re-running the tight name filter here. If an older index
+      // predates the require/exclude rule, this catches leaks.
+      if (!nameMatchesTight(r.name ?? '')) {
+        filteredForName++;
+        continue;
+      }
       picks.push({
         document_number: r.document_number ?? '',
         name: r.name ?? '',
@@ -401,6 +409,7 @@ async function pickNewBatch(
       });
       if (picks.length >= limit) break;
     }
+    if (filteredForName > 0) log('INFO', `pickNewBatch: ${filteredForName} rows dropped by tight-name guard`);
     void normNames;
     return { picks, source: 'sqlite' };
   } catch (err) {
@@ -533,47 +542,82 @@ interface SunbizHit {
   mailing_address: string | null;
 }
 
-// PBC ZIP → canonical city, copied verbatim from
-// hoa-agent/scripts/verify-locations.py so the v3 zip-city rule stays
-// aligned with the pipeline the existing published rows were verified
-// against. Only ZIPs the rule recognises get city_verified = true; any
-// other zip stays false and the row cannot publish tonight.
-const PBC_ZIP_CITY: Record<string, string> = {
-  '33401': 'West Palm Beach', '33402': 'West Palm Beach', '33403': 'West Palm Beach',
-  '33404': 'West Palm Beach', '33405': 'West Palm Beach', '33406': 'West Palm Beach',
-  '33407': 'West Palm Beach', '33408': 'North Palm Beach', '33409': 'West Palm Beach',
-  '33410': 'Palm Beach Gardens', '33411': 'West Palm Beach', '33412': 'West Palm Beach',
-  '33413': 'West Palm Beach', '33414': 'Wellington', '33415': 'West Palm Beach',
-  '33417': 'West Palm Beach', '33418': 'Palm Beach Gardens', '33426': 'Boynton Beach',
-  '33428': 'Boca Raton', '33430': 'Belle Glade', '33431': 'Boca Raton', '33432': 'Boca Raton',
-  '33433': 'Boca Raton', '33434': 'Boca Raton', '33435': 'Boynton Beach', '33436': 'Boynton Beach',
-  '33437': 'Boynton Beach', '33438': 'Canal Point', '33440': 'Clewiston',
-  '33444': 'Delray Beach', '33445': 'Delray Beach', '33446': 'Delray Beach', '33448': 'Delray Beach',
-  '33449': 'Lake Worth', '33458': 'Jupiter', '33460': 'Lake Worth', '33461': 'Lake Worth',
-  '33462': 'Lake Worth', '33463': 'Lake Worth', '33467': 'Lake Worth', '33469': 'Jupiter',
-  '33470': 'Loxahatchee', '33471': 'Moore Haven', '33472': 'Boynton Beach', '33473': 'Boynton Beach',
-  '33474': 'Boynton Beach', '33476': 'Pahokee', '33477': 'Jupiter', '33478': 'Jupiter',
-  '33480': 'Palm Beach', '33483': 'Delray Beach', '33484': 'Delray Beach', '33486': 'Boca Raton',
-  '33487': 'Boca Raton', '33488': 'Boca Raton', '33496': 'Boca Raton', '33498': 'Boca Raton',
-};
+// PBC ZIP → acceptable-city list, loaded at startup from
+// data/pbc_zip_cities.json. Owner ruling 2026-09-09 (late): USPS
+// acceptable city names per ZIP. A ZIP absent from the file resolves
+// to out_of_market. city_verified passes when the normalized Sunbiz
+// principal city appears in the list for that ZIP.
+let PBC_ZIP_CITIES: Record<string, string[]> = {};
+
+function loadZipCityDict(repoRoot: string): void {
+  const path = resolve(repoRoot, 'data/pbc_zip_cities.json');
+  try {
+    const raw = readFileSync(path, 'utf8');
+    const parsed = JSON.parse(raw) as Record<string, string[] | string>;
+    const out: Record<string, string[]> = {};
+    for (const [zip, val] of Object.entries(parsed)) {
+      if (zip.startsWith('_')) continue; // metadata keys
+      if (Array.isArray(val)) out[zip] = val.map((c) => c.toUpperCase().trim());
+    }
+    PBC_ZIP_CITIES = out;
+    log('INFO', `pbc-zip-cities loaded: ${Object.keys(out).length} zips`);
+  } catch (err) {
+    throw new Error(`failed to load ${path}: ${(err as Error).message}`);
+  }
+}
 
 function normalizeCity(s: string | null | undefined): string {
   return (s ?? '').toUpperCase().replace(/\s+/g, ' ').trim();
 }
 
 /**
- * Zip-city rule: given a ZIP and a city, returns true when the ZIP is a
- * known PBC ZIP AND the city matches the PBC_ZIP_CITY dictionary entry
- * for that ZIP (case + whitespace tolerant). Returns false for
- * out-of-map ZIPs or mismatches. This is the same check hoa-agent has
- * used for city_verified since May 2026.
+ * Zip-city rule: ZIP is known AND the (normalized) city appears in the
+ * acceptable-name list for that ZIP.
  */
 function checkZipCity(zip: string | null, city: string | null): boolean {
   if (!zip) return false;
   const z = zip.trim().slice(0, 5);
-  const expected = PBC_ZIP_CITY[z];
-  if (!expected) return false;
-  return normalizeCity(city) === normalizeCity(expected);
+  const list = PBC_ZIP_CITIES[z];
+  if (!list) return false;
+  const norm = normalizeCity(city);
+  return list.includes(norm);
+}
+
+function zipInMarket(zip: string | null): boolean {
+  if (!zip) return false;
+  return Object.prototype.hasOwnProperty.call(PBC_ZIP_CITIES, zip.trim().slice(0, 5));
+}
+
+// ────────────────────────── new-row name-filter guard ──────────────────────────
+// Duplicate of the tight filter used by build-sunbiz-index.ts so a
+// stale index can't leak old rows into pickNewBatch. Kept in sync
+// manually — small array, low change velocity.
+const NAME_REQUIRE_ONE = [
+  'HOMEOWNERS', 'OWNERS', 'CONDOMINIUM', 'CONDO', 'PROPERTY',
+  'COMMUNITY', 'MASTER', 'RESIDENTS', 'TOWNHOME', 'TOWNHOMES',
+  'VILLAS', 'ESTATES', 'NEIGHBORHOOD', 'RECREATION', 'MAINTENANCE',
+];
+const NAME_EXCLUDE_ANY = [
+  'ALUMNI', 'CLUB', 'CLUBS', 'CHURCH', 'MINISTRY', 'MINISTRIES',
+  'FOUNDATION', 'CHARITABLE', 'LEAGUE', 'SOCIETY', 'GUILD',
+  'NURSES', 'MEDICAL', 'DENTAL', 'BAR ASSOCIATION', 'CHAMBER',
+  'PROFESSIONAL', 'TRADE', 'BOOSTER', 'PTA', 'PTO', 'ATHLETIC',
+  'BUSINESS',
+];
+const NAME_ASSOCIATION = /\bASSOCIATION\b/;
+const NAME_REQ = new RegExp(
+  '\\b(' + NAME_REQUIRE_ONE.map((t) => t.replace(/\s+/g, '\\s+')).join('|') + ')\\b',
+);
+const NAME_EXC = new RegExp(
+  '\\b(' + NAME_EXCLUDE_ANY.map((t) => t.replace(/\s+/g, '\\s+')).join('|') + ')\\b',
+);
+
+function nameMatchesTight(name: string): boolean {
+  const up = name.toUpperCase();
+  if (!NAME_ASSOCIATION.test(up)) return false;
+  if (!NAME_REQ.test(up)) return false;
+  if (NAME_EXC.test(up)) return false;
+  return true;
 }
 
 function normalizeForLookup(name: string): string {
@@ -699,21 +743,29 @@ async function stepIdentity(f: Findings, cfg: Config, sunbizAvailable: boolean):
 }
 
 function stepLocation(f: Findings, cfg: Config): void {
-  const county = (f.community.county ?? '').trim();
-  const inMarket = cfg.in_market_counties.includes(county);
-  const phase2 = cfg.phase2_counties.includes(county);
-  if (!inMarket && !phase2) {
+  const c = f.community;
+  // Owner ruling 2026-09-09 (late): principal_zip is authoritative for
+  // out_of_market on new rows. For refresh rows the DB county field is
+  // trusted (already went through location verification when it was
+  // published); a new v3 pass shouldn't demote a published PBC row
+  // just because zip_code is null.
+  const county = (c.county ?? '').trim();
+  const inMarketByCounty = cfg.in_market_counties.includes(county);
+  const inMarketByZip = zipInMarket(c.zip_code);
+
+  const outOfMarket = f.isRefresh
+    ? !inMarketByCounty && !inMarketByZip
+    : !inMarketByZip;
+
+  if (outOfMarket) {
     f.out_of_market = true;
-    f.location_source = 'county-out-of-scope';
-    f.notes.push(`location: out_of_market (county=${county})`);
+    f.location_source = 'zip-out-of-market';
+    f.notes.push(
+      `location: out_of_market (zip=${c.zip_code ?? 'null'} county=${county || 'null'})`,
+    );
     return;
   }
-  // Owner ruling 2026-09-09: apply the pbc-zip-city rule directly so
-  // new rows also earn city_verified from their Sunbiz principal
-  // address. Refresh rows keep their existing city_verified whenever
-  // the DB already says true; the rule is only re-evaluated when
-  // city_verified is false/null.
-  const c = f.community;
+
   const dbVerified = c.city_verified === true;
   const ruleVerified = checkZipCity(c.zip_code, c.city);
   f.city_verified = dbVerified || ruleVerified;
@@ -1162,13 +1214,18 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
     if (error) throw new Error(`update communities ${id}: ${error.message}`);
   }
   for (const c of f.planned_change_log) {
+    // Owner ruling: change_log reason lives in the `source` column
+    // (schema has no `reason` column). If the change carries an
+    // explicit source (e.g. 'sunbiz-doc:...' for attempts), we keep
+    // that; otherwise the reason string is written as 'reason:<label>'.
+    const src = c.source ?? (c.reason ? `reason:${c.reason}` : null);
     await sb.from('change_log').insert({
       community_id: id,
       action: c.action,
       field: c.field ?? null,
       old_value: c.old_value ?? null,
       new_value: c.new_value ?? null,
-      source: c.source ?? null,
+      source: src,
       run_id: RUN_ID,
     });
   }
@@ -1191,8 +1248,10 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
 
 async function main(): Promise<void> {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  const cfg = loadConfig(resolve(__dirname, '../config/enrich.yaml'));
-  const prompt = readFileSync(resolve(__dirname, '../prompts/extract_management.txt'), 'utf8');
+  const repoRoot = resolve(__dirname, '..');
+  const cfg = loadConfig(resolve(repoRoot, 'config/enrich.yaml'));
+  const prompt = readFileSync(resolve(repoRoot, 'prompts/extract_management.txt'), 'utf8');
+  loadZipCityDict(repoRoot);
   const args = parseCli(process.argv.slice(2));
 
   const newLimit = args.newLimit ?? cfg.new_per_night;
@@ -1415,7 +1474,6 @@ async function main(): Promise<void> {
       }
     }
 
-    summary.new_processed = 0; // no new-batch loop this run
     summary.duration_seconds = Math.round((Date.now() - START) / 1000);
     await endJobRun(sb, RUN_ID, 'success', summary);
     log('INFO', `done in ${summary.duration_seconds}s`);

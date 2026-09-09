@@ -28,7 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     .from('communities')
     .select('canonical_name,city,zip_code,monthly_fee_min,monthly_fee_max,monthly_fee_median,management_company,property_type,unit_count')
     .eq('slug', slug)
-    .single()
+    .eq('status', 'published')
+    .maybeSingle()
 
   if (!community) return { title: 'Community Not Found — HOA Agent' }
 
@@ -110,11 +111,15 @@ interface Community {
 }
 
 async function getCommunity(slug: string) {
+  // CLAUDE.md rule 19: every public community query MUST filter by
+  // status='published'. Rows with status in {draft, needs_review,
+  // removed, duplicate, merged} must never leak onto public pages.
   const { data, error } = await supabase
     .from('communities')
     .select('*, city_verified')
     .eq('slug', slug)
-    .single()
+    .eq('status', 'published')
+    .maybeSingle()
   if (error || !data) return null
   return data as Community
 }
