@@ -557,6 +557,42 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           )}
         </div>
 
+        {/* Rules block (Phase 10a) — sits between Fees and Utilities.
+            Rows: Pets · Rentals · Age · Vehicles · Amenities. Each row
+            renders only when a value exists; the whole block hides when
+            every row is empty. */}
+        {(() => {
+          const ruleRows: { label: string; value: string }[] = []
+          if (present(community.pet_restriction)) ruleRows.push({ label: 'Pets', value: String(community.pet_restriction).trim() })
+          if (present(community.rental_approval)) ruleRows.push({ label: 'Rentals', value: String(community.rental_approval).trim() })
+          const ageLabel = community.is_55_plus
+            ? '55+ community'
+            : community.is_age_restricted
+              ? 'Age-restricted community'
+              : null
+          if (ageLabel) ruleRows.push({ label: 'Age', value: ageLabel })
+          if (present(community.vehicle_restriction)) ruleRows.push({ label: 'Vehicles', value: String(community.vehicle_restriction).trim() })
+          if (present(community.amenities)) ruleRows.push({ label: 'Amenities', value: String(community.amenities).trim() })
+          if (ruleRows.length === 0) return null
+          return (
+            <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+              <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Rules</div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                {ruleRows.map((r) => (
+                  <div key={r.label} style={{display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap'}}>
+                    <span style={{color: '#595959', fontSize: '12px'}}>{r.label}</span>
+                    <span style={{color: '#1a1a1a', fontSize: '13px', textAlign: 'right', maxWidth: '70%'}}>{r.value}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #f0f0f0', fontSize: '11px', color: '#595959', lineHeight: 1.55, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px'}}>
+                <span>Reviewed by HOA Agent. Confirm with the association before relying on it.</span>
+                <a href="#restrictions-block" style={{color: '#06875e', fontSize: '11px', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap'}}>Report a rule →</a>
+              </div>
+            </div>
+          )
+        })()}
+
         {/* Sponsored card (only shows if advertisers configured for this city) */}
         {pageAdvertisers.length > 0 && (
           <div style={{marginBottom: '12px'}}>
@@ -663,7 +699,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           </div>
         )}
 
-        <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+        <div id="restrictions-block" style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px'}}>
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a'}}>Restrictions</div>
             <span style={{fontSize: '10px', padding: '2px 8px', borderRadius: '3px', backgroundColor: '#f0f0f0', color: '#666'}}>public + resident</span>
