@@ -127,7 +127,7 @@ create table if not exists public.change_log (
   action       text        not null
                check (action in (
                  'published','refreshed','removed','queued',
-                 'approved','rejected','field_updated'
+                 'approved','rejected','field_updated','attempted'
                )),
   field        text,
   old_value    text,

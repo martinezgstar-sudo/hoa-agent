@@ -1219,7 +1219,7 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
     // explicit source (e.g. 'sunbiz-doc:...' for attempts), we keep
     // that; otherwise the reason string is written as 'reason:<label>'.
     const src = c.source ?? (c.reason ? `reason:${c.reason}` : null);
-    await sb.from('change_log').insert({
+    const { error: clErr } = await sb.from('change_log').insert({
       community_id: id,
       action: c.action,
       field: c.field ?? null,
@@ -1228,6 +1228,7 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
       source: src,
       run_id: RUN_ID,
     });
+    if (clErr) log('WARN', `change_log insert failed (${c.action}): ${clErr.message}`);
   }
   if (f.utility_rows && f.utility_rows.length) {
     for (const u of f.utility_rows) {
