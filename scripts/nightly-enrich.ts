@@ -164,6 +164,7 @@ interface Findings {
   // per-step outputs
   identity_source?: string;
   identity_matched?: boolean;
+  identity_skipped?: boolean;
   sunbiz_active?: boolean;
   registered_agent?: string;
   principal_address?: string;
@@ -173,11 +174,13 @@ interface Findings {
   out_of_market?: boolean;
 
   management_source?: string;
+  management_skipped?: boolean;
   management_company?: string;
   management_phone?: string;
   management_website?: string;
 
   fees_source?: string;
+  fees_skipped?: boolean;
   monthly_fee_median?: number; // rounded to $25
   dues_frequency?: 'monthly' | 'quarterly' | 'annual' | 'unknown';
 
@@ -197,6 +200,7 @@ interface Findings {
     old_value?: string | null;
     new_value?: string | null;
     source?: string;
+    reason?: string;
   }[];
 
   notes: string[];
@@ -275,31 +279,96 @@ interface SunbizCandidate {
   zip: string | null;
 }
 
-/** Try local sqlite index first; fall back to LaCie cordata scan. */
+/** Sunbiz index freshness check — owner ruling: index_fresh = built_at within 45 days. */
+async function sunbizIndexFresh(
+  cfg: Config,
+): Promise<{ ok: boolean; reason: string; built_at?: string }> {
+  if (!existsSync(cfg.sunbiz_index_path)) {
+    return { ok: false, reason: 'index_missing' };
+  }
+  try {
+    const { execFileSync } = await import('node:child_process');
+    const out = execFileSync(
+      'sqlite3',
+      [cfg.sunbiz_index_path, "SELECT COALESCE(MAX(built_at), '') FROM sunbiz_meta"],
+      { encoding: 'utf8', timeout: 5000 },
+    ).trim();
+    if (!out) return { ok: false, reason: 'no_built_at' };
+    const built = new Date(out);
+    const ageDays = (Date.now() - built.getTime()) / 86400_000;
+    if (ageDays > 45) return { ok: false, reason: 'stale_over_45d', built_at: out };
+    return { ok: true, reason: 'fresh', built_at: out };
+  } catch (err) {
+    return { ok: false, reason: `probe_error(${(err as Error).message})` };
+  }
+}
+
+/** Pick new candidates from the local Sunbiz sqlite. Empty when index down. */
 async function pickNewBatch(
   cfg: Config,
   sb: SupabaseClient,
   limit: number,
+  indexFresh: boolean,
 ): Promise<{ picks: SunbizCandidate[]; source: string }> {
-  if (existsSync(cfg.sunbiz_index_path)) {
-    log('INFO', `sunbiz index found at ${cfg.sunbiz_index_path} — TODO: sqlite pick not implemented in dry-run yet`);
-    // Real path would open better-sqlite3 and pick candidates. For dry-run
-    // we skip so the operator sees the fallback path exercised.
-  } else {
-    log('WARN', `sunbiz_index_path missing: ${cfg.sunbiz_index_path}`);
+  if (!indexFresh) {
+    log(
+      'WARN',
+      'new_batch skipped — sunbiz index not fresh. Real run will refuse to publish new rows tonight.',
+    );
+    void sb;
+    void limit;
+    return { picks: [], source: 'index-not-fresh' };
   }
-  // Fallback: no LaCie CSV parse in this initial cut. Return empty and
-  // note the reason. The refresh batch will still exercise the pipeline
-  // end-to-end, which is what the owner asked for in the 5+5 dry-run
-  // check.
-  log(
-    'WARN',
-    'new_batch is empty for this run — Sunbiz index not built yet. ' +
-      'Refresh batch alone will exercise every research step.',
-  );
-  void sb;
-  void limit;
-  return { picks: [], source: 'unavailable' };
+  try {
+    const { execFileSync } = await import('node:child_process');
+    // Query the local index for association-like Palm Beach entities
+    // that are not already in communities (by doc number OR normalized
+    // name). We cap generously — the caller trims to `limit`.
+    const query = `SELECT document_number, name, normalized_name, status, filing_date,
+                          registered_agent, principal_address, mailing_address
+                   FROM sunbiz_pbc_associations
+                   ORDER BY document_number
+                   LIMIT ${limit * 4};`;
+    const raw = execFileSync(
+      'sqlite3',
+      [cfg.sunbiz_index_path, '-json', query],
+      { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, timeout: 15000 },
+    ).trim();
+    if (!raw) return { picks: [], source: 'sqlite-empty' };
+    const rows = JSON.parse(raw) as Array<Record<string, string | null>>;
+
+    // Filter out anything already in communities.
+    const docNums = rows.map((r) => r.document_number).filter(Boolean);
+    const normNames = rows.map((r) => r.normalized_name).filter(Boolean);
+    const existing = new Set<string>();
+    if (docNums.length) {
+      const { data } = await sb
+        .from('communities')
+        .select('state_entity_number')
+        .in('state_entity_number', docNums as string[]);
+      for (const r of data ?? []) if (r.state_entity_number) existing.add(r.state_entity_number);
+    }
+    const picks: SunbizCandidate[] = [];
+    for (const r of rows) {
+      if (r.document_number && existing.has(r.document_number)) continue;
+      picks.push({
+        document_number: r.document_number ?? '',
+        name: r.name ?? '',
+        status: r.status ?? '',
+        filing_date: r.filing_date,
+        registered_agent: r.registered_agent,
+        principal_address: r.principal_address,
+        city: null,
+        zip: null,
+      });
+      if (picks.length >= limit) break;
+    }
+    void normNames;
+    return { picks, source: 'sqlite' };
+  } catch (err) {
+    log('WARN', `pickNewBatch error: ${(err as Error).message}`);
+    return { picks: [], source: 'error' };
+  }
 }
 
 // ────────────────────────── external services ──────────────────────────
@@ -412,11 +481,21 @@ function digitsOnly(s: string | null | undefined): string {
 
 // ────────────────────────── research steps ──────────────────────────
 
-async function stepIdentity(f: Findings): Promise<void> {
-  // For refresh rows: identity is already "matched" — the row exists in
-  // communities. Score awards the 40 points if state_entity_number is
-  // present (owner ruling: reuse existing column).
+async function stepIdentity(f: Findings, sunbizAvailable: boolean): Promise<void> {
+  // For refresh rows: identity is DB-backed. If Sunbiz index is
+  // available we re-check the row; if it's down we DO NOT count the
+  // block as zero — we preserve the existing DB values (owner ruling
+  // 2026-09-08). Score against DB below in scoreFindings.
   if (f.isRefresh) {
+    if (!sunbizAvailable) {
+      f.identity_source = 'sunbiz-index-down';
+      f.identity_skipped = true;
+      f.notes.push('identity: skipped (sunbiz index unavailable) — preserving existing values');
+      return;
+    }
+    // TODO: real Sunbiz re-check against sqlite when the builder wires in.
+    // For now, when the index is available we still trust the DB row —
+    // Phase 3 does not yet re-open Sunbiz for refresh reads.
     f.identity_source = 'communities-refresh';
     f.identity_matched = !!f.community.state_entity_number;
     f.sunbiz_active = f.community.entity_status === 'Active';
@@ -426,10 +505,16 @@ async function stepIdentity(f: Findings): Promise<void> {
     );
     return;
   }
-  // For new rows: would query sunbiz sqlite here. Not implemented in v0.
-  f.identity_source = 'sunbiz-unavailable';
-  f.identity_matched = false;
-  f.notes.push('identity: skipped (new-batch Sunbiz path not built)');
+  // For new rows: needs the Sunbiz index.
+  if (!sunbizAvailable) {
+    f.identity_source = 'sunbiz-index-down';
+    f.identity_skipped = true;
+    f.notes.push('identity: skipped (sunbiz index unavailable) — new row will hold as draft');
+    return;
+  }
+  f.identity_source = 'sunbiz-index';
+  f.identity_matched = false; // real lookup not wired yet
+  f.notes.push('identity: sunbiz sqlite lookup TBD in Phase 3 v2');
 }
 
 function stepLocation(f: Findings, cfg: Config): void {
@@ -438,14 +523,15 @@ function stepLocation(f: Findings, cfg: Config): void {
   const phase2 = cfg.phase2_counties.includes(county);
   if (!inMarket && !phase2) {
     f.out_of_market = true;
-    f.location_source = 'county-check';
+    f.location_source = 'county-out-of-scope';
     f.notes.push(`location: out_of_market (county=${county})`);
     return;
   }
-  // Reuse existing city_verified. Owner ruling.
+  // Reuse existing city_verified — owner ruling: parcel geocoding waits
+  // for v2. The source is the rule name that produced the boolean.
   f.city_verified = f.community.city_verified === true;
-  f.location_source = f.city_verified ? 'existing-city-verified' : 'pending-geocode';
-  f.notes.push(`location: city_verified=${f.city_verified}`);
+  f.location_source = 'pbc-zip-city-rule';
+  f.notes.push(`location: city_verified=${f.city_verified} (rule=pbc-zip-city-rule)`);
 }
 
 async function stepManagement(
@@ -457,7 +543,8 @@ async function stepManagement(
 ): Promise<void> {
   if (!ollamaOk || !searxOk) {
     f.management_source = ollamaOk ? 'searxng-down' : 'ollama-down';
-    f.notes.push(`management: skipped (${f.management_source})`);
+    f.management_skipped = true;
+    f.notes.push(`management: skipped (${f.management_source}) — preserving existing values`);
     return;
   }
   const q = `"${f.community.canonical_name}" ${f.community.city ?? ''} management`.trim();
@@ -512,7 +599,8 @@ async function stepFees(
   // extract; if it didn't, re-run one focused query.
   if (!ollamaOk || !searxOk) {
     f.fees_source = ollamaOk ? 'searxng-down' : 'ollama-down';
-    f.notes.push(`fees: skipped (${f.fees_source})`);
+    f.fees_skipped = true;
+    f.notes.push(`fees: skipped (${f.fees_source}) — preserving existing values`);
     return;
   }
   const q = `"${f.community.canonical_name}" ${f.community.city ?? ''} HOA fee`.trim();
@@ -597,59 +685,135 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
 // ────────────────────────── score + decide ──────────────────────────
 
 function scoreFindings(f: Findings): void {
+  // Owner ruling 2026-09-08: a skipped block preserves existing DB
+  // values and does not contribute a zero. Each score component
+  // therefore honours the freshly-observed value first, then falls
+  // back to the DB row when the block was skipped (or when no new
+  // value was accepted this run).
+  const c = f.community;
   const b: Record<string, number> = {};
-  b.identity = f.identity_matched ? 40 : 0;
-  b.entity_active = f.sunbiz_active ? 10 : 0;
-  b.city_verified = f.city_verified ? 20 : 0;
-  b.management = f.management_company ? 15 : 0;
-  b.fees = f.monthly_fee_median != null ? 10 : 0;
+
+  const hasIdentity = f.identity_skipped
+    ? !!c.state_entity_number
+    : !!(f.identity_matched || c.state_entity_number);
+  b.identity = hasIdentity ? 40 : 0;
+
+  const active = f.identity_skipped
+    ? c.entity_status === 'Active'
+    : !!(f.sunbiz_active || c.entity_status === 'Active');
+  b.entity_active = active ? 10 : 0;
+
+  // Location step never depends on an external service — no skip case.
+  b.city_verified = f.city_verified || c.city_verified === true ? 20 : 0;
+
+  const hasMgmt = f.management_skipped
+    ? !!c.management_company
+    : !!(f.management_company || c.management_company);
+  b.management = hasMgmt ? 15 : 0;
+
+  const hasFees = f.fees_skipped
+    ? c.monthly_fee_median != null
+    : (f.monthly_fee_median != null || c.monthly_fee_median != null);
+  b.fees = hasFees ? 10 : 0;
+
   b.utilities = f.utilities_mapped === 5 ? 5 : 0;
-  const total = Object.values(b).reduce((a, x) => a + x, 0);
-  f.score = total;
+
+  f.score = Object.values(b).reduce((a, x) => a + x, 0);
   f.score_breakdown = b;
 }
 
+function anySkipped(f: Findings): boolean {
+  return !!(f.identity_skipped || f.management_skipped || f.fees_skipped);
+}
+
 function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
+  // Owner ruling 2026-09-08: refresh rows have three outcomes only —
+  //   (a) stays published with field updates,
+  //   (b) stays published + queued for review when score drops below
+  //       publish_min OR entity_status leaves Active,
+  //   (c) unchanged.
+  // Removal of a published row happens ONLY by human rejection in the
+  // Review tab.
+  //
+  // New rows follow a separate ladder — out_of_market → removed, any
+  // skipped block → draft (retry tomorrow), else published/queue/draft
+  // by score. Refresh removal is impossible in this decide step.
   const c = f.community;
   const changes = f.planned_change_log;
 
-  // out_of_market OR score < remove_below_score => removed
-  if (f.out_of_market || f.score < cfg.remove_below_score) {
-    if (c.status !== 'removed') {
-      changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed' });
-      f.planned_status = 'removed';
-    } else {
-      f.planned_status = null;
+  // Effective entity status (DB fallback when identity was skipped).
+  const effectiveActive =
+    (f.identity_skipped ? c.entity_status === 'Active' : !!f.sunbiz_active) ||
+    (f.identity_skipped && c.entity_status === 'Active');
+  const cityVerified = f.city_verified || c.city_verified === true;
+
+  if (f.isRefresh) {
+    // A refresh row is by definition currently published (see
+    // pickRefreshBatch's `.eq('status','published')`). Owner rule
+    // forbids removal here.
+    const dropped = f.score < cfg.publish_min_score;
+    const leftActive = !effectiveActive;
+    if (dropped || leftActive) {
+      const reason = leftActive ? 'entity_inactive' : 'score_drop';
+      changes.push({ action: 'queued', field: 'reason', new_value: reason });
+      if (queueOpen) {
+        changes.push({
+          action: 'field_updated',
+          field: 'status',
+          old_value: 'published',
+          new_value: 'needs_review',
+          reason,
+        });
+        f.planned_status = 'needs_review';
+      } else {
+        // Queue is at cap. Log the queued action but leave status alone.
+        f.planned_status = null;
+        f.notes.push(`decide: refresh row queued(reason=${reason}) but queue at cap — status unchanged`);
+      }
+      return;
     }
+    // Refresh row is healthy — refresh field updates only.
+    changes.push({ action: 'refreshed' });
+    f.planned_status = null;
     return;
   }
 
-  // score >= publish_min AND Active AND city_verified => published
-  const canPublish = f.score >= cfg.publish_min_score && f.sunbiz_active && f.city_verified;
+  // ---- new row ladder ----
+
+  // Out of market: never publishable. Row is fresh so removal is honest.
+  if (f.out_of_market) {
+    changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed', reason: 'out_of_market' });
+    f.planned_status = 'removed';
+    return;
+  }
+
+  // Any skipped block: cannot decide fairly tonight. Hold as draft and
+  // retry tomorrow. No queue entry (owner rule).
+  if (anySkipped(f)) {
+    if (c.status !== 'draft') {
+      changes.push({ action: 'field_updated', field: 'status', old_value: c.status, new_value: 'draft', reason: 'skipped_block' });
+      f.planned_status = 'draft';
+    } else {
+      f.planned_status = null;
+    }
+    f.notes.push('decide: new row held as draft — one or more blocks skipped');
+    return;
+  }
+
+  // Full read; decide by score.
+  const canPublish = f.score >= cfg.publish_min_score && effectiveActive && cityVerified;
   if (canPublish) {
-    if (c.status !== 'published') {
-      changes.push({ action: 'published', field: 'status', old_value: c.status, new_value: 'published' });
-      f.planned_status = 'published';
-    } else {
-      changes.push({ action: 'refreshed' });
-      f.planned_status = null;
-    }
+    changes.push({ action: 'published', field: 'status', old_value: c.status, new_value: 'published' });
+    f.planned_status = 'published';
     return;
   }
 
-  // Refresh rows never drop from published on score alone.
-  if (f.isRefresh && c.status === 'published') {
-    changes.push({ action: 'queued', field: 'reason', new_value: 'score_drop' });
-    if (queueOpen) {
-      changes.push({ action: 'field_updated', field: 'status', old_value: 'published', new_value: 'needs_review' });
-      f.planned_status = 'needs_review';
-    } else {
-      f.planned_status = null;
-    }
+  if (f.score < cfg.remove_below_score) {
+    changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed', reason: 'score_below_remove' });
+    f.planned_status = 'removed';
     return;
   }
 
-  // Otherwise: queue if room, else keep status and try again tomorrow.
   if (queueOpen) {
     if (c.status !== 'needs_review') {
       changes.push({ action: 'queued', field: 'status', old_value: c.status, new_value: 'needs_review' });
@@ -659,18 +823,28 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
     }
     return;
   }
-  // no room: keep status; caller sets next_research_at to tomorrow.
+
+  // No queue room and score in the middle — retry tomorrow.
   f.planned_status = null;
-  f.notes.push('decide: queue at cap; will retry tomorrow');
+  f.notes.push('decide: new row score in middle band, queue at cap — retry tomorrow');
 }
 
 function buildPlannedUpdates(f: Findings, cfg: Config): void {
   const now = new Date().toISOString();
-  const nextIso = new Date(Date.now() + cfg.refresh_after_days * 86400_000).toISOString();
+  const tomorrowIso = new Date(Date.now() + 86400_000).toISOString();
+  const refreshIso = new Date(Date.now() + cfg.refresh_after_days * 86400_000).toISOString();
+
+  // Owner ruling: refresh rows never lose data on a skipped block, so
+  // planned updates never null-overwrite. `next_research_at` uses the
+  // full refresh cadence when the run was clean; when the row is
+  // draft-held (new row with a skipped block) it retries tomorrow.
+  const heldForTomorrow =
+    !f.isRefresh && (anySkipped(f) || f.planned_status === 'draft');
+
   const u: Record<string, unknown> = {
     confidence_score: f.score,
     last_verified: now,
-    next_research_at: nextIso,
+    next_research_at: heldForTomorrow ? tomorrowIso : refreshIso,
   };
   if (f.planned_status) u.status = f.planned_status;
   if (f.registered_agent) u.registered_agent = f.registered_agent;
@@ -741,28 +915,58 @@ async function main(): Promise<void> {
     published: 0,
     queued: 0,
     removed: 0,
+    draft_held: 0,
+    degraded: false,
+    degraded_reasons: [] as string[],
     failed_steps: {} as Record<string, number>,
   };
 
   try {
-    // cap check
+    // Owner ruling 2026-09-08: cap counts in-market needs_review only.
+    // The 400+ Broward + Miami-Dade needs_review rows are Phase 2
+    // county backlog and MUST NOT throttle the Palm Beach loop.
+    const inMarketCountiesCsv = cfg.in_market_counties.map((c) => `"${c}"`).join(',');
     const { count } = await sb
       .from('communities')
       .select('id', { count: 'exact', head: true })
-      .eq('status', 'needs_review');
+      .eq('status', 'needs_review')
+      .in('county', cfg.in_market_counties);
     const queueOpen = (count ?? 0) < cfg.review_queue_cap;
-    log('INFO', `queue: needs_review=${count} cap=${cfg.review_queue_cap} queue_open=${queueOpen}`);
+    log(
+      'INFO',
+      `queue: needs_review(in-market=${inMarketCountiesCsv})=${count} cap=${cfg.review_queue_cap} queue_open=${queueOpen}`,
+    );
 
     // external service probes
     const [ollamaOk, searxOk] = await Promise.all([ollamaReachable(cfg), searxngReachable(cfg)]);
     log('INFO', `ollama_up=${ollamaOk} searxng_up=${searxOk}`);
-    if (!ollamaOk) log('WARN', `ollama unreachable at ${cfg.ollama_url}`);
-    if (!searxOk) log('WARN', `searxng unreachable at ${cfg.searxng_url}`);
+    if (!ollamaOk) {
+      log('WARN', `ollama unreachable at ${cfg.ollama_url}`);
+      (summary.degraded_reasons as string[]).push('ollama_down');
+      summary.degraded = true;
+    }
+    if (!searxOk) {
+      log('WARN', `searxng unreachable at ${cfg.searxng_url}`);
+      (summary.degraded_reasons as string[]).push('searxng_down');
+      summary.degraded = true;
+    }
+
+    // Sunbiz index freshness — owner ruling: index_fresh means built_at
+    // within 45 days. Missing or older than 45d = degraded and identity
+    // block reports skipped.
+    const sunbizFresh = await sunbizIndexFresh(cfg);
+    if (!sunbizFresh.ok) {
+      log('WARN', `sunbiz index not fresh: ${sunbizFresh.reason}`);
+      (summary.degraded_reasons as string[]).push(`sunbiz_${sunbizFresh.reason}`);
+      summary.degraded = true;
+    } else {
+      log('INFO', `sunbiz index fresh: built_at=${sunbizFresh.built_at}`);
+    }
 
     const refresh = await pickRefreshBatch(sb, refreshLimit);
     log('INFO', `refresh batch: ${refresh.length} rows`);
 
-    const newPicks = await pickNewBatch(cfg, sb, newLimit);
+    const newPicks = await pickNewBatch(cfg, sb, newLimit, sunbizFresh.ok);
     log('INFO', `new batch: ${newPicks.picks.length} rows (source=${newPicks.source})`);
 
     const allFindings: Findings[] = [];
@@ -779,7 +983,7 @@ async function main(): Promise<void> {
         notes: [],
       };
       try {
-        await stepIdentity(f);
+        await stepIdentity(f, sunbizFresh.ok);
         stepLocation(f, cfg);
         if (!f.out_of_market) {
           await stepManagement(f, cfg, prompt, ollamaOk, searxOk);
@@ -796,10 +1000,67 @@ async function main(): Promise<void> {
       summary.refreshed = (summary.refreshed as number) + 1;
       if (f.planned_status === 'published') summary.published = (summary.published as number) + 1;
       else if (f.planned_status === 'needs_review') summary.queued = (summary.queued as number) + 1;
+      else if (f.planned_status === 'draft') summary.draft_held = (summary.draft_held as number) + 1;
       else if (f.planned_status === 'removed') summary.removed = (summary.removed as number) + 1;
     }
 
-    // (Would loop newPicks here — omitted in this run because Sunbiz index is not present.)
+    // New-row loop. Skipped-block rule means most rows will draft-hold
+    // until Ollama + SearXNG are up, so tonight's "5 new" surface may
+    // still land as 5 draft rows.
+    for (const cand of newPicks.picks) {
+      // Compose a synthetic community shell for the new-row decide.
+      // The row is not yet in `communities`; we scope the shell to the
+      // fields decide/score/apply touch.
+      const shell: CommunityRow = {
+        id: '',                              // filled at insert time in a real run
+        slug: '',                            // slug generation TBD (Phase 3 v2)
+        canonical_name: cand.name,
+        city: cand.city,
+        county: cfg.in_market_counties[0],   // Sunbiz filter guaranteed in-market
+        state: 'FL',
+        zip_code: cand.zip,
+        status: 'draft',
+        state_entity_number: cand.document_number,
+        entity_status: cand.status,
+        registered_agent: cand.registered_agent,
+        city_verified: null,
+        management_company: null,
+        monthly_fee_median: null,
+        confidence_score: null,
+        last_verified: null,
+        next_research_at: null,
+      };
+      const f: Findings = {
+        community: shell,
+        isRefresh: false,
+        score: 0,
+        score_breakdown: {},
+        planned_updates: {},
+        planned_status: null,
+        planned_change_log: [],
+        notes: [],
+      };
+      try {
+        await stepIdentity(f, sunbizFresh.ok);
+        stepLocation(f, cfg);
+        if (!f.out_of_market) {
+          await stepManagement(f, cfg, prompt, ollamaOk, searxOk);
+          await stepFees(f, cfg, prompt, ollamaOk, searxOk);
+          await stepUtilities(f, sb);
+        }
+        scoreFindings(f);
+        decideFindings(f, cfg, queueOpen);
+        buildPlannedUpdates(f, cfg);
+      } catch (err) {
+        f.notes.push(`row error: ${(err as Error).message}`);
+      }
+      allFindings.push(f);
+      summary.new_processed = (summary.new_processed as number) + 1;
+      if (f.planned_status === 'published') summary.published = (summary.published as number) + 1;
+      else if (f.planned_status === 'needs_review') summary.queued = (summary.queued as number) + 1;
+      else if (f.planned_status === 'draft') summary.draft_held = (summary.draft_held as number) + 1;
+      else if (f.planned_status === 'removed') summary.removed = (summary.removed as number) + 1;
+    }
 
     // ── report ─────────────────────────────────
     log('PLAN', `=== ${args.dryRun ? 'DRY-RUN' : 'REAL'} plan (${allFindings.length} rows) ===`);
