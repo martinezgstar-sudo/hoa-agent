@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Locally-built Sunbiz index (v3 Phase 3). Regenerated from LaCie cordata
+# via `npx tsx scripts/build-sunbiz-index.ts`. Not committed — 4.7 MB now,
+# host-local, always rebuildable, and treated as stale after 45 days.
+/data/sunbiz.sqlite
+/data/sunbiz.sqlite.building
+
 # dependencies
 /node_modules
 /.pnp
