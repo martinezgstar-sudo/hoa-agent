@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  com.hoaagent.searxng.plist
+  Keeps the ~/searxng docker-compose stack up. Owner approved
+  2026-09-09; complements Docker Desktop's `restart: unless-stopped`
+  by surviving a full daemon crash / login without Docker autostart.
+
+  Install:
+    cp scripts/com.hoaagent.searxng.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.hoaagent.searxng.plist
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.hoaagent.searxng.plist
+    rm ~/Library/LaunchAgents/com.hoaagent.searxng.plist
+
+  Runner: scripts/run-searxng.sh
+    - waits for the docker daemon (up to 60 s)
+    - `docker compose up -d` (idempotent)
+    - `docker wait searxng` blocks until the container exits, then
+      this script exits and launchd's KeepAlive restarts us.
+
+  Logs:
+    ~/Library/Logs/hoaagent/searxng.out.log
+    ~/Library/Logs/hoaagent/searxng.err.log
+    ~/Library/Logs/hoaagent/searxng.compose.log  (docker compose stderr)
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.hoaagent.searxng</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>/Users/izzymartinez/Projects/hoa-agent/scripts/run-searxng.sh</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/izzymartinez/Library/Logs/hoaagent/searxng.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/izzymartinez/Library/Logs/hoaagent/searxng.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>/Users/izzymartinez</string>
+  </dict>
+</dict>
+</plist>

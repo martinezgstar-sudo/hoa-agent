@@ -230,6 +230,23 @@ async function startJobRun(sb: SupabaseClient, jobName: string, dry: boolean): P
   return data?.id ?? null;
 }
 
+async function countAttempts(sb: SupabaseClient, source: string): Promise<number> {
+  // Track new-row attempt count via change_log entries tagged with
+  // source='sunbiz-doc:<doc>'. Refresh rows can also count via
+  // community_id but attempts are only load-bearing for new rows.
+  try {
+    const { count, error } = await sb
+      .from('change_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('action', 'attempted')
+      .eq('source', source);
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 async function endJobRun(
   sb: SupabaseClient,
   id: number | null,
@@ -481,40 +498,125 @@ function digitsOnly(s: string | null | undefined): string {
 
 // ────────────────────────── research steps ──────────────────────────
 
-async function stepIdentity(f: Findings, sunbizAvailable: boolean): Promise<void> {
-  // For refresh rows: identity is DB-backed. If Sunbiz index is
-  // available we re-check the row; if it's down we DO NOT count the
-  // block as zero — we preserve the existing DB values (owner ruling
-  // 2026-09-08). Score against DB below in scoreFindings.
-  if (f.isRefresh) {
-    if (!sunbizAvailable) {
-      f.identity_source = 'sunbiz-index-down';
-      f.identity_skipped = true;
-      f.notes.push('identity: skipped (sunbiz index unavailable) — preserving existing values');
-      return;
-    }
-    // TODO: real Sunbiz re-check against sqlite when the builder wires in.
-    // For now, when the index is available we still trust the DB row —
-    // Phase 3 does not yet re-open Sunbiz for refresh reads.
-    f.identity_source = 'communities-refresh';
-    f.identity_matched = !!f.community.state_entity_number;
-    f.sunbiz_active = f.community.entity_status === 'Active';
-    f.registered_agent = f.community.registered_agent ?? undefined;
-    f.notes.push(
-      `identity: state_entity_number=${f.community.state_entity_number ?? 'null'} entity_status=${f.community.entity_status ?? 'null'}`,
-    );
-    return;
+// ────────────────────────── sunbiz name-match lookup ──────────────────────────
+
+interface SunbizHit {
+  document_number: string;
+  name: string;
+  status: string;
+  filing_date: string | null;
+  registered_agent: string | null;
+  principal_address: string | null;
+  mailing_address: string | null;
+}
+
+function normalizeForLookup(name: string): string {
+  return name
+    .toUpperCase()
+    .replace(/,?\s+(INC|INCORPORATED|LLC|LTD|CO)\.?\s*$/i, '')
+    .replace(/[^A-Z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+let SUNBIZ_CACHE: Map<string, SunbizHit[]> | null = null;
+
+async function sunbizLookupByName(
+  cfg: Config,
+  canonicalName: string,
+): Promise<{ ok: boolean; hit?: SunbizHit; reason: string }> {
+  if (!canonicalName?.trim()) return { ok: false, reason: 'empty_name' };
+  const norm = normalizeForLookup(canonicalName);
+  if (!norm) return { ok: false, reason: 'empty_normalized' };
+
+  try {
+    const { execFileSync } = await import('node:child_process');
+    // Owner ruling 2026-09-09: match by normalized_name in the local
+    // sunbiz index. Zero or multiple matches -> 'unmatched'.
+    const query = `SELECT document_number, name, status, filing_date,
+                          registered_agent, principal_address, mailing_address
+                   FROM sunbiz_pbc_associations
+                   WHERE normalized_name = '${norm.replace(/'/g, "''")}'
+                   LIMIT 3;`;
+    const raw = execFileSync(
+      'sqlite3',
+      [cfg.sunbiz_index_path, '-json', query],
+      { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024, timeout: 5000 },
+    ).trim();
+    const rows = raw ? (JSON.parse(raw) as SunbizHit[]) : [];
+    if (rows.length === 1) return { ok: true, hit: rows[0], reason: 'single_match' };
+    if (rows.length === 0) return { ok: false, reason: 'unmatched' };
+    return { ok: false, reason: `multiple_matches(${rows.length})` };
+  } catch (err) {
+    return { ok: false, reason: `probe_error(${(err as Error).message})` };
   }
-  // For new rows: needs the Sunbiz index.
+}
+
+async function stepIdentity(f: Findings, cfg: Config, sunbizAvailable: boolean): Promise<void> {
+  // Refresh path
+  //   - Row already has state_entity_number: trust DB values, do not
+  //     re-hit Sunbiz. (Grandfathered.)
+  //   - Row lacks state_entity_number: run the identity lookup now
+  //     (owner ruling 2026-09-09 grandfather-with-backfill). On a single
+  //     confident match, write the fields with identity_source =
+  //     'sunbiz-name-match'. On zero or multiple matches, leave null
+  //     and set identity_source = 'unmatched'.
+  // New path
+  //   - Always run the lookup. Sunbiz shell already carries
+  //     state_entity_number from pickNewBatch, but we verify by name
+  //     match to confirm the row isn't a duplicate of an existing PBC
+  //     association under a different doc number.
   if (!sunbizAvailable) {
     f.identity_source = 'sunbiz-index-down';
     f.identity_skipped = true;
-    f.notes.push('identity: skipped (sunbiz index unavailable) — new row will hold as draft');
+    f.notes.push(
+      f.isRefresh
+        ? 'identity: skipped (sunbiz index unavailable) — preserving existing values'
+        : 'identity: skipped (sunbiz index unavailable) — new row will hold as draft',
+    );
     return;
   }
-  f.identity_source = 'sunbiz-index';
-  f.identity_matched = false; // real lookup not wired yet
-  f.notes.push('identity: sunbiz sqlite lookup TBD in Phase 3 v2');
+
+  const c = f.community;
+
+  // Refresh row that already has an identity — trust and move on.
+  if (f.isRefresh && c.state_entity_number) {
+    f.identity_source = 'communities-refresh';
+    f.identity_matched = true;
+    f.sunbiz_active = c.entity_status === 'Active';
+    f.registered_agent = c.registered_agent ?? undefined;
+    f.notes.push(
+      `identity: existing state_entity_number=${c.state_entity_number} entity_status=${c.entity_status ?? 'null'} (grandfathered)`,
+    );
+    return;
+  }
+
+  // Refresh with null identity OR new row — do the lookup.
+  const result = await sunbizLookupByName(cfg, c.canonical_name);
+  if (result.ok && result.hit) {
+    const h = result.hit;
+    f.identity_source = 'sunbiz-name-match';
+    f.identity_matched = true;
+    f.sunbiz_active = h.status === 'Active';
+    f.registered_agent = h.registered_agent ?? undefined;
+    // For new rows, also carry across the doc number + status for
+    // downstream write.
+    if (!f.isRefresh) {
+      // shell already carries state_entity_number from pickNewBatch;
+      // overwrite with the confirmed lookup value in case of drift.
+      c.state_entity_number = h.document_number;
+      c.entity_status = h.status;
+      c.registered_agent = h.registered_agent;
+    }
+    f.notes.push(
+      `identity: single match doc=${h.document_number} status=${h.status}`,
+    );
+    return;
+  }
+  f.identity_source = 'unmatched';
+  f.identity_matched = false;
+  f.sunbiz_active = false;
+  f.notes.push(`identity: ${result.reason}`);
 }
 
 function stepLocation(f: Findings, cfg: Config): void {
@@ -726,33 +828,46 @@ function anySkipped(f: Findings): boolean {
   return !!(f.identity_skipped || f.management_skipped || f.fees_skipped);
 }
 
-function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
-  // Owner ruling 2026-09-08: refresh rows have three outcomes only —
-  //   (a) stays published with field updates,
-  //   (b) stays published + queued for review when score drops below
-  //       publish_min OR entity_status leaves Active,
-  //   (c) unchanged.
-  // Removal of a published row happens ONLY by human rejection in the
-  // Review tab.
+function decideFindings(
+  f: Findings,
+  cfg: Config,
+  queueOpen: boolean,
+  attemptCount: number,
+): void {
+  // Owner rulings 2026-09-08 + 2026-09-09.
   //
-  // New rows follow a separate ladder — out_of_market → removed, any
-  // skipped block → draft (retry tomorrow), else published/queue/draft
-  // by score. Refresh removal is impossible in this decide step.
+  // Refresh rows:
+  //   * Never removed here (Review-tab-only).
+  //   * Queued when score < publish_min (any state) OR when the row
+  //     has state_entity_number AND its entity_status leaves Active.
+  //     Rows without state_entity_number skip the entity_inactive
+  //     trigger — the identity backfill runs in this same pass, so
+  //     next night the normal rule applies.
+  //
+  // New rows:
+  //   * Removed only for out_of_market OR (identity known AND status
+  //     Inactive). No removal by score alone.
+  //   * Any skipped block → draft (retry tomorrow).
+  //   * Full clean read: publish if score ≥ publish_min AND Active
+  //     AND city_verified.
+  //   * Active row under publish_min: needs_review if queue_open,
+  //     else draft with next_research_at = +7 days.
+  //   * After 3 attempts still under threshold, queue regardless of
+  //     cap.
   const c = f.community;
   const changes = f.planned_change_log;
 
-  // Effective entity status (DB fallback when identity was skipped).
   const effectiveActive =
-    (f.identity_skipped ? c.entity_status === 'Active' : !!f.sunbiz_active) ||
-    (f.identity_skipped && c.entity_status === 'Active');
+    f.identity_skipped ? c.entity_status === 'Active' : !!f.sunbiz_active;
   const cityVerified = f.city_verified || c.city_verified === true;
+  const hasIdentity = !!c.state_entity_number;
 
   if (f.isRefresh) {
-    // A refresh row is by definition currently published (see
-    // pickRefreshBatch's `.eq('status','published')`). Owner rule
-    // forbids removal here.
     const dropped = f.score < cfg.publish_min_score;
-    const leftActive = !effectiveActive;
+    // Grandfather: only trip entity_inactive when we actually know an
+    // identity for this row. Rows without state_entity_number get one
+    // pass of quiet backfill instead of a mass reclassification.
+    const leftActive = hasIdentity && !effectiveActive && !f.identity_skipped;
     if (dropped || leftActive) {
       const reason = leftActive ? 'entity_inactive' : 'score_drop';
       changes.push({ action: 'queued', field: 'reason', new_value: reason });
@@ -766,13 +881,11 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
         });
         f.planned_status = 'needs_review';
       } else {
-        // Queue is at cap. Log the queued action but leave status alone.
         f.planned_status = null;
         f.notes.push(`decide: refresh row queued(reason=${reason}) but queue at cap — status unchanged`);
       }
       return;
     }
-    // Refresh row is healthy — refresh field updates only.
     changes.push({ action: 'refreshed' });
     f.planned_status = null;
     return;
@@ -780,15 +893,21 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
 
   // ---- new row ladder ----
 
-  // Out of market: never publishable. Row is fresh so removal is honest.
   if (f.out_of_market) {
     changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed', reason: 'out_of_market' });
     f.planned_status = 'removed';
     return;
   }
 
-  // Any skipped block: cannot decide fairly tonight. Hold as draft and
-  // retry tomorrow. No queue entry (owner rule).
+  // Owner ruling 2026-09-09: only remove a new row for Inactive when we
+  // actually verified the identity this run. A skipped identity block
+  // holds the row as draft (below).
+  if (hasIdentity && !f.identity_skipped && !effectiveActive) {
+    changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed', reason: 'entity_inactive' });
+    f.planned_status = 'removed';
+    return;
+  }
+
   if (anySkipped(f)) {
     if (c.status !== 'draft') {
       changes.push({ action: 'field_updated', field: 'status', old_value: c.status, new_value: 'draft', reason: 'skipped_block' });
@@ -800,7 +919,6 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
     return;
   }
 
-  // Full read; decide by score.
   const canPublish = f.score >= cfg.publish_min_score && effectiveActive && cityVerified;
   if (canPublish) {
     changes.push({ action: 'published', field: 'status', old_value: c.status, new_value: 'published' });
@@ -808,15 +926,17 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
     return;
   }
 
-  if (f.score < cfg.remove_below_score) {
-    changes.push({ action: 'removed', field: 'status', old_value: c.status, new_value: 'removed', reason: 'score_below_remove' });
-    f.planned_status = 'removed';
-    return;
-  }
-
-  if (queueOpen) {
+  // Active but under publish_min. queue_open OR 3-strike escalation.
+  const forceQueue = attemptCount >= 3;
+  if (queueOpen || forceQueue) {
     if (c.status !== 'needs_review') {
-      changes.push({ action: 'queued', field: 'status', old_value: c.status, new_value: 'needs_review' });
+      changes.push({
+        action: 'queued',
+        field: 'status',
+        old_value: c.status,
+        new_value: 'needs_review',
+        reason: forceQueue && !queueOpen ? 'three_strike_force' : 'under_publish_min',
+      });
       f.planned_status = 'needs_review';
     } else {
       f.planned_status = null;
@@ -824,27 +944,35 @@ function decideFindings(f: Findings, cfg: Config, queueOpen: boolean): void {
     return;
   }
 
-  // No queue room and score in the middle — retry tomorrow.
-  f.planned_status = null;
-  f.notes.push('decide: new row score in middle band, queue at cap — retry tomorrow');
+  // Draft-hold with +7d.
+  if (c.status !== 'draft') {
+    changes.push({ action: 'field_updated', field: 'status', old_value: c.status, new_value: 'draft', reason: 'under_publish_min' });
+    f.planned_status = 'draft';
+  } else {
+    f.planned_status = null;
+  }
+  f.notes.push(`decide: new row draft-held (attempt ${attemptCount + 1}, queue at cap) — next_research_at=+7d`);
 }
 
 function buildPlannedUpdates(f: Findings, cfg: Config): void {
   const now = new Date().toISOString();
   const tomorrowIso = new Date(Date.now() + 86400_000).toISOString();
+  const sevenDaysIso = new Date(Date.now() + 7 * 86400_000).toISOString();
   const refreshIso = new Date(Date.now() + cfg.refresh_after_days * 86400_000).toISOString();
 
-  // Owner ruling: refresh rows never lose data on a skipped block, so
-  // planned updates never null-overwrite. `next_research_at` uses the
-  // full refresh cadence when the run was clean; when the row is
-  // draft-held (new row with a skipped block) it retries tomorrow.
-  const heldForTomorrow =
-    !f.isRefresh && (anySkipped(f) || f.planned_status === 'draft');
+  // Owner rulings: skipped-block drafts retry tomorrow (fast recovery
+  // when the down dependency comes back). Under-publish-min draft-holds
+  // retry in 7 days per the 2026-09-09 correction. Refresh rows and
+  // freshly-published rows go on the standard cadence.
+  let nextAt = refreshIso;
+  if (!f.isRefresh && f.planned_status === 'draft') {
+    nextAt = anySkipped(f) ? tomorrowIso : sevenDaysIso;
+  }
 
   const u: Record<string, unknown> = {
     confidence_score: f.score,
     last_verified: now,
-    next_research_at: heldForTomorrow ? tomorrowIso : refreshIso,
+    next_research_at: nextAt,
   };
   if (f.planned_status) u.status = f.planned_status;
   if (f.registered_agent) u.registered_agent = f.registered_agent;
@@ -854,6 +982,13 @@ function buildPlannedUpdates(f: Findings, cfg: Config): void {
   if (f.monthly_fee_median != null) u.monthly_fee_median = f.monthly_fee_median;
   if (f.dues_frequency) u.dues_frequency = f.dues_frequency;
   if (f.identity_source) u.identity_source = f.identity_source;
+  // Backfilled identity fields flow through to the row when the
+  // name-match found a single hit.
+  if (!f.isRefresh || (f.identity_source === 'sunbiz-name-match' && f.identity_matched)) {
+    if (f.community.state_entity_number) u.state_entity_number = f.community.state_entity_number;
+    if (f.community.entity_status) u.entity_status = f.community.entity_status;
+    // registered_agent already handled above via f.registered_agent
+  }
   if (f.location_source) u.location_source = f.location_source;
   if (f.management_source) u.management_source = f.management_source;
   if (f.fees_source) u.fees_source = f.fees_source;
@@ -983,7 +1118,7 @@ async function main(): Promise<void> {
         notes: [],
       };
       try {
-        await stepIdentity(f, sunbizFresh.ok);
+        await stepIdentity(f, cfg, sunbizFresh.ok);
         stepLocation(f, cfg);
         if (!f.out_of_market) {
           await stepManagement(f, cfg, prompt, ollamaOk, searxOk);
@@ -991,7 +1126,9 @@ async function main(): Promise<void> {
           await stepUtilities(f, sb);
         }
         scoreFindings(f);
-        decideFindings(f, cfg, queueOpen);
+        // Refresh rows don't use the 3-attempt escalation, but pass 0
+        // so decide() has one signature.
+        decideFindings(f, cfg, queueOpen, 0);
         buildPlannedUpdates(f, cfg);
       } catch (err) {
         f.notes.push(`row error: ${(err as Error).message}`);
@@ -1040,8 +1177,14 @@ async function main(): Promise<void> {
         planned_change_log: [],
         notes: [],
       };
+      // Owner ruling 2026-09-09: after 3 attempts still under
+      // publish_min, force-queue regardless of cap. Track attempts via
+      // change_log entries tagged `source=sunbiz-doc:<doc>` so we can
+      // count them across nights even before the row is inserted.
+      const attemptSource = `sunbiz-doc:${cand.document_number}`;
+      const attempts = await countAttempts(sb, attemptSource);
       try {
-        await stepIdentity(f, sunbizFresh.ok);
+        await stepIdentity(f, cfg, sunbizFresh.ok);
         stepLocation(f, cfg);
         if (!f.out_of_market) {
           await stepManagement(f, cfg, prompt, ollamaOk, searxOk);
@@ -1049,8 +1192,11 @@ async function main(): Promise<void> {
           await stepUtilities(f, sb);
         }
         scoreFindings(f);
-        decideFindings(f, cfg, queueOpen);
+        decideFindings(f, cfg, queueOpen, attempts);
         buildPlannedUpdates(f, cfg);
+        // Always log an 'attempted' change_log row for new picks so
+        // the 3-strike counter advances every night.
+        f.planned_change_log.push({ action: 'attempted', source: attemptSource });
       } catch (err) {
         f.notes.push(`row error: ${(err as Error).message}`);
       }
@@ -1064,14 +1210,35 @@ async function main(): Promise<void> {
 
     // ── report ─────────────────────────────────
     log('PLAN', `=== ${args.dryRun ? 'DRY-RUN' : 'REAL'} plan (${allFindings.length} rows) ===`);
-    for (const f of allFindings) {
+    log(
+      'PLAN',
+      '   idx | kind    | row / doc                                         | score | identity_source     | -> status',
+    );
+    log(
+      'PLAN',
+      '  -----+---------+---------------------------------------------------+-------+---------------------+---------------',
+    );
+    for (let i = 0; i < allFindings.length; i++) {
+      const f = allFindings[i];
       const c = f.community;
-      const line =
-        `  · ${c.slug} [${c.status}] score=${f.score}` +
-        ` breakdown=${JSON.stringify(f.score_breakdown)}` +
-        ` -> status=${f.planned_status ?? '(no change)'}` +
-        ` updates=${Object.keys(f.planned_updates).join(',')}`;
-      log('PLAN', line);
+      const kind = f.isRefresh ? 'refresh' : 'new';
+      const label = c.slug || c.canonical_name || `doc:${c.state_entity_number ?? '(unknown)'}`;
+      const idSrc = f.identity_source ?? '(unset)';
+      const target = f.planned_status ?? '(no change)';
+      log(
+        'PLAN',
+        `  ${String(i + 1).padStart(4)} | ${kind.padEnd(7)} | ${label.slice(0, 49).padEnd(49)} | ${String(f.score).padStart(5)} | ${idSrc.slice(0, 19).padEnd(19)} | ${target}`,
+      );
+    }
+    log('PLAN', '  ---- per-row detail ----');
+    for (let i = 0; i < allFindings.length; i++) {
+      const f = allFindings[i];
+      const c = f.community;
+      const label = c.slug || c.canonical_name || `doc:${c.state_entity_number ?? '(unknown)'}`;
+      log(
+        'PLAN',
+        `  [${i + 1}] ${label} — breakdown=${JSON.stringify(f.score_breakdown)} updates=${Object.keys(f.planned_updates).join(',')}`,
+      );
       for (const n of f.notes) log('PLAN', `      ${n}`);
       for (const cl of f.planned_change_log)
         log('PLAN', `      change_log: ${JSON.stringify(cl)}`);
