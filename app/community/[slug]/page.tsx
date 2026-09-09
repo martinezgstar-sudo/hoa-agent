@@ -24,11 +24,15 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  // CLAUDE.md rule 19: public queries filter status='published'. Rows
+  // with status in {draft, needs_review, removed, duplicate, merged}
+  // must never render metadata for a live URL.
   const { data: community } = await supabase
     .from('communities')
     .select('canonical_name,city,zip_code,monthly_fee_min,monthly_fee_max,monthly_fee_median,management_company,property_type,unit_count')
     .eq('slug', slug)
-    .single()
+    .eq('status', 'published')
+    .maybeSingle()
 
   if (!community) return { title: 'Community Not Found — HOA Agent' }
 
@@ -110,11 +114,16 @@ interface Community {
 }
 
 async function getCommunity(slug: string) {
+  // CLAUDE.md rule 19: public queries filter status='published'. Rows
+  // in draft/needs_review/removed/duplicate/merged 404 instead of
+  // rendering. Uses maybeSingle so a rejected/removed slug returns
+  // null cleanly rather than throwing.
   const { data, error } = await supabase
     .from('communities')
     .select('*, city_verified')
     .eq('slug', slug)
-    .single()
+    .eq('status', 'published')
+    .maybeSingle()
   if (error || !data) return null
   return data as Community
 }
@@ -288,14 +297,17 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   const effectiveParentId = community.master_hoa_id ?? null
   const isSub = !!(community.is_sub_hoa || effectiveParentId)
 
-  // Master HOA data (shown on sub-community pages)
+  // Master HOA data (shown on sub-community pages). Master must also
+  // be published — never link to a removed/draft master from a live
+  // sub-community page (CLAUDE.md rule 19).
   let masterHoa: any = null
   if (isSub && effectiveParentId) {
     const { data } = await supabase
       .from('communities')
       .select('id,canonical_name,slug,monthly_fee_min,monthly_fee_max,city')
       .eq('id', effectiveParentId)
-      .single()
+      .eq('status', 'published')
+      .maybeSingle()
     masterHoa = data
   }
 
