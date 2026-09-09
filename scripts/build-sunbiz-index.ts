@@ -46,6 +46,9 @@
  *   1  LaCie volume not mounted / no cordata files
  */
 
+// node:sqlite is Node 22.5+. TS types trail; the runtime binding works.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error node:sqlite types not yet in @types/node baseline
 import { DatabaseSync } from 'node:sqlite';
 import { createReadStream, existsSync, mkdirSync, readdirSync, statSync, renameSync } from 'node:fs';
 import { createInterface } from 'node:readline';
@@ -59,25 +62,15 @@ const CORDATA_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted
 const OUT_PATH = join(REPO, 'data', 'sunbiz.sqlite');
 const TMP_PATH = OUT_PATH + '.building';
 
-// Same filter set the enrichment loop uses to spot HOA-shaped entities.
-const INCLUDE_TOKENS = [
-  'HOMEOWNERS',
-  'HOA',
-  'PROPERTY OWNERS',
-  'PROPERTY OWNER',
-  'CONDOMINIUM',
-  'CONDO',
-  'COMMUNITY ASSOCIATION',
-  'MASTER',
-  ' POA',
-  ' COA',
-  'ASSOCIATION, INC',
-];
+// Owner ruling 2026-09-09: word-boundary tokens only, and drop the
+// generic COA / POA shorthands that grabbed "COAST*" / "POACHER*" etc.
+// The six approved tokens (word-boundary matched):
+//   ASSOCIATION, HOMEOWNERS, CONDOMINIUM, PROPERTY OWNERS, MASTER, COMMUNITY
+const INCLUDE_PATTERN =
+  /\b(ASSOCIATION|HOMEOWNERS|CONDOMINIUM|PROPERTY\s+OWNERS|MASTER|COMMUNITY)\b/;
 
 function nameMatches(name: string): boolean {
-  const up = name.toUpperCase();
-  for (const t of INCLUDE_TOKENS) if (up.includes(t)) return true;
-  return false;
+  return INCLUDE_PATTERN.test(name.toUpperCase());
 }
 
 function normalizeName(name: string): string {
@@ -111,6 +104,7 @@ interface Parsed {
   filing_date: string | null;
   registered_agent: string | null;
   principal_address: string | null;
+  principal_city: string | null;   // stored separately for the multi-match tie-breaker
   mailing_address: string | null;
 }
 
@@ -158,6 +152,7 @@ function parseLine(line: string): Parsed | null {
     filing_date,
     registered_agent: ra_name,
     principal_address: principal_address || null,
+    principal_city: p_city || null,
     mailing_address,
   };
 }
@@ -203,6 +198,7 @@ async function main(): Promise<void> {
       filing_date       TEXT,
       registered_agent  TEXT,
       principal_address TEXT,
+      principal_city    TEXT,
       mailing_address   TEXT
     );
     CREATE TABLE sunbiz_meta (
@@ -217,8 +213,8 @@ async function main(): Promise<void> {
   const insert = db.prepare(
     `INSERT OR REPLACE INTO sunbiz_pbc_associations
        (document_number, name, normalized_name, status, filing_date,
-        registered_agent, principal_address, mailing_address)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        registered_agent, principal_address, principal_city, mailing_address)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   );
 
   const t0 = Date.now();
@@ -246,6 +242,7 @@ async function main(): Promise<void> {
           rec.filing_date,
           rec.registered_agent,
           rec.principal_address,
+          rec.principal_city,
           rec.mailing_address,
         );
         kept++;
@@ -269,6 +266,7 @@ async function main(): Promise<void> {
 
   db.exec('CREATE INDEX idx_sunbiz_norm_name ON sunbiz_pbc_associations(normalized_name)');
   db.exec('CREATE INDEX idx_sunbiz_status ON sunbiz_pbc_associations(status)');
+  db.exec('CREATE INDEX idx_sunbiz_status_filing ON sunbiz_pbc_associations(status, filing_date DESC)');
 
   db.prepare(
     'INSERT INTO sunbiz_meta (built_at, source_files, source_bytes, rows_kept, rows_scanned) VALUES (?, ?, ?, ?, ?)',

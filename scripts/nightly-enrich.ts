@@ -338,13 +338,14 @@ async function pickNewBatch(
   }
   try {
     const { execFileSync } = await import('node:child_process');
-    // Query the local index for association-like Palm Beach entities
-    // that are not already in communities (by doc number OR normalized
-    // name). We cap generously — the caller trims to `limit`.
+    // Owner ruling 2026-09-09: Active-only, newest filings first. The
+    // old ORDER BY document_number ASC was serving up 1970s-era Inactive
+    // rows that then all removed as entity_inactive.
     const query = `SELECT document_number, name, normalized_name, status, filing_date,
-                          registered_agent, principal_address, mailing_address
+                          registered_agent, principal_address, principal_city, mailing_address
                    FROM sunbiz_pbc_associations
-                   ORDER BY document_number
+                   WHERE status = 'Active'
+                   ORDER BY filing_date DESC NULLS LAST
                    LIMIT ${limit * 4};`;
     const raw = execFileSync(
       'sqlite3',
@@ -375,7 +376,7 @@ async function pickNewBatch(
         filing_date: r.filing_date,
         registered_agent: r.registered_agent,
         principal_address: r.principal_address,
-        city: null,
+        city: r.principal_city ?? null,
         zip: null,
       });
       if (picks.length >= limit) break;
@@ -507,6 +508,7 @@ interface SunbizHit {
   filing_date: string | null;
   registered_agent: string | null;
   principal_address: string | null;
+  principal_city: string | null;
   mailing_address: string | null;
 }
 
@@ -519,11 +521,10 @@ function normalizeForLookup(name: string): string {
     .replace(/\s+/g, ' ');
 }
 
-let SUNBIZ_CACHE: Map<string, SunbizHit[]> | null = null;
-
 async function sunbizLookupByName(
   cfg: Config,
   canonicalName: string,
+  communityCity?: string | null,
 ): Promise<{ ok: boolean; hit?: SunbizHit; reason: string }> {
   if (!canonicalName?.trim()) return { ok: false, reason: 'empty_name' };
   const norm = normalizeForLookup(canonicalName);
@@ -531,21 +532,35 @@ async function sunbizLookupByName(
 
   try {
     const { execFileSync } = await import('node:child_process');
-    // Owner ruling 2026-09-09: match by normalized_name in the local
-    // sunbiz index. Zero or multiple matches -> 'unmatched'.
+    // Strict name-match — no fuzzy fallback (owner ruling 2026-09-09).
+    // On multiple hits, break the tie by principal_city == community.city
+    // (case-insensitive). Still ambiguous → unmatched.
     const query = `SELECT document_number, name, status, filing_date,
-                          registered_agent, principal_address, mailing_address
+                          registered_agent, principal_address, principal_city, mailing_address
                    FROM sunbiz_pbc_associations
                    WHERE normalized_name = '${norm.replace(/'/g, "''")}'
-                   LIMIT 3;`;
+                   LIMIT 20;`;
     const raw = execFileSync(
       'sqlite3',
       [cfg.sunbiz_index_path, '-json', query],
       { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024, timeout: 5000 },
     ).trim();
     const rows = raw ? (JSON.parse(raw) as SunbizHit[]) : [];
-    if (rows.length === 1) return { ok: true, hit: rows[0], reason: 'single_match' };
+
     if (rows.length === 0) return { ok: false, reason: 'unmatched' };
+    if (rows.length === 1) return { ok: true, hit: rows[0], reason: 'single_match' };
+
+    // Multi-hit tie-breaker: pick the one whose principal_city equals
+    // the community city (case-insensitive, whitespace-normalized).
+    const wantCity = (communityCity ?? '').toUpperCase().replace(/\s+/g, ' ').trim();
+    if (wantCity) {
+      const cityHits = rows.filter(
+        (r) => (r.principal_city ?? '').toUpperCase().replace(/\s+/g, ' ').trim() === wantCity,
+      );
+      if (cityHits.length === 1) {
+        return { ok: true, hit: cityHits[0], reason: 'city_tiebreaker' };
+      }
+    }
     return { ok: false, reason: `multiple_matches(${rows.length})` };
   } catch (err) {
     return { ok: false, reason: `probe_error(${(err as Error).message})` };
@@ -592,7 +607,7 @@ async function stepIdentity(f: Findings, cfg: Config, sunbizAvailable: boolean):
   }
 
   // Refresh with null identity OR new row — do the lookup.
-  const result = await sunbizLookupByName(cfg, c.canonical_name);
+  const result = await sunbizLookupByName(cfg, c.canonical_name, c.city);
   if (result.ok && result.hit) {
     const h = result.hit;
     f.identity_source = 'sunbiz-name-match';
@@ -863,14 +878,23 @@ function decideFindings(
   const hasIdentity = !!c.state_entity_number;
 
   if (f.isRefresh) {
-    const dropped = f.score < cfg.publish_min_score;
-    // Grandfather: only trip entity_inactive when we actually know an
-    // identity for this row. Rows without state_entity_number get one
-    // pass of quiet backfill instead of a mass reclassification.
+    // Owner ruling 2026-09-09: score_drop fires only on a real drop
+    // (>= 15 points under the row's previous confidence_score). First
+    // refresh (previous null or 0) sets the baseline and never queues.
+    // Being under publish_min_score alone is not a drop — thin
+    // published rows get richer over the 60-day cycle without human
+    // time.
+    const prev = c.confidence_score ?? 0;
+    const isBaseline = prev === 0;
+    const dropped = !isBaseline && f.score <= prev - 15;
+    // Grandfather still applies: skip entity_inactive when we've never
+    // observed identity for this row.
     const leftActive = hasIdentity && !effectiveActive && !f.identity_skipped;
     if (dropped || leftActive) {
       const reason = leftActive ? 'entity_inactive' : 'score_drop';
-      changes.push({ action: 'queued', field: 'reason', new_value: reason });
+      const detail =
+        reason === 'score_drop' ? `${prev}->${f.score}` : c.entity_status ?? '';
+      changes.push({ action: 'queued', field: 'reason', new_value: `${reason}(${detail})` });
       if (queueOpen) {
         changes.push({
           action: 'field_updated',
@@ -886,6 +910,7 @@ function decideFindings(
       }
       return;
     }
+    if (isBaseline) f.notes.push(`decide: baseline set (prev=null/0, new=${f.score}) — no queue this pass`);
     changes.push({ action: 'refreshed' });
     f.planned_status = null;
     return;
