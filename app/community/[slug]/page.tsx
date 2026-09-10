@@ -218,8 +218,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   addUtility('Water', community.water_provider)
   addUtility('Sewer', community.sewer_provider)
   addUtility('Trash provider', community.trash_provider)
-  addUtility('Trash pickup', community.trash_pickup_days)
-  addUtility('Recycling pickup', community.recycling_pickup_days)
+  // Trash pickup + Recycling pickup rows now live in the Trash pickup
+  // block (Phase 10b, owner ruling) — do not duplicate them here.
   addUtility('Internet', community.internet_providers)
   // Boolean, so it needs a null check rather than a truthiness check: `false`
   // means "verified: no natural gas here", which is information worth showing.
@@ -622,8 +622,12 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
           const hasLookup    = present(community.pickup_lookup_url)
           if (days.length === 0 && !hasAuthority && !hasLookup) return null
 
+          // Owner ruling: 'Verified on {date}' only when at least one day
+          // field is filled AND pickup_verified_at is set. A block that
+          // shows only the lookup URL falls back to the 'Reported to
+          // HOA Agent…' footer — the URL alone is not verification.
           const verifiedAt = community.pickup_verified_at
-          const verifiedLabel = verifiedAt
+          const verifiedLabel = (days.length > 0 && verifiedAt)
             ? `Verified on ${new Date(verifiedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`
             : 'Reported to HOA Agent. Confirm with the association before relying on it.'
 

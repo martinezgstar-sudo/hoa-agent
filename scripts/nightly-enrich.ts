@@ -1364,19 +1364,22 @@ async function runBackfillPickup(
         log('WARN', `backfill update ${raw.slug}: ${upErr.message}`);
         continue;
       }
-      for (const [field, value] of Object.entries(delta)) {
-        const oldValue = (current as Record<string, unknown>)[field] ?? null;
-        const { error: clErr } = await sb.from('change_log').insert({
-          community_id: raw.id,
-          action:       'field_updated',
-          field,
-          old_value:    oldValue == null ? null : String(oldValue),
-          new_value:    value    == null ? null : String(value),
-          source:       src,
-          run_id:       RUN_ID,
-        });
-        if (clErr) log('WARN', `backfill change_log ${raw.slug} ${field}: ${clErr.message}`);
-      }
+      // Owner ruling (backfill-only): one change_log row per
+      // community, not per field. field='pickup', new_value=the
+      // authority name (the durable identity of what was written),
+      // source='swa-directory' (or city-default:<city> once seeded).
+      // Nightly refresh path keeps per-field rows — that write path
+      // is untouched here.
+      const { error: clErr } = await sb.from('change_log').insert({
+        community_id: raw.id,
+        action:       'field_updated',
+        field:        'pickup',
+        old_value:    null,
+        new_value:    next.trash_authority ?? null,
+        source:       src,
+        run_id:       RUN_ID,
+      });
+      if (clErr) log('WARN', `backfill change_log ${raw.slug}: ${clErr.message}`);
     }
 
     log('INFO', `backfill batch: scanned=${summary.scanned} updated=${summary.rows_updated} fields=${summary.fields_written}`);
@@ -1412,6 +1415,7 @@ async function main(): Promise<void> {
       log('INFO', `backfill done: scanned=${bf.scanned} rows_updated=${bf.rows_updated} fields_written=${bf.fields_written} sources=${JSON.stringify(bf.sources)}`);
       await endJobRun(sb, RUN_ID, 'success', {
         mode: 'backfill-pickup',
+        backfill: true,
         dry_run: args.dryRun,
         limit: args.backfillLimit,
         batch_size: args.backfillBatchSize,
