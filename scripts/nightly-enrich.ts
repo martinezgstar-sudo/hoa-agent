@@ -40,6 +40,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
+import { resolvePickup, pickupDelta, type PickupResult } from './lib/pickup-days.ts';
 
 // ────────────────────────── config + CLI ──────────────────────────
 
@@ -100,15 +101,28 @@ interface CliArgs {
   dryRun: boolean;
   newLimit: number | null;
   refreshLimit: number | null;
+  backfillPickup: boolean;
+  backfillLimit: number | null;
+  backfillBatchSize: number;
 }
 
 function parseCli(argv: string[]): CliArgs {
-  const out: CliArgs = { dryRun: false, newLimit: null, refreshLimit: null };
+  const out: CliArgs = {
+    dryRun: false,
+    newLimit: null,
+    refreshLimit: null,
+    backfillPickup: false,
+    backfillLimit: null,
+    backfillBatchSize: 500,
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--dry-run') out.dryRun = true;
     else if (a === '--new') out.newLimit = parseInt(argv[++i], 10);
     else if (a === '--refresh') out.refreshLimit = parseInt(argv[++i], 10);
+    else if (a === '--backfill-pickup') out.backfillPickup = true;
+    else if (a === '--limit') out.backfillLimit = parseInt(argv[++i], 10);
+    else if (a === '--batch-size') out.backfillBatchSize = parseInt(argv[++i], 10);
   }
   return out;
 }
@@ -155,6 +169,16 @@ interface CommunityRow {
   confidence_score: number | null;
   last_verified: string | null;
   next_research_at: string | null;
+  // Pickup — Phase 10b. Read into CommunityRow so stepUtilities can
+  // compute a delta against the current row and only write when the
+  // rule-resolved values differ.
+  trash_pickup_days:     string | null;
+  recycling_pickup_days: string | null;
+  bulk_pickup_days:      string | null;
+  trash_authority:       string | null;
+  pickup_lookup_url:     string | null;
+  pickup_source:         string | null;
+  pickup_verified_at:    string | null;
 }
 
 interface Findings {
@@ -186,6 +210,15 @@ interface Findings {
 
   utilities_mapped?: number; // 0..5
   utility_rows?: { service: string; provider_id: number }[];
+
+  // Pickup — Phase 10b. `pickup_delta` holds the fields that changed
+  // vs the row's current values; only those are written to communities
+  // and get change_log rows. `pickup_verified_at_iso` is set when at
+  // least one pickup field changed OR the row had no prior verify
+  // timestamp — this feeds the community page's footer ("Verified on
+  // {date}" vs "Reported to HOA Agent").
+  pickup_delta?: Partial<PickupResult>;
+  pickup_verified_at_iso?: string;
 
   // scoring
   score: number;
@@ -293,7 +326,7 @@ async function pickRefreshBatch(sb: SupabaseClient, limit: number): Promise<Comm
   const { data, error } = await sb
     .from('communities')
     .select(
-      'id,slug,canonical_name,city,county,state,zip_code,status,state_entity_number,entity_status,registered_agent,city_verified,management_company,monthly_fee_median,confidence_score,last_verified,next_research_at',
+      'id,slug,canonical_name,city,county,state,zip_code,status,state_entity_number,entity_status,registered_agent,city_verified,management_company,monthly_fee_median,confidence_score,last_verified,next_research_at,trash_pickup_days,recycling_pickup_days,bulk_pickup_days,trash_authority,pickup_lookup_url,pickup_source,pickup_verified_at',
     )
     .eq('status', 'published')
     .or(`next_research_at.is.null,next_research_at.lte.${nowIso}`)
@@ -921,6 +954,35 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
   f.utility_rows = rows;
   f.utilities_mapped = rows.length;
   f.notes.push(`utilities: mapped ${rows.length}/5 services`);
+
+  // Phase 10b — pickup resolver. Rule-based, no network, no LLM.
+  const next = resolvePickup(f.community.county, f.community.city);
+  const current: Partial<PickupResult> = {
+    trash_pickup_days:     f.community.trash_pickup_days,
+    recycling_pickup_days: f.community.recycling_pickup_days,
+    bulk_pickup_days:      f.community.bulk_pickup_days,
+    trash_authority:       f.community.trash_authority,
+    pickup_lookup_url:     f.community.pickup_lookup_url,
+    pickup_source:         f.community.pickup_source,
+  };
+  const delta = pickupDelta(next, current);
+  if (Object.keys(delta).length > 0) {
+    f.pickup_delta = delta;
+    f.pickup_verified_at_iso = new Date().toISOString();
+    for (const [field, value] of Object.entries(delta)) {
+      const oldValue = (current as Record<string, unknown>)[field] ?? null;
+      f.planned_change_log.push({
+        action:    'field_updated',
+        field,
+        old_value: oldValue == null ? null : String(oldValue),
+        new_value: value  == null ? null : String(value),
+        source:    next.pickup_source ?? 'pickup-resolver',
+      });
+    }
+    f.notes.push(`pickup: ${Object.keys(delta).length} field(s) changed (source=${next.pickup_source})`);
+  } else {
+    f.notes.push(`pickup: no change`);
+  }
 }
 
 // ────────────────────────── score + decide ──────────────────────────
@@ -1156,6 +1218,10 @@ function buildPlannedUpdates(f: Findings, cfg: Config): void {
   if (f.location_source) u.location_source = f.location_source;
   if (f.management_source) u.management_source = f.management_source;
   if (f.fees_source) u.fees_source = f.fees_source;
+  if (f.pickup_delta && Object.keys(f.pickup_delta).length > 0) {
+    for (const [k, v] of Object.entries(f.pickup_delta)) u[k] = v;
+    u.pickup_verified_at = f.pickup_verified_at_iso ?? now;
+  }
   f.planned_updates = u;
 }
 
@@ -1245,6 +1311,84 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
   }
 }
 
+// ────────────────────────── backfill (Phase 10b) ──────────────────────────
+
+async function runBackfillPickup(
+  sb: SupabaseClient,
+  batchSize: number,
+  limitTotal: number | null,
+  dryRun: boolean,
+): Promise<{ scanned: number; rows_updated: number; fields_written: number; sources: Record<string, number> }> {
+  const summary = { scanned: 0, rows_updated: 0, fields_written: 0, sources: {} as Record<string, number> };
+  let cursor: string | null = null;
+
+  const pickupCols = 'id,slug,county,city,trash_pickup_days,recycling_pickup_days,bulk_pickup_days,trash_authority,pickup_lookup_url,pickup_source,pickup_verified_at';
+
+  while (true) {
+    if (limitTotal != null && summary.scanned >= limitTotal) break;
+    const thisBatch = limitTotal == null
+      ? batchSize
+      : Math.min(batchSize, limitTotal - summary.scanned);
+
+    let q = sb.from('communities').select(pickupCols).eq('status', 'published').order('id', { ascending: true }).limit(thisBatch);
+    if (cursor) q = q.gt('id', cursor);
+    const { data: rows, error } = await q;
+    if (error) throw new Error(`backfill select: ${error.message}`);
+    if (!rows || rows.length === 0) break;
+
+    for (const raw of rows as unknown as Array<Record<string, unknown>>) {
+      summary.scanned += 1;
+      cursor = String(raw.id);
+      const current: Partial<PickupResult> = {
+        trash_pickup_days:     (raw.trash_pickup_days     as string | null) ?? null,
+        recycling_pickup_days: (raw.recycling_pickup_days as string | null) ?? null,
+        bulk_pickup_days:      (raw.bulk_pickup_days      as string | null) ?? null,
+        trash_authority:       (raw.trash_authority       as string | null) ?? null,
+        pickup_lookup_url:     (raw.pickup_lookup_url     as string | null) ?? null,
+        pickup_source:         (raw.pickup_source         as string | null) ?? null,
+      };
+      const next = resolvePickup(raw.county as string | null, raw.city as string | null);
+      const delta = pickupDelta(next, current);
+      if (Object.keys(delta).length === 0) continue;
+
+      const src = next.pickup_source ?? 'pickup-resolver';
+      summary.sources[src] = (summary.sources[src] ?? 0) + 1;
+      summary.rows_updated += 1;
+      summary.fields_written += Object.keys(delta).length;
+
+      if (dryRun) continue;
+
+      const updatePayload: Record<string, unknown> = { ...delta, pickup_verified_at: new Date().toISOString() };
+      const { error: upErr } = await sb.from('communities').update(updatePayload).eq('id', raw.id);
+      if (upErr) {
+        log('WARN', `backfill update ${raw.slug}: ${upErr.message}`);
+        continue;
+      }
+      // Owner ruling (backfill-only): one change_log row per
+      // community, not per field. field='pickup', new_value=the
+      // authority name (the durable identity of what was written),
+      // source='swa-directory' (or city-default:<city> once seeded).
+      // Nightly refresh path keeps per-field rows — that write path
+      // is untouched here.
+      const { error: clErr } = await sb.from('change_log').insert({
+        community_id: raw.id,
+        action:       'field_updated',
+        field:        'pickup',
+        old_value:    null,
+        new_value:    next.trash_authority ?? null,
+        source:       src,
+        run_id:       RUN_ID,
+      });
+      if (clErr) log('WARN', `backfill change_log ${raw.slug}: ${clErr.message}`);
+    }
+
+    log('INFO', `backfill batch: scanned=${summary.scanned} updated=${summary.rows_updated} fields=${summary.fields_written}`);
+    if (rows.length < thisBatch) break;
+  }
+
+  return summary;
+}
+
 // ────────────────────────── main ──────────────────────────
 
 async function main(): Promise<void> {
@@ -1259,6 +1403,34 @@ async function main(): Promise<void> {
   const refreshLimit = args.refreshLimit ?? cfg.refresh_per_night;
 
   const sb = getSupabase();
+
+  // Phase 10b — --backfill-pickup runs the pickup resolver over every
+  // published row (or `--limit N` of them) in batches. Standalone
+  // path; nothing else in the normal nightly flow runs on this call.
+  if (args.backfillPickup) {
+    RUN_ID = await startJobRun(sb, 'nightly-enrich:backfill-pickup', args.dryRun);
+    log('INFO', `run_id=${RUN_ID ?? 'null'} backfill-pickup dry_run=${args.dryRun} limit=${args.backfillLimit ?? 'all'} batch=${args.backfillBatchSize}`);
+    try {
+      const bf = await runBackfillPickup(sb, args.backfillBatchSize, args.backfillLimit, args.dryRun);
+      log('INFO', `backfill done: scanned=${bf.scanned} rows_updated=${bf.rows_updated} fields_written=${bf.fields_written} sources=${JSON.stringify(bf.sources)}`);
+      await endJobRun(sb, RUN_ID, 'success', {
+        mode: 'backfill-pickup',
+        backfill: true,
+        dry_run: args.dryRun,
+        limit: args.backfillLimit,
+        batch_size: args.backfillBatchSize,
+        ...bf,
+        duration_seconds: Math.round((Date.now() - START) / 1000),
+      });
+      return;
+    } catch (err) {
+      const stack = (err as Error).stack ?? String(err);
+      log('ERROR', stack);
+      await endJobRun(sb, RUN_ID, 'failed', { mode: 'backfill-pickup', error: stack.slice(0, 2000) });
+      process.exit(1);
+    }
+  }
+
   RUN_ID = await startJobRun(sb, 'nightly-enrich', args.dryRun);
   log('INFO', `run_id=${RUN_ID ?? 'null'} dry_run=${args.dryRun} new=${newLimit} refresh=${refreshLimit}`);
 
@@ -1387,6 +1559,13 @@ async function main(): Promise<void> {
         confidence_score: null,
         last_verified: null,
         next_research_at: null,
+        trash_pickup_days:     null,
+        recycling_pickup_days: null,
+        bulk_pickup_days:      null,
+        trash_authority:       null,
+        pickup_lookup_url:     null,
+        pickup_source:         null,
+        pickup_verified_at:    null,
       };
       const f: Findings = {
         community: shell,

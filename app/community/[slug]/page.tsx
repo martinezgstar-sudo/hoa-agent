@@ -108,6 +108,12 @@ interface Community {
   is_55_plus?: boolean
   is_gated?: boolean
   is_age_restricted?: boolean
+  // Pickup — Phase 10b. All optional; block hides when every column is null.
+  trash_authority?: string | null
+  bulk_pickup_days?: string | null
+  pickup_lookup_url?: string | null
+  pickup_source?: string | null
+  pickup_verified_at?: string | null
 }
 
 async function getCommunity(slug: string) {
@@ -212,8 +218,8 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   addUtility('Water', community.water_provider)
   addUtility('Sewer', community.sewer_provider)
   addUtility('Trash provider', community.trash_provider)
-  addUtility('Trash pickup', community.trash_pickup_days)
-  addUtility('Recycling pickup', community.recycling_pickup_days)
+  // Trash pickup + Recycling pickup rows now live in the Trash pickup
+  // block (Phase 10b, owner ruling) — do not duplicate them here.
   addUtility('Internet', community.internet_providers)
   // Boolean, so it needs a null check rather than a truthiness check: `false`
   // means "verified: no natural gas here", which is information worth showing.
@@ -594,6 +600,78 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
               <div style={{marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #f0f0f0', fontSize: '11px', color: '#595959', lineHeight: 1.55, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px'}}>
                 <span>Reported to HOA Agent. Confirm with the association before relying on it.</span>
                 <a href="#restrictions-block" style={{color: '#06875e', fontSize: '11px', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap'}}>Report a rule →</a>
+              </div>
+            </div>
+          )
+        })()}
+
+        {/* Pickup block (Phase 10b) — trash / recycling / bulk pickup rows.
+            Rows hide when the column is null; the block hides when every
+            column is null AND there is no lookup URL. When day fields are
+            null but pickup_lookup_url is set, the block renders a single
+            "Check your pickup days" link instead of a schedule. Footer
+            swaps "Verified on {date}" (when pickup_verified_at is set)
+            for "Reported to HOA Agent…" (when it's null). */}
+        {(() => {
+          const days = [
+            { label: 'Trash',     value: community.trash_pickup_days },
+            { label: 'Recycling', value: community.recycling_pickup_days },
+            { label: 'Bulk',      value: community.bulk_pickup_days },
+          ].filter((d) => present(d.value)) as { label: string; value: string }[]
+          const hasAuthority = present(community.trash_authority)
+          const hasLookup    = present(community.pickup_lookup_url)
+          if (days.length === 0 && !hasAuthority && !hasLookup) return null
+
+          // Owner ruling: 'Verified on {date}' only when at least one day
+          // field is filled AND pickup_verified_at is set. A block that
+          // shows only the lookup URL falls back to the 'Reported to
+          // HOA Agent…' footer — the URL alone is not verification.
+          const verifiedAt = community.pickup_verified_at
+          const verifiedLabel = (days.length > 0 && verifiedAt)
+            ? `Verified on ${new Date(verifiedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`
+            : 'Reported to HOA Agent. Confirm with the association before relying on it.'
+
+          return (
+            <div style={{backgroundColor: '#fff', border: '1px solid #e5e5e5', borderRadius: '12px', padding: '20px 24px', marginBottom: '12px'}}>
+              <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Trash pickup</div>
+              {hasAuthority && (
+                <div style={{fontSize: '12px', color: '#595959', marginBottom: '10px'}}>
+                  Authority: <span style={{color: '#1a1a1a'}}>{community.trash_authority}</span>
+                </div>
+              )}
+              {days.length > 0 ? (
+                <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                  {days.map((d) => (
+                    <div key={d.label} style={{display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap'}}>
+                      <span style={{color: '#595959', fontSize: '12px'}}>{d.label}</span>
+                      <span style={{color: '#1a1a1a', fontSize: '13px', textAlign: 'right', maxWidth: '70%'}}>{d.value}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : hasLookup ? (
+                <div>
+                  <a
+                    href={community.pickup_lookup_url ?? '#'}
+                    target="_blank"
+                    rel="nofollow noopener"
+                    style={{color: '#06875e', fontSize: '13px', fontWeight: 500, textDecoration: 'none'}}
+                  >
+                    Check your pickup days →
+                  </a>
+                </div>
+              ) : null}
+              <div style={{marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #f0f0f0', fontSize: '11px', color: '#595959', lineHeight: 1.55, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px'}}>
+                <span>{verifiedLabel}</span>
+                {days.length > 0 && hasLookup && (
+                  <a
+                    href={community.pickup_lookup_url ?? '#'}
+                    target="_blank"
+                    rel="nofollow noopener"
+                    style={{color: '#06875e', fontSize: '11px', fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap'}}
+                  >
+                    Look up your address →
+                  </a>
+                )}
               </div>
             </div>
           )
