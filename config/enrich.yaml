@@ -10,7 +10,7 @@ phase2_counties: [Broward, Miami-Dade]
 ollama_url: http://localhost:11434
 ollama_model: llama3.1:8b
 searxng_url: http://127.0.0.1:8888
-sunbiz_index_path: ~/Projects/hoa-agent/data/sunbiz.sqlite
+sunbiz_index_path: ~/hoaagent/data/sunbiz.sqlite
 imessage_to: "561-567-4114"
 orchestrator_interval_min: 15
 reporter_hour_local: 7

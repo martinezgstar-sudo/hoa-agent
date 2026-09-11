@@ -169,13 +169,45 @@ async function checkSearxngUp(cfg: Config): Promise<CheckResult> {
   }
 }
 
-const CHECKS = [
-  { name: 'nightly_fresh',    fn: (sb: SupabaseClient, cfg: Config) => checkNightlyFresh(sb) },
-  { name: 'site_up',          fn: (_sb: SupabaseClient, _cfg: Config) => checkSiteUp() },
-  { name: 'db_up',            fn: (sb: SupabaseClient, _cfg: Config) => checkDbUp(sb) },
-  { name: 'queue_under_cap',  fn: (sb: SupabaseClient, cfg: Config) => checkQueueUnderCap(sb, cfg) },
-  { name: 'ollama_up',        fn: (_sb: SupabaseClient, cfg: Config) => checkOllamaUp(cfg) },
-  { name: 'searxng_up',       fn: (_sb: SupabaseClient, cfg: Config) => checkSearxngUp(cfg) },
+// Owner ruling 2026-09-11: alert when the latest nightly-enrich run
+// finished with degraded=true. Retry rule does NOT apply — the
+// summary is written once, retrying 60s later would produce the
+// same result. shouldAlert() dedupes on the check name; the run_id
+// is included in the detail so a fresh non-degraded run (which
+// produces ok=true here) resets the latch naturally.
+async function checkNightlyDegraded(sb: SupabaseClient): Promise<CheckResult> {
+  const { data, error } = await sb
+    .from('job_runs')
+    .select('id, summary, finished_at')
+    .eq('job_name', 'nightly-enrich')
+    .not('finished_at', 'is', null)
+    .order('finished_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) return { ok: false, detail: `db error: ${error.message}` };
+  if (!data)  return { ok: true,  detail: 'no nightly-enrich runs on record yet' };
+  let parsed: Record<string, unknown> = {};
+  try { parsed = JSON.parse(String(data.summary ?? '{}')); } catch { /* fall through */ }
+  const degraded = parsed.degraded === true;
+  const reasons  = Array.isArray(parsed.degraded_reasons) ? (parsed.degraded_reasons as unknown[]).join(',') : '';
+  if (degraded) return { ok: false, detail: `run_id=${data.id} degraded reasons=[${reasons}]` };
+  return { ok: true, detail: `run_id=${data.id} clean` };
+}
+
+type CheckDef = {
+  name:    string;
+  fn:      (sb: SupabaseClient, cfg: Config) => Promise<CheckResult>;
+  noRetry?: boolean;
+};
+
+const CHECKS: readonly CheckDef[] = [
+  { name: 'nightly_fresh',    fn: (sb, _cfg) => checkNightlyFresh(sb) },
+  { name: 'nightly_degraded', fn: (sb, _cfg) => checkNightlyDegraded(sb), noRetry: true },
+  { name: 'site_up',          fn: (_sb, _cfg) => checkSiteUp() },
+  { name: 'db_up',            fn: (sb, _cfg) => checkDbUp(sb) },
+  { name: 'queue_under_cap',  fn: (sb, cfg) => checkQueueUnderCap(sb, cfg) },
+  { name: 'ollama_up',        fn: (_sb, cfg) => checkOllamaUp(cfg) },
+  { name: 'searxng_up',       fn: (_sb, cfg) => checkSearxngUp(cfg) },
 ] as const;
 
 // ────────────────────────── alerting ──────────────────────────
@@ -257,7 +289,7 @@ async function maybeRepairNightly(cfg: Config, nightlyFreshOk: boolean): Promise
 async function runCheck(
   sb: SupabaseClient,
   cfg: Config,
-  check: (typeof CHECKS)[number],
+  check: CheckDef,
   allowAlerts: boolean,
 ): Promise<{ ok: boolean; alerted: boolean; retried: boolean; detail: string }> {
   const first = await check.fn(sb, cfg);
@@ -270,6 +302,28 @@ async function runCheck(
       alerted: false,
     });
     return { ok: true, alerted: false, retried: false, detail: first.detail };
+  }
+  // Owner ruling 2026-09-11: some checks (e.g. nightly_degraded) MUST
+  // NOT retry — the underlying signal is a single job_runs summary
+  // that won't change 60s later. Alert directly on the first fail.
+  if (check.noRetry) {
+    const canAlertNoRetry = allowAlerts && (await shouldAlert(sb, check.name));
+    if (canAlertNoRetry) {
+      try {
+        sendIMessage(cfg.imessage_to, `[hoa-agent] ${check.name} FAILED — ${first.detail}`);
+        log('ALERT', `iMessage sent for ${check.name}`);
+      } catch (err) {
+        log('ERROR', `iMessage send failed: ${(err as Error).message}`);
+      }
+    }
+    await sb.from('job_health').insert({
+      check_name: check.name,
+      ok: false,
+      detail: first.detail,
+      retried: false,
+      alerted: canAlertNoRetry,
+    });
+    return { ok: false, alerted: canAlertNoRetry, retried: false, detail: first.detail };
   }
   log('WARN', `${check.name} failed: ${first.detail} — retrying in 60s`);
   await new Promise((r) => setTimeout(r, 60_000));

@@ -54,12 +54,16 @@ import { createReadStream, existsSync, mkdirSync, readdirSync, statSync, renameS
 import { createInterface } from 'node:readline';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { homedir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, '..');
 
 const CORDATA_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted';
-const OUT_PATH = join(REPO, 'data', 'sunbiz.sqlite');
+// Owner ruling 2026-09-11: index lives OUTSIDE both git trees at a
+// stable path so the v3 worktree, the hoa-agent production tree, and
+// the nightly launchd job all see the same file. Was: <repo>/data/sunbiz.sqlite.
+const OUT_PATH = join(homedir(), 'hoaagent', 'data', 'sunbiz.sqlite');
 const TMP_PATH = OUT_PATH + '.building';
 
 // Owner ruling 2026-09-09 (late): three filters, in order.

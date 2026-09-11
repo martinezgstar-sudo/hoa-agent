@@ -351,7 +351,7 @@ interface SunbizCandidate {
 /** Sunbiz index freshness check — owner ruling: index_fresh = built_at within 45 days. */
 async function sunbizIndexFresh(
   cfg: Config,
-): Promise<{ ok: boolean; reason: string; built_at?: string }> {
+): Promise<{ ok: boolean; reason: string; built_at?: string; age_days?: number }> {
   if (!existsSync(cfg.sunbiz_index_path)) {
     return { ok: false, reason: 'index_missing' };
   }
@@ -365,10 +365,110 @@ async function sunbizIndexFresh(
     if (!out) return { ok: false, reason: 'no_built_at' };
     const built = new Date(out);
     const ageDays = (Date.now() - built.getTime()) / 86400_000;
-    if (ageDays > 45) return { ok: false, reason: 'stale_over_45d', built_at: out };
-    return { ok: true, reason: 'fresh', built_at: out };
+    if (ageDays > 45) return { ok: false, reason: 'stale_over_45d', built_at: out, age_days: ageDays };
+    return { ok: true, reason: 'fresh', built_at: out, age_days: ageDays };
   } catch (err) {
     return { ok: false, reason: `probe_error(${(err as Error).message})` };
+  }
+}
+
+// Owner ruling 2026-09-11: at the start of nightly-enrich, if the
+// index is missing or built_at is older than 30 days AND the LaCie
+// cordata path is readable, run the builder inline before the batch.
+// Rebuild threshold (30d) is stricter than the freshness threshold
+// (45d) so we heal the index before the identity step starts refusing.
+// No new launchd job — this is the only self-heal path.
+const REBUILD_AGE_THRESHOLD_DAYS = 30;
+const CORDATA_PROBE_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted';
+
+// Owner ruling 2026-09-11: an owner-authored JSON at
+// data/start_service_urls.json holds candidate start-service URLs for
+// the 21 provider names the auto-probe couldn't safely guess. At
+// nightly start, for every non-empty entry, fetch the URL, keep it
+// only when the final URL after redirects is a 200 on the provider's
+// own domain, and write new_service_url + new_service_verified_at on
+// every utility_providers row with that provider_name. Empty entries
+// are skipped. Never overwrites an existing (already-verified) row.
+async function applyStartServiceUrls(sb: SupabaseClient, repoRoot: string): Promise<{ tried: number; wrote: number; skipped_empty: number; skipped_bad: number }> {
+  const path = resolve(repoRoot, 'data/start_service_urls.json');
+  if (!existsSync(path)) return { tried: 0, wrote: 0, skipped_empty: 0, skipped_bad: 0 };
+  let raw: Record<string, unknown>;
+  try { raw = JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>; }
+  catch { return { tried: 0, wrote: 0, skipped_empty: 0, skipped_bad: 0 }; }
+
+  const stripWww = (h: string) => h.replace(/^www\./i, '').toLowerCase();
+  const sameDomain = (providerUrl: string, finalUrl: string): boolean => {
+    try {
+      const p = stripWww(new URL(providerUrl).hostname);
+      const f = stripWww(new URL(finalUrl).hostname);
+      return f === p || f.endsWith('.' + p);
+    } catch { return false; }
+  };
+
+  let tried = 0, wrote = 0, skipped_empty = 0, skipped_bad = 0;
+  for (const [providerName, val] of Object.entries(raw)) {
+    if (providerName.startsWith('_')) continue;
+    const url = String(val ?? '').trim();
+    if (!url) { skipped_empty += 1; continue; }
+    tried += 1;
+
+    // Need a provider_url to same-domain-check against.
+    const { data: rows, error } = await sb
+      .from('utility_providers')
+      .select('id, provider_url, new_service_url')
+      .eq('provider_name', providerName);
+    if (error || !rows || rows.length === 0) { skipped_bad += 1; continue; }
+    const providerUrl = rows[0].provider_url as string | null;
+    if (!providerUrl) { skipped_bad += 1; continue; }
+
+    let final = url, status = 0;
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { 'user-agent': 'HOA-Agent/nightly (+https://www.hoa-agent.com)' } });
+      clearTimeout(timer);
+      final = res.url; status = res.status;
+    } catch { skipped_bad += 1; continue; }
+    if (status !== 200 || !sameDomain(providerUrl, final)) { skipped_bad += 1; continue; }
+
+    // Update ONLY rows still null — don't overwrite an owner-verified value.
+    const ids = rows.filter((r) => (r.new_service_url as string | null) == null).map((r) => r.id);
+    if (ids.length === 0) continue;
+    const nowIso = new Date().toISOString();
+    const { error: upErr } = await sb
+      .from('utility_providers')
+      .update({ new_service_url: final, new_service_verified_at: nowIso })
+      .in('id', ids);
+    if (upErr) { skipped_bad += 1; continue; }
+    wrote += ids.length;
+  }
+
+  return { tried, wrote, skipped_empty, skipped_bad };
+}
+
+async function attemptIndexRebuild(
+  cfg: Config,
+  fresh: { ok: boolean; reason: string; age_days?: number },
+): Promise<{ rebuilt: boolean; reason: string; duration_seconds?: number }> {
+  const shouldTry = !fresh.ok || (fresh.age_days != null && fresh.age_days > REBUILD_AGE_THRESHOLD_DAYS);
+  if (!shouldTry) return { rebuilt: false, reason: 'not_needed' };
+
+  if (!existsSync(CORDATA_PROBE_DIR)) {
+    return { rebuilt: false, reason: 'lacie_not_readable' };
+  }
+
+  const t0 = Date.now();
+  try {
+    const { execFileSync } = await import('node:child_process');
+    const builderPath = resolve(dirname(fileURLToPath(import.meta.url)), 'build-sunbiz-index.ts');
+    execFileSync('npx', ['tsx', builderPath], {
+      encoding: 'utf8',
+      timeout: 30 * 60_000,   // 30-min ceiling; typical run is ~5-8 min
+      stdio:   ['ignore', 'inherit', 'inherit'],
+    });
+    return { rebuilt: true, reason: 'ok', duration_seconds: Math.round((Date.now() - t0) / 1000) };
+  } catch (err) {
+    return { rebuilt: false, reason: `builder_failed(${(err as Error).message.slice(0, 120)})` };
   }
 }
 
@@ -1480,7 +1580,21 @@ async function main(): Promise<void> {
     // Sunbiz index freshness — owner ruling: index_fresh means built_at
     // within 45 days. Missing or older than 45d = degraded and identity
     // block reports skipped.
-    const sunbizFresh = await sunbizIndexFresh(cfg);
+    let sunbizFresh = await sunbizIndexFresh(cfg);
+
+    // Owner ruling 2026-09-11 — self-heal: if the index is missing or
+    // older than 30 days AND LaCie is readable, rebuild inline before
+    // the batch starts. Not readable => refresh only, degraded as now.
+    const rebuild = await attemptIndexRebuild(cfg, sunbizFresh);
+    summary.index_rebuilt        = rebuild.rebuilt;
+    summary.index_rebuild_reason = rebuild.reason;
+    if (rebuild.rebuilt) {
+      log('INFO', `sunbiz index rebuilt inline (${rebuild.duration_seconds}s)`);
+      sunbizFresh = await sunbizIndexFresh(cfg);
+    } else if (rebuild.reason !== 'not_needed') {
+      log('WARN', `sunbiz index rebuild skipped: ${rebuild.reason}`);
+    }
+
     if (!sunbizFresh.ok) {
       log('WARN', `sunbiz index not fresh: ${sunbizFresh.reason}`);
       (summary.degraded_reasons as string[]).push(`sunbiz_${sunbizFresh.reason}`);
@@ -1488,6 +1602,15 @@ async function main(): Promise<void> {
     } else {
       log('INFO', `sunbiz index fresh: built_at=${sunbizFresh.built_at}`);
     }
+
+    // Owner ruling 2026-09-11: pull owner-authored start-service URLs
+    // from data/start_service_urls.json and write any that verify.
+    const startServiceOutcome = await applyStartServiceUrls(sb, repoRoot);
+    summary.start_service = startServiceOutcome;
+    log(
+      'INFO',
+      `start_service: tried=${startServiceOutcome.tried} wrote=${startServiceOutcome.wrote} empty=${startServiceOutcome.skipped_empty} bad=${startServiceOutcome.skipped_bad}`,
+    );
 
     const refresh = await pickRefreshBatch(sb, refreshLimit);
     log('INFO', `refresh batch: ${refresh.length} rows`);

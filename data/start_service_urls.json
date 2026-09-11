@@ -1,0 +1,25 @@
+{
+  "_comment": "Owner-authored URLs for the 21 utility providers whose start-service page the probe cannot safely guess. Fill in a value and the nightly job will fetch it, verify 200 on the provider's own domain, and write new_service_url on every utility_providers row with that provider_name. Leave empty to skip. Values are validated at nightly start; nothing writes if the URL fails the domain-or-status check.",
+
+  "City of Boca Raton Municipal Services":            "",
+  "City of Boca Raton Utility Services":              "",
+  "City of Boynton Beach Solid Waste":                "",
+  "City of Boynton Beach Utilities":                  "",
+  "City of Delray Beach Sanitation Division":         "",
+  "City of Delray Beach Utilities":                   "",
+  "City of Lake Worth Beach Utilities":               "",
+  "City of Riviera Beach Public Works Sanitation":    "",
+  "City of Riviera Beach Utility Special District":   "",
+  "City of West Palm Beach Public Utilities":         "",
+  "City of West Palm Beach Sanitation":               "",
+  "FCC Environmental Services (Wellington contract)": "",
+  "Florida Power & Light":                            "",
+  "Lake Worth Beach Electric Utility":                "",
+  "Palm Beach County Water Utilities":                "",
+  "Solid Waste Authority of Palm Beach County":       "",
+  "Town of Jupiter Utilities":                        "",
+  "Town of Lantana Water Utilities":                  "",
+  "Village of Palm Springs Utilities":                "",
+  "Village of Tequesta Utilities":                    "",
+  "Village of Wellington Utilities":                  ""
+}
