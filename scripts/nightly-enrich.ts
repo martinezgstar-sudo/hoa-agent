@@ -1513,10 +1513,52 @@ async function runBackfillUtilities(
   const summary = { scanned: 0, rows_updated: 0, mappings_written: 0, distribution: {} as Record<string, number> };
 
   // Owner ruling 2026-09-11: every published in-market row missing
-  // any community_utilities row. Use the same in-market list the
-  // nightly refresh uses.
+  // any community_utilities row. utility_providers has ~45 rows total —
+  // load once, resolve in memory per row (thousands of DB round trips
+  // otherwise). Skip-set of already-mapped community_ids fetched once
+  // up front so we don't COUNT per row either.
   const inMarket = cfg.in_market_counties;
+  const services = ['electric', 'water', 'sewer', 'trash', 'gas'];
 
+  // 1. Load utility_providers into memory (only ~45 rows).
+  const { data: allProviders, error: pErr } = await sb
+    .from('utility_providers')
+    .select('id, county, city, zip, service');
+  if (pErr) throw new Error(`backfill-utilities providers: ${pErr.message}`);
+  const providerByScope: Record<string, number> = {};
+  for (const p of (allProviders ?? []) as Array<{ id: number; county: string; city: string | null; zip: string | null; service: string }>) {
+    // key = county::city::zip::service   ('' for null slots)
+    providerByScope[`${p.county}::${p.city ?? ''}::${p.zip ?? ''}::${p.service}`] = p.id;
+  }
+  const pick = (county: string, city: string | null, zip: string | null, service: string): number | null => {
+    const kZip = `${county}::${city ?? ''}::${zip ?? ''}::${service}`;
+    if (zip && providerByScope[kZip] != null) return providerByScope[kZip];
+    if (city) {
+      const kCity = `${county}::${city}::::${service}`;
+      if (providerByScope[kCity] != null) return providerByScope[kCity];
+    }
+    const kCounty = `${county}::::::${service}`;
+    return providerByScope[kCounty] ?? null;
+  };
+
+  // 2. Load the set of community_ids that already have community_utilities.
+  const alreadyMapped = new Set<string>();
+  {
+    let cursor: string | null = null;
+    while (true) {
+      let q = sb.from('community_utilities').select('community_id').order('community_id', { ascending: true }).limit(1000);
+      if (cursor) q = q.gt('community_id', cursor);
+      const { data, error } = await q;
+      if (error) throw new Error(`backfill-utilities existing scan: ${error.message}`);
+      if (!data || data.length === 0) break;
+      for (const r of data as Array<{ community_id: string }>) alreadyMapped.add(r.community_id);
+      cursor = (data[data.length - 1] as { community_id: string }).community_id;
+      if (data.length < 1000) break;
+    }
+  }
+  log('INFO', `backfill-utilities cache: providers=${allProviders?.length ?? 0} already_mapped=${alreadyMapped.size}`);
+
+  // 3. Walk published in-market rows in id-cursor batches.
   let cursor: string | null = null;
   while (true) {
     if (limitTotal != null && summary.scanned >= limitTotal) break;
@@ -1539,15 +1581,13 @@ async function runBackfillUtilities(
     for (const raw of rows as unknown as Array<{ id: string; slug: string; county: string; city: string | null; zip_code: string | null }>) {
       summary.scanned += 1;
       cursor = raw.id;
+      if (alreadyMapped.has(raw.id)) continue;
 
-      // Skip rows that already have a mapping — we only fill missing.
-      const { count: existing } = await sb
-        .from('community_utilities')
-        .select('community_id', { count: 'exact', head: true })
-        .eq('community_id', raw.id);
-      if ((existing ?? 0) > 0) continue;
-
-      const mappings = await resolveCommunityUtilities(sb, raw.county, raw.city, raw.zip_code);
+      const mappings: { service: string; provider_id: number }[] = [];
+      for (const svc of services) {
+        const providerId = pick(raw.county, raw.city, raw.zip_code, svc);
+        if (providerId != null) mappings.push({ service: svc, provider_id: providerId });
+      }
       const mappedCount = mappings.length;
       const bucketKey = `mapped_${mappedCount}`;
       summary.distribution[bucketKey] = (summary.distribution[bucketKey] ?? 0) + 1;
