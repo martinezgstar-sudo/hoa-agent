@@ -102,6 +102,7 @@ interface CliArgs {
   newLimit: number | null;
   refreshLimit: number | null;
   backfillPickup: boolean;
+  backfillUtilities: boolean;
   backfillLimit: number | null;
   backfillBatchSize: number;
 }
@@ -112,6 +113,7 @@ function parseCli(argv: string[]): CliArgs {
     newLimit: null,
     refreshLimit: null,
     backfillPickup: false,
+    backfillUtilities: false,
     backfillLimit: null,
     backfillBatchSize: 500,
   };
@@ -120,7 +122,8 @@ function parseCli(argv: string[]): CliArgs {
     if (a === '--dry-run') out.dryRun = true;
     else if (a === '--new') out.newLimit = parseInt(argv[++i], 10);
     else if (a === '--refresh') out.refreshLimit = parseInt(argv[++i], 10);
-    else if (a === '--backfill-pickup') out.backfillPickup = true;
+    else if (a === '--backfill-pickup')    out.backfillPickup    = true;
+    else if (a === '--backfill-utilities') out.backfillUtilities = true;
     else if (a === '--limit') out.backfillLimit = parseInt(argv[++i], 10);
     else if (a === '--batch-size') out.backfillBatchSize = parseInt(argv[++i], 10);
   }
@@ -351,7 +354,7 @@ interface SunbizCandidate {
 /** Sunbiz index freshness check — owner ruling: index_fresh = built_at within 45 days. */
 async function sunbizIndexFresh(
   cfg: Config,
-): Promise<{ ok: boolean; reason: string; built_at?: string }> {
+): Promise<{ ok: boolean; reason: string; built_at?: string; age_days?: number }> {
   if (!existsSync(cfg.sunbiz_index_path)) {
     return { ok: false, reason: 'index_missing' };
   }
@@ -365,10 +368,110 @@ async function sunbizIndexFresh(
     if (!out) return { ok: false, reason: 'no_built_at' };
     const built = new Date(out);
     const ageDays = (Date.now() - built.getTime()) / 86400_000;
-    if (ageDays > 45) return { ok: false, reason: 'stale_over_45d', built_at: out };
-    return { ok: true, reason: 'fresh', built_at: out };
+    if (ageDays > 45) return { ok: false, reason: 'stale_over_45d', built_at: out, age_days: ageDays };
+    return { ok: true, reason: 'fresh', built_at: out, age_days: ageDays };
   } catch (err) {
     return { ok: false, reason: `probe_error(${(err as Error).message})` };
+  }
+}
+
+// Owner ruling 2026-09-11: at the start of nightly-enrich, if the
+// index is missing or built_at is older than 30 days AND the LaCie
+// cordata path is readable, run the builder inline before the batch.
+// Rebuild threshold (30d) is stricter than the freshness threshold
+// (45d) so we heal the index before the identity step starts refusing.
+// No new launchd job — this is the only self-heal path.
+const REBUILD_AGE_THRESHOLD_DAYS = 30;
+const CORDATA_PROBE_DIR = '/Volumes/LaCie/FL-Palm Beach County Data /cordata_extracted';
+
+// Owner ruling 2026-09-11: an owner-authored JSON at
+// data/start_service_urls.json holds candidate start-service URLs for
+// the 21 provider names the auto-probe couldn't safely guess. At
+// nightly start, for every non-empty entry, fetch the URL, keep it
+// only when the final URL after redirects is a 200 on the provider's
+// own domain, and write new_service_url + new_service_verified_at on
+// every utility_providers row with that provider_name. Empty entries
+// are skipped. Never overwrites an existing (already-verified) row.
+async function applyStartServiceUrls(sb: SupabaseClient, repoRoot: string): Promise<{ tried: number; wrote: number; skipped_empty: number; skipped_bad: number }> {
+  const path = resolve(repoRoot, 'data/start_service_urls.json');
+  if (!existsSync(path)) return { tried: 0, wrote: 0, skipped_empty: 0, skipped_bad: 0 };
+  let raw: Record<string, unknown>;
+  try { raw = JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>; }
+  catch { return { tried: 0, wrote: 0, skipped_empty: 0, skipped_bad: 0 }; }
+
+  const stripWww = (h: string) => h.replace(/^www\./i, '').toLowerCase();
+  const sameDomain = (providerUrl: string, finalUrl: string): boolean => {
+    try {
+      const p = stripWww(new URL(providerUrl).hostname);
+      const f = stripWww(new URL(finalUrl).hostname);
+      return f === p || f.endsWith('.' + p);
+    } catch { return false; }
+  };
+
+  let tried = 0, wrote = 0, skipped_empty = 0, skipped_bad = 0;
+  for (const [providerName, val] of Object.entries(raw)) {
+    if (providerName.startsWith('_')) continue;
+    const url = String(val ?? '').trim();
+    if (!url) { skipped_empty += 1; continue; }
+    tried += 1;
+
+    // Need a provider_url to same-domain-check against.
+    const { data: rows, error } = await sb
+      .from('utility_providers')
+      .select('id, provider_url, new_service_url')
+      .eq('provider_name', providerName);
+    if (error || !rows || rows.length === 0) { skipped_bad += 1; continue; }
+    const providerUrl = rows[0].provider_url as string | null;
+    if (!providerUrl) { skipped_bad += 1; continue; }
+
+    let final = url, status = 0;
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch(url, { redirect: 'follow', signal: controller.signal, headers: { 'user-agent': 'HOA-Agent/nightly (+https://www.hoa-agent.com)' } });
+      clearTimeout(timer);
+      final = res.url; status = res.status;
+    } catch { skipped_bad += 1; continue; }
+    if (status !== 200 || !sameDomain(providerUrl, final)) { skipped_bad += 1; continue; }
+
+    // Update ONLY rows still null — don't overwrite an owner-verified value.
+    const ids = rows.filter((r) => (r.new_service_url as string | null) == null).map((r) => r.id);
+    if (ids.length === 0) continue;
+    const nowIso = new Date().toISOString();
+    const { error: upErr } = await sb
+      .from('utility_providers')
+      .update({ new_service_url: final, new_service_verified_at: nowIso })
+      .in('id', ids);
+    if (upErr) { skipped_bad += 1; continue; }
+    wrote += ids.length;
+  }
+
+  return { tried, wrote, skipped_empty, skipped_bad };
+}
+
+async function attemptIndexRebuild(
+  cfg: Config,
+  fresh: { ok: boolean; reason: string; age_days?: number },
+): Promise<{ rebuilt: boolean; reason: string; duration_seconds?: number }> {
+  const shouldTry = !fresh.ok || (fresh.age_days != null && fresh.age_days > REBUILD_AGE_THRESHOLD_DAYS);
+  if (!shouldTry) return { rebuilt: false, reason: 'not_needed' };
+
+  if (!existsSync(CORDATA_PROBE_DIR)) {
+    return { rebuilt: false, reason: 'lacie_not_readable' };
+  }
+
+  const t0 = Date.now();
+  try {
+    const { execFileSync } = await import('node:child_process');
+    const builderPath = resolve(dirname(fileURLToPath(import.meta.url)), 'build-sunbiz-index.ts');
+    execFileSync('npx', ['tsx', builderPath], {
+      encoding: 'utf8',
+      timeout: 30 * 60_000,   // 30-min ceiling; typical run is ~5-8 min
+      stdio:   ['ignore', 'inherit', 'inherit'],
+    });
+    return { rebuilt: true, reason: 'ok', duration_seconds: Math.round((Date.now() - t0) / 1000) };
+  } catch (err) {
+    return { rebuilt: false, reason: `builder_failed(${(err as Error).message.slice(0, 120)})` };
   }
 }
 
@@ -908,19 +1011,25 @@ async function stepFees(
   f.notes.push('fees: no extract met certainty+verbatim rule');
 }
 
-async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
-  const city = f.community.city ?? null;
-  const zip = f.community.zip_code ?? null;
+// Resolve utility_providers ids for a community's (county, city, zip).
+// Resolution order per service: exact (city, zip) → city → county default.
+// Extracted so both stepUtilities and the --backfill-utilities path can
+// share the exact same rule.
+async function resolveCommunityUtilities(
+  sb: SupabaseClient,
+  county: string,
+  city: string | null,
+  zip: string | null,
+): Promise<{ service: string; provider_id: number }[]> {
   const services = ['electric', 'water', 'sewer', 'trash', 'gas'];
   const rows: { service: string; provider_id: number }[] = [];
   for (const svc of services) {
-    // resolution order: exact (city,zip) → city → county default
     let pick: { id: number } | null = null;
     if (zip) {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .eq('city', city ?? '')
         .eq('zip', zip)
@@ -931,7 +1040,7 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .eq('city', city)
         .is('zip', null)
@@ -942,7 +1051,7 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .is('city', null)
         .is('zip', null)
@@ -951,6 +1060,11 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
     }
     if (pick) rows.push({ service: svc, provider_id: pick.id });
   }
+  return rows;
+}
+
+async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
+  const rows = await resolveCommunityUtilities(sb, f.community.county, f.community.city ?? null, f.community.zip_code ?? null);
   f.utility_rows = rows;
   f.utilities_mapped = rows.length;
   f.notes.push(`utilities: mapped ${rows.length}/5 services`);
@@ -1389,6 +1503,129 @@ async function runBackfillPickup(
   return summary;
 }
 
+async function runBackfillUtilities(
+  sb: SupabaseClient,
+  cfg: Config,
+  batchSize: number,
+  limitTotal: number | null,
+  dryRun: boolean,
+): Promise<{ scanned: number; rows_updated: number; mappings_written: number; distribution: Record<string, number> }> {
+  const summary = { scanned: 0, rows_updated: 0, mappings_written: 0, distribution: {} as Record<string, number> };
+
+  // Owner ruling 2026-09-11: every published in-market row missing
+  // any community_utilities row. utility_providers has ~45 rows total —
+  // load once, resolve in memory per row (thousands of DB round trips
+  // otherwise). Skip-set of already-mapped community_ids fetched once
+  // up front so we don't COUNT per row either.
+  const inMarket = cfg.in_market_counties;
+  const services = ['electric', 'water', 'sewer', 'trash', 'gas'];
+
+  // 1. Load utility_providers into memory (only ~45 rows).
+  const { data: allProviders, error: pErr } = await sb
+    .from('utility_providers')
+    .select('id, county, city, zip, service');
+  if (pErr) throw new Error(`backfill-utilities providers: ${pErr.message}`);
+  const providerByScope: Record<string, number> = {};
+  for (const p of (allProviders ?? []) as Array<{ id: number; county: string; city: string | null; zip: string | null; service: string }>) {
+    // key = county::city::zip::service   ('' for null slots)
+    providerByScope[`${p.county}::${p.city ?? ''}::${p.zip ?? ''}::${p.service}`] = p.id;
+  }
+  const pick = (county: string, city: string | null, zip: string | null, service: string): number | null => {
+    const kZip = `${county}::${city ?? ''}::${zip ?? ''}::${service}`;
+    if (zip && providerByScope[kZip] != null) return providerByScope[kZip];
+    if (city) {
+      const kCity = `${county}::${city}::::${service}`;
+      if (providerByScope[kCity] != null) return providerByScope[kCity];
+    }
+    const kCounty = `${county}::::::${service}`;
+    return providerByScope[kCounty] ?? null;
+  };
+
+  // 2. Load the set of community_ids that already have community_utilities.
+  const alreadyMapped = new Set<string>();
+  {
+    let cursor: string | null = null;
+    while (true) {
+      let q = sb.from('community_utilities').select('community_id').order('community_id', { ascending: true }).limit(1000);
+      if (cursor) q = q.gt('community_id', cursor);
+      const { data, error } = await q;
+      if (error) throw new Error(`backfill-utilities existing scan: ${error.message}`);
+      if (!data || data.length === 0) break;
+      for (const r of data as Array<{ community_id: string }>) alreadyMapped.add(r.community_id);
+      cursor = (data[data.length - 1] as { community_id: string }).community_id;
+      if (data.length < 1000) break;
+    }
+  }
+  log('INFO', `backfill-utilities cache: providers=${allProviders?.length ?? 0} already_mapped=${alreadyMapped.size}`);
+
+  // 3. Walk published in-market rows in id-cursor batches.
+  let cursor: string | null = null;
+  while (true) {
+    if (limitTotal != null && summary.scanned >= limitTotal) break;
+    const thisBatch = limitTotal == null
+      ? batchSize
+      : Math.min(batchSize, limitTotal - summary.scanned);
+
+    let q = sb
+      .from('communities')
+      .select('id, slug, county, city, zip_code')
+      .eq('status', 'published')
+      .in('county', inMarket)
+      .order('id', { ascending: true })
+      .limit(thisBatch);
+    if (cursor) q = q.gt('id', cursor);
+    const { data: rows, error } = await q;
+    if (error) throw new Error(`backfill-utilities select: ${error.message}`);
+    if (!rows || rows.length === 0) break;
+
+    for (const raw of rows as unknown as Array<{ id: string; slug: string; county: string; city: string | null; zip_code: string | null }>) {
+      summary.scanned += 1;
+      cursor = raw.id;
+      if (alreadyMapped.has(raw.id)) continue;
+
+      const mappings: { service: string; provider_id: number }[] = [];
+      for (const svc of services) {
+        const providerId = pick(raw.county, raw.city, raw.zip_code, svc);
+        if (providerId != null) mappings.push({ service: svc, provider_id: providerId });
+      }
+      const mappedCount = mappings.length;
+      const bucketKey = `mapped_${mappedCount}`;
+      summary.distribution[bucketKey] = (summary.distribution[bucketKey] ?? 0) + 1;
+
+      if (dryRun) continue;
+
+      if (mappings.length > 0) {
+        const nowIso = new Date().toISOString();
+        const payload = mappings.map((m) => ({ community_id: raw.id, service: m.service, provider_id: m.provider_id, verified_at: nowIso }));
+        const { error: upErr } = await sb
+          .from('community_utilities')
+          .upsert(payload, { onConflict: 'community_id,service' });
+        if (upErr) { log('WARN', `backfill-utilities upsert ${raw.slug}: ${upErr.message}`); continue; }
+        summary.mappings_written += mappings.length;
+      }
+      summary.rows_updated += 1;
+
+      // Owner-ruling change_log shape: one row per community,
+      // field='utilities', new_value=<count>, source='utility-directory'.
+      const { error: clErr } = await sb.from('change_log').insert({
+        community_id: raw.id,
+        action:       'field_updated',
+        field:        'utilities',
+        old_value:    null,
+        new_value:    String(mappedCount),
+        source:       'utility-directory',
+        run_id:       RUN_ID,
+      });
+      if (clErr) log('WARN', `backfill-utilities change_log ${raw.slug}: ${clErr.message}`);
+    }
+
+    log('INFO', `backfill-utilities batch: scanned=${summary.scanned} updated=${summary.rows_updated} mappings=${summary.mappings_written}`);
+    if (rows.length < thisBatch) break;
+  }
+
+  return summary;
+}
+
 // ────────────────────────── main ──────────────────────────
 
 async function main(): Promise<void> {
@@ -1403,6 +1640,33 @@ async function main(): Promise<void> {
   const refreshLimit = args.refreshLimit ?? cfg.refresh_per_night;
 
   const sb = getSupabase();
+
+  // Phase 10c — --backfill-utilities runs stepUtilities' resolver over
+  // every published in-market row missing community_utilities rows.
+  // Standalone; nothing else in the normal nightly flow runs on this call.
+  if (args.backfillUtilities) {
+    RUN_ID = await startJobRun(sb, 'nightly-enrich:backfill-utilities', args.dryRun);
+    log('INFO', `run_id=${RUN_ID ?? 'null'} backfill-utilities dry_run=${args.dryRun} limit=${args.backfillLimit ?? 'all'} batch=${args.backfillBatchSize}`);
+    try {
+      const bf = await runBackfillUtilities(sb, cfg, args.backfillBatchSize, args.backfillLimit, args.dryRun);
+      log('INFO', `backfill-utilities done: scanned=${bf.scanned} rows_updated=${bf.rows_updated} mappings=${bf.mappings_written} dist=${JSON.stringify(bf.distribution)}`);
+      await endJobRun(sb, RUN_ID, 'success', {
+        mode: 'backfill-utilities',
+        backfill: true,
+        dry_run: args.dryRun,
+        limit: args.backfillLimit,
+        batch_size: args.backfillBatchSize,
+        ...bf,
+        duration_seconds: Math.round((Date.now() - START) / 1000),
+      });
+      return;
+    } catch (err) {
+      const stack = (err as Error).stack ?? String(err);
+      log('ERROR', stack);
+      await endJobRun(sb, RUN_ID, 'failed', { mode: 'backfill-utilities', error: stack.slice(0, 2000) });
+      process.exit(1);
+    }
+  }
 
   // Phase 10b — --backfill-pickup runs the pickup resolver over every
   // published row (or `--limit N` of them) in batches. Standalone
@@ -1480,7 +1744,21 @@ async function main(): Promise<void> {
     // Sunbiz index freshness — owner ruling: index_fresh means built_at
     // within 45 days. Missing or older than 45d = degraded and identity
     // block reports skipped.
-    const sunbizFresh = await sunbizIndexFresh(cfg);
+    let sunbizFresh = await sunbizIndexFresh(cfg);
+
+    // Owner ruling 2026-09-11 — self-heal: if the index is missing or
+    // older than 30 days AND LaCie is readable, rebuild inline before
+    // the batch starts. Not readable => refresh only, degraded as now.
+    const rebuild = await attemptIndexRebuild(cfg, sunbizFresh);
+    summary.index_rebuilt        = rebuild.rebuilt;
+    summary.index_rebuild_reason = rebuild.reason;
+    if (rebuild.rebuilt) {
+      log('INFO', `sunbiz index rebuilt inline (${rebuild.duration_seconds}s)`);
+      sunbizFresh = await sunbizIndexFresh(cfg);
+    } else if (rebuild.reason !== 'not_needed') {
+      log('WARN', `sunbiz index rebuild skipped: ${rebuild.reason}`);
+    }
+
     if (!sunbizFresh.ok) {
       log('WARN', `sunbiz index not fresh: ${sunbizFresh.reason}`);
       (summary.degraded_reasons as string[]).push(`sunbiz_${sunbizFresh.reason}`);
@@ -1488,6 +1766,15 @@ async function main(): Promise<void> {
     } else {
       log('INFO', `sunbiz index fresh: built_at=${sunbizFresh.built_at}`);
     }
+
+    // Owner ruling 2026-09-11: pull owner-authored start-service URLs
+    // from data/start_service_urls.json and write any that verify.
+    const startServiceOutcome = await applyStartServiceUrls(sb, repoRoot);
+    summary.start_service = startServiceOutcome;
+    log(
+      'INFO',
+      `start_service: tried=${startServiceOutcome.tried} wrote=${startServiceOutcome.wrote} empty=${startServiceOutcome.skipped_empty} bad=${startServiceOutcome.skipped_bad}`,
+    );
 
     const refresh = await pickRefreshBatch(sb, refreshLimit);
     log('INFO', `refresh batch: ${refresh.length} rows`);

@@ -210,21 +210,48 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
     }
   }
 
-  const utilityRows: { label: string; value: string }[] = []
-  const addUtility = (label: string, value: unknown) => {
-    if (present(value)) utilityRows.push({ label, value: value.trim() })
+  // Phase 10c — Start-service links per utility row. For each service
+  // we prefer the v3-populated (community_utilities → utility_providers)
+  // mapping: it carries the provider_name AND the URL. When that's
+  // absent, fall back to the old-pipeline text columns on communities
+  // for the provider name (with no link).
+  const cuByService: Record<string, { provider_name: string | null; new_service_url: string | null; provider_url: string | null }> = {}
+  {
+    const { data: cuRows } = await supabase
+      .from('community_utilities')
+      .select('service, utility_providers!inner(provider_name, new_service_url, provider_url)')
+      .eq('community_id', community.id)
+    for (const r of (cuRows ?? []) as Array<{ service: string; utility_providers: { provider_name: string | null; new_service_url: string | null; provider_url: string | null } | { provider_name: string | null; new_service_url: string | null; provider_url: string | null }[] }>) {
+      const up = Array.isArray(r.utility_providers) ? r.utility_providers[0] : r.utility_providers
+      if (up) cuByService[r.service] = up
+    }
   }
-  addUtility('Electric', community.electric_provider)
-  addUtility('Water', community.water_provider)
-  addUtility('Sewer', community.sewer_provider)
-  addUtility('Trash provider', community.trash_provider)
+
+  const utilityRows: { label: string; value: string; service?: string; link?: string | null }[] = []
+  const addUtility = (label: string, service: string, oldText: unknown) => {
+    const cu = cuByService[service]
+    const value = cu?.provider_name ?? (present(oldText) ? oldText.trim() : null)
+    if (!value) return
+    const link = cu ? (cu.new_service_url || cu.provider_url) : null
+    utilityRows.push({ label, value, service, link })
+  }
+  addUtility('Electric',        'electric', community.electric_provider)
+  addUtility('Water',           'water',    community.water_provider)
+  addUtility('Sewer',           'sewer',    community.sewer_provider)
+  addUtility('Trash provider',  'trash',    community.trash_provider)
   // Trash pickup + Recycling pickup rows now live in the Trash pickup
   // block (Phase 10b, owner ruling) — do not duplicate them here.
-  addUtility('Internet', community.internet_providers)
+  addUtility('Internet',        'internet', community.internet_providers)
   // Boolean, so it needs a null check rather than a truthiness check: `false`
   // means "verified: no natural gas here", which is information worth showing.
   if (community.natural_gas_available !== null && community.natural_gas_available !== undefined) {
-    utilityRows.push({ label: 'Natural gas', value: community.natural_gas_available ? 'Available' : 'Not available' })
+    const cu = cuByService.gas
+    utilityRows.push({
+      label: 'Natural gas',
+      value: community.natural_gas_available ? 'Available' : 'Not available',
+      service: community.natural_gas_available ? 'gas' : undefined,
+      link:  community.natural_gas_available ? (cu?.new_service_url || cu?.provider_url || null) : null,
+    })
   }
 
   // Sponsored ads — fetch advertisers targeting this community's city.
@@ -758,9 +785,21 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
             <div style={{fontSize: '15px', fontWeight: '500', color: '#1a1a1a', marginBottom: '12px'}}>Utilities &amp; services</div>
             <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
               {utilityRows.map((row) => (
-                <div key={row.label} style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap'}}>
+                <div key={row.label} style={{display:'flex',justifyContent:'space-between',gap:'12px',flexWrap:'wrap',alignItems:'center'}}>
                   <span style={{color:'#595959',fontSize:'12px'}}>{row.label}</span>
-                  <span style={{color:'#1a1a1a',fontSize:'13px',textAlign:'right',maxWidth:'60%'}}>{row.value}</span>
+                  <span style={{display:'flex',alignItems:'center',gap:'12px',textAlign:'right',maxWidth:'70%',flexWrap:'wrap',justifyContent:'flex-end'}}>
+                    <span style={{color:'#1a1a1a',fontSize:'13px'}}>{row.value}</span>
+                    {row.link && (
+                      <a
+                        href={row.link}
+                        target="_blank"
+                        rel="nofollow noopener"
+                        style={{color:'#06875e',fontSize:'11px',fontWeight:500,textDecoration:'none',whiteSpace:'nowrap'}}
+                      >
+                        Start service →
+                      </a>
+                    )}
+                  </span>
                 </div>
               ))}
             </div>
