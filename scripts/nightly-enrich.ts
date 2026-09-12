@@ -102,6 +102,7 @@ interface CliArgs {
   newLimit: number | null;
   refreshLimit: number | null;
   backfillPickup: boolean;
+  backfillUtilities: boolean;
   backfillLimit: number | null;
   backfillBatchSize: number;
 }
@@ -112,6 +113,7 @@ function parseCli(argv: string[]): CliArgs {
     newLimit: null,
     refreshLimit: null,
     backfillPickup: false,
+    backfillUtilities: false,
     backfillLimit: null,
     backfillBatchSize: 500,
   };
@@ -120,7 +122,8 @@ function parseCli(argv: string[]): CliArgs {
     if (a === '--dry-run') out.dryRun = true;
     else if (a === '--new') out.newLimit = parseInt(argv[++i], 10);
     else if (a === '--refresh') out.refreshLimit = parseInt(argv[++i], 10);
-    else if (a === '--backfill-pickup') out.backfillPickup = true;
+    else if (a === '--backfill-pickup')    out.backfillPickup    = true;
+    else if (a === '--backfill-utilities') out.backfillUtilities = true;
     else if (a === '--limit') out.backfillLimit = parseInt(argv[++i], 10);
     else if (a === '--batch-size') out.backfillBatchSize = parseInt(argv[++i], 10);
   }
@@ -1008,19 +1011,25 @@ async function stepFees(
   f.notes.push('fees: no extract met certainty+verbatim rule');
 }
 
-async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
-  const city = f.community.city ?? null;
-  const zip = f.community.zip_code ?? null;
+// Resolve utility_providers ids for a community's (county, city, zip).
+// Resolution order per service: exact (city, zip) → city → county default.
+// Extracted so both stepUtilities and the --backfill-utilities path can
+// share the exact same rule.
+async function resolveCommunityUtilities(
+  sb: SupabaseClient,
+  county: string,
+  city: string | null,
+  zip: string | null,
+): Promise<{ service: string; provider_id: number }[]> {
   const services = ['electric', 'water', 'sewer', 'trash', 'gas'];
   const rows: { service: string; provider_id: number }[] = [];
   for (const svc of services) {
-    // resolution order: exact (city,zip) → city → county default
     let pick: { id: number } | null = null;
     if (zip) {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .eq('city', city ?? '')
         .eq('zip', zip)
@@ -1031,7 +1040,7 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .eq('city', city)
         .is('zip', null)
@@ -1042,7 +1051,7 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
       const { data } = await sb
         .from('utility_providers')
         .select('id')
-        .eq('county', f.community.county)
+        .eq('county', county)
         .eq('service', svc)
         .is('city', null)
         .is('zip', null)
@@ -1051,6 +1060,11 @@ async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
     }
     if (pick) rows.push({ service: svc, provider_id: pick.id });
   }
+  return rows;
+}
+
+async function stepUtilities(f: Findings, sb: SupabaseClient): Promise<void> {
+  const rows = await resolveCommunityUtilities(sb, f.community.county, f.community.city ?? null, f.community.zip_code ?? null);
   f.utility_rows = rows;
   f.utilities_mapped = rows.length;
   f.notes.push(`utilities: mapped ${rows.length}/5 services`);
@@ -1489,6 +1503,89 @@ async function runBackfillPickup(
   return summary;
 }
 
+async function runBackfillUtilities(
+  sb: SupabaseClient,
+  cfg: Config,
+  batchSize: number,
+  limitTotal: number | null,
+  dryRun: boolean,
+): Promise<{ scanned: number; rows_updated: number; mappings_written: number; distribution: Record<string, number> }> {
+  const summary = { scanned: 0, rows_updated: 0, mappings_written: 0, distribution: {} as Record<string, number> };
+
+  // Owner ruling 2026-09-11: every published in-market row missing
+  // any community_utilities row. Use the same in-market list the
+  // nightly refresh uses.
+  const inMarket = cfg.in_market_counties;
+
+  let cursor: string | null = null;
+  while (true) {
+    if (limitTotal != null && summary.scanned >= limitTotal) break;
+    const thisBatch = limitTotal == null
+      ? batchSize
+      : Math.min(batchSize, limitTotal - summary.scanned);
+
+    let q = sb
+      .from('communities')
+      .select('id, slug, county, city, zip_code')
+      .eq('status', 'published')
+      .in('county', inMarket)
+      .order('id', { ascending: true })
+      .limit(thisBatch);
+    if (cursor) q = q.gt('id', cursor);
+    const { data: rows, error } = await q;
+    if (error) throw new Error(`backfill-utilities select: ${error.message}`);
+    if (!rows || rows.length === 0) break;
+
+    for (const raw of rows as unknown as Array<{ id: string; slug: string; county: string; city: string | null; zip_code: string | null }>) {
+      summary.scanned += 1;
+      cursor = raw.id;
+
+      // Skip rows that already have a mapping — we only fill missing.
+      const { count: existing } = await sb
+        .from('community_utilities')
+        .select('community_id', { count: 'exact', head: true })
+        .eq('community_id', raw.id);
+      if ((existing ?? 0) > 0) continue;
+
+      const mappings = await resolveCommunityUtilities(sb, raw.county, raw.city, raw.zip_code);
+      const mappedCount = mappings.length;
+      const bucketKey = `mapped_${mappedCount}`;
+      summary.distribution[bucketKey] = (summary.distribution[bucketKey] ?? 0) + 1;
+
+      if (dryRun) continue;
+
+      if (mappings.length > 0) {
+        const nowIso = new Date().toISOString();
+        const payload = mappings.map((m) => ({ community_id: raw.id, service: m.service, provider_id: m.provider_id, verified_at: nowIso }));
+        const { error: upErr } = await sb
+          .from('community_utilities')
+          .upsert(payload, { onConflict: 'community_id,service' });
+        if (upErr) { log('WARN', `backfill-utilities upsert ${raw.slug}: ${upErr.message}`); continue; }
+        summary.mappings_written += mappings.length;
+      }
+      summary.rows_updated += 1;
+
+      // Owner-ruling change_log shape: one row per community,
+      // field='utilities', new_value=<count>, source='utility-directory'.
+      const { error: clErr } = await sb.from('change_log').insert({
+        community_id: raw.id,
+        action:       'field_updated',
+        field:        'utilities',
+        old_value:    null,
+        new_value:    String(mappedCount),
+        source:       'utility-directory',
+        run_id:       RUN_ID,
+      });
+      if (clErr) log('WARN', `backfill-utilities change_log ${raw.slug}: ${clErr.message}`);
+    }
+
+    log('INFO', `backfill-utilities batch: scanned=${summary.scanned} updated=${summary.rows_updated} mappings=${summary.mappings_written}`);
+    if (rows.length < thisBatch) break;
+  }
+
+  return summary;
+}
+
 // ────────────────────────── main ──────────────────────────
 
 async function main(): Promise<void> {
@@ -1503,6 +1600,33 @@ async function main(): Promise<void> {
   const refreshLimit = args.refreshLimit ?? cfg.refresh_per_night;
 
   const sb = getSupabase();
+
+  // Phase 10c — --backfill-utilities runs stepUtilities' resolver over
+  // every published in-market row missing community_utilities rows.
+  // Standalone; nothing else in the normal nightly flow runs on this call.
+  if (args.backfillUtilities) {
+    RUN_ID = await startJobRun(sb, 'nightly-enrich:backfill-utilities', args.dryRun);
+    log('INFO', `run_id=${RUN_ID ?? 'null'} backfill-utilities dry_run=${args.dryRun} limit=${args.backfillLimit ?? 'all'} batch=${args.backfillBatchSize}`);
+    try {
+      const bf = await runBackfillUtilities(sb, cfg, args.backfillBatchSize, args.backfillLimit, args.dryRun);
+      log('INFO', `backfill-utilities done: scanned=${bf.scanned} rows_updated=${bf.rows_updated} mappings=${bf.mappings_written} dist=${JSON.stringify(bf.distribution)}`);
+      await endJobRun(sb, RUN_ID, 'success', {
+        mode: 'backfill-utilities',
+        backfill: true,
+        dry_run: args.dryRun,
+        limit: args.backfillLimit,
+        batch_size: args.backfillBatchSize,
+        ...bf,
+        duration_seconds: Math.round((Date.now() - START) / 1000),
+      });
+      return;
+    } catch (err) {
+      const stack = (err as Error).stack ?? String(err);
+      log('ERROR', stack);
+      await endJobRun(sb, RUN_ID, 'failed', { mode: 'backfill-utilities', error: stack.slice(0, 2000) });
+      process.exit(1);
+    }
+  }
 
   // Phase 10b — --backfill-pickup runs the pickup resolver over every
   // published row (or `--limit N` of them) in batches. Standalone
