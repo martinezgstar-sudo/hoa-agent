@@ -132,19 +132,36 @@ async function countChangeLog(
 }
 
 async function topFailingStep(sb: SupabaseClient, startIso: string): Promise<string | null> {
-  // "Top failing step" == the check_name that produced the most
-  // ok=false job_health rows in the window. Ties broken by most recent.
+  // "Top failing step" == the check whose CURRENT state (its most
+  // recent job_health row) is ok=false. Historical fails from earlier
+  // in the window that have since recovered do not count — otherwise
+  // the report kept saying nightly_degraded (48) after run 5818 had
+  // already cleared the latch (owner ruling 2026-09-12). Ties broken
+  // by the check with the oldest continuous fail (most persistent).
   const { data } = await sb
     .from('job_health')
     .select('check_name, ok, checked_at')
     .gte('checked_at', startIso)
-    .eq('ok', false);
+    .order('checked_at', { ascending: false });
   if (!data || data.length === 0) return null;
-  const counts = new Map<string, number>();
-  for (const r of data) counts.set(r.check_name, (counts.get(r.check_name) ?? 0) + 1);
+
+  // Walk rows newest→oldest, capturing the current state per check.
+  const currentState = new Map<string, boolean>();
+  for (const r of data) {
+    if (!currentState.has(r.check_name)) currentState.set(r.check_name, r.ok);
+  }
+
+  // Count consecutive fails per currently-failing check.
+  const runLength = new Map<string, number>();
+  for (const r of data) {
+    if (currentState.get(r.check_name) !== false) continue;      // check is currently passing
+    if (r.ok) continue;                                           // a pass in the failing run — stop
+    runLength.set(r.check_name, (runLength.get(r.check_name) ?? 0) + 1);
+  }
+
   let best: string | null = null;
   let bestN = 0;
-  for (const [k, n] of counts) {
+  for (const [k, n] of runLength) {
     if (n > bestN) { best = k; bestN = n; }
   }
   return best ? `${best} (${bestN})` : null;

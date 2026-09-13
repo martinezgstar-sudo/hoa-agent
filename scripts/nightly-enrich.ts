@@ -168,7 +168,10 @@ interface CommunityRow {
   registered_agent: string | null;
   city_verified: boolean | null;
   management_company: string | null;
+  management_phone:   string | null;
+  management_website: string | null;
   monthly_fee_median: number | null;
+  dues_frequency:     string | null;
   confidence_score: number | null;
   last_verified: string | null;
   next_research_at: string | null;
@@ -329,7 +332,7 @@ async function pickRefreshBatch(sb: SupabaseClient, limit: number): Promise<Comm
   const { data, error } = await sb
     .from('communities')
     .select(
-      'id,slug,canonical_name,city,county,state,zip_code,status,state_entity_number,entity_status,registered_agent,city_verified,management_company,monthly_fee_median,confidence_score,last_verified,next_research_at,trash_pickup_days,recycling_pickup_days,bulk_pickup_days,trash_authority,pickup_lookup_url,pickup_source,pickup_verified_at',
+      'id,slug,canonical_name,city,county,state,zip_code,status,state_entity_number,entity_status,registered_agent,city_verified,management_company,management_phone,management_website,monthly_fee_median,dues_frequency,confidence_score,last_verified,next_research_at,trash_pickup_days,recycling_pickup_days,bulk_pickup_days,trash_authority,pickup_lookup_url,pickup_source,pickup_verified_at',
     )
     .eq('status', 'published')
     .or(`next_research_at.is.null,next_research_at.lte.${nowIso}`)
@@ -1390,6 +1393,37 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
     f.community.id = id;
     f.community.slug = data.slug as string;
   } else {
+    // Owner ruling 2026-09-12 (Phase 5 fix): refresh path must emit
+    // change_log 'field_updated' rows for the five value fields the
+    // reporter counts (management_company, management_phone,
+    // management_website, monthly_fee_median, dues_frequency) whenever
+    // the planned value actually differs from the current row.
+    // change_log rows are prepended to planned_change_log so the
+    // existing insert loop below writes them.
+    const trackedFields: Array<keyof CommunityRow> = [
+      'management_company',
+      'management_phone',
+      'management_website',
+      'monthly_fee_median',
+      'dues_frequency',
+    ];
+    const diffs: Findings['planned_change_log'] = [];
+    const u = f.planned_updates as Record<string, unknown>;
+    for (const field of trackedFields) {
+      if (!(field in u)) continue;                       // not planned this run
+      const oldVal = (f.community as Record<string, unknown>)[field] ?? null;
+      const newVal = u[field] ?? null;
+      if (String(oldVal ?? '') === String(newVal ?? '')) continue;
+      diffs.push({
+        action:    'field_updated',
+        field,
+        old_value: oldVal == null ? null : String(oldVal),
+        new_value: newVal == null ? null : String(newVal),
+        source:    'nightly-enrich',
+      });
+    }
+    if (diffs.length) f.planned_change_log.unshift(...diffs);
+
     const { error } = await sb.from('communities').update(f.planned_updates).eq('id', id);
     if (error) throw new Error(`update communities ${id}: ${error.message}`);
   }
@@ -1411,14 +1445,37 @@ async function applyWrites(sb: SupabaseClient, f: Findings): Promise<void> {
     if (clErr) log('WARN', `change_log insert failed (${c.action}): ${clErr.message}`);
   }
   if (f.utility_rows && f.utility_rows.length) {
+    // Owner ruling 2026-09-12 (Phase 5 fix): emit change_log
+    // field_updated rows for community_utilities on real changes.
+    // Read the existing mappings once, then diff by service:
+    //   old_value = existing provider_id (or null if not mapped)
+    //   new_value = planned provider_id
+    // One row per changed service; unchanged services stay silent.
+    const { data: existing } = await sb
+      .from('community_utilities')
+      .select('service, provider_id')
+      .eq('community_id', id);
+    const currentByService: Record<string, number> = {};
+    for (const r of (existing ?? []) as Array<{ service: string; provider_id: number }>) {
+      currentByService[r.service] = r.provider_id;
+    }
+    const now = new Date().toISOString();
     for (const u of f.utility_rows) {
-      await sb.from('community_utilities').upsert(
-        {
+      const cur = currentByService[u.service] ?? null;
+      if (cur !== u.provider_id) {
+        const { error: clErr } = await sb.from('change_log').insert({
           community_id: id,
-          service: u.service,
-          provider_id: u.provider_id,
-          verified_at: new Date().toISOString(),
-        },
+          action:       'field_updated',
+          field:        'utilities',
+          old_value:    cur == null ? null : `${u.service}:${cur}`,
+          new_value:    `${u.service}:${u.provider_id}`,
+          source:       'nightly-enrich',
+          run_id:       RUN_ID,
+        });
+        if (clErr) log('WARN', `change_log utilities ${u.service} for ${id}: ${clErr.message}`);
+      }
+      await sb.from('community_utilities').upsert(
+        { community_id: id, service: u.service, provider_id: u.provider_id, verified_at: now },
         { onConflict: 'community_id,service' },
       );
     }
@@ -1842,7 +1899,10 @@ async function main(): Promise<void> {
         registered_agent: cand.registered_agent,
         city_verified: null,
         management_company: null,
+        management_phone:   null,
+        management_website: null,
         monthly_fee_median: null,
+        dues_frequency:     null,
         confidence_score: null,
         last_verified: null,
         next_research_at: null,
