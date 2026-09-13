@@ -201,6 +201,39 @@ async function publishedDelta(
   return (pub.count ?? 0) - (rem.count ?? 0);
 }
 
+// Owner ruling 2026-09-11 (Phase 10c) + 2026-09-12 (Phase 5 revision):
+// backfill runs — job_name like 'nightly-enrich:backfill-*' — must be
+// counted SEPARATELY from the nightly refresh window. resolveLastNightWindow
+// already filters job_runs to job_name='nightly-enrich' so backfill run
+// ids never enter the countChangeLog window in the first place. This
+// helper adds a separate report line summarizing the two backfill modes
+// over the last 30 days.
+async function backfillsSummary(sb: SupabaseClient): Promise<{ pickup: number; utilities: number; last_pickup: string | null; last_utilities: string | null }> {
+  const cutoff = new Date(Date.now() - 30 * 86400_000).toISOString();
+  const { data } = await sb
+    .from('job_runs')
+    .select('id, job_name, started_at, status, summary')
+    .like('job_name', 'nightly-enrich:backfill-%')
+    .eq('status', 'success')
+    .gte('started_at', cutoff)
+    .order('started_at', { ascending: false });
+  const out = { pickup: 0, utilities: 0, last_pickup: null as string | null, last_utilities: null as string | null };
+  for (const r of data ?? []) {
+    // Only count real writes — dry-runs skip.
+    let s: Record<string, unknown> = {};
+    try { s = JSON.parse(String(r.summary ?? '{}')); } catch { /* ignore */ }
+    if (s.dry_run === true) continue;
+    if (String(r.job_name).endsWith('backfill-pickup')) {
+      out.pickup += 1;
+      if (!out.last_pickup) out.last_pickup = String(r.started_at).slice(0, 10);
+    } else if (String(r.job_name).endsWith('backfill-utilities')) {
+      out.utilities += 1;
+      if (!out.last_utilities) out.last_utilities = String(r.started_at).slice(0, 10);
+    }
+  }
+  return out;
+}
+
 async function orchestratorSummary(sb: SupabaseClient, startIso: string): Promise<{ alerts: number; repairs: number }> {
   const alerts = await sb
     .from('job_health')
@@ -238,7 +271,7 @@ async function buildMessage(sb: SupabaseClient, cfg: Config, forDate?: string): 
   const [
     newN, refreshedN, publishedN, queuedN, removedN,
     mgmtN, feesN, utilsN,
-    queueN, orch, top,
+    queueN, orch, top, backfill,
   ] = await Promise.all([
     // We don't distinguish 'new' processed from any other action, but
     // 'attempted' change_log rows come only from the new-row loop.
@@ -249,11 +282,12 @@ async function buildMessage(sb: SupabaseClient, cfg: Config, forDate?: string): 
     countChangeLog(sb, window.runIds, { action: 'removed' }),
     countChangeLog(sb, window.runIds, { action: 'field_updated', field: 'management_company' }),
     countChangeLog(sb, window.runIds, { action: 'field_updated', field: 'monthly_fee_median' }),
-    // Utilities updates go through community_utilities upsert, not
-    // change_log field_updated. Approximate: count 'attempted' rows
-    // where utilities in the plan mapped 5/5 — we don't currently log
-    // that in change_log. Placeholder 0; wire when nightly-enrich
-    // emits a 'utilities_mapped' change_log entry.
+    // Utilities: the nightly refresh path currently upserts
+    // community_utilities WITHOUT a matching change_log 'field_updated'
+    // row, so this always reports 0 from the nightly window. Backfill
+    // utilities emit their own change_log rows but run_ids for those
+    // are excluded (backfill job_name), so they land on the separate
+    // Backfills line below rather than double-counting here.
     Promise.resolve(0),
     sb.from('communities')
       .select('id', { count: 'exact', head: true })
@@ -262,6 +296,7 @@ async function buildMessage(sb: SupabaseClient, cfg: Config, forDate?: string): 
       .then((r) => r.count ?? 0),
     orchestratorSummary(sb, window.startIso),
     topFailingStep(sb, window.startIso),
+    backfillsSummary(sb),
   ]);
 
   const isFriday = new Date().getDay() === 5;
@@ -273,6 +308,10 @@ async function buildMessage(sb: SupabaseClient, cfg: Config, forDate?: string): 
   lines.push(`Queue: ${queueN} of ${cfg.review_queue_cap}`);
   lines.push(`Fields updated: management ${mgmtN} · fees ${feesN} · utilities ${utilsN}`);
   lines.push(`Orchestrator: alerts ${orch.alerts} · repairs ${orch.repairs}`);
+  const bfBits: string[] = [];
+  if (backfill.pickup    > 0) bfBits.push(`pickup ${backfill.pickup} (last ${backfill.last_pickup})`);
+  if (backfill.utilities > 0) bfBits.push(`utilities ${backfill.utilities} (last ${backfill.last_utilities})`);
+  lines.push(`Backfills 30d: ${bfBits.length ? bfBits.join(' · ') : 'none'}`);
   lines.push(`Errors: ${top ?? 'none'}`);
 
   if (isFriday) {
@@ -286,7 +325,7 @@ async function buildMessage(sb: SupabaseClient, cfg: Config, forDate?: string): 
     const signed = (n: number) => (n >= 0 ? `+${n}` : `${n}`);
     lines.push(`Published: ${total.toLocaleString()} (7d ${signed(d7)}, 30d ${signed(d30)})`);
     lines.push(`Utilities mapped: ${utilPct}% · overdue for refresh: ${overdue}`);
-    lines.push('Review: https://www.hoa-agent.com/admin/pending');
+    lines.push('Review: https://www.hoa-agent.com/admin/review');
   }
 
   return lines.slice(0, 12).join('\n');
